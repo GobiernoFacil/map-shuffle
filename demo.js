@@ -37,6 +37,29 @@ var GF_app = {
     request.send();
   },
 
+  get_advances : function(setup){
+    var that    = this, 
+        request = new XMLHttpRequest(),
+        url     = !setup ? this.endpoints.avances : this.endpoints.avances + "?" + this._toUrl(setup);
+
+
+    request.open('GET', url, true);
+    request.onload = function(){
+      if (this.status >= 200 && this.status < 400){
+        var resp = JSON.parse(this.response);
+        console.log(resp);
+      } 
+      else{
+      }
+    };
+
+    request.onerror = function(){
+
+    };
+
+    request.send();
+  },
+
   get_definitions : function(){
     var that    = this,
         request = new XMLHttpRequest(),
