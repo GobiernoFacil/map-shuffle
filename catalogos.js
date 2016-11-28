@@ -23,27 +23,39 @@
       },
       {
         "descripcion": "Clave de la Unidad Responsable adscrita al Ramo que coordina el registro de la información del desempeño del programa presupuestario.",
-        "variable": "id-ur"
+        "variable": "id-ur",
+        "type" : "integer",
+        "db" : "unit_id"
       },
       {
         "descripcion": "Descripción de la Unidad Responsable adscrita al Ramo que coordina el registro de la información del desempeño del programa presupuestario.",
-        "variable": "desc-ur"
+        "variable": "desc-ur",
+        "type" : "string",
+        "db" : "unit_name"
       },
       {
         "descripcion": "Clave de la Entidad Federativa, de acuerdo con el “Catálogo de entidades federativas, municipios y localidades” que elabora el Instituto Nacional de Estadística y Geografía (INEGI).",
-        "variable": "id-entidad-federativa"
+        "variable": "id-entidad-federativa",
+        "type" : "integer",
+        "db" : "state_id"
       },
       {
         "descripcion": "Nombre de la Entidad Federativa, de acuerdo con el “Catálogo de entidades federativas, municipios y localidades” que elabora el Instituto Nacional de Estadística y Geografía (INEGI).",
-        "variable": "entidad-federativa"
+        "variable": "entidad-federativa",
+        "type" : "string",
+        "db" : "state_name"
       },
       {
-        "descripcion": "Clave del Municipio o Demarcación Territorial de la Ciudad de México, de acuerdo con el “Catálogo de entidades federativas, municipios y localidades” que elabora el Instituto Nacional de Estadística y Geografía (INEGI).",
-        "variable": "id-municipio"
+        "descripcion" : "Clave del Municipio o Demarcación Territorial de la Ciudad de México, de acuerdo con el “Catálogo de entidades federativas, municipios y localidades” que elabora el Instituto Nacional de Estadística y Geografía (INEGI).",
+        "variable" : "id-municipio",
+        "type" : "integer",
+        "db" : "city_id"
       },
       {
         "descripcion": "Nombre del Municipio o Demarcación Territorial de la Ciudad de México, de acuerdo con el “Catálogo de entidades federativas, municipios y localidades” que elabora el Instituto Nacional de Estadística y Geografía (INEGI).",
-        "variable": "municipio"
+        "variable": "municipio",
+        "type" : "string",
+        "db" : "city_name"
       },
       {
         "descripcion": "Clave que corresponde al primer nivel (o dígito) de la Clasificación Funcional del Gasto (forma de presentación del presupuesto que agrupa los gastos según los propósitos u objetivos socioeconómicos que persiguen los diferentes entes públicos) que permite identificar las actividades que realiza el Estado para cumplir con sus fines de: Desarrollo Social, Desarrollo Económico y Gobierno.",
