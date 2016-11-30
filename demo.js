@@ -1,4 +1,4 @@
-var GF_app = {
+var app = {
   
   // routes
   endpoints : {
@@ -13,6 +13,7 @@ var GF_app = {
   initialize : function(){
     this.get_definitions();
     this.advances = {};
+    this.opa      = {};
 
   },
 
@@ -88,13 +89,93 @@ var GF_app = {
 
     for(var i = 0; i <= years_num; i++){
       let year = from + i;
-      this._make_call(this.endpoints.avances + "?" + this._toUrl({ciclo : from + i}), function(d){
+      this._make_call(this.endpoints.avances + "?" + this._toUrl({ciclo : from + i, pageSize : 1}), function(d){
         years.push({
-          year : year,
-          total : d.pagination.total
+          year   : year,
+          total  : d.pagination.total,
+          states : []
         });
       });
     }
+  },
+
+  _count_advance_states : function(year){
+    var min = 1, 
+    max     = 35,
+    states  = this.advances.years.filter(function(d){
+      return d.year == year;
+    })[0].states;
+
+    for(var  i = min; i <= max; i++){
+      let state_id = i;
+      this._make_call(this.endpoints.avances + "?" + this._toUrl({
+        "id-entidad-federativa" : state_id, 
+        ciclo : year,
+        pageSize : 1
+      }), function(d){
+        states.push({
+          state_id : state_id,
+          total  : d.pagination.total
+        });
+      });
+    }
+  },
+
+  _count_advance_cities : function(year, state_id){
+    var page_size = 500;
+    this._make_call(this.endpoints.avances + "?" + this._toUrl({
+      "id-entidad-federativa" : state_id, 
+      "ciclo"                 : year,
+      "pageSize"              : 1
+    }), d => console.log(d));
+
+  },
+
+  _count_opa_years : function(){
+    this.opa.years = [];
+    var years     = this.opa.years,
+        years_num = 5,
+        current   = new Date().getFullYear(),
+        from      = current - years_num;
+
+    for(var i = 0; i <= years_num; i++){
+      let year = from + i;
+      this._make_call(this.endpoints.opa + "?" + this._toUrl({ciclo : from + i}), function(d){
+        years.push({
+          year   : year,
+          total  : d.pagination.total,
+          states : []
+        });
+      });
+    }
+  },
+
+  _count_opa_states : function(year){
+    var min    = 1, 
+        max    = 35,
+        states = this.opa.years.filter(function(d){
+      return d.year == year;
+    })[0].states;
+
+    for(var  i = min; i <= max; i++){
+      let state_id = i;
+      this._make_call(this.endpoints.opa + "?" + this._toUrl({"id-entidad-federativa" : state_id, ciclo : year}), function(d){
+        states.push({
+          state_id : state_id,
+          total  : d.pagination.total
+        });
+      });
+    }
+  },
+
+  _count_opa_cities : function(year, state_id){
+    var page_size = 500;
+    this._make_call(this.endpoints.opa + "?" + this._toUrl({
+      "id-entidad-federativa" : state_id, 
+      "ciclo"                 : year,
+      "pageSize"              : 1
+    }), d => console.log(d));
+
   },
 
   _make_call : function(url, callback){
@@ -151,4 +232,4 @@ var GF_app = {
   }
 };
 
-GF_app.initialize();
+app.initialize();
