@@ -21,7 +21,35 @@
 			</nav>
 		</div>
 		<div class="col-sm-10 filter_container">
-			<p>azul</p>
+			<!--year-->
+			<h3>Año</h3>
+			<select>
+				<option>2016</option>
+				<option>2015</option>
+				<option>2014</option>
+			</select>
+			<!--state-->
+			<h3>Entidad Federativa</h3>
+			<select>
+				<option>Todos</option>
+				<option>Oaxaca</option>
+				<option>Puebla</option>
+			</select>
+			<!--branch-->
+			<h3>Ramo</h3>
+			<select>
+				<option>Selecciona un Ramo</option>
+				
+			</select>
+			<h3>Ejecutor</h3>
+			<select>
+				<option>Todos los Ejecutores</option>
+			
+			</select>
+			<!--pojects-->
+			<h3>Proyectos</h3>
+			<a href="#" class="agp selected"><b></b> Agricultura, Ganadería y Pesca <span>(22)</span></a>
+			<a href="#" class="asp"><b></b> Asociación público-privada<span>(7)</span></a>
 		</div>
 		<div class="clearfix"></div>
 	</div>
@@ -30,7 +58,14 @@
 			<h1>Obra Pública Abierta: <span>Todo México</span></h1>
 		</header>
 	</div>
-	
+		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+	$("#dd").on('click', function(event){
+            $(this).toggleClass('active');
+            event.stopPropagation();
+        }); 
+
+</script>
 	
 </body>
 </html>

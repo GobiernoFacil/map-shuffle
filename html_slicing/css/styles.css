@@ -296,47 +296,18 @@ input[type="search"]::-webkit-search-decoration {
   font-weight: normal;
   font-style: normal; }
 
-.form-horizontal .form-group {
-  margin-right: -15px;
-  margin-left: -15px; }
-  .form-horizontal .form-group button {
-    background: #2acccc;
-    border: 0;
-    color: white;
-    font-size: 14px;
-    font-weight: 700;
-    margin-top: 15px;
-    height: 54px;
-    width: 100%;
-    text-transform: uppercase; }
-    .form-horizontal .form-group button:hover {
-      background: rgba(42, 204, 204, 0.8);
-      cursor: pointer;
-      transition: background 400ms; }
-
-.form-group {
-  margin-bottom: 15px; }
-
-.form-horizontal .control-label {
-  padding-top: 7px;
-  margin-bottom: 0;
-  text-align: right; }
-
-.form-control {
-  background-color: whitesmoke;
-  border: 0;
-  color: #989;
-  display: block;
-  height: 54px;
-  padding: 6px 12px;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1.42857143;
+select {
+  background: rgba(244, 242, 242, 0.7);
+  border: 1px solid #F4F2F2;
+  border-radius: 0;
+  height: 35px;
+  line-height: 35px;
   width: 100%;
-  transition: background-color 400ms; }
-  .form-control:focus {
-    background-color: #e8e8e8;
-    border: 0; }
+  transition: background 500ms; }
+  select:focus {
+    background: #1cb68d;
+    border-color: #F4F2F2 !important;
+    color: white; }
 
 .wrapper,
 .wrap {
@@ -1042,13 +1013,42 @@ h1 {
 
 .sidebar {
   background: rgba(28, 28, 28, 0.6);
-  border-right: 6px solid rgba(28, 182, 141, 0.3);
+  border-right: 6px solid rgba(28, 182, 141, 0.4);
   position: absolute;
   top: 0;
   left: 0px;
   height: 100%; }
   .sidebar .filter_container {
-    background: white; }
+    background: white;
+    padding: 20px; }
+    .sidebar .filter_container a {
+      display: block;
+      color: rgba(96, 95, 94, 0.3);
+      font: 500 11px "soberana_sans", Helvetica, Arial, sans-serif;
+      margin: 10px 0; }
+      .sidebar .filter_container a b {
+        border-radius: 50px;
+        border: 1px solid #ccc;
+        display: inline-block;
+        height: 9px;
+        width: 9px; }
+      .sidebar .filter_container a span {
+        font: 300 10px "soberana_sans", Helvetica, Arial, sans-serif;
+        color: #A3A2A2; }
+      .sidebar .filter_container a.selected {
+        color: #605F5E; }
+        .sidebar .filter_container a.selected.agp b {
+          background: red;
+          border-color: red; }
+  .sidebar h3 {
+    font: 700 13px "soberana_sans", Helvetica, Arial, sans-serif;
+    border-top: 1px solid rgba(53, 53, 51, 0.1);
+    margin-top: 18px;
+    padding-top: 15px; }
+    .sidebar h3:first-child {
+      margin: 0;
+      border: 0;
+      padding-top: 0; }
 
 /* =Media queries
 -------------------------------------------------------------- */
