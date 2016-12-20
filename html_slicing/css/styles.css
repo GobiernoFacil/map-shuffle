@@ -994,14 +994,19 @@ header.top {
   header.top.title_side {
     background: #1cb68d;
     border: 0; }
-    header.top.title_side h1 {
+    header.top.title_side h1,
+    header.top.title_side a.link_back {
       color: white;
       font: 700 18px "soberana_sans", Helvetica, Arial, sans-serif;
       margin-bottom: 0;
       text-align: left;
-      line-height: 40px; }
-      header.top.title_side h1 span {
+      line-height: 40px;
+      transition: color 500ms; }
+      header.top.title_side h1 span,
+      header.top.title_side a.link_back span {
         font-weight: 300; }
+    header.top.title_side a.link_back:hover {
+      color: rgba(0, 0, 0, 0.4); }
 
 h1 {
   font: 700 55px "soberana_sans", Helvetica, Arial, sans-serif;
@@ -1095,6 +1100,13 @@ h1 {
       background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSIyNC40NDRweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjQuNDQ0IDIwIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAyNC40NDQgMjAiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwYXRoIGZpbGw9IiNGRkZGRkYiIGQ9Ik00LjQ0NCwxMS4zMTF2NC40NDVMMTIuMjIyLDIwTDIwLDE1Ljc1NnYtNC40NDVsLTcuNzc4LDQuMjQ1TDQuNDQ0LDExLjMxMXogTTEyLjIyMiwwTDAsNi42NjdsMTIuMjIyLDYuNjY3bDEwLTUuNDU2djcuNjc4aDIuMjIyVjYuNjY3TDEyLjIyMiwweiIvPjwvc3ZnPg=="); }
     .main_nav li.current a {
       background-color: #1cb68d; }
+
+/* =Fichas
+-------------------------------------------------------------- */
+.record h1 {
+  color: #2b2a2a;
+  font: 500 40px "soberana_sans", Helvetica, Arial, sans-serif;
+  text-align: left; }
 
 /* =Media queries
 -------------------------------------------------------------- */
