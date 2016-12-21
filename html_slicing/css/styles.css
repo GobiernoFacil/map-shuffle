@@ -1122,17 +1122,67 @@ h1 {
     .record h3 span.active {
       background: #1cb68d;
       color: white;
+      font-weight: 700;
       padding: 2px 5px; }
+  .record h3.title {
+    color: #333;
+    font-weight: 700; }
+    .record h3.title.line {
+      border-top: 1px solid #ccc;
+      padding: 5px 0; }
+
+.record p {
+  color: #666;
+  font: 500 13px "soberana_sans", Helvetica, Arial, sans-serif;
+  margin-bottom: 10px; }
+
+.record .amount {
+  color: black;
+  font-size: 21px; }
+  .record .amount.big {
+    font-size: 25px; }
+  .record .amount span {
+    font-size: 12px; }
 
 .side {
-  background: #f2f2f2;
+  background: #f9f9f9;
   margin-bottom: 10px;
   min-height: 200px;
   padding-bottom: 10px;
-  padding-top: 20px; }
+  padding-top: 25px; }
+
+.bar {
+  background: #d7dbd7;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  border-radius: 5px;
+  height: 10px;
+  display: block;
+  margin-bottom: 20px; }
+  .bar span.inside.total,
+  .bar span.inside.ejercido {
+    background: #1cb68d; }
+  .bar span.inside.pef {
+    background: #462b5f; }
+  .bar span.inside.modificado {
+    background: #f49d51; }
 
 section {
   padding: 110px 0 120px; }
+
+.btn.report {
+  background: #7a4ba5;
+  border: 2px solid #2c1b3c;
+  color: white;
+  display: block;
+  font: 700 16px "soberana_sans", Helvetica, Arial, sans-serif;
+  padding: 10px 0;
+  text-align: center;
+  text-transform: uppercase;
+  transition: background 500ms; }
+  .btn.report:hover {
+    background: #462b5f; }
 
 /* =Media queries
 -------------------------------------------------------------- */
