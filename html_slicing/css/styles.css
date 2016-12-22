@@ -1233,6 +1233,9 @@ section {
     background: #462b5f;
     color: white;
     text-decoration: none; }
+  .btn.report.large {
+    padding: 20px 0;
+    font-size: 17px; }
 
 /* =Footer
 -------------------------------------------------------------- */
