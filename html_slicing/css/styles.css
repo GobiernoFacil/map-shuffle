@@ -347,7 +347,7 @@ table {
   transition: background-color 0.3s, color 0.3s, transform 0.3s; }
   .tooltip-item b {
     background: #462b5f;
-    font-weight: 700;
+    font: 700 11px "soberana_sans", Helvetica, Arial, sans-serif;
     border-radius: 50%;
     display: inline-block;
     color: white;
@@ -360,26 +360,27 @@ table {
   -webkit-transform: translate3d(0, -0.5em, 0);
   transform: translate3d(0, -0.5em, 0); }
   .tooltip:hover .tooltip-item b {
-    background: #1cb68d; }
+    background: #158a6b; }
 
 .tooltip-content {
-  background: #1cb68d;
-  border-bottom: 30px solid #2a3035;
+  background: #f2f2f2;
+  bottom: -5px;
+  border-radius: 5px;
+  border-bottom: 40px solid #1cb68d;
   color: #fff !important;
   cursor: default;
-  position: absolute;
-  width: 380px;
-  z-index: 99;
-  left: 50%;
-  margin-left: -180px;
-  bottom: -5px;
-  text-align: left;
-  opacity: 0;
   font-size: 12px;
+  font-weight: 500;
+  left: 50%;
   line-height: 1.5;
+  margin-left: -180px;
+  opacity: 0;
   padding: 1.5em;
+  position: absolute;
   pointer-events: none;
-  border-radius: 5px;
+  width: 360px;
+  text-align: left;
+  z-index: 99;
   -webkit-transform: translate3d(0, -0.5em, 0);
   transform: translate3d(0, -0.5em, 0);
   -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
@@ -388,7 +389,7 @@ table {
 
 .tooltip-text {
   opacity: 0;
-  color: #fff !important;
+  color: #666 !important;
   -webkit-transform: translate3d(0, 1.5em, 0);
   transform: translate3d(0, 1.5em, 0);
   -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
@@ -1235,6 +1236,7 @@ h1 {
 .record h3 {
   color: #999;
   font: 500 12px "soberana_sans", Helvetica, Arial, sans-serif;
+  position: relative;
   text-transform: uppercase; }
   .record h3 span {
     color: #1cb68d; }
