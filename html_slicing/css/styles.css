@@ -1231,7 +1231,8 @@ h1 {
   border-bottom: 1px solid #ccc;
   font: 700 21px "soberana_sans", Helvetica, Arial, sans-serif;
   margin-bottom: 10px;
-  padding: 10px 0; }
+  padding: 10px 0;
+  position: relative; }
 
 .record h3 {
   color: #999;
@@ -1271,6 +1272,11 @@ h1 {
   .record a:hover {
     color: #0e5e49;
     text-decoration: underline; }
+
+.record .graph {
+  background: #1cb68d;
+  display: block;
+  min-height: 490px; }
 
 .side {
   background: #f9f9f9;
