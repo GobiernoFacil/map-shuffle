@@ -335,6 +335,22 @@ table {
   vertical-align: top;
   border-top: 1px solid #ddd; }
 
+/***graph*/
+.axis path,
+.axis line {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0.1);
+  shape-rendering: crispEdges; }
+
+.line {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.7);
+  stroke-width: 2px; }
+
+text {
+  fill: white;
+  font: 500 12px "soberana_sans", Helvetica, Arial, sans-serif; }
+
 /* Tooltip */
 .tooltip {
   display: inline-block;
@@ -1287,7 +1303,8 @@ h1 {
 .record .graph {
   background: #1cb68d;
   display: block;
-  min-height: 490px; }
+  min-height: 490px;
+  padding: 20px 0; }
 
 .side {
   background: #f9f9f9;

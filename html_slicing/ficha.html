@@ -7,6 +7,13 @@
 	<meta name="description" content="Construcción de la nueva Terminal de Almacenamiento y Reparto Tapachula, Chiapas; con capacidad de 115 MB nominales, abastecida por Buque tanque">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="css/styles.css"/>
+	<style>
+
+
+
+
+
+</style>
 </head>
 <body class="record">
 	<!--header-->
@@ -186,7 +193,7 @@
 			</div>
 			<!--gráfica-->
 			<div class="col-sm-9">		
-				<div class="graph">
+				<div id="graph" class="graph">
 				</div>		
 			</div>
 			<!--tabla-->
@@ -431,5 +438,117 @@
 		</div>
 
 	</footer>
+	
+	<script src="js/d3.v3.min.js"></script>
+<script>
+
+var margin = {top: 20, right: 20, bottom: 30, left: 120},
+    width = 800 - margin.left - margin.right,
+    height = 450 - margin.top - margin.bottom;
+
+
+var x = d3.scale.linear()
+    .range([0, width]);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+
+var line = d3.svg.line()
+    .x(function(d) { return x(d.year); })
+
+    .y(function(d) { return y(d.amount); });
+
+
+var svg = d3.select("#graph").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+	.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	var data = [
+
+  {
+    "year": 2017,
+    "amount": 109814311
+  },
+  {
+    "year": 2016,
+    "amount": 101313120
+  },
+  {
+    "year": 2015,
+    "amount": 208539823
+  },
+  {
+    "year": 2014,
+    "amount": 54564412
+  },
+  {
+    "year": 2013,
+    "amount": 300157683
+  },
+  {
+    "year": 2012,
+    "amount": 215044846
+  },
+  {
+    "year": 2011,
+    "amount": 25873394
+  },
+  {
+    "year": 2010,
+    "amount": 25741318
+  },
+  {
+    "year": 2009,
+    "amount": 12287059
+  },
+  {
+    "year": 2008,
+    "amount": 4337408
+  },
+  {
+    "year": 2007,
+    "amount": 0
+  },
+  {
+    "year": 2006,
+    "amount": 2385
+  }
+
+	];
+	
+
+
+  x.domain(d3.extent(data, function(d) { return d.year; }));
+  y.domain([0, d3.max(data, function(d) { return d.amount; })]);
+
+ 
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+      
+       svg.append("path")
+      .datum(data)
+      .attr("class", "line")
+      .attr("d", line);
+
+
+</script>
+
 </body>
 </html>
