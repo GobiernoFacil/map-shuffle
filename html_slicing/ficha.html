@@ -446,7 +446,7 @@ var width = 160,
     radius = Math.min(width, height) / 2;
 
 var color = d3.scale.ordinal()
-    .range(["rgb(190,205,81)","rgba(0,0,0,0.36)"]);
+    .range(["rgb(190,205,81)","rgb(210,210,210)"]);
 
 var arc = d3.svg.arc()
     //.outerRadius(radius - 10)
@@ -479,8 +479,8 @@ var svg = d3.select("#arc_side").append("svg")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 var data = [
-		{"amount": 92.7,},	
-		{"amount": 7.3}
+		{"amount": 40,},	
+		{"amount": 60}
 	];
 
 var g = svg.selectAll(".arc")
