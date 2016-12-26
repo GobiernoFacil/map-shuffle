@@ -350,6 +350,9 @@ table {
 text {
   fill: white;
   font: 500 12px "soberana_sans", Helvetica, Arial, sans-serif; }
+  text.text_arc {
+    fill: #555;
+    font-size: 18px; }
 
 /* Tooltip */
 .tooltip {
@@ -1309,9 +1312,12 @@ h1 {
 .side {
   background: #f9f9f9;
   margin-bottom: 10px;
-  min-height: 200px;
+  min-height: 100px;
   padding-bottom: 10px;
   padding-top: 25px; }
+
+#arc_side h3 {
+  text-align: center; }
 
 .bar {
   background: #d7dbd7;

@@ -61,7 +61,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-2 side">
+			<div id="arc_side" class="col-sm-2 side">
 				<h3>Avance Físico</h3>
 			</div>
 		</div>
@@ -439,7 +439,59 @@
 
 	</footer>
 	
-	<script src="js/d3.v3.min.js"></script>
+<script src="js/d3.v3.min.js"></script>
+<script>
+var width = 160,
+    height = 130,
+    radius = Math.min(width, height) / 2;
+
+var color = d3.scale.ordinal()
+    .range(["rgb(190,205,81)","rgba(0,0,0,0.36)"]);
+
+var arc = d3.svg.arc()
+    .outerRadius(radius - 10)
+    .innerRadius(radius - 25);
+
+var pie = d3.layout.pie()
+    .sort(null)
+    .value(function(d) { return d.amount; });
+
+var svg = d3.select("#arc_side").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+	.append("g")
+    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+var data = [
+		{"amount": 92.7,},	
+		{"amount": 7.3}
+	];
+
+var g = svg.selectAll(".arc")
+      .data(pie(data))
+	  .enter().append("g")
+      .attr("class", "arc");
+
+  g.append("path")
+      .attr("d", arc)
+      .style("fill", function(d) { return color(d.data.amount); });
+
+  g.append("text")
+      .attr("transform",  "translate(-25)")
+      .attr("dy", ".35em")
+      .text(function(d, i) { 
+	      if(i==0) {
+	     	 return d.data.amount + "%";
+	      }
+	    })
+	  .attr("class", "text_arc");
+
+
+function type(d) {
+  d.amount = +d.amount;
+  return d;
+}
+</script>
 <script>
 
 var margin = {top: 20, right: 20, bottom: 30, left: 120},
