@@ -336,6 +336,10 @@ table {
   border-top: 1px solid #ddd; }
 
 /* Tooltip */
+.tooltip {
+  display: inline-block;
+  position: relative; }
+
 .tooltip-item {
   color: #462b5f !important;
   cursor: pointer;
@@ -355,6 +359,13 @@ table {
     text-align: center;
     width: 15px; }
 
+h2 .tooltip .h2title {
+  color: white;
+  font-size: 12px; }
+
+h2 .tooltip:hover .tooltip-item {
+  font-size: 12px; }
+
 .tooltip:hover .tooltip-item {
   color: #fff !important;
   -webkit-transform: translate3d(0, -0.5em, 0);
@@ -373,7 +384,7 @@ table {
   font-weight: 500;
   left: 50%;
   line-height: 1.5;
-  margin-left: -180px;
+  margin-left: -120px;
   opacity: 0;
   padding: 1.5em;
   position: absolute;
