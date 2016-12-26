@@ -449,8 +449,24 @@ var color = d3.scale.ordinal()
     .range(["rgb(190,205,81)","rgba(0,0,0,0.36)"]);
 
 var arc = d3.svg.arc()
-    .outerRadius(radius - 10)
-    .innerRadius(radius - 25);
+    //.outerRadius(radius - 10)
+    .outerRadius(function(d,i) { 
+	    if(i==0) {
+	    	return radius - 10; 
+	    }
+	    else { 
+		   return radius - 20;  
+	    }
+	 })
+	//.innerRadius(radius - 25);
+    .innerRadius(function(d,i) { 
+	    if(i==0) {
+	    	return radius - 25; 
+	    }
+	    else { 
+		   return radius - 15;  
+	    }
+	 });
 
 var pie = d3.layout.pie()
     .sort(null)
