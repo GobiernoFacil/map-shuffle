@@ -7,13 +7,7 @@
 	<meta name="description" content="Construcción de la nueva Terminal de Almacenamiento y Reparto Tapachula, Chiapas; con capacidad de 115 MB nominales, abastecida por Buque tanque">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="css/styles.css"/>
-	<style>
-
-
-
-
-
-</style>
+	<script src="js/modernizr.custom.js"></script>
 </head>
 <body class="record">
 	<!--header-->
@@ -27,7 +21,7 @@
 			<a href="index.html" class="link_back">&lt; Ir a Mapa de Obra Pública</a>
 		</header>		
 	</div>
-	
+	<div class="clearfix"></div>
 <div class="container">
 	<!--content-->
 	<section>
@@ -157,7 +151,7 @@
 					<span class="bar inside modificado" style="width: 26.86%"></span>
 				</div>
 				<!-- reporta obra-->
-				<a href="#" class="btn report">Reporta esta obra</a>
+				<a href="#" data-dialog="somedialog" class="btn report trigger">Reporta esta obra</a>
 			</div>
 		</div>
 	</section>
@@ -376,7 +370,7 @@
 	<section>
 		<div class="row">
 			<div class="col-sm-12">
-				<a href="#" class="btn report large">Reporta esta Obra</a>
+				<a href="#" data-dialog="somedialog" class="btn report large trigger">Reporta esta Obra</a>
 			</div>
 		</div>
 	</section>
@@ -436,10 +430,48 @@
 				</div>
 			</div>
 		</div>
-
 	</footer>
-	
+
+<!-- dialog--->
+<div id="somedialog" class="dialog">
+	<div class="dialog__overlay"></div>
+	<div class="dialog__content">
+		<h2>Reporta esta obra</h2>
+		<div><button class="action" data-dialog-close>X</button></div>
+		<p>Realiza tu reporte ciudadano para este proyecto:</p>
+		<div class="dialog-container">
+			<div class="row">
+				<div class="col-sm-4">
+					<a href="#" class="btn_type">
+						<span class="btn-content">No coincide el avance físico  que aparece en el PTP con el que ves en la obra</span>
+						<span class="btn-symbol">Reportar</span>
+					</a>
+				</div>
+				<div class="col-sm-4">
+					<a href="#" class="btn_type">
+						<span class="btn-content">La obra ha sido abandonada</span>
+						<span class="btn-symbol">Reportar</span>
+					</a>
+				</div>
+				<div class="col-sm-4">
+					<a href="#" class="btn_type">
+						<span class="btn-content">Existe un error en la localización</span>
+						<span class="btn-symbol">Reportar</span>
+					</a>
+				</div>
+			</div>
+			<h3>Preguntas Frecuentes</h3>	
+			<ul>
+				<li><a href="#">¿Qué es un reporte ciudadano?</a></li>
+			</ul>
+		</div>
+		
+	</div>
+</div>
+<!-- scripts--->
 <script src="js/d3.v3.min.js"></script>
+<script src="js/classie.js"></script>
+		<script src="js/dialogFx.js"></script>
 <script>
 var width = 160,
     height = 130,
@@ -618,5 +650,16 @@ var svg = d3.select("#graph").append("svg")
 
 </script>
 
+		<script>
+			(function() {
+
+				var dlgtrigger = document.querySelector( '[data-dialog]' ),
+					somedialog = document.getElementById( dlgtrigger.getAttribute( 'data-dialog' ) ),
+					dlg = new DialogFx( somedialog );
+
+				dlgtrigger.addEventListener( 'click', dlg.toggle.bind(dlg) );
+
+			})();
+		</script>
 </body>
 </html>

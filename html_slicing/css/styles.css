@@ -354,7 +354,131 @@ text {
     fill: #555;
     font-size: 18px; }
 
-/* Tooltip */
+/******** dialog ****/
+.dialog,
+.dialog__overlay {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0; }
+
+.dialog {
+  position: absolute;
+  display: block;
+  pointer-events: none; }
+
+.dialog__overlay {
+  position: absolute;
+  z-index: 5;
+  background: rgba(55, 58, 71, 0.9);
+  opacity: 0;
+  transition: opacity 0.3s; }
+
+.dialog--open .dialog__overlay {
+  opacity: 1;
+  pointer-events: auto; }
+
+.dialog--open .dialog__content {
+  pointer-events: auto; }
+
+.record .dialog__content {
+  width: 50%;
+  min-height: 400px;
+  min-width: 290px;
+  background: #fff;
+  padding-bottom: 40px;
+  position: absolute;
+  top: 5%;
+  left: 25%;
+  z-index: 6;
+  opacity: 0; }
+  .record .dialog__content h2 {
+    background: #1cb68d;
+    border: 0;
+    color: white;
+    padding-top: 25px;
+    text-align: center; }
+  .record .dialog__content h3 {
+    border-top: 3px solid #1cb68d;
+    font: 700 18px "soberana_sans", Helvetica, Arial, sans-serif;
+    margin: 50px 0 30px;
+    padding: 40px 0 0;
+    text-transform: none; }
+  .record .dialog__content p {
+    font-size: 15px;
+    padding: 10px 20px; }
+  .record .dialog__content ul {
+    width: 90%;
+    margin-left: 10%; }
+    .record .dialog__content ul li {
+      border-bottom: 1px solid #1cb68d;
+      list-style: none;
+      padding: 5px 0; }
+      .record .dialog__content ul li a {
+        display: block; }
+  .record .dialog__content a.btn_type {
+    background: #462b5f;
+    color: white;
+    display: block; }
+    .record .dialog__content a.btn_type span {
+      display: block;
+      padding: 20px; }
+      .record .dialog__content a.btn_type span.btn-content {
+        background: #603b82;
+        min-height: 150px; }
+      .record .dialog__content a.btn_type span.btn-symbol {
+        font-weight: 700;
+        padding: 15px 20px 20px;
+        text-align: center;
+        text-transform: uppercase; }
+    .record .dialog__content a.btn_type:hover {
+      text-decoration: none;
+      background: #603b82; }
+      .record .dialog__content a.btn_type:hover span.btn-content {
+        background: #7a4ba5; }
+  .record .dialog__content .action {
+    background: red;
+    border: 0;
+    color: white;
+    cursor: pointer;
+    font: 700 15px "soberana_sans", Helvetica, Arial, sans-serif;
+    position: absolute;
+    right: 0;
+    top: 0; }
+    .record .dialog__content .action:hover {
+      background: #cc0000; }
+
+.dialog-container {
+  margin: 0 auto;
+  width: 90%; }
+
+.dialog.dialog--open .dialog__content,
+.dialog.dialog--close .dialog__content {
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards; }
+
+.dialog.dialog--open .dialog__content {
+  animation-name: anim-open; }
+
+.dialog.dialog--close .dialog__content {
+  animation-name: anim-close; }
+
+@keyframes anim-open {
+  0% {
+    opacity: 0;
+    transform: scale3d(1.1, 1.1, 1); }
+  100% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1); } }
+
+@keyframes anim-close {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0;
+    transform: scale3d(0.9, 0.9, 1); } }
+
+/****************** Tooltip */
 .tooltip {
   display: inline-block;
   position: relative; }
@@ -363,7 +487,7 @@ text {
   color: #462b5f !important;
   cursor: pointer;
   font-weight: 700;
-  z-index: 100;
+  z-index: 2;
   position: relative;
   display: inline-block;
   -webkit-transition: background-color 0.3s, color 0.3s, -webkit-transform 0.3s;
@@ -410,7 +534,7 @@ h2 .tooltip:hover .tooltip-item {
   pointer-events: none;
   width: 360px;
   text-align: left;
-  z-index: 99;
+  z-index: 1;
   -webkit-transform: translate3d(0, -0.5em, 0);
   transform: translate3d(0, -0.5em, 0);
   -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
@@ -1250,64 +1374,60 @@ h1 {
 
 /* =Fichas
 -------------------------------------------------------------- */
-.record h1 {
-  border-bottom: 1px solid #ccc;
-  color: #2b2a2a;
-  font: 500 40px/1.4 "soberana_sans", Helvetica, Arial, sans-serif;
-  padding: 10px 0;
-  text-align: left; }
-
-.record h2 {
-  border-bottom: 1px solid #ccc;
-  font: 700 21px "soberana_sans", Helvetica, Arial, sans-serif;
-  margin-bottom: 10px;
-  padding: 10px 0;
+.record {
   position: relative; }
-
-.record h3 {
-  color: #999;
-  font: 500 12px "soberana_sans", Helvetica, Arial, sans-serif;
-  position: relative;
-  text-transform: uppercase; }
-  .record h3 span {
-    color: #1cb68d; }
-    .record h3 span.active {
-      background: #1cb68d;
-      color: white;
-      font-weight: 700;
-      padding: 2px 5px; }
-  .record h3.title {
-    color: #333;
-    font-weight: 700; }
-    .record h3.title.line {
-      border-top: 1px solid #ccc;
-      padding: 5px 0; }
-
-.record p {
-  color: #666;
-  font: 500 13px "soberana_sans", Helvetica, Arial, sans-serif; }
-
-.record .amount {
-  color: black;
-  font-size: 21px;
-  margin-bottom: 8px; }
-  .record .amount.big {
-    font-size: 25px; }
-  .record .amount span {
-    font-size: 12px; }
-
-.record a {
-  color: #1cb68d;
-  font-family: "soberana_sans", Helvetica, Arial, sans-serif; }
-  .record a:hover {
-    color: #0e5e49;
-    text-decoration: underline; }
-
-.record .graph {
-  background: #1cb68d;
-  display: block;
-  min-height: 490px;
-  padding: 20px 0; }
+  .record h1 {
+    border-bottom: 1px solid #ccc;
+    color: #2b2a2a;
+    font: 500 40px/1.4 "soberana_sans", Helvetica, Arial, sans-serif;
+    padding: 10px 0;
+    text-align: left; }
+  .record h2 {
+    border-bottom: 1px solid #ccc;
+    font: 700 21px "soberana_sans", Helvetica, Arial, sans-serif;
+    margin-bottom: 10px;
+    padding: 10px 0;
+    position: relative; }
+  .record h3 {
+    color: #999;
+    font: 500 12px "soberana_sans", Helvetica, Arial, sans-serif;
+    position: relative;
+    text-transform: uppercase; }
+    .record h3 span {
+      color: #1cb68d; }
+      .record h3 span.active {
+        background: #1cb68d;
+        color: white;
+        font-weight: 700;
+        padding: 2px 5px; }
+    .record h3.title {
+      color: #333;
+      font-weight: 700; }
+      .record h3.title.line {
+        border-top: 1px solid #ccc;
+        padding: 5px 0; }
+  .record p {
+    color: #666;
+    font: 500 13px "soberana_sans", Helvetica, Arial, sans-serif; }
+  .record .amount {
+    color: black;
+    font-size: 21px;
+    margin-bottom: 8px; }
+    .record .amount.big {
+      font-size: 25px; }
+    .record .amount span {
+      font-size: 12px; }
+  .record a {
+    color: #1cb68d;
+    font-family: "soberana_sans", Helvetica, Arial, sans-serif; }
+    .record a:hover {
+      color: #0e5e49;
+      text-decoration: underline; }
+  .record .graph {
+    background: #1cb68d;
+    display: block;
+    min-height: 490px;
+    padding: 20px 0; }
 
 .side {
   background: #f9f9f9;
