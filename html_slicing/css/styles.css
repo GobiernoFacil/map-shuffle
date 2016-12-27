@@ -382,14 +382,14 @@ text {
   pointer-events: auto; }
 
 .record .dialog__content {
-  width: 50%;
+  width: 60%;
   min-height: 400px;
   min-width: 290px;
   background: #fff;
-  padding-bottom: 40px;
+  padding-bottom: 60px;
   position: absolute;
   top: 5%;
-  left: 25%;
+  left: 20%;
   z-index: 6;
   opacity: 0; }
   .record .dialog__content h2 {
@@ -409,13 +409,26 @@ text {
     padding: 10px 20px; }
   .record .dialog__content ul {
     width: 90%;
+    margin-bottom: 50px;
     margin-left: 10%; }
     .record .dialog__content ul li {
       border-bottom: 1px solid #1cb68d;
+      font-size: 14px;
       list-style: none;
       padding: 5px 0; }
       .record .dialog__content ul li a {
-        display: block; }
+        display: block;
+        font-weight: 700; }
+      .record .dialog__content ul li span {
+        color: #999;
+        display: block;
+        font-size: 13px;
+        margin: 5px 0 10px 10px;
+        word-break: break-word; }
+        .record .dialog__content ul li span a {
+          display: inline-block;
+          color: #1cb68d;
+          font-weight: 500; }
   .record .dialog__content a.btn_type {
     background: #462b5f;
     color: white;
@@ -1482,6 +1495,18 @@ section {
   .btn.report.large {
     padding: 20px 0;
     font-size: 17px; }
+
+.btn.more {
+  background: #1cb68d;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 20px;
+  transition: background 500ms; }
+  .btn.more:hover {
+    background: #158a6b;
+    color: white;
+    text-decoration: none; }
 
 /* =Footer
 -------------------------------------------------------------- */
