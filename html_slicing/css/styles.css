@@ -404,6 +404,9 @@ text {
     margin: 50px 0 30px;
     padding: 40px 0 0;
     text-transform: none; }
+  .record .dialog__content h4 {
+    color: #1cb68d;
+    font: 700 15px "soberana_sans", Helvetica, Arial, sans-serif; }
   .record .dialog__content p {
     font-size: 15px;
     padding: 10px 20px; }
@@ -415,20 +418,33 @@ text {
       border-bottom: 1px solid #1cb68d;
       font-size: 14px;
       list-style: none;
-      padding: 5px 0; }
+      padding: 5px 0;
+      position: relative; }
+      .record .dialog__content ul li:hover h4 {
+        color: #158a6b;
+        text-decoration: underline; }
       .record .dialog__content ul li a {
         display: block;
         font-weight: 700; }
-      .record .dialog__content ul li span {
+      .record .dialog__content ul li div.panel {
         color: #999;
         display: block;
-        font-size: 13px;
-        margin: 5px 0 10px 10px;
+        font: 500 13px "soberana_sans", Helvetica, Arial, sans-serif;
+        padding: 5px 0 10px 10px;
         word-break: break-word; }
-        .record .dialog__content ul li span a {
+        .record .dialog__content ul li div.panel a {
           display: inline-block;
           color: #1cb68d;
           font-weight: 500; }
+  .record .dialog__content #toggle-view span {
+    position: absolute;
+    right: 5px;
+    top: 0;
+    color: #ccc;
+    font-size: 13px; }
+  .record .dialog__content #toggle-view .panel {
+    margin: 5px 0;
+    display: none; }
   .record .dialog__content a.btn_type {
     background: #462b5f;
     color: white;
