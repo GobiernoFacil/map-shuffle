@@ -77,7 +77,7 @@
 							
 							
 						</h3>
-						<p>52 - Petróleos Mexicanos</p>
+						<p class="fichas_ramo"><b class="pemex"></b>52 - Petróleos Mexicanos</p>
 					</div>
 					<!-- Ejecutor-->
 					<div class="col-sm-4">
@@ -104,16 +104,22 @@
 				
 				<div class="info location">
 					<div class="row">
+						<div class="col-sm-4">
+							<h3 class="title">Programa Presupuestario</h3>
+							<p><a href="#" title="Conoce su desempeño">11S243 – Programa Nacional de Petróleo</a></p>
+						</div>
 						<!---entidad-->
-						<div class="col-sm-6">
+						<div class="col-sm-4">
 							<h3 class="title">Entidad Federativa</h3>
 							<p>7- Chiapas</p>
 						</div>
 						<!---coordenadas---->
-						<div class="col-sm-6">
+						<div class="col-sm-4">
 							<h3 class="title">Coordenadas Geográficas</h3>
-							<p>Latitud: 14.727778 / Longitud: -92.396659</p>
+							<p>Latitud: 14.727778 <br> Longitud: -92.396659</p>
 						</div>
+						
+						
 					</div>
 				</div>
 			</div>
@@ -370,6 +376,9 @@
 	<section>
 		<div class="row">
 			<div class="col-sm-12">
+				<p class="update right">Información actualizada al primer trimestre de 2016</p>
+			</div>
+			<div class="col-sm-12">
 				<a href="#" data-dialog="somedialog" class="btn report large trigger">Reporta esta Obra</a>
 			</div>
 		</div>
@@ -461,7 +470,7 @@
 				</div>
 			</div>
 			<h3>Preguntas Frecuentes</h3>	
-			<ul>
+			<ul id="toggle-view">
 				<li><a href="#">¿Qué es un reporte ciudadano?</a>
 					<span>Aviso que realiza cualquier interesado, a través de medios electrónicos, sobre posibles observaciones relacionadas con la ubicación, avances físicos y financieros o condiciones físicas de los programas y proyectos de inversión registrados en la Cartera de Inversión y en proceso de ejecución, susceptibles de ser georreferenciados.</span>
 				</li>
@@ -682,5 +691,23 @@ var svg = d3.select("#graph").append("svg")
 
 			})();
 		</script>
+		
+		<script>
+	
+	$('#toggle-view li').click(function () {
+
+		var text = $(this).children('div.panel');
+
+		if (text.is(':hidden')) {
+			text.slideDown('200');
+			$(this).children('span').html('-');		
+		} else {
+			text.slideUp('200');
+			$(this).children('span').html('+');		
+		}
+		
+	});
+
+</script>
 </body>
 </html>
