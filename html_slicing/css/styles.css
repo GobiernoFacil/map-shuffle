@@ -1441,6 +1441,18 @@ h1 {
     display: block;
     min-height: 490px;
     padding: 20px 0; }
+  .record p.fichas_ramo b {
+    background-position: 50%;
+    background-size: 25px auto;
+    display: inline-block;
+    height: 25px;
+    margin-right: 5px;
+    vertical-align: bottom;
+    width: 25px; }
+    .record p.fichas_ramo b.pemex {
+      background-image: url("../img/logos_ramo/pemex.gif"); }
+  .record .update {
+    margin-bottom: 40px; }
 
 .side {
   background: #f9f9f9;
