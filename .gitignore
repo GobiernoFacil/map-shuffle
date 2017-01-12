@@ -1,2 +1,5 @@
-.DS_Store
 assets
+bower_components
+.DS_Store
+html_slicing/css/src_sass
+html_slicing/css/fonts
