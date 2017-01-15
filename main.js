@@ -8,7 +8,8 @@ var GFSHCPMap =  function(){
     zoom        : 5,
     maxZoom     : 18,
     baseURL     : 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    attribution : 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+    attribution : 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+    data        : "http://localhost:8000/api/data"
   },
 
   STYLE = {
@@ -32,7 +33,7 @@ var GFSHCPMap =  function(){
   //[ la maroma que aparece al pasar el mouse sobre un punto]
   //
   //
-  point_popup = _.template("cve_ppi: <%=cve_ppi%>");
+  point_popup = null;//_.template("cve_ppi: <%=cve_ppi%>");
 
 
 
@@ -94,12 +95,13 @@ var GFSHCPMap =  function(){
    *
    *
    */
-  app = {
+  var app = {
     //
     // [ comentar otro día n_____n ]
     //
     //
     initialize : function(data, map, style, states){
+      this.settings     = Object.create(MAP);
       this.brew         = null;
       this.selected     = null;
       this.current      = null;
@@ -107,14 +109,18 @@ var GFSHCPMap =  function(){
       this.base_map     = null;
       this.map          = null;
       this.states       = null;
+      this._points      = null;
       this.points       = null;
-      this.CSS          = style;
+      this.style        = Object.create(STYLE);
 
+      /*
       this.collection   = new Backbone.Collection(data);
       this.labels       = new Backbone.Collection(Selector);
       this.cities_layer = this.make_geojson(this.collection.toArray());
+      */
     
-      this.drawMap(map);
+      this.drawMap();
+      /*
       this.drawCities(this.map, this.cities_layer, style.city);
       this.drawStates(states, style.state);
 
@@ -126,8 +132,102 @@ var GFSHCPMap =  function(){
 
       this.drawPoints();
       this.drawPoints2();
+      */
 
+    },
+
+    getData : function(){
+      var that = this;
+      d3.json(this.settings.data, function(error, d){
+        that._points = that.makeGeojson(d);
+        that.drawPoints();
+        console.log(that.points);
+      });
+    },
+
+    //
+    // [ comentar otro día n_____n ]
+    //
+    //
+    drawMap : function(){
+      this.map = L.map(this.settings.div).setView([this.settings.lat, this.settings.lng], this.settings.zoom);
+
+      L.tileLayer(this.settings.baseURL, {
+        id : "main-map",//this.settings.id,
+        maxZoom : this.settings.maxZoom,
+        attribution : this.settings.attribution,
+      }).addTo(this.map);
+
+      this.map.attributionControl.addAttribution('SHCP');
+
+      return this.map;
+    },
+
+    //
+    // [ comentar otro día n_____n ]
+    //
+    //
+    drawPoints : function(){
+      var that = this;
+      this.points = L.geoJson(this._points, {
+        pointToLayer : function(feature, latlng){
+          var p = L.circleMarker(latlng, that.style.points),
+              content = {
+                //nombre : feature.properties["Nombre"],
+                estado : feature.properties["Estado"],
+                //municipio : feature.properties["Municipio"],
+                //destino : feature.properties["Destino 1"]
+              };
+
+              /*
+              p.on("mouseover", function(e){
+
+                L.popup()
+                  .setLatLng(latlng)
+                  .setContent(point_popup(content))
+                  .openOn(that.map);
+              });
+              */
+          return p;
+        }
+      }).addTo(this.map);
+    },
+
+    //
+    // [ comentar otro día n_____n ]
+    //
+    //
+    makeGeojson : function(data){
+      return{
+        "type":"FeatureCollection",
+        "crs":{
+          "type":"name",
+          "properties":{
+            "name":"urn:ogc:def:crs:EPSG::4019"
+          }
+        },
+        "features" : data.map(function(d){
+          return {
+            type : "Feature",
+            properties : {
+              "Municipio" : "Aguascalientes", 
+              "Estado"    : "Aguascalientes", 
+              "Long"      : d.longitud_inicial, 
+              "Lat"       : d.latitud_inicial,
+              "cvePPI" : d.cve_ppi
+            },
+            geometry : {
+              "type": "Point", 
+              "coordinates": [ d.longitud_inicial, d.latitud_inicial ]
+            }
+          }
+        })
+      }
     },
   }
 
+  return app;
 };
+
+var _App = new GFSHCPMap();
+_App.initialize();
