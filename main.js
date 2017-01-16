@@ -33,7 +33,7 @@ var GFSHCPMap =  function(){
   //[ la maroma que aparece al pasar el mouse sobre un punto]
   //
   //
-  point_popup = null;//_.template("cve_ppi: <%=cve_ppi%>");
+  point_popup = null;//_.template("key: <%=key%>");
 
 
 
@@ -120,6 +120,7 @@ var GFSHCPMap =  function(){
       */
     
       this.drawMap();
+      this.getData();
       /*
       this.drawCities(this.map, this.cities_layer, style.city);
       this.drawStates(states, style.state);
@@ -212,13 +213,13 @@ var GFSHCPMap =  function(){
             properties : {
               "Municipio" : "Aguascalientes", 
               "Estado"    : "Aguascalientes", 
-              "Long"      : d.longitud_inicial, 
-              "Lat"       : d.latitud_inicial,
-              "cvePPI" : d.cve_ppi
+              "Long"      : d.lng, 
+              "Lat"       : d.lat,
+              "cvePPI" : d.key
             },
             geometry : {
               "type": "Point", 
-              "coordinates": [ d.longitud_inicial, d.latitud_inicial ]
+              "coordinates": [ d.lng, d.lat ]
             }
           }
         })
