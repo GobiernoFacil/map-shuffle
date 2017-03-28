@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Transparencia presupuestaria</title>
+  <meta name="description" content="Mapas">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+  <link rel="stylesheet" type="text/css" href="css/leaflet.css">
+</head>
+<body>
+  <div id="map"> 
+    <div id="GF-SHCP-map" style="width:100%; height:100%; frameborder:0; scrolling:no;"></div>
+  </div>
+  
+  <div class="col-sm-3 zero sidebar">
+    <header class="top">
+     <a class="tp">Transparencia Presupuestaria</a>
+    </header>
+    <div class="col-sm-2 zero">
+      <ul class="main_nav">
+        <li><a href="#" class="i_money">money</a></li>
+        <li><a href="#" class="i_alert">alert</a></li>
+        <li class="current"><a href="#" class="i_opa">Obra Pública Abierta</a></li>
+        <li><a href="#" class="i_ramo23">Ramo 23</a></li>
+        <li><a href="#" class="i_escuelas">Escuelas</a></li>
+      </ul>
+    </div>
+    <div class="col-sm-10 filter_container">
+      <!--year-->
+      <!--
+      <h3>Año</h3>
+      <select id="GF-SHCP-year-selector">
+        <option value="all">Todos</option>
+        <option value="2017">2017</option>
+        <option value="2016">2016</option>
+        <option value="2015">2015</option>
+        <option value="2014">2014</option>
+        <option value="2013">2013</option>
+        <option value="2012">2012</option>
+      </select>
+      -->
+      <!--state-->
+      <h3>Entidad Federativa</h3>
+      <select id="GF-SHCP-state-selector">
+        <option value="all">Todas</option>
+        <option value="1">Aguascalientes</option>
+        <option value="2">Baja California</option>
+        <option value="3">Baja California Sur</option>
+        <option value="4">Campeche</option>
+        <option value="5">Coahuila de Zaragoza</option>
+        <option value="6">Colima</option>
+        <option value="7">Chiapas</option>
+        <option value="8">Chihuahua</option>
+        <option value="9">Ciudad de México</option>
+        <option value="10">Durango</option>
+        <option value="11">Guanajuato</option>
+        <option value="12">Guerrero</option>
+        <option value="13">Hidalgo</option>
+        <option value="14">Jalisco</option>
+        <option value="15">México</option>
+        <option value="16">Michoacán de Ocampo</option>
+        <option value="17">Morelos</option>
+        <option value="18">Nayarit</option>
+        <option value="19">Nuevo León</option>
+        <option value="20">Oaxaca</option>
+        <option value="21">Puebla</option>
+        <option value="22">Querétaro</option>
+        <option value="23">Quintana Roo</option>
+        <option value="24">San Luis Potosí</option>
+        <option value="25">Sinaloa</option>
+        <option value="26">Sonora</option>
+        <option value="27">Tabasco</option>
+        <option value="28">Tamaulipas</option>
+        <option value="29">Tlaxcala</option>
+        <option value="30">Veracruz de Ignacio de la Llave</option>
+        <option value="31">Yucatán</option>
+        <option value="32">Zacatecas</option>
+      </select>
+      <!--branch-->
+      <h3>Ramo</h3>
+
+      <select id="GF-SHCP-branch-selector">
+        <option value="all">Todos</option>
+        <option value="2">Oficina de la Presidencia de la República</option>
+        <option value="4">Gobernación</option>
+        <option value="5">Relaciones Exteriores</option>
+        <option value="6">Hacienda y Crédito Público</option>
+        <option value="7">Defensa Nacional</option>
+        <option value="8">Agricultura, Ganadería, Desarrollo Rural, Pesca y Alimentación</option>
+        <option value="9">Comunicaciones y Transportes</option>
+        <option value="10">Economía</option>
+        <option value="11">Educación Pública</option>
+        <option value="12">Salud</option>
+        <option value="13">Marina</option>
+        <option value="14">Trabajo y Previsión Social</option>
+        <option value="15">Desarrollo Agrario, Territorial y Urbano</option>
+        <option value="16">Medio Ambiente y Recursos Naturales</option>
+        <option value="17">Procuraduría General de la República</option>
+        <option value="18">Energía</option>
+        <option value="20">Desarrollo Social</option>
+        <option value="21">Turismo</option>
+        <option value="27">Función Pública</option>
+        <option value="31">Tribunales Agrarios</option>
+        <option value="32">Tribunal Federal de Justicia Administrativa</option>
+        <option value="37">Consejería Jurídica del Ejecutivo Federal</option>
+        <option value="38">Consejo Nacional de Ciencia y Tecnología</option>
+        <option value="47">Entidades no Sectorizadas</option>
+        <option value="50">Instituto Mexicano del Seguro Social</option>
+        <option value="51">Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado</option>
+        <option value="52">Petróleos Mexicanos</option>
+        <option value="53">Comisión Federal de Electricidad</option>
+      </select>
+
+      <h3>Ejecutor</h3>
+      <select id="GF-SHCP-exec-selector">
+        <option value="all">Todos</option>
+        <option>Abogado General</option>
+        <option>Administración Portuaria Integral de Altamira, S.A. de C.V.</option>
+        <option>Administración Portuaria Integral de Coatzacoalcos, S.A. de C.V.</option>
+        <option>Administración Portuaria Integral de Dos Bocas, S.A. de C.V.</option>
+        <option>Administración Portuaria Integral de Ensenada, S.A. de C.V.</option>
+        <option>Administración Portuaria Integral de Guaymas, S.A. de C.V.</option>
+        <option>Administración Portuaria Integral de Lázaro Cárdenas, S.A. de C.V.</option>
+        <option>Administración Portuaria Integral de Manzanillo, S.A. de C.V.</option>
+        <option>Administración Portuaria Integral de Mazatlán, S.A. de C.V.</option>
+        <option>Administración Portuaria Integral de Progreso, S.A. de C.V.</option>
+        <option>Administración Portuaria Integral de Puerto Madero, S.A. de C.V.</option>
+        <option>Administración Portuaria Integral de Puerto Vallarta, S.A. de C.V.</option>
+        <option>Administración Portuaria Integral de Salina Cruz, S.A. de C.V.</option>
+        <option>Administración Portuaria Integral de Tampico, S.A. de C.V.</option>
+        <option>Administración Portuaria Integral de Topolobampo, S.A. de C.V.</option>
+        <option>Administración Portuaria Integral de Tuxpan, S.A. de C.V.</option>
+        <option>Administración Portuaria Integral de Veracruz, S.A. de C.V.</option>
+        <option>Aeropuerto Internacional de la Ciudad de México, S.A. de C.V.</option>
+        <option>Aeropuertos y Servicios Auxiliares</option>
+        <option>Agencia Nacional de Seguridad Industrial y de Protección al Medio Ambiente del Sector Hidrocarburos</option>
+        <option>Agroasemex, S.A.</option>
+        <option>Archivo General de la Nación</option>
+        <option>Banco del Ahorro Nacional y Servicios Financieros, S.N.C.</option>
+        <option>Banco Nacional de Comercio Exterior, S.N.C.</option>
+        <option>Banco Nacional de Obras y Servicios Públicos, S.N.C.</option>
+        <option>Banco Nacional del Ejército, Fuerza Aérea y Armada, S.N.C.</option>
+        <option>Caminos y Puentes Federales de Ingresos y Servicios Conexos</option>
+        <option>Casa de Moneda de México</option>
+        <option>Centro de Capacitación Cinematográfica, A.C.</option>
+        <option>Centro de Enseñanza Técnica Industrial</option>
+        <option>Centro de Ingeniería y Desarrollo Industrial</option>
+        <option>Centro de Investigación Científica de Yucatán, A.C.</option>
+        <option>Centro de Investigación Científica y de Educación Superior de Ensenada, Baja California</option>
+        <option>Centro de Investigación en Alimentación y Desarrollo, A.C.</option>
+        <option>Centro de Investigación en Matemáticas, A.C.</option>
+        <option>Centro de Investigación en Materiales Avanzados, S.C.</option>
+        <option>Centro de Investigación en Química Aplicada</option>
+        <option>Centro de Investigación y de Estudios Avanzados del Instituto Politécnico Nacional</option>
+        <option>Centro de Investigación y Desarrollo Tecnológico en Electroquímica, S.C.</option>
+        <option>Centro de Investigación y Docencia Económicas, A.C.</option>
+        <option>Centro de Investigación y Seguridad Nacional</option>
+        <option>Centro de Investigaciones Biológicas del Noroeste, S.C.</option>
+        <option>Centro de Investigaciones en Óptica, A.C.</option>
+        <option>Centro de Investigaciones y Estudios Superiores en Antropología Social</option>
+        <option>Centro Nacional de Control de Energía</option>
+        <option>Centro Nacional de Control del Gas Natural</option>
+        <option>Centro Nacional de Metrología</option>
+        <option>Centro Nacional de Prevención de Desastres</option>
+        <option>Centro Nacional de Programas Preventivos y Control de Enfermedades</option>
+        <option>Centro SCT Aguascalientes</option>
+        <option>Centro SCT Baja California</option>
+        <option>Centro SCT Baja California Sur</option>
+        <option>Centro SCT Campeche</option>
+        <option>Centro SCT Chiapas</option>
+        <option>Centro SCT Chihuahua</option>
+        <option>Centro SCT Coahuila</option>
+        <option>Centro SCT Colima</option>
+        <option>Centro SCT Durango</option>
+        <option>Centro SCT Guanajuato</option>
+        <option>Centro SCT Guerrero</option>
+        <option>Centro SCT Hidalgo</option>
+        <option>Centro SCT Jalisco</option>
+        <option>Centro SCT México</option>
+        <option>Centro SCT Michoacán</option>
+        <option>Centro SCT Morelos</option>
+        <option>Centro SCT Nayarit</option>
+        <option>Centro SCT Nuevo León</option>
+        <option>Centro SCT Oaxaca</option>
+        <option>Centro SCT Puebla</option>
+        <option>Centro SCT Querétaro</option>
+        <option>Centro SCT Quintana Roo</option>
+        <option>Centro SCT San Luis Potosí</option>
+        <option>Centro SCT Sinaloa</option>
+        <option>Centro SCT Sonora</option>
+        <option>Centro SCT Tabasco</option>
+        <option>Centro SCT Tamaulipas</option>
+        <option>Centro SCT Tlaxcala</option>
+        <option>Centro SCT Veracruz</option>
+        <option>Centro SCT Yucatán</option>
+        <option>Centro SCT Zacatecas</option>
+        <option>Centros de Integración Juvenil, A.C.</option>
+        <option>CIATEC, A.C. "Centro de Innovación Aplicada en Tecnologías Competitivas"</option>
+        <option>Colegio Nacional de Educación Profesional Técnica</option>
+        <option>Colegio Superior Agropecuario del Estado de Guerrero</option>
+        <option>Comandancia de la Fuerza Aérea Mexicana</option>
+        <option>Comandancia I Región Militar</option>
+        <option>Comisión de Operación y Fomento de Actividades Académicas del Instituto Politécnico Nacional</option>
+        <option>Comisión Federal de Electricidad</option>
+        <option>Comisión Federal de Mejora Regulatoria</option>
+        <option>Comisión Federal para la Protección contra Riesgos Sanitarios</option>
+        <option>Comisión Nacional Bancaria y de Valores</option>
+        <option>Comisión Nacional de Acuacultura y Pesca</option>
+        <option>Comisión Nacional de Arbitraje Médico</option>
+        <option>Comisión Nacional de Áreas Naturales Protegidas</option>
+        <option>Comisión Nacional de Bioética</option>
+        <option>Comisión Nacional de Libros de Texto Gratuitos</option>
+        <option>Comisión Nacional de Protección Social en Salud</option>
+        <option>Comisión Nacional de Seguridad Nuclear y Salvaguardias</option>
+        <option>Comisión Nacional de Seguros y Fianzas</option>
+        <option>Comisión Nacional de Vivienda</option>
+        <option>Comisión Nacional del Agua</option>
+        <option>Comisión Nacional del Sistema de Ahorro para el Retiro</option>
+        <option>Comisión Nacional Forestal</option>
+        <option>Comisión Nacional para el Desarrollo de los Pueblos Indígenas</option>
+        <option>Compañía Mexicana de Exploraciones, S.A. de C.V.</option>
+        <option>Consejería Jurídica del Ejecutivo Federal</option>
+        <option>Consejo Nacional de Ciencia y Tecnología</option>
+        <option>Consejo Nacional de Fomento Educativo</option>
+        <option>Consejo Nacional para el Desarrollo y la Inclusión de las Personas con Discapacidad</option>
+        <option>Coordinación General de Administración</option>
+        <option>Coordinación General de Transportes Aéreos Presidenciales</option>
+        <option>Coordinación General del Servicio Nacional de Empleo</option>
+        <option>Coordinación Nacional de PROSPERA Programa de Inclusión Social</option>
+        <option>Corporación Mexicana de Investigación en Materiales, S.A. de C.V.</option>
+        <option>Delegación en Hidalgo</option>
+        <option>Delegación en Michoacán</option>
+        <option>Delegación en Tamaulipas</option>
+        <option>Diconsa, S.A. de C.V.</option>
+        <option>Dirección General de Administración</option>
+        <option>Dirección General de Administración y Finanzas</option>
+        <option>Dirección General de Bienes Inmuebles y Recursos Materiales</option>
+        <option>Dirección General de Carreteras</option>
+        <option>Dirección General de Comunicación Social</option>
+        <option>Dirección General de Conservación de Carreteras</option>
+        <option>Dirección General de Construcciones Navales</option>
+        <option>Dirección General de Delegaciones</option>
+        <option>Dirección General de Desarrollo Carretero</option>
+        <option>Dirección General de Desarrollo Ferroviario y Multimodal</option>
+        <option>Dirección General de Desarrollo Regional y Fomento Turístico</option>
+        <option>Dirección General de Educación Militar y Rectoría de la Universidad del Ejército y Fuerza Aérea</option>
+        <option>Dirección General de Educación Tecnológica Agropecuaria</option>
+        <option>Dirección General de Fábricas de Vestuario y Equipo</option>
+        <option>Dirección General de Fomento Ambiental, Urbano y Turístico</option>
+        <option>Dirección General de Industria Militar</option>
+        <option>Dirección General de Informática</option>
+        <option>Dirección General de Ingenieros</option>
+        <option>Dirección General de Intendencia</option>
+        <option>Dirección General de Investigación y Desarrollo</option>
+        <option>Dirección General de Laboratorios Criminalísticos</option>
+        <option>Dirección General de Marina Mercante</option>
+        <option>Dirección General de Planeación y Desarrollo en Salud</option>
+        <option>Dirección General de Plataforma México</option>
+        <option>Dirección General de Puertos</option>
+        <option>Dirección General de Radio, Televisión y Cinematografía</option>
+        <option>Dirección General de Recursos Financieros</option>
+        <option>Dirección General de Recursos Humanos</option>
+        <option>Dirección General de Recursos Materiales</option>
+        <option>Dirección General de Recursos Materiales y Servicios Generales</option>
+        <option>Dirección General de Recursos Materiales, Inmuebles y Servicios</option>
+        <option>Dirección General de Recursos Materiales, Obra Públicay Servicios Generales</option>
+        <option>Dirección General de Sanidad</option>
+        <option>Dirección General de Servicios</option>
+        <option>Dirección General de Servicios Aéreos</option>
+        <option>Dirección General de Servicios Técnicos</option>
+        <option>Dirección General de Tecnologías de Información</option>
+        <option>Dirección General de Tecnologías de Información e Innovación</option>
+        <option>Dirección General de Vida Silvestre</option>
+        <option>El Colegio de la Frontera Sur</option>
+        <option>El Colegio de México, A.C.</option>
+        <option>Estado Mayor General de la Armada</option>
+        <option>Estado Mayor Presidencial</option>
+        <option>Exportadora de Sal, S.A. de C.V.</option>
+        <option>Ferrocarril del Istmo de Tehuantepec, S.A. de C.V.</option>
+        <option>Fideicomiso de Fomento Minero</option>
+        <option>Fideicomiso de Formación y Capacitación para el Personal de la Marina Mercante Nacional</option>
+        <option>Fideicomiso de los Sistemas Normalizado de Competencia Laboral y de Certificación de Competencia Laboral</option>
+        <option>Fideicomiso para la Cineteca Nacional</option>
+        <option>Financiera Nacional de Desarrollo Agropecuario, Rural, Forestal y Pesquero</option>
+        <option>Fondo de Capitalización e Inversión del Sector Rural</option>
+        <option>Fondo de Garantía y Fomento para la Agricultura, Ganadería y Avicultura</option>
+        <option>Fondo Nacional de Fomento al Turismo</option>
+        <option>Fondo Nacional para el Fomento de las Artesanías</option>
+        <option>Grupo Aeroportuario de la Ciudad de México, S.A. de C.V.</option>
+        <option>Hospital General "Dr. Manuel Gea González"</option>
+        <option>Hospital General de México "Dr. Eduardo Liceaga"</option>
+        <option>Hospital Infantil de México Federico Gómez</option>
+        <option>Hospital Juárez de México</option>
+        <option>Hospital Regional de Alta Especialidad del Bajío</option>
+        <option>Impresora y Encuadernadora Progreso, S.A. de C.V.</option>
+        <option>INFOTEC Centro de Investigación e Innovación en Tecnologías de la Información y Comunicación</option>
+        <option>Instituto de Administración y Avalúos de Bienes Nacionales</option>
+        <option>Instituto de Ecología, A.C.</option>
+        <option>Instituto de Investigaciones "Dr. José María Luis Mora"</option>
+        <option>Instituto de Seguridad Social para las Fuerzas Armadas Mexicanas</option>
+        <option>Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado</option>
+        <option>Instituto Mexicano de Cinematografía</option>
+        <option>Instituto Mexicano de la Propiedad Industrial</option>
+        <option>Instituto Mexicano de Tecnología del Agua</option>
+        <option>Instituto Mexicano del Petróleo</option>
+        <option>Instituto Mexicano del Seguro Social</option>
+        <option>Instituto Mexicano del Transporte</option>
+        <option>Instituto Nacional de Antropología e Historia</option>
+        <option>Instituto Nacional de Astrofísica, Óptica y Electrónica</option>
+        <option>Instituto Nacional de Cancerología</option>
+        <option>Instituto Nacional de Cardiología Ignacio Chávez</option>
+        <option>Instituto Nacional de Ciencias Médicas y Nutrición Salvador Zubirán</option>
+        <option>Instituto Nacional de Ciencias Penales</option>
+        <option>Instituto Nacional de Ecología y Cambio Climático</option>
+        <option>Instituto Nacional de Electricidad y Energías Limpias</option>
+        <option>Instituto Nacional de Enfermedades Respiratorias Ismael Cosío Villegas</option>
+        <option>Instituto Nacional de Investigaciones Nucleares</option>
+        <option>Instituto Nacional de la Economía Social</option>
+        <option>Instituto Nacional de la Infraestructura Física Educativa</option>
+        <option>Instituto Nacional de Lenguas Indígenas</option>
+        <option>Instituto Nacional de Medicina Genómica</option>
+        <option>Instituto Nacional de Migración</option>
+        <option>Instituto Nacional de Neurología y Neurocirugía Manuel Velasco Suárez</option>
+        <option>Instituto Nacional de Pediatría</option>
+        <option>Instituto Nacional de Perinatología Isidro Espinosa de los Reyes</option>
+        <option>Instituto Nacional de Pesca</option>
+        <option>Instituto Nacional de Psiquiatría Ramón de la Fuente Muñiz</option>
+        <option>Instituto Nacional de Rehabilitación Luis Guillermo Ibarra Ibarra</option>
+        <option>Instituto Nacional de Salud Pública</option>
+        <option>Instituto para la Protección al Ahorro Bancario</option>
+        <option>Instituto Politécnico Nacional</option>
+        <option>Instituto Potosino de Investigación Científica y Tecnológica, A.C.</option>
+        <option>Jefatura del Estado Mayor de la Defensa Nacional</option>
+        <option>Laboratorios de Biológicos y Reactivos de México, S.A. de C.V.</option>
+        <option>Nacional Financiera, S.N.C.</option>
+        <option>Notimex, Agencia de Noticias del Estado Mexicano</option>
+        <option>Oficialía Mayor</option>
+        <option>Patronato de Obras e Instalaciones del Instituto Politécnico Nacional</option>
+        <option>Pemex Corporativo</option>
+        <option>Pemex Etileno</option>
+        <option>Pemex Exploración y Producción</option>
+        <option>Pemex Fertilizantes</option>
+        <option>Pemex Logística</option>
+        <option>Pemex Perforación y Servicios</option>
+        <option>Pemex Transformación Industrial</option>
+        <option>Policía Federal</option>
+        <option>Prevención y Readaptación Social</option>
+        <option>Procuraduría Agraria</option>
+        <option>Procuraduría Federal de la Defensa del Trabajo</option>
+        <option>Procuraduría Federal de Protección al Ambiente</option>
+        <option>Procuraduría Federal del Consumidor</option>
+        <option>Procuraduría Fiscal de la Federación</option>
+        <option>Procuraduría General de Justicia Militar</option>
+        <option>Productora Nacional de Biológicos Veterinarios</option>
+        <option>Pronósticos para la Asistencia Pública</option>
+        <option>Secretaría Técnica del Consejo de Coordinación para la Implementación del Sistema de Justicia Penal</option>
+        <option>Servicio de Administración Tributaria</option>
+        <option>Servicio de Administración y Enajenación de Bienes</option>
+        <option>Servicio Geológico Mexicano</option>
+        <option>Servicio Nacional de Sanidad, Inocuidad y Calidad Agroalimentaria</option>
+        <option>Servicio Postal Mexicano</option>
+        <option>Servicios a la Navegación en el Espacio Aéreo Mexicano</option>
+        <option>Servicios de Atención Psiquiátrica</option>
+        <option>Sistema Nacional para el Desarrollo Integral de la Familia</option>
+        <option>Sistema Público de Radiodifusión del Estado Mexicano</option>
+        <option>Sociedad Hipotecaria Federal, S.N.C.</option>
+        <option>Subsecretaría de Comunicaciones</option>
+        <option>Subsecretaría de Educación Media Superior</option>
+        <option>Subsecretaría de Egresos</option>
+        <option>Subsecretaría de Hacienda y Crédito Público</option>
+        <option>Talleres Gráficos de México</option>
+        <option>Tecnológico Nacional de México</option>
+        <option>Tesorería de la Federación</option>
+        <option>Tribunal Federal de JusticiaAdministrativa con sede en la Ciudad de México</option>
+        <option>Tribunal Superior Agrario</option>
+        <option>Tribunales Unitarios Agrarios</option>
+        <option>Unidad de Comunicación Social y Vocero</option>
+        <option>Unidad de Control y Auditoría a Obra Pública</option>
+        <option>Unidad de Gobierno Digital</option>
+        <option>Unidad de la Red Privada del Gobierno Federal</option>
+        <option>Universidad Autónoma Chapingo</option>
+        <option>Universidad Autónoma Metropolitana</option>
+        <option>Universidad Nacional Autónoma de México</option>
+        <option>XE-IPN Canal 11</option>
+      </select>
+
+
+      <h3>Avance físico</h3>
+      <select id="GF-SHCP-advance-selector">
+        <!-- avance_fisico -->
+        <option value="all">Todos</option>
+        <option value="1">&lt; 1%</option>
+        <option value="2">1 a 20%</option>
+        <option value="3">20 a 40%</option>
+        <option value="4">40 a 60%</option>
+        <option value="5">60 a 80%</option>
+        <option value="6">80 a 100%</option>
+      </select>
+      
+      <!--
+      <h3>Clasificación</h3>
+      <select id="GF-SHCP-class-selector">
+        <option value="all">Todas</option>
+        <option value="Agricultura, Ganadería, Desarrollo Rural, Pesca y Alimentación">Agricultura, Ganadería, Desarrollo Rural, Pesca y Alimentación</option>
+        <option value="Asociación Público-Privada">Asociación Público-Privada</option>
+        <option value="Comunicaciones y Transportes">Comunicaciones y Transportes</option>
+        <option value="Desarrollo económico">Desarrollo económico</option>
+        <option value="Desarrollo Social">Desarrollo Social</option>
+        <option value="Educación">Educación</option>
+        <option value="Energía">Energía</option>
+        <option value="Gobierno">Gobierno</option>
+        <option value="Medio Ambiente">Medio Ambiente</option>
+        <option value="Salud">Salud</option>
+        <option value="Seguridad">Seguridad</option>
+        <option value="Turismo">Turismo</option>
+      </select>
+      -->
+      
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="col-sm-9 col-sm-offset-3 zero">
+    <header class="top title_side">
+      <h1>Obra Pública Abierta: <span>Todo México</span></h1>
+    </header>
+  
+  </div>
+  
+  
+  <!--aviso-->
+  <div class="col-sm-4 col-sm-offset-3">
+    <div class="note_opa">
+      <p>En este mapa se despliegan aquéllos <strong>proyectos de inversión física</strong> que pueden ser ubicados geográficamente.</p>
+    </div>
+  </div>
+  
+  <div class="col-sm-3 col-sm-offset-2">
+  <!--buscador-->
+    <div class="module_box">
+      <form id="GF-SHCP-geocoder">
+        <input id="GF-SHCP-geocoder-input" type="text" placeholder="Buscar palabra clave, dirección o CP">
+      <button>b</button>
+      </form>
+      <div class="clearfix"></div>
+    </div>
+    <!--gasto total-->
+    <div class="module_box">
+      <h3>Gasto total de inversión 2016</h3>
+      <p class="amount">$738,868.79 <span>MDP MXN</span></p>
+      <div class="separator"></div> 
+      <!--gráfica gasto inversión
+      <div class="bar_graph">
+        <div class="col-sm-4">
+          <div class="container_bar">
+            <div class="bbar" style="height: 100%"></div>
+          </div>
+          <p>Física</p>
+        </div>
+        <div class="col-sm-4">
+          <div class="container_bar">
+            <div class="bbar" style="height: 25%"></div>
+          </div>
+          <p>Subsidios</p>
+        </div>
+        <div class="col-sm-4">
+          <div class="container_bar">
+            <div class="bbar" style="height: 5%"></div>
+          </div>
+          <p>Financiera</p>
+        </div>-->
+        <div class="clearfix"></div>
+      </div>
+    </div>
+    
+  </div>
+  
+  
+<script src="js/d3.min.js"></script>
+<script src="js/leaflet.js"></script>
+<script src="js/underscore-min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZXX_dqYAZ9oLxA28sN5ztg3qNBArk80I"></script>
+<script>
+    var GFSHCPbasePath = "/ficha.html";
+</script>
+<script src="js/main.js"></script>
+  
+</body>
+</html>
