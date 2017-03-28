@@ -6,7 +6,9 @@ Este proyecto contiene la primera versión del mapa de transparencia presupuesta
 La información que despliega en el mapa, está contenida en la carpeta CSV.
 
 ## Configuración
-EL mapa principal (mapa.html) contiene un solo punto de control, que define el url del sitio que debe abrir al seleccionar un punto en el mismo.
+
+#### mapa principal
+El mapa principal (mapa.html) contiene un solo punto de control, que define el url del sitio que debe abrir al seleccionar un punto en el mismo.
 
 Este punto de control se encuentra al final del documento mapa.html: es una variable: 
 
@@ -15,7 +17,9 @@ Este punto de control se encuentra al final del documento mapa.html: es una vari
     var GFSHCPbasePath = "/ficha.html";
 </script>
 ```
+El código toma el url de GFSHCPbasePath y le agrega el signo _#_ y el id de la clave de cartera. Es posible defnir urls ms complejas, como por ejemplo: "https://mapas.gobiernofacil.com/ficha"
 
+#### Ficha
 El documento ficha.html contiene cuatro variables de control:
 * GFLinksBaseURL: contiene el url de la ficha del proyecto,
 * GFAPIBaseURL: el endpoint de datos.gob para obtener la ficha completa del proyecto
