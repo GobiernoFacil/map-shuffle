@@ -1,0 +1,15 @@
+{
+  "type"  : "area",
+  "level" : ["state"],
+  "src"   : "/js/maps/tomas_clandestinas.csv",
+  "file"  : "csv",
+  "location" : {
+    "state" : "estado_id"
+  },
+  "values"  : ["tomas"],
+  "data"    : ["year", "estado"],
+  "current" : {
+    "level" : "state",
+    "value" : "tomas"
+  }
+}

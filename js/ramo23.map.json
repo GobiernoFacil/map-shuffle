@@ -1,0 +1,16 @@
+{
+  "type"  : "area",
+  "level" : ["state", "city"],
+  "src"   : "/js/maps/ramo23-2017.csv",
+  "file"  : "csv",
+  "location" : {
+    "state" : "id_entidad",
+    "city"  : "id_municipio"
+  },
+  "values"  : ["monto", "pagado"],
+  "data"    : ["clave_de_programa", "fondo", "entidad", "municipio", "proyecto"],
+  "current" : {
+    "level" : "state",
+    "value" : "monto"
+  }
+}

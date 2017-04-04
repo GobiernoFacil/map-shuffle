@@ -340,6 +340,11 @@
       this.points = L.geoJson(d, {
         pointToLayer : function(feature, latlng){
           //console.log(feature.properties.monto_total);
+<<<<<<< HEAD
+=======
+          if(latlng.lat && latlng.lng){
+
+>>>>>>> f190c3c9d5cb10d0fe15fcd4a7615b6ea75aa55e
           var p = L.circleMarker(latlng, that.style.points),
               content = {
                 //nombre : feature.properties["Nombre"],
@@ -355,7 +360,11 @@
 
               p.on("click", function(e){
                 //alert(feature.properties.cvePPI);
+<<<<<<< HEAD
                 window.open(GFSHCPbasePath +'#' + feature.properties.cvePPI, '_blank');
+=======
+                window.open('/ficha#' + feature.properties.cvePPI, '_blank');
+>>>>>>> f190c3c9d5cb10d0fe15fcd4a7615b6ea75aa55e
                 // window.location.href = "";
               });
 
@@ -369,6 +378,10 @@
               });
               
           return p;
+<<<<<<< HEAD
+=======
+          }
+>>>>>>> f190c3c9d5cb10d0fe15fcd4a7615b6ea75aa55e
         }
       }).addTo(this.map);
     },

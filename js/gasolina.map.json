@@ -1,0 +1,14 @@
+{
+  "type"  : "point",
+  "level" : [],
+  "src"   : "/js/maps/gasolina_puntos.csv",
+  "file"  : "csv",
+  "location" : {
+    "lat" : "lat",
+    "lng" : "lng"
+  },
+  "values"  : [],
+  "data"    : ["id","place_id","name","brand","category","address","_lat","_lng","lat","lng","osm_place_id","osm_licence","osm_type","osm_id","osm_lat","osm_lon","osm_display_name","osm_address_road","osm_hamlet","osm_county","osm_state","osm_postcode","osm_country","osm_country_code","state_id","city_id","created_at","updated_at","_postcodes","_state_id","_city_id"],
+  "current" : {},
+  "template" : "<p><%=name%>:<%=osm_state%></p>"
+}

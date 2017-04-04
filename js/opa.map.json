@@ -1,0 +1,14 @@
+{
+  "type"  : "point",
+  "level" : [],
+  "src"   : "/js/maps/opa.csv",
+  "file"  : "csv",
+  "location" : {
+    "lat" : "lat",
+    "lng" : "lng"
+  },
+  "values"  : [],
+  "data"    : ["key","name","ramo","unidad","state","lat","lng","advance","monto_total_inversion","ciclo","classification","ejercido"],
+  "current" : {},
+  "template" : "<p><%=name%>:<%=monto_total_inversion%></p>"
+}
