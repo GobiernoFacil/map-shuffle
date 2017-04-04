@@ -22,7 +22,8 @@ define(function(require){
       // obtiene los conjuntos de datos
       COLORS      = require("assets/brewer-color-list"),
       ESTADOS     = require("assets/estados-area"),
-      ESTADOSNAME = require("assets/estados-nombres");
+      ESTADOSNAME = require("assets/estados-nombres"),
+      MUNICIPIOS  = require("assets/municipios");
 
 
 
@@ -41,6 +42,22 @@ define(function(require){
     // función que se ejecuta
     //
     initialize : function(){
+
+/*
+      MUNICIPIOS.municipios.features.forEach(function(feature){
+        var props = {
+          state : +feature.properties.CVE_ENT,
+          city  : +feature.properties.CVE_MUN,
+          inegi : +feature.properties.concat,
+        };
+
+        feature.properties = props;
+      });
+      */
+
+      console.log(MUNICIPIOS.municipios.features[0]);
+
+      XXXX = MUNICIPIOS;
       // inicia las propiedades a usar
       this.map          = null;
       this.layersConfig = [];

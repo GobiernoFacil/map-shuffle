@@ -9,12 +9,12 @@
 require.config({
   baseUrl : '/js',
   paths : {
-    d3         : "bower_components/d3/d3.min",
-    leaflet    : "bower_components/leaflet/dist/leaflet",
-    underscore : "bower_components/underscore/underscore-min",
-    text       : 'bower_components/requirejs-plugins/lib/text',
-    json       : 'bower_components/requirejs-plugins/src/json',
-    classyBrew : "classybrew/build/classybrew.min"
+    d3         : "libs/d3.min",
+    leaflet    : "libs/leaflet",
+    underscore : "libs/underscore-min",
+    text       : 'libs/text',
+    json       : 'libs/json',
+    classyBrew : "libs/classybrew.min"
   }
 });
 
