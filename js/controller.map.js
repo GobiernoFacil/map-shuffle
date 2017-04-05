@@ -12,25 +12,34 @@ define(function(require){
    * ------------------------------------------------------------
    */
 
-      // obtiene el archivo de configuración
+      // [1] obtiene el archivo de configuración
   var CONFIG      = require("json!config.map.json"),
-      // obtiene las librerías necesarias
+
+      // [2] obtiene las librerías necesarias
       d3          = require("d3"),
       leaflet     = require("leaflet"),
       underscore  = require("underscore"),
       classybrew  = require("classyBrew"),
-      // obtiene los conjuntos de datos
-      // [1] las posibles combinaciones de color de classyBrew
+
+      // [3] obtiene los conjuntos de datos
+      // [*] las posibles combinaciones de color de classyBrew
       COLORS         = require("assets/brewer-color-list"),
+      // [*] el archivo de geojson de los estados
       ESTADOS        = require("assets/estados-area"),
-      ESTADOSNAME    = require("assets/estados-nombres");
+      // [*] el nombre y clave de cada estado
+      ESTADOSNAME    = require("assets/estados-nombres"),
+      // [*] el geojson de los municipios
       MUNICIPIOS     = require("assets/municipios"),
+      // [*] el nombre y clave de cada municipio
       MUNICIPIOSNAME = require("assets/municipios-nombres");
 
 
   /*
    * E L   S I N G L E T O N   D E L   M A P A (main obj)
    * ------------------------------------------------------------
+   * Este singleton será la aplicación principal, y se manda a llamar desde
+   * /js/main.map.js (en la versión de desarrollo, el objeto se llama GFSHCPMapApp),
+   * y se puede acceder desde la consola.
    */
   var GFSHCPMap = {
 
@@ -41,29 +50,44 @@ define(function(require){
     // función que se ejecuta
     //
     initialize : function(){
-      // inicia las propiedades a usar
-      this.map          = null;
-      this.layersConfig = [];
-      this.settings     = Object.create(CONFIG);
+      // [1] INICIA LAS PROPIEDADES DEL APP 
+      //
+      // * la referencia a classyBrew
       this.brew         = null;
+      // * la referencia al layer de leaflet de ciudades
+      this.cities       = null;
+      // * la referencia al archivo de configuración principal después de cargar la info
       this.currentData  = null;
+      // * la referencia al mapa de configuración seleccionado
       this.currentMap   = null;
+      // * la lista de mapas disponibles (archivos de configuración)
+      this.layersConfig = [];
+      // * el mapa de leaflet
+      this.map          = null;
+      // * la referencia al layer de leaflet de puntos
+      this.points       = null;
+      // la referencia al layer de leaflet de estados
+      this.states       = null;
+      // referencia al archivo de configuración inicial
+      this.settings     = Object.create(CONFIG);
+      
 
-      this.states = null;
-      this.cities = null;
-      this.points = null;
 
-
-      // arregla el scope de algunas funciones
+      // [2] ARRREGLA EL SCOPE DE ALGUNAS FUNCIONES
+      //
       this._stateStyle = this._stateStyle.bind(this);
+      this._cityStyle  = this._cityStyle.bind(this);
 
-      // arregla algunos datos del geojson
+      // [3] ARREGLA EL GEOJSON DE ESTADOS (esto debe desaparecer)
+      //
       this._setStatesGeometry();
       
-      // inicia el mapa de leaflet
+      // [4] INICIA EL MAPA DE LEAFLET
+      //
       this.drawMap();
 
-      // carga los json de configuración decada mapa
+      // [5] CARGA LOS ARCHIVOS DE CONFIGURACIÓN Y DESPLIEGA EL MAPA SELECCIONADO
+      //
       this.loadMapsConfig();
 
     },
@@ -73,14 +97,17 @@ define(function(require){
     //
     //
     drawMap : function(){
-      // inicia el mapa de leaflet con los settings de config.map.json
+      // [1] inicia el mapa de leaflet con los settings de config.map.json
+      //
       this.map = L.map(this.settings.map.div)
                   .setView([this.settings.map.lat, this.settings.map.lng], this.settings.map.zoom);
 
-      // agrega el layer de tiles
+      // [2] agrega el layer de tiles
+      //
       L.tileLayer(this.settings.map.tileServer, this.settings.map.tileServerConfig).addTo(this.map);
 
-      // agrega los demas créditos
+      // [3] agrega los demas créditos
+      //
       if(this.settings.map.attributions.length){
         this.settings.map.attributions.forEach(function(attr){
           this.map.attributionControl.addAttribution(attr);
@@ -99,19 +126,25 @@ define(function(require){
       // genera unlayer con la información
       this.settings.maps.maps.forEach(function(url, index){
         
+        // crea una referencia para la ruta del archivo de configuración,
+        // y del mapa que debe desplegarse al inicio
         var path   = this.settings.maps.basePath + "/" + url,
             active = this.settings.maps.current; 
 
+        // carga el json de configuración
         d3.json(path, function(error, data){
+          // genera el elemento que representará al mapa en la app
           var item = {
-            src    : path, 
-            config : data,
-            index  : index,
-            data   : null
+            src    : path,  // la ruta del archivo
+            config : data,  // el contenido del json
+            index  : index, // su posición (id)
+            data   : null   // aquí se guardarán los datos cargados
           };
 
+          // guarda el mapa en el array de mapas
           that.layersConfig.push(item);
 
+          // si es el seleccionado, lo ejectura
           if(+index === +active){
             that.getLayer(item);
           }
@@ -120,33 +153,34 @@ define(function(require){
     },
 
     //
-    // OBTIENE LA INFORMACIÓN DEL LAYER SELECCIONADO
+    // OBTIENE LA INFORMACIÓN DEL LAYER SELECCIONADO Y LO DESPLIEGA
     //
     //
     getLayer : function(item){
       var that = this, 
           conf = item.config;
 
-      // carga el archivo con los datos para graficar
+      // [1] carga el archivo con los datos para graficar
+      //
       d3[conf.file](conf.src, function(error, data){
         item.data = data;
         that.currentMap = item;
-
-        // renderea un mapa a nivel estatal
+        
+        // [2] Dependiendo el tipo de mapa, selecciona el método para desplegar la info
+        // 
+        // * renderea un mapa a nivel estatal (area)
         if(item.config.current.level == "state"){
           that.currentData = that._agregateDataByState(item);
           that.brew = that._colorMixer(item);
           that.renderStateLayer(item);
         }
-
-        // renderea un mapa a nivel municipal
+        // * renderea un mapa a nivel municipal (area)
         else if(item.config.current.level == "city"){
           that.currentData = that._agregateDataByCity(item);
           that.brew        = that._colorMixer(item);
           that.renderCityLayer(item);
         }
-
-        // renderea un mapa a nivel latitud y longitud
+        // * renderea un mapa a nivel latitud y longitud (point)
         else{
           that.currentData = null;
           that.renderPointsLayer(item);
@@ -157,7 +191,7 @@ define(function(require){
     },
 
     //
-    // DIBUJA EL LAYER SELECCIONADO
+    // DIBUJA EL LAYER SELECCIONADO PARA ESTADOS
     //
     //
     renderStateLayer : function(item){
@@ -166,19 +200,23 @@ define(function(require){
                     }).addTo(this.map);
     },
 
+    //
+    // DIBUJA EL LAYER SELECCIONADO PARA CIUDADES
+    //
+    //
     renderCityLayer : function(item){
       this.cities = L.geoJson(MUNICIPIOS.municipios, {
                       style : this._cityStyle,
                     }).addTo(this.map);
     },
 
+    //
+    // DIBUJA EL LAYER SELECCIONADO PARA PUNTOS
+    //
+    //
     renderPointsLayer : function(item){
-      console.log(item);
       var that   = this,
           points = this._makeGeojson(item);
-
-      // return;
-
 
       this.points = L.geoJson(points, {
         pointToLayer : function(feature, latlng){
