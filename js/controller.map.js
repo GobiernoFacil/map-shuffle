@@ -20,14 +20,12 @@ define(function(require){
       underscore  = require("underscore"),
       classybrew  = require("classyBrew"),
       // obtiene los conjuntos de datos
+      // [1] las posibles combinaciones de color de classyBrew
       COLORS         = require("assets/brewer-color-list"),
       ESTADOS        = require("assets/estados-area"),
       ESTADOSNAME    = require("assets/estados-nombres");
-      //MUNICIPIOS     = require("assets/municipios"),
-      //MUNICIPIOSNAME = require("assets/municipios-nombres");
-
-
-
+      MUNICIPIOS     = require("assets/municipios"),
+      MUNICIPIOSNAME = require("assets/municipios-nombres");
 
 
   /*
@@ -43,20 +41,6 @@ define(function(require){
     // función que se ejecuta
     //
     initialize : function(){
-
-/*
-      MUNICIPIOS.municipios.features.forEach(function(feature){
-        var props = {
-          state : +feature.properties.CVE_ENT,
-          city  : +feature.properties.CVE_MUN,
-          inegi : +feature.properties.concat,
-        };
-
-        feature.properties = props;
-      });
-      */
-
-      //console.log(MUNICIPIOS.municipios.features[0]);
       // inicia las propiedades a usar
       this.map          = null;
       this.layersConfig = [];
@@ -228,6 +212,26 @@ define(function(require){
           data    = state.data,
           current = this.currentMap.config.current.value,
           value   = ! state.data.length ? 0 : _.pluck(data, current).reduce(function(a, b){
+                      return Number(a) + Number(b);
+                    }, 0);
+
+      return {
+        weight      : .4,
+        opacity     : 0.1,
+        color       : 'black',
+        dashArray   : '',
+        fillOpacity : 1,
+        fillColor   : this.brew.getColorInRange(value) // "#f2f2f2"
+      }
+    },
+
+    _cityStyle : function(feature){
+      var city    = this.currentData.filter(function(d){
+                      return feature.properties.state == d.state && feature.properties.city == d.city;
+                    })[0],
+          data    = city.data, 
+          current = this.currentMap.config.current.value,
+          value   = ! city.data.length ? 0 : _.pluck(data, current).reduce(function(a, b){
                       return Number(a) + Number(b);
                     }, 0);
 
