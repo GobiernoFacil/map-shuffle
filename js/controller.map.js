@@ -158,7 +158,7 @@ define(function(require){
         // renderea un mapa a nivel municipal
         else if(item.config.current.level == "city"){
           that.currentData = that._agregateDataByCity(item);
-          that.brew = that._colorMixer(item);
+          that.brew        = that._colorMixer(item);
           that.renderCityLayer(item);
         }
 
@@ -179,6 +179,12 @@ define(function(require){
     renderStateLayer : function(item){
       this.states = L.geoJson(ESTADOS.edos, {
                       style : this._stateStyle,
+                    }).addTo(this.map);
+    },
+
+    renderCityLayer : function(item){
+      this.cities = L.geoJson(MUNICIPIOS.municipios, {
+                      style : this._cityStyle,
                     }).addTo(this.map);
     },
 
@@ -248,7 +254,7 @@ define(function(require){
           _data = null,
           brew  = null;
 
-      if(level == "state"){
+      if(level == "state" || level == "city"){
         data  = this.currentData;
         _data = data.map(function(d){
                   if(d.data.length){
@@ -261,9 +267,6 @@ define(function(require){
                   }
                 });
       }
-      else if(level == "city"){
-      }
-
       else{
 
       }
@@ -313,6 +316,15 @@ define(function(require){
         
         search[state] = st.state;
         search[city]  = st.city;
+
+        return {
+          id    : ct.inegi,
+          state : ct.state,
+          city  : ct.city,
+          name  : ct.name,
+          //url  : ct.url,
+          data : _.where(item.data, search)
+        }
       });
 
     },
