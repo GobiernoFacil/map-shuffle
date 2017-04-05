@@ -20,10 +20,11 @@ define(function(require){
       underscore  = require("underscore"),
       classybrew  = require("classyBrew"),
       // obtiene los conjuntos de datos
-      COLORS      = require("assets/brewer-color-list"),
-      ESTADOS     = require("assets/estados-area"),
-      ESTADOSNAME = require("assets/estados-nombres"),
-      MUNICIPIOS  = require("assets/municipios");
+      COLORS         = require("assets/brewer-color-list"),
+      ESTADOS        = require("assets/estados-area"),
+      ESTADOSNAME    = require("assets/estados-nombres"),
+      MUNICIPIOS     = require("assets/municipios"),
+      MUNICIPIOSNAME = require("assets/municipios-nombres");
 
 
 
@@ -56,8 +57,6 @@ define(function(require){
       */
 
       console.log(MUNICIPIOS.municipios.features[0]);
-
-      XXXX = MUNICIPIOS;
       // inicia las propiedades a usar
       this.map          = null;
       this.layersConfig = [];
@@ -82,6 +81,7 @@ define(function(require){
 
       // carga los json de configuración decada mapa
       this.loadMapsConfig();
+
     },
 
     //
@@ -298,6 +298,23 @@ define(function(require){
       });
 
       return _data;
+    },
+
+    _agregateDataByCity : function(item){
+      var state = item.config.location.state,
+          city  = item.config.location.city,
+          _data = null;
+
+      this._strToNumber(item.data, state);
+      this._strToNumber(item.data, city);
+
+      _data = MUNICIPIOSNAME.cities.map(function(ct){
+        var search = {};
+        
+        search[state] = st.state;
+        search[city]  = st.city;
+      });
+
     },
 
     _strToNumber : function(data, field){
