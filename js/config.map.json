@@ -31,6 +31,6 @@
     "basePath" : "/js",
     "maps"     : ["ramo23.map.json", "opa.map.json", "tomas.map.json", "gasolina.map.json"],
     "extras"   : ["poblacion.map.json"],
-    "current"  : 2
+    "current"  : 0
   }
 }
