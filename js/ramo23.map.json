@@ -10,7 +10,7 @@
   "values"  : ["monto", "pagado"],
   "data"    : ["clave_de_programa", "fondo", "entidad", "municipio", "proyecto"],
   "current" : {
-    "level" : "state",
+    "level" : "city",
     "value" : "monto"
   }
 }

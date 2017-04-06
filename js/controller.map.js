@@ -90,6 +90,17 @@ define(function(require){
       //
       this.loadMapsConfig();
 
+
+
+      XXXXX = GFCityList.map(function(m){
+        return {
+          "city": +m.clave,
+    "state": +m.state,
+    "inegi": Number(m.state.concat(m.clave)),
+    "name": m.name
+        }
+      });
+
     },
 
     //
@@ -266,8 +277,8 @@ define(function(require){
     _cityStyle : function(feature){
       var city    = this.currentData.filter(function(d){
                       return feature.properties.state == d.state && feature.properties.city == d.city;
-                    })[0],
-          data    = city.data, 
+                    })[0];
+      var data    = city.data, 
           current = this.currentMap.config.current.value,
           value   = ! city.data.length ? 0 : _.pluck(data, current).reduce(function(a, b){
                       return Number(a) + Number(b);
@@ -356,8 +367,8 @@ define(function(require){
       _data = MUNICIPIOSNAME.cities.map(function(ct){
         var search = {};
         
-        search[state] = st.state;
-        search[city]  = st.city;
+        search[state] = ct.state;
+        search[city]  = ct.city;
 
         return {
           id    : ct.inegi,
@@ -369,6 +380,7 @@ define(function(require){
         }
       });
 
+      return _data;
     },
 
     _strToNumber : function(data, field){
@@ -382,7 +394,6 @@ define(function(require){
     // -------------------------------------------------------
     //
     _makeGeojson : function(item){
-      console.log(item);
 
       var geojson = {
                       "features" : null,
