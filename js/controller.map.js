@@ -13,7 +13,7 @@ define(function(require){
    */
 
       // [1] obtiene el archivo de configuración
-  var CONFIG      = require("json!config.map.json"),
+  var CONFIG      = require("json!config/config.map.json"),
 
       // [2] obtiene las librerías necesarias
       d3          = require("d3"),
@@ -262,16 +262,13 @@ define(function(require){
           current = this.currentMap.config.current.value,
           value   = ! state.data.length ? 0 : _.pluck(data, current).reduce(function(a, b){
                       return Number(a) + Number(b);
-                    }, 0);
+                    }, 0),
+          css     = Object.create(this.settings.mapGeometry);
 
-      return {
-        weight      : .4,
-        opacity     : 0.1,
-        color       : 'black',
-        dashArray   : '',
-        fillOpacity : 1,
-        fillColor   : this.brew.getColorInRange(value) // "#f2f2f2"
-      }
+
+      css.fillColor = this.brew.getColorInRange(value);
+
+      return css;
     },
 
     _cityStyle : function(feature){
@@ -282,16 +279,11 @@ define(function(require){
           current = this.currentMap.config.current.value,
           value   = ! city.data.length ? 0 : _.pluck(data, current).reduce(function(a, b){
                       return Number(a) + Number(b);
-                    }, 0);
+                    }, 0),
+          css     = Object.create(this.settings.mapGeometry);
 
-      return {
-        weight      : .4,
-        opacity     : 0.1,
-        color       : 'black',
-        dashArray   : '',
-        fillOpacity : 1,
-        fillColor   : this.brew.getColorInRange(value) // "#f2f2f2"
-      }
+      css.fillColor = this.brew.getColorInRange(value);
+      return css;
     },
 
     //

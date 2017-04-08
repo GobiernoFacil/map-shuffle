@@ -23,12 +23,12 @@
   "mapGeometry" : {
     "weight"      : 0.4,
     "opacity"     : 0.1,
-    "color"       : "black",
+    "color"       : "red",
     "dashArray"   : "",
     "fillOpacity" : 1
   },
   "maps" : {
-    "basePath" : "/js",
+    "basePath" : "/js/config",
     "maps"     : ["ramo23.map.json", "opa.map.json", "tomas.map.json", "gasolina.map.json"],
     "extras"   : ["poblacion.map.json"],
     "current"  : 0
