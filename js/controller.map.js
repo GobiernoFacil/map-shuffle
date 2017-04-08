@@ -208,6 +208,11 @@ define(function(require){
     renderStateLayer : function(item){
       this.states = L.geoJson(ESTADOS.edos, {
                       style : this._stateStyle,
+                      onEachFeature : function(feature, layer){
+                        layer.on("mouseover", function(e){
+                          console.log(feature, layer);
+                        });
+                      }
                     }).addTo(this.map);
     },
 
@@ -227,11 +232,19 @@ define(function(require){
     //
     renderPointsLayer : function(item){
       var that   = this,
-          points = this._makeGeojson(item);
+          points = this._makeGeojson(item),
+          t      = _.template(item.config.template);
 
       this.points = L.geoJson(points, {
         pointToLayer : function(feature, latlng){
           var p = L.circleMarker(latlng, that.settings.mapPoint);
+
+          p.on("mouseover", function(e){
+            L.popup()
+                .setLatLng(latlng)
+                .setContent(t(feature.properties))
+                .openOn(that.map);
+          });
           return p;
         }
       }).addTo(this.map);
