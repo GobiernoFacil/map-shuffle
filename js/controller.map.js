@@ -56,7 +56,7 @@ define(function(require){
       this.brew         = null;
       // * la referencia al layer de leaflet de ciudades
       this.cities       = null;
-      // * la referencia al archivo de configuración principal después de cargar la info
+      // * la referencia a los datos agregados por municipio o estado
       this.currentData  = null;
       // * la referencia al mapa de configuración seleccionado
       this.currentMap   = null;
@@ -70,8 +70,6 @@ define(function(require){
       this.states       = null;
       // referencia al archivo de configuración inicial
       this.settings     = Object.create(CONFIG);
-      
-
 
       // [2] ARRREGLA EL SCOPE DE ALGUNAS FUNCIONES
       //
@@ -89,18 +87,6 @@ define(function(require){
       // [5] CARGA LOS ARCHIVOS DE CONFIGURACIÓN Y DESPLIEGA EL MAPA SELECCIONADO
       //
       this.loadMapsConfig();
-
-
-
-      XXXXX = GFCityList.map(function(m){
-        return {
-          "city": +m.clave,
-    "state": +m.state,
-    "inegi": Number(m.state.concat(m.clave)),
-    "name": m.name
-        }
-      });
-
     },
 
     //
@@ -174,8 +160,9 @@ define(function(require){
       // [1] carga el archivo con los datos para graficar
       //
       d3[conf.file](conf.src, function(error, data){
-        item.data = data;
-        that.currentMap = item;
+        item.data         = data;
+        that.currentMap   = item;
+        that.currentMapId = item.idex;
         
         // [2] Dependiendo el tipo de mapa, selecciona el método para desplegar la info
         // 
@@ -206,13 +193,18 @@ define(function(require){
     //
     //
     renderStateLayer : function(item){
+      // [1] genera el layer de geojson estatal
       this.states = L.geoJson(ESTADOS.edos, {
+                    // * asigna el estilo. Internamente, genera la función de color,
+                    //   lo demás viene del archivo de configuración principal
                       style : this._stateStyle,
+                    // * agrega el popup a cada estado
                       onEachFeature : function(feature, layer){
                         layer.on("mouseover", function(e){
-                          console.log(feature, layer);
+                          console.log(feature, layer, item);
                         });
                       }
+                    // * agrega el layer de estados al mapa
                     }).addTo(this.map);
     },
 
@@ -250,9 +242,73 @@ define(function(require){
       }).addTo(this.map);
     },
 
+    /*
+     * F U N C I O N E S   D E   M A P E O   D E    D A T O S
+     * ------------------------------------------------------------
+     */
+     _agregateDataByState : function(item){
 
+      var state  = item.config.location.state,
+          _data  = null;
 
+      this._strToNumber(item.data, state);
 
+      _data = ESTADOSNAME.states.map(function(st){
+        var search = {},
+            data   = null;
+        
+        search[state] = st.id;
+        data          = _.where(item.data, search);
+        
+        //console.log(item.config.current.value);
+        return {
+          id    : st.id,
+          name  : st.name,
+          url   : st.url,
+          data  : data,
+          value : d3[item.config.current.method](data, function(a){
+            //console.log(a);
+            return +a[item.config.current.value]
+          })
+        }
+
+      });
+
+      return _data;
+    },
+
+    _agregateDataByCity : function(item){
+      var state = item.config.location.state,
+          city  = item.config.location.city,
+          _data = null;
+
+      this._strToNumber(item.data, state);
+      this._strToNumber(item.data, city);
+
+      _data = MUNICIPIOSNAME.cities.map(function(ct){
+        var search = {};
+        
+        search[state] = ct.state;
+        search[city]  = ct.city;
+
+        return {
+          id    : ct.inegi,
+          state : ct.state,
+          city  : ct.city,
+          name  : ct.name,
+          //url  : ct.url,
+          data : _.where(item.data, search)
+        }
+      });
+
+      return _data;
+    },
+
+    _strToNumber : function(data, field){
+      data.forEach(function(el){
+        el[field] = +el[field];
+      });
+    },
 
     /*
      * F U N C I O N E S   D E   S O P O R T E 
@@ -338,62 +394,6 @@ define(function(require){
       return brew;
     },
 
-    _agregateDataByState : function(item){
-
-      var state  = item.config.location.state,
-          _data  = null;
-
-      this._strToNumber(item.data, state);
-
-      _data = ESTADOSNAME.states.map(function(st){
-        var search    = {};
-        search[state] = st.id;
-        
-        return {
-          id   : st.id,
-          name : st.name,
-          url  : st.url,
-          data : _.where(item.data, search)
-        }
-
-      });
-
-      return _data;
-    },
-
-    _agregateDataByCity : function(item){
-      var state = item.config.location.state,
-          city  = item.config.location.city,
-          _data = null;
-
-      this._strToNumber(item.data, state);
-      this._strToNumber(item.data, city);
-
-      _data = MUNICIPIOSNAME.cities.map(function(ct){
-        var search = {};
-        
-        search[state] = ct.state;
-        search[city]  = ct.city;
-
-        return {
-          id    : ct.inegi,
-          state : ct.state,
-          city  : ct.city,
-          name  : ct.name,
-          //url  : ct.url,
-          data : _.where(item.data, search)
-        }
-      });
-
-      return _data;
-    },
-
-    _strToNumber : function(data, field){
-      data.forEach(function(el){
-        el[field] = +el[field];
-      });
-    },
-
     //
     // TOMA UN ARRAY DE PUNTOS Y LO CONVIERTE A GEOJSON
     // -------------------------------------------------------
@@ -431,6 +431,11 @@ define(function(require){
       return geojson;
     },
 
+
+
+
+
+    // XXXXX ESTO DEBE BORRARSE E INTEGRAR EL GEOJSON FINAL XXXXX
     //
     // ARREGLA EL GEOJSON DE ESTADOS
     // ---------------------------------------------
