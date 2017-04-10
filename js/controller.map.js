@@ -31,7 +31,10 @@ define(function(require){
       // [*] el geojson de los municipios
       MUNICIPIOS     = require("assets/municipios"),
       // [*] el nombre y clave de cada municipio
-      MUNICIPIOSNAME = require("assets/municipios-nombres");
+      MUNICIPIOSNAME = require("assets/municipios-nombres"),
+
+      // [4] obtiene los templates de UI
+      MAPSELECTOR    = require("text!templates/map-selector-panel.html");
 
 
   /*
@@ -91,7 +94,12 @@ define(function(require){
       //
       this.drawMap();
 
-      // [5] CARGA LOS ARCHIVOS DE CONFIGURACIÓN Y DESPLIEGA EL MAPA SELECCIONADO
+      // [5]] INICIA LOS ELEMENTOS DE UI
+      // 
+      // * el selector de mapa
+      this.renderMapSelector();
+
+      // [6] CARGA LOS ARCHIVOS DE CONFIGURACIÓN Y DESPLIEGA EL MAPA SELECCIONADO
       //
       this.loadMapsConfig();
     },
@@ -147,6 +155,9 @@ define(function(require){
 
           // guarda el mapa en el array de mapas
           that.layersConfig.push(item);
+
+          // agrega el mapa al selector de mapas
+          this.addMapToMapSelector(item);
 
           // si es el seleccionado, lo ejectura
           if(+index === +active){
@@ -439,6 +450,58 @@ define(function(require){
 
       geojson.features = features;
       return geojson;
+    },
+
+
+
+
+    /*
+     * F U N C I O N E S   D E   U I   ( P Á N E L E S ) 
+     * ------------------------------------------------------------
+     */
+
+    //
+    // EL PANEL DE SELECTOR DE MAPA
+    // ---------------------------------------------
+    // genera el HTML y el panel dentro de leaflet para el 
+    // selector de mapa
+    //
+    renderMapSelector : function(){
+      var conf = this.settings.ui.mapSelector;
+
+      this.mapSelector = new L.Control({position : conf.position});
+      this.mapSelector.onAdd = function(map){
+        var html       = document.createElement(conf.container);
+        
+        html.innerHTML = MAPSELECTOR;
+        html.id        = conf.id;
+        html.setAttribute("class", conf.class);
+
+        return html;
+      };
+      this.mapSelector.addTo(this.map);
+    },
+
+    //
+    // EL MENÚ DEL SELECTOR DE MAPAS
+    // ---------------------------------------------
+    // agrega un mapa al selector de mapas con el siguiente formato:
+    // <option value="index">name</option>
+    //
+    addMapToMapSelector : function(map){
+      /*
+       var item = {
+            src    : path,  // la ruta del archivo
+            config : data,  // el contenido del json
+            index  : index, // su posición (id)
+            data   : null   // aquí se guardarán los datos cargados
+          };
+      */
+      var container = document.getElementById(this.settings.ui.mapSelector.id),
+          select    = container.querySelector("select"),
+          option    = document.createElement("option");
+
+      select.appendChild(option);
     },
 
 

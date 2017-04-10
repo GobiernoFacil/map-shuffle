@@ -32,5 +32,13 @@
     "maps"     : ["ramo23.map.json", "opa.map.json", "tomas.map.json", "gasolina.map.json"],
     "extras"   : ["poblacion.map.json"],
     "current"  : 0
+  },
+  "ui" : {
+    "mapSelector" : {
+      "container" : "div",
+      "class"     : "",
+      "id"        : "GF-SHCP-map-selector",
+      "position"  : "topright"
+    }
   }
 }
