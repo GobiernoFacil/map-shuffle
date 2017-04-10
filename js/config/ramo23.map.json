@@ -13,5 +13,6 @@
     "level"  : "state",
     "value"  : "monto",
     "method" : "sum"
-  }
+  },
+  "template" : "<p><%=name%> : <%=value%> </p>"
 }

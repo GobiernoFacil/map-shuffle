@@ -70,6 +70,13 @@ define(function(require){
       this.states       = null;
       // referencia al archivo de configuración inicial
       this.settings     = Object.create(CONFIG);
+      // referencia a las colecciones de ubicaciones
+      this.lists = {
+                     estados        : Object.create(ESTADOS),
+                     estadosName    : Object.create(ESTADOSNAME),
+                     municipios     : Object.create(MUNICIPIOS),
+                     municipiosName : Object.create(MUNICIPIOSNAME)
+                    };
 
       // [2] ARRREGLA EL SCOPE DE ALGUNAS FUNCIONES
       //
@@ -169,6 +176,7 @@ define(function(require){
         // * renderea un mapa a nivel estatal (area)
         if(item.config.current.level == "state"){
           that.currentData = that._agregateDataByState(item);
+          that._mapStateGeojson(that.currentData);
           that.brew = that._colorMixer(item);
           that.renderStateLayer(item);
         }
@@ -193,6 +201,8 @@ define(function(require){
     //
     //
     renderStateLayer : function(item){
+      var that = this,
+          t    = _.template(item.config.template);
       // [1] genera el layer de geojson estatal
       this.states = L.geoJson(ESTADOS.edos, {
                     // * asigna el estilo. Internamente, genera la función de color,
@@ -200,9 +210,18 @@ define(function(require){
                       style : this._stateStyle,
                     // * agrega el popup a cada estado
                       onEachFeature : function(feature, layer){
+                        layer.bindPopup(t(feature.properties.data));
+                        /*
                         layer.on("mouseover", function(e){
-                          console.log(feature, layer, item);
+                          //console.log(feature, layer, item);
+                          layer.bindPopup("hola");
+                          // t(feature.properties.data)
+                          //L.tooltip(layer);
+                            //.setLatLng(latlng)
+                            //.setContent(t(feature.properties.data))
+                            //.openOn(that.map);
                         });
+                        */
                       }
                     // * agrega el layer de estados al mapa
                     }).addTo(this.map);
@@ -242,6 +261,10 @@ define(function(require){
       }).addTo(this.map);
     },
 
+
+
+
+
     /*
      * F U N C I O N E S   D E   M A P E O   D E    D A T O S
      * ------------------------------------------------------------
@@ -253,7 +276,7 @@ define(function(require){
 
       this._strToNumber(item.data, state);
 
-      _data = ESTADOSNAME.states.map(function(st){
+      _data = this.lists.estadosName.states.map(function(st){
         var search = {},
             data   = null;
         
@@ -267,14 +290,22 @@ define(function(require){
           url   : st.url,
           data  : data,
           value : d3[item.config.current.method](data, function(a){
-            //console.log(a);
-            return +a[item.config.current.value]
-          })
+                    return +a[item.config.current.value]
+                  })
         }
 
       });
 
       return _data;
+    },
+
+    _mapStateGeojson : function(data){
+      this.lists.estados.edos.features.forEach(function(state){
+        var id = state.properties.CVE_ENT,
+            d  = _.find(data, {id : id});
+
+        state.properties.data = d;
+      });
     },
 
     _agregateDataByCity : function(item){
@@ -322,20 +353,8 @@ define(function(require){
     // las geometrías de estado
     //
     _stateStyle : function(feature){
-      // type, geometry, properties
-      // brew.getColorInRange(7.5);
-      var state   = this.currentData.filter(function(d){
-                      return feature.properties.CVE_ENT == d.id
-                    })[0],
-          data    = state.data,
-          current = this.currentMap.config.current.value,
-          value   = ! state.data.length ? 0 : _.pluck(data, current).reduce(function(a, b){
-                      return Number(a) + Number(b);
-                    }, 0),
-          css     = Object.create(this.settings.mapGeometry);
-
-
-      css.fillColor = this.brew.getColorInRange(value);
+      var css       = Object.create(this.settings.mapGeometry);
+      css.fillColor = this.brew.getColorInRange(feature.properties.data.value);
 
       return css;
     },
@@ -370,16 +389,7 @@ define(function(require){
 
       if(level == "state" || level == "city"){
         data  = this.currentData;
-        _data = data.map(function(d){
-                  if(d.data.length){
-                    return _.pluck(d.data, value).reduce(function(a, b){
-                      return Number(a) + Number(b);
-                    }, 0);
-                  }
-                  else{
-                    return 0;
-                  }
-                });
+        _data = _.pluck(data, "value");
       }
       else{
 
