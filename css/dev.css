@@ -1,0 +1,7 @@
+#GF-SHCP-map-selector{
+  background: white;
+}
+
+#GF-SHCP-map-selector .selected{
+  color: red;
+}

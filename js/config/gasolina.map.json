@@ -1,4 +1,5 @@
 {
+  "name"  : "gasolinerías en el país",
   "type"  : "point",
   "level" : [],
   "src"   : "/js/maps/gasolina_puntos.csv",

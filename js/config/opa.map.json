@@ -1,4 +1,5 @@
 {
+  "name"  : "Obra pública abierta",
   "type"  : "point",
   "level" : [],
   "src"   : "/js/maps/opa.csv",

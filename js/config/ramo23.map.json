@@ -1,4 +1,5 @@
 {
+  "name"  : "Ramo 23",
   "type"  : "area",
   "level" : ["state", "city"],
   "src"   : "/js/maps/ramo23-2017.csv",

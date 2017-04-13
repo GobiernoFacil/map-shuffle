@@ -79,12 +79,20 @@ define(function(require){
                      estadosName    : Object.create(ESTADOSNAME),
                      municipios     : Object.create(MUNICIPIOS),
                      municipiosName : Object.create(MUNICIPIOSNAME)
-                    };
+                   };
+
+      // [1.1] DEFINE SHORTCUTS PARA LOS ELEMENTOS DE UI
+      //
+      // * El selector de mapas
+      this.UImapSelector = null;
+      // * El selector del nivel del mapa (estado, municipio)
+      this.UIlevelSelector    = null;
 
       // [2] ARRREGLA EL SCOPE DE ALGUNAS FUNCIONES
       //
-      this._stateStyle = this._stateStyle.bind(this);
-      this._cityStyle  = this._cityStyle.bind(this);
+      this._stateStyle             = this._stateStyle.bind(this);
+      this._cityStyle              = this._cityStyle.bind(this);
+      this.renderMapSelectorChange = this.renderMapSelectorChange.bind(this);
 
       // [3] ARREGLA EL GEOJSON DE ESTADOS (esto debe desaparecer)
       //
@@ -157,11 +165,12 @@ define(function(require){
           that.layersConfig.push(item);
 
           // agrega el mapa al selector de mapas
-          this.addMapToMapSelector(item);
+          that.addMapToMapSelector(item);
 
           // si es el seleccionado, lo ejectura
           if(+index === +active){
             that.getLayer(item);
+            that.updateUILevelSelector(item);
           }
         });
       }, this);
@@ -178,33 +187,48 @@ define(function(require){
       // [1] carga el archivo con los datos para graficar
       //
       d3[conf.file](conf.src, function(error, data){
-        item.data         = data;
-        that.currentMap   = item;
-        that.currentMapId = item.idex;
-        
-        // [2] Dependiendo el tipo de mapa, selecciona el método para desplegar la info
-        // 
-        // * renderea un mapa a nivel estatal (area)
-        if(item.config.current.level == "state"){
-          that.currentData = that._agregateDataByState(item);
-          that._mapStateGeojson(that.currentData);
-          that.brew = that._colorMixer(item);
-          that.renderStateLayer(item);
+        item.data = data;
+        that.renderLayer(item);
+      });
+    },
+
+    renderLayer : function(item){
+      this.cleanLayers();
+
+      this.currentMap   = item;
+      this.currentMapId = item.idex;
+
+      if(item.config.current.level == "state"){
+          this.currentData = this._agregateDataByState(item);
+          this._mapStateGeojson(this.currentData);
+          this.brew = this._colorMixer(item);
+          this.renderStateLayer(item);
         }
         // * renderea un mapa a nivel municipal (area)
         else if(item.config.current.level == "city"){
-          that.currentData = that._agregateDataByCity(item);
-          that.brew        = that._colorMixer(item);
-          that.renderCityLayer(item);
+          this.currentData = this._agregateDataByCity(item);
+          this.brew        = this._colorMixer(item);
+          this.renderCityLayer(item);
         }
         // * renderea un mapa a nivel latitud y longitud (point)
         else{
-          that.currentData = null;
-          that.renderPointsLayer(item);
+          this.currentData = null;
+          this.renderPointsLayer(item);
         }
+    },
 
-        
-      });
+    cleanLayers : function(){
+      if(this.points){
+        this.map.removeLayer(this.points)
+      }
+
+      if(this.states){
+        this.map.removeLayer(this.states)
+      }
+
+      if(this.cities){
+        this.map.removeLayer(this.cities)
+      }
     },
 
     //
@@ -283,7 +307,8 @@ define(function(require){
      _agregateDataByState : function(item){
 
       var state  = item.config.location.state,
-          _data  = null;
+          _data  = null,
+          method = item.config.current.method || "sum";
 
       this._strToNumber(item.data, state);
 
@@ -294,13 +319,12 @@ define(function(require){
         search[state] = st.id;
         data          = _.where(item.data, search);
         
-        //console.log(item.config.current.value);
         return {
           id    : st.id,
           name  : st.name,
           url   : st.url,
           data  : data,
-          value : d3[item.config.current.method](data, function(a){
+          value : d3[method](data, function(a){
                     return +a[item.config.current.value]
                   })
         }
@@ -351,6 +375,10 @@ define(function(require){
         el[field] = +el[field];
       });
     },
+
+
+
+
 
     /*
      * F U N C I O N E S   D E   S O P O R T E 
@@ -467,7 +495,8 @@ define(function(require){
     // selector de mapa
     //
     renderMapSelector : function(){
-      var conf = this.settings.ui.mapSelector;
+      var that = this,
+          conf = this.settings.ui.mapSelector;
 
       this.mapSelector = new L.Control({position : conf.position});
       this.mapSelector.onAdd = function(map){
@@ -477,9 +506,31 @@ define(function(require){
         html.id        = conf.id;
         html.setAttribute("class", conf.class);
 
+        that.UImapSelector   = html.querySelector("select");
+        that.UIlevelSelector = html.querySelector("ul");
+
+        that.UImapSelector.addEventListener("change", that.renderMapSelectorChange);
+
         return html;
       };
       this.mapSelector.addTo(this.map);
+    },
+
+    renderMapSelectorChange : function(e){
+      //console.log(e.currentTarget.value);
+      var value = +e.currentTarget.value,
+          item  = this.layersConfig.filter(function(l){
+                    return +l.index == value;
+                  })[0];
+
+      if(item.data){
+        this.renderLayer(item);
+      }
+      else{
+        this.getLayer(item);
+      }
+
+      this.updateUILevelSelector(item);
     },
 
     //
@@ -488,7 +539,7 @@ define(function(require){
     // agrega un mapa al selector de mapas con el siguiente formato:
     // <option value="index">name</option>
     //
-    addMapToMapSelector : function(map){
+    addMapToMapSelector : function(item){
       /*
        var item = {
             src    : path,  // la ruta del archivo
@@ -501,7 +552,26 @@ define(function(require){
           select    = container.querySelector("select"),
           option    = document.createElement("option");
 
+      option.innerHTML = item.config.name;
+      option.value     = item.index;
       select.appendChild(option);
+    },
+
+    updateUILevelSelector : function(item){
+      var that     = this,
+          display  = item.config.type == "area" && item.config.level.length > 1,
+          _current = item.config.current.level,
+          current  = _current ? this.UIlevelSelector.querySelector("a[data-value='" + _current +"']") : null,
+          options  = _current ? Array.prototype.slice.call(this.UIlevelSelector.querySelectorAll("a")) : null;
+      
+      if(display){
+        this.UIlevelSelector.style.display = "block";
+        options.forEach(function(opt){opt.classList.remove("selected");});
+        current.classList.add("selected");
+      }
+      else{
+        this.UIlevelSelector.style.display = "none";
+      }
     },
 
 
