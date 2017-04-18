@@ -39,6 +39,17 @@
       "class"     : "",
       "id"        : "GF-SHCP-map-selector",
       "position"  : "topright"
+    },
+    "filterSelector" : {
+      "container" : "div",
+      "class" : "",
+      "id" : "GF-SHCP-filter-selector",
+      "position" : "topleft",
+      "selectors" : {
+        "filtersId"      : "GF-SHCP-CONTAINER-FILTERS",
+        "extraFiltersId" : "GF-SHCP-CONTAINER-EXTRA-FILTERS",
+        "yearContainer"  : "GF-SHCP-CONTROL-YEAR" 
+      }
     }
   }
 }

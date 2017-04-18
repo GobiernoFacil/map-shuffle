@@ -34,7 +34,10 @@ define(function(require){
       MUNICIPIOSNAME = require("assets/municipios-nombres"),
 
       // [4] obtiene los templates de UI
-      MAPSELECTOR    = require("text!templates/map-selector-panel.html");
+      // [*] el selector de mapa
+      MAPSELECTOR    = require("text!templates/map-selector-panel.html"),
+      // [*] el selector de filtros
+      FILTERSELECTOR = require("text!templates/filter-selector-panel.html");
 
 
   /*
@@ -572,6 +575,34 @@ define(function(require){
       else{
         this.UIlevelSelector.style.display = "none";
       }
+    },
+
+    renderFilterSelector : function(){
+      // FILTERSELECTOR
+      var that = this,
+           conf = this.settings.ui.filterSelector;
+
+      /*
+      var that = this,
+          conf = this.settings.ui.mapSelector;
+
+      this.mapSelector = new L.Control({position : conf.position});
+      this.mapSelector.onAdd = function(map){
+        var html       = document.createElement(conf.container);
+        
+        html.innerHTML = MAPSELECTOR;
+        html.id        = conf.id;
+        html.setAttribute("class", conf.class);
+
+        that.UImapSelector   = html.querySelector("select");
+        that.UIlevelSelector = html.querySelector("ul");
+
+        that.UImapSelector.addEventListener("change", that.renderMapSelectorChange);
+
+        return html;
+      };
+      this.mapSelector.addTo(this.map);
+      */
     },
 
 
