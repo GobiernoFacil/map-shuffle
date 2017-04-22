@@ -11,5 +11,11 @@
   "values"  : [],
   "data"    : ["key","name","ramo","unidad","state","lat","lng","advance","monto_total_inversion","ciclo","classification","ejercido"],
   "current" : {},
+  "filters" : [
+    {"type" : "state", "field" : "state"},
+    {"type" : "branch", "field" : "ramo"},
+    {"type" : "year", "field" : "ciclo"}
+  ],
+  "extraFilters" : ["classification"],
   "template" : "<p><%=name%>:<%=monto_total_inversion%></p>"
 }

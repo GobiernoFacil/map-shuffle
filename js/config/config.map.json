@@ -31,7 +31,7 @@
     "basePath" : "/js/config",
     "maps"     : ["ramo23.map.json", "opa.map.json", "tomas.map.json", "gasolina.map.json"],
     "extras"   : ["poblacion.map.json"],
-    "current"  : 0
+    "current"  : 1
   },
   "ui" : {
     "mapSelector" : {
@@ -46,9 +46,11 @@
       "id" : "GF-SHCP-filter-selector",
       "position" : "topleft",
       "selectors" : {
-        "filtersId"      : "GF-SHCP-CONTAINER-FILTERS",
-        "extraFiltersId" : "GF-SHCP-CONTAINER-EXTRA-FILTERS",
-        "yearContainer"  : "GF-SHCP-CONTROL-YEAR" 
+        "filtersId"       : "GF-SHCP-CONTAINER-FILTERS",
+        "extraFiltersId"  : "GF-SHCP-CONTAINER-EXTRA-FILTERS",
+        "yearContainer"   : "GF-SHCP-CONTROL-YEAR",
+        "stateContainer"  : "GF-SHCP-CONTROL-STATE",
+        "branchContainer" : "GF-SHCP-CONTROL-BRANCH" 
       }
     }
   }

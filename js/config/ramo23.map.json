@@ -15,5 +15,7 @@
     "value"  : "monto",
     "method" : "sum"
   },
+  "filters" : [],
+  "extraFilters" : [],
   "template" : "<p><%=name%> : <%=value%> </p>"
 }
