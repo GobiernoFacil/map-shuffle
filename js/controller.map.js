@@ -37,7 +37,10 @@ define(function(require){
       // [*] el selector de mapa
       MAPSELECTOR    = require("text!templates/map-selector-panel.html"),
       // [*] el selector de filtros
-      FILTERSELECTOR = require("text!templates/filter-selector-panel.html");
+      FILTERSELECTOR = require("text!templates/filter-selector-panel.html"),
+
+      // [5] define las constantes internas del sistema 
+      SELECTALL      = "_____";
 
 
   /*
@@ -106,6 +109,7 @@ define(function(require){
       this._stateStyle             = this._stateStyle.bind(this);
       this._cityStyle              = this._cityStyle.bind(this);
       this.renderMapSelectorChange = this.renderMapSelectorChange.bind(this);
+      this._enableYearFilterChange = this._enableYearFilterChange.bind(this);
 
       // [3] ARREGLA EL GEOJSON DE ESTADOS (esto debe desaparecer)
       //
@@ -214,22 +218,24 @@ define(function(require){
       this.currentMapId = item.idex;
 
       if(item.config.current.level == "state"){
-          this.currentData = this._agregateDataByState(item);
-          this._mapStateGeojson(this.currentData);
-          this.brew = this._colorMixer(item);
-          this.renderStateLayer(item);
-        }
+        this.currentData = this._agregateDataByState(item);
+        this._mapStateGeojson(this.currentData);
+        this.brew = this._colorMixer(item);
+        this.renderStateLayer(item);
+      }
         // * renderea un mapa a nivel municipal (area)
-        else if(item.config.current.level == "city"){
-          this.currentData = this._agregateDataByCity(item);
-          this.brew        = this._colorMixer(item);
-          this.renderCityLayer(item);
-        }
+      else if(item.config.current.level == "city"){
+        this.currentData = this._agregateDataByCity(item);
+        this.brew        = this._colorMixer(item);
+        this.renderCityLayer(item);
+      }
         // * renderea un mapa a nivel latitud y longitud (point)
-        else{
-          this.currentData = null;
-          this.renderPointsLayer(item);
-        }
+      else{
+        this.currentData = null;
+        this.renderPointsLayer(item);
+      }
+
+      this.enableFilters(item);
     },
 
     cleanLayers : function(){
@@ -666,8 +672,31 @@ define(function(require){
       var that     = this,
           conf     = this.settings.ui.filterSelector,
           _filters = conf.selectors.filtersContainers,
-          filters  = item.config.filters;
+          filters  = item.config.filters,
+          _state   = filters.filter(function(filter){return filter.type == "state"})[0],
+          _branch  = filters.filter(function(filter){return filter.type == "branch"})[0],
+          _year    = filters.filter(function(filter){return filter.type == "year"})[0];
       // hide filters
+      /*
+      _filters.forEach(function(el){
+        for(var prop in el){
+          if(el.hasOwnProperty(prop)){
+            document.querySelector("#" + el[prop]).style.display = "none";
+          }
+        }
+      });
+      */
+
+      console.log(item, _state);
+
+      if(_year){
+        this._enableYearFilter(item, _year);
+      }
+      /*
+      {"yearContainer"   : "GF-SHCP-CONTROL-YEAR"},
+      {"stateContainer"  : "GF-SHCP-CONTROL-STATE"},
+      {"branchContainer" : "GF-SHCP-CONTROL-BRANCH"}
+      */
       // 
       /*
       "filters" : [
@@ -686,6 +715,37 @@ define(function(require){
             data   : null   // aquí se guardarán los datos cargados
           };
       */
+    },
+
+    _enableYearFilter : function(item, year){
+      var _data = item.data,
+           data = _.uniq(_.pluck(item.data, year.field))
+                   .map(function(y){return +y})
+                   .sort(function(a, b){return a - b}),
+          selector = this.UIyearSelector.querySelector("select");
+
+      selector.innerHTML = "";
+      selector.removeEventListener("change", this._enableYearFilterChange);
+
+      var optAll = document.createElement("option");
+      optAll.value     = SELECTALL;
+      optAll.innerHTML = "todos";
+      selector.appendChild(optAll);
+
+      data.forEach(function(y){
+        var opt = document.createElement("option");
+
+        opt.value     = y;
+        opt.innerHTML = y;
+
+        selector.appendChild(opt);
+      }, this);
+
+      selector.addEventListener("change", this._enableYearFilterChange);
+    },
+
+    _enableYearFilterChange : function(e){
+      console.log(this, e.currentTarget.value);
     },
 
 
