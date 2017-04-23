@@ -87,9 +87,19 @@ define(function(require){
       // [1.1] DEFINE SHORTCUTS PARA LOS ELEMENTOS DE UI
       //
       // * El selector de mapas
-      this.UImapSelector = null;
+      this.UImapSelector    = null;
       // * El selector del nivel del mapa (estado, municipio)
-      this.UIlevelSelector    = null;
+      this.UIlevelSelector  = null;
+      // * El selector de filtros
+      this.UIfilterSelector = null;
+      // * El selector de año
+      this.UIyearSelector = null;
+      // * El selector de ramo
+      this.UIbranchSelector = null;
+      // * El selector de estado
+      this.UIstateSelector = null;
+      // * los <select> de los filtros extra
+      this.UIextraFiltersSelector = [];
 
       // [2] ARRREGLA EL SCOPE DE ALGUNAS FUNCIONES
       //
@@ -109,6 +119,8 @@ define(function(require){
       // 
       // * el selector de mapa
       this.renderMapSelector();
+      // * el selector de filtros
+      this.renderFilterSelector();
 
       // [6] CARGA LOS ARCHIVOS DE CONFIGURACIÓN Y DESPLIEGA EL MAPA SELECCIONADO
       //
@@ -580,8 +592,53 @@ define(function(require){
     renderFilterSelector : function(){
       // FILTERSELECTOR
       var that = this,
-           conf = this.settings.ui.filterSelector;
+          conf = this.settings.ui.filterSelector;
 
+
+      this.filterSelector = new L.Control({position : conf.position});
+      this.filterSelector.onAdd = function(map){
+        var html       = document.createElement(conf.container);
+
+        html.innerHTML = FILTERSELECTOR;
+        html.id        = conf.id;
+        html.setAttribute("class", conf.class);
+
+        //that.UIfilterSelector = html.querySelector("select");
+        that.UIyearSelector   = html.querySelector("#" + conf.selectors.filtersContainers.yearContainer);
+        that.UIstateSelector  = html.querySelector("#" + conf.selectors.filtersContainers.stateContainer);
+        that.UIbranchSelector = html.querySelector("#" + conf.selectors.filtersContainers.branchContainer);
+
+        return html;
+
+        /*
+        this.UIyearSelector = null;
+      // * El selector de ramo
+      this.UIbranchSelector = null;
+      // * El selector de estado
+      this.UIstateSelector = null;
+      // * los <select> de los filtros extra
+      this.UIextraFiltersSelector = [];
+        */
+      };
+
+      this.filterSelector.addTo(this.map);
+           /*
+           "filterSelector" : {
+      "container" : "div",
+      "class" : "",
+      "id" : "GF-SHCP-filter-selector",
+      "position" : "topleft",
+      "selectors" : {
+        "filtersId"       : "GF-SHCP-CONTAINER-FILTERS",
+        "extraFiltersId"  : "GF-SHCP-CONTAINER-EXTRA-FILTERS",
+        "filtersContainers" : [
+          {"yearContainer"   : "GF-SHCP-CONTROL-YEAR"},
+          {"stateContainer"  : "GF-SHCP-CONTROL-STATE"},
+          {"branchContainer" : "GF-SHCP-CONTROL-BRANCH"}
+        ],
+      }
+    }
+           */
       /*
       var that = this,
           conf = this.settings.ui.mapSelector;
@@ -602,6 +659,32 @@ define(function(require){
         return html;
       };
       this.mapSelector.addTo(this.map);
+      */
+    },
+
+    enableFilters : function(item){
+      var that     = this,
+          conf     = this.settings.ui.filterSelector,
+          _filters = conf.selectors.filtersContainers,
+          filters  = item.config.filters;
+      // hide filters
+      // 
+      /*
+      "filters" : [
+    {"type" : "state", "field" : "state"},
+    {"type" : "branch", "field" : "ramo"},
+    {"type" : "year", "field" : "ciclo"}
+  ],
+  "extraFilters" : ["classification"],
+      */
+
+      /*
+      var item = {
+            src    : path,  // la ruta del archivo
+            config : data,  // el contenido del json
+            index  : index, // su posición (id)
+            data   : null   // aquí se guardarán los datos cargados
+          };
       */
     },
 

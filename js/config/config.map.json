@@ -48,9 +48,12 @@
       "selectors" : {
         "filtersId"       : "GF-SHCP-CONTAINER-FILTERS",
         "extraFiltersId"  : "GF-SHCP-CONTAINER-EXTRA-FILTERS",
-        "yearContainer"   : "GF-SHCP-CONTROL-YEAR",
-        "stateContainer"  : "GF-SHCP-CONTROL-STATE",
-        "branchContainer" : "GF-SHCP-CONTROL-BRANCH" 
+        "filtersContainers" : [
+          {"yearContainer"   : "GF-SHCP-CONTROL-YEAR"},
+          {"stateContainer"  : "GF-SHCP-CONTROL-STATE"},
+          {"branchContainer" : "GF-SHCP-CONTROL-BRANCH"}
+        ],
+        "extraFiltersContainersPrefix" : "GF-SHCP-CONTROL-EXTRA-"
       }
     }
   }
