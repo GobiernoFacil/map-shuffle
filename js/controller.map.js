@@ -67,8 +67,12 @@ define(function(require){
       this.cities       = null;
       // * la referencia a los datos agregados por municipio o estado
       this.currentData  = null;
+      // * la referencia a la información para graficar
+      this._currentData = null;
       // * la referencia al mapa de configuración seleccionado
       this.currentMap   = null;
+      // * la lista de filtros para los datos
+      this.filters      = [];
       // * la lista de mapas disponibles (archivos de configuración)
       this.layersConfig = [];
       // * el mapa de leaflet
@@ -216,6 +220,7 @@ define(function(require){
 
       this.currentMap   = item;
       this.currentMapId = item.idex;
+      this._currentData = this._filterData(item);
 
       if(item.config.current.level == "state"){
         this.currentData = this._agregateDataByState(item);
@@ -325,6 +330,27 @@ define(function(require){
      * F U N C I O N E S   D E   M A P E O   D E    D A T O S
      * ------------------------------------------------------------
      */
+     _filterData : function(item){
+      var filter          = {},
+          filterContainer = document.getElementById(this.settings.ui.filterSelector.id),
+          data            = null;
+      if(!this.filters.length){
+        data = item.data;
+      }
+      else{
+        this.filters.forEach(function(fil){
+          if(fil.value !== SELECTALL){
+            filter[fil.field] = fil.value;
+          }
+        }, this);
+
+        data = _.where(item.data, filter);
+      }
+
+      console.log(data.length);
+      return data;
+     }, 
+
      _agregateDataByState : function(item){
 
       var state  = item.config.location.state,
@@ -725,6 +751,7 @@ define(function(require){
           selector = this.UIyearSelector.querySelector("select");
 
       selector.innerHTML = "";
+      selector.setAttribute("data-field", year.field);
       selector.removeEventListener("change", this._enableYearFilterChange);
 
       var optAll = document.createElement("option");
@@ -745,7 +772,20 @@ define(function(require){
     },
 
     _enableYearFilterChange : function(e){
-      console.log(this, e.currentTarget.value);
+      var val     = e.currentTarget.value,
+          field   = e.currentTarget.getAttribute("data-field"),
+          current = this.filters.filter(function(el){ return el.field == field })[0];
+
+      if(current){
+        this.filters.splice(this.filters.indexOf(current), 1);
+      }
+
+      this.filters.push({
+        field : field,
+        value : val
+      });
+
+      this._filterData(this.currentMap);
     },
 
 
