@@ -113,8 +113,8 @@ define(function(require){
       this._stateStyle              = this._stateStyle.bind(this);
       this._cityStyle               = this._cityStyle.bind(this);
       this.renderMapSelectorChange  = this.renderMapSelectorChange.bind(this);
-      this._enableYearFilterChange  = this._enableYearFilterChange.bind(this);
-      this._enableStateFilterChange = this._enableStateFilterChange.bind(this);
+      this._enableFilterChange  = this._enableFilterChange.bind(this);
+      //this._enableStateFilterChange = this._enableStateFilterChange.bind(this);
 
       // [3] ARREGLA EL GEOJSON DE ESTADOS (esto debe desaparecer)
       //
@@ -714,25 +714,7 @@ define(function(require){
         selector.appendChild(opt);
       }, this);
 
-      selector.addEventListener("change", this._enableYearFilterChange);
-    },
-
-    _enableYearFilterChange : function(e){
-      var val     = e.currentTarget.value,
-          field   = e.currentTarget.getAttribute("data-field"),
-          current = this.filters.filter(function(el){ return el.field == field })[0];
-
-      if(current){
-        this.filters.splice(this.filters.indexOf(current), 1);
-      }
-
-      this.filters.push({
-        field : field,
-        value : val
-      });
-
-      this.renderLayer(this.currentMap, true);
-      //this._currentData = this._filterData(this.currentMap);
+      selector.addEventListener("change", this._enableFilterChange);
     },
 
     _enableStateFilter : function(item, state){
@@ -764,11 +746,10 @@ define(function(require){
         selector.appendChild(opt);
       }, this);
 
-      selector.addEventListener("change", this._enableStateFilterChange);
+      selector.addEventListener("change", this._enableFilterChange);
     },
 
-    _enableStateFilterChange : function(e){
-      /*
+    _enableFilterChange : function(e){
       var val     = e.currentTarget.value,
           field   = e.currentTarget.getAttribute("data-field"),
           current = this.filters.filter(function(el){ return el.field == field })[0];
@@ -783,7 +764,7 @@ define(function(require){
       });
 
       this.renderLayer(this.currentMap, true);
-      */
+      //this._currentData = this._filterData(this.currentMap);
     },
     
 
