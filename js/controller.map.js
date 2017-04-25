@@ -135,6 +135,14 @@ define(function(require){
       this.loadMapsConfig();
     },
 
+
+
+
+    /*
+     * F U N C I O N E S   D E   D I B U J O   D E   I T E M S
+     * ------------------------------------------------------------
+     */
+
     //
     // DIBUJA EL MAPA PRINCIPAL
     //
@@ -159,63 +167,10 @@ define(function(require){
     },
 
     //
-    // CARGA LA CONFIGUACIÓN DE LOS MAPAS EXTERNOS
+    // RENDEREA EL MAPA SELECCIONADO (item)
     //
     //
-    loadMapsConfig : function(){
-      var that = this;
-
-      // carga el json de cada mapa, y si es el mapa seleccionado, 
-      // genera unlayer con la información
-      this.settings.maps.maps.forEach(function(url, index){
-        
-        // crea una referencia para la ruta del archivo de configuración,
-        // y del mapa que debe desplegarse al inicio
-        var path   = this.settings.maps.basePath + "/" + url,
-            active = this.settings.maps.current; 
-
-        // carga el json de configuración
-        d3.json(path, function(error, data){
-          // genera el elemento que representará al mapa en la app
-          var item = {
-            src    : path,  // la ruta del archivo
-            config : data,  // el contenido del json
-            index  : index, // su posición (id)
-            data   : null   // aquí se guardarán los datos cargados
-          };
-
-          // guarda el mapa en el array de mapas
-          that.layersConfig.push(item);
-
-          // agrega el mapa al selector de mapas
-          that.addMapToMapSelector(item);
-
-          // si es el seleccionado, lo ejectura
-          if(+index === +active){
-            that.getLayer(item);
-            that.updateUILevelSelector(item);
-          }
-        });
-      }, this);
-    },
-
-    //
-    // OBTIENE LA INFORMACIÓN DEL LAYER SELECCIONADO Y LO DESPLIEGA
-    //
-    //
-    getLayer : function(item){
-      var that = this, 
-          conf = item.config;
-
-      // [1] carga el archivo con los datos para graficar
-      //
-      d3[conf.file](conf.src, function(error, data){
-        item.data = data;
-        that.renderLayer(item);
-      });
-    },
-
-    renderLayer : function(item){
+    renderLayer : function(item, keepFilters){
       this.cleanLayers();
 
       this.currentMap   = item;
@@ -240,20 +195,8 @@ define(function(require){
         this.renderPointsLayer(item);
       }
 
-      this.enableFilters(item);
-    },
-
-    cleanLayers : function(){
-      if(this.points){
-        this.map.removeLayer(this.points)
-      }
-
-      if(this.states){
-        this.map.removeLayer(this.states)
-      }
-
-      if(this.cities){
-        this.map.removeLayer(this.cities)
+      if(!keepFilters){
+        this.enableFilters(item);
       }
     },
 
@@ -272,17 +215,6 @@ define(function(require){
                     // * agrega el popup a cada estado
                       onEachFeature : function(feature, layer){
                         layer.bindPopup(t(feature.properties.data));
-                        /*
-                        layer.on("mouseover", function(e){
-                          //console.log(feature, layer, item);
-                          layer.bindPopup("hola");
-                          // t(feature.properties.data)
-                          //L.tooltip(layer);
-                            //.setLatLng(latlng)
-                            //.setContent(t(feature.properties.data))
-                            //.openOn(that.map);
-                        });
-                        */
                       }
                     // * agrega el layer de estados al mapa
                     }).addTo(this.map);
@@ -322,6 +254,92 @@ define(function(require){
       }).addTo(this.map);
     },
 
+    //
+    // ELIMINA LOS LAYERS DEL MAPA
+    //
+    //
+    cleanLayers : function(){
+      if(this.points){
+        this.map.removeLayer(this.points)
+      }
+
+      if(this.states){
+        this.map.removeLayer(this.states)
+      }
+
+      if(this.cities){
+        this.map.removeLayer(this.cities)
+      }
+    },
+
+
+
+
+
+    /*
+     * F U N C I O N E S   D E   C A R G A   D E   D A T O S
+     * ------------------------------------------------------------
+     */
+
+    //
+    // CARGA LA CONFIGUACIÓN DE LOS MAPAS EXTERNOS
+    //
+    //
+    loadMapsConfig : function(){
+      var that = this;
+
+      // carga el json de cada mapa, y si es el mapa seleccionado, 
+      // genera unlayer con la información
+      this.settings.maps.maps.forEach(function(url, index){
+        
+        // crea una referencia para la ruta del archivo de configuración,
+        // y del mapa que debe desplegarse al inicio
+        var path   = this.settings.maps.basePath + "/" + url,
+            active = this.settings.maps.current; 
+
+        // carga el json de configuración
+        d3.json(path, function(error, data){
+          // genera el elemento que representará al mapa en la app
+          var item = {
+            src    : path,  // la ruta del archivo
+            config : data,  // el contenido del json
+            index  : index, // su posición (id)
+            data   : null   // aquí se guardarán los datos cargados
+          };
+
+          // guarda el mapa en el array de mapas
+          that.layersConfig.push(item);
+
+          // agrega el mapa al selector de mapas
+          that.addMapToMapSelector(item, active);
+
+          // si es el seleccionado, lo ejectura
+          if(+index === +active){
+            that.getLayer(item);
+            that.updateUILevelSelector(item);
+          }
+        });
+      }, this);
+    },
+
+    //
+    // OBTIENE LA INFORMACIÓN DEL LAYER SELECCIONADO
+    //
+    //
+    getLayer : function(item){
+      var that = this, 
+          conf = item.config;
+
+      // [1] carga el archivo con los datos para graficar
+      //
+      d3[conf.file](conf.src, function(error, data){
+        item.data = data;
+        that.renderLayer(item);
+      });
+    },
+
+    
+
 
 
 
@@ -330,7 +348,114 @@ define(function(require){
      * F U N C I O N E S   D E   M A P E O   D E    D A T O S
      * ------------------------------------------------------------
      */
-     _filterData : function(item){
+
+     _agregateDataByState : function(item){
+
+      var state  = item.config.location.state,
+          _data  = null,
+          method = item.config.current.method || "sum";
+
+      this._strToNumber(this._currentData, state);
+      //this._strToNumber(item.data, state);
+
+      _data = this.lists.estadosName.states.map(function(st){
+        var search = {},
+            data   = null;
+        
+        search[state] = st.id;
+        data          = _.where(this._currentData, search);
+        
+        return {
+          id    : st.id,
+          name  : st.name,
+          url   : st.url,
+          data  : data,
+          value : d3[method](data, function(a){
+                    return +a[item.config.current.value]
+                  })
+        }
+
+      }, this);
+
+      return _data;
+    },
+
+    _agregateDataByCity : function(item){
+      var state = item.config.location.state,
+          city  = item.config.location.city,
+          _data = null;
+
+      this._strToNumber(this._currentData, state);
+      this._strToNumber(this._currentData, city);
+      // this._strToNumber(item.data, state);
+      // this._strToNumber(item.data, city);
+
+      _data = MUNICIPIOSNAME.cities.map(function(ct){
+        var search = {};
+        
+        search[state] = ct.state;
+        search[city]  = ct.city;
+
+        return {
+          id    : ct.inegi,
+          state : ct.state,
+          city  : ct.city,
+          name  : ct.name,
+          //url  : ct.url,
+          data : _.where(this._currentData, search)
+        }
+      }, this);
+
+      return _data;
+    },
+
+    _mapStateGeojson : function(data){
+      this.lists.estados.edos.features.forEach(function(state){
+        var id = state.properties.CVE_ENT,
+            d  = _.find(data, {id : id});
+
+        state.properties.data = d;
+      });
+    },
+
+    //
+    // TOMA UN ARRAY DE PUNTOS Y LO CONVIERTE A GEOJSON
+    // -------------------------------------------------------
+    //
+    _makeGeojson : function(item){
+
+      var geojson = {
+                      "features" : null,
+                      "type" : "FeatureCollection",
+                      "crs"  : {
+                                 "type"       : "name",
+                                 "properties" : { "name" : "urn:ogc:def:crs:EPSG::4019" }
+                                }
+                    },
+          properties = item.config.data,
+          lat        = item.config.location.lat,
+          lng        = item.config.location.lng,
+          features   = this._currentData.map(function(d){
+                       var p = {};
+                       properties.forEach(function(property){
+                        p[property] = d[property];
+                       });
+
+                       return {
+                        type : "Feature",
+                        properties : p,
+                        geometry : {
+                          "type": "Point", 
+                          "coordinates": [ +d[lng], +d[lat] ]
+                        }
+                       }
+                     });
+
+      geojson.features = features;
+      return geojson;
+    },
+
+    _filterData : function(item){
       var filter          = {},
           filterContainer = document.getElementById(this.settings.ui.filterSelector.id),
           data            = null;
@@ -347,88 +472,21 @@ define(function(require){
         data = _.where(item.data, filter);
       }
 
-      console.log(data.length);
       return data;
-     }, 
+     },
 
-     _agregateDataByState : function(item){
-
-      var state  = item.config.location.state,
-          _data  = null,
-          method = item.config.current.method || "sum";
-
-      this._strToNumber(item.data, state);
-
-      _data = this.lists.estadosName.states.map(function(st){
-        var search = {},
-            data   = null;
-        
-        search[state] = st.id;
-        data          = _.where(item.data, search);
-        
-        return {
-          id    : st.id,
-          name  : st.name,
-          url   : st.url,
-          data  : data,
-          value : d3[method](data, function(a){
-                    return +a[item.config.current.value]
-                  })
-        }
-
-      });
-
-      return _data;
-    },
-
-    _mapStateGeojson : function(data){
-      this.lists.estados.edos.features.forEach(function(state){
-        var id = state.properties.CVE_ENT,
-            d  = _.find(data, {id : id});
-
-        state.properties.data = d;
-      });
-    },
-
-    _agregateDataByCity : function(item){
-      var state = item.config.location.state,
-          city  = item.config.location.city,
-          _data = null;
-
-      this._strToNumber(item.data, state);
-      this._strToNumber(item.data, city);
-
-      _data = MUNICIPIOSNAME.cities.map(function(ct){
-        var search = {};
-        
-        search[state] = ct.state;
-        search[city]  = ct.city;
-
-        return {
-          id    : ct.inegi,
-          state : ct.state,
-          city  : ct.city,
-          name  : ct.name,
-          //url  : ct.url,
-          data : _.where(item.data, search)
-        }
-      });
-
-      return _data;
-    },
-
-    _strToNumber : function(data, field){
+     _strToNumber : function(data, field){
       data.forEach(function(el){
         el[field] = +el[field];
       });
-    },
+    }, 
 
 
 
 
 
     /*
-     * F U N C I O N E S   D E   S O P O R T E 
+     * F U N C I O N E S   D E   E S T I L O
      * ------------------------------------------------------------
      */
 
@@ -490,42 +548,6 @@ define(function(require){
       return brew;
     },
 
-    //
-    // TOMA UN ARRAY DE PUNTOS Y LO CONVIERTE A GEOJSON
-    // -------------------------------------------------------
-    //
-    _makeGeojson : function(item){
-
-      var geojson = {
-                      "features" : null,
-                      "type" : "FeatureCollection",
-                      "crs"  : {
-                                 "type"       : "name",
-                                 "properties" : { "name" : "urn:ogc:def:crs:EPSG::4019" }
-                                }
-                    },
-          properties = item.config.data,
-          lat        = item.config.location.lat,
-          lng        = item.config.location.lng,
-          features = item.data.map(function(d){
-                       var p = {};
-                       properties.forEach(function(property){
-                        p[property] = d[property];
-                       });
-
-                       return {
-                        type : "Feature",
-                        properties : p,
-                        geometry : {
-                          "type": "Point", 
-                          "coordinates": [ +d[lng], +d[lat] ]
-                        }
-                       }
-                     });
-
-      geojson.features = features;
-      return geojson;
-    },
 
 
 
@@ -564,7 +586,6 @@ define(function(require){
     },
 
     renderMapSelectorChange : function(e){
-      //console.log(e.currentTarget.value);
       var value = +e.currentTarget.value,
           item  = this.layersConfig.filter(function(l){
                     return +l.index == value;
@@ -586,7 +607,7 @@ define(function(require){
     // agrega un mapa al selector de mapas con el siguiente formato:
     // <option value="index">name</option>
     //
-    addMapToMapSelector : function(item){
+    addMapToMapSelector : function(item, active){
       /*
        var item = {
             src    : path,  // la ruta del archivo
@@ -601,6 +622,9 @@ define(function(require){
 
       option.innerHTML = item.config.name;
       option.value     = item.index;
+      if(+item.index === +active){
+        option.selected = true;
+      }
       select.appendChild(option);
     },
 
@@ -713,7 +737,6 @@ define(function(require){
       });
       */
 
-      console.log(item, _state);
 
       if(_year){
         this._enableYearFilter(item, _year);
@@ -785,7 +808,8 @@ define(function(require){
         value : val
       });
 
-      this._filterData(this.currentMap);
+      this.renderLayer(this.currentMap, true);
+      //this._currentData = this._filterData(this.currentMap);
     },
 
 
