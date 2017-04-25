@@ -32,6 +32,10 @@ define(function(require){
       MUNICIPIOS     = require("assets/municipios"),
       // [*] el nombre y clave de cada municipio
       MUNICIPIOSNAME = require("assets/municipios-nombres"),
+      // [*] el nombre y clave de cada ramo
+      RAMOSNAME      = require("assets/ramos-nombres"),
+      // [*] el nombre,ramo y clave de cada unidad ejecutora
+      UNIDADESNAME   = require("assets/unidades-nombres"),
 
       // [4] obtiene los templates de UI
       // [*] el selector de mapa
