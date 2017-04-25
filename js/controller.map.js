@@ -665,57 +665,9 @@ define(function(require){
         that.UIbranchSelector = html.querySelector("#" + conf.selectors.filtersContainers.branchContainer);
 
         return html;
-
-        /*
-        this.UIyearSelector = null;
-      // * El selector de ramo
-      this.UIbranchSelector = null;
-      // * El selector de estado
-      this.UIstateSelector = null;
-      // * los <select> de los filtros extra
-      this.UIextraFiltersSelector = [];
-        */
       };
 
       this.filterSelector.addTo(this.map);
-           /*
-           "filterSelector" : {
-      "container" : "div",
-      "class" : "",
-      "id" : "GF-SHCP-filter-selector",
-      "position" : "topleft",
-      "selectors" : {
-        "filtersId"       : "GF-SHCP-CONTAINER-FILTERS",
-        "extraFiltersId"  : "GF-SHCP-CONTAINER-EXTRA-FILTERS",
-        "filtersContainers" : [
-          {"yearContainer"   : "GF-SHCP-CONTROL-YEAR"},
-          {"stateContainer"  : "GF-SHCP-CONTROL-STATE"},
-          {"branchContainer" : "GF-SHCP-CONTROL-BRANCH"}
-        ],
-      }
-    }
-           */
-      /*
-      var that = this,
-          conf = this.settings.ui.mapSelector;
-
-      this.mapSelector = new L.Control({position : conf.position});
-      this.mapSelector.onAdd = function(map){
-        var html       = document.createElement(conf.container);
-        
-        html.innerHTML = MAPSELECTOR;
-        html.id        = conf.id;
-        html.setAttribute("class", conf.class);
-
-        that.UImapSelector   = html.querySelector("select");
-        that.UIlevelSelector = html.querySelector("ul");
-
-        that.UImapSelector.addEventListener("change", that.renderMapSelectorChange);
-
-        return html;
-      };
-      this.mapSelector.addTo(this.map);
-      */
     },
 
     enableFilters : function(item){
@@ -727,43 +679,10 @@ define(function(require){
           _branch  = filters.filter(function(filter){return filter.type == "branch"})[0],
           _year    = filters.filter(function(filter){return filter.type == "year"})[0];
       // hide filters
-      /*
-      _filters.forEach(function(el){
-        for(var prop in el){
-          if(el.hasOwnProperty(prop)){
-            document.querySelector("#" + el[prop]).style.display = "none";
-          }
-        }
-      });
-      */
-
-
+  
       if(_year){
         this._enableYearFilter(item, _year);
       }
-      /*
-      {"yearContainer"   : "GF-SHCP-CONTROL-YEAR"},
-      {"stateContainer"  : "GF-SHCP-CONTROL-STATE"},
-      {"branchContainer" : "GF-SHCP-CONTROL-BRANCH"}
-      */
-      // 
-      /*
-      "filters" : [
-    {"type" : "state", "field" : "state"},
-    {"type" : "branch", "field" : "ramo"},
-    {"type" : "year", "field" : "ciclo"}
-  ],
-  "extraFilters" : ["classification"],
-      */
-
-      /*
-      var item = {
-            src    : path,  // la ruta del archivo
-            config : data,  // el contenido del json
-            index  : index, // su posición (id)
-            data   : null   // aquí se guardarán los datos cargados
-          };
-      */
     },
 
     _enableYearFilter : function(item, year){
