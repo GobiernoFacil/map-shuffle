@@ -110,10 +110,11 @@ define(function(require){
 
       // [2] ARRREGLA EL SCOPE DE ALGUNAS FUNCIONES
       //
-      this._stateStyle             = this._stateStyle.bind(this);
-      this._cityStyle              = this._cityStyle.bind(this);
-      this.renderMapSelectorChange = this.renderMapSelectorChange.bind(this);
-      this._enableYearFilterChange = this._enableYearFilterChange.bind(this);
+      this._stateStyle              = this._stateStyle.bind(this);
+      this._cityStyle               = this._cityStyle.bind(this);
+      this.renderMapSelectorChange  = this.renderMapSelectorChange.bind(this);
+      this._enableYearFilterChange  = this._enableYearFilterChange.bind(this);
+      this._enableStateFilterChange = this._enableStateFilterChange.bind(this);
 
       // [3] ARREGLA EL GEOJSON DE ESTADOS (esto debe desaparecer)
       //
@@ -683,6 +684,9 @@ define(function(require){
       if(_year){
         this._enableYearFilter(item, _year);
       }
+      if(_state){
+        this._enableStateFilter(item, _state);
+      }
     },
 
     _enableYearFilter : function(item, year){
@@ -730,6 +734,58 @@ define(function(require){
       this.renderLayer(this.currentMap, true);
       //this._currentData = this._filterData(this.currentMap);
     },
+
+    _enableStateFilter : function(item, state){
+      // ESTADOSNAME
+      var _data    = _.uniq(_.pluck(item.data, state.field))
+                      .map(function(y){return +y})
+                      .sort(function(a, b){return a - b}),
+          data     = Object.create(ESTADOSNAME),
+          selector = this.UIstateSelector.querySelector("select"),
+          optAll   = null;
+
+      console.log(_data);
+
+      selector.innerHTML = "";
+      selector.setAttribute("data-field", state.field);
+      selector.removeEventListener("change", this._enableStateFilterChange);
+
+      optAll           = document.createElement("option");
+      optAll.value     = SELECTALL;
+      optAll.innerHTML = "todos";
+      selector.appendChild(optAll);
+
+      data.states.forEach(function(y){
+        var opt = document.createElement("option");
+
+        opt.value     = y.id;
+        opt.innerHTML = y.name;
+
+        selector.appendChild(opt);
+      }, this);
+
+      selector.addEventListener("change", this._enableStateFilterChange);
+    },
+
+    _enableStateFilterChange : function(e){
+      /*
+      var val     = e.currentTarget.value,
+          field   = e.currentTarget.getAttribute("data-field"),
+          current = this.filters.filter(function(el){ return el.field == field })[0];
+
+      if(current){
+        this.filters.splice(this.filters.indexOf(current), 1);
+      }
+
+      this.filters.push({
+        field : field,
+        value : val
+      });
+
+      this.renderLayer(this.currentMap, true);
+      */
+    },
+    
 
 
 
