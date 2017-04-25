@@ -691,6 +691,9 @@ define(function(require){
       if(_state){
         this._enableStateFilter(item, _state);
       }
+      if(_branch){
+        this._enableBranchFilter(item, _branch);
+      }
     },
 
     _enableYearFilter : function(item, year){
@@ -702,7 +705,7 @@ define(function(require){
 
       selector.innerHTML = "";
       selector.setAttribute("data-field", year.field);
-      selector.removeEventListener("change", this._enableYearFilterChange);
+      selector.removeEventListener("change", this._enableFilterChange);
 
       var optAll = document.createElement("option");
       optAll.value     = SELECTALL;
@@ -722,7 +725,6 @@ define(function(require){
     },
 
     _enableStateFilter : function(item, state){
-      // ESTADOSNAME
       var _data    = _.uniq(_.pluck(item.data, state.field))
                       .map(function(y){return +y})
                       .sort(function(a, b){return a - b}),
@@ -734,7 +736,7 @@ define(function(require){
 
       selector.innerHTML = "";
       selector.setAttribute("data-field", state.field);
-      selector.removeEventListener("change", this._enableStateFilterChange);
+      selector.removeEventListener("change", this._enableFilterChange);
 
       optAll           = document.createElement("option");
       optAll.value     = SELECTALL;
@@ -742,6 +744,37 @@ define(function(require){
       selector.appendChild(optAll);
 
       data.states.forEach(function(y){
+        var opt = document.createElement("option");
+
+        opt.value     = y.id;
+        opt.innerHTML = y.name;
+
+        selector.appendChild(opt);
+      }, this);
+
+      selector.addEventListener("change", this._enableFilterChange);
+    },
+
+    _enableBranchFilter : function(item, branch){
+      var _data    = _.uniq(_.pluck(item.data, branch.field))
+                      .map(function(y){return +y})
+                      .sort(function(a, b){return a - b}),
+          data     = Object.create(RAMOSNAME),
+          selector = this.UIbranchSelector.querySelector("select"),
+          optAll   = null;
+
+      console.log(_data);
+
+      selector.innerHTML = "";
+      selector.setAttribute("data-field", branch.field);
+      selector.removeEventListener("change", this._enableFilterChange);
+
+      optAll           = document.createElement("option");
+      optAll.value     = SELECTALL;
+      optAll.innerHTML = "todos";
+      selector.appendChild(optAll);
+
+      data.branches.forEach(function(y){
         var opt = document.createElement("option");
 
         opt.value     = y.id;
