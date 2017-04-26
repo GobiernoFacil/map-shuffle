@@ -177,6 +177,7 @@ define(function(require){
     //
     renderLayer : function(item, keepFilters){
       this.cleanLayers();
+      this.filters = [];
 
       this.currentMap   = item;
       this.currentMapId = item.idex;
@@ -680,19 +681,36 @@ define(function(require){
           conf     = this.settings.ui.filterSelector,
           _filters = conf.selectors.filtersContainers,
           filters  = item.config.filters,
-          _state   = filters.filter(function(filter){return filter.type == "state"})[0],
-          _branch  = filters.filter(function(filter){return filter.type == "branch"})[0],
-          _year    = filters.filter(function(filter){return filter.type == "year"})[0];
-      // hide filters
+          _state   = filters ? filters.filter(function(filter){return filter.type == "state"})[0] : null,
+          _branch  = filters ? filters.filter(function(filter){return filter.type == "branch"})[0] : null,
+          _year    = filters ? filters.filter(function(filter){return filter.type == "year"})[0] :null;
+      // remove filters 
   
       if(_year){
         this._enableYearFilter(item, _year);
+        this.UIyearSelector.style.display = "block";
       }
+      else{
+        this.UIyearSelector.querySelector("select").removeEventListener("change", this._enableFilterChange);
+        this.UIyearSelector.style.display = "none";
+      }
+
       if(_state){
         this._enableStateFilter(item, _state);
+        this.UIstateSelector.style.display = "block";
       }
+      else{
+        this.UIstateSelector.querySelector("select").removeEventListener("change", this._enableFilterChange);
+        this.UIstateSelector.style.display = "none";
+      }
+
       if(_branch){
         this._enableBranchFilter(item, _branch);
+        this.UIbranchSelector.style.display = "block";
+      }
+      else{
+        this.UIbranchSelector.querySelector("select").removeEventListener("change", this._enableFilterChange);
+        this.UIbranchSelector.style.display = "none";
       }
     },
 
@@ -732,8 +750,6 @@ define(function(require){
           selector = this.UIstateSelector.querySelector("select"),
           optAll   = null;
 
-      console.log(_data);
-
       selector.innerHTML = "";
       selector.setAttribute("data-field", state.field);
       selector.removeEventListener("change", this._enableFilterChange);
@@ -762,8 +778,6 @@ define(function(require){
           data     = Object.create(RAMOSNAME),
           selector = this.UIbranchSelector.querySelector("select"),
           optAll   = null;
-
-      console.log(_data);
 
       selector.innerHTML = "";
       selector.setAttribute("data-field", branch.field);
