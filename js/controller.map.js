@@ -627,14 +627,6 @@ define(function(require){
     // <option value="index">name</option>
     //
     addMapToMapSelector : function(item, active){
-      /*
-       var item = {
-            src    : path,  // la ruta del archivo
-            config : data,  // el contenido del json
-            index  : index, // su posición (id)
-            data   : null   // aquí se guardarán los datos cargados
-          };
-      */
       var container = document.getElementById(this.settings.ui.mapSelector.id),
           select    = container.querySelector("select"),
           option    = document.createElement("option");
@@ -662,6 +654,10 @@ define(function(require){
       else{
         this.UIlevelSelector.style.display = "none";
       }
+    },
+
+    updateUILevelSelectorChange : function(){
+
     },
 
     renderFilterSelector : function(){
