@@ -334,11 +334,17 @@ define(function(require){
     //
     getLayer : function(item){
       var that = this, 
-          conf = item.config;
+          conf = item.config,
+          src  = conf.src;
 
       // [1] carga el archivo con los datos para graficar
       //
-      d3[conf.file](conf.src, function(error, data){
+
+      if(conf.api && conf.type == "area"){
+        src = src + "/" + conf.current.level + "/" + conf.current.value
+      }
+
+      d3[conf.file](src, function(error, data){
         item.data = data;
         that.renderLayer(item);
       });
@@ -465,6 +471,12 @@ define(function(require){
       var filter          = {},
           filterContainer = document.getElementById(this.settings.ui.filterSelector.id),
           data            = null;
+
+      if(item.config.api){
+        console.log("is an api call");
+        data = item.data;
+      }
+
       if(!this.filters.length){
         data = item.data;
       }
@@ -482,6 +494,7 @@ define(function(require){
      },
 
      _strToNumber : function(data, field){
+
       data.forEach(function(el){
         el[field] = +el[field];
       });

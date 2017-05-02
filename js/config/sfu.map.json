@@ -1,0 +1,22 @@
+{
+  "name"  : "Proyectos Suspendidos SFU",
+  "type"  : "area",
+  "level" : ["state", "city"],
+  "src"   : "http://localhost:8000/api/sfu",
+  "file"  : "json",
+  "api"   : true,
+  "location" : {
+    "state" : "state_id",
+    "city"  : "city_id"
+  },
+  "values"  : ["COMPROMETIDO_PER", "AUTORIZADO"],
+  "data"    : [],
+  "current" : {
+    "level"  : "state",
+    "value"  : "COMPROMETIDO_PER",
+    "method" : "sum"
+  },
+  "filters" : [],
+  "extraFilters" : [],
+  "template" : "<p><%=name%> : <%=value%> </p>"
+}

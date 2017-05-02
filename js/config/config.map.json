@@ -29,9 +29,9 @@
   },
   "maps" : {
     "basePath" : "/js/config",
-    "maps"     : ["ramo23.map.json", "opa.map.json", "tomas.map.json", "gasolina.map.json"],
+    "maps"     : ["sfu.map.json", "ramo23.map.json", "opa.map.json", "tomas.map.json", "gasolina.map.json"],
     "extras"   : ["poblacion.map.json"],
-    "current"  : 1
+    "current"  : 0
   },
   "ui" : {
     "mapSelector" : {
