@@ -114,10 +114,11 @@ define(function(require){
 
       // [2] ARRREGLA EL SCOPE DE ALGUNAS FUNCIONES
       //
-      this._stateStyle              = this._stateStyle.bind(this);
-      this._cityStyle               = this._cityStyle.bind(this);
-      this.renderMapSelectorChange  = this.renderMapSelectorChange.bind(this);
-      this._enableFilterChange  = this._enableFilterChange.bind(this);
+      this._stateStyle                 = this._stateStyle.bind(this);
+      this._cityStyle                  = this._cityStyle.bind(this);
+      this._enableFilterChange         = this._enableFilterChange.bind(this);
+      this.renderMapSelectorChange     = this.renderMapSelectorChange.bind(this);
+      this.updateUILevelSelectorChange = this.updateUILevelSelectorChange.bind(this);
       //this._enableStateFilterChange = this._enableStateFilterChange.bind(this);
 
       // [3] ARREGLA EL GEOJSON DE ESTADOS (esto debe desaparecer)
@@ -192,6 +193,7 @@ define(function(require){
         // * renderea un mapa a nivel municipal (area)
       else if(item.config.current.level == "city"){
         this.currentData = this._agregateDataByCity(item);
+        this._mapCityGeojson(this.currentData);
         this.brew        = this._colorMixer(item);
         this.renderCityLayer(item);
       }
@@ -214,6 +216,7 @@ define(function(require){
       var that = this,
           t    = _.template(item.config.template);
       // [1] genera el layer de geojson estatal
+      console.log(ESTADOS.edos);
       this.states = L.geoJson(ESTADOS.edos, {
                     // * asigna el estilo. Internamente, genera la función de color,
                     //   lo demás viene del archivo de configuración principal
@@ -231,8 +234,16 @@ define(function(require){
     //
     //
     renderCityLayer : function(item){
+      var that = this,
+          t    = _.template(item.config.template);
+
+      console.log(MUNICIPIOS.municipios);
+
       this.cities = L.geoJson(MUNICIPIOS.municipios, {
                       style : this._cityStyle,
+                      onEachFeature : function(feature, layer){
+                        layer.bindPopup(t(feature.properties.data));
+                      }
                     }).addTo(this.map);
     },
 
@@ -393,9 +404,10 @@ define(function(require){
     },
 
     _agregateDataByCity : function(item){
-      var state = item.config.location.state,
-          city  = item.config.location.city,
-          _data = null;
+      var state  = item.config.location.state,
+          city   = item.config.location.city,
+          method = item.config.current.method || "sum";
+          _data  = null;
 
       this._strToNumber(this._currentData, state);
       this._strToNumber(this._currentData, city);
@@ -403,10 +415,13 @@ define(function(require){
       // this._strToNumber(item.data, city);
 
       _data = MUNICIPIOSNAME.cities.map(function(ct){
-        var search = {};
+        var search = {},
+            data   = null;
         
         search[state] = ct.state;
         search[city]  = ct.city;
+
+        data = _.where(this._currentData, search);
 
         return {
           id    : ct.inegi,
@@ -414,7 +429,10 @@ define(function(require){
           city  : ct.city,
           name  : ct.name,
           //url  : ct.url,
-          data : _.where(this._currentData, search)
+          data  : data,
+          value : d3[method](data, function(a){
+                    return +a[item.config.current.value]
+                  })
         }
       }, this);
 
@@ -427,6 +445,17 @@ define(function(require){
             d  = _.find(data, {id : id});
 
         state.properties.data = d;
+      });
+    },
+
+    _mapCityGeojson : function(data){
+      console.log(data);
+      this.lists.municipios.municipios.features.forEach(function(city){
+        var id  = city.properties.city,
+            state = city.properties.state,
+            d  = _.find(data, {city : id, state : state});
+
+        city.properties.data = d;
       });
     },
 
@@ -473,7 +502,6 @@ define(function(require){
           data            = null;
 
       if(item.config.api){
-        console.log("is an api call");
         data = item.data;
       }
 
@@ -544,11 +572,14 @@ define(function(require){
     // las geometrías o puntos
     //
     _colorMixer : function(item){
+      
+
       var value = item.config.current.value,
           level = item.config.current.level,
           data  = null,
           _data = null,
           brew  = null;
+
 
       if(level == "state" || level == "city"){
         data  = this.currentData;
@@ -558,11 +589,13 @@ define(function(require){
 
       }
       
+
       brew = new classyBrew();
       brew.setSeries(_data);
       brew.setNumClasses(7);
       brew.setColorCode("BuGn");
       brew.classify('jenks');
+
 
       return brew;
     },
@@ -600,9 +633,7 @@ define(function(require){
         that.UImapSelector.addEventListener("change", that.renderMapSelectorChange);
 
         // updateUILevelSelectorChange
-        console.log(that.UIlevelSelector);
         Array.prototype.slice.call(that.UIlevelSelector.querySelectorAll("a")).forEach(function(el){
-          console.log(el);
           el.addEventListener("click", that.updateUILevelSelectorChange);
         });
 
@@ -670,7 +701,19 @@ define(function(require){
           selected = item.classList.contains("selected"),
           level    = item.getAttribute("data-value");
 
-      console.log(item, selected, level);
+      if(selected){
+        return;
+      }
+      else{
+        Array.prototype.slice.call(this.UIlevelSelector.querySelectorAll("a")).forEach(function(el){
+          el.classList.remove("selected");
+        });
+
+        item.classList.add("selected");
+        this.currentMap.config.current.level = level;
+
+        this.renderLayer(this.currentMap, true);
+      }
     },
 
     renderFilterSelector : function(){
