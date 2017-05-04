@@ -180,7 +180,7 @@ define(function(require){
 
 
       this.cleanLayers();
-      this.filters = this.filters || [];
+      this.filters = keepFilters ? this.filters : [];
 
 
       this.currentMap   = item;
