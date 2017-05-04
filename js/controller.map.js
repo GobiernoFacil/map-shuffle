@@ -599,6 +599,13 @@ define(function(require){
 
         that.UImapSelector.addEventListener("change", that.renderMapSelectorChange);
 
+        // updateUILevelSelectorChange
+        console.log(that.UIlevelSelector);
+        Array.prototype.slice.call(that.UIlevelSelector.querySelectorAll("a")).forEach(function(el){
+          console.log(el);
+          el.addEventListener("click", that.updateUILevelSelectorChange);
+        });
+
         return html;
       };
       this.mapSelector.addTo(this.map);
@@ -656,8 +663,14 @@ define(function(require){
       }
     },
 
-    updateUILevelSelectorChange : function(){
+    updateUILevelSelectorChange : function(e){
+      e.preventDefault();
+      
+      var item     = e.target,
+          selected = item.classList.contains("selected"),
+          level    = item.getAttribute("data-value");
 
+      console.log(item, selected, level);
     },
 
     renderFilterSelector : function(){
