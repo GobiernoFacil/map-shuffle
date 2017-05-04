@@ -13,5 +13,8 @@
     "level" : "state",
     "value" : "tomas"
   },
+  "filters" : [
+    {"type" : "year", "field" : "year"}
+  ],
   "template" : "<p><%=name%> : <%=value%> </p>"
 }

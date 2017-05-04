@@ -177,8 +177,11 @@ define(function(require){
     //
     //
     renderLayer : function(item, keepFilters){
+
+
       this.cleanLayers();
-      this.filters = [];
+      this.filters = this.filters || [];
+
 
       this.currentMap   = item;
       this.currentMapId = item.idex;
@@ -216,7 +219,6 @@ define(function(require){
       var that = this,
           t    = _.template(item.config.template);
       // [1] genera el layer de geojson estatal
-      console.log(ESTADOS.edos);
       this.states = L.geoJson(ESTADOS.edos, {
                     // * asigna el estilo. Internamente, genera la función de color,
                     //   lo demás viene del archivo de configuración principal
@@ -236,8 +238,6 @@ define(function(require){
     renderCityLayer : function(item){
       var that = this,
           t    = _.template(item.config.template);
-
-      console.log(MUNICIPIOS.municipios);
 
       this.cities = L.geoJson(MUNICIPIOS.municipios, {
                       style : this._cityStyle,
@@ -449,7 +449,6 @@ define(function(require){
     },
 
     _mapCityGeojson : function(data){
-      console.log(data);
       this.lists.municipios.municipios.features.forEach(function(city){
         var id  = city.properties.city,
             state = city.properties.state,
