@@ -355,8 +355,17 @@ define(function(require){
         src = src + "/" + conf.current.level + "/" + conf.current.value
       }
 
+      else if(conf.api && conf.type == "point"){
+        src = src + "/" + "1";
+      }
+
       d3[conf.file](src, function(error, data){
-        item.data = data;
+        if(conf.api && conf.type == "point"){
+          item.data = data.results;
+        }
+        else{
+          item.data = data;
+        }
         that.renderLayer(item);
       });
     },

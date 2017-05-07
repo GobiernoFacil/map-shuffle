@@ -29,9 +29,9 @@
   },
   "maps" : {
     "basePath" : "/js/config",
-    "maps"     : ["sfu.map.json", "ramo23.map.json", "opa.map.json", "tomas.map.json", "gasolina.map.json"],
+    "maps"     : ["sfu.map.json", "ramo23.map.json", "opa.map.json", "tomas.map.json", "gasolina.map.json", "consolidado2015.map.json"],
     "extras"   : ["poblacion.map.json"],
-    "current"  : 1
+    "current"  : 5
   },
   "ui" : {
     "mapSelector" : {
@@ -39,6 +39,18 @@
       "class"     : "",
       "id"        : "GF-SHCP-map-selector",
       "position"  : "topright"
+    },
+    "pageSelector" : {
+      "container" : "div",
+      "class"     : "",
+      "id"        : "GF-SHCP-page-selector",
+      "position"  : "topright",
+      "controls"  : {
+        "pageSelect" : "GF-SHCP-CONTROL-PAGE",
+        "pageDisplay" : "GF-SHCP-LABEL-PAGE-TOTAL",
+        "nextPageBtn" : "GF-SHCP-CONTROL-NEXT",
+        "prevPageBtn" : "GF-SHCP-CONTROL-PREV"
+      }
     },
     "filterSelector" : {
       "container" : "div",
