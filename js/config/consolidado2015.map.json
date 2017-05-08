@@ -9,8 +9,8 @@
     "lat" : "LATITUD",
     "lng" : "LONGITUD"
   },
-  "values"  : [],
-  "data"    : [],
+  "values"  : ["PAGADO"],
+  "data"    : ["NOMBRE_PROYECTO", "PAGADO"],
   "current" : {},
   "filters" : [
     {"type" : "state", "field" : "ID_ENTIDAD_FEDERATIVA"},

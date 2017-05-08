@@ -479,7 +479,6 @@ define(function(require){
     // -------------------------------------------------------
     //
     _makeGeojson : function(item){
-
       var geojson = {
                       "features" : null,
                       "type" : "FeatureCollection",
