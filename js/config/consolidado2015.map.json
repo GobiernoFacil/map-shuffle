@@ -2,7 +2,7 @@
   "name"  : "Consolidado 2015",
   "type"  : "point",
   "level" : [],
-  "src"   : "http://localhost:8000/api/consolidado2015",
+  "src"   : "https://mapas.gobiernofacil.com/api/consolidado2015",
   "file"  : "json",
   "api"   : true,
   "location" : {
