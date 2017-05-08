@@ -42,6 +42,8 @@ define(function(require){
       MAPSELECTOR    = require("text!templates/map-selector-panel.html"),
       // [*] el selector de filtros
       FILTERSELECTOR = require("text!templates/filter-selector-panel.html"),
+      // [*] el selector de filtros
+      PAGESELECTOR = require("text!templates/page-selector-panel.html"),
 
       // [5] define las constantes internas del sistema 
       SELECTALL      = "_____";
@@ -204,6 +206,9 @@ define(function(require){
       else{
         this.currentData = null;
         this.renderPointsLayer(item);
+        if(item.config.api){
+          this.updatePagination();
+        }
       }
 
       if(!keepFilters){
@@ -361,10 +366,12 @@ define(function(require){
 
       d3[conf.file](src, function(error, data){
         if(conf.api && conf.type == "point"){
-          item.data = data.results;
+          item.data     = data.results;
+          item.response = data;
         }
         else{
-          item.data = data;
+          item.data     = data;
+          item.response = null;
         }
         that.renderLayer(item);
       });
@@ -889,6 +896,41 @@ define(function(require){
 
       this.renderLayer(this.currentMap, true);
       //this._currentData = this._filterData(this.currentMap);
+    },
+
+    updatePagination : function(){
+      var map     = this.currentMap,
+          res     = map.response,
+          conf    = this.settings.ui.pageSelector,
+          id      = conf.id,
+          _id     = this.settings.ui.topToolsDiv,
+          el      = document.getElementById(id),
+          panel   = document.getElementById(_id),
+          page    = res.page,
+          total   = res.pages,
+          pageEl  = null,
+          totalEl = null,
+          next    = null,
+          prev    = null;
+
+
+      if(!el){
+        el    = document.createElement(conf.container);
+        el.id = id;
+        el.innerHTML = PAGESELECTOR;
+        panel.appendChild(el);
+      }
+      else{
+        //console.log("yahoo");
+      }
+ 
+      pageEl  = document.getElementById(conf.controls.pageSelect);
+      totalEl = document.getElementById(conf.controls.pageDisplay);
+      next    = document.getElementById(conf.controls.nextPageBtn);
+      prev    = document.getElementById(conf.controls.prevPageBtn);
+
+      pageEl.value = page;
+      totalEl.innerHTML = total;
     },
     
 
