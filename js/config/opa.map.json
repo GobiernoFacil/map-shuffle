@@ -16,6 +16,8 @@
     {"type" : "branch", "field" : "ramo"},
     {"type" : "year", "field" : "ciclo"}
   ],
-  "extraFilters" : ["classification"],
+  "extraFilters" : [
+    {"type" : "extra", "field" : "classification", "title" : "Clasificación"}
+  ],
   "template" : "<p><%=name%>:<%=monto_total_inversion%></p>"
 }

@@ -16,6 +16,8 @@
     "method" : "sum"
   },
   "filters" : [],
-  "extraFilters" : [],
+  "extraFilters" : [
+    {"type" : "extra", "field" : "clave_de_programa", "title" : "Clave de programas"}
+  ],
   "template" : "<p><%=name%> : <%=value%> </p>"
 }

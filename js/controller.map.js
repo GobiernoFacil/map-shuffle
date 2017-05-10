@@ -46,7 +46,8 @@ define(function(require){
       PAGESELECTOR = require("text!templates/page-selector-panel.html"),
 
       // [5] define las constantes internas del sistema 
-      SELECTALL      = "_____";
+      SELECTALL      = "_____",
+      XFILTERCLASS   = "killMePlease";
 
 
   /*
@@ -112,7 +113,7 @@ define(function(require){
       // * El selector de estado
       this.UIstateSelector = null;
       // * los <select> de los filtros extra
-      this.UIextraFiltersSelector = [];
+      this.UIextraFiltersSelector = null;
 
       // [2] ARRREGLA EL SCOPE DE ALGUNAS FUNCIONES
       //
@@ -180,29 +181,38 @@ define(function(require){
     //
     renderLayer : function(item, keepFilters){
 
-
+      // [1] elimina el layer anterior
+      //
       this.cleanLayers();
+
+      // [2] actualiza las referencia internas
+      //
+      // * la lista de filtros
       this.filters = keepFilters ? this.filters : [];
-
-
+      // * el mapa desplegado
       this.currentMap   = item;
+      // * el id interno del mapa desplegado
       this.currentMapId = item.idex;
+      // * la colección de datos seleccionados (los datos sin ser covertidos a geojson)
       this._currentData = this._filterData(item);
 
+      // [3] despliega el mapa según el tipo
+      //
+      // A) Es un mapa de área por estado
       if(item.config.current.level == "state"){
         this.currentData = this._agregateDataByState(item);
         this._mapStateGeojson(this.currentData);
         this.brew = this._colorMixer(item);
         this.renderStateLayer(item);
       }
-        // * renderea un mapa a nivel municipal (area)
+      // B) Es un mapa de área por municipio
       else if(item.config.current.level == "city"){
         this.currentData = this._agregateDataByCity(item);
         this._mapCityGeojson(this.currentData);
         this.brew        = this._colorMixer(item);
         this.renderCityLayer(item);
       }
-        // * renderea un mapa a nivel latitud y longitud (point)
+      // C) Es un mapa de puntos definidos por latitud y longitud
       else{
         this.currentData = null;
         this.renderPointsLayer(item);
@@ -211,6 +221,8 @@ define(function(require){
         }
       }
 
+      // [4] Actualiza el panel de filtros si es un mapa nuevo
+      //
       if(!keepFilters){
         this.enableFilters(item);
       }
@@ -353,9 +365,8 @@ define(function(require){
           conf = item.config,
           src  = conf.src;
 
-      // [1] carga el archivo con los datos para graficar
+      // [1] Si es un api la fuente, actualiza el url
       //
-
       if(conf.api && conf.type == "area"){
         src = src + "/" + conf.current.level + "/" + conf.current.value
       }
@@ -364,6 +375,8 @@ define(function(require){
         src = src + "/" + "1";
       }
 
+      // [2] carga el archivo con los datos para graficar
+      //
       d3[conf.file](src, function(error, data){
         if(conf.api && conf.type == "point"){
           item.data     = data.results;
@@ -748,6 +761,7 @@ define(function(require){
         that.UIyearSelector   = html.querySelector("#" + conf.selectors.filtersContainers.yearContainer);
         that.UIstateSelector  = html.querySelector("#" + conf.selectors.filtersContainers.stateContainer);
         that.UIbranchSelector = html.querySelector("#" + conf.selectors.filtersContainers.branchContainer);
+        that.UIextraFiltersSelector = html.querySelector("#" + conf.selectors.extraFiltersId);
 
         return html;
       };
@@ -760,9 +774,11 @@ define(function(require){
           conf     = this.settings.ui.filterSelector,
           _filters = conf.selectors.filtersContainers,
           filters  = item.config.filters,
+          xfilters = item.config.extraFilters,
           _state   = filters ? filters.filter(function(filter){return filter.type == "state"})[0] : null,
           _branch  = filters ? filters.filter(function(filter){return filter.type == "branch"})[0] : null,
-          _year    = filters ? filters.filter(function(filter){return filter.type == "year"})[0] :null;
+          _year    = filters ? filters.filter(function(filter){return filter.type == "year"})[0] :null,
+          _extras  = xfilters || [];
       // remove filters 
   
       if(_year){
@@ -791,6 +807,36 @@ define(function(require){
         this.UIbranchSelector.querySelector("select").removeEventListener("change", this._enableFilterChange);
         this.UIbranchSelector.style.display = "none";
       }
+
+      if(_extras){
+        _extras.forEach(function(fil){
+          this._enableExtraFilter(item, fil);
+        }, this);
+      }
+    },
+
+    _enableExtraFilter : function(item, filter){
+      var p       = document.createElement("p"),
+          label   = document.createElement("label"),
+          select  = document.createElement("select"),
+          optAll  = document.createElement("option"),
+          pid     = XFILTERCLASS  + _.uniqueId("-pid-"),
+          options = _.uniq(_.pluck(this._currentData, filter.field));
+      
+      // XFILTERCLASS
+      p.id = pid;
+      p.classList.add(XFILTERCLASS);
+      label.innerHTML = filter.title;
+      optAll.value     = SELECTALL;
+      optAll.innerHTML = "todos";
+
+      select.setAttribute("name", XFILTERCLASS + pid + "-name");
+
+      select.appendChild(optAll);
+      p.appendChild(label);
+      p.appendChild(select);
+
+      this.UIextraFiltersSelector.appendChild(p);
     },
 
     _enableYearFilter : function(item, year){
