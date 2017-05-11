@@ -1,0 +1,23 @@
+{
+  "name"  : "Obra pública abierta",
+  "type"  : "point",
+  "level" : [],
+  "src"   : "/js/maps/opa.csv",
+  "file"  : "csv",
+  "location" : {
+    "lat" : "lat",
+    "lng" : "lng"
+  },
+  "values"  : [],
+  "data"    : ["key","name","ramo","unidad","state","lat","lng","advance","monto_total_inversion","ciclo","classification","ejercido"],
+  "current" : {},
+  "filters" : [
+    {"type" : "state", "field" : "state"},
+    {"type" : "branch", "field" : "ramo"},
+    {"type" : "year", "field" : "ciclo"}
+  ],
+  "extraFilters" : [
+    {"type" : "extra", "field" : "classification", "title" : "Clasificación"}
+  ],
+  "template" : "<p><%=name%>:<%=monto_total_inversion%></p>"
+}

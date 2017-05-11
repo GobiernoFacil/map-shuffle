@@ -1,0 +1,22 @@
+{
+  "name"  : "Consolidado 2015",
+  "type"  : "point",
+  "level" : [],
+  "src"   : "https://mapas.gobiernofacil.com/api/consolidado2015",
+  "file"  : "json",
+  "api"   : true,
+  "location" : {
+    "lat" : "LATITUD",
+    "lng" : "LONGITUD"
+  },
+  "values"  : ["PAGADO"],
+  "data"    : ["NOMBRE_PROYECTO", "PAGADO"],
+  "current" : {},
+  "filters" : [
+    {"type" : "state", "field" : "ID_ENTIDAD_FEDERATIVA"},
+    {"type" : "branch", "field" : "ID_RAMO"},
+    {"type" : "year", "field" : "CICLO"}
+  ],
+  "extraFilters" : ["classification"],
+  "template" : "<p><%=NOMBRE_PROYECTO%>:<%=PAGADO%></p>"
+}

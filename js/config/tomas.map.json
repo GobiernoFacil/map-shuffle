@@ -1,0 +1,20 @@
+{
+  "name" : "Tomas clandestinas",
+  "type"  : "area",
+  "level" : ["state"],
+  "src"   : "/js/maps/tomas_clandestinas.csv",
+  "file"  : "csv",
+  "location" : {
+    "state" : "estado_id"
+  },
+  "values"  : ["tomas"],
+  "data"    : ["year", "estado"],
+  "current" : {
+    "level" : "state",
+    "value" : "tomas"
+  },
+  "filters" : [
+    {"type" : "year", "field" : "year"}
+  ],
+  "template" : "<p><%=name%> : <%=value%> </p>"
+}
