@@ -17,7 +17,7 @@
   },
   "filters" : [],
   "extraFilters" : [
-    {"type" : "extra", "field" : "clave_de_programa", "title" : "Clave de programas"}
+    {"type" : "extra", "field" : "Fondo", "title" : "Clave de programas"}
   ],
   "template" : "<p><%=name%> : <%=value%> </p>"
 }

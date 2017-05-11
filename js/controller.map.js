@@ -770,6 +770,8 @@ define(function(require){
     },
 
     enableFilters : function(item){
+      this._disableExtraFilters();
+
       var that     = this,
           conf     = this.settings.ui.filterSelector,
           _filters = conf.selectors.filtersContainers,
@@ -815,6 +817,14 @@ define(function(require){
       }
     },
 
+    _disableExtraFilters : function(){
+      var extras = document.querySelectorAll("." + XFILTERCLASS);
+
+      Array.prototype.slice.call(extras).forEach(function(el){
+        el.parentNode.removeChild(el);
+      });
+    },
+
     _enableExtraFilter : function(item, filter){
       var p       = document.createElement("p"),
           label   = document.createElement("label"),
@@ -823,7 +833,6 @@ define(function(require){
           pid     = XFILTERCLASS  + _.uniqueId("-pid-"),
           options = _.uniq(_.pluck(this._currentData, filter.field));
       
-      // XFILTERCLASS
       p.id = pid;
       p.classList.add(XFILTERCLASS);
       label.innerHTML = filter.title;
@@ -836,7 +845,17 @@ define(function(require){
       p.appendChild(label);
       p.appendChild(select);
 
+      options.forEach(function(opt){
+        var option = document.createElement("option");
+        option.value = opt;
+        option.innerHTML = opt;
+        select.appendChild(option);
+      }, this);
+
       this.UIextraFiltersSelector.appendChild(p);
+
+      select.setAttribute("data-field", filter.field);
+      select.addEventListener("change", this._enableFilterChange);
     },
 
     _enableYearFilter : function(item, year){
