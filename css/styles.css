@@ -1543,6 +1543,26 @@ h1 {
         .sidebar .filter_container a.selected.agp b {
           background: red;
           border-color: red; }
+    .sidebar .filter_container .desplegar li {
+      list-style: none;
+      display: inline-block;
+      margin-right: 5px; }
+      .sidebar .filter_container .desplegar li a,
+      .sidebar .filter_container .desplegar li a:visited {
+        background: #ccc;
+        color: #333;
+        display: block;
+        padding: 5px; }
+        .sidebar .filter_container .desplegar li a:hover,
+        .sidebar .filter_container .desplegar li a:visited:hover {
+          background: #e6e6e6; }
+        .sidebar .filter_container .desplegar li a.selected,
+        .sidebar .filter_container .desplegar li a:visited.selected {
+          background: #1cb68d;
+          color: white; }
+          .sidebar .filter_container .desplegar li a.selected:hover,
+          .sidebar .filter_container .desplegar li a:visited.selected:hover {
+            background: #158a6b; }
   .sidebar h3 {
     font: 700 13px "soberana_sans", Helvetica, Arial, sans-serif;
     border-top: 1px solid rgba(53, 53, 51, 0.1);
@@ -1615,6 +1635,11 @@ h1 {
       color: #1cb68d; }
       .record h3 span.active {
         background: #1cb68d;
+        color: white;
+        font-weight: 700;
+        padding: 2px 5px; }
+      .record h3 span.disabled {
+        background: red;
         color: white;
         font-weight: 700;
         padding: 2px 5px; }
