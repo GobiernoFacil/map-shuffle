@@ -644,8 +644,27 @@ define(function(require){
     //
     renderMapSelector : function(){
       var that = this,
-          conf = this.settings.ui.mapSelector;
+          conf = this.settings.ui.mapSelector,
+          div  = document.getElementById(this.settings.ui.topToolsDiv),
+          html = document.createElement(conf.container);
+        
+      html.innerHTML = MAPSELECTOR;
+      html.id        = conf.id;
+      html.setAttribute("class", conf.class);
 
+      this.UImapSelector   = html.querySelector("select");
+      this.UIlevelSelector = html.querySelector("ul");
+
+      this.UImapSelector.addEventListener("change", this.renderMapSelectorChange);
+
+        // updateUILevelSelectorChange
+      Array.prototype.slice.call(this.UIlevelSelector.querySelectorAll("a")).forEach(function(el){
+        el.addEventListener("click", this.updateUILevelSelectorChange);
+      }, this);
+
+      div.appendChild(html);
+
+      /*
       this.mapSelector = new L.Control({position : conf.position});
       this.mapSelector.onAdd = function(map){
         var html       = document.createElement(conf.container);
@@ -667,6 +686,7 @@ define(function(require){
         return html;
       };
       this.mapSelector.addTo(this.map);
+      */
     },
 
     renderMapSelectorChange : function(e){
@@ -746,9 +766,22 @@ define(function(require){
     renderFilterSelector : function(){
       // FILTERSELECTOR
       var that = this,
-          conf = this.settings.ui.filterSelector;
+          conf = this.settings.ui.filterSelector,
+          div  = document.getElementById(this.settings.ui.topToolsDiv),
+          html = document.createElement(conf.container);
 
+      html.innerHTML = FILTERSELECTOR;
+      html.id        = conf.id;
+      html.setAttribute("class", conf.class);
 
+      this.UIyearSelector   = html.querySelector("#" + conf.selectors.filtersContainers.yearContainer);
+      this.UIstateSelector  = html.querySelector("#" + conf.selectors.filtersContainers.stateContainer);
+      this.UIbranchSelector = html.querySelector("#" + conf.selectors.filtersContainers.branchContainer);
+      this.UIextraFiltersSelector = html.querySelector("#" + conf.selectors.extraFiltersId);
+
+      div.appendChild(html);
+
+      /*
       this.filterSelector = new L.Control({position : conf.position});
       this.filterSelector.onAdd = function(map){
         var html       = document.createElement(conf.container);
@@ -767,6 +800,7 @@ define(function(require){
       };
 
       this.filterSelector.addTo(this.map);
+      */
     },
 
     enableFilters : function(item){
