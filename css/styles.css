@@ -1606,6 +1606,10 @@ h1 {
       right: 10px;
       top: 7px; }
 
+.leaflet-interactive {
+  stroke: black;
+  stroke-width: 2px; }
+
 .main_nav {
   margin: 0; }
   .main_nav li {
