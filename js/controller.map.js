@@ -620,7 +620,7 @@ define(function(require){
       brew = new classyBrew();
       brew.setSeries(_data);
       brew.setNumClasses(7);
-      brew.setColorCode("BuGn");
+      brew.setColorCode("Greens"); //BuGn
       brew.classify('jenks');
 
 
