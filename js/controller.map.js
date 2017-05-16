@@ -822,6 +822,7 @@ define(function(require){
         this.UIyearSelector.style.display = "block";
       }
       else{
+        console.log("meh");
         this.UIyearSelector.querySelector("select").removeEventListener("change", this._enableFilterChange);
         this.UIyearSelector.style.display = "none";
       }
