@@ -136,6 +136,10 @@ define(function(require){
       // 
       // * el selector de mapa
       this.renderMapSelector();
+
+      // * el selector de mapas extra
+      this.renderExtraMapSelector();
+
       // * el selector de filtros
       this.renderFilterSelector();
 
@@ -663,30 +667,29 @@ define(function(require){
       }, this);
 
       div.appendChild(html);
+    },
 
-      /*
-      this.mapSelector = new L.Control({position : conf.position});
-      this.mapSelector.onAdd = function(map){
-        var html       = document.createElement(conf.container);
-        
-        html.innerHTML = MAPSELECTOR;
-        html.id        = conf.id;
-        html.setAttribute("class", conf.class);
+    //
+    // EL PANEL DE SELECTOR DE MAPA EXTRA
+    // ---------------------------------------------
+    // genera la lista de mapas extras para desplegar, y agrega el listener 
+    // para cuando cambia el select
+    //
+    renderExtraMapSelector : function(){
+      var div     = document.getElementById(this.settings.ui.extraMapSelector),
+          select  = div.querySelector("select"),
+          optNone = document.createElement("option");
 
-        that.UImapSelector   = html.querySelector("select");
-        that.UIlevelSelector = html.querySelector("ul");
+      optNone.value    = SELECTALL;
+      optNone.innerHTML = "ninguno";
+      
+      select.appendChild(optNone);
 
-        that.UImapSelector.addEventListener("change", that.renderMapSelectorChange);
+      this.UIextraFiltersSelector = select;
 
-        // updateUILevelSelectorChange
-        Array.prototype.slice.call(that.UIlevelSelector.querySelectorAll("a")).forEach(function(el){
-          el.addEventListener("click", that.updateUILevelSelectorChange);
-        });
-
-        return html;
-      };
-      this.mapSelector.addTo(this.map);
-      */
+      this.UIextraFiltersSelector.addEventListener("change", this.renderExtraMapSelectorChange);
+      // console.log(this.settings.ui.extraMapSelector);
+      // console.log(this.settings.maps.extras);
     },
 
     renderMapSelectorChange : function(e){
@@ -703,6 +706,10 @@ define(function(require){
       }
 
       this.updateUILevelSelector(item);
+    },
+
+    renderExtraMapSelectorChange : function(e){
+      console.log(e.target.value);
     },
 
     //

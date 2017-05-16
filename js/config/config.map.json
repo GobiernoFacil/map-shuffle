@@ -42,6 +42,7 @@
       "id"        : "GF-SHCP-map-selector",
       "position"  : "topright"
     },
+    "extraMapSelector" : "GF-SHCP-extra-map-list",
     "pageSelector" : {
       "container" : "div",
       "class"     : "",
