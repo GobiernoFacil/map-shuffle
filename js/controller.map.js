@@ -146,6 +146,8 @@ define(function(require){
       // [6] CARGA LOS ARCHIVOS DE CONFIGURACIÓN Y DESPLIEGA EL MAPA SELECCIONADO
       //
       this.loadMapsConfig();
+
+      this.loadExtraMapsConfig();
     },
 
 
@@ -356,6 +358,20 @@ define(function(require){
             that.getLayer(item);
             that.updateUILevelSelector(item);
           }
+        });
+      }, this);
+    },
+
+    loadExtraMapsConfig : function(){
+      var that = this;
+
+      this.settings.maps.extras.forEach(function(url, index){
+        var path = this.settings.maps.basePath + "/" + url;
+        console.log(path);
+        d3.json(path, function(error, data){
+          var item = {
+
+          };
         });
       }, this);
     },
