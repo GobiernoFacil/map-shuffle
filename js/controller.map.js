@@ -82,6 +82,9 @@ define(function(require){
       this.filters      = [];
       // * la lista de mapas disponibles (archivos de configuración)
       this.layersConfig = [];
+      // * la lista de mapas extra disponibles (archivos de configuración)
+      //   los mapas extra son los que se superponen a los principales
+      this.extraLayersConfig = [];
       // * el mapa de leaflet
       this.map          = null;
       // * la referencia al layer de leaflet de puntos
@@ -146,6 +149,8 @@ define(function(require){
       // [6] CARGA LOS ARCHIVOS DE CONFIGURACIÓN Y DESPLIEGA EL MAPA SELECCIONADO
       //
       this.loadMapsConfig();
+
+      this.loadExtraMapsConfig();
     },
 
 
@@ -356,6 +361,44 @@ define(function(require){
             that.getLayer(item);
             that.updateUILevelSelector(item);
           }
+        });
+      }, this);
+    },
+
+    loadExtraMapsConfig : function(){
+      var that = this;
+
+      // carga el json de cada mapa, y si es el mapa seleccionado, 
+      // genera unlayer con la información
+      this.settings.maps.extras.forEach(function(url, index){
+        
+        // crea una referencia para la ruta del archivo de configuración,
+        // y del mapa que debe desplegarse al inicio
+        var path   = this.settings.maps.basePath + "/" + url;
+
+        // carga el json de configuración
+        d3.json(path, function(error, data){
+          // genera el elemento que representará al mapa en la app
+          var item = {
+            src    : path,  // la ruta del archivo
+            config : data,  // el contenido del json
+            index  : index, // su posición (id)
+            data   : null   // aquí se guardarán los datos cargados
+          };
+
+          // guarda el mapa en el array de mapas
+          that.extraLayersConfig.push(item);
+
+          // agrega el mapa al selector de mapas
+          that.addExtraMapToExtraMapSelector(item);
+
+          // si es el seleccionado, lo ejectura
+          /*
+          if(+index === +active){
+            that.getLayer(item);
+            that.updateUILevelSelector(item);
+          }
+          */
         });
       }, this);
     },
@@ -688,8 +731,6 @@ define(function(require){
       this.UIextraFiltersSelector = select;
 
       this.UIextraFiltersSelector.addEventListener("change", this.renderExtraMapSelectorChange);
-      // console.log(this.settings.ui.extraMapSelector);
-      // console.log(this.settings.maps.extras);
     },
 
     renderMapSelectorChange : function(e){
@@ -729,6 +770,17 @@ define(function(require){
         option.selected = true;
       }
       select.appendChild(option);
+    },
+
+    addExtraMapToExtraMapSelector : function(item){
+      var div    = document.getElementById(this.settings.ui.extraMapSelector),
+          select = div.querySelector("select"),
+          option = document.createElement("option");
+      
+      option.innerHTML = item.config.name;
+      option.value     = item.index;
+      select.appendChild(option);
+      
     },
 
     updateUILevelSelector : function(item){
