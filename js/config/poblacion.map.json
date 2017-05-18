@@ -15,5 +15,5 @@
     "value"  : "monto",
     "method" : "sum"
   },
-  "template" : "<p><%=name%> : <%=GFSHCPFormat(value)%> </p>"
+  "template" : "<p><%=name%> : <%=value%> </p>"
 }

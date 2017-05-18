@@ -91,6 +91,8 @@ define(function(require){
       this.points       = null;
       // la referencia al layer de leaflet de estados
       this.states       = null;
+      // la referencia al layer de leaflet extra
+      this.extra        = null;
       // referencia al archivo de configuración inicial
       this.settings     = Object.create(CONFIG);
       // referencia a las colecciones de ubicaciones
@@ -124,6 +126,7 @@ define(function(require){
       this._cityStyle                  = this._cityStyle.bind(this);
       this._enableFilterChange         = this._enableFilterChange.bind(this);
       this.renderMapSelectorChange     = this.renderMapSelectorChange.bind(this);
+      this.renderExtraMapSelectorChange = this.renderExtraMapSelectorChange.bind(this);
       this.updateUILevelSelectorChange = this.updateUILevelSelectorChange.bind(this);
       //this._enableStateFilterChange = this._enableStateFilterChange.bind(this);
 
@@ -209,16 +212,16 @@ define(function(require){
       //
       // A) Es un mapa de área por estado
       if(item.config.current.level == "state"){
-        this.currentData = this._agregateDataByState(item);
+        this.currentData = this._agregateDataByState(item, this._currentData);
         this._mapStateGeojson(this.currentData);
-        this.brew = this._colorMixer(item);
-        this.renderStateLayer(item);
+        this.brew = this._colorMixer(item, this.currentData);
+        this.renderStateLayer(item, "states");
       }
       // B) Es un mapa de área por municipio
       else if(item.config.current.level == "city"){
         this.currentData = this._agregateDataByCity(item);
         this._mapCityGeojson(this.currentData);
-        this.brew        = this._colorMixer(item);
+        this.brew        = this._colorMixer(item, this.currentData);
         this.renderCityLayer(item);
       }
       // C) Es un mapa de puntos definidos por latitud y longitud
@@ -237,15 +240,55 @@ define(function(require){
       }
     },
 
+    renderExtraLayer : function(item){
+      // [1] elimina el layer anterior
+      //
+      this.cleanExtraLayer();
+
+      // [2] actualiza las referencia internas
+      //
+      // * el mapa desplegado
+      this.currentExtraMap   = item;
+      // * el id interno del mapa desplegado
+      this.currentExtraMapId = item.idex;
+
+      // [3] despliega el mapa según el tipo
+      //
+      // A) Es un mapa de área por estado
+      if(item.config.current.level == "state"){
+        this.currentExtraData = this._agregateDataByState(item, item.data);
+        this._mapStateGeojson(this.currentExtraData);
+        this.extraBrew = this._colorMixer(item, this.currentExtraData);
+        this.renderStateLayer(item, "extra");
+      }
+      /*
+      // B) Es un mapa de área por municipio
+      else if(item.config.current.level == "city"){
+        this.currentData = this._agregateDataByCity(item);
+        this._mapCityGeojson(this.currentData);
+        this.brew        = this._colorMixer(item);
+        this.renderCityLayer(item);
+      }
+      // C) Es un mapa de puntos definidos por latitud y longitud
+      else{
+        this.currentData = null;
+        this.renderPointsLayer(item);
+        if(item.config.api){
+          this.updatePagination();
+        }
+      }*/
+    },
+
     //
     // DIBUJA EL LAYER SELECCIONADO PARA ESTADOS
     //
     //
-    renderStateLayer : function(item){
+    renderStateLayer : function(item, container){
       var that = this,
           t    = _.template(item.config.template);
       // [1] genera el layer de geojson estatal
-      this.states = L.geoJson(ESTADOS.edos, {
+      console.log(container);
+      this[container] = L.geoJson(ESTADOS.edos, {
                     // * asigna el estilo. Internamente, genera la función de color,
                     //   lo demás viene del archivo de configuración principal
                       style : this._stateStyle,
@@ -303,17 +346,29 @@ define(function(require){
     //
     cleanLayers : function(){
       if(this.points){
-        this.map.removeLayer(this.points)
+        this.map.removeLayer(this.points);
       }
 
       if(this.states){
-        this.map.removeLayer(this.states)
+        this.map.removeLayer(this.states);
       }
 
       if(this.cities){
-        this.map.removeLayer(this.cities)
+        this.map.removeLayer(this.cities);
       }
     },
+
+    cleanExtraLayer : function(){
+      console.log(this, this.extra);
+      if(this.extra){
+        this.map.removeLayer(this.extra);
+        console.log("remove");
+      }
+      else{
+        console.log("dont remove");
+      }
+    },
+
 
 
 
@@ -437,6 +492,20 @@ define(function(require){
       });
     },
 
+    getExtraLayer : function(item){
+      var that = this, 
+          conf = item.config,
+          src  = conf.src;
+
+      // [1] carga el archivo con los datos para graficar
+      //
+      d3[conf.file](src, function(error, data){
+        item.data     = data;
+        item.response = null;
+        that.renderExtraLayer(item);
+      });
+    },
+
     
 
 
@@ -448,13 +517,13 @@ define(function(require){
      * ------------------------------------------------------------
      */
 
-     _agregateDataByState : function(item){
+     _agregateDataByState : function(item, currentData){
 
       var state  = item.config.location.state,
           _data  = null,
           method = item.config.current.method || "sum";
 
-      this._strToNumber(this._currentData, state);
+      this._strToNumber(currentData, state);
       //this._strToNumber(item.data, state);
 
       _data = this.lists.estadosName.states.map(function(st){
@@ -462,7 +531,7 @@ define(function(require){
             data   = null;
         
         search[state] = st.id;
-        data          = _.where(this._currentData, search);
+        data          = _.where(currentData, search);
         
         return {
           id    : st.id,
@@ -645,7 +714,7 @@ define(function(require){
     // regresa una función que asigna el color para 
     // las geometrías o puntos
     //
-    _colorMixer : function(item){
+    _colorMixer : function(item, theData){
       
 
       var value = item.config.current.value,
@@ -656,7 +725,7 @@ define(function(require){
 
 
       if(level == "state" || level == "city"){
-        data  = this.currentData;
+        data  = theData;
         _data = _.pluck(data, "value");
       }
       else{
@@ -750,7 +819,24 @@ define(function(require){
     },
 
     renderExtraMapSelectorChange : function(e){
-      console.log(e.target.value);
+
+      var value = +e.currentTarget.value,
+          item  = this.extraLayersConfig.filter(function(l){
+                    return +l.index == value;
+                  })[0];
+
+      if(!value && value != 0){
+        this.cleanExtraLayer();
+        console.log(value, "alv");
+        return;
+      }
+
+      if(item.data){
+        this.renderExtraLayer(item);
+      }
+      else{
+        this.getExtraLayer(item);
+      }
     },
 
     //
@@ -881,7 +967,6 @@ define(function(require){
         this.UIyearSelector.style.display = "block";
       }
       else{
-        console.log("meh");
         this.UIyearSelector.querySelector("select").removeEventListener("change", this._enableFilterChange);
         this.UIyearSelector.style.display = "none";
       }
