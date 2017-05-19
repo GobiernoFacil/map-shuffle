@@ -78,7 +78,92 @@
 
   <!-- DATA TABLE -->
   <div id="GF-SHCP-table-tool">
+    <div id="GF-SHCP-table-tool-action">
+      <form>
+      <p>
+        <label>estado</label>
+        <select name="id_entidad"></select>
+      </p>
+
+      <p>
+        <label>municipio</label>
+        <select name="id_municipio"></select>
+      </p>
+
+      <p>
+        <label>Clave de programas</label>
+        <select name="Fondo"></select>
+      </p>
+      <p>
+        <label>buscar</label>
+        <input type="text" name="search">
+      </p>
+      <p>
+        <a href="#" id="GF-SHCP-table-tool-export-btn">exportar</a>
+      </p>
+      <p>
+        <input type="submit" value="filtrar">
+      </p>
+    </form>
+    </div>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>
+            <a data-name="monto" class="GF-SHCP-table-tool-number-sort" href="#">monto</a>
+          </th>
+          <th>
+            <a data-name="pagado" class="GF-SHCP-table-tool-number-sort" href="#">pagado</a>
+          </th>
+          <th>
+            <a data-name="clave_de_programa" class="GF-SHCP-table-tool-string-sort" href="#">clave_de_programa</a>
+          </th>
+          <th>
+            <a data-name="fondo" class="GF-SHCP-table-tool-string-sort" href="#">fondo</a>
+          </th>
+          <th>
+            <a data-name="entidad" class="GF-SHCP-table-tool-string-sort" href="#">entidad</a>
+          </th>
+          <th>
+            <a data-name="municipio" class="GF-SHCP-table-tool-string-sort" href="#">municipio</a>
+          </th>
+          <th>
+            <a data-name="proyecto" class="GF-SHCP-table-tool-string-sort" href="#">proyecto</a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>5600000</td>
+          <td>0</td>
+          <td>U128</td>
+          <td>PROYECTOS DE DESARROLLO REGIONAL</td>
+          <td>TAMAULIPAS</td>
+          <td>ALTAMIRA</td>
+          <td>INFRAESTRUCTURA VIAL EN EL MUNICIPIO DE ALTAMIRA EN EL ESTADO DE TAMAULIPAS</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+  <!--
+  1 U128  PROYECTOS DE DESARROLLO REGIONAL  28  TAMAULIPAS  3 ALTAMIRA  INFRAESTRUCTURA VIAL EN EL MUNICIPIO DE ALTAMIRA EN EL ESTADO DE TAMAULIPAS 5600000 0
+  "location" : {
+    "state" : "id_entidad",
+    "city"  : "id_municipio"
+  },
+  "values"  : ["monto", "pagado"],
+  "data"    : ["clave_de_programa", "fondo", "entidad", "municipio", "proyecto"],
+  "current" : {
+    "level"  : "state",
+    "value"  : "monto",
+    "method" : "sum"
+  },
+  "filters" : [],
+  "extraFilters" : [
+    {"type" : "extra", "field" : "Fondo", "title" : "Clave de programas"}
+  ], 
+  -->
 
   <!-- versión de desarrollo -->
   <script data-main="js/main.map" src="js/libs/require.js"></script>
