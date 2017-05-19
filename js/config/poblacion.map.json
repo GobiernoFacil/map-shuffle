@@ -4,6 +4,7 @@
   "level" : ["state", "city"],
   "src"   : "/js/maps/ramo23-2017.csv",
   "file"  : "csv",
+  "color" : 18,
   "location" : {
     "state" : "id_entidad",
     "city"  : "id_municipio"
@@ -15,5 +16,5 @@
     "value"  : "monto",
     "method" : "sum"
   },
-  "template" : "<p><%=name%> : <%=GFSHCPFormat(value)%> </p>"
+  "template" : "<p><%=name%> : <%=value%> </p>"
 }

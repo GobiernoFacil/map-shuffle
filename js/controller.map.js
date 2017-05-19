@@ -82,12 +82,17 @@ define(function(require){
       this.filters      = [];
       // * la lista de mapas disponibles (archivos de configuración)
       this.layersConfig = [];
+      // * la lista de mapas extra disponibles (archivos de configuración)
+      //   los mapas extra son los que se superponen a los principales
+      this.extraLayersConfig = [];
       // * el mapa de leaflet
       this.map          = null;
       // * la referencia al layer de leaflet de puntos
       this.points       = null;
       // la referencia al layer de leaflet de estados
       this.states       = null;
+      // la referencia al layer de leaflet extra
+      this.extra        = null;
       // referencia al archivo de configuración inicial
       this.settings     = Object.create(CONFIG);
       // referencia a las colecciones de ubicaciones
@@ -118,9 +123,11 @@ define(function(require){
       // [2] ARRREGLA EL SCOPE DE ALGUNAS FUNCIONES
       //
       this._stateStyle                 = this._stateStyle.bind(this);
+      this._stateExtraStyle            = this._stateExtraStyle.bind(this);
       this._cityStyle                  = this._cityStyle.bind(this);
       this._enableFilterChange         = this._enableFilterChange.bind(this);
       this.renderMapSelectorChange     = this.renderMapSelectorChange.bind(this);
+      this.renderExtraMapSelectorChange = this.renderExtraMapSelectorChange.bind(this);
       this.updateUILevelSelectorChange = this.updateUILevelSelectorChange.bind(this);
       //this._enableStateFilterChange = this._enableStateFilterChange.bind(this);
 
@@ -145,8 +152,9 @@ define(function(require){
 
       // [6] CARGA LOS ARCHIVOS DE CONFIGURACIÓN Y DESPLIEGA EL MAPA SELECCIONADO
       //
+      // * la configuración de los mapas principales
       this.loadMapsConfig();
-
+      // * la configuración de los mapas extra (para comparar)
       this.loadExtraMapsConfig();
     },
 
@@ -206,16 +214,16 @@ define(function(require){
       //
       // A) Es un mapa de área por estado
       if(item.config.current.level == "state"){
-        this.currentData = this._agregateDataByState(item);
-        this._mapStateGeojson(this.currentData);
-        this.brew = this._colorMixer(item);
-        this.renderStateLayer(item);
+        this.currentData = this._agregateDataByState(item, this._currentData);
+        var xxxxx = this._mapStateGeojson(this.currentData);
+        this.brew = this._colorMixer(item, this.currentData);
+        this.renderStateLayer(item, "states", xxxxx, this._stateStyle);
       }
       // B) Es un mapa de área por municipio
       else if(item.config.current.level == "city"){
         this.currentData = this._agregateDataByCity(item);
         this._mapCityGeojson(this.currentData);
-        this.brew        = this._colorMixer(item);
+        this.brew        = this._colorMixer(item, this.currentData);
         this.renderCityLayer(item);
       }
       // C) Es un mapa de puntos definidos por latitud y longitud
@@ -235,17 +243,62 @@ define(function(require){
     },
 
     //
+    // RENDEREA EL MAPA EXTRA SELECCIONADO
+    //
+    //
+    renderExtraLayer : function(item){
+      // [1] elimina el layer anterior
+      //
+      this.cleanExtraLayer();
+
+      // [2] actualiza las referencia internas
+      //
+      // * el mapa desplegado
+      this.currentExtraMap   = item;
+      // * el id interno del mapa desplegado
+      this.currentExtraMapId = item.idex;
+
+      // [3] despliega el mapa según el tipo
+      //
+      // A) Es un mapa de área por estado
+      if(item.config.current.level == "state"){
+        this.currentExtraData = this._agregateDataByState(item, item.data);
+        //this._mapStateGeojson(this.currentExtraData);
+        var xxxxx = this._mapStateGeojson(this.currentExtraData);
+        this.extraBrew = this._colorMixer(item, this.currentExtraData);
+        this.renderStateLayer(item, "extra", xxxxx, this._stateExtraStyle);
+      }
+      /*
+      // B) Es un mapa de área por municipio
+      else if(item.config.current.level == "city"){
+        this.currentData = this._agregateDataByCity(item);
+        this._mapCityGeojson(this.currentData);
+        this.brew        = this._colorMixer(item);
+        this.renderCityLayer(item);
+      }
+      // C) Es un mapa de puntos definidos por latitud y longitud
+      else{
+        this.currentData = null;
+        this.renderPointsLayer(item);
+        if(item.config.api){
+          this.updatePagination();
+        }
+      }*/
+    },
+
+    //
     // DIBUJA EL LAYER SELECCIONADO PARA ESTADOS
     //
     //
-    renderStateLayer : function(item){
+    renderStateLayer : function(item, container, geojson, style){
       var that = this,
           t    = _.template(item.config.template);
       // [1] genera el layer de geojson estatal
-      this.states = L.geoJson(ESTADOS.edos, {
+      console.log(container);
+      this[container] = L.geoJson(geojson/*ESTADOS.edos*/, {
                     // * asigna el estilo. Internamente, genera la función de color,
                     //   lo demás viene del archivo de configuración principal
-                      style : this._stateStyle,
+                      style : style,
                     // * agrega el popup a cada estado
                       onEachFeature : function(feature, layer){
                         layer.bindPopup(t(feature.properties.data));
@@ -300,17 +353,37 @@ define(function(require){
     //
     cleanLayers : function(){
       if(this.points){
-        this.map.removeLayer(this.points)
+        this.map.removeLayer(this.points);
       }
 
       if(this.states){
-        this.map.removeLayer(this.states)
+        this.map.removeLayer(this.states);
       }
 
       if(this.cities){
-        this.map.removeLayer(this.cities)
+        this.map.removeLayer(this.cities);
+      }
+
+      if(this.extra){
+        this.cleanExtraLayer();
       }
     },
+
+    //
+    // ELIMINA EL LAYER EXTRA DEL MAPA
+    //
+    //
+    cleanExtraLayer : function(){
+      console.log(this, this.extra);
+      if(this.extra){
+        this.map.removeLayer(this.extra);
+        console.log("remove");
+      }
+      else{
+        console.log("dont remove");
+      }
+    },
+
 
 
 
@@ -322,7 +395,7 @@ define(function(require){
      */
 
     //
-    // CARGA LA CONFIGUACIÓN DE LOS MAPAS EXTERNOS
+    // CARGA LA CONFIGUACIÓN DE LOS MAPAS
     //
     //
     loadMapsConfig : function(){
@@ -377,7 +450,49 @@ define(function(require){
     },
 
     //
-    // OBTIENE LA INFORMACIÓN DEL LAYER SELECCIONADO
+    // CARGA LA CONFIGUACIÓN DE LOS MAPAS EXTRA
+    //
+    //
+    loadExtraMapsConfig : function(){
+      var that = this;
+
+      // carga el json de cada mapa, y si es el mapa seleccionado, 
+      // genera unlayer con la información
+      this.settings.maps.extras.forEach(function(url, index){
+        
+        // crea una referencia para la ruta del archivo de configuración,
+        // y del mapa que debe desplegarse al inicio
+        var path   = this.settings.maps.basePath + "/" + url;
+
+        // carga el json de configuración
+        d3.json(path, function(error, data){
+          // genera el elemento que representará al mapa en la app
+          var item = {
+            src    : path,  // la ruta del archivo
+            config : data,  // el contenido del json
+            index  : index, // su posición (id)
+            data   : null   // aquí se guardarán los datos cargados
+          };
+
+          // guarda el mapa en el array de mapas
+          that.extraLayersConfig.push(item);
+
+          // agrega el mapa al selector de mapas
+          that.addExtraMapToExtraMapSelector(item);
+
+          // si es el seleccionado, lo ejectura
+          /*
+          if(+index === +active){
+            that.getLayer(item);
+            that.updateUILevelSelector(item);
+          }
+          */
+        });
+      }, this);
+    },
+
+    //
+    // OBTIENE LA INFORMACIÓN DEL MAPA SELECCIONADO
     //
     //
     getLayer : function(item){
@@ -410,6 +525,24 @@ define(function(require){
       });
     },
 
+    //
+    // OBTIENE LA INFORMACIÓN DEL MAPA EXTRA SELECCIONADO
+    //
+    //
+    getExtraLayer : function(item){
+      var that = this, 
+          conf = item.config,
+          src  = conf.src;
+
+      // [1] carga el archivo con los datos para graficar
+      //
+      d3[conf.file](src, function(error, data){
+        item.data     = data;
+        item.response = null;
+        that.renderExtraLayer(item);
+      });
+    },
+
     
 
 
@@ -421,13 +554,17 @@ define(function(require){
      * ------------------------------------------------------------
      */
 
-     _agregateDataByState : function(item){
+    //
+    // REGRESA LA INFORMACIÓN AGREGADA POR ESTADO
+    //
+    //
+     _agregateDataByState : function(item, currentData){
 
       var state  = item.config.location.state,
           _data  = null,
           method = item.config.current.method || "sum";
 
-      this._strToNumber(this._currentData, state);
+      this._strToNumber(currentData, state);
       //this._strToNumber(item.data, state);
 
       _data = this.lists.estadosName.states.map(function(st){
@@ -435,7 +572,7 @@ define(function(require){
             data   = null;
         
         search[state] = st.id;
-        data          = _.where(this._currentData, search);
+        data          = _.where(currentData, search);
         
         return {
           id    : st.id,
@@ -452,6 +589,10 @@ define(function(require){
       return _data;
     },
 
+    //
+    // REGRESA LA INFORMACIÓN AGREGADA POR MUNICIPIO
+    //
+    //
     _agregateDataByCity : function(item){
       var state  = item.config.location.state,
           city   = item.config.location.city,
@@ -489,12 +630,25 @@ define(function(require){
     },
 
     _mapStateGeojson : function(data){
+
+      var geoJSON = Object.create(this.lists.estados.edos);
+      
+      geoJSON.features.forEach(function(state){
+        var id = state.properties.CVE_ENT,
+            d  = _.find(data, {id : id});
+
+        state.properties.data = d;
+      });
+
+      return geoJSON;
+      /*
       this.lists.estados.edos.features.forEach(function(state){
         var id = state.properties.CVE_ENT,
             d  = _.find(data, {id : id});
 
         state.properties.data = d;
       });
+      */
     },
 
     _mapCityGeojson : function(data){
@@ -548,13 +702,15 @@ define(function(require){
           filterContainer = document.getElementById(this.settings.ui.filterSelector.id),
           data            = null;
 
-      if(item.config.api){
+      if(item.config.api || !this.filters.length){
         data = item.data;
       }
 
+      /*
       if(!this.filters.length){
         data = item.data;
       }
+      */
       else{
         this.filters.forEach(function(fil){
           if(fil.value !== SELECTALL){
@@ -597,6 +753,13 @@ define(function(require){
       return css;
     },
 
+    _stateExtraStyle : function(feature){
+      var css       = Object.create(this.settings.extraMapGeometry);
+      css.fillColor = this.extraBrew.getColorInRange(feature.properties.data.value);
+
+      return css;
+    },
+
     _cityStyle : function(feature){
       var city    = this.currentData.filter(function(d){
                       return feature.properties.state == d.state && feature.properties.city == d.city;
@@ -618,29 +781,30 @@ define(function(require){
     // regresa una función que asigna el color para 
     // las geometrías o puntos
     //
-    _colorMixer : function(item){
+    _colorMixer : function(item, theData){
       
 
       var value = item.config.current.value,
           level = item.config.current.level,
+          color = item.config.color || this.settings.mapGeometry.defaultColor || 1,
           data  = null,
           _data = null,
           brew  = null;
 
 
       if(level == "state" || level == "city"){
-        data  = this.currentData;
+        data  = theData;
         _data = _.pluck(data, "value");
       }
       else{
-
+        return null;
       }
       
 
       brew = new classyBrew();
       brew.setSeries(_data);
       brew.setNumClasses(7);
-      brew.setColorCode("Greens"); //BuGn
+      brew.setColorCode(brew.getColorCodes()[color]);
       brew.classify('jenks');
 
 
@@ -704,28 +868,6 @@ define(function(require){
       this.UIextraFiltersSelector = select;
 
       this.UIextraFiltersSelector.addEventListener("change", this.renderExtraMapSelectorChange);
-      // console.log(this.settings.ui.extraMapSelector);
-      // console.log(this.settings.maps.extras);
-    },
-
-    renderMapSelectorChange : function(e){
-      var value = +e.currentTarget.value,
-          item  = this.layersConfig.filter(function(l){
-                    return +l.index == value;
-                  })[0];
-
-      if(item.data){
-        this.renderLayer(item);
-      }
-      else{
-        this.getLayer(item);
-      }
-
-      this.updateUILevelSelector(item);
-    },
-
-    renderExtraMapSelectorChange : function(e){
-      console.log(e.target.value);
     },
 
     //
@@ -747,6 +889,17 @@ define(function(require){
       select.appendChild(option);
     },
 
+    addExtraMapToExtraMapSelector : function(item){
+      var div    = document.getElementById(this.settings.ui.extraMapSelector),
+          select = div.querySelector("select"),
+          option = document.createElement("option");
+      
+      option.innerHTML = item.config.name;
+      option.value     = item.index;
+      select.appendChild(option);
+      
+    },
+
     updateUILevelSelector : function(item){
       var that     = this,
           display  = item.config.type == "area" && item.config.level.length > 1,
@@ -761,28 +914,6 @@ define(function(require){
       }
       else{
         this.UIlevelSelector.style.display = "none";
-      }
-    },
-
-    updateUILevelSelectorChange : function(e){
-      e.preventDefault();
-      
-      var item     = e.target,
-          selected = item.classList.contains("selected"),
-          level    = item.getAttribute("data-value");
-
-      if(selected){
-        return;
-      }
-      else{
-        Array.prototype.slice.call(this.UIlevelSelector.querySelectorAll("a")).forEach(function(el){
-          el.classList.remove("selected");
-        });
-
-        item.classList.add("selected");
-        this.currentMap.config.current.level = level;
-
-        this.renderLayer(this.currentMap, true);
       }
     },
 
@@ -845,7 +976,6 @@ define(function(require){
         this.UIyearSelector.style.display = "block";
       }
       else{
-        console.log("meh");
         this.UIyearSelector.querySelector("select").removeEventListener("change", this._enableFilterChange);
         this.UIyearSelector.style.display = "none";
       }
@@ -1055,6 +1185,75 @@ define(function(require){
       totalEl.innerHTML = total;
     },
     
+
+
+
+
+
+    /*
+     * L I S T E N E R S   ( P Á N E L E S ) 
+     * ------------------------------------------------------------
+     */
+
+     renderMapSelectorChange : function(e){
+      var value = +e.currentTarget.value,
+          item  = this.layersConfig.filter(function(l){
+                    return +l.index == value;
+                  })[0];
+
+      if(item.data){
+        this.renderLayer(item);
+      }
+      else{
+        this.getLayer(item);
+      }
+
+      this.updateUILevelSelector(item);
+    },
+
+    renderExtraMapSelectorChange : function(e){
+
+      var value = +e.currentTarget.value,
+          item  = this.extraLayersConfig.filter(function(l){
+                    return +l.index == value;
+                  })[0];
+
+      if(!value && value != 0){
+        this.cleanExtraLayer();
+        console.log(value, "alv");
+        return;
+      }
+
+      if(item.data){
+        this.renderExtraLayer(item);
+      }
+      else{
+        this.getExtraLayer(item);
+      }
+    },
+
+    updateUILevelSelectorChange : function(e){
+      e.preventDefault();
+      
+      var item     = e.target,
+          selected = item.classList.contains("selected"),
+          level    = item.getAttribute("data-value");
+
+      if(selected){
+        return;
+      }
+      else{
+        Array.prototype.slice.call(this.UIlevelSelector.querySelectorAll("a")).forEach(function(el){
+          el.classList.remove("selected");
+        });
+
+        item.classList.add("selected");
+        this.currentMap.config.current.level = level;
+
+        this.renderLayer(this.currentMap, true);
+      }
+    },
+
 
 
 
