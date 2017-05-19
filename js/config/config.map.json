@@ -21,17 +21,26 @@
     "fillOpacity" : 0.9
   },
   "mapGeometry" : {
-    "weight"      : 0.4,
-    "opacity"     : 0.1,
-    "color"       : "red",
-    "dashArray"   : "",
-    "fillOpacity" : 1
+    "weight"       : 0.4,
+    "opacity"      : 0.1,
+    "color"        : "red",
+    "dashArray"    : "",
+    "fillOpacity"  : 1,
+    "defaultColor" : 12 
+  },
+  "extraMapGeometry" : {
+    "weight"       : 0.4,
+    "opacity"      : 0.1,
+    "color"        : "red",
+    "dashArray"    : "",
+    "fillOpacity"  : 1,
+    "defaultColor" : 5 
   },
   "maps" : {
     "basePath" : "/js/config",
     "maps"     : ["sfu.map.json", "ramo23.map.json", "opa.map.json", "tomas.map.json", "gasolina.map.json", "consolidado2015.map.json"],
     "extras"   : ["poblacion.map.json"],
-    "current"  : 1
+    "current"  : 3
   },
   "ui" : {
     "topToolsDiv"    : "GF-SHCP-top-tools",
