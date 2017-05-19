@@ -6,6 +6,7 @@
   <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
+<div class="map_container">
   <!-- MAIN MAP -->
   <div id="map"> 
 	  <!--paginación, categorías-->
@@ -22,16 +23,13 @@
 	      <ul id="GF-SHCP-cart-list" class="cart-list">
       		<li data-field="year">2017</li>
     	  </ul>
-        
-        <!-- extra layers -->
-        <div id="GF-SHCP-extra-map-list">
-          <p>
-            <label>compara con:</label>
-            <select></select>
-          </p>
-        </div>
-        
       </div>
+      
+       <!-- extra layers -->
+        <div id="GF-SHCP-extra-map-list">
+        	<h3><label>Agregar capa para comparar:</label></h3>
+            <select></select>         
+        </div>
  
       
     </div>
@@ -44,25 +42,37 @@
     </header>
   
   </div>
-  <div class="row">
+  
+</div>
+
+
+<div class="container">
+	<div class="row">
+  
+  
   <!-- MAP SELECTOR -->
   <ul id="GF-SHCP-list"></ul>
 
-  </div>
+  <div class="col-sm-12">
   
   <!-- DATA BARS -->
   <div id="GF-SHCP-bars-tool">
     <form>
-      <p>
-        <label>estado</label>
+	  <div class="row">
+	    <div class="col-sm-6">
+        	<h3><label>estado</label></h3>
         <select id="GF-SHCP-bars-tool-state-selector"></select>
       </p>
-
+	    </div>
+	    <div class="col-sm-6">
       <p>
         <label>municipio</label>
         <select id="GF-SHCP-bars-tool-city-selector"></select>
       </p>
+	    </div>
+	  </div>
     </form>
+  </div>
     <ul id="GF-SHCP-bars-tool-list">
       <li>
         <h4>nombre municipio</h4>
@@ -146,24 +156,7 @@
       </tbody>
     </table>
   </div>
-  <!--
-  1 U128  PROYECTOS DE DESARROLLO REGIONAL  28  TAMAULIPAS  3 ALTAMIRA  INFRAESTRUCTURA VIAL EN EL MUNICIPIO DE ALTAMIRA EN EL ESTADO DE TAMAULIPAS 5600000 0
-  "location" : {
-    "state" : "id_entidad",
-    "city"  : "id_municipio"
-  },
-  "values"  : ["monto", "pagado"],
-  "data"    : ["clave_de_programa", "fondo", "entidad", "municipio", "proyecto"],
-  "current" : {
-    "level"  : "state",
-    "value"  : "monto",
-    "method" : "sum"
-  },
-  "filters" : [],
-  "extraFilters" : [
-    {"type" : "extra", "field" : "Fondo", "title" : "Clave de programas"}
-  ], 
-  -->
+
 
   <!-- versión de desarrollo -->
   <script data-main="js/main.map" src="js/libs/require.js"></script>
