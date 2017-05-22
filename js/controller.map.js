@@ -13,7 +13,7 @@ define(function(require){
    */
 
       // [1] obtiene el archivo de configuración
-  var CONFIG      = require("json!config/config.map.json"),
+  var CONFIG      = require("json!config/config.map.b.json"),
 
       // [2] obtiene las librerías necesarias
       d3          = require("d3"),
@@ -331,7 +331,17 @@ define(function(require){
     renderPointsLayer : function(item){
       var that   = this,
           points = this._makeGeojson(item),
-          t      = _.template(item.config.template);
+          t      = _.template(item.config.template),
+          style  = that.settings.mapPoint,
+          _style = item.config.style;
+
+      if(_style){
+        for(var prop in _style){
+          if(_style.hasOwnProperty(prop)){
+            style[prop] = _style[prop];
+          }
+        }
+      }
 
       this.points = L.geoJson(points, {
         pointToLayer : function(feature, latlng){

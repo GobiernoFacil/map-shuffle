@@ -1,9 +1,14 @@
 {
   "name"  : "Obra pública abierta",
   "type"  : "point",
+  "multiple" : true,
   "level" : [],
   "src"   : "/js/maps/opa.csv",
   "file"  : "csv",
+  "style" : {
+    "fillColor" : "pink",
+    "color"     : "black"
+  },
   "location" : {
     "lat" : "lat",
     "lng" : "lng"
