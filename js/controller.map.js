@@ -240,6 +240,35 @@ define(function(require){
       if(!keepFilters){
         this.enableFilters(item);
       }
+
+      // [5] Actualiza las opciones de UI
+      //
+      this.updateUIOptions(item);
+    },
+
+    updateUIOptions : function(item){
+      var type   = item.config.type, 
+          _geo   = this.settings.ui.mapSelector.geolocationId,
+           geo   = document.getElementById(_geo),
+          _level = this.settings.ui.mapSelector.levelId;
+           level = document.getElementById(_level);
+
+      console.log(geo, level, _geo, _level);
+
+      // clear filters
+
+      if(type == "point"){
+        // hide area level selector
+        level.style.display= "none";
+        // show geocoding
+        geo.style.display= "block";
+      }
+      else{
+        // show area level selector
+        level.style.display= "block";
+        // hide geocoding
+        geo.style.display= "none";
+      }
     },
 
     //

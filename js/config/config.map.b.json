@@ -41,7 +41,7 @@
   },
   "maps" : {
     "basePath" : "/js/config",
-    "maps"     : ["opa.map.json"],
+    "maps"     : ["opa.map.json", "ramo23.map.json"],
     "extras"   : [],
     "current"  : 0
   },
@@ -52,7 +52,9 @@
       "container" : "div",
       "class"     : "",
       "id"        : "GF-SHCP-map-selector",
-      "position"  : "topright"
+      "position"  : "topright",
+      "levelId"   : "GF-SHCP-view-selector-section",
+      "geolocationId" : "GF-SHCP-view-geolocation-section"
     },
     "extraMapSelector" : "GF-SHCP-extra-map-list",
     "pageSelector" : {
