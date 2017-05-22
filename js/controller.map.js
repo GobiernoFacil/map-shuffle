@@ -287,7 +287,6 @@ define(function(require){
       var that = this,
           t    = _.template(item.config.template);
       // [1] genera el layer de geojson estatal
-      console.log(container);
       this[container] = L.geoJson(ESTADOS.edos, {
                     // * asigna el estilo. Internamente, genera la función de color,
                     //   lo demás viene del archivo de configuración principal
