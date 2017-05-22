@@ -309,6 +309,14 @@ select {
     border-color: #F4F2F2 !important;
     color: white; }
 
+input.inputs {
+  background: white;
+  border: 1px solid #F4F2F2;
+  border-radius: 0;
+  height: 35px;
+  line-height: 35px;
+  width: 100%; }
+
 .module_box form {
   margin: 0; }
 
@@ -1514,6 +1522,13 @@ h1 {
   margin: 0 15px 0;
   padding-bottom: 10px; }
 
+.map_container {
+  height: 900px;
+  position: relative; }
+
+.divider {
+  border-top: 1px solid #ccc; }
+
 .sidebar {
   background: rgba(28, 28, 28, 0.6);
   border-right: 3px solid #1cb68d;
@@ -1543,6 +1558,20 @@ h1 {
         .sidebar .filter_container a.selected.agp b {
           background: red;
           border-color: red; }
+      .sidebar .filter_container a.btn_location {
+        display: block;
+        background: #f49d51;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        border-radius: 10px;
+        color: white;
+        font-size: 14px;
+        text-align: center;
+        padding: 3px 0;
+        line-height: 1.5; }
+        .sidebar .filter_container a.btn_location:hover {
+          background: #ea750f; }
     .sidebar .filter_container .desplegar li {
       list-style: none;
       display: inline-block;

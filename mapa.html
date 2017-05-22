@@ -6,6 +6,7 @@
   <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
+<div class="map_container">
   <!-- MAIN MAP -->
   <div id="map"> 
 	  <!--paginación, categorías-->
@@ -22,16 +23,13 @@
 	      <ul id="GF-SHCP-cart-list" class="cart-list">
       		<li data-field="year">2017</li>
     	  </ul>
-        
-        <!-- extra layers -->
-        <div id="GF-SHCP-extra-map-list">
-          <p>
-            <label>compara con:</label>
-            <select></select>
-          </p>
-        </div>
-        
       </div>
+      
+       <!-- extra layers -->
+        <div id="GF-SHCP-extra-map-list">
+        	<h3><label>Agregar capa para comparar:</label></h3>
+            <select></select>         
+        </div>
  
       
     </div>
@@ -44,25 +42,37 @@
     </header>
   
   </div>
-  <div class="row">
+  
+</div>
+
+
+<div class="container">
+	<div class="row">
+  
+  
   <!-- MAP SELECTOR -->
   <ul id="GF-SHCP-list"></ul>
 
-  </div>
-  
+  <div class="col-sm-12">
+  	<h2>Comparar</h2>
   <!-- DATA BARS -->
   <div id="GF-SHCP-bars-tool">
     <form>
-      <p>
-        <label>estado</label>
+	  <div class="row">
+	    <div class="col-sm-6">
+        	<h3><label>estado</label></h3>
         <select id="GF-SHCP-bars-tool-state-selector"></select>
       </p>
-
+	    </div>
+	    <div class="col-sm-6">
       <p>
         <label>municipio</label>
         <select id="GF-SHCP-bars-tool-city-selector"></select>
       </p>
+	    </div>
+	  </div>
     </form>
+  </div>
     <ul id="GF-SHCP-bars-tool-list">
       <li>
         <h4>nombre municipio</h4>
@@ -73,12 +83,96 @@
       </li>
     </ul>
   </div>
+  </div>
 
 
 
   <!-- DATA TABLE -->
   <div id="GF-SHCP-table-tool">
+    <div id="GF-SHCP-table-tool-action">
+	    <h2>Filtrar</h2>
+      <form>
+	      <div class="row">
+		      <div class="col-sm-3">
+      <p>
+        <label>estado</label>
+        <select name="id_entidad"></select>
+      </p>
+		      </div>
+		      <div class="col-sm-3">
+      <p>
+        <label>municipio</label>
+        <select name="id_municipio"></select>
+      </p>
+		      </div>
+		      <div class="col-sm-3">
+      <p>
+        <label>Clave de programas</label>
+        <select name="Fondo"></select>
+      </p>
+		      </div>
+		      <div class="col-sm-3">
+      <p>
+        <label>buscar</label>
+        <input type="text" name="search">
+      </p>
+		      </div>
+	      </div>
+	      <div class="row">
+		      <div class="col-sm-3 col-sm-offset-6">
+      <p>
+        <a href="#" id="GF-SHCP-table-tool-export-btn">exportar</a>
+      </p>
+		      </div>
+		      <div class="col-sm-3">
+      <p>
+        <input type="submit" value="filtrar">
+      </p>
+		      </div>
+	      </div>
+    </form>
+    </div>
+    
+    <table class="table">
+      <thead>
+        <tr>
+          <th>
+            <a data-name="monto" class="GF-SHCP-table-tool-number-sort" href="#">monto</a>
+          </th>
+          <th>
+            <a data-name="pagado" class="GF-SHCP-table-tool-number-sort" href="#">pagado</a>
+          </th>
+          <th>
+            <a data-name="clave_de_programa" class="GF-SHCP-table-tool-string-sort" href="#">clave_de_programa</a>
+          </th>
+          <th>
+            <a data-name="fondo" class="GF-SHCP-table-tool-string-sort" href="#">fondo</a>
+          </th>
+          <th>
+            <a data-name="entidad" class="GF-SHCP-table-tool-string-sort" href="#">entidad</a>
+          </th>
+          <th>
+            <a data-name="municipio" class="GF-SHCP-table-tool-string-sort" href="#">municipio</a>
+          </th>
+          <th>
+            <a data-name="proyecto" class="GF-SHCP-table-tool-string-sort" href="#">proyecto</a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>5600000</td>
+          <td>0</td>
+          <td>U128</td>
+          <td>PROYECTOS DE DESARROLLO REGIONAL</td>
+          <td>TAMAULIPAS</td>
+          <td>ALTAMIRA</td>
+          <td>INFRAESTRUCTURA VIAL EN EL MUNICIPIO DE ALTAMIRA EN EL ESTADO DE TAMAULIPAS</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+
 
   <!-- versión de desarrollo -->
   <script data-main="js/main.map" src="js/libs/require.js"></script>

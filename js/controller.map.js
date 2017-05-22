@@ -123,6 +123,7 @@ define(function(require){
       // [2] ARRREGLA EL SCOPE DE ALGUNAS FUNCIONES
       //
       this._stateStyle                 = this._stateStyle.bind(this);
+      this._stateExtraStyle            = this._stateExtraStyle.bind(this);
       this._cityStyle                  = this._cityStyle.bind(this);
       this._enableFilterChange         = this._enableFilterChange.bind(this);
       this.renderMapSelectorChange     = this.renderMapSelectorChange.bind(this);
@@ -151,8 +152,9 @@ define(function(require){
 
       // [6] CARGA LOS ARCHIVOS DE CONFIGURACIÓN Y DESPLIEGA EL MAPA SELECCIONADO
       //
+      // * la configuración de los mapas principales
       this.loadMapsConfig();
-
+      // * la configuración de los mapas extra (para comparar)
       this.loadExtraMapsConfig();
     },
 
@@ -213,9 +215,9 @@ define(function(require){
       // A) Es un mapa de área por estado
       if(item.config.current.level == "state"){
         this.currentData = this._agregateDataByState(item, this._currentData);
-        this._mapStateGeojson(this.currentData);
+        var xxxxx = this._mapStateGeojson(this.currentData);
         this.brew = this._colorMixer(item, this.currentData);
-        this.renderStateLayer(item, "states");
+        this.renderStateLayer(item, "states", xxxxx, this._stateStyle);
       }
       // B) Es un mapa de área por municipio
       else if(item.config.current.level == "city"){
@@ -240,6 +242,10 @@ define(function(require){
       }
     },
 
+    //
+    // RENDEREA EL MAPA EXTRA SELECCIONADO
+    //
+    //
     renderExtraLayer : function(item){
       // [1] elimina el layer anterior
       //
@@ -257,9 +263,10 @@ define(function(require){
       // A) Es un mapa de área por estado
       if(item.config.current.level == "state"){
         this.currentExtraData = this._agregateDataByState(item, item.data);
-        this._mapStateGeojson(this.currentExtraData);
+        //this._mapStateGeojson(this.currentExtraData);
+        var xxxxx = this._mapStateGeojson(this.currentExtraData);
         this.extraBrew = this._colorMixer(item, this.currentExtraData);
-        this.renderStateLayer(item, "extra");
+        this.renderStateLayer(item, "extra", xxxxx, this._stateExtraStyle);
       }
       /*
       // B) Es un mapa de área por municipio
@@ -283,14 +290,16 @@ define(function(require){
     // DIBUJA EL LAYER SELECCIONADO PARA ESTADOS
     //
     //
-    renderStateLayer : function(item, container){
+    renderStateLayer : function(item, container, geojson, style){
       var that = this,
           t    = _.template(item.config.template);
       // [1] genera el layer de geojson estatal
-      this[container] = L.geoJson(ESTADOS.edos, {
+
+      console.log(container);
+      this[container] = L.geoJson(geojson/*ESTADOS.edos*/, {
                     // * asigna el estilo. Internamente, genera la función de color,
                     //   lo demás viene del archivo de configuración principal
-                      style : this._stateStyle,
+                      style : style,
                     // * agrega el popup a cada estado
                       onEachFeature : function(feature, layer){
                         layer.bindPopup(t(feature.properties.data));
@@ -355,8 +364,16 @@ define(function(require){
       if(this.cities){
         this.map.removeLayer(this.cities);
       }
+
+      if(this.extra){
+        this.cleanExtraLayer();
+      }
     },
 
+    //
+    // ELIMINA EL LAYER EXTRA DEL MAPA
+    //
+    //
     cleanExtraLayer : function(){
       console.log(this, this.extra);
       if(this.extra){
@@ -379,7 +396,7 @@ define(function(require){
      */
 
     //
-    // CARGA LA CONFIGUACIÓN DE LOS MAPAS EXTERNOS
+    // CARGA LA CONFIGUACIÓN DE LOS MAPAS
     //
     //
     loadMapsConfig : function(){
@@ -419,6 +436,10 @@ define(function(require){
       }, this);
     },
 
+    //
+    // CARGA LA CONFIGUACIÓN DE LOS MAPAS EXTRA
+    //
+    //
     loadExtraMapsConfig : function(){
       var that = this;
 
@@ -458,7 +479,7 @@ define(function(require){
     },
 
     //
-    // OBTIENE LA INFORMACIÓN DEL LAYER SELECCIONADO
+    // OBTIENE LA INFORMACIÓN DEL MAPA SELECCIONADO
     //
     //
     getLayer : function(item){
@@ -491,6 +512,10 @@ define(function(require){
       });
     },
 
+    //
+    // OBTIENE LA INFORMACIÓN DEL MAPA EXTRA SELECCIONADO
+    //
+    //
     getExtraLayer : function(item){
       var that = this, 
           conf = item.config,
@@ -516,6 +541,10 @@ define(function(require){
      * ------------------------------------------------------------
      */
 
+    //
+    // REGRESA LA INFORMACIÓN AGREGADA POR ESTADO
+    //
+    //
      _agregateDataByState : function(item, currentData){
 
       var state  = item.config.location.state,
@@ -547,6 +576,10 @@ define(function(require){
       return _data;
     },
 
+    //
+    // REGRESA LA INFORMACIÓN AGREGADA POR MUNICIPIO
+    //
+    //
     _agregateDataByCity : function(item){
       var state  = item.config.location.state,
           city   = item.config.location.city,
@@ -584,12 +617,25 @@ define(function(require){
     },
 
     _mapStateGeojson : function(data){
+
+      var geoJSON = Object.create(this.lists.estados.edos);
+      
+      geoJSON.features.forEach(function(state){
+        var id = state.properties.CVE_ENT,
+            d  = _.find(data, {id : id});
+
+        state.properties.data = d;
+      });
+
+      return geoJSON;
+      /*
       this.lists.estados.edos.features.forEach(function(state){
         var id = state.properties.CVE_ENT,
             d  = _.find(data, {id : id});
 
         state.properties.data = d;
       });
+      */
     },
 
     _mapCityGeojson : function(data){
@@ -643,13 +689,15 @@ define(function(require){
           filterContainer = document.getElementById(this.settings.ui.filterSelector.id),
           data            = null;
 
-      if(item.config.api){
+      if(item.config.api || !this.filters.length){
         data = item.data;
       }
 
+      /*
       if(!this.filters.length){
         data = item.data;
       }
+      */
       else{
         this.filters.forEach(function(fil){
           if(fil.value !== SELECTALL){
@@ -692,6 +740,13 @@ define(function(require){
       return css;
     },
 
+    _stateExtraStyle : function(feature){
+      var css       = Object.create(this.settings.extraMapGeometry);
+      css.fillColor = this.extraBrew.getColorInRange(feature.properties.data.value);
+
+      return css;
+    },
+
     _cityStyle : function(feature){
       var city    = this.currentData.filter(function(d){
                       return feature.properties.state == d.state && feature.properties.city == d.city;
@@ -718,6 +773,7 @@ define(function(require){
 
       var value = item.config.current.value,
           level = item.config.current.level,
+          color = item.config.color || this.settings.mapGeometry.defaultColor || 1,
           data  = null,
           _data = null,
           brew  = null;
@@ -728,14 +784,14 @@ define(function(require){
         _data = _.pluck(data, "value");
       }
       else{
-
+        return null;
       }
       
 
       brew = new classyBrew();
       brew.setSeries(_data);
       brew.setNumClasses(7);
-      brew.setColorCode("Greens"); //BuGn
+      brew.setColorCode(brew.getColorCodes()[color]);
       brew.classify('jenks');
 
 
@@ -801,43 +857,6 @@ define(function(require){
       this.UIextraFiltersSelector.addEventListener("change", this.renderExtraMapSelectorChange);
     },
 
-    renderMapSelectorChange : function(e){
-      var value = +e.currentTarget.value,
-          item  = this.layersConfig.filter(function(l){
-                    return +l.index == value;
-                  })[0];
-
-      if(item.data){
-        this.renderLayer(item);
-      }
-      else{
-        this.getLayer(item);
-      }
-
-      this.updateUILevelSelector(item);
-    },
-
-    renderExtraMapSelectorChange : function(e){
-
-      var value = +e.currentTarget.value,
-          item  = this.extraLayersConfig.filter(function(l){
-                    return +l.index == value;
-                  })[0];
-
-      if(!value && value != 0){
-        this.cleanExtraLayer();
-        console.log(value, "alv");
-        return;
-      }
-
-      if(item.data){
-        this.renderExtraLayer(item);
-      }
-      else{
-        this.getExtraLayer(item);
-      }
-    },
-
     //
     // EL MENÚ DEL SELECTOR DE MAPAS
     // ---------------------------------------------
@@ -882,28 +901,6 @@ define(function(require){
       }
       else{
         this.UIlevelSelector.style.display = "none";
-      }
-    },
-
-    updateUILevelSelectorChange : function(e){
-      e.preventDefault();
-      
-      var item     = e.target,
-          selected = item.classList.contains("selected"),
-          level    = item.getAttribute("data-value");
-
-      if(selected){
-        return;
-      }
-      else{
-        Array.prototype.slice.call(this.UIlevelSelector.querySelectorAll("a")).forEach(function(el){
-          el.classList.remove("selected");
-        });
-
-        item.classList.add("selected");
-        this.currentMap.config.current.level = level;
-
-        this.renderLayer(this.currentMap, true);
       }
     },
 
@@ -1175,6 +1172,75 @@ define(function(require){
       totalEl.innerHTML = total;
     },
     
+
+
+
+
+
+    /*
+     * L I S T E N E R S   ( P Á N E L E S ) 
+     * ------------------------------------------------------------
+     */
+
+     renderMapSelectorChange : function(e){
+      var value = +e.currentTarget.value,
+          item  = this.layersConfig.filter(function(l){
+                    return +l.index == value;
+                  })[0];
+
+      if(item.data){
+        this.renderLayer(item);
+      }
+      else{
+        this.getLayer(item);
+      }
+
+      this.updateUILevelSelector(item);
+    },
+
+    renderExtraMapSelectorChange : function(e){
+
+      var value = +e.currentTarget.value,
+          item  = this.extraLayersConfig.filter(function(l){
+                    return +l.index == value;
+                  })[0];
+
+      if(!value && value != 0){
+        this.cleanExtraLayer();
+        console.log(value, "alv");
+        return;
+      }
+
+      if(item.data){
+        this.renderExtraLayer(item);
+      }
+      else{
+        this.getExtraLayer(item);
+      }
+    },
+
+    updateUILevelSelectorChange : function(e){
+      e.preventDefault();
+      
+      var item     = e.target,
+          selected = item.classList.contains("selected"),
+          level    = item.getAttribute("data-value");
+
+      if(selected){
+        return;
+      }
+      else{
+        Array.prototype.slice.call(this.UIlevelSelector.querySelectorAll("a")).forEach(function(el){
+          el.classList.remove("selected");
+        });
+
+        item.classList.add("selected");
+        this.currentMap.config.current.level = level;
+
+        this.renderLayer(this.currentMap, true);
+      }
+    },
+
 
 
 
