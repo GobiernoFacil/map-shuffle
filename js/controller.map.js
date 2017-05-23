@@ -1311,7 +1311,19 @@ define(function(require){
      * ----------------------------------------------------------------------
      */
     enableBarsTool : function(item){
-      console.log(item);
+      var thisConf = this.settings.ui.barsTool,
+          itemConf = item.config,
+          container = document.getElementById(thisConf.container);
+
+      if(itemConf.type == "point"){
+        container.style.display = "none";
+        return;
+      }
+      else{
+        container.style.display = "block";
+      }
+
+      
     },
 
 
