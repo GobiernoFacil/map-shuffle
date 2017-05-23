@@ -1311,9 +1311,11 @@ define(function(require){
      * ----------------------------------------------------------------------
      */
     enableBarsTool : function(item){
-      var thisConf = this.settings.ui.barsTool,
-          itemConf = item.config,
-          container = document.getElementById(thisConf.container);
+      var thisConf    = this.settings.ui.barsTool,
+          itemConf    = item.config,
+          container   = document.getElementById(thisConf.container),
+          stateSelect = document.getElementById(thisConf.stateSelector),
+          citySelect  = document.getElementById(thisConf.citySelector);
 
       if(itemConf.type == "point"){
         container.style.display = "none";
@@ -1323,7 +1325,33 @@ define(function(require){
         container.style.display = "block";
       }
 
-      
+      if(itemConf.level.indexOf("state") !== -1){
+        this.renderBarsToolStateList();
+      }
+    },
+
+    renderBarsToolStateList : function(){
+      var select = document.getElementById(this.settings.ui.barsTool.stateSelector),
+          states = this.lists.estadosName.states,
+          optNone = document.createElement("option");
+
+      optNone.innerHTML = "Selecciona un estado";
+      optNone.value = SELECTALL;
+
+      select.appendChild(optNone);
+
+      states.forEach(function(st){
+        var opt = document.createElement("option");
+
+        opt.value = st.id;
+        opt.innerHTML = st.name;
+
+        select.appendChild(opt);
+      });
+    },
+
+    changeStateBarsToolFunction : function(e){
+
     },
 
 
