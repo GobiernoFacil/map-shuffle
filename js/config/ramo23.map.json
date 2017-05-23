@@ -4,7 +4,7 @@
   "level" : ["state", "city"],
   "src"   : "/js/maps/ramo23-2017.csv",
   "file"  : "csv",
-  "color" : 9,
+  "color" : 12,
   "location" : {
     "state" : "id_entidad",
     "city"  : "id_municipio"

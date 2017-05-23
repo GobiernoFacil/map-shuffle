@@ -6,8 +6,8 @@
   "src"   : "/js/maps/opa.csv",
   "file"  : "csv",
   "style" : {
-    "fillColor" : "pink",
-    "color"     : "black"
+    "fillColor" : "green",
+    "color"     : "red"
   },
   "location" : {
     "lat" : "lat",
