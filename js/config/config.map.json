@@ -83,6 +83,7 @@
       }
     },
     "barsTool" : {
+      "container"     : "GF-SHCP-bars-tool",
       "stateSelector" : "GF-SHCP-bars-tool-state-selector",
       "citySelector"  : "GF-SHCP-bars-tool-city-selector",
       "barsList"      : "GF-SHCP-bars-tool-list"

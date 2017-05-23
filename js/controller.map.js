@@ -13,7 +13,7 @@ define(function(require){
    */
 
       // [1] obtiene el archivo de configuración
-  var CONFIG      = require("json!config/config.map.b.json"),
+  var CONFIG      = require("json!config/config.map.json"),
 
       // [2] obtiene las librerías necesarias
       d3          = require("d3"),
@@ -244,6 +244,14 @@ define(function(require){
       // [5] Actualiza las opciones de UI
       //
       this.updateUIOptions(item);
+
+      // [6] Activa las barras de comparación
+      //
+      this.enableBarsTool(item);
+
+      // [7] Activa la tabla de comparación
+      //
+      this.enableTableTool(item);
     },
 
     updateUIOptions : function(item){
@@ -762,86 +770,6 @@ define(function(require){
 
 
     /*
-     * F U N C I O N E S   D E   E S T I L O
-     * ------------------------------------------------------------
-     */
-
-    //
-    // ESTILO PARA LAS GEOMETRÍAS DE ESTADO
-    // ---------------------------------------------
-    // regresa una función que asigna el estilo para 
-    // las geometrías de estado
-    //
-    _stateStyle : function(feature){
-      var css       = Object.create(this.settings.mapGeometry);
-      css.fillColor = this.brew.getColorInRange(feature.properties.data.value);
-
-      return css;
-    },
-
-    _stateExtraStyle : function(feature){
-      var css       = Object.create(this.settings.extraMapGeometry);
-      css.fillColor = this.extraBrew.getColorInRange(feature.properties.data.value);
-
-      return css;
-    },
-
-    _cityStyle : function(feature){
-      var city    = this.currentData.filter(function(d){
-                      return feature.properties.state == d.state && feature.properties.city == d.city;
-                    })[0];
-      var data    = city.data, 
-          current = this.currentMap.config.current.value,
-          value   = ! city.data.length ? 0 : _.pluck(data, current).reduce(function(a, b){
-                      return Number(a) + Number(b);
-                    }, 0),
-          css     = Object.create(this.settings.mapGeometry);
-
-      css.fillColor = this.brew.getColorInRange(value);
-      return css;
-    },
-
-    //
-    // GEOMETRY/POINT COLOR FUNCTION
-    // ---------------------------------------------
-    // regresa una función que asigna el color para 
-    // las geometrías o puntos
-    //
-    _colorMixer : function(item, theData){
-      
-
-      var value = item.config.current.value,
-          level = item.config.current.level,
-          color = item.config.color || this.settings.mapGeometry.defaultColor || 1,
-          data  = null,
-          _data = null,
-          brew  = null;
-
-
-      if(level == "state" || level == "city"){
-        data  = theData;
-        _data = _.pluck(data, "value");
-      }
-      else{
-        return null;
-      }
-      
-
-      brew = new classyBrew();
-      brew.setSeries(_data);
-      brew.setNumClasses(7);
-      brew.setColorCode(brew.getColorCodes()[color]);
-      brew.classify('jenks');
-
-
-      return brew;
-    },
-
-
-
-
-
-    /*
      * F U N C I O N E S   D E   U I   ( P Á N E L E S ) 
      * ------------------------------------------------------------
      */
@@ -1278,6 +1206,136 @@ define(function(require){
 
         this.renderLayer(this.currentMap, true);
       }
+    },
+
+
+
+
+
+
+    /*
+     * F U N C I O N E S   D E   E S T I L O
+     * ------------------------------------------------------------
+     */
+
+    //
+    // ESTILO PARA LAS GEOMETRÍAS DE ESTADO
+    // ---------------------------------------------
+    // regresa una función que asigna el estilo para 
+    // las geometrías de estado
+    //
+    _stateStyle : function(feature){
+      var css       = Object.create(this.settings.mapGeometry);
+      css.fillColor = this.brew.getColorInRange(feature.properties.data.value);
+
+      return css;
+    },
+
+    //
+    // ESTILO PARA LAS GEOMETRÍAS EXTRAS DE ESTADO
+    // ---------------------------------------------
+    // regresa una función que asigna el estilo para 
+    // las geometrías de estado cuando se refiere a los
+    // mapas para comparar
+    //
+    _stateExtraStyle : function(feature){
+      var css       = Object.create(this.settings.extraMapGeometry);
+      css.fillColor = this.extraBrew.getColorInRange(feature.properties.data.value);
+
+      return css;
+    },
+
+    //
+    // ESTILO PARA LAS GEOMETRÍAS DE MUNICIPIO
+    // ---------------------------------------------
+    // regresa una función que asigna el estilo para 
+    // las geometrías de municipio
+    //
+    _cityStyle : function(feature){
+      var city    = this.currentData.filter(function(d){
+                      return feature.properties.state == d.state && feature.properties.city == d.city;
+                    })[0];
+      var data    = city.data, 
+          current = this.currentMap.config.current.value,
+          value   = ! city.data.length ? 0 : _.pluck(data, current).reduce(function(a, b){
+                      return Number(a) + Number(b);
+                    }, 0),
+          css     = Object.create(this.settings.mapGeometry);
+
+      css.fillColor = this.brew.getColorInRange(value);
+      return css;
+    },
+
+    //
+    // GEOMETRY/POINT COLOR FUNCTION
+    // ---------------------------------------------
+    // regresa una función que asigna el color para 
+    // las geometrías o puntos
+    //
+    _colorMixer : function(item, theData){
+      
+
+      var value = item.config.current.value,
+          level = item.config.current.level,
+          color = item.config.color || this.settings.mapGeometry.defaultColor || 1,
+          data  = null,
+          _data = null,
+          brew  = null;
+
+
+      if(level == "state" || level == "city"){
+        data  = theData;
+        _data = _.pluck(data, "value");
+      }
+      else{
+        return null;
+      }
+      
+
+      brew = new classyBrew();
+      brew.setSeries(_data);
+      brew.setNumClasses(7);
+      brew.setColorCode(brew.getColorCodes()[color]);
+      brew.classify('jenks');
+
+
+      return brew;
+    },
+
+
+
+
+
+    /*
+     * F U N C I O N E S   D E   B A R R A S   C O M P A R A T I V A S
+     * ----------------------------------------------------------------------
+     */
+    enableBarsTool : function(item){
+      var thisConf = this.settings.ui.barsTool,
+          itemConf = item.config,
+          container = document.getElementById(thisConf.container);
+
+      if(itemConf.type == "point"){
+        container.style.display = "none";
+        return;
+      }
+      else{
+        container.style.display = "block";
+      }
+
+      
+    },
+
+
+
+
+
+    /*
+     * F U N C I O N E S   D E   T A B L A   D E   B Ú S Q U E D A
+     * ----------------------------------------------------------------------
+     */
+    enableTableTool : function(item){
+
     },
 
 
