@@ -40,7 +40,7 @@
     "basePath" : "/js/config",
     "maps"     : ["sfu.map.json", "ramo23.map.json", "opa.map.json", "tomas.map.json", "gasolina.map.json", "consolidado2015.map.json"],
     "extras"   : ["poblacion.map.json"],
-    "current"  : 3
+    "current"  : 1
   },
   "ui" : {
     "topToolsDiv"    : "GF-SHCP-top-tools",
