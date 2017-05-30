@@ -20,5 +20,5 @@
   "extraFilters" : [
     {"type" : "extra", "field" : "Fondo", "title" : "Clave de programas"}
   ],
-  "template" : "<p><%=name%> : <%=value%> </p>"
+  "template" : "<p><%=name%> : <strong>$</strong> <%=value%> </p>"
 }

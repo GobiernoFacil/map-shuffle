@@ -1,0 +1,29 @@
+{
+  "name"  : "Seguimiento de Recursos de las Entidades Federativas",
+  "type"  : "point",
+  "multiple" : true,
+  "level" : [],
+  "src"   : "/js/maps/bd_ef_2017_boris.csv",
+  "file"  : "csv",
+  "style" : {
+    "fillColor" : "green",
+    "color"     : "red"
+  },
+  "location" : {
+    "lat" : "LATITUD",
+    "lng" : "LONGITUD"
+  },
+  "values"  : [],
+  "data"    : ["FOLIO","NOMBRE_PROYECTO","NUMERO_PROYECTO","ID_ENTIDAD_FEDERATIVA","ENTIDAD","ID_MUNICIPIO","MUNICIPIO","ID_LOCALIDAD","LOCALIDAD","LATITUD","LONGITUD","AMBITO","ID_RECURSO","RECURSO","CLAVE_PROGRAMA_PRESUPUESTARIO","PROGRAMA_PRESUPUESTARIO","ID_RAMO","RAMO","INSTITUCION_EJECUTORA","ID_CLASIFICACION","CLASIFICACION","ID_TIPOPPI","TIPOPPI","BENEFICIARIOS","INICIO","TERMINO","DIRECCION","ID_CONCURRENCIA_DE_RECURSOS","CONCURRENCIA","CICLO_RECURSO","AUTORIZADO /1","MODIFICADO /1","MINISTRADO /2","COMPROMETIDO /1","DEVENGADO /1","EJERCIDO /1","PAGADO /1","AVANCE_FINANCIERO","UNIDADMEDIDA","POBLACION_ANUAL","AVANCE_ESTIMADO_ANUAL","AVANCE_FISICO","ID_ESTATUS_FLUJO_VALIDACION","ESTATUS_FLUJO_VALIDACION","OBSER_FISICO_PER","KA_ESTATUS /3","DESC_ESTATUS /3"],
+  "current" : {},
+  "filters" : [
+    {"type" : "branch", "field" : "RAMO"},
+    {"type" : "state", "field" : "ENTIDAD"},
+	{"type" : "year", "field" : "CICLO_RECURSO"}
+  ],
+  "extraFilters" : [
+    {"type" : "extra", "field" : "MUNICIPIO", "title" : "Municipio"},
+    {"type" : "extra", "field" : "DESC_ESTATUS /3", "title" : "Estatus"}
+  ],
+  "template" : "<p><%=name%>:<%=monto_total_inversion%></p>"
+}

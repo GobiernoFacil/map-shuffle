@@ -22,7 +22,7 @@ donde la propiedad "data-main" debe incluir el nombre del archivo de configuraci
 ### descripción
 dentro de la carpeta "js", existe un archivo json llamado: config.map.json; este archivo de configuración sirve para definir:
 * el aspecto inicial del plugin de leaflet,
-* la fuente de datos geográficos, 
+* la fuente de dºatos geográficos, 
 * el diseño para las geometrías (estados, municipios),
 * el diseño para los puntos (cuando se muestre elementos con latitud y longitud)
 * los mapas que se ocuparan, mediante una lista de archivos de configuración,

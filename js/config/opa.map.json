@@ -22,7 +22,7 @@
     {"type" : "year", "field" : "ciclo"}
   ],
   "extraFilters" : [
-    {"type" : "extra", "field" : "classification", "title" : "Clasificación"}
+    {"type" : "extra", "field" : "classification", "title" : "pinche vic"}
   ],
-  "template" : "<p><%=name%>:<%=monto_total_inversion%></p>"
+  "template" : "<p><%=name%> xxx <%=ciclo%> : <br> <%=monto_total_inversion%></p>"
 }

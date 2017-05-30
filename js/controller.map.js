@@ -44,6 +44,8 @@ define(function(require){
       FILTERSELECTOR = require("text!templates/filter-selector-panel.html"),
       // [*] el selector de filtros
       PAGESELECTOR = require("text!templates/page-selector-panel.html"),
+      // [*] las barras de comparación
+      PAGESELECTOR = require("text!templates/page-selector-panel.html"),
 
       // [5] define las constantes internas del sistema 
       SELECTALL      = "_____",
@@ -1338,7 +1340,40 @@ define(function(require){
 
     addRegionToCompare : function(e){
       e.preventDefault();
-      console.log(":D");
+
+      var state  = document.getElementById(this.settings.ui.barsTool.stateSelector),
+          city   = document.getElementById(this.settings.ui.barsTool.citySelector),
+          list   = document.getElementById(this.settings.ui.barsTool.barsList),
+          _data  = this.currentMap.data,
+          data   = null,
+          config = this.currentMap.config,
+          states = this.lists.estadosName.states,
+          cities = this.lists.municipiosName.cities,
+          state  = null,
+          city   = null;
+      
+      if(!state.value || state.value == SELECTALL){
+        //console.log("nein");
+        return;
+      }
+      else if(state.value && city.value == SELECTALL){
+        data = _data.filter(function(d){
+          return +state.value == +d[config.location.state];
+        });
+
+        state = states.filter(function(st){
+          return +state.value == +st.id;
+        })[0];
+
+        console.log(_data, data);
+        //console.log("only state");
+      }
+
+      else{
+        //console.log("only city");
+      }
+
+      //console.log(state.value, city.value);
     },
 
     renderBarsToolStateList : function(){
