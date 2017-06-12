@@ -5,12 +5,16 @@
   "src"   : "https://mapas.gobiernofacil.com/api/consolidado2015",
   "file"  : "json",
   "api"   : true,
+  "link"  : {
+    "url"    : "http://localhost:8000/consolidado2015.html",
+    "column" : "id"
+  },
   "location" : {
     "lat" : "LATITUD",
     "lng" : "LONGITUD"
   },
   "values"  : ["PAGADO"],
-  "data"    : ["NOMBRE_PROYECTO", "PAGADO"],
+  "data"    : ["id","NOMBRE_PROYECTO", "PAGADO"],
   "current" : {},
   "filters" : [
     {"type" : "state", "field" : "ID_ENTIDAD_FEDERATIVA"},

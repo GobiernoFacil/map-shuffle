@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Consolidado 2015 test</title>
+  <link rel="stylesheet" type="text/css" href="css/leaflet.css">
+</head>
+<body>
+
+<div id="GF-error-message" style="display: none">
+  La información no está disponible
+</div>
+
+<div id="GF-content-card">
+  <!--
+  {"id":2,"CICLO":"2015","PERIODO":"1","FOLIO":"HID10130100004757","NOMBRE_PROYECTO":"Mejoramiento De La Infraestructura Y Operacion De La Mina Dificultad","NUMERO_PROYECTO":"SFDGPFONREG27215710","ID_ENTIDAD_FEDERATIVA":"13","ENTIDAD":"Hidalgo","ID_MUNICIPIO":"39","MUNICIPIO":"Mineral del Monte","ID_LOCALIDAD":"1","LOCALIDAD":"Mineral del Monte","LONGITUD":"-98.671666","LATITUD":"20.139166","AMBITO":"Urbano","ID_RECURSO":"1","RECURSO":"Subsidios","CLAVE_PROGRAMA_PRESUPUESTARIO":"U020","PROGRAMA_PRESUPUESTARIO":"Fondo Regional","ID_RAMO":"23","RAMO":"Provisiones Salariales y Econ\u0443micas","INSTITUCION_EJECUTORA":"COMISION DE AGUA Y ALCANTARILLADO DE SISTEMAS INTERMUNICIPALES","ID_CLASIFICACION":"0","CLASIFICACION":"Otros Proyectos","ID_TIPOPPI":"5","TIPOPPI":"Otros proyectos de Inversi\u0443n","BENEFICIARIOS":"45000","INICIO":"6\/27\/13","TERMINO":"5\/27\/15","DIRECCION":"-","ID_CONCURRENCIA_DE_RECURSOS":"0","CONCURRENCIA":"","CICLO_RECURSO":"2010","AUTORIZADO":"0","MODIFICADO":"2223882","MINISTRADO":"2223882","COMPROMETIDO":"2223882","DEVENGADO":"2223882","EJERCIDO":"2223882","PAGADO":"2223882","AVANCE_FINANCIERO":"100","UNIDADMEDIDA":"Metros Cuadrados","POBLACION_ANUAL":"1","AVANCE_ESTIMADO_ANUAL":"100","AVANCE_FISICO":"100","ID_ESTATUS_FLUJO_VALIDACION":"3","ESTATUS_FLUJO_VALIDACION":"VALIDADO","OBSER_FISICO_PER":"Financiera:  \/ F\u043dsica:  \/ Registro: SISTEMA: Pasa al siguiente nivel.","created_at":null,"updated_at":null} 
+  -->
+  <section>
+    <p>id : {{id}}</p>
+    <p>id : {{CICLO}}</p>
+    <p>id : {{PERIODO}}</p>
+    <p>id : {{FOLIO}}</p>
+    <p>id : {{NOMBRE_PROYECTO}}</p>
+    <p>id : {{NUMERO_PROYECTO}}</p>
+  </section>
+
+  <section>
+    <div id="GF-map-div" style="width: 500px; height: 300px;"></div>
+  </section>
+
+  <section>
+    <div id="arc_side"></div>
+  </section>
+</div>
+
+<form id = "reportForm">
+      <!-- paso 1-->
+      <fieldset id="reporte_step1" class="hide">
+        <h3>Paso 1 de 2</h3>
+        <ul class="step_n">
+          <li><a class="active"></a></li>
+          <li><a></a></li>
+        </ul>
+        <div class="row">
+          <div class="col-sm-10 col-sm-offset-1">
+            <label>Asunto del reporte</label>
+            <textarea id="asuntoReporte"></textarea>
+            <label>Narre el motivo de su reporte</label>
+            <textarea id="motivoReporte"></textarea>
+            <a class="btn more" @click="step2">Continuar &gt;</a>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- paso 2-->
+      <fieldset id="reporte_step2" class="hide">
+        <h3>Paso 2 de 2</h3>
+        <ul class="step_n">
+          <li><a class="complete"></a></li>
+          <li><a class="active"></a></li>
+        </ul>
+        <div class="row">
+          <div class="col-sm-10 col-sm-offset-1">
+            <h3>Tu denuncia puede ser anónima o puedes proporcionar tu información de contacto básica
+              para dar seguimiento a tu solicitud.</h3>
+              <p class="center"><span class="small"><span class="alert">*</span> Información necesaria </span></p>
+            <label>¿Deseas que tu denuncia sea reportada como anónima?<span class="alert">*</span></label>
+            <select id="anonymous">
+              <option value="0">No</option>
+              <option value="1">Sí</option>
+            </select>
+          </div>
+        </div>
+        <div id = "noAnonymous">
+          <div class="row">
+
+            <div class="col-sm-5 col-sm-offset-1">
+              <label>Nombre(s) <span class="alert">*</span></label>
+              <input id="name" type="text" name="name">
+            </div>
+            <div class="col-sm-5">
+              <label>Paterno <span class="alert">*</span></label>
+              <input id="surname"  type="text" name="surname">
+            </div>
+            <div class="col-sm-5 col-sm-offset-1">
+              <label>Materno</label>
+              <input id="lastname"  type="text" name="lastname">
+            </div>
+            <div class="col-sm-5">
+              <label>Género <span class="alert">*</span></label>
+              <select id="gender">
+                <option value="MUJER">Femenino</option>
+                <option value="HOMBRE">Masculino</option>
+              </select>
+            </div>
+            <div class="col-sm-5 col-sm-offset-1">
+              <label>Correo <span class="alert">*</span></label>
+              <input id="email" type="text" name="email">
+            </div>
+            <div class="col-sm-5">
+              <label>Contraseña <span class="alert">*</span></label>
+              <input id="password" type="text" name="password">
+            </div>
+          </div>
+              </div>
+          <div class="row">
+          <div class="col-sm-3 col-sm-offset-1">
+            <a class="btn more back" @click="step2">&lt; Regresar</a>
+          </div>
+          <div class="col-sm-4">
+            <input class="rpt-advance" type="submit" value="Enviar Reporte &gt;">
+          </div>
+        </div>
+      </fieldset>
+</form>
+
+<script src="js/libs/d3.v3.min.js"></script>
+<script src="js/libs/jquery-3.1.1.min.js"></script>
+<script src="js/libs/vue.min.js"></script>
+<script src="js/libs/leaflet.js"></script>
+
+<!-- config -->
+<script>
+  var GFormat          = d3.format(","),
+      GFAPIBaseURL     = "http://localhost:8001/api/consulta/consolidado2015",
+      GFErrorBlockID   = "GF-error-message",
+      GFContentBlockID = "GF-content-card",
+      GFDefaultLat     = 22.442167,
+      GFDefaultLng     = -100.110350,
+      GFLatColumn      = "LATITUD",
+      GFLngColumn      = "LONGITUD",
+      GFMapId          = "GF-map-div",
+      GFAdvanceColumn,
+
+      GFSFPappKey         = "5825343BB68F29D2A881B2E8D205B98846C95558",
+      GFSFPStatesEndpoint = "http://devretociudadano.funcionpublica.gob.mx/SidecWS/resources/quejadenuncia/obtenerEstados/2";
+
+      GFReportFields = [
+       {id : "cveReport", name : "carteraId", default : false},
+       {id : "ejecutorReport", name : "dependencia", default : false},
+       {id : "programaReport", name : "programa", default : false},
+       {id : "entidadReport", name : "entidad", default : false},
+       {id : "nameReport", name : "nombre", default : false},
+       {id : "motivoReporte", name : "motivo", default : false},
+       {id : "asuntoReporte", name : "asunto", default : false},
+       {id : null, name : "estadoId", default : 40},
+       {id : null, name : "paisId", default : "2"}
+      ];
+    
+</script>
+
+<!-- code -->
+<script>
+(function(win){
+  // Configura las vaariables necesarias
+  var hash     = window.location.hash.replace("#", ""),
+      endpoint = GFAPIBaseURL + "/" + hash,
+      contentElement, mymap, lat, lng, marker;
+
+
+// llama al api para obtener la información
+d3.json(endpoint)
+  .get(function(e, d){
+    // Si falla la conexión / no encuentra el id, muestra el
+    // Letrero de error
+    if(e){
+      document.getElementById(GFErrorBlockID).style.display = "block";
+      document.getElementById(GFContentBlockID).style.display = "none";
+      return;
+    }
+
+    // ejecuta el template con vuejs
+    contentElement = new Vue({
+      el   : "#" + GFContentBlockID,
+      data : d
+    });
+
+    // inicia el mapa
+    lat = d[GFLatColumn] ? d[GFLatColumn] : GFDefaultLat;
+    lng = d[GFLngColumn] ? d[GFLngColumn] : GFDefaultLng;
+    mymap = L.map(GFMapId).setView([lat, lng], 13);
+    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+      maxZoom: 18,
+    }).addTo(mymap);
+    // agrega un marcador al mapa
+    marker = L.marker([lat, lng]).addTo(mymap);
+
+    // dibuja el porcentaje del proyecto
+    GFMakeCircle({
+      width  : 160,
+      height : 130,
+      colorA : "rgb(190,205,81)",
+      colorB : "rgb(210,210,210)",
+      selector : "#arc_side",
+      value : "AVANCE_FINANCIERO",
+      item  : d
+    });
+
+    // obtiene la lista de estados
+    GFgetStateList();
+    // habilita los reportes
+    GFenableReports();
+  });
+})();
+</script>
+
+
+<!-- HELPER FUNCTIONS -->
+<script>
+/*
+ * HAbilita reporte ciudadano
+ *
+ */
+function GFenableReports(){
+  var reportForm  = document.getElementById("reportForm"),
+      anonymous   = document.getElementById("anonymous"),
+      noAnonymous = document.getElementById("noAnonymous"),
+      keyCode;
+
+  reportForm.addEventListener("keyup", function(e){
+    keyCode = e.keyCode || e.which;
+      if(keyCode === 13) {
+        e.preventDefault();
+        return false;
+      }
+  });
+
+  anonymous.addEventListener("change", function(e){
+    if(e.currentTarget.value == "1"){
+      noAnonymous.style.display = "none";
+    }
+    else{
+      noAnonymous.style.display = "block";
+    }
+  });
+
+  reportForm.addEventListener("submit", function(e){
+    e.preventDefault();
+
+  });
+  /*
+  
+  */
+}
+/*
+ * Gráfica circular
+ *
+ */
+function GFMakeCircle(settings){
+  var radius = Math.min(settings.width, settings.height) / 2,
+      value = +settings.item[settings.value],
+      color, arc, pie, svg, data, g;
+
+  color = d3.scale.ordinal()
+        .range([settings.colorA, settings.colorB]);
+
+  arc = d3.svg.arc()
+        .outerRadius(function(d,i) {
+          return i ? radius - 20 : radius - 10;
+       })
+        .innerRadius(function(d,i) {
+          return i ? radius - 15 : radius - 25;
+       });
+
+  pie = d3.layout.pie()
+        .sort(null)
+        .value(function(d) { return d.amount; });
+
+  svg = d3.select(settings.selector).append("svg")
+        .attr("width", settings.width)
+        .attr("height", settings.height)
+      .append("g")
+        .attr("transform", "translate(" + settings.width / 2 + "," + settings.height / 2 + ")");
+
+  data = [
+        {"amount": value },
+        {"amount": 100 - value}
+      ];
+
+  g = svg.selectAll(".arc")
+          .data(pie(data))
+        .enter().append("g")
+          .attr("class", "arc");
+
+      g.append("path")
+          .attr("d", arc)
+          .style("fill", function(d) { return color(d.data.amount); });
+
+      g.append("text")
+          .attr("transform",  "translate(-25)")
+          .attr("dy", ".35em")
+          .text(function(d, i) {
+            if(i==0) {
+             return d.data.amount + "%";
+            }
+          })
+        .attr("class", "text_arc");
+}
+
+/*
+ * Obtiene lista de estados de API de Función pública
+ *
+ */
+function GFgetStateList(){
+      //return $.ajax({
+  $.ajax({
+           beforeSend: function(xhrObj){
+                         xhrObj.setRequestHeader("app-key",GFSFPappKey);
+                       },
+           type : "GET",
+           url  : GFSFPStatesEndpoint,
+           contentType : 'application/json; charset=utf-8',
+           dataType :"json",
+           processData : false,
+           headers :{"app-key":GFSFPappKey},
+           success : function(dataSt){
+             // dataSt: json con los estados
+           }
+       });
+
+    }
+</script>
+
+</body>
+</html>
