@@ -121,7 +121,7 @@
 <!-- config -->
 <script>
   var GFormat          = d3.format(","),
-      GFAPIBaseURL     = "http://localhost:8001/api/consulta/consolidado2015",
+      GFAPIBaseURL     = "https://mapas.gobiernofacil.com/api/consulta/consolidado2015",
       GFErrorBlockID   = "GF-error-message",
       GFContentBlockID = "GF-content-card",
       GFDefaultLat     = 22.442167,
@@ -174,16 +174,8 @@ d3.json(endpoint)
       data : d
     });
 
-    // inicia el mapa
-    lat = d[GFLatColumn] ? d[GFLatColumn] : GFDefaultLat;
-    lng = d[GFLngColumn] ? d[GFLngColumn] : GFDefaultLng;
-    mymap = L.map(GFMapId).setView([lat, lng], 13);
-    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
-      maxZoom: 18,
-    }).addTo(mymap);
-    // agrega un marcador al mapa
-    marker = L.marker([lat, lng]).addTo(mymap);
+    // dibuja un mapa
+    GFAddMap(d);
 
     // dibuja el porcentaje del proyecto
     GFMakeCircle({
@@ -318,7 +310,20 @@ function GFgetStateList(){
            }
        });
 
-    }
+}
+
+function GFAddMap(d){
+  // inicia el mapa
+  var lat = d[GFLatColumn] ? d[GFLatColumn] : GFDefaultLat;
+      lng = d[GFLngColumn] ? d[GFLngColumn] : GFDefaultLng;
+    mymap = L.map(GFMapId).setView([lat, lng], 13);
+    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+      maxZoom: 18,
+    }).addTo(mymap);
+    // agrega un marcador al mapa
+    marker = L.marker([lat, lng]).addTo(mymap);
+}
 </script>
 
 </body>
