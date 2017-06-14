@@ -20,6 +20,8 @@ require.config({
 
 var GFSHCPMapApp;
 
+window.GFSHCPMapApp = GFSHCPMapApp;
+
 require(['controller.map'], function(map){ 
   GFSHCPMapApp = map;
   GFSHCPMapApp.initialize();

@@ -87,6 +87,8 @@ define(function(require){
       // * la lista de mapas extra disponibles (archivos de configuración)
       //   los mapas extra son los que se superponen a los principales
       this.extraLayersConfig = [];
+      // * la lista de localidades por comparar
+      this.compareList = [];
       // * el mapa de leaflet
       this.map          = null;
       // * la referencia al layer de leaflet de puntos
@@ -1344,28 +1346,48 @@ define(function(require){
       var state  = document.getElementById(this.settings.ui.barsTool.stateSelector),
           city   = document.getElementById(this.settings.ui.barsTool.citySelector),
           list   = document.getElementById(this.settings.ui.barsTool.barsList),
-          _data  = this.currentMap.data,
-          data   = null,
+          __data = this.currentMap.data,
+          _data  = null,
+          data   = null
           config = this.currentMap.config,
           states = this.lists.estadosName.states,
           cities = this.lists.municipiosName.cities,
-          state  = null,
-          city   = null;
+          _state = null,
+          _city  = null,
+          total  = []; 
       
       if(!state.value || state.value == SELECTALL){
         //console.log("nein");
         return;
       }
       else if(state.value && city.value == SELECTALL){
-        data = _data.filter(function(d){
+        _data = __data.filter(function(d){
           return +state.value == +d[config.location.state];
         });
 
-        state = states.filter(function(st){
+        _state = states.filter(function(st){
           return +state.value == +st.id;
         })[0];
 
-        console.log(_data, data);
+        config.values.forEach(function(col){
+          var m = {
+            name : col,
+            val  : _data.reduce(function(total, num){
+                     return +num[col] + total;
+                   }, 0)
+          }
+          total.push(m);
+        });
+
+        data = {
+          id : "s" + _state.id,
+          total : total,
+          name : _state.name
+        }
+
+        //console.log(_data, _state, config, total);
+        console.log(data);
+        this.compareList.push(data);
         //console.log("only state");
       }
 
