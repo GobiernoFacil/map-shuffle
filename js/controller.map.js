@@ -425,6 +425,7 @@ define(function(require){
 
           if(link){
             p.on("click", function(e){
+              console.log(link.column, feature.properties);
               window.open(link.url + "#" + feature.properties[link.column]);
             });
           }
