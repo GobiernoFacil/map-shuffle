@@ -105,17 +105,21 @@
 <script src="js/libs/leaflet.js"></script>
 
 <!-- helpers -->
+<script src="js/card.helpers.js"></script>
 
 <!-- config -->
 <script>
   var GFormat          = d3.format(","),
-      GFAPIBaseURL     = "https://mapas.gobiernofacil.com/api/consulta/consolidado2015",
-      GFErrorBlockID   = "GF-error-message",
-      GFContentBlockID = "GF-opa-template",
-      GFDefaultLat     = 22.442167,
-      GFDefaultLng     = -100.110350,
+      //GFAPIBaseURL     = "https://mapas.gobiernofacil.com/api/consulta/opa",
+      GFAPIBaseURL     = "http://localhost:8000/api/consulta/opa",
+      GFErrorBlockID    = "GF-error-message",
+      GFContentBlockID  = "GF-card-list-container",
+      GFTemplateBlockID = "GF-opa-template",
+      GFDefaultLat      = 22.442167,
+      GFDefaultLng      = -100.110350,
       GFSFPappKey         = "5825343BB68F29D2A881B2E8D205B98846C95558",
-      GFSFPStatesEndpoint = "http://devretociudadano.funcionpublica.gob.mx/SidecWS/resources/quejadenuncia/obtenerEstados/2";
+      GFSFPStatesEndpoint = "http://devretociudadano.funcionpublica.gob.mx/SidecWS/resources/quejadenuncia/obtenerEstados/2",
+      GFJSONDataContainer = "resultados";
 
       GFReportFields = [
        {id : "cveReport", name : "carteraId", default : false},
@@ -131,6 +135,18 @@
 </script>
 
 <!-- initialize -->
+<script>
+  // selector, container, endpoint, data, error
+  var GFSHCPConfig = {
+    container     : "#" + GFContentBlockID,
+    error         : "#" + GFErrorBlockID,
+    template      : "#" + GFTemplateBlockID,
+    endpoint      : GFAPIBaseURL,
+    dataContainer : GFJSONDataContainer
+  };
+
+  GFSHCPHelpers.initialize(GFSHCPConfig);
+</script>
 
 </body>
 </html>
