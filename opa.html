@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OPA (sin diseño)</title>
+  <link rel="stylesheet" type="text/css" href="css/leaflet.css">
+</head>
+<body>
+
+<!-- MENSAJE DE ERROR -->
+<div id="GF-error-message" style="display: none">
+  La información no está disponible
+</div>
+
+
+
+
+<!-- TEMPLATE (Esto se copia para cada proyecto recibido)-->
+<div id="GF-opa-template" style="display: none">
+  <section>
+    <p>id : {{cve_ppi}}</p>
+    <p>id : {{nombre}}</p>
+    <p>id : {{ramo}}</p>
+    <p>id : {{desc_ramo}}</p>
+    <p>id : {{unidad}}</p>
+    <p>id : {{desc_unidad}}</p>
+    <p>id : {{tipo_ppi}}</p>
+    <p>id : {{descripcion}}</p>
+  </section>
+
+  <section>
+    <p>id : {{localizacion}}</p>
+    <p>id : {{cve_entfed}}</p>
+    <p>id : {{ent_fed}}</p>
+    <div class="GF-SHCP-map" data-lat="latitud_inicial" data-lng="longitud_inicial"></div>
+  </section>
+
+  <section>
+    <p>id : {{fecha_ini_cal_fiscal}}</p>
+    <p>id : {{fecha_fin_cal_fiscal}}</p>
+    <p>id : {{fecha_ini_ff}}</p>
+    <p>id : {{fecha_fin_ff}}</p>
+    <p>id : {{anios_he}}</p>
+  </section>
+
+  <section>
+    <p>id : {{nombre_admin}}</p>
+    <p>id : {{ap_materno_admin}}</p>
+    <p>id : {{cargo_admin}}</p>
+    <p>id : {{mail_admin}}</p>
+    <p>id : {{telefono_admin}}</p>
+  </section>
+
+  <section>
+    <p>id : {{meta_fisica}}</p>
+    <p>id : {{meta_beneficios}}</p>
+    <p>id : {{id_ppi}}</p>
+  </section>
+
+  <section>
+    <p>id : {{aprobado}}</p>
+    <p>id : {{modificado}}</p>
+    <p>id : {{ejercido}}</p>
+    <p>id : {{avance_fisico}}</p>
+  </section>
+
+  <section>
+    <p>id : {{grupo_funcional}}</p>
+    <p>id : {{funcion}}</p>
+    <p>id : {{monto_total_inversion}}</p>
+    <p>id : {{total_gasto_operacion_he}}</p>
+    <p>id : {{total_gasto_no_consid}}</p>
+    <p>id : {{costo_total_ppi}}</p>
+  </section>
+
+  <section>
+    <p>id : {{anio}}</p>
+    <p>id : {{monto_asigautact}}</p>
+    <p>id : {{recursos_estatales}}</p>
+    <p>id : {{recursos_municipales}}</p>
+    <p>id : {{privados}}</p>
+    <p>id : {{fideicomiso}}</p>
+    <p>id : {{ciclo}}</p>
+  </section>
+
+  <section>
+    <p>id : {{desc_clas_ciudadana}}</p>
+    <p>id : {{fase}}</p>
+  </section>
+
+  <section>
+    <ul class="GF-SHCP-images" data-list="urlimages"></ul>
+  </section>
+
+
+</div>
+
+<!-- Aquí se crearán todas las fichas -->
+<div id="GF-card-list-container">
+  
+</div>
+<!-- libs -->
+<script src="js/libs/d3.v3.min.js"></script>
+<script src="js/libs/jquery-3.1.1.min.js"></script>
+<script src="js/libs/vue.min.js"></script>
+<script src="js/libs/leaflet.js"></script>
+
+<!-- helpers -->
+<script src="js/card.helpers.js"></script>
+
+<!-- config -->
+<script>
+  var GFormat          = d3.format(","),
+      //GFAPIBaseURL     = "https://mapas.gobiernofacil.com/api/consulta/opa",
+      GFAPIBaseURL     = "http://localhost:8000/api/consulta/opa",
+      GFErrorBlockID    = "GF-error-message",
+      GFContentBlockID  = "GF-card-list-container",
+      GFTemplateBlockID = "GF-opa-template",
+      GFDefaultLat      = 22.442167,
+      GFDefaultLng      = -100.110350,
+      GFSFPappKey         = "5825343BB68F29D2A881B2E8D205B98846C95558",
+      GFSFPStatesEndpoint = "http://devretociudadano.funcionpublica.gob.mx/SidecWS/resources/quejadenuncia/obtenerEstados/2",
+      GFJSONDataContainer = "resultados";
+
+      GFReportFields = [
+       {id : "cveReport", name : "carteraId", default : false},
+       {id : "ejecutorReport", name : "dependencia", default : false},
+       {id : "programaReport", name : "programa", default : false},
+       {id : "entidadReport", name : "entidad", default : false},
+       {id : "nameReport", name : "nombre", default : false},
+       {id : "motivoReporte", name : "motivo", default : false},
+       {id : "asuntoReporte", name : "asunto", default : false},
+       {id : null, name : "estadoId", default : 40},
+       {id : null, name : "paisId", default : "2"}
+      ];
+</script>
+
+<!-- initialize -->
+<script>
+  // selector, container, endpoint, data, error
+  var GFSHCPConfig = {
+    container     : "#" + GFContentBlockID,
+    error         : "#" + GFErrorBlockID,
+    template      : "#" + GFTemplateBlockID,
+    endpoint      : GFAPIBaseURL,
+    dataContainer : GFJSONDataContainer
+  };
+
+  GFSHCPHelpers.initialize(GFSHCPConfig);
+</script>
+
+</body>
+</html>

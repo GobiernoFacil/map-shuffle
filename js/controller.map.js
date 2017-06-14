@@ -162,7 +162,34 @@ define(function(require){
       this.loadMapsConfig();
       // * la configuración de los mapas extra (para comparar)
       this.loadExtraMapsConfig();
+
+      // [7] HABILITA EL GEOLOCALIZADOR Y LA OBTENCIÓN DE LAS COORDENADAS DEL USUARIO
+      this.enableUserLocation();
     },
+
+
+
+
+
+    /*
+     * F U N C I O N E S   S O P O R T E
+     * ------------------------------------------------------------
+     */
+    enableUserLocation : function(){
+
+      if(navigator.geolocation){
+        console.log("yei");
+        navigator.geolocation.getCurrentPosition(this.goToUserLocation);
+      }
+      else{
+        console.log("nope");
+      }
+    },
+
+    goToUserLocation : function(position){
+      console.log(position);
+    },
+
 
 
 
@@ -376,7 +403,8 @@ define(function(require){
           points = this._makeGeojson(item),
           t      = _.template(item.config.template),
           style  = that.settings.mapPoint,
-          _style = item.config.style;
+          _style = item.config.style,
+          link   = item.config.link;
 
       if(_style){
         for(var prop in _style){
@@ -396,6 +424,13 @@ define(function(require){
                 .setContent(t(feature.properties))
                 .openOn(that.map);
           });
+
+          if(link){
+            p.on("click", function(e){
+              console.log(link.column, feature.properties);
+              window.open(link.url + "#" + feature.properties[link.column]);
+            });
+          }
           return p;
         }
       }).addTo(this.map);
@@ -779,6 +814,7 @@ define(function(require){
      * F U N C I O N E S   D E   U I   ( P Á N E L E S ) 
      * ------------------------------------------------------------
      */
+
 
     //
     // EL PANEL DE SELECTOR DE MAPA

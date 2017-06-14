@@ -40,7 +40,7 @@
     "basePath" : "/js/config",
     "maps"     : ["ef.map.json", "sfu.map.json", "ramo23.map.json", "opa.map.json", "tomas.map.json", "gasolina.map.json", "consolidado2015.map.json"],
     "extras"   : ["poblacion.map.json"],
-    "current"  : 2
+    "current"  : 6
   },
   "ui" : {
     "topToolsDiv"    : "GF-SHCP-top-tools",
@@ -87,6 +87,9 @@
       "stateSelector" : "GF-SHCP-bars-tool-state-selector",
       "citySelector"  : "GF-SHCP-bars-tool-city-selector",
       "barsList"      : "GF-SHCP-bars-tool-list"
-    }
+    },
+    "geolocationBtn"   : "GF-SHCP-geolocate-user",
+    "geolocationForm"  : "GF-SHCP-geolocation-form",
+    "geolocationField" : "GF-SHCP-geolocation-input"
   }
 }

@@ -5,6 +5,10 @@
   "level" : [],
   "src"   : "/js/maps/opa.csv",
   "file"  : "csv",
+  "link"  : {
+    "url"    : "http://localhost:8001/opa.html",
+    "column" : "key"
+  },
   "style" : {
     "fillColor" : "green",
     "color"     : "red"
