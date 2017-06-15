@@ -1,45 +1,446 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <title>OPA (sin diseño)</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{{ nombre }}</title>
+  <meta name="description" v-bind:content="descripcion">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/styles.css"/>
   <link rel="stylesheet" type="text/css" href="css/leaflet.css">
+  <script src="js/modernizr.custom.js"></script>
 </head>
-<body>
 
+<body class="record">
 <!-- MENSAJE DE ERROR -->
 <div id="GF-error-message" style="display: none">
   La información no está disponible
 </div>
 
+<!-- header-->
+<div class="col-sm-3 zero">
+  <header class="top">
+   <a class="tp">Transparencia Presupuestaria</a>
+  </header>
+</div>
+<div class="col-sm-9 zero">
+  <header class="top title_side">
+    <a href="http://www.transparenciapresupuestaria.gob.mx/en/PTP/Obra_Publica_Abierta" class="link_back">&lt; Ir a Mapa de Obra Pública</a>
+  </header>
+</div>
+<div class="clearfix"></div>
 
+<!--content-->
+<div class="container">
+
+	<!-- chupar faros………-->
+	<div id="chupar-faros" style="display: none;">
+	    <section>
+			<div class="row">
+	    		<div class="col-sm-10 col-sm-offset-1">
+	    			<h1>Lo sentimos, algo falló en nuestro sitio</h1>
+	    			<h2>¿Qué pudo fallar?</h2>
+	    			<ol>
+	  		  		<li>Algo técnico falló</li>
+	  		  		<li>El enlace pudo ser viejo y no se encuentra en el sitio</li>
+	  		  		<li>Accidentalmente escribiste mal la dirección URL </li>
+	    			</ol>
+	    			<h2>¿Qué puedes hacer?</h2>
+	    			<p>Puedes consultar esta página más tarde, o intentar escribir la URL otra vez.</p>
+	    			<p>O puedes regresar al mapa de <a href="http://www.transparenciapresupuestaria.gob.mx/en/PTP/Obra_Publica_Abierta" class="link_back">Obra Pública</a>.</p>
+	    		</div>
+			</div>
+	    </section>
+	</div>
 
 
 <!-- TEMPLATE (Esto se copia para cada proyecto recibido)-->
 <div id="GF-opa-template" style="display: none">
+	<!--sección encabezado-->
+	<section class="GF-card">
+    <!--titles -->
+    <div class="row">
+      <div class="col-md-10 col-sm-9">
+        <div class="row">
+          <div class="col-sm-6">
+            <h3>Programa o Proyecto de Inversión
+              <!--tooltip-->
+              <span class="tooltip">
+                <span class="tooltip-item">(PPI) <b>?</b></span>
+                <span class="tooltip-content clearfix">
+                  <span class="tooltip-text"><strong>Programa o Proyecto de Inversión,</strong> es el nombre del programa o proyecto de inversión establecido por cada unidad responsable, que lo identifica claramente.</span>
+                </span>
+              </span>
+            </h3>
+          </div>
+          <!--- clave de cartera-->
+          <div class="col-sm-6">
+            <h3 class="right">Clave de Cartera: <span id="cveReport">{{cve_ppi}}</span></h3>
+          </div>
+        </div>
+        <h1 id ="nameReport">{{nombre}}</h1>
+        <div class="row">
+          <div class="col-md-10 col-sm-9">
+            <p>{{descripcion}}</p>
+          </div>
+          <div class="col-md-2 col-sm-3">
+	        <div v-if="fase == 'Vigente'">
+           	 <h3 class="right">Fase: <span class="active">{{fase}}</span></h3>
+	        </div>
+            <div v-else>
+	            <h3 class="right">Fase: <span class="disabled">{{fase}}</span></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--avance fisico-->
+      <div id="arc_side" class="col-md-2 col-sm-3 side">
+        <h3>Avance Físico Total</h3>
+      </div>
+    </div>
+
+    <!--mapa y montos-->
+    <div class="row">
+      <div class="col-md-9 col-sm-8">
+        <div class="row">
+          <!-- Ramo-->
+          <div class="col-md-4 col-sm-7">
+            <h3 class="title line">
+              <!--tooltip-->
+              <span class="tooltip">
+                <span class="tooltip-item">Ramo <b>?</b></span>
+                <span class="tooltip-content clearfix">
+                  <span class="tooltip-text"><strong>Ramo</strong>. Categoría administrativa a la que pertenece el programa presupuestario, de acuerdo con la estructura programática del PEF vigente</span>
+                </span>
+              </span>
+
+
+            </h3>
+            <p class="fichas_ramo"><b v-bind:class="['ramo' + ramo,]"></b>{{ramo}} - {{desc_ramo}}</p>
+          </div>
+          <!-- Ejecutor-->
+          <div class="col-md-4 col-sm-5">
+            <h3 class="title line">Ejecutor del Proyecto</h3>
+            <p id = "ejecutorReport">{{unidad}} - {{desc_unidad}}</p>
+          </div>
+          <!-- Tipo de proyecto-->
+          <div class="col-md-4 col-sm-12">
+            <h3 class="title line">
+              <!--tooltip-->
+              <span class="tooltip">
+                <span class="tooltip-item">Tipo de Proyecto <b>?</b></span>
+                <span class="tooltip-content clearfix">
+                  <span class="tooltip-text">Descripción del tipo de programa o proyecto de inversión a ejecutar, de acuerdo con su finalidad y función</span>
+                </span>
+              </span>
+            </h3>
+            <p>{{ tipo_ppi }}</p>
+          </div>
+        </div>
+
+        <!--mapa-->
+        <!--<iframe width="100%" height="350px" frameborder="0" scrolling="no" v-bind:src="map_src"></iframe>-->
+        <div id="GF-SHCP-map" style="width:100%; height:350px; frameborder:0; scrolling:no;"></div>
+
+        <div class="info location">
+          <div class="row">
+	        <!--programa-->
+          	<div class="col-md-4 col-sm-12">
+              <h3 class="title">Programa Presupuestario</h3>
+              <ul id="GF-SHCP-links"></ul>
+            </div>
+            <div class="col-md-8  col-sm-12">
+            	<div class="row">
+			    <!--localizacion-->
+			   <div class="col-sm-12">
+			     <h3 class="title">Localización</h3>
+			     <p>{{localizacion}}</p>
+			   </div>
+
+            	<!---entidad-->
+          		<div class="col-md-6 col-sm-12">
+            	  <h3 class="title">Entidad Federativa</h3>
+            	  <p id="entidadReport">	{{ent_fed}}</p>
+            	</div>
+            	<!---coordenadas---->
+          		<div class="col-md-6 col-sm-12">
+            	  <h3 class="title">Coordenadas Geográficas</h3>
+            	  <p>Latitud: {{latitud_inicial}} <br> Longitud: {{longitud_inicial}}</p>
+            	</div>
+            	</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-4 side">
+        <!-- monto total-->
+        <h3>
+          <!--tooltip-->
+          <span class="tooltip">
+            <span class="tooltip-item">Monto total de inversión <b>?</b></span>
+            <span class="tooltip-content clearfix">
+              <span class="tooltip-text">La suma de la totalidad de recursos destinados a la ejecución de un programa o proyecto de inversión, incluyendo los recursos fiscales y los recursos que se obtienen de otras fuentes de financiamiento</span>
+            </span>
+          </span>
+        </h3>
+        <p class="amount big right">$<strong>{{GFormat(monto_total_inversion)}}</strong> <span>MXN</span></p>
+        <div class="bar">
+          <span class="bar inside total"></span>
+        </div>
+		
+		
+		<div v-if="aprobado != null">
+       		<!-- pef-->
+       		<h3>Presupuesto aprobado en el PEF 2017</h3>
+       		<p class="amount right">$<strong>{{GFormat(aprobado)}}</strong> <span>MXN</span></p>
+       		<div class="bar">
+       		</div>
+		</div>
+		
+		<div v-if="ejercido != null">
+        	<!-- ejercido-->
+        	<h3>Monto ejercido 2017</h3>
+        	<p class="amount right">$<strong>{{GFormat(ejercido)}}</strong> <span>MXN</span></p>
+        	<div class="bar">
+        	</div>
+        </div>
+		
+		<div v-if="modificado != null">
+        	<!-- modificado-->
+        	<h3>Presupuesto modificado 2017</h3>
+        	<p class="amount right">$<strong>{{GFormat(modificado)}}</strong> <span>MXN</span></p>
+        	<div class="bar">
+        	</div>
+		</div>
+		
+        <!-- reporta obra-->
+        <button id="show-modal" @click="showModal = true" class="btn report trigger">Reporta esta obra</button>
+
+      </div>
+    </div>
+  </section>
+	
+	<!--operación-->
+  <section class="GF-card">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2>Datos sobre la etapa de operación</h2>
+      </div>
+      <!--años-->
+      <div class="col-sm-3">
+        <p class="amount"><strong>{{anios_he}}</strong> años</p>
+        <p class="lead">Número estimado de años de operación en el horizonte de evaluación
+          <!--tooltip-->
+          <span class="tooltip">
+            <span class="tooltip-item"><b>?</b></span>
+            <span class="tooltip-content clearfix">
+              <span class="tooltip-text">Período que comprende tanto la etapa de ejecución como de operación de un programa o proyecto de inversión</span>
+            </span>
+          </span>
+        </p>
+      </div>
+      <!--gastos-->
+      <div class="col-sm-3">
+        <p class="amount">$<strong>{{GFormat(total_gasto_operacion_he)}}</strong></p>
+        <p class="lead">Gastos estimados totales de mantenimiento y operación del activo en el horizonte de evaluación
+	      <!--tooltip-->
+          <span class="tooltip">
+            <span class="tooltip-item"><b>?</b></span>
+            <span class="tooltip-content clearfix">
+              <span class="tooltip-text">Monto estimado global de recursos que se requerirán para el funcionamiento adecuado de los activos derivados de un programa o proyecto de inversión</span>
+            </span>
+          </span>
+        </p>
+      </div>
+      <!--otros costos-->
+      <div class="col-sm-3">
+        <p class="amount">${{GFormat(total_gasto_no_consid)}}</p>
+        <p class="lead">Otros costos y gastos asociados al PPI que no forman parte del gasto de inversión ni de los gastos de operación y mantenimiento
+	      <!--tooltip-->
+          <span class="tooltip">
+            <span class="tooltip-item"><b>?</b></span>
+            <span class="tooltip-content clearfix">
+              <span class="tooltip-text">Monto estimado de recursos asociados a la ejecución del programa o proyecto de inversión distintos a los gastos de inversión, operación y mantenimiento</span>
+            </span>
+          </span>
+        </p>
+      </div>
+      <!--costo total-->
+      <div class="col-sm-3">
+        <p class="amount">$<strong>{{GFormat(costo_total_ppi)}}</strong></p>
+        <p class="lead">Costo Total del PPI
+	        <!--tooltip-->
+          <span class="tooltip">
+            <span class="tooltip-item"><b>?</b></span>
+            <span class="tooltip-content clearfix">
+              <span class="tooltip-text">La suma del monto total de inversión, los gastos estimados de operación y mantenimiento, y los otros costos y gastos asociados</span>
+            </span>
+          </span>
+        </p>
+      </div>
+    </div>
+  </section>
+	
+	
+	<!--metas -->
+  <section class="GF-card">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2>Metas</h2>
+      </div>
+      <!--física-->
+      <div class="col-sm-6">
+        <h3 class="title">
+          <!--tooltip-->
+          <span class="tooltip">
+            <span class="tooltip-item">Meta Física <b>?</b></span>
+            <span class="tooltip-content clearfix">
+              <span class="tooltip-text">La producción de bienes y servicios que se pretenden alcanzar con el programa o proyecto de inversión</span>
+            </span>
+          </span>
+        </h3>
+        <p>{{meta_fisica}}</p>
+      </div>
+      <!--física-->
+      <div class="col-sm-6">
+        <h3 class="title">
+
+          <!--tooltip-->
+          <span class="tooltip">
+            <span class="tooltip-item">Beneficios esperados del PPI <b>?</b></span>
+            <span class="tooltip-content clearfix">
+              <span class="tooltip-text">Efectos favorables que se generarían sobre la población o para el país como resultado del programa o proyecto de inversión</span>
+            </span>
+          </span>
+        </h3>
+        <p>{{meta_beneficios}}</p>
+      </div>
+    </div>
+  </section>
+  
+  
+    <!--calendario fiscal-->
+  <section class="GF-card">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2>Calendario Fiscal
+          <!--tooltip-->
+          <span class="tooltip">
+            <span class="tooltip-item"> <b>?</b> <span class="h2title">Calendario Fiscal</span></span>
+            <span class="tooltip-content clearfix">
+              <span class="tooltip-text">Monto máximo de recursos programados por la dependencia para ejercer durante el año. Se diferencia del aprobado porque no depende de sus capacidades de pago sino de estimaciones propias de la dependencia.</span>
+            </span>
+          </span>
+        </h2>
+      </div>
+      <!--inicio-->
+      <div class="col-sm-4">
+        <h3>Fecha de inicio de inversión:</h3>
+        <p>{{fecha_ini_cal_fiscal}}</p>
+      </div>
+      <!--término-->
+      <div class="col-sm-4">
+        <h3>Fecha de término de inversión:</h3>
+        <p>{{fecha_fin_cal_fiscal}}</p>
+      </div>
+      <!--total-->
+      <div class="col-sm-4">
+        <h3>Monto total de inversión:</h3>
+        <p>${{GFormat(monto_total_inversion)}}</p>
+      </div>
+    </div>
+  </section>
+	
+	
+	 <!--otras fuentes-->
+  <section class="GF-card">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2>Otras fuentes de financiamiento</h2>
+       <!--<p>No se ha reportado información sobre otras fuentes de financiamiento de este PPI.</p>-->
+      </div>
+      <!--recursos estatales-->
+      <div class="col-sm-3">
+	      <h3>Recursos Estatales</h3>
+		  <p class="amount" v-if="recursos_estatales">$<strong>{{GFormat(recursos_estatales)}}</strong></p>
+		  <p class="amount" v-else>$<strong>{{GFormat(0)}}</strong></p>
+      </div>
+      <!--recursos municipales-->
+      <div class="col-sm-3">
+	      <h3>Recursos Municipales</h3>
+		  <p class="amount" v-if="recursos_municipales">$<strong>{{GFormat(recursos_municipales)}}</strong></p>
+		  <p class="amount" v-else>$<strong>{{GFormat(0)}}</strong></p>
+      </div>
+	  <!--privados-->
+      <div class="col-sm-3">
+	      <h3>Recursos Privados</h3>
+		  <p class="amount" v-if="privados">$<strong>{{GFormat(privados)}}</strong></p>
+		  <p class="amount" v-else>$<strong>{{GFormat(0)}}</strong></p>
+      </div>
+	  <!--fideicomiso-->
+      <div class="col-sm-3">
+	      <h3>Fideicomiso</h3>
+		  <p class="amount" v-if="fideicomiso">$<strong>{{GFormat(fideicomiso)}}</strong></p>
+		  <p class="amount" v-else>$<strong>{{GFormat(0)}}</strong></p>
+      </div>
+    </div>
+  </section>
+	
+	
+	  <!--responsable---------->
+  <section class="GF-card">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2>Responsable</h2>
+        <table class="table">
+          <thead>
+            <th>Nombre</th>
+            <th>Apellido Paterno</th>
+            <th>Apellido  Materno </th>
+            <th>Cargo       </th>
+            <th>Correo electrónico  </th>
+            <th>Teléfono      </th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{nombre_admin}}              </td>
+              <td>{{ap_paterno_admin}}            </td>
+              <td>{{ap_materno_admin}}               </td>
+              <td>{{cargo_admin}}             </td>
+              <td>{{mail_admin}}</td>
+              <td>{{telefono_admin}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+	<!--
   <section>
-    <p>id : {{cve_ppi}}</p>
-    <p>id : {{nombre}}</p>
-    <p>id : {{ramo}}</p>
-    <p>id : {{desc_ramo}}</p>
-    <p>id : {{unidad}}</p>
-    <p>id : {{desc_unidad}}</p>
-    <p>id : {{tipo_ppi}}</p>
-    <p>id : {{descripcion}}</p>
+    <p>cve_ppi : {{cve_ppi}}</p>
+    <p>nombre : {{nombre}}</p>
+    <p>ramo : {{ramo}}</p>
+    <p>desc_ramo : {{desc_ramo}}</p>
+    <p>unidad : {{unidad}}</p>
+    <p>desc_unidad : {{desc_unidad}}</p>
+    <p>tipo_ppi : {{tipo_ppi}}</p>
+    <p>descripcion : {{descripcion}}</p>
   </section>
 
   <section>
-    <p>id : {{localizacion}}</p>
-    <p>id : {{cve_entfed}}</p>
-    <p>id : {{ent_fed}}</p>
+    <p>localizacion : {{localizacion}}</p>
+    <p>cve_entfed : {{cve_entfed}}</p>
+    <p>ent_fed : {{ent_fed}}</p>
     <div class="GF-SHCP-map" data-lat="latitud_inicial" data-lng="longitud_inicial"></div>
   </section>
 
   <section>
-    <p>id : {{fecha_ini_cal_fiscal}}</p>
-    <p>id : {{fecha_fin_cal_fiscal}}</p>
-    <p>id : {{fecha_ini_ff}}</p>
-    <p>id : {{fecha_fin_ff}}</p>
-    <p>id : {{anios_he}}</p>
+    <p>fecha_ini_cal_fiscal : {{fecha_ini_cal_fiscal}}</p>
+    <p>fecha_fin_cal_fiscal : {{fecha_fin_cal_fiscal}}</p>
+    <p>fecha_ini_ff : {{fecha_ini_ff}}</p>
+    <p>fecha_fin_ff : {{fecha_fin_ff}}</p>
+    <p>anios_he : {{anios_he}}</p>
   </section>
 
   <section>
@@ -78,6 +479,7 @@
       item  : d
     });
     -->
+    <!--
   </section>
 
   <section>
@@ -100,10 +502,10 @@
   </section>
 
   <section>
-    <p>id : {{desc_clas_ciudadana}}</p>
+    <p>desc_clas_ciudadana : {{desc_clas_ciudadana}}</p>
     <p>id : {{fase}}</p>
   </section>
-
+-->
   <section>
     <ul class="GF-SHCP-images" data-list="urlimages"></ul>
   </section>
@@ -115,6 +517,65 @@
 <div id="GF-card-list-container">
   
 </div>
+</div>
+
+
+  <!--footer------->
+  <footer>
+    <div class="container">
+      <div class="content">
+        <div class="row">
+          <div class="col-sm-4">
+            <h3>Contacto</h3>
+             <p class="data">Palacio Nacional <br>
+               Plaza de la Constitución s/n<br>
+               Colonia Centro, Delegación Cuauhtémoc<br>
+               México, Ciudad de México</p>
+          </div>
+
+          <div class="col-sm-4">
+            <ul>
+              <li><a class="linksfoot" href="/es/PTP/Glosario">Glosario</a></li>
+              <li><a class="linksfoot" href="/es/PTP/Mapa_de_Sitio">Mapa de sitio</a></li>
+              <li><a class="linksfoot" href="/es/PTP/Estadisticas">Estadísticas del Portal</a></li>
+            </ul>
+            <ul>
+              <!--fb-->
+              <li><a href="http://www.facebook.com/TransparenciaPresupuestaria" class="fb" target="_blank">Facebook</a></li>
+              <!--tw-->
+              <li><a href="//twitter.com/TPresupuestaria" class="tw" target="_blank">Twitter</a></li>                 <!--youtube-->
+              <li> <a href="http://www.youtube.com/channel/UCokAhIwndny0k2ROksI-qqg?sub_confirmation=1" class="youtube" title="Youtube" target="_blank">Youtube</a>
+              </li>
+              <li> <a href="mailto:trans_presupuestaria@hacienda.gob.mx" target="_blank" class="email" title="trans_presupuestaria@hacienda.gob.mx">Email</a></li>
+            </ul>
+          </div>
+
+          <div class="col-sm-4 right">
+            <h3>Última actualización:</h3>
+             <p class="data">Jueves 1 de diciembre de 2016 a las 14:25 hrs.</p>
+             <p class="right"><a href="http://www.hacienda.gob.mx" class="shcp">Secretaría de Hacienda y Crédito Público</a><span class="clearfix"></span></p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="author">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4">
+            <p class="data"><a href="http://www.transparenciapresupuestaria.gob.mx/" class="tp">Transparencia Presupuestaria</a> <a href="#" class="linksfoot">Términos y Condiciones del uso de la información.</a></p>
+          </div>
+          <div class="col-sm-4">
+            <p class="data center">Forjado artesanalmente por <a href="http://www.gobiernofacil.com" class="gobiernofacil" title="Ir a Gobierno Fácil">Gobierno Fácil</a></p>
+          </div>
+          <div class="col-sm-4">
+            <p class="data right"><span class="usaid">USAID</span></p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 <!-- libs -->
 <script src="js/libs/d3.v3.min.js"></script>
 <script src="js/libs/jquery-3.1.1.min.js"></script>
