@@ -61,6 +61,23 @@
     <p>id : {{modificado}}</p>
     <p>id : {{ejercido}}</p>
     <p>id : {{avance_fisico}}</p>
+    <div class="GF-SHCP-circle"
+         data-width="160"
+         data-height="130"
+         data-color-a="rgb(190,205,81)"
+         data-color-b="rgb(210,210,210)"
+         data-column="avance_fisico"></div>
+    <!--
+    GFMakeCircle({
+      width  : 160,
+      height : 130,
+      colorA : "rgb(190,205,81)",
+      colorB : "rgb(210,210,210)",
+      selector : "#arc_side",
+      value : "AVANCE_FINANCIERO",
+      item  : d
+    });
+    -->
   </section>
 
   <section>
@@ -119,7 +136,8 @@
       GFDefaultLng      = -100.110350,
       GFSFPappKey         = "5825343BB68F29D2A881B2E8D205B98846C95558",
       GFSFPStatesEndpoint = "http://devretociudadano.funcionpublica.gob.mx/SidecWS/resources/quejadenuncia/obtenerEstados/2",
-      GFJSONDataContainer = "resultados";
+      GFJSONDataContainer = "resultados",
+      GFCircleClass       = "GF-SHCP-circle";
 
       GFReportFields = [
        {id : "cveReport", name : "carteraId", default : false},
@@ -142,7 +160,8 @@
     error         : "#" + GFErrorBlockID,
     template      : "#" + GFTemplateBlockID,
     endpoint      : GFAPIBaseURL,
-    dataContainer : GFJSONDataContainer
+    dataContainer : GFJSONDataContainer,
+    circleClass   : "." + GFCircleClass
   };
 
   GFSHCPHelpers.initialize(GFSHCPConfig);

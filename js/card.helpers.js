@@ -11,7 +11,9 @@
           error     = document.querySelector(config.error),
           that      = this;
 
+
       this.vueTemplates = [];
+      this.config = config;
 
       //this.render = this.render.bind(this);
 
@@ -27,6 +29,7 @@
       },
 
       render : function(data, container, template){
+        console.log(this);
         data.forEach(function(d){
           var div = document.createElement("div"),
               vue;
@@ -39,11 +42,16 @@
             data : d
           });
 
+          this.renderCircle(div, d, this.config.circleClass);
+          // function(el, data, className){
+
+
+
           //console.log(this, this.vueTemplates);
 
           //this.vueTemplates.push(vue);
 
-        });
+        }, this);
       },
 
       /*
@@ -111,7 +119,74 @@ d3.json(endpoint)
     }).addTo(mymap);
     // agrega un marcador al mapa
     marker = L.marker([lat, lng]).addTo(mymap);
+    },
+
+    renderCircle : function(el, data, className){
+      //var radius = Math.min(settings.width, settings.height) / 2,
+      var divs = el.querySelectorAll(className),
+          num  = divs.length;
+          //value = +this.settings.item[this.settings.value],
+          //color, arc, pie, svg, data, g;
+
+      if(!num){
+        return;
+      }
+
+      divs = Array.prototype.slice.apply(divs);
+      //console.log(divs);
     }
+    /*
+    GFMakeCircle(settings){
+  var radius = Math.min(settings.width, settings.height) / 2,
+      value = +settings.item[settings.value],
+      color, arc, pie, svg, data, g;
+
+  color = d3.scale.ordinal()
+        .range([settings.colorA, settings.colorB]);
+
+  arc = d3.svg.arc()
+        .outerRadius(function(d,i) {
+          return i ? radius - 20 : radius - 10;
+       })
+        .innerRadius(function(d,i) {
+          return i ? radius - 15 : radius - 25;
+       });
+
+  pie = d3.layout.pie()
+        .sort(null)
+        .value(function(d) { return d.amount; });
+
+  svg = d3.select(settings.selector).append("svg")
+        .attr("width", settings.width)
+        .attr("height", settings.height)
+      .append("g")
+        .attr("transform", "translate(" + settings.width / 2 + "," + settings.height / 2 + ")");
+
+  data = [
+        {"amount": value },
+        {"amount": 100 - value}
+      ];
+
+  g = svg.selectAll(".arc")
+          .data(pie(data))
+        .enter().append("g")
+          .attr("class", "arc");
+
+      g.append("path")
+          .attr("d", arc)
+          .style("fill", function(d) { return color(d.data.amount); });
+
+      g.append("text")
+          .attr("transform",  "translate(-25)")
+          .attr("dy", ".35em")
+          .text(function(d, i) {
+            if(i==0) {
+             return d.data.amount + "%";
+            }
+          })
+        .attr("class", "text_arc");
+}
+    */
   }
 
   window.GFSHCPHelpers = GFSHCPHelpers;
