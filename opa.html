@@ -517,6 +517,192 @@
 <div id="GF-card-list-container">
   
 </div>
+
+
+  <!-- reportar-->
+  <section class="GF-card">
+    <div class="row">
+      <div class="col-sm-12">
+       <!-- <p class="update right">Información actualizada al primer trimestre de 2016</p>-->
+      </div>
+      <div class="col-sm-12">
+        <a id="red" class="btn report large trigger" @click="showModal = true" data-dialog="somedialog">Reporta esta Obra</a>
+      </div>
+    </div>
+    <!-- modal -->
+	  <modal v-if="showModal" @close="showModal = false">
+	  <!-- content-->
+	  <h2 slot="header">Reporta esta obra</h2>
+
+	  <div class="dialog-container" slot="body">
+
+		<div id="reporte_step0">
+		  <p slot="header">Realiza tu reporte ciudadano para este proyecto:</p>
+     	<div class="row">
+        	<div class="col-sm-4">
+        	  <a class="btn_type" @click="step1">
+        	    <span class="btn-content">No coincide el avance físico  que aparece en el PTP con el que ves en la obra</span>
+        	    <span class="btn-symbol">Reportar</span>
+        	  </a>
+        	</div>
+        	<div class="col-sm-4">
+        	  <a class="btn_type" @click="step1">
+        	    <span class="btn-content">La obra ha sido abandonada</span>
+        	    <span class="btn-symbol">Reportar</span>
+        	  </a>
+        	</div>
+        	<div class="col-sm-4">
+        	  <a class="btn_type" @click="step1">
+        	    <span class="btn-content">Existe un error en la localización</span>
+        	    <span class="btn-symbol">Reportar</span>
+        	  </a>
+        	</div>
+        </div>
+		<h3>Preguntas Frecuentes</h3>
+		<ul id="toggle-view">
+        <li @click="listfaqs">
+          <h4>¿Qué es un reporte ciudadano?</h4>
+          <span>+</span>
+          <div class="panel">
+          Aviso que realiza cualquier interesado, a través de medios electrónicos, sobre posibles observaciones relacionadas con la ubicación, avances físicos y financieros o condiciones físicas de los programas y proyectos de inversión registrados en la Cartera de Inversión y en proceso de ejecución, susceptibles de ser georreferenciados.</div>
+        </li>
+        <li @click="listfaqs">
+        	<h4>¿Puedo presentar una queja o denuncia sobre algún funcionario público en particular a través de la plataforma?</h4>
+          <span>+</span>
+          <div class="panel">Para ello, la Secretaría de la Función Pública pone a disposición de los ciudadanos distintos mecanismos que se pueden consultar a través de la página <a href="http://www.funcionpublica.gob.mx/index.php/temas/quejas-y-denuncias.html">http://www.funcionpublica.gob.mx/index.php/temas/quejas-y-denuncias.html</a></div>
+        </li>
+        <li @click="listfaqs">
+        	<h4>¿Qué es la Cartera de Inversión?</h4>
+          <span>+</span>
+          <div class="panel">La Cartera es un sistema electrónico que contiene la información de todos los programas y proyectos de inversión que las dependencias y entidades de la Administración Pública Federal registraron y que demostraron tener beneficios para la población (rentables socioeconómicamente).</div>
+        </li>
+        <li @click="listfaqs">
+          <h4>¿Cuál es el procedimiento para registrar un proyecto de inversión?</h4>
+          <span>+</span>
+          <div class="panel">El proceso comienza con la identificación de necesidades de la población por parte de las dependencias y entidades de la Administración Pública Federal, las cuales analizan, evalúan y formulan proyectos o programas de inversión con el fin de satisfacer dichas necesidades. La solicitud de registro, la cual debe cumplir con la normatividad vigente, la realizan las dependencias y entidades mediante los sistemas informáticos de la Secretaría de Hacienda y Crédito Público (SHCP). Posteriormente, la solicitud es revisada por la Unidad de Inversiones de la SHCP y una vez que el proyecto demuestra que tiene beneficios para la población, se le otorga el registro en la Cartera de Inversión.</div>
+        </li>
+        <li @click="listfaqs">
+        	<h4>¿Por qué no se ha aprobado mi proyecto?</h4>
+          <span>+</span>
+          <div class="panel">Sólo los programas y proyectos que las dependencias y entidades de la Administración Pública Federal registran en los sistemas informáticos de la SHCP son susceptibles de registro en la Cartera. Para que los proyectos puedan ser aprobados, deben cumplir los requisitos establecidos en la normatividad vigente, por lo que son revisados estrictamente para poder ser autorizados.</div>
+        </li>
+        <li @click="listfaqs">
+          <h4>¿Por qué mi proyecto no recibió recursos?</h4>
+          <span>+</span>
+          <div class="panel">Derivado del hecho que los recursos son limitados, la dependencia o entidad determina, de acuerdo con su planeación, qué proyectos son prioritarios para asignarles recursos durante el ejercicio fiscal, además, dichos recursos son aprobados por la Cámara de Diputados, junto con la totalidad del Presupuesto de Egresos de la Federación, en el mes de noviembre de cada año.</div>
+        </li>
+        <li @click="listfaqs">
+          <h4>¿Cuál es la normatividad vigente para registrar un proyecto de inversión?</h4>
+          <span>+</span>
+          <div class="panel">Para llevar a cabo el registro de un programa o proyecto de inversión se debe cumplir lo establecido en los Lineamientos para el registro en la cartera de programas y proyectos de inversión, los cuales se encuentran disponibles en la página de la SHCP: <a href="http://www.shcp.gob.mx/LASHCP/MarcoJuridico/ProgramasYProyectosDeInversion/Paginas/lineamientos.aspx">http://www.shcp.gob.mx/LASHCP/MarcoJuridico/ProgramasYProyectosDeInversion/Paginas/lineamientos.aspx</a></div>
+        </li>
+      </ul>
+		<a href="http://transparenciapresupuestaria.gob.mx/es/PTP/PreguntasFrecuentes" class="btn more">Más preguntas frecuentes</a>
+		</div>
+
+		<form id = "reportForm">
+			<!-- paso 1-->
+			<fieldset id="reporte_step1" class="hide">
+				<h3>Paso 1 de 2</h3>
+				<ul class="step_n">
+					<li><a class="active"></a></li>
+					<li><a></a></li>
+				</ul>
+				<div class="row">
+					<div class="col-sm-10 col-sm-offset-1">
+						<label>Asunto del reporte</label>
+						<textarea id="asuntoReporte"></textarea>
+						<label>Narre el motivo de su reporte</label>
+						<textarea id="motivoReporte"></textarea>
+						<a class="btn more" @click="step2">Continuar &gt;</a>
+					</div>
+				</div>
+			</fieldset>
+
+			<!-- paso 2-->
+			<fieldset id="reporte_step2" class="hide">
+				<h3>Paso 2 de 2</h3>
+				<ul class="step_n">
+					<li><a class="complete"></a></li>
+					<li><a class="active"></a></li>
+				</ul>
+				<div class="row">
+					<div class="col-sm-10 col-sm-offset-1">
+						<h3>Tu denuncia puede ser anónima o puedes proporcionar tu información de contacto básica
+							para dar seguimiento a tu solicitud.</h3>
+							<p class="center"><span class="small"><span class="alert">*</span> Información necesaria </span></p>
+						<label>¿Deseas que tu denuncia sea reportada como anónima?<span class="alert">*</span></label>
+              {{ csrf_field() }}
+						<select id="anonymous">
+						  <option value="0">No</option>
+						  <option value="1">Sí</option>
+						</select>
+					</div>
+				</div>
+				<div id = "noAnonymous">
+					<div class="row">
+
+						<div class="col-sm-5 col-sm-offset-1">
+							<label>Nombre(s) <span class="alert">*</span></label>
+							<input id="name" type="text" name="name">
+						</div>
+						<div class="col-sm-5">
+							<label>Paterno <span class="alert">*</span></label>
+							<input id="surname"  type="text" name="surname">
+						</div>
+						<div class="col-sm-5 col-sm-offset-1">
+							<label>Materno</label>
+							<input id="lastname"  type="text" name="lastname">
+						</div>
+						<div class="col-sm-5">
+							<label>Género <span class="alert">*</span></label>
+							<select id="gender">
+							  <option value="MUJER">Femenino</option>
+							  <option value="HOMBRE">Masculino</option>
+							</select>
+						</div>
+						<div class="col-sm-5 col-sm-offset-1">
+							<label>Correo <span class="alert">*</span></label>
+							<input id="email" type="text" name="email">
+						</div>
+						<div class="col-sm-5">
+							<label>Contraseña <span class="alert">*</span></label>
+							<input id="password" type="text" name="password">
+						</div>
+					</div>
+          		</div>
+		  		<div class="row">
+					<div class="col-sm-3 col-sm-offset-1">
+						<a class="btn more back" @click="step2">&lt; Regresar</a>
+					</div>
+					<div class="col-sm-4">
+						<input class="rpt-advance" type="submit" value="Enviar Reporte &gt;">
+					</div>
+				</div>
+			</fieldset>
+		</form>
+
+
+
+		<div id="respuesta_reporte" class="hide">
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1">
+					<div id ="successReport">
+							<h3>Recibimos tu reporte, en breve le daremos seguimiento</h3>
+							<p>ID de reporte : <span id="folio"></span></p>
+							<p>Contraseña reporte: <span id="passfolio"></span></p>
+					</div>
+					<div id ="errorReport" style= "display:none;">
+					  <h3>Ocurrió un error al enviar tu reporte, inténtalo más tarde</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	  </div>
+	  </modal>
+
+  </section>
+
 </div>
 
 
@@ -576,6 +762,40 @@
       </div>
     </div>
   </footer>
+
+<!-- template for the modal component -->
+<script type="text/x-template" id="modal-template">
+  <transition name="modal">
+    <div class="modal-mask">
+      <div class="modal-wrapper">
+        <div class="modal-container">
+          <div class="modal-header">
+
+            <slot name="header">
+              default header
+
+            </slot>
+            <button class="modal-default-button action" @click="$emit('close')">X</button>
+          </div>
+
+          <div class="modal-body">
+            <slot name="body">
+              default body
+            </slot>
+          </div>
+
+		 <!--
+          <div class="modal-footer">
+            <slot name="footer">
+              default footer
+            </slot>
+          </div>
+          -->
+        </div>
+      </div>
+    </div>
+  </transition>
+</script>
 <!-- libs -->
 <script src="js/libs/d3.v3.min.js"></script>
 <script src="js/libs/jquery-3.1.1.min.js"></script>
