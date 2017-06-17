@@ -26,10 +26,8 @@
             error.style.display     = "block";
           }
 
-// valores extra
-
           that.render(data[config.dataContainer], container, template);
-        });
+      });
     },
 
     render : function(data, container, template){
@@ -45,11 +43,11 @@
           this.makeMap(div, d);
 
           console.log(d);
-          
+
           this.map(d);
           vue = new Vue({
-            el   : div,
-            data : d
+            el      : div,
+            data    : d
           });
         }, this);
     },

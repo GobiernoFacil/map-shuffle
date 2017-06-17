@@ -11,7 +11,7 @@
   <script src="js/modernizr.custom.js"></script>
 </head>
 
-<body class="record">
+<body class="record" id="record">
 <!-- MENSAJE DE ERROR -->
 <div id="GF-error-message" style="display: none">
   La información no está disponible
@@ -171,7 +171,7 @@
             	  <h3 class="title">Entidad Federativa</h3>
             	  <p id="entidadReport">	{{ent_fed}}</p>
             	</div>
-            	<!---coordenadas---->
+            	<!---coordenadas -->
           		<div class="col-md-6 col-sm-12">
             	  <h3 class="title">Coordenadas Geográficas</h3>
             	  <p>Latitud: {{latitud_inicial}} <br> Longitud: {{longitud_inicial}}</p>
@@ -397,7 +397,7 @@
   </section>
 	
 	
-	  <!--responsable---------->
+	  <!-- responsable -->
   <section class="GF-card">
     <div class="row">
       <div class="col-sm-12">
@@ -425,108 +425,21 @@
       </div>
     </div>
   </section>
-	<!--
-  <section>
-    <p>cve_ppi : {{cve_ppi}}</p>
-    <p>nombre : {{nombre}}</p>
-    <p>ramo : {{ramo}}</p>
-    <p>desc_ramo : {{desc_ramo}}</p>
-    <p>unidad : {{unidad}}</p>
-    <p>desc_unidad : {{desc_unidad}}</p>
-    <p>tipo_ppi : {{tipo_ppi}}</p>
-    <p>descripcion : {{descripcion}}</p>
-  </section>
 
-  <section>
-    <p>localizacion : {{localizacion}}</p>
-    <p>cve_entfed : {{cve_entfed}}</p>
-    <p>ent_fed : {{ent_fed}}</p>
-    <div class="GF-SHCP-map" data-lat="latitud_inicial" data-lng="longitud_inicial"></div>
-  </section>
-
-  <section>
-    <p>fecha_ini_cal_fiscal : {{fecha_ini_cal_fiscal}}</p>
-    <p>fecha_fin_cal_fiscal : {{fecha_fin_cal_fiscal}}</p>
-    <p>fecha_ini_ff : {{fecha_ini_ff}}</p>
-    <p>fecha_fin_ff : {{fecha_fin_ff}}</p>
-    <p>anios_he : {{anios_he}}</p>
-  </section>
-
-  <section>
-    <p>id : {{nombre_admin}}</p>
-    <p>id : {{ap_materno_admin}}</p>
-    <p>id : {{cargo_admin}}</p>
-    <p>id : {{mail_admin}}</p>
-    <p>id : {{telefono_admin}}</p>
-  </section>
-
-  <section>
-    <p>id : {{meta_fisica}}</p>
-    <p>id : {{meta_beneficios}}</p>
-    <p>id : {{id_ppi}}</p>
-  </section>
-
-  <section>
-    <p>id : {{aprobado}}</p>
-    <p>id : {{modificado}}</p>
-    <p>id : {{ejercido}}</p>
-    <p>id : {{avance_fisico}}</p>
-    <div class="GF-SHCP-circle"
-         data-width="160"
-         data-height="130"
-         data-color-a="rgb(190,205,81)"
-         data-color-b="rgb(210,210,210)"
-         data-column="avance_fisico"></div>
-    <!--
-    GFMakeCircle({
-      width  : 160,
-      height : 130,
-      colorA : "rgb(190,205,81)",
-      colorB : "rgb(210,210,210)",
-      selector : "#arc_side",
-      value : "AVANCE_FINANCIERO",
-      item  : d
-    });
-    -->
-    <!--
-  </section>
-
-  <section>
-    <p>id : {{grupo_funcional}}</p>
-    <p>id : {{funcion}}</p>
-    <p>id : {{monto_total_inversion}}</p>
-    <p>id : {{total_gasto_operacion_he}}</p>
-    <p>id : {{total_gasto_no_consid}}</p>
-    <p>id : {{costo_total_ppi}}</p>
-  </section>
-
-  <section>
-    <p>id : {{anio}}</p>
-    <p>id : {{monto_asigautact}}</p>
-    <p>id : {{recursos_estatales}}</p>
-    <p>id : {{recursos_municipales}}</p>
-    <p>id : {{privados}}</p>
-    <p>id : {{fideicomiso}}</p>
-    <p>id : {{ciclo}}</p>
-  </section>
-
-  <section>
-    <p>desc_clas_ciudadana : {{desc_clas_ciudadana}}</p>
-    <p>id : {{fase}}</p>
-  </section>
--->
   <section>
     <ul class="GF-SHCP-images" data-list="urlimages"></ul>
   </section>
-
-
 </div>
+
 
 <!-- Aquí se crearán todas las fichas -->
 <div id="GF-card-list-container">
   
 </div>
 
+<div id="mamadas">
+<button id="show-modal" @click="showModal = true">Show Modal</button>
+</div>
 
   <!-- reportar-->
   <section class="GF-card">
@@ -540,182 +453,15 @@
     </div>
     <!-- modal -->
 	  <modal v-if="showModal" @close="showModal = false">
-	  <!-- content-->
-	  <h2 slot="header">Reporta esta obra</h2>
-
-	  <div class="dialog-container" slot="body">
-
-		<div id="reporte_step0">
-		  <p slot="header">Realiza tu reporte ciudadano para este proyecto:</p>
-     	<div class="row">
-        	<div class="col-sm-4">
-        	  <a class="btn_type" @click="step1">
-        	    <span class="btn-content">No coincide el avance físico  que aparece en el PTP con el que ves en la obra</span>
-        	    <span class="btn-symbol">Reportar</span>
-        	  </a>
-        	</div>
-        	<div class="col-sm-4">
-        	  <a class="btn_type" @click="step1">
-        	    <span class="btn-content">La obra ha sido abandonada</span>
-        	    <span class="btn-symbol">Reportar</span>
-        	  </a>
-        	</div>
-        	<div class="col-sm-4">
-        	  <a class="btn_type" @click="step1">
-        	    <span class="btn-content">Existe un error en la localización</span>
-        	    <span class="btn-symbol">Reportar</span>
-        	  </a>
-        	</div>
-        </div>
-		<h3>Preguntas Frecuentes</h3>
-		<ul id="toggle-view">
-        <li @click="listfaqs">
-          <h4>¿Qué es un reporte ciudadano?</h4>
-          <span>+</span>
-          <div class="panel">
-          Aviso que realiza cualquier interesado, a través de medios electrónicos, sobre posibles observaciones relacionadas con la ubicación, avances físicos y financieros o condiciones físicas de los programas y proyectos de inversión registrados en la Cartera de Inversión y en proceso de ejecución, susceptibles de ser georreferenciados.</div>
-        </li>
-        <li @click="listfaqs">
-        	<h4>¿Puedo presentar una queja o denuncia sobre algún funcionario público en particular a través de la plataforma?</h4>
-          <span>+</span>
-          <div class="panel">Para ello, la Secretaría de la Función Pública pone a disposición de los ciudadanos distintos mecanismos que se pueden consultar a través de la página <a href="http://www.funcionpublica.gob.mx/index.php/temas/quejas-y-denuncias.html">http://www.funcionpublica.gob.mx/index.php/temas/quejas-y-denuncias.html</a></div>
-        </li>
-        <li @click="listfaqs">
-        	<h4>¿Qué es la Cartera de Inversión?</h4>
-          <span>+</span>
-          <div class="panel">La Cartera es un sistema electrónico que contiene la información de todos los programas y proyectos de inversión que las dependencias y entidades de la Administración Pública Federal registraron y que demostraron tener beneficios para la población (rentables socioeconómicamente).</div>
-        </li>
-        <li @click="listfaqs">
-          <h4>¿Cuál es el procedimiento para registrar un proyecto de inversión?</h4>
-          <span>+</span>
-          <div class="panel">El proceso comienza con la identificación de necesidades de la población por parte de las dependencias y entidades de la Administración Pública Federal, las cuales analizan, evalúan y formulan proyectos o programas de inversión con el fin de satisfacer dichas necesidades. La solicitud de registro, la cual debe cumplir con la normatividad vigente, la realizan las dependencias y entidades mediante los sistemas informáticos de la Secretaría de Hacienda y Crédito Público (SHCP). Posteriormente, la solicitud es revisada por la Unidad de Inversiones de la SHCP y una vez que el proyecto demuestra que tiene beneficios para la población, se le otorga el registro en la Cartera de Inversión.</div>
-        </li>
-        <li @click="listfaqs">
-        	<h4>¿Por qué no se ha aprobado mi proyecto?</h4>
-          <span>+</span>
-          <div class="panel">Sólo los programas y proyectos que las dependencias y entidades de la Administración Pública Federal registran en los sistemas informáticos de la SHCP son susceptibles de registro en la Cartera. Para que los proyectos puedan ser aprobados, deben cumplir los requisitos establecidos en la normatividad vigente, por lo que son revisados estrictamente para poder ser autorizados.</div>
-        </li>
-        <li @click="listfaqs">
-          <h4>¿Por qué mi proyecto no recibió recursos?</h4>
-          <span>+</span>
-          <div class="panel">Derivado del hecho que los recursos son limitados, la dependencia o entidad determina, de acuerdo con su planeación, qué proyectos son prioritarios para asignarles recursos durante el ejercicio fiscal, además, dichos recursos son aprobados por la Cámara de Diputados, junto con la totalidad del Presupuesto de Egresos de la Federación, en el mes de noviembre de cada año.</div>
-        </li>
-        <li @click="listfaqs">
-          <h4>¿Cuál es la normatividad vigente para registrar un proyecto de inversión?</h4>
-          <span>+</span>
-          <div class="panel">Para llevar a cabo el registro de un programa o proyecto de inversión se debe cumplir lo establecido en los Lineamientos para el registro en la cartera de programas y proyectos de inversión, los cuales se encuentran disponibles en la página de la SHCP: <a href="http://www.shcp.gob.mx/LASHCP/MarcoJuridico/ProgramasYProyectosDeInversion/Paginas/lineamientos.aspx">http://www.shcp.gob.mx/LASHCP/MarcoJuridico/ProgramasYProyectosDeInversion/Paginas/lineamientos.aspx</a></div>
-        </li>
-      </ul>
-		<a href="http://transparenciapresupuestaria.gob.mx/es/PTP/PreguntasFrecuentes" class="btn more">Más preguntas frecuentes</a>
-		</div>
-
-		<form id = "reportForm">
-			<!-- paso 1-->
-			<fieldset id="reporte_step1" class="hide">
-				<h3>Paso 1 de 2</h3>
-				<ul class="step_n">
-					<li><a class="active"></a></li>
-					<li><a></a></li>
-				</ul>
-				<div class="row">
-					<div class="col-sm-10 col-sm-offset-1">
-						<label>Asunto del reporte</label>
-						<textarea id="asuntoReporte"></textarea>
-						<label>Narre el motivo de su reporte</label>
-						<textarea id="motivoReporte"></textarea>
-						<a class="btn more" @click="step2">Continuar &gt;</a>
-					</div>
-				</div>
-			</fieldset>
-
-			<!-- paso 2-->
-			<fieldset id="reporte_step2" class="hide">
-				<h3>Paso 2 de 2</h3>
-				<ul class="step_n">
-					<li><a class="complete"></a></li>
-					<li><a class="active"></a></li>
-				</ul>
-				<div class="row">
-					<div class="col-sm-10 col-sm-offset-1">
-						<h3>Tu denuncia puede ser anónima o puedes proporcionar tu información de contacto básica
-							para dar seguimiento a tu solicitud.</h3>
-							<p class="center"><span class="small"><span class="alert">*</span> Información necesaria </span></p>
-						<label>¿Deseas que tu denuncia sea reportada como anónima?<span class="alert">*</span></label>
-              {{ csrf_field() }}
-						<select id="anonymous">
-						  <option value="0">No</option>
-						  <option value="1">Sí</option>
-						</select>
-					</div>
-				</div>
-				<div id = "noAnonymous">
-					<div class="row">
-
-						<div class="col-sm-5 col-sm-offset-1">
-							<label>Nombre(s) <span class="alert">*</span></label>
-							<input id="name" type="text" name="name">
-						</div>
-						<div class="col-sm-5">
-							<label>Paterno <span class="alert">*</span></label>
-							<input id="surname"  type="text" name="surname">
-						</div>
-						<div class="col-sm-5 col-sm-offset-1">
-							<label>Materno</label>
-							<input id="lastname"  type="text" name="lastname">
-						</div>
-						<div class="col-sm-5">
-							<label>Género <span class="alert">*</span></label>
-							<select id="gender">
-							  <option value="MUJER">Femenino</option>
-							  <option value="HOMBRE">Masculino</option>
-							</select>
-						</div>
-						<div class="col-sm-5 col-sm-offset-1">
-							<label>Correo <span class="alert">*</span></label>
-							<input id="email" type="text" name="email">
-						</div>
-						<div class="col-sm-5">
-							<label>Contraseña <span class="alert">*</span></label>
-							<input id="password" type="text" name="password">
-						</div>
-					</div>
-          		</div>
-		  		<div class="row">
-					<div class="col-sm-3 col-sm-offset-1">
-						<a class="btn more back" @click="step2">&lt; Regresar</a>
-					</div>
-					<div class="col-sm-4">
-						<input class="rpt-advance" type="submit" value="Enviar Reporte &gt;">
-					</div>
-				</div>
-			</fieldset>
-		</form>
-
-
-
-		<div id="respuesta_reporte" class="hide">
-			<div class="row">
-				<div class="col-sm-10 col-sm-offset-1">
-					<div id ="successReport">
-							<h3>Recibimos tu reporte, en breve le daremos seguimiento</h3>
-							<p>ID de reporte : <span id="folio"></span></p>
-							<p>Contraseña reporte: <span id="passfolio"></span></p>
-					</div>
-					<div id ="errorReport" style= "display:none;">
-					  <h3>Ocurrió un error al enviar tu reporte, inténtalo más tarde</h3>
-					</div>
-				</div>
-			</div>
-		</div>
-	  </div>
-	  </modal>
+     <h1>ALVV</h1> 
+    </modal>
 
   </section>
 
 </div>
 
 
-  <!--footer------->
+  <!-- footer -->
   <footer>
     <div class="container">
       <div class="content">
@@ -735,7 +481,7 @@
               <li><a class="linksfoot" href="/es/PTP/Estadisticas">Estadísticas del Portal</a></li>
             </ul>
             <ul>
-              <!--fb-->
+              <!-- fb-->
               <li><a href="http://www.facebook.com/TransparenciaPresupuestaria" class="fb" target="_blank">Facebook</a></li>
               <!--tw-->
               <li><a href="//twitter.com/TPresupuestaria" class="tw" target="_blank">Twitter</a></li>                 <!--youtube-->
@@ -778,13 +524,11 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-          <div class="modal-header">
 
+          <div class="modal-header">
             <slot name="header">
               default header
-
             </slot>
-            <button class="modal-default-button action" @click="$emit('close')">X</button>
           </div>
 
           <div class="modal-body">
@@ -793,23 +537,244 @@
             </slot>
           </div>
 
-		 <!--
           <div class="modal-footer">
             <slot name="footer">
               default footer
+              <button class="modal-default-button" @click="$emit('close')">
+                OK
+              </button>
             </slot>
           </div>
-          -->
         </div>
       </div>
     </div>
   </transition>
 </script>
+
+<!-- app -->
+<div id="app">
+  <button id="show-modal" @click="showModal = true">Show Modal</button>
+  <!-- use the modal component, pass in the prop -->
+  <modal v-if="showModal" @close="showModal = false">
+    <!--
+      you can use custom content here to overwrite
+      default content
+    -->
+    <!-- content-->
+    <h2 slot="header">Reporta esta obra</h2>
+
+    <div class="dialog-container" slot="body">
+
+    <div id="reporte_step0">
+      <p slot="header">Realiza tu reporte ciudadano para este proyecto:</p>
+      <div class="row">
+          <div class="col-sm-4">
+            <a class="btn_type" @click="step1">
+              <span class="btn-content">No coincide el avance físico  que aparece en el PTP con el que ves en la obra</span>
+              <span class="btn-symbol">Reportar</span>
+            </a>
+          </div>
+          <div class="col-sm-4">
+            <a class="btn_type" @click="step1">
+              <span class="btn-content">La obra ha sido abandonada</span>
+              <span class="btn-symbol">Reportar</span>
+            </a>
+          </div>
+          <div class="col-sm-4">
+            <a class="btn_type" @click="step1">
+              <span class="btn-content">Existe un error en la localización</span>
+              <span class="btn-symbol">Reportar</span>
+            </a>
+          </div>
+        </div>
+    <h3>Preguntas Frecuentes</h3>
+    <ul id="toggle-view">
+        <li @click="listfaqs">
+          <h4>¿Qué es un reporte ciudadano?</h4>
+          <span>+</span>
+          <div class="panel">
+          Aviso que realiza cualquier interesado, a través de medios electrónicos, sobre posibles observaciones relacionadas con la ubicación, avances físicos y financieros o condiciones físicas de los programas y proyectos de inversión registrados en la Cartera de Inversión y en proceso de ejecución, susceptibles de ser georreferenciados.</div>
+        </li>
+        <li @click="listfaqs" class="active">
+          <h4>¿Puedo presentar una queja o denuncia sobre algún funcionario público en particular a través de la plataforma?</h4>
+          <span>+</span>
+          <div class="panel">Para ello, la Secretaría de la Función Pública pone a disposición de los ciudadanos distintos mecanismos que se pueden consultar a través de la página <a href="http://www.funcionpublica.gob.mx/index.php/temas/quejas-y-denuncias.html">http://www.funcionpublica.gob.mx/index.php/temas/quejas-y-denuncias.html</a></div>
+        </li>
+        <li @click="listfaqs">
+          <h4>¿Qué es la Cartera de Inversión?</h4>
+          <span>+</span>
+          <div class="panel">La Cartera es un sistema electrónico que contiene la información de todos los programas y proyectos de inversión que las dependencias y entidades de la Administración Pública Federal registraron y que demostraron tener beneficios para la población (rentables socioeconómicamente).</div>
+        </li>
+        <li @click="listfaqs">
+          <h4>¿Cuál es el procedimiento para registrar un proyecto de inversión?</h4>
+          <span>+</span>
+          <div class="panel">El proceso comienza con la identificación de necesidades de la población por parte de las dependencias y entidades de la Administración Pública Federal, las cuales analizan, evalúan y formulan proyectos o programas de inversión con el fin de satisfacer dichas necesidades. La solicitud de registro, la cual debe cumplir con la normatividad vigente, la realizan las dependencias y entidades mediante los sistemas informáticos de la Secretaría de Hacienda y Crédito Público (SHCP). Posteriormente, la solicitud es revisada por la Unidad de Inversiones de la SHCP y una vez que el proyecto demuestra que tiene beneficios para la población, se le otorga el registro en la Cartera de Inversión.</div>
+        </li>
+        <li @click="listfaqs">
+          <h4>¿Por qué no se ha aprobado mi proyecto?</h4>
+          <span>+</span>
+          <div class="panel">Sólo los programas y proyectos que las dependencias y entidades de la Administración Pública Federal registran en los sistemas informáticos de la SHCP son susceptibles de registro en la Cartera. Para que los proyectos puedan ser aprobados, deben cumplir los requisitos establecidos en la normatividad vigente, por lo que son revisados estrictamente para poder ser autorizados.</div>
+        </li>
+        <li @click="listfaqs">
+          <h4>¿Por qué mi proyecto no recibió recursos?</h4>
+          <span>+</span>
+          <div class="panel">Derivado del hecho que los recursos son limitados, la dependencia o entidad determina, de acuerdo con su planeación, qué proyectos son prioritarios para asignarles recursos durante el ejercicio fiscal, además, dichos recursos son aprobados por la Cámara de Diputados, junto con la totalidad del Presupuesto de Egresos de la Federación, en el mes de noviembre de cada año.</div>
+        </li>
+        <li @click="listfaqs">
+          <h4>¿Cuál es la normatividad vigente para registrar un proyecto de inversión?</h4>
+          <span>+</span>
+          <div class="panel">Para llevar a cabo el registro de un programa o proyecto de inversión se debe cumplir lo establecido en los Lineamientos para el registro en la cartera de programas y proyectos de inversión, los cuales se encuentran disponibles en la página de la SHCP: <a href="http://www.shcp.gob.mx/LASHCP/MarcoJuridico/ProgramasYProyectosDeInversion/Paginas/lineamientos.aspx">http://www.shcp.gob.mx/LASHCP/MarcoJuridico/ProgramasYProyectosDeInversion/Paginas/lineamientos.aspx</a></div>
+        </li>
+      </ul>
+    <a href="http://transparenciapresupuestaria.gob.mx/es/PTP/PreguntasFrecuentes" class="btn more">Más preguntas frecuentes</a>
+    </div>
+
+    <form id = "reportForm">
+      <!-- paso 1-->
+      <fieldset id="reporte_step1" class="hide">
+        <h3>Paso 1 de 2</h3>
+        <ul class="step_n">
+          <li><a class="active"></a></li>
+          <li><a></a></li>
+        </ul>
+        <div class="row">
+          <div class="col-sm-10 col-sm-offset-1">
+            <label>Asunto del reporte</label>
+            <textarea id="asuntoReporte"></textarea>
+            <label>Narre el motivo de su reporte</label>
+            <textarea id="motivoReporte"></textarea>
+            <a class="btn more" @click="step2">Continuar &gt;</a>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- paso 2-->
+      <fieldset id="reporte_step2" class="hide">
+        <h3>Paso 2 de 2</h3>
+        <ul class="step_n">
+          <li><a class="complete"></a></li>
+          <li><a class="active"></a></li>
+        </ul>
+        <div class="row">
+          <div class="col-sm-10 col-sm-offset-1">
+            <h3>Tu denuncia puede ser anónima o puedes proporcionar tu información de contacto básica
+              para dar seguimiento a tu solicitud.</h3>
+              <p class="center"><span class="small"><span class="alert">*</span> Información necesaria </span></p>
+            <label>¿Deseas que tu denuncia sea reportada como anónima?<span class="alert">*</span></label>
+            <select id="anonymous">
+              <option value="0">No</option>
+              <option value="1">Sí</option>
+            </select>
+          </div>
+        </div>
+        <div id = "noAnonymous">
+          <div class="row">
+
+            <div class="col-sm-5 col-sm-offset-1">
+              <label>Nombre(s) <span class="alert">*</span></label>
+              <input id="name" type="text" name="name">
+            </div>
+            <div class="col-sm-5">
+              <label>Paterno <span class="alert">*</span></label>
+              <input id="surname"  type="text" name="surname">
+            </div>
+            <div class="col-sm-5 col-sm-offset-1">
+              <label>Materno</label>
+              <input id="lastname"  type="text" name="lastname">
+            </div>
+            <div class="col-sm-5">
+              <label>Género <span class="alert">*</span></label>
+              <select id="gender">
+                <option value="MUJER">Femenino</option>
+                <option value="HOMBRE">Masculino</option>
+              </select>
+            </div>
+            <div class="col-sm-5 col-sm-offset-1">
+              <label>Correo <span class="alert">*</span></label>
+              <input id="email" type="text" name="email">
+            </div>
+            <div class="col-sm-5">
+              <label>Contraseña <span class="alert">*</span></label>
+              <input id="password" type="text" name="password">
+            </div>
+          </div>
+              </div>
+          <div class="row">
+          <div class="col-sm-3 col-sm-offset-1">
+            <a class="btn more back" @click="step2">&lt; Regresar</a>
+          </div>
+          <div class="col-sm-4">
+            <input class="rpt-advance" type="submit" value="Enviar Reporte &gt;">
+          </div>
+        </div>
+      </fieldset>
+    </form>
+
+
+
+    <div id="respuesta_reporte" class="hide">
+      <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+          <div id ="successReport">
+              <h3>Recibimos tu reporte, en breve le daremos seguimiento</h3>
+              <p>ID de reporte : <span id="folio"></span></p>
+              <p>Contraseña reporte: <span id="passfolio"></span></p>
+          </div>
+          <div id ="errorReport" style= "display:none;">
+            <h3>Ocurrió un error al enviar tu reporte, inténtalo más tarde</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </modal>
+</div>
+
+
 <!-- libs -->
 <script src="js/libs/d3.v3.min.js"></script>
 <script src="js/libs/jquery-3.1.1.min.js"></script>
 <script src="js/libs/vue.min.js"></script>
 <script src="js/libs/leaflet.js"></script>
+
+<script>
+
+// register modal component
+Vue.component('modal', {
+  template: '#modal-template'
+})
+
+// start app
+new Vue({
+  el: '#app',
+  data: {
+    showModal: false
+  },
+  methods: {
+              // lista de faqs en modal
+            listfaqs : function(e) {
+            e.currentTarget.classList.toggle("active");
+              },
+              // modal formulario paso 1
+              step1 : function(e) {
+                var divstep0 = document.getElementById("reporte_step0");
+                var divstep1 = document.getElementById("reporte_step1");
+
+              divstep0.classList.toggle("hide");
+              divstep1.classList.toggle("hide");
+              },
+              // modal formulario paso 2
+              step2 : function(e) {
+                var divstep1 = document.getElementById("reporte_step1");
+                  var divstep2 = document.getElementById("reporte_step2");
+
+              divstep2.classList.toggle("hide");
+              divstep1.classList.toggle("hide");
+              }
+          }
+})
+
+</script>
 
 <!-- helpers -->
 <script src="js/card.helpers.js"></script>
@@ -865,6 +830,183 @@
   }
 
   GFSHCPHelpers.initialize(GFSHCPConfig, GFSHCPmap);
+</script>
+
+
+
+
+<script>
+  
+  var appKey  = '5825343BB68F29D2A881B2E8D205B98846C95558';
+
+  // var estadosList = get_stateList();
+  $(document).ready(function(){
+    $('#reportForm').on('keyup keypress', function(e) {
+      var keyCode = e.keyCode || e.which;
+      if (keyCode === 13) {
+        e.preventDefault();
+        return false;
+      }
+    });
+
+    //Motivo reporte
+    $(document).on("click",".btn_type", function(){
+       $("#asuntoReporte").text($(this).find(".btn-content").text()+".");
+    });
+    //Reporte anononimo
+    $(document).on("change","#anonymous", function(){
+      if($("#anonymous").val() == 1){
+        $("#noAnonymous").hide();
+      }else{
+        $("#noAnonymous").show();
+      }
+
+    });
+   //Reporte general
+   $(document).on("click", ".rpt-advance", function () {
+     event.preventDefault();
+     anonimo  = $("#anonymous").val();
+     estados = estadosList.responseJSON.estado;
+
+
+     //informacion de proyecto
+     var carteraId = $("#cveReport").text(),
+         dependencia  = $("#ejecutorReport").text(),
+         programa  = $("#programaReport").text(),
+         entidad   = $("#entidadReport").text(),
+         nombre    = $("#nameReport").text(),
+         motivo    = $("#motivoReporte").val(),
+         asunto    = $("#asuntoReporte").val(),
+         estadoId = "",
+         paisId="2";
+         testado = RemoveAccents(entidad.toLowerCase());
+         for (var i = 0; i < estados.length; i++) {
+           estado = RemoveAccents(estados[i].nombre.toLowerCase());
+          if(estado == testado.replace(/\s/g,'')){
+             estadoID = estados[i].estadoId;
+             break;
+           }else{
+             estadoID = false;
+           }
+         }
+    motivo = "El proyecto "+ nombre+", perteneciente al programa "+ programa +", con clave " + carteraId+", ejecutado por " + dependencia+", presenta irregularidades en su proceso.\n " + asunto + "\n"+ motivo;
+    //informacion de ciudadano
+    var name    = $("#name").val(),
+        paterno = $("#surname").val(),
+        materno = $("#lastname").val(),
+        email   = $("#email").val(),
+        pass    = $("#password").val(),
+        genero  = $("#gender").val();
+
+
+    if(anonimo == 0){
+      var ciudadanoAPI = {"anonimo":false,"genero":genero,"nombre":name,"paterno":paterno,"materno":materno,"email":email,"contrasenia":pass};
+    }else{
+      var ciudadanoAPI = {"anonimo":true};
+    }
+
+
+    var dataAPI = {"ciudadano":ciudadanoAPI,"dependencia":dependencia,"estado":estadoID,"motivoPeticion":motivo,"otroPais":null,"pais":paisId,"motivoId":7,"queSolicitaron":null,"solictaronDinero":false};
+    
+    //console.log(estadoID, estado, estados);
+
+    if(!estadoID) estadoID = 40;
+    
+    if(estadoID){
+      //Request API
+    /*   $.ajax({
+         beforeSend: function(xhrObj){
+                   xhrObj.setRequestHeader("app-key",appKey);
+           },
+         type: "POST",
+         url: "http://devretociudadano.funcionpublica.gob.mx/SidecWS/resources/quejadenuncia/registrarPeticion",
+         contentType: 'application/json; charset=utf-8',
+         dataType:"json",
+         processData: false,
+         headers:{"app-key":appKey},
+         data: JSON.stringify(dataAPI),
+         success: function(dataRe){
+             console.log(dataRe);
+             if(dataRe.resultado == 'REGISTRO_PETICION_EXITOSO'){
+              $("#respuesta_reporte").toggleClass("hide");
+              $("#reporte_step2").toggleClass("hide");
+                $("#folio").text(dataRe.folio);
+                $("#passfolio").text(dataRe.passFolio);
+                $("#successReport").show();
+                $("#errorReport").hide();
+             }else{
+               $("#respuesta_reporte").toggleClass("hide");
+              $("#reporte_step2").toggleClass("hide");
+               $("#successReport").hide();
+               $("#errorReport").show();
+             }
+           }
+       });*/
+    //Salvar en db
+    $.ajaxSetup({headers:{'X-CSRF-Token': $('input[name="_token"]').val()}});
+    $.ajax({
+          type: "POST",
+          url: '../denuncia/guardar',
+          data: {"anonimo":anonimo,"genero":genero,"nombre":name,"paterno":paterno,"materno":materno,"email":email,"contrasenia":pass,"dependencia":dependencia,"estado":estadoID,"motivoPeticion":motivo,motivoId:"7"},
+          dataType: 'json',
+          success: function(dataRe){
+            console.log(dataRe);
+            if(dataRe){
+              $("#respuesta_reporte").toggleClass("hide");
+              $("#reporte_step2").toggleClass("hide");
+              $("#folio").text(dataRe.folio);
+              $("#passfolio").text(dataRe.passFolio);
+              $("#successReport").show();
+              $("#errorReport").hide();
+            }else{
+              $("#respuesta_reporte").toggleClass("hide");
+              $("#reporte_step2").toggleClass("hide");
+              $("#successReport").hide();
+              $("#errorReport").show();
+            }
+          }
+          });
+
+   }else{
+     $("#respuesta_reporte").toggleClass("hide");
+     $("#reporte_step2").toggleClass("hide");
+     //error
+     $("#successReport").hide();
+     $("#errorReport").show();
+   }
+   });
+
+   function RemoveAccents(str) {
+      var accents    = 'ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž';
+      var accentsOut = "AAAAAAaaaaaaOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuNnSsYyyZz";
+      str = str.split('');
+      var strLen = str.length;
+      var i, x;
+      for (i = 0; i < strLen; i++) {
+        if ((x = accents.indexOf(str[i])) != -1) {
+          str[i] = accentsOut[x];
+        }
+      }
+      return str.join('');
+    }
+  });
+
+     function get_stateList(){
+      return $.ajax({
+         beforeSend: function(xhrObj){
+                   xhrObj.setRequestHeader("app-key",appKey);
+           },
+         type: "GET",
+         url: "http://devretociudadano.funcionpublica.gob.mx/SidecWS/resources/quejadenuncia/obtenerEstados/2",
+         contentType: 'application/json; charset=utf-8',
+         dataType:"json",
+         processData: false,
+         headers:{"app-key":appKey},
+         success: function(dataSt){
+           }
+       });
+
+    }
 </script>
 
 </body>
