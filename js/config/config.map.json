@@ -90,6 +90,7 @@
     },
     "geolocationBtn"   : "GF-SHCP-geolocate-user",
     "geolocationForm"  : "GF-SHCP-geolocation-form",
-    "geolocationField" : "GF-SHCP-geolocation-input"
+    "geolocationField" : "GF-SHCP-geolocation-input",
+    "searchTable"      : "GF-SHCP-advanced-search"
   }
 }

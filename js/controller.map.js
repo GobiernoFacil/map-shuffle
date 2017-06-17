@@ -166,29 +166,6 @@ define(function(require){
 
       // [7] HABILITA EL GEOLOCALIZADOR Y LA OBTENCIÓN DE LAS COORDENADAS DEL USUARIO
       this.enableUserLocation();
-
-
-      $('#GF-SHCP-advanced-search').bootstrapTable({
-    columns: [{
-        field: 'id',
-        title: 'Item ID'
-    }, {
-        field: 'name',
-        title: 'Item Name'
-    }, {
-        field: 'price',
-        title: 'Item Price'
-    }],
-    data: [{
-        id: 1,
-        name: 'Item 1',
-        price: '$1'
-    }, {
-        id: 2,
-        name: 'Item 2',
-        price: '$2'
-    }]
-});
     },
 
 
@@ -308,7 +285,12 @@ define(function(require){
 
       // [7] Activa la tabla de comparación
       //
-      this.enableTableTool(item);
+      if(!keepFilters){
+        this.enableTableTool(item);
+      }
+
+      //
+      //
     },
 
     updateUIOptions : function(item){
@@ -1529,6 +1511,39 @@ define(function(require){
      * ----------------------------------------------------------------------
      */
     enableTableTool : function(item){
+      var selector     = "#" + this.settings.ui.searchTable,
+          columns      = [],
+          numFields    = this.currentMap.config.values,
+          stringFields = this.currentMap.config.data,
+          _fields      = _.uniq(numFields.concat(stringFields)),
+          fields       = _fields.map(function(field){
+                           return {field : field, title : field}
+                         }),
+          _data        = this.currentMap.data,
+          data         = _data.map(function(d){
+                           var el = {};
+                           _fields.forEach(function(field){
+                             el[field] = d[field];
+                           });
+
+                           return el; 
+                         });
+
+      /*
+      $.extend($.fn.bootstrapTable.columnDefaults, {
+        sortable: true
+      });
+      */
+
+      $(selector).bootstrapTable({
+        columns: fields,
+        pagination : true,
+        pageSize : 50,
+        search : true,
+        searchOnEnterKey : true,
+        data: data,
+        sortable : true
+      });
 
     },
 
