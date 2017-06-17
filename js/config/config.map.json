@@ -38,9 +38,9 @@
   },
   "maps" : {
     "basePath" : "/js/config",
-    "maps"     : ["ef.map.json", "sfu.map.json", "ramo23.map.json", "opa.map.json", "tomas.map.json", "gasolina.map.json", "consolidado2015.map.json"],
+    "maps"     : ["escuelas100.map.json", "ramo23.map.json", "opa.map.json"],
     "extras"   : ["poblacion.map.json"],
-    "current"  : 6
+    "current"  : 0
   },
   "ui" : {
     "topToolsDiv"    : "GF-SHCP-top-tools",

@@ -1,0 +1,30 @@
+{
+  "name"  : "Escuelas al 100",
+  "type"  : "point",
+  "multiple" : true,
+  "level" : [],
+  "src"   : "/js/maps/escuelas100.csv",
+  "file"  : "csv",
+  "link"  : {
+    "url"    : "http://localhost:8001/escuelas.html",
+    "column" : "CLAVECENTROTRABAJO"
+  },
+  "style" : {
+    "fillColor" : "green",
+    "color"     : "red"
+  },
+  "location" : {
+    "lat" : "LATITUD",
+    "lng" : "LONGITUD"
+  },
+  "values"  : [],
+
+  "data"    : ["CLAVECENTROTRABAJO","ANIO_EJECUCION","NOMBRECT","CLAVE_ENTIDAD","ENTIDAD", "MUNICIPIO","LOCALIDAD","LATITUD","LONGITUD","MATRICULA_PLANTEL","MONTO_ASIGNADO","DOMICILIO","CONTRATISTA"],
+  "current" : {},
+  "filters" : [
+    {"type" : "state", "field" : "CLAVE_ENTIDAD"},
+    {"type" : "year", "field" : "ANIO_EJECUCION"}
+  ],
+  "extraFilters" : [],
+  "template" : "<p><%=NOMBRECT%> <%=ANIO_EJECUCION%> : <br> <%=MONTO_ASIGNADO%></p>"
+}

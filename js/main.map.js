@@ -14,8 +14,15 @@ require.config({
     underscore : "libs/underscore-min",
     text       : 'libs/text',
     json       : 'libs/json',
-    classyBrew : "libs/classybrew.min"
-  }
+    classyBrew : "libs/classybrew.min",
+    jquery     : "libs/jquery-3.1.1.min",
+    bootstrap  : "libs/bootstrap.min",
+    btable     : "libs/bootstrap-table.min"
+  },
+  shim : {
+    "bootstrap" : { "deps" :['jquery'] },
+    "btable" : {"deps" : ['bootstrap']}
+  },
 });
 
 var GFSHCPMapApp;
