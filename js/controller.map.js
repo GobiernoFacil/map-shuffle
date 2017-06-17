@@ -122,6 +122,10 @@ define(function(require){
       this.UIbranchSelector = null;
       // * El selector de estado
       this.UIstateSelector = null;
+      // * El selector de ciudad
+      this.UIcitySelector = null;
+      // * El selector de ejecutor
+      this.UIunitSelector = null;
       // * los <select> de los filtros extra
       this.UIextraFiltersSelector = null;
 
@@ -932,6 +936,8 @@ define(function(require){
 
       this.UIyearSelector   = html.querySelector("#" + conf.selectors.filtersContainers.yearContainer);
       this.UIstateSelector  = html.querySelector("#" + conf.selectors.filtersContainers.stateContainer);
+      this.UIcitySelector   = html.querySelector("#" + conf.selectors.filtersContainers.cityContainer);
+      this.UIunitSelector   = html.querySelector("#" + conf.selectors.filtersContainers.unitContainer);
       this.UIbranchSelector = html.querySelector("#" + conf.selectors.filtersContainers.branchContainer);
       this.UIextraFiltersSelector = html.querySelector("#" + conf.selectors.extraFiltersId);
 
@@ -968,7 +974,9 @@ define(function(require){
           filters  = item.config.filters,
           xfilters = item.config.extraFilters,
           _state   = filters ? filters.filter(function(filter){return filter.type == "state"})[0] : null,
+          _city    = filters ? filters.filter(function(filter){return filter.type == "city"})[0] : null,
           _branch  = filters ? filters.filter(function(filter){return filter.type == "branch"})[0] : null,
+          _unit    = filters ? filters.filter(function(filter){return filter.type == "unit"})[0] : null,
           _year    = filters ? filters.filter(function(filter){return filter.type == "year"})[0] :null,
           _extras  = xfilters || [];
       // remove filters 
@@ -991,6 +999,17 @@ define(function(require){
         this.UIstateSelector.style.display = "none";
       }
 
+      // IF CITY
+      if(_city && _state){
+        this._enableCityFilter(item, _state, _city);
+        this.UIcitySelector.style.display = "block";
+      }
+      else{
+        this.UIcitySelector.querySelector("select").removeEventListener("change", this._enableFilterChange);
+        this.UIcitySelector.style.display = "none";
+      }
+
+
       if(_branch){
         this._enableBranchFilter(item, _branch);
         this.UIbranchSelector.style.display = "block";
@@ -998,6 +1017,16 @@ define(function(require){
       else{
         this.UIbranchSelector.querySelector("select").removeEventListener("change", this._enableFilterChange);
         this.UIbranchSelector.style.display = "none";
+      }
+
+      // IF UNIT
+      if(_unit){
+        this._enableUnitFilter(item, _branch, _unit);
+        this.UIunitSelector.style.display = "block";
+      }
+      else{
+        this.UIunitSelector.querySelector("select").removeEventListener("change", this._enableFilterChange);
+        this.UIunitSelector.style.display = "none";
       }
 
       if(_extras){
@@ -1077,12 +1106,14 @@ define(function(require){
     },
 
     _enableStateFilter : function(item, state){
-      var _data    = _.uniq(_.pluck(item.data, state.field))
+      var /*_data    = _.uniq(_.pluck(item.data, state.field))
                       .map(function(y){return +y})
-                      .sort(function(a, b){return a - b}),
+                      .sort(function(a, b){return a - b}),*/
           data     = Object.create(ESTADOSNAME),
           selector = this.UIstateSelector.querySelector("select"),
-          optAll   = null;
+          optAll   = null,
+          
+          _default  = state.default;
 
       selector.innerHTML = "";
       selector.setAttribute("data-field", state.field);
@@ -1099,16 +1130,52 @@ define(function(require){
         opt.value     = y.id;
         opt.innerHTML = y.name;
 
+        if(_default == y.id){
+          opt.selected = true;
+        }
+
         selector.appendChild(opt);
       }, this);
 
       selector.addEventListener("change", this._enableFilterChange);
     },
+    // this._enableCityFilter(item, _state, _city);
+    _enableCityFilter : function(item, state, city){
+      var data = Object.create(MUNICIPIOSNAME),
+          selector      = this.UIcitySelector.querySelector("select"),
+          stateSelector = this.UIstateSelector.querySelector("select"),
+          optAll        = null,
+          cities;
+
+      selector.innerHTML = "";
+      selector.setAttribute("data-field", city.field);
+      selector.removeEventListener("change", this._enableFilterChange);
+
+      optAll           = document.createElement("option");
+      optAll.value     = SELECTALL;
+      optAll.innerHTML = "todas";
+      selector.appendChild(optAll);
+
+      if(stateSelector.value != SELECTALL){
+        cities = data.cities.filter(function(city){
+          return city.state == +stateSelector.value;
+        });
+
+        cities.forEach(function(c){
+          var opt = document.createElement("option");
+
+          opt.value     = c.city;
+          opt.innerHTML = c.name;
+
+          selector.appendChild(opt);
+        }, this);
+      }
+    },
 
     _enableBranchFilter : function(item, branch){
-      var _data    = _.uniq(_.pluck(item.data, branch.field))
+      var /*_data    = _.uniq(_.pluck(item.data, branch.field))
                       .map(function(y){return +y})
-                      .sort(function(a, b){return a - b}),
+                      .sort(function(a, b){return a - b}),*/
           data     = Object.create(RAMOSNAME),
           selector = this.UIbranchSelector.querySelector("select"),
           optAll   = null;
