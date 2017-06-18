@@ -346,6 +346,10 @@ table {
   vertical-align: top;
   border-top: 1px solid #ddd; }
 
+.bootstrap-table {
+  width: 100%;
+  overflow-y: scroll; }
+
 /***graph*/
 .axis path,
 .axis line {
