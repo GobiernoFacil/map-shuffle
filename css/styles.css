@@ -346,6 +346,10 @@ table {
   vertical-align: top;
   border-top: 1px solid #ddd; }
 
+.bootstrap-table {
+  width: 100%;
+  overflow-y: scroll; }
+
 /***graph*/
 .axis path,
 .axis line {
@@ -1529,6 +1533,53 @@ h1 {
 .divider {
   border-top: 1px solid #ccc; }
 
+.compare {
+  border-bottom: 1px solid #ccc;
+  padding: 0;
+  margin-bottom: 30px; }
+  .compare form {
+    background: rgba(28, 28, 28, 0.6);
+    padding: 15px 15px 0;
+    color: white; }
+
+.map_title {
+  font-size: 18px;
+  font-weight: 700; }
+
+.form {
+  background: #1cb68d;
+  padding: 15px 15px 0;
+  color: white; }
+  .form input[type=submit] {
+    background: #f49d51;
+    font-size: 16px;
+    border: 0;
+    color: white;
+    width: 100%;
+    line-height: 35px; }
+    .form input[type=submit]:hover {
+      cursor: pointer;
+      background: #f18221; }
+
+.GF-SHCP-bars-tool-list-variable-bar {
+  background: #f49d51;
+  display: block;
+  height: 20px;
+  width: 100%; }
+
+a.export,
+a.export:visited {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: block;
+  text-align: center;
+  font-size: 16px;
+  padding: 3px;
+  line-height: 35px; }
+  a.export:hover,
+  a.export:visited:hover {
+    background: rgba(0, 0, 0, 0.3); }
+
 .sidebar {
   background: rgba(28, 28, 28, 0.6);
   border-right: 3px solid #1cb68d;
@@ -1536,6 +1587,8 @@ h1 {
   top: 0;
   left: 0px;
   height: 100%; }
+  .sidebar section {
+    padding: 0; }
   .sidebar .filter_container {
     background: white;
     padding: 20px; }
@@ -1592,34 +1645,44 @@ h1 {
           .sidebar .filter_container .desplegar li a.selected:hover,
           .sidebar .filter_container .desplegar li a:visited.selected:hover {
             background: #158a6b; }
-  .sidebar h3 {
+  .sidebar
+h3 {
     font: 700 13px "soberana_sans", Helvetica, Arial, sans-serif;
     border-top: 1px solid rgba(53, 53, 51, 0.1);
     margin-top: 18px;
     padding-top: 15px; }
+  .sidebar label {
+    font: 700 13px "soberana_sans", Helvetica, Arial, sans-serif; }
+  .sidebar select {
+    font-family: "soberana_sans", Helvetica, Arial, sans-serif; }
+
+.filters {
+  background: rgba(242, 242, 242, 0.8);
+  padding: 3px 10px; }
 
 .cart-list {
   margin: 0;
   padding: 0; }
   .cart-list:before {
-    content: "Filtros aplicados";
+    content: "Filtros aplicados: ";
     color: #999;
     font: 500 13px "soberana_sans", Helvetica, Arial, sans-serif;
-    margin: 0; }
+    margin: 0;
+    display: inline-block; }
   .cart-list li {
-    background: #eaeaea;
+    background: white;
     color: #999;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     border-radius: 10px;
+    display: inline-block;
     font-size: 13px;
     list-style: none;
-    margin: 10px 0;
+    margin: 3px 5px 3px 0;
     position: relative;
-    padding: 10px; }
+    padding: 10px 40px 10px 10px; }
     .cart-list li:hover {
-      background: #dedede;
       color: black;
       cursor: pointer; }
       .cart-list li:hover:after {
@@ -1636,7 +1699,7 @@ h1 {
       top: 7px; }
 
 .leaflet-interactive {
-  stroke: black;
+  stroke: rgba(0, 0, 0, 0.1);
   stroke-width: 2px; }
 
 .main_nav {
