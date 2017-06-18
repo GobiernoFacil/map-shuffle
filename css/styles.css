@@ -1529,6 +1529,53 @@ h1 {
 .divider {
   border-top: 1px solid #ccc; }
 
+.compare {
+  border-bottom: 1px solid #ccc;
+  padding: 0;
+  margin-bottom: 30px; }
+  .compare form {
+    background: rgba(28, 28, 28, 0.6);
+    padding: 15px 15px 0;
+    color: white; }
+
+.map_title {
+  font-size: 18px;
+  font-weight: 700; }
+
+.form {
+  background: #1cb68d;
+  padding: 15px 15px 0;
+  color: white; }
+  .form input[type=submit] {
+    background: #f49d51;
+    font-size: 16px;
+    border: 0;
+    color: white;
+    width: 100%;
+    line-height: 35px; }
+    .form input[type=submit]:hover {
+      cursor: pointer;
+      background: #f18221; }
+
+.GF-SHCP-bars-tool-list-variable-bar {
+  background: #f49d51;
+  display: block;
+  height: 20px;
+  width: 100%; }
+
+a.export,
+a.export:visited {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: block;
+  text-align: center;
+  font-size: 16px;
+  padding: 3px;
+  line-height: 35px; }
+  a.export:hover,
+  a.export:visited:hover {
+    background: rgba(0, 0, 0, 0.3); }
+
 .sidebar {
   background: rgba(28, 28, 28, 0.6);
   border-right: 3px solid #1cb68d;
@@ -1636,7 +1683,7 @@ h1 {
       top: 7px; }
 
 .leaflet-interactive {
-  stroke: black;
+  stroke: rgba(0, 0, 0, 0.1);
   stroke-width: 2px; }
 
 .main_nav {
