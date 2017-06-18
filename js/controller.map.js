@@ -374,8 +374,6 @@ define(function(require){
       var that = this,
           t    = _.template(item.config.template);
       // [1] genera el layer de geojson estatal
-
-      console.log(container);
       this[container] = L.geoJson(geojson/*ESTADOS.edos*/, {
                     // * asigna el estilo. Internamente, genera la función de color,
                     //   lo demás viene del archivo de configuración principal
@@ -437,7 +435,6 @@ define(function(require){
 
           if(link){
             p.on("click", function(e){
-              console.log(link.column, feature.properties);
               window.open(link.url + "#" + feature.properties[link.column]);
             });
           }
@@ -473,7 +470,6 @@ define(function(require){
     //
     //
     cleanExtraLayer : function(){
-      console.log(this, this.extra);
       if(this.extra){
         this.map.removeLayer(this.extra);
         console.log("remove");
@@ -1109,11 +1105,11 @@ define(function(require){
       var /*_data    = _.uniq(_.pluck(item.data, state.field))
                       .map(function(y){return +y})
                       .sort(function(a, b){return a - b}),*/
-          data     = Object.create(ESTADOSNAME),
-          selector = this.UIstateSelector.querySelector("select"),
-          optAll   = null,
-          
-          _default  = state.default;
+          data         = Object.create(ESTADOSNAME),
+          selector     = this.UIstateSelector.querySelector("select"),
+          citySelector = this.UIcitySelector.querySelector("select"),
+          optAll       = null,
+          _default     = state.default;
 
       selector.innerHTML = "";
       selector.setAttribute("data-field", state.field);
@@ -1170,6 +1166,8 @@ define(function(require){
           selector.appendChild(opt);
         }, this);
       }
+
+      selector.addEventListener("change", this._enableFilterChange);
     },
 
     _enableBranchFilter : function(item, branch){
@@ -1202,9 +1200,19 @@ define(function(require){
     },
 
     _enableFilterChange : function(e){
-      var val     = e.currentTarget.value,
-          field   = e.currentTarget.getAttribute("data-field"),
-          current = this.filters.filter(function(el){ return el.field == field })[0];
+      var val         = e.currentTarget.value,
+          field       = e.currentTarget.getAttribute("data-field"),
+          current     = this.filters.filter(function(el){ return el.field == field })[0],
+          stateFilter = this.currentMap.config.filters.filter(function(fil){ return fil.type == "state"})[0],
+          cityFilter  = this.currentMap.config.filters.filter(function(fil){ return fil.type == "city"})[0],
+          currentCity = null;
+
+
+      if(stateFilter.field == field){
+        this._enableCityFilter(null, stateFilter, cityFilter);
+        currentCity = this.filters.filter(function(el){ return el.field == cityFilter.field })[0];
+        this.filters.splice(this.filters.indexOf(currentCity), 1);
+      }
 
       if(current){
         this.filters.splice(this.filters.indexOf(current), 1);
@@ -1242,7 +1250,7 @@ define(function(require){
         panel.appendChild(el);
       }
       else{
-        //console.log("yahoo");
+        //
       }
  
       pageEl  = document.getElementById(conf.controls.pageSelect);
@@ -1494,8 +1502,7 @@ define(function(require){
           name : _state.name
         }
 
-        //console.log(_data, _state, config, total);
-        console.log(data);
+
         this.compareList.push(data);
         //console.log("only state");
       }
