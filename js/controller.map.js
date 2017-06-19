@@ -108,6 +108,8 @@ define(function(require){
                      municipiosName : Object.create(MUNICIPIOSNAME)
                    };
 
+      this.numberFormat = d3.format(",");
+
       // [1.1] DEFINE SHORTCUTS PARA LOS ELEMENTOS DE UI
       //
       // * El selector de mapas
@@ -422,13 +424,25 @@ define(function(require){
 
       this.points = L.geoJson(points, {
         pointToLayer : function(feature, latlng){
-          var p = L.circleMarker(latlng, that.settings.mapPoint);
+          var p     = L.circleMarker(latlng, that.settings.mapPoint),
+              props = feature.properties;
+
+          //that.currentMap.config.values
+          
+          for(var key in props){
+            if(props.hasOwnProperty(key)){
+              props[key] = that.currentMap.config.values.indexOf(key) != -1 ? that.numberFormat(props[key]) : props[key];
+            }
+          }
+          
 
           p.on("mouseover", function(e){
             L.popup()
                 .setLatLng(latlng)
                 .setContent(t(feature.properties))
                 .openOn(that.map);
+
+            //console.log(that.currentMap.config feature.properties);
           });
 
           if(link){

@@ -17,7 +17,7 @@
     "lat" : "lat",
     "lng" : "lng"
   },
-  "values"  : [],
+  "values"  : ["monto_total_inversion", "ejercido"],
   "data"    : ["key","name","ramo","unidad","state","lat","lng","advance","monto_total_inversion","ciclo","classification","ejercido"],
   "current" : {},
   "filters" : [
