@@ -183,11 +183,11 @@ define(function(require){
     enableUserLocation : function(){
 
       if(navigator.geolocation){
-        console.log("yei");
+        
         navigator.geolocation.getCurrentPosition(this.goToUserLocation);
       }
       else{
-        console.log("nope");
+        
       }
     },
 
@@ -303,8 +303,6 @@ define(function(require){
            geo   = document.getElementById(_geo),
           _level = this.settings.ui.mapSelector.levelId;
            level = document.getElementById(_level);
-
-      console.log(geo, level, _geo, _level);
 
       // clear filters
 
@@ -472,10 +470,8 @@ define(function(require){
     cleanExtraLayer : function(){
       if(this.extra){
         this.map.removeLayer(this.extra);
-        console.log("remove");
       }
       else{
-        console.log("dont remove");
       }
     },
 
@@ -799,6 +795,7 @@ define(function(require){
           }
         }, this);
 
+        console.log(filter);
         data = _.where(item.data, filter);
       }
 
@@ -1176,7 +1173,8 @@ define(function(require){
                       .sort(function(a, b){return a - b}),*/
           data     = Object.create(RAMOSNAME),
           selector = this.UIbranchSelector.querySelector("select"),
-          optAll   = null;
+          optAll   = null,
+          _default = branch.default;
 
       selector.innerHTML = "";
       selector.setAttribute("data-field", branch.field);
@@ -1193,29 +1191,87 @@ define(function(require){
         opt.value     = y.id;
         opt.innerHTML = y.name;
 
+        if(_default == y.id){
+          opt.selected = true;
+        }
+
         selector.appendChild(opt);
       }, this);
 
       selector.addEventListener("change", this._enableFilterChange);
     },
 
+    _enableUnitFilter : function(item, branch, unit){
+      var data           = Object.create(UNIDADESNAME),
+          selector       = this.UIunitSelector.querySelector("select"),
+          branchSelector = this.UIbranchSelector.querySelector("select"),
+          optAll         = null,
+          units;
+
+
+      selector.innerHTML = "";
+      selector.setAttribute("data-field", unit.field);
+      selector.removeEventListener("change", this._enableFilterChange);
+
+      optAll           = document.createElement("option");
+      optAll.value     = SELECTALL;
+      optAll.innerHTML = "todos";
+      selector.appendChild(optAll);
+
+      if(branchSelector.value != SELECTALL){
+        units = data.units.filter(function(unit){
+          return +unit.branch == +branchSelector.value;
+        });
+
+        units.forEach(function(c){
+          var opt = document.createElement("option");
+
+          opt.value     = c.id;
+          opt.innerHTML = c.name;
+
+          selector.appendChild(opt);
+        }, this);
+      }
+
+      selector.addEventListener("change", this._enableFilterChange);
+    },
+
     _enableFilterChange : function(e){
-      var val         = e.currentTarget.value,
-          field       = e.currentTarget.getAttribute("data-field"),
-          current     = this.filters.filter(function(el){ return el.field == field })[0],
-          stateFilter = this.currentMap.config.filters.filter(function(fil){ return fil.type == "state"})[0],
-          cityFilter  = this.currentMap.config.filters.filter(function(fil){ return fil.type == "city"})[0],
-          currentCity = null;
+      var val          = e.currentTarget.value,
+          field        = e.currentTarget.getAttribute("data-field"),
+          current      = this.filters.filter(function(el){ return el.field == field })[0],
+          stateFilter  = this.currentMap.config.filters.filter(function(fil){ return fil.type == "state"})[0],
+          cityFilter   = this.currentMap.config.filters.filter(function(fil){ return fil.type == "city"})[0],
+          branchFilter = this.currentMap.config.filters.filter(function(fil){ return fil.type == "branch"})[0],
+          unitFilter   = this.currentMap.config.filters.filter(function(fil){ return fil.type == "unit"})[0],
+          currentCity  = null;
 
+      if(
+        (stateFilter && stateFilter.field == field) ||
+        (branchFilter && branchFilter.field == field) ||
+        (cityFilter && cityFilter.field == field)
+      ){
+        val = val == SELECTALL ? val : +val;
+      }
 
-      if(stateFilter.field == field){
+      if(stateFilter.field == field && cityFilter){
         this._enableCityFilter(null, stateFilter, cityFilter);
         currentCity = this.filters.filter(function(el){ return el.field == cityFilter.field })[0];
         this.filters.splice(this.filters.indexOf(currentCity), 1);
       }
 
+      if(branchFilter.field == field && unitFilter){
+        this._enableUnitFilter(null, branchFilter, unitFilter);
+        currentUnit = this.filters.filter(function(el){ return el.field == unitFilter.field })[0];
+        this.filters.splice(this.filters.indexOf(currentUnit), 1);
+      }
+
       if(current){
+        console.log(current, this.filters);
         this.filters.splice(this.filters.indexOf(current), 1);
+      }
+      else{
+
       }
 
       this.filters.push({
@@ -1297,7 +1353,6 @@ define(function(require){
 
       if(!value && value != 0){
         this.cleanExtraLayer();
-        console.log(value, "alv");
         return;
       }
 
@@ -1474,7 +1529,6 @@ define(function(require){
           total  = []; 
       
       if(!state.value || state.value == SELECTALL){
-        //console.log("nein");
         return;
       }
       else if(state.value && city.value == SELECTALL){
@@ -1504,14 +1558,11 @@ define(function(require){
 
 
         this.compareList.push(data);
-        //console.log("only state");
       }
 
       else{
-        //console.log("only city");
       }
 
-      //console.log(state.value, city.value);
     },
 
     renderBarsToolStateList : function(){
