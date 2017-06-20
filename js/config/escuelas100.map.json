@@ -6,7 +6,7 @@
   "src"   : "/js/maps/escuelas100.csv",
   "file"  : "csv",
   "link"  : {
-    "url"    : "http://localhost:8001/escuelas.html",
+    "url"    : "http://localhost:8000/escuelas.html",
     "column" : "CLAVECENTROTRABAJO"
   },
   "style" : {
@@ -17,7 +17,7 @@
     "lat" : "LATITUD",
     "lng" : "LONGITUD"
   },
-  "values"  : [],
+  "values"  : ["MONTO_ASIGNADO"],
 
   "data"    : ["CLAVECENTROTRABAJO","ANIO_EJECUCION","NOMBRECT","CLAVE_ENTIDAD","ENTIDAD", "MUNICIPIO","LOCALIDAD","LATITUD","LONGITUD","MATRICULA_PLANTEL","MONTO_ASIGNADO","DOMICILIO","CONTRATISTA"],
   "current" : {},

@@ -38,13 +38,14 @@
           div.innerHTML = template;
           container.appendChild(div);
 
+          this.map(d);
+          
           this.renderCircle(div, d, this.config.circleClass);
 
           this.makeMap(div, d);
 
           console.log(d);
 
-          this.map(d);
           vue = new Vue({
             el      : div,
             data    : d
@@ -131,6 +132,7 @@
 
         _data = [ {"amount": value }, {"amount": 100 - value} ];
 
+        console.log(data, column, data[column], _data);
         g = svg.selectAll(".arc")
           .data(pie(_data))
         .enter().append("g")

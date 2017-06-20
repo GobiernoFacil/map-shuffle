@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Escuelas al 100</title>
+  <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+  <link rel="stylesheet" type="text/css" href="css/leaflet.css">
+</head>
+<body>
+
+  <!-- MENSAJE DE ERROR -->
+  <div id="GF-error-message" style="display: none">
+    La información no está disponible
+  </div>
+  
+
+  <!-- TEMPLATE DEL CONTENIDO -->
+  <div id="GF-opa-template" style="display: none;">
+  <section>
+    <h2>Template básico de escuelas al 100</h2>
+    <p>{{CLAVECENTROTRABAJO}}</p>
+    <p>{{ANIO_EJECUCION}}</p>
+    <p>{{NOMBRECT}}</p>
+    <p>{{CLAVE_ENTIDAD}}</p>
+    <p>{{ENTIDAD}}</p>
+    <p>{{MUNICIPIO}}</p>
+    <p>{{LOCALIDAD}}</p>
+    <p>{{LATITUD}}</p>
+    <p>{{LONGITUD}}</p>
+    <p>{{MATRICULA_PLANTEL}}</p>
+    <p>{{MONTO_ASIGNADO}}</p>
+    <p>{{DOMICILIO}}</p>
+    <p>{{CONTRATISTA}}</p>
+    <p>{{avance_fisico}}</p>
+
+    <div class="GF-SHCP-circle"
+         data-width="160"
+         data-height="130"
+         data-color-a="rgb(190,205,81)"
+         data-color-b="rgb(210,210,210)"
+         data-column="avance_fisico"></div>
+
+    <div class="GF-SHCP-map" 
+         data-lat="LATITUD"
+         data-lng="LONGITUD"
+         style="width:100%; height:350px; frameborder:0; scrolling:no;"></div>
+
+  </section>
+  </div>
+
+  <!-- CONTENIDO -->
+  <div id="GF-card-list-container"></div>
+
+
+  <!-- LIBRERÍAS -->
+  <script src="js/libs/d3.v3.min.js"></script>
+  <script src="js/libs/jquery-3.1.1.min.js"></script>
+  <script src="js/libs/vue.min.js"></script>
+  <script src="js/libs/leaflet.js"></script>
+
+  <!-- HELPERS -->
+  <script src="js/card.helpers.js"></script>
+
+  <!-- CONFIGURACIÓN -->
+  <script>
+  var GFormat             = d3.format(","),
+      GFAPIBaseURL        = "https://mapas.gobiernofacil.com/api/consulta/escuelas",
+      //GFAPIBaseURL      = "http://localhost:8000/api/consulta/opa",
+      GFErrorBlockID      = "GF-error-message",
+      GFContentBlockID    = "GF-card-list-container",
+      GFTemplateBlockID   = "GF-opa-template",
+      GFDefaultLat        = 22.442167,
+      GFDefaultLng        = -100.110350,
+      GFSFPappKey         = "5825343BB68F29D2A881B2E8D205B98846C95558",
+      GFSFPStatesEndpoint = "http://devretociudadano.funcionpublica.gob.mx/SidecWS/resources/quejadenuncia/obtenerEstados/2",
+      GFJSONDataContainer = "resultados",
+      GFCircleClass       = "GF-SHCP-circle",
+      GFMapClass          = "GF-SHCP-map";
+  </script>
+
+
+  <!-- SE INICIA EL TEMPLATE -->
+  <script>
+  var GFSHCPConfig = {
+    container     : "#" + GFContentBlockID,
+    error         : "#" + GFErrorBlockID,
+    template      : "#" + GFTemplateBlockID,
+    endpoint      : GFAPIBaseURL,
+    dataContainer : GFJSONDataContainer,
+    circleClass   : "." + GFCircleClass,
+    mapClass      : "." + GFMapClass,
+    defaultLat    : GFDefaultLat,
+    defaultLng    : GFDefaultLng
+  };
+
+  var GFSHCPmap = function(data){
+    data.avance_fisico = 80;
+  }
+
+  GFSHCPHelpers.initialize(GFSHCPConfig, GFSHCPmap);
+  </script>
+
+</body>
+</html>
