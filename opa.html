@@ -204,6 +204,7 @@
        		<h3>Presupuesto aprobado en el PEF 2017</h3>
        		<p class="amount right">$<strong>{{GFormat(aprobado)}}</strong> <span>MXN</span></p>
        		<div class="bar">
+       		  <span class="bar inside pef" v-bind:style="presupuesto_style"></span>
        		</div>
 		</div>
 		
@@ -212,6 +213,7 @@
         	<h3>Monto ejercido 2017</h3>
         	<p class="amount right">$<strong>{{GFormat(ejercido)}}</strong> <span>MXN</span></p>
         	<div class="bar">
+        	<span class="bar inside ejercido" v-bind:style="total_ejercido_style"></span>
         	</div>
         </div>
 		
@@ -220,6 +222,7 @@
         	<h3>Presupuesto modificado 2017</h3>
         	<p class="amount right">$<strong>{{GFormat(modificado)}}</strong> <span>MXN</span></p>
         	<div class="bar">
+        	  <span class="bar inside modificado" v-bind:style="modificado_style"></span>
         	</div>
 		</div>
 		
@@ -453,7 +456,6 @@
     </div>
     <!-- modal -->
 	  <modal v-if="showModal" @close="showModal = false">
-     <h1>ALVV</h1> 
     </modal>
 
   </section>
