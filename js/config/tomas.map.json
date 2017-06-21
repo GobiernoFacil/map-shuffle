@@ -4,11 +4,12 @@
   "level" : ["state"],
   "src"   : "/js/maps/tomas_clandestinas.csv",
   "file"  : "csv",
+  "color" : 5,
   "location" : {
     "state" : "estado_id"
   },
   "values"  : ["tomas"],
-  "data"    : ["year", "estado"],
+  "data"    : ["year", "estado", "municipio", "municipio_id"],
   "current" : {
     "level" : "state",
     "value" : "tomas"

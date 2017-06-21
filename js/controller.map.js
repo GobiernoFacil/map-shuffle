@@ -142,6 +142,7 @@ define(function(require){
       this.updateUILevelSelectorChange  = this.updateUILevelSelectorChange.bind(this);
       this.changeStateBarsToolFunction  = this.changeStateBarsToolFunction.bind(this);
       this.addRegionToCompare           = this.addRegionToCompare.bind(this);
+      this.goToUserLocation             = this.goToUserLocation.bind(this);
       //this._enableStateFilterChange = this._enableStateFilterChange.bind(this);
 
       // [3] ARREGLA EL GEOJSON DE ESTADOS (esto debe desaparecer)
@@ -183,18 +184,21 @@ define(function(require){
      * ------------------------------------------------------------
      */
     enableUserLocation : function(){
-
-      if(navigator.geolocation){
-        
-        navigator.geolocation.getCurrentPosition(this.goToUserLocation);
-      }
-      else{
-        
-      }
+      var btn  = document.getElementById(this.settings.ui.geolocationBtn),
+          that = this;
+      btn.addEventListener("click", function(e){
+        if(navigator.geolocation){
+          navigator.geolocation.getCurrentPosition(that.goToUserLocation);
+        }
+        else{
+          alert("función no disponible");
+        }
+      });
     },
 
     goToUserLocation : function(position){
-      console.log(position);
+      var latlng = L.latLng(position.coords.latitude, position.coords.longitude);
+      this.map.setView(latlng, this.settings.ux.findMeZoom);
     },
 
 

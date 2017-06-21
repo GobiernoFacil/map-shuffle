@@ -38,9 +38,9 @@
   },
   "maps" : {
     "basePath" : "/js/config",
-    "maps"     : ["escuelas100.map.json", "ramo23.map.json", "opa.map.json", "gasolina.map.json"],
+    "maps"     : ["escuelas100.map.json", "ramo23.map.json", "opa.map.json", "gasolina.map.json", "tomas.map.json"],
     "extras"   : ["poblacion.map.json"],
-    "current"  : 2
+    "current"  : 4
   },
   "ui" : {
     "topToolsDiv"    : "GF-SHCP-top-tools",
@@ -94,5 +94,8 @@
     "geolocationForm"  : "GF-SHCP-geolocation-form",
     "geolocationField" : "GF-SHCP-geolocation-input",
     "searchTable"      : "GF-SHCP-advanced-search"
+  },
+  "ux" : {
+    "findMeZoom" : 14
   }
 }

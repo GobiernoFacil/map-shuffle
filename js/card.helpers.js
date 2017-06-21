@@ -12,6 +12,7 @@
           that      = this;
       
       this.map  = map;
+      this.data = null;
 
 
       this.vueTemplates = [];
@@ -26,15 +27,17 @@
             error.style.display     = "block";
           }
 
-          that.render(data[config.dataContainer], container, template);
+        that.render(data[config.dataContainer], container, template);
       });
     },
 
     render : function(data, container, template){
+      this.data = data;
         data.forEach(function(d){
           var div = document.createElement("div"),
               vue;
 
+          div.setAttribute("class", this.config.containerClass);
           div.innerHTML = template;
           container.appendChild(div);
 
@@ -42,24 +45,28 @@
           
           this.renderCircle(div, d, this.config.circleClass);
 
-          this.makeMap(div, d);
-
-          console.log(d);
+          
 
           vue = new Vue({
             el      : div,
             data    : d
           });
+
+          this.makeMap(div, d);
         }, this);
     },
 
     makeMap : function(container, d){
 
+      console.log("yahoooo", container, d);
+
       var maps  = container.querySelectorAll(this.config.mapClass);
 
       maps = Array.prototype.slice.apply(maps);
 
+      console.log(maps);
       maps.forEach(function(map){
+        console.log(map);
         var _lat  = map.getAttribute("data-lat"),
             _lng  = map.getAttribute("data-lng"),
             lat   = +d[_lat] ? d[_lat] : this.config.defaultLat,
@@ -72,10 +79,8 @@
 
         map.id = id;
 
-        mymap = L.map(id).setView([lat, lng], 7);
+        mymap = L.map(map).setView([lat, lng], 7);
 
-
-        console.log(_lat, d[_lat], _lng, d[_lng]);
         L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
           maxZoom: 18,
@@ -132,7 +137,6 @@
 
         _data = [ {"amount": value }, {"amount": 100 - value} ];
 
-        console.log(data, column, data[column], _data);
         g = svg.selectAll(".arc")
           .data(pie(_data))
         .enter().append("g")

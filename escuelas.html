@@ -17,6 +17,12 @@
   <div id="GF-opa-template" style="display: none;">
   <section>
     <h2>Template básico de escuelas al 100</h2>
+
+    <div class="GF-SHCP-map" 
+         data-lat="LATITUD"
+         data-lng="LONGITUD"
+         style="width:400px; height:350px; frameborder:0; scrolling:no;"></div>
+
     <p>{{CLAVECENTROTRABAJO}}</p>
     <p>{{ANIO_EJECUCION}}</p>
     <p>{{NOMBRECT}}</p>
@@ -32,17 +38,17 @@
     <p>{{CONTRATISTA}}</p>
     <p>{{avance_fisico}}</p>
 
+    <div class="GF-SHCP-map" 
+         data-lat="LATITUD"
+         data-lng="LONGITUD"
+         style="width:400px; height:350px; frameborder:0; scrolling:no;"></div>
+
     <div class="GF-SHCP-circle"
          data-width="160"
          data-height="130"
          data-color-a="rgb(190,205,81)"
          data-color-b="rgb(210,210,210)"
          data-column="avance_fisico"></div>
-
-    <div class="GF-SHCP-map" 
-         data-lat="LATITUD"
-         data-lng="LONGITUD"
-         style="width:100%; height:350px; frameborder:0; scrolling:no;"></div>
 
   </section>
   </div>
@@ -74,7 +80,8 @@
       GFSFPStatesEndpoint = "http://devretociudadano.funcionpublica.gob.mx/SidecWS/resources/quejadenuncia/obtenerEstados/2",
       GFJSONDataContainer = "resultados",
       GFCircleClass       = "GF-SHCP-circle",
-      GFMapClass          = "GF-SHCP-map";
+      GFMapClass          = "GF-SHCP-map",
+      GFContainerClass    = "GF-SHCP-container";
   </script>
 
 
@@ -89,7 +96,8 @@
     circleClass   : "." + GFCircleClass,
     mapClass      : "." + GFMapClass,
     defaultLat    : GFDefaultLat,
-    defaultLng    : GFDefaultLng
+    defaultLng    : GFDefaultLng,
+    containerClass : GFContainerClass
   };
 
   var GFSHCPmap = function(data){
