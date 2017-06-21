@@ -14,6 +14,7 @@ require.config({
     underscore : "libs/underscore-min",
     text       : 'libs/text',
     json       : 'libs/json',
+    async      : 'libs/async',
     classyBrew : "libs/classybrew.min",
     jquery     : "libs/jquery-3.1.1.min",
     bootstrap  : "libs/bootstrap.min",

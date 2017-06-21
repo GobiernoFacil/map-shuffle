@@ -96,6 +96,7 @@
     "searchTable"      : "GF-SHCP-advanced-search"
   },
   "ux" : {
-    "findMeZoom" : 14
+    "findMeZoom" : 14,
+    "geocoding"  : "https://maps.googleapis.com/maps/api/geocode/json"
   }
 }

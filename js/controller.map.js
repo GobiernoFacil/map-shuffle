@@ -21,6 +21,8 @@ define(function(require){
       underscore  = require("underscore"),
       classybrew  = require("classyBrew"),
       btable      = require("btable"),
+      APIKEY      = "AIzaSyDZXX_dqYAZ9oLxA28sN5ztg3qNBArk80I",
+      gMaps       = require("async!https://maps.googleapis.com/maps/api/js?key=AIzaSyDZXX_dqYAZ9oLxA28sN5ztg3qNBArk80I");
 
       // [3] obtiene los conjuntos de datos
       // [*] las posibles combinaciones de color de classyBrew
@@ -98,6 +100,8 @@ define(function(require){
       this.states       = null;
       // la referencia al layer de leaflet extra
       this.extra        = null;
+      // la referencia al geocoder;
+      this.geocoder     = null;
       // referencia al archivo de configuración inicial
       this.settings     = Object.create(CONFIG);
       // referencia a las colecciones de ubicaciones
@@ -173,6 +177,10 @@ define(function(require){
 
       // [7] HABILITA EL GEOLOCALIZADOR Y LA OBTENCIÓN DE LAS COORDENADAS DEL USUARIO
       this.enableUserLocation();
+
+      // [8] HABILITA EL REVERSE GEOCODING
+      this.enableReverseGeocofing();
+      // var geocoder = new google.maps.Geocoder;
     },
 
 
@@ -183,6 +191,44 @@ define(function(require){
      * F U N C I O N E S   S O P O R T E
      * ------------------------------------------------------------
      */
+
+    enableReverseGeocofing : function(){
+      var geocoder  = new google.maps.Geocoder,
+          input     = document.getElementById(this.settings.ui.geolocationField),
+          form      = document.getElementById(this.settings.ui.geolocationForm),
+          _template = "?address=<%=address%>&key=<%=apikey%>",
+          endpoint  = this.settings.ux.geocoding,
+          template  = _.template(endpoint + _template),
+          url       = null,
+          search    = "",
+          that      = this;
+          // APIKEY;
+
+      form.addEventListener("submit", function(e){
+        e.preventDefault();
+
+        search = input.value;
+
+        if(!search) return;
+
+        url = template({address : search, apikey  : APIKEY});
+
+        d3.json(url, function(error, data){
+          if(!error && data.status == "OK"){
+            var loc    = data.results[0].geometry.location,
+                latlng = [loc.lat, loc.lng];
+
+            that.map.setView(latlng, that.settings.ux.findMeZoom);
+          }
+        });
+        // encodeURI
+      });
+      //console.log(geocoder);
+      // https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY
+
+
+    },
+
     enableUserLocation : function(){
       var btn  = document.getElementById(this.settings.ui.geolocationBtn),
           that = this;
