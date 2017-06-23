@@ -18,11 +18,15 @@ require.config({
     classyBrew : "libs/classybrew.min",
     jquery     : "libs/jquery-3.1.1.min",
     bootstrap  : "libs/bootstrap.min",
-    btable     : "libs/bootstrap-table.min"
+    btable     : "libs/bootstrap-table.min",
+    tableExport: "libs/tableExport.min",
+    bootstrapTableExport: "libs/bootstrap-table-export"
   },
   shim : {
     "bootstrap" : { "deps" :['jquery'] },
-    "btable" : {"deps" : ['bootstrap']}
+    "tableExport" : { "deps" :['jquery'] },
+    "btable" : {"deps" : ['bootstrap']},
+    "bootstrapTableExport" : {"deps" : ["btable"]}
   },
 });
 

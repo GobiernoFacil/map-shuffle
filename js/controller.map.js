@@ -21,6 +21,8 @@ define(function(require){
       underscore  = require("underscore"),
       classybrew  = require("classyBrew"),
       btable      = require("btable"),
+      tableExport = require("tableExport"),
+      bootstrapTableExport = require("bootstrapTableExport"),
       APIKEY      = "AIzaSyDZXX_dqYAZ9oLxA28sN5ztg3qNBArk80I",
       gMaps       = require("async!https://maps.googleapis.com/maps/api/js?key=AIzaSyDZXX_dqYAZ9oLxA28sN5ztg3qNBArk80I");
 
@@ -1731,7 +1733,13 @@ define(function(require){
         search : true,
         searchOnEnterKey : true,
         data: data,
-        sortable : true
+        sortable : true,
+        showExport: true,
+        pageList : "ALL",
+        exportOptions: {
+        fileName: 'custom_file_name',
+        pageList : "ALL"
+    }
       });
 
     },
