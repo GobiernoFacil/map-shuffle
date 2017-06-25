@@ -52,9 +52,11 @@ define(function(require){
       // [*] el selector de filtros
       FILTERSELECTOR = require("text!templates/filter-selector-panel.html"),
       // [*] el selector de filtros
-      PAGESELECTOR = require("text!templates/page-selector-panel.html"),
+      PAGESELECTOR   = require("text!templates/page-selector-panel.html"),
       // [*] las barras de comparación
-      PAGESELECTOR = require("text!templates/page-selector-panel.html"),
+      PAGESELECTOR   = require("text!templates/page-selector-panel.html"),
+      // [*] la búsqueda avanzada
+      ADVANCESEARCH  = require("text!templates/advanced-search.html"),  
 
       // [5] define las constantes internas del sistema 
       // ----------------------------------------------------------------------
@@ -166,6 +168,9 @@ define(function(require){
 
       // [5] INICIA LOS ELEMENTOS DE UI
       // ----------------------------------------------------------------------
+      // * la búsqueda avanzada
+      this.renderAdvancedSearch();
+
       // * el selector de mapa
       this.renderMapSelector();
 
@@ -893,6 +898,22 @@ define(function(require){
      * ------------------------------------------------------------
      */
 
+
+    // EL BUSCADOR AVANZADO
+    //
+    //
+    //
+    //
+
+    renderAdvancedSearch : function(){
+      // ADVANCESEARCH
+      var //template = _.template(ADVANCESEARCH),
+          elID     = this.settings.ui.searchTable,
+          el       = document.getElementById(elID);
+
+      console.log(elID);
+      el.innerHTML = ADVANCESEARCH;
+    },
 
     //
     // EL PANEL DE SELECTOR DE MAPA

@@ -93,7 +93,7 @@
     "geolocationBtn"   : "GF-SHCP-geolocate-user",
     "geolocationForm"  : "GF-SHCP-geolocation-form",
     "geolocationField" : "GF-SHCP-geolocation-input",
-    "searchTable"      : "GF-SHCP-advanced-search",
+    "searchTable"      : "GF-SHCP-table-tool",
     "projectCounter"   : "GF-SHCP-project-counter"
   },
   "ux" : {
