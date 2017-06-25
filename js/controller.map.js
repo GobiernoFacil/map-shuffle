@@ -14,8 +14,10 @@ define(function(require){
 
       // [1] obtiene el archivo de configuración
   var CONFIG      = require("json!config/config.map.json"),
+      // ----------------------------------------------------------------------
 
       // [2] obtiene las librerías necesarias
+      // ----------------------------------------------------------------------
       d3          = require("d3"),
       leaflet     = require("leaflet"),
       underscore  = require("underscore"),
@@ -27,6 +29,7 @@ define(function(require){
       gMaps       = require("async!https://maps.googleapis.com/maps/api/js?key=AIzaSyDZXX_dqYAZ9oLxA28sN5ztg3qNBArk80I");
 
       // [3] obtiene los conjuntos de datos
+      // ----------------------------------------------------------------------
       // [*] las posibles combinaciones de color de classyBrew
       COLORS         = require("assets/brewer-color-list"),
       // [*] el archivo de geojson de los estados
@@ -43,6 +46,7 @@ define(function(require){
       UNIDADESNAME   = require("assets/unidades-nombres"),
 
       // [4] obtiene los templates de UI
+      // ----------------------------------------------------------------------
       // [*] el selector de mapa
       MAPSELECTOR    = require("text!templates/map-selector-panel.html"),
       // [*] el selector de filtros
@@ -53,6 +57,7 @@ define(function(require){
       PAGESELECTOR = require("text!templates/page-selector-panel.html"),
 
       // [5] define las constantes internas del sistema 
+      // ----------------------------------------------------------------------
       SELECTALL      = "_____",
       XFILTERCLASS   = "killMePlease";
 
@@ -74,7 +79,7 @@ define(function(require){
     //
     initialize : function(){
       // [1] INICIA LAS PROPIEDADES DEL APP 
-      //
+      // ----------------------------------------------------------------------
       // * la referencia a classyBrew
       this.brew         = null;
       // * la referencia al layer de leaflet de ciudades
@@ -117,7 +122,7 @@ define(function(require){
       this.numberFormat = d3.format(",");
 
       // [1.1] DEFINE SHORTCUTS PARA LOS ELEMENTOS DE UI
-      //
+      // ----------------------------------------------------------------------
       // * El selector de mapas
       this.UImapSelector    = null;
       // * El selector del nivel del mapa (estado, municipio)
@@ -138,7 +143,7 @@ define(function(require){
       this.UIextraFiltersSelector = null;
 
       // [2] ARRREGLA EL SCOPE DE ALGUNAS FUNCIONES
-      //
+      // ----------------------------------------------------------------------
       this._stateStyle                  = this._stateStyle.bind(this);
       this._stateExtraStyle             = this._stateExtraStyle.bind(this);
       this._cityStyle                   = this._cityStyle.bind(this);
@@ -156,11 +161,11 @@ define(function(require){
       this._setStatesGeometry();
       
       // [4] INICIA EL MAPA DE LEAFLET
-      //
+      // ----------------------------------------------------------------------
       this.drawMap();
 
-      // [5]] INICIA LOS ELEMENTOS DE UI
-      // 
+      // [5] INICIA LOS ELEMENTOS DE UI
+      // ----------------------------------------------------------------------
       // * el selector de mapa
       this.renderMapSelector();
 
@@ -171,16 +176,18 @@ define(function(require){
       this.renderFilterSelector();
 
       // [6] CARGA LOS ARCHIVOS DE CONFIGURACIÓN Y DESPLIEGA EL MAPA SELECCIONADO
-      //
+      // ----------------------------------------------------------------------
       // * la configuración de los mapas principales
       this.loadMapsConfig();
       // * la configuración de los mapas extra (para comparar)
       this.loadExtraMapsConfig();
 
-      // [7] HABILITA EL GEOLOCALIZADOR Y LA OBTENCIÓN DE LAS COORDENADAS DEL USUARIO
+      // [7] LA GEOLOCALIZACIÓN
+      // ----------------------------------------------------------------------
+      // [7.1] HABILITA EL GEOLOCALIZADOR Y LA OBTENCIÓN DE LAS COORDENADAS DEL USUARIO
       this.enableUserLocation();
 
-      // [8] HABILITA EL REVERSE GEOCODING
+      // [7.2] HABILITA EL REVERSE GEOCODING
       this.enableReverseGeocofing();
       // var geocoder = new google.maps.Geocoder;
     },
@@ -302,6 +309,7 @@ define(function(require){
       // * la colección de datos seleccionados (los datos sin ser covertidos a geojson)
       this._currentData = this._filterData(item);
 
+
       // [3] despliega el mapa según el tipo
       //
       // A) Es un mapa de área por estado
@@ -347,8 +355,9 @@ define(function(require){
         this.enableTableTool(item);
       }
 
+      // [8] Actualiza el contador de proyectos
       //
-      //
+      this.renderProjectCounter(this._currentData);
     },
 
     updateUIOptions : function(item){
@@ -982,6 +991,14 @@ define(function(require){
       }
     },
 
+    renderProjectCounter : function(data){
+      var id    = this.settings.ui.projectCounter,
+          el    = document.getElementById(id),
+          total = data.length;
+
+      el.innerHTML = total ? total : 0;
+    },
+
     renderFilterSelector : function(){
       // FILTERSELECTOR
       var that = this,
@@ -1001,27 +1018,6 @@ define(function(require){
       this.UIextraFiltersSelector = html.querySelector("#" + conf.selectors.extraFiltersId);
 
       div.appendChild(html);
-
-      /*
-      this.filterSelector = new L.Control({position : conf.position});
-      this.filterSelector.onAdd = function(map){
-        var html       = document.createElement(conf.container);
-
-        html.innerHTML = FILTERSELECTOR;
-        html.id        = conf.id;
-        html.setAttribute("class", conf.class);
-
-        //that.UIfilterSelector = html.querySelector("select");
-        that.UIyearSelector   = html.querySelector("#" + conf.selectors.filtersContainers.yearContainer);
-        that.UIstateSelector  = html.querySelector("#" + conf.selectors.filtersContainers.stateContainer);
-        that.UIbranchSelector = html.querySelector("#" + conf.selectors.filtersContainers.branchContainer);
-        that.UIextraFiltersSelector = html.querySelector("#" + conf.selectors.extraFiltersId);
-
-        return html;
-      };
-
-      this.filterSelector.addTo(this.map);
-      */
     },
 
     enableFilters : function(item){
