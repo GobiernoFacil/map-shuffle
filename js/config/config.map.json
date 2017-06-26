@@ -94,7 +94,8 @@
     "geolocationForm"  : "GF-SHCP-geolocation-form",
     "geolocationField" : "GF-SHCP-geolocation-input",
     "searchTable"      : "GF-SHCP-table-tool",
-    "projectCounter"   : "GF-SHCP-project-counter"
+    "projectCounter"   : "GF-SHCP-project-counter",
+    "colorGuide"       : "GF-SHCP-color-guide"
   },
   "ux" : {
     "findMeZoom" : 14,
