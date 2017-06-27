@@ -14,6 +14,13 @@
 	  <!--paginación, categorías-->
 	  <div id="GF-SHCP-map" style="width:100%; height:100%; frameborder:0; scrolling:no;"></div>
 	  <!--<div id="GF-SHCP-bottom-tools"></div>-->
+	  <!-- 
+          Color guide : GF-SHCP-color-guide 
+          Genera un <ul> con los distintos colores para
+          gradientes. El template de cada <li> está
+          en js/templates/color-band.html
+        -->
+        <div id="GF-SHCP-color-guide" style="display: none"></div>
   </div>
   
    <div class="col-sm-3 zero sidebar">
@@ -30,21 +37,7 @@
       este div va arriba del mapa
       -->
       <div id="GF-SHCP-top-tools">
-        <!-- 
-          Color guide : GF-SHCP-color-guide 
-          Genera un <ul> con los distintos colores para
-          gradientes. El template de cada <li> está
-          en js/templates/color-band.html
-        -->
-        <div id="GF-SHCP-color-guide" style="display: none"></div>
-        <!-- 
-        Project counter : GF-SHCP-project-counter
-        aquí se despliegan el número de proyectos 
-        desplegados en el mapa después de filtrarlos
-        -->
-        <div>
-          
-        </div>
+        
       </div>
       
        <!-- extra layers -->
@@ -65,6 +58,11 @@
 				<!--acá necesito el nombre del estado, municipio o todo méxico--><span>Todo México</span></h1>
 		    </div>
 		    <div class="col-sm-3 right">
+			    <!-- 
+					Project counter : GF-SHCP-project-counter
+					aquí se despliegan el número de proyectos 
+					desplegados en el mapa después de filtrarlos
+					-->
 			    <h2>Proyectos:	<span id="GF-SHCP-project-counter">0</span></h2>
 		    </div>
 	    </div>
@@ -75,6 +73,7 @@
       		<li data-field="state">Puebla</li>
     	  </ul>
 	</div>
+	
   </div>
   
 </div>
