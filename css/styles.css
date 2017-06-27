@@ -1406,6 +1406,12 @@ header.top {
       header.top.title_side h1 span,
       header.top.title_side a.link_back span {
         font-weight: 300; }
+    header.top.title_side h2 {
+      color: white;
+      font: 300 18px "soberana_sans", Helvetica, Arial, sans-serif;
+      line-height: 40px; }
+      header.top.title_side h2 span {
+        font-weight: 700; }
     header.top.title_side a.link_back:hover {
       color: rgba(0, 0, 0, 0.4); }
 
