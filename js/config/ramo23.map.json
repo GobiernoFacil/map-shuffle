@@ -14,11 +14,11 @@
   "current" : {
     "level"  : "state",
     "value"  : "monto",
-    "method" : "sum"
+    "method" : "length"
   },
   "filters" : [],
   "extraFilters" : [
     {"type" : "extra", "field" : "Fondo", "title" : "Clave de programas"}
   ],
-  "template" : "<p><%=name%> : <strong>$</strong> <%=value%> </p>"
+  "template" : "<p><%=name%> : registros <%=value%> </p>"
 }

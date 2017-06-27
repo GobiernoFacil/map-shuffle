@@ -746,19 +746,27 @@ define(function(require){
 
       _data = this.lists.estadosName.states.map(function(st){
         var search = {},
-            data   = null;
+            data   = null,
+            value  = null;
         
         search[state] = st.id;
         data          = _.where(currentData, search);
         
+        if(method != "length"){
+          value = d3[method](data, function(a){
+            return +a[item.config.current.value];
+          });
+        }
+        else{
+          value = data.length;
+        }
+
         return {
           id    : st.id,
           name  : st.name,
           url   : st.url,
           data  : data,
-          value : d3[method](data, function(a){
-                    return +a[item.config.current.value]
-                  })
+          value : value
         }
 
       }, this);
@@ -783,12 +791,22 @@ define(function(require){
 
       _data = MUNICIPIOSNAME.cities.map(function(ct){
         var search = {},
-            data   = null;
+            data   = null,
+            value  = null;
         
         search[state] = ct.state;
         search[city]  = ct.city;
 
         data = _.where(this._currentData, search);
+
+        if(method != "length"){
+          value = d3[method](data, function(a){
+                    return +a[item.config.current.value]
+                  });
+        }
+        else{
+          value = data.length;
+        }
 
         return {
           id    : ct.inegi,
@@ -797,9 +815,7 @@ define(function(require){
           name  : ct.name,
           //url  : ct.url,
           data  : data,
-          value : d3[method](data, function(a){
-                    return +a[item.config.current.value]
-                  })
+          value : value
         }
       }, this);
 
@@ -959,7 +975,6 @@ define(function(require){
 
       el.appendChild(ul);
     },
-
 
 
     // EL BUSCADOR AVANZADO
@@ -1576,6 +1591,7 @@ define(function(require){
     // las geometrías de municipio
     //
     _cityStyle : function(feature){
+      /*
       var city    = this.currentData.filter(function(d){
                       return feature.properties.state == d.state && feature.properties.city == d.city;
                     })[0];
@@ -1584,9 +1600,11 @@ define(function(require){
           value   = ! city.data.length ? 0 : _.pluck(data, current).reduce(function(a, b){
                       return Number(a) + Number(b);
                     }, 0),
-          css     = Object.create(this.settings.mapGeometry);
+                    */
+      var css     = Object.create(this.settings.mapGeometry);
 
-      css.fillColor = this.brew.getColorInRange(value);
+      //css.fillColor = this.brew.getColorInRange(value);
+      css.fillColor = this.brew.getColorInRange(feature.properties.data.value);
       return css;
     },
 
