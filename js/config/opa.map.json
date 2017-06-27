@@ -10,8 +10,8 @@
     "column" : "key"
   },
   "style" : {
-    "fillColor" : "green",
-    "color"     : "red"
+    "fillColor" : "#f49d51",
+    "color"     : "#ea750f"
   },
   "location" : {
     "lat" : "lat",
