@@ -57,6 +57,8 @@ define(function(require){
       PAGESELECTOR   = require("text!templates/page-selector-panel.html"),
       // [*] la búsqueda avanzada
       ADVANCESEARCH  = require("text!templates/advanced-search.html"),  
+      // [*] la guía de color
+      COLORGUIDE     = require("text!templates/color-band.html"),  
 
       // [5] define las constantes internas del sistema 
       // ----------------------------------------------------------------------
@@ -79,7 +81,7 @@ define(function(require){
     // cuando el objeto se carga mediante require, es la primera 
     // función que se ejecuta
     //
-    initialize : function(){
+    initialize : function(settings){
       // [1] INICIA LAS PROPIEDADES DEL APP 
       // ----------------------------------------------------------------------
       // * la referencia a classyBrew
@@ -120,8 +122,12 @@ define(function(require){
                      municipios     : Object.create(MUNICIPIOS),
                      municipiosName : Object.create(MUNICIPIOSNAME)
                    };
-
+      // el formato para números
       this.numberFormat = d3.format(",");
+
+      // la función de loader
+      this.loaderStart = settings.loaderStart;
+      this.loaderStop  = settings.loaderStop;
 
       // [1.1] DEFINE SHORTCUTS PARA LOS ELEMENTOS DE UI
       // ----------------------------------------------------------------------
@@ -180,6 +186,8 @@ define(function(require){
       // * el selector de filtros
       this.renderFilterSelector();
 
+      // * 
+
       // [6] CARGA LOS ARCHIVOS DE CONFIGURACIÓN Y DESPLIEGA EL MAPA SELECCIONADO
       // ----------------------------------------------------------------------
       // * la configuración de los mapas principales
@@ -195,6 +203,9 @@ define(function(require){
       // [7.2] HABILITA EL REVERSE GEOCODING
       this.enableReverseGeocofing();
       // var geocoder = new google.maps.Geocoder;
+
+      // [8] LOADER 
+      this.loaderStop("ya cargó lo básico");
     },
 
 
@@ -363,6 +374,10 @@ define(function(require){
       // [8] Actualiza el contador de proyectos
       //
       this.renderProjectCounter(this._currentData);
+
+      // [9] Actualiza la guía de color
+      //
+      this.renderColorGuide();
     },
 
     updateUIOptions : function(item){
@@ -653,6 +668,9 @@ define(function(require){
     //
     //
     getLayer : function(item){
+      
+      this.loaderStart("voy a cargar un mapa");
+      
       var that = this, 
           conf = item.config,
           src  = conf.src;
@@ -679,6 +697,8 @@ define(function(require){
           item.response = null;
         }
         that.renderLayer(item);
+
+        that.loaderStop("ya cargó el mapa");
       });
     },
 
@@ -897,6 +917,49 @@ define(function(require){
      * F U N C I O N E S   D E   U I   ( P Á N E L E S ) 
      * ------------------------------------------------------------
      */
+
+
+    // LA GUÍA DE COLOR
+    //
+    //
+    //
+    renderColorGuide : function(){
+      var id   = this.settings.ui.colorGuide,
+          type = this.currentMap.config.type,
+          el   = document.getElementById(id),
+          ul   = document.createElement("ul"),
+          li   = _.template(COLORGUIDE),
+          grades = this.brew ? this.brew.getBreaks() : null,
+          colors = this.brew ? this.brew.getColors() : null;
+
+
+      if(type != "area"){
+        el.innerHTML     = "";
+        el.style.display = "none";
+        return;
+      }
+
+      el.innerHTML     = "";
+      el.style.display = "block";
+
+      colors.forEach(function(color, i){
+        var from = this.numberFormat(grades[i]),
+            to   = this.numberFormat(grades[i+1])
+            data = {
+              from  : from,
+              to    : to,
+              color : color
+            },
+            _li = document.createElement("li");
+        
+        _li.innerHTML = li(data);
+
+        ul.appendChild(_li);
+      }, this);
+
+      el.appendChild(ul);
+    },
+
 
 
     // EL BUSCADOR AVANZADO
@@ -1337,13 +1400,13 @@ define(function(require){
         val = val == SELECTALL ? val : +val;
       }
 
-      if(stateFilter.field == field && cityFilter){
+      if(stateFilter && stateFilter.field == field && cityFilter){
         this._enableCityFilter(null, stateFilter, cityFilter);
         currentCity = this.filters.filter(function(el){ return el.field == cityFilter.field })[0];
         this.filters.splice(this.filters.indexOf(currentCity), 1);
       }
 
-      if(branchFilter.field == field && unitFilter){
+      if(branchFilter && branchFilter.field == field && unitFilter){
         this._enableUnitFilter(null, branchFilter, unitFilter);
         currentUnit = this.filters.filter(function(el){ return el.field == unitFilter.field })[0];
         this.filters.splice(this.filters.indexOf(currentUnit), 1);

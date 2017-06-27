@@ -36,5 +36,8 @@ window.GFSHCPMapApp = GFSHCPMapApp;
 
 require(['controller.map'], function(map){ 
   GFSHCPMapApp = map;
-  GFSHCPMapApp.initialize();
+  GFSHCPMapApp.initialize({
+    loaderStart : GFSHCPLoaderStart,
+    loaderStop : GFSHCPLoaderStop
+  });
 });

@@ -7,6 +7,7 @@
   <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
+
 <div class="map_container">
   <!-- MAIN MAP -->
   <div id="map"> 
@@ -123,7 +124,17 @@
           filterChange : function(filters, someUselessShit){
 
           }
+        },
+
+        GFSHCPLoaderStart = function(stuff){
+          console.log(stuff);
         };
+
+        GFSHCPLoaderStop = function(stuff){
+          console.log(stuff);
+        };
+
+    GFSHCPLoaderStart("está iniciando esta maroma");
   </script>
 
   <!-- versión de desarrollo -->
