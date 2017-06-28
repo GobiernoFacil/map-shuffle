@@ -124,6 +124,11 @@
   -->
   <div id="GF-SHCP-table-tool"></div>
 
+</div>
+
+<div id="GF-SHCP-loader" class="loader">
+	<img src="img/Preloader_3.gif">
+</div>
 
   <script>
     var GFSHCPcallbacks = {
@@ -134,10 +139,12 @@
 
         GFSHCPLoaderStart = function(stuff){
           console.log(stuff);
+         document.getElementById("GF-SHCP-loader").style.display = "block";
         };
 
         GFSHCPLoaderStop = function(stuff){
           console.log(stuff);
+         document.getElementById("GF-SHCP-loader").style.display = "none";
         };
 
     GFSHCPLoaderStart("está iniciando esta maroma");
