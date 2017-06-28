@@ -345,6 +345,12 @@ define(function(require){
       // C) Es un mapa de puntos definidos por latitud y longitud
       else{
         this.currentData = null;
+        // filtra los puntos que no tienen localización
+        this._currentData = ! this.currentMap.config.disable ? this._currentData : this._currentData.filter(function(d){
+          return d[this.currentMap.config.location.lat] != this.currentMap.config.disable[0] && d[this.currentMap.config.location.lng] != this.currentMap.config.disable[1];
+        }, this);
+
+
         this.renderPointsLayer(item);
         if(item.config.api){
           this.updatePagination();
@@ -488,6 +494,7 @@ define(function(require){
     //
     //
     renderPointsLayer : function(item){
+
       var that   = this,
           points = this._makeGeojson(item),
           t      = _.template(item.config.template),
@@ -859,6 +866,7 @@ define(function(require){
     // -------------------------------------------------------
     //
     _makeGeojson : function(item){
+
       var geojson = {
                       "features" : null,
                       "type" : "FeatureCollection",
@@ -867,7 +875,7 @@ define(function(require){
                                  "properties" : { "name" : "urn:ogc:def:crs:EPSG::4019" }
                                 }
                     },
-          properties = item.config.data,
+          properties = _.uniq(item.config.data.concat(item.config.values || [])),
           lat        = item.config.location.lat,
           lng        = item.config.location.lng,
           features   = this._currentData.map(function(d){
@@ -886,6 +894,7 @@ define(function(require){
                        }
                      });
 
+      console.log(properties, this._currentData);
       geojson.features = features;
       return geojson;
     },

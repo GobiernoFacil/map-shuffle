@@ -2,6 +2,7 @@
   "name"  : "Obra pública abierta",
   "type"  : "point",
   "multiple" : true,
+  "disable" : [0,0],
   "level" : [],
   "src"   : "/js/maps/opa.json",
   "file"  : "json",
@@ -18,7 +19,7 @@
     "lng" : "lng"
   },
   "values"  : ["monto_total_inversion", "ejercido"],
-  "data"    : ["key","name","ramo","unidad","state","lat","lng","advance","monto_total_inversion","ciclo","classification","ejercido"],
+  "data"    : ["key","name","ramo","unidad","state","lat","lng","advance","ciclo","classification"],
   "current" : {},
   "filters" : [
     {"type" : "state", "field" : "state", "default" : 21},
