@@ -35,7 +35,8 @@
     <p><%=MATRICULA_PLANTEL%></p>
     <p><%=MONTO_ASIGNADO%></p>
     <p><%=DOMICILIO%></p>
-    <p><%=CONTRATISTA%></p>
+    <div data-hide="<%=CONTRATISTA%>"><p><%=CONTRATISTA%></p></div>
+    <div data-hide="<%=HIDETHISTHING%>"><p><%=HIDETHISTHING%></p></div>
 
     <div class="GF-SHCP-map" 
          data-lat="LATITUD"
@@ -102,7 +103,8 @@
 
   var GFSHCPmap = function(data){
     data.avance_fisico = 80;
-  }
+    data.HIDETHISTHING = null;
+  };
 
   GFSHCPHelpers.initialize(GFSHCPConfig, GFSHCPmap);
   </script>

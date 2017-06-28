@@ -36,28 +36,40 @@
 
 
         data.forEach(function(d){
-          var div      = document.createElement("div"),
-              tmp      = template.replace(/&lt;/g, "<").replace(/&gt;/g, ">"),
-              _template = _.template(tmp),
-              vue;
+          var div       = document.createElement("div"),
+              tmp       = template.replace(/&lt;/g, "<").replace(/&gt;/g, ">"),
+              _template = _.template(tmp);
+
+          this.map(d);
 
           div.setAttribute("class", this.config.containerClass);
           console.log(tmp, data[0]);
           div.innerHTML = _template(data[0]);
           container.appendChild(div);
 
-          /*
-          vue = new Vue({
-            el      : div,
-            data    : d
-          });
-          */
 
-          this.map(d);
           this.renderCircle(div, d, this.config.circleClass);
 
           this.makeMap(div, d);
+
+          this.hideEmptyValues(container);
+
         }, this);
+    },
+
+    hideEmptyValues : function(container){
+      var items = container.querySelectorAll("[data-hide]");
+
+      items = Array.prototype.slice.apply(items);
+
+      console.log(items);
+
+      items.forEach(function(item){
+        var value = item.getAttribute("data-hide");
+        if(!value){
+          item.style.display = "none";
+        }
+      }, this);
     },
 
     makeMap : function(container, d){
