@@ -248,9 +248,6 @@ define(function(require){
         });
         // encodeURI
       });
-      //console.log(geocoder);
-      // https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY
-
 
     },
 
@@ -350,6 +347,11 @@ define(function(require){
           return d[this.currentMap.config.location.lat] != this.currentMap.config.disable[0] && d[this.currentMap.config.location.lng] != this.currentMap.config.disable[1];
         }, this);
 
+        // agrupa
+        if(this.currentMap.config.multiple){
+          console.log(this.groupPoints());
+        }
+
 
         this.renderPointsLayer(item);
         if(item.config.api){
@@ -384,6 +386,35 @@ define(function(require){
       // [9] Actualiza la guía de color
       //
       this.renderColorGuide();
+    },
+
+    groupPoints : function(){
+      var finalData = [],
+          colector  = [],
+          lat = this.currentMap.config.location.lat,
+          lng = this.currentMap.config.location.lng,
+          initialData = this._currentData.slice(0);
+
+      initialData.forEach(function(d){
+
+        var search      = {},
+            result      = null;
+
+        search[lat] = d[lat];
+        search[lng] = d[lng];
+
+        if(colector.indexOf(d) != -1) return;
+
+        result = _.where(initialData, search);
+
+        finalData.push(result);
+
+        result.forEach(function(r){
+          colector.push(r);
+        });
+      });
+
+      return finalData;
     },
 
     updateUIOptions : function(item){
@@ -529,8 +560,6 @@ define(function(require){
                 .setLatLng(latlng)
                 .setContent(t(feature.properties))
                 .openOn(that.map);
-
-            //console.log(that.currentMap.config feature.properties);
           });
 
           if(link){
@@ -894,7 +923,6 @@ define(function(require){
                        }
                      });
 
-      console.log(properties, this._currentData);
       geojson.features = features;
       return geojson;
     },
@@ -920,7 +948,6 @@ define(function(require){
           }
         }, this);
 
-        console.log(filter);
         data = _.where(item.data, filter);
       }
 
@@ -998,7 +1025,6 @@ define(function(require){
           elID     = this.settings.ui.searchTable,
           el       = document.getElementById(elID);
 
-      console.log(elID);
       el.innerHTML = ADVANCESEARCH;
     },
 
@@ -1437,7 +1463,6 @@ define(function(require){
       }
 
       if(current){
-        console.log(current, this.filters);
         this.filters.splice(this.filters.indexOf(current), 1);
       }
       else{
