@@ -14,7 +14,7 @@
   
 
   <!-- TEMPLATE DEL CONTENIDO -->
-  <div id="GF-opa-template" style="display: none;">
+  <div id="GF-escuelas-template" style="display: none;">
   <section>
     <h2>Template básico de escuelas al 100</h2>
 
@@ -23,20 +23,19 @@
          data-lng="LONGITUD"
          style="width:400px; height:350px; frameborder:0; scrolling:no;"></div>
 
-    <p>{{CLAVECENTROTRABAJO}}</p>
-    <p>{{ANIO_EJECUCION}}</p>
-    <p>{{NOMBRECT}}</p>
-    <p>{{CLAVE_ENTIDAD}}</p>
-    <p>{{ENTIDAD}}</p>
-    <p>{{MUNICIPIO}}</p>
-    <p>{{LOCALIDAD}}</p>
-    <p>{{LATITUD}}</p>
-    <p>{{LONGITUD}}</p>
-    <p>{{MATRICULA_PLANTEL}}</p>
-    <p>{{MONTO_ASIGNADO}}</p>
-    <p>{{DOMICILIO}}</p>
-    <p>{{CONTRATISTA}}</p>
-    <p>{{avance_fisico}}</p>
+    <p><%=CLAVECENTROTRABAJO%></p>
+    <p><%=ANIO_EJECUCION%></p>
+    <p><%=NOMBRECT%></p>
+    <p><%=CLAVE_ENTIDAD%></p>
+    <p><%=ENTIDAD%></p>
+    <p><%=MUNICIPIO%></p>
+    <p><%=LOCALIDAD%></p>
+    <p><%=LATITUD%></p>
+    <p><%=LONGITUD%></p>
+    <p><%=MATRICULA_PLANTEL%></p>
+    <p><%=MONTO_ASIGNADO%></p>
+    <p><%=DOMICILIO%></p>
+    <p><%=CONTRATISTA%></p>
 
     <div class="GF-SHCP-map" 
          data-lat="LATITUD"
@@ -60,11 +59,12 @@
   <!-- LIBRERÍAS -->
   <script src="js/libs/d3.v3.min.js"></script>
   <script src="js/libs/jquery-3.1.1.min.js"></script>
-  <script src="js/libs/vue.min.js"></script>
+  <!--<script src="js/libs/vue.min.js"></script>-->
+  <script src="js/libs/underscore-min.js"></script>
   <script src="js/libs/leaflet.js"></script>
 
   <!-- HELPERS -->
-  <script src="js/card.helpers.js"></script>
+  <script src="js/card.helpers.v2.js"></script>
 
   <!-- CONFIGURACIÓN -->
   <script>
@@ -73,7 +73,7 @@
       //GFAPIBaseURL      = "http://localhost:8000/api/consulta/opa",
       GFErrorBlockID      = "GF-error-message",
       GFContentBlockID    = "GF-card-list-container",
-      GFTemplateBlockID   = "GF-opa-template",
+      GFTemplateBlockID   = "GF-escuelas-template",
       GFDefaultLat        = 22.442167,
       GFDefaultLng        = -100.110350,
       GFSFPappKey         = "5825343BB68F29D2A881B2E8D205B98846C95558",
