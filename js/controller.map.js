@@ -85,19 +85,21 @@ define(function(require){
       // [1] INICIA LAS PROPIEDADES DEL APP 
       // ----------------------------------------------------------------------
       // * la referencia a classyBrew
-      this.brew         = null;
+      this.brew           = null;
       // * la referencia al layer de leaflet de ciudades
-      this.cities       = null;
+      this.cities         = null;
       // * la referencia a los datos agregados por municipio o estado
-      this.currentData  = null;
+      this.currentData    = null;
       // * la referencia a la información para graficar
-      this._currentData = null;
+      this._currentData   = null;
+      // * la referencia a los puntos agrupados x ubicación
+      this._currentPoints = null;
       // * la referencia al mapa de configuración seleccionado
-      this.currentMap   = null;
+      this.currentMap     = null;
       // * la lista de filtros para los datos
-      this.filters      = [];
+      this.filters        = [];
       // * la lista de mapas disponibles (archivos de configuración)
-      this.layersConfig = [];
+      this.layersConfig   = [];
       // * la lista de mapas extra disponibles (archivos de configuración)
       //   los mapas extra son los que se superponen a los principales
       this.extraLayersConfig = [];
@@ -349,7 +351,7 @@ define(function(require){
 
         // agrupa
         if(this.currentMap.config.multiple){
-          console.log(this.groupPoints());
+          this._currentPoints = this.groupPoints();
         }
 
 
@@ -556,10 +558,29 @@ define(function(require){
           
 
           p.on("mouseover", function(e){
+
+            console.log(feature.properties);
+
+            var multiple = that.currentMap.config.multiple,
+                content  = null;
+
+            if(multiple){
+              content = "";
+              feature.properties.points.forEach(function(point){
+                content += t(point);
+              });
+            }
+            else{
+              content = t(feature.properties);
+            }
+
+            console.log(content);
+            
             L.popup()
                 .setLatLng(latlng)
-                .setContent(t(feature.properties))
+                .setContent(content)
                 .openOn(that.map);
+                
           });
 
           if(link){
@@ -907,7 +928,28 @@ define(function(require){
           properties = _.uniq(item.config.data.concat(item.config.values || [])),
           lat        = item.config.location.lat,
           lng        = item.config.location.lng,
-          features   = this._currentData.map(function(d){
+          multiple   = item.config.multiple,
+          features   = null;
+          
+
+      if(multiple){
+        //this._currentPoints
+        features = this._currentPoints.map(function(d){
+          var p    = {};
+          p.points = d;
+
+          return {
+            type : "Feature",
+            properties : p,
+            geometry : {
+              "type": "Point", 
+              "coordinates": [ +d[0][lng], +d[0][lat] ]
+            }
+          }
+        });
+      }
+      else{
+        features = this._currentData.map(function(d){
                        var p = {};
                        properties.forEach(function(property){
                         p[property] = d[property];
@@ -922,8 +964,12 @@ define(function(require){
                         }
                        }
                      });
+      }
 
       geojson.features = features;
+
+      console.log(features);
+
       return geojson;
     },
 
