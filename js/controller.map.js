@@ -1861,7 +1861,7 @@ define(function(require){
       $(selector).bootstrapTable({
         columns: fields,
         pagination : true,
-        pageSize : 50,
+        pageSize : 10,
         search : true,
         searchOnEnterKey : true,
         data: data,
