@@ -1,7 +1,7 @@
 {
   "name"  : "Escuelas al 100",
   "type"  : "point",
-  "multiple" : true,
+  "multiple" : false,
   "level" : [],
   "src"   : "/js/maps/escuelas100.csv",
   "file"  : "csv",
