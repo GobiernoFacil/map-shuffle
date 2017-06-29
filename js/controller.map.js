@@ -559,8 +559,6 @@ define(function(require){
 
           p.on("mouseover", function(e){
 
-            console.log(feature.properties);
-
             var multiple = that.currentMap.config.multiple,
                 content  = null;
 
@@ -573,8 +571,6 @@ define(function(require){
             else{
               content = t(feature.properties);
             }
-
-            console.log(content);
             
             L.popup()
                 .setLatLng(latlng)
@@ -967,8 +963,6 @@ define(function(require){
       }
 
       geojson.features = features;
-
-      console.log(features);
 
       return geojson;
     },
