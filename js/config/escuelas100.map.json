@@ -19,12 +19,12 @@
   },
   "values"  : ["MONTO_ASIGNADO"],
 
-  "data"    : ["CLAVECENTROTRABAJO","ANIO_EJECUCION","NOMBRECT","CLAVE_ENTIDAD","ENTIDAD", "MUNICIPIO","LOCALIDAD","LATITUD","LONGITUD","MATRICULA_PLANTEL","MONTO_ASIGNADO","DOMICILIO","CONTRATISTA"],
+  "data"    : ["CLAVECENTROTRABAJO","ANIO_EJECUCION","AVANCE_FINANCIERO","AVANCE_FISICO_PORCENTAJE","NOMBRECT","CLAVE_ENTIDAD","ENTIDAD", "MUNICIPIO","LOCALIDAD","LATITUD","LONGITUD","MATRICULA_PLANTEL","MONTO_ASIGNADO","DOMICILIO","CONTRATISTA"],
   "current" : {},
   "filters" : [
     {"type" : "state", "field" : "CLAVE_ENTIDAD"},
     {"type" : "year", "field" : "ANIO_EJECUCION"}
   ],
   "extraFilters" : [],
-  "template" : "<p><%=NOMBRECT%> <%=ANIO_EJECUCION%> : <br> <%=MONTO_ASIGNADO%></p>"
+  "template" : "<%=NOMBRECT%>  <div class='amount_label'><div class='row'><div class='col-sm-6'><h5>Monto aprobado</h5>  $<%=MONTO_ASIGNADO%><h5>Monto ejercido</h5> $<%=AVANCE_FINANCIERO%></div><div class='col-sm-6'><h5>Avance Físico</h5> <%=AVANCE_FISICO_PORCENTAJE%>% <div class='bar'><span class='bar inside total' style='width:<%=AVANCE_FISICO_PORCENTAJE%>%'></span><h5>Año</h5> <%=ANIO_EJECUCION%></div></div></div> <br><a href='/escuelas.html#<%=CLAVECENTROTRABAJO%>'  class='btn more info'>Más información</a></div>"
 }
