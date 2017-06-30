@@ -10,8 +10,8 @@
     "column" : "CLAVECENTROTRABAJO"
   },
   "style" : {
-    "fillColor" : "green",
-    "color"     : "red"
+    "fillColor" : "#1cb68d",
+    "color"     : "green",
   },
   "location" : {
     "lat" : "LATITUD",
