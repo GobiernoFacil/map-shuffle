@@ -22,10 +22,10 @@
   "data"    : ["key","name","ramo","unidad","state","lat","lng","advance","ciclo","classification"],
   "current" : {},
   "filters" : [
-    {"type" : "state", "field" : "state", "default" : 21},
-    {"type" : "branch", "field" : "ramo", "default" : 1},
+    {"type" : "state", "field" : "state"},
+    {"type" : "branch", "field" : "ramo"},
     {"type" : "unit", "field" : "id_unidad"},
-    {"type" : "year", "field" : "ciclo"}
+    {"type" : "year", "field" : "ciclo", "default" : "2017"}
   ],
   "extraFilters" : [
     {"type" : "extra", "field" : "classification", "title" : "clasificación ciudadana"}
