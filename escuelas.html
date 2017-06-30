@@ -1,61 +1,399 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Escuelas al 100</title>
+  <meta name="description" v-bind:content="descripcion">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="css/styles.css"/>
   <link rel="stylesheet" type="text/css" href="css/leaflet.css">
+  <script src="js/modernizr.custom.js"></script>
 </head>
-<body>
-
+<body class="record" id="record">
   <!-- MENSAJE DE ERROR -->
   <div id="GF-error-message" style="display: none">
     La información no está disponible
   </div>
-  
+<!-- header-->
+<div class="col-sm-3 zero">
+  <header class="top">
+   <a class="tp">Transparencia Presupuestaria</a>
+  </header>
+</div>
+<div class="col-sm-9 zero">
+  <header class="top title_side">
+    <a href="/mapa.html" class="link_back">&lt; Ir a Mapa de Escuelas al 100</a>
+  </header>
+</div>
+<div class="clearfix"></div>
 
-  <!-- TEMPLATE DEL CONTENIDO -->
-  <div id="GF-escuelas-template" style="display: none;">
-  <section>
-    <h2>Template básico de escuelas al 100</h2>
+<!--content-->
+<div class="container">
 
-    <div class="GF-SHCP-map" 
-         data-lat="LATITUD"
-         data-lng="LONGITUD"
-         style="width:400px; height:350px; frameborder:0; scrolling:no;"></div>
+	<!-- chupar faros………-->
+	<div id="chupar-faros" style="display: none;">
+	    <section>
+			<div class="row">
+	    		<div class="col-sm-10 col-sm-offset-1">
+	    			<h1>Lo sentimos, algo falló en nuestro sitio</h1>
+	    			<h2>¿Qué pudo fallar?</h2>
+	    			<ol>
+	  		  		<li>Algo técnico falló</li>
+	  		  		<li>El enlace pudo ser viejo y no se encuentra en el sitio</li>
+	  		  		<li>Accidentalmente escribiste mal la dirección URL </li>
+	    			</ol>
+	    			<h2>¿Qué puedes hacer?</h2>
+	    			<p>Puedes consultar esta página más tarde, o intentar escribir la URL otra vez.</p>
+	    			<p>O puedes regresar al mapa de <a href="http://www.transparenciapresupuestaria.gob.mx/en/PTP/Obra_Publica_Abierta" class="link_back">Obra Pública</a>.</p>
+	    		</div>
+			</div>
+	    </section>
+	</div>
 
-    <p><%=CLAVECENTROTRABAJO%></p>
-    <p><%=ANIO_EJECUCION%></p>
-    <p><%=NOMBRECT%></p>
-    <p><%=CLAVE_ENTIDAD%></p>
-    <p><%=ENTIDAD%></p>
-    <p><%=MUNICIPIO%></p>
-    <p><%=LOCALIDAD%></p>
-    <p><%=LATITUD%></p>
-    <p><%=LONGITUD%></p>
-    <p><%=MATRICULA_PLANTEL%></p>
-    <p><%=MONTO_ASIGNADO%></p>
-    <p><%=DOMICILIO%></p>
-    <div data-hide="<%=CONTRATISTA%>"><p><%=CONTRATISTA%></p></div>
-    <div data-hide="<%=HIDETHISTHING%>"><p><%=HIDETHISTHING%></p></div>
 
-    <div class="GF-SHCP-map" 
-         data-lat="LATITUD"
-         data-lng="LONGITUD"
-         style="width:400px; height:350px; frameborder:0; scrolling:no;"></div>
-
-    <div class="GF-SHCP-circle"
+<!-- TEMPLATE DEL CONTENIDO -->
+<div id="GF-escuelas-template" style="display: none;">
+	<!--sección encabezado-->
+	<section class="GF-card">
+    <!--titles -->
+    <div class="row">
+      <div class="col-md-10 col-sm-9">
+        <div class="row">
+          <div class="col-sm-6">
+            <h3>Programa o Proyecto de Inversión
+              <!--tooltip-->
+              <span class="tooltip">
+                <span class="tooltip-item">(PPI) <b>?</b></span>
+                <span class="tooltip-content clearfix">
+                  <span class="tooltip-text"><strong>Programa o Proyecto de Inversión,</strong> es el nombre del programa o proyecto de inversión establecido por cada unidad responsable, que lo identifica claramente.</span>
+                </span>
+              </span>
+            </h3>
+          </div>
+          <!--- clave de cartera-->
+          <div class="col-sm-6">
+            <h3 class="right">Identificador: <span id="cveReport"><%=CLAVECENTROTRABAJO%></span></h3>
+          </div>
+        </div>
+        <h1 id ="nameReport"><%=NOMBRECT%></h1>
+        <div class="row">
+          <div class="col-md-10 col-sm-9">
+	          <div class="row">
+	          	<div class="col-sm-6">
+				  	<h3>Matricula</h3>
+				  	<p><%=MATRICULA_PLANTEL%></p>
+			  	</div>
+			  	<div class="col-sm-6">
+				  	<h3>NIVEL</h3>
+				  	<p><%=NIVEL%></p>
+			  	</div>
+	          </div>
+          </div>
+          <div class="col-md-2 col-sm-3">
+	           <h3 class="right">Fase:<span class="active"> </span></h3>
+         </div>
+        </div>
+      </div>
+      <!--avance fisico-->
+      <div id="arc_side" class="col-md-2 col-sm-3 side">
+        <h3>Avance Físico Total</h3>
+        <div class="GF-SHCP-circle"
          data-width="160"
          data-height="130"
          data-color-a="rgb(190,205,81)"
          data-color-b="rgb(210,210,210)"
          data-column="avance_fisico"></div>
+      </div>
+    </div>
 
+    <!--mapa y montos-->
+    <div class="row">
+      <div class="col-md-9 col-sm-8">
+        <div data-hide="<%=HIDETHISTHING%>">
+        <div class="row">
+          <!-- Ramo-->
+          <div class="col-md-4 col-sm-7">
+            <h3 class="title line">
+              <!--tooltip-->
+              <span class="tooltip">
+                <span class="tooltip-item">Ramo <b>?</b></span>
+                <span class="tooltip-content clearfix">
+                  <span class="tooltip-text"><strong>Ramo</strong>. Categoría administrativa a la que pertenece el programa presupuestario, de acuerdo con la estructura programática del PEF vigente</span>
+                </span>
+              </span>
+
+
+            </h3>
+            <p class="fichas_ramo"><b v-bind:class="['ramo' + ramo,]"></b>{{ID_RAMO}} - {{RAMO}}</p>
+          </div>
+          <!-- Ejecutor-->
+          <div class="col-md-4 col-sm-5">
+            <h3 class="title line">Ejecutor del Proyecto</h3>
+            <p id = "ejecutorReport">{{INSTITUCION_EJECUTORA}} </p>
+          </div>
+</div>
+          
+        </div>
+
+        <!--mapa-->
+        <div class="GF-SHCP-map" 
+             data-lat="<%=LATITUD%>"
+             data-lng="<%=LONGITUD%>"
+             style="width:100%; height:350px; frameborder:0; scrolling:no;"></div>
+		        <div class="info location">
+          <div class="row">
+	        <!--programa-->
+          	<div class="col-md-4 col-sm-12">
+              <h3 class="title">Programa Presupuestario</h3>
+              <ul id="GF-SHCP-links"></ul>
+            </div>
+            <div class="col-md-8  col-sm-12">
+            	<div class="row">
+			    <!--localizacion-->
+			   <div class="col-sm-12">
+			     <h3 class="title">Dirección</h3>
+			     <p><%=DOMICILIO%></p>
+			   </div>
+
+            	<!---entidad-->
+          		<div class="col-md-6 col-sm-12">
+            	  <h3 class="title">Entidad Federativa</h3>
+            	  <p id="entidadReport"><%=ENTIDAD%></p>
+            	</div>
+            	<!---municipio-->
+          		<div class="col-md-6 col-sm-12">
+            	  <h3 class="title">Municipio</h3>
+            	  <p id="entidadReport"><%=MUNICIPIO%></p>
+            	</div>
+            	<!---localidad-->
+          		<div class="col-md-6 col-sm-12">
+            	  <h3 class="title">Localidad</h3>
+            	  <p id="entidadReport"><%=LOCALIDAD%></p>
+            	</div>
+            	<!---coordenadas---->
+          		<div class="col-md-6 col-sm-12">
+            	  <h3 class="title">Coordenadas Geográficas</h3>
+            	  <p>Latitud: <%=LATITUD%> <br> Longitud: <%=LONGITUD%></p>
+            	</div>
+            	</div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-3 col-sm-4 side">
+       		<!-- aprobado-->
+       		<h3>Monto aprobado</h3>
+       		<p class="amount right">$<strong><%=GFormat(MONTO_ASIGNADO)%></strong> <span>MXN</span></p>
+       		<div class="bar">
+       		  <span class="bar inside total"></span>
+       		</div>
+        	<!-- entregado-->
+        	<h3>Monto ejercido</h3>
+        	<p class="amount right">$<strong><%=GFormat(AVANCE_FINANCIERO)%></strong> <span>MXN</span></p>
+        	<div class="bar">
+        	  <span class="bar inside modificado" style="<%=avance_style%>"></span>
+        	</div>
+		
+        <!-- reporta obra-->
+        <button id="show-modal" @click="showModal = true" class="btn report trigger">Reporta esta obra</button>
+
+      </div>
+    </div>
   </section>
+ 
+<!--metas -->
+  <section class="GF-card">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2>Metas</h2>
+      </div>
+       <div data-hide="<%=HIDETHISTHING%>">
+      <!--acciones_comp1_16-->
+      <div class="col-sm-6">
+        <h3 class="title">Acciones del Componente 1</h3>
+        <p>@{{acciones_comp1_16}}</p>
+      </div>
+      <!--AVANCE_COMP1_16-->
+      <div class="col-sm-6">
+        <h3 class="title">Porcentaje de Avance del Componente 1</h3>
+        <p>@{{avance_comp1_16}}</p>
+      </div>
+      <!--acciones_comp2_16-->
+      <div class="col-sm-6">
+        <h3 class="title">Acciones del Componente 2</h3>
+        <p>@{{acciones_comp2_16}}</p>
+      </div>
+      <!--AVANCE_COMP2_16-->
+      <div class="col-sm-6">
+        <h3 class="title">Porcentaje de Avance del Componente 2</h3>
+        <p>@{{avance_comp2_16}}</p>
+      </div>
+       </div>
+      <!--componentes a atender-->
+      <div class="col-sm-6">
+        <h3 class="title">Componentes a atender</h3>
+        <p><%=COMPONENTESATENDER%></p>
+      </div>
+      <!--avances del componente-->
+      <div class="col-sm-6">
+	      <div data-hide="<%=AVANCEXCOMPONENTE%>">
+        <h3 class="title">Avances del componente</h3>
+        <p><%=AVANCEXCOMPONENTE%></p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  <!--contratos-->
+  <section class="GF-card">
+    <div class="row">
+      <div class="col-sm-12">
+	      <h2>Contratos</h2>
+	      <table class="table">
+          <thead>
+            <th>Proveedor</th>
+            <th>Comité de Mejoramiento</th>
+            <th>Tipo de contratación</th>
+            <th>Supervisor       </th>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%=CONTRATISTA%>              </td>
+              <td><%=COMITE_MEJORAMIENTO%>            </td>
+              <td><%=TIPO_CONTRATACION%>             </td>
+              <td><%=SUPERVISOR_INIFED%>             </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </section>
+  
+  
+  <!--galeria de imagenes-->
+  <section class="GF-card">
+    <div class="row">
+      <div class="col-sm-12">
+	      <h2>Galería de imágenes</h2>
+	      
+      </div>
+      <div class="col-sm-4">
+	      <h3 class="title">Antes</h3>
+	      <img src="<%=URL_FOTO_ACTUAL1%>" width="100%">
+      </div>
+      <div class="col-sm-4">
+	      <h3 class="title">Durante</h3>
+	      <img src="<%=URL_FOTO_AVANCE1%>" width="100%">
+      </div>
+      <div class="col-sm-4">
+	      <h3 class="title">Después</h3>
+	      <img src="<%=URL_FOTO_ESCUELAALCIEN2%>" width="100%">
+      </div>
+    </div>
+  </section>
+
+  <!--Adicionales-->
+  <section class="GF-card">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2>Datos Adicionales</h2>
+      </div>
+      
+      <!--Fecha de inicio-->
+      <div class="col-sm-3">
+	      <h3 class="title">Fecha de inicio</h3>
+		 <p><%=FECHA_INICIO%></p>
+      </div>
+      <!--Agua-->
+      <div class="col-sm-3">
+	      <h3 class="title">Fecha de término</h3>
+		 <p><%=FECHA_TERMINO%></p>
+      </div>
+      <!--Sillas-->
+      <div class="col-sm-3">
+	      <h3 class="title">Fecha de avance</h3>
+		 <p><%=FECHA_AVANCE%></p>
+      </div>
+    </div>
+  </section>
+
+<!--    
+    <div data-hide="<%=CONTRATISTA%>"><p><%=CONTRATISTA%></p></div>
+    <div data-hide="<%=HIDETHISTHING%>"><p><%=HIDETHISTHING%></p></div>
+-->
+ 
+
   </div>
+  
+  
+  
 
   <!-- CONTENIDO -->
   <div id="GF-card-list-container"></div>
+</div>
 
+
+<!--footer------->
+  <footer>
+    <div class="container">
+      <div class="content">
+        <div class="row">
+          <div class="col-sm-4">
+            <h3>Contacto</h3>
+             <p class="data">Palacio Nacional <br>
+               Plaza de la Constitución s/n<br>
+               Colonia Centro, Delegación Cuauhtémoc<br>
+               México, Ciudad de México</p>
+          </div>
+
+          <div class="col-sm-4">
+            <ul>
+              <li><a class="linksfoot" href="/es/PTP/Glosario">Glosario</a></li>
+              <li><a class="linksfoot" href="/es/PTP/Mapa_de_Sitio">Mapa de sitio</a></li>
+              <li><a class="linksfoot" href="/es/PTP/Estadisticas">Estadísticas del Portal</a></li>
+            </ul>
+            <ul>
+              <!--fb-->
+              <li><a href="http://www.facebook.com/TransparenciaPresupuestaria" class="fb" target="_blank">Facebook</a></li>
+              <!--tw-->
+              <li><a href="//twitter.com/TPresupuestaria" class="tw" target="_blank">Twitter</a></li>                 <!--youtube-->
+              <li> <a href="http://www.youtube.com/channel/UCokAhIwndny0k2ROksI-qqg?sub_confirmation=1" class="youtube" title="Youtube" target="_blank">Youtube</a>
+              </li>
+              <li> <a href="mailto:trans_presupuestaria@hacienda.gob.mx" target="_blank" class="email" title="trans_presupuestaria@hacienda.gob.mx">Email</a></li>
+            </ul>
+          </div>
+
+          <div class="col-sm-4 right">
+            <h3>Última actualización:</h3>
+             <p class="data">Jueves 1 de diciembre de 2016 a las 14:25 hrs.</p>
+             <p class="right"><a href="http://www.hacienda.gob.mx" class="shcp">Secretaría de Hacienda y Crédito Público</a><span class="clearfix"></span></p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="author">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4">
+            <p class="data"><a href="http://www.transparenciapresupuestaria.gob.mx/" class="tp">Transparencia Presupuestaria</a> <a href="#" class="linksfoot">Términos y Condiciones del uso de la información.</a></p>
+          </div>
+          <div class="col-sm-4">
+            <p class="data center">Forjado artesanalmente por <a href="http://www.gobiernofacil.com" class="gobiernofacil" title="Ir a Gobierno Fácil">Gobierno Fácil</a></p>
+          </div>
+          <div class="col-sm-4">
+            <p class="data right"><span class="usaid">USAID</span></p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <!-- LIBRERÍAS -->
   <script src="js/libs/d3.v3.min.js"></script>
@@ -104,6 +442,7 @@
   var GFSHCPmap = function(data){
     data.avance_fisico = 80;
     data.HIDETHISTHING = null;
+    data.avance_style = "width:" + ((data.AVANCE_FINANCIERO * 100) / data.MONTO_ASIGNADO) + "%";
   };
 
   GFSHCPHelpers.initialize(GFSHCPConfig, GFSHCPmap);
