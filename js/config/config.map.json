@@ -37,10 +37,11 @@
     "defaultColor" : 5 
   },
   "maps" : {
-    "basePath" : "/js/config",
-    "maps"     : ["escuelas100.map.json", "ramo23.map.json", "opa.map.json", "gasolina.map.json", "tomas.map.json", "entidades.map.json"],
-    "extras"   : ["poblacion.map.json"],
-    "current"  : 5
+    "basePath"  : "/js/config",
+    "maps"      : ["escuelas100.map.json", "ramo23.map.json", "opa.map.json", "gasolina.map.json", "tomas.map.json", "entidades.map.json"],
+    "extras"    : ["poblacion.map.json"],
+    "current"   : 5,
+    "embedPath" : "http://localhost:8000/mapa.html" 
   },
   "ui" : {
     "topToolsDiv"    : "GF-SHCP-top-tools",
@@ -95,7 +96,8 @@
     "geolocationField" : "GF-SHCP-geolocation-input",
     "searchTable"      : "GF-SHCP-table-tool",
     "projectCounter"   : "GF-SHCP-project-counter",
-    "colorGuide"       : "GF-SHCP-color-guide"
+    "colorGuide"       : "GF-SHCP-color-guide",
+    "embedForm"        : "GF-SHCP-embed-form"
   },
   "ux" : {
     "findMeZoom" : 14,
