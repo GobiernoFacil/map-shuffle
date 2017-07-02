@@ -194,7 +194,7 @@
       <div class="col-md-3 col-sm-4 side">
         
 		
-		<div v-if="autorizado_1 != null">
+		<div data-hide="<%=AUTORIZADO_1%>">
        		<!-- aprobado-->
        		<h3>Monto aprobado</h3>
        		<p class="amount right">$<strong><%=GFormat(AUTORIZADO_1)%></strong> <span>MXN</span></p>
@@ -202,7 +202,7 @@
        		  <span class="bar inside pef" v-bind:style="presupuesto_style"></span>
        		</div>
 		</div>
-		<div v-if="modificado_1 != null">
+		<div data-hide="<%=MODIFICADO_1%>">
         	<!-- modificado-->
         	<h3>Monto modificado</h3>
         	<p class="amount right">$<strong><%=GFormat(MODIFICADO_1)%></strong> <span>MXN</span></p>
@@ -211,58 +211,58 @@
         	</div>
 		</div>
 		
-		<div v-if="ministrado_2 != null">
+		<div data-hide="<%=MINISTRADO_2%>">
        		<!-- ministrado-->
        		<h3>Monto ministrado</h3>
        		<p class="amount right">$<strong><%=GFormat(MINISTRADO_2)%></strong> <span>MXN</span></p>
        		<div class="bar">
-       		  <span class="bar inside pef" v-bind:style="presupuesto_style"></span>
+       		  <span class="bar inside pef" style="<%=ministrado_style%>"></span>
        		</div>
 		</div>
 
 		
-		<div v-if="comprometido_1 != null">
+		<div data-hide="<%=COMPROMETIDO_1%>">
        		<!-- comprometido-->
        		<h3>Monto comprometido</h3>
        		<p class="amount right">$<strong><%=GFormat(COMPROMETIDO_1)%></strong> <span>MXN</span></p>
        		<div class="bar">
-       		  <span class="bar inside pef" v-bind:style="presupuesto_style"></span>
+       		  <span class="bar inside pef" style="<%=comprometido_style%>"></span>
        		</div>
 		</div>
 		
-		<div v-if="devengado_1 != null">
+		<div data-hide="<%=DEVENGADO_1%>">
        		<!-- devengado-->
        		<h3>Monto devengado</h3>
        		<p class="amount right">$<strong><%=GFormat(DEVENGADO_1)%></strong> <span>MXN</span></p>
        		<div class="bar">
-       		  <span class="bar inside pef" v-bind:style="presupuesto_style"></span>
+       		  <span class="bar inside pef" style="<%=devengado_style%>"></span>
        		</div>
 		</div>
 		
-		<div v-if="ejercido_1 != null">
+		<div data-hide="<%=EJERCIDO_1%>">
         	<!-- ejercido-->
         	<h3>Monto ejercido</h3>
         	<p class="amount right">$<strong><%=GFormat(EJERCIDO_1)%></strong> <span>MXN</span></p>
         	<div class="bar">
-        	<span class="bar inside ejercido" v-bind:style="total_ejercido_style"></span>
+        	<span class="bar inside ejercido" style="<%=ejercido_style%>"></span>
         	</div>
         </div>
         
-        <div v-if="pagado_1 != null">
+		<div data-hide="<%=PAGADO_1%>">
        		<!-- pagado-->
        		<h3>Monto pagado</h3>
        		<p class="amount right">$<strong><%=GFormat(PAGADO_1)%></strong> <span>MXN</span></p>
        		<div class="bar">
-       		  <span class="bar inside pef" v-bind:style="presupuesto_style"></span>
+       		  <span class="bar inside pef" style="<%=pagado_style%>"></span>
        		</div>
 		</div>
 		
-		<div v-if="avance_financiero != null">
+		<div data-hide="<%=AVANCE_FINANCIERO%>">
        		<!-- avance financiero-->
        		<h3>Avance Financiero</h3>
        		<p class="amount right">$<strong><%=GFormat(AVANCE_FINANCIERO)%></strong> <span>MXN</span></p>
        		<div class="bar">
-       		  <span class="bar inside pef" v-bind:style="presupuesto_style"></span>
+       		  <span class="bar inside pef" style="<%=avance_style%>"></span>
        		</div>
 		</div>
 	
@@ -566,6 +566,12 @@
   var GFSHCPmap = function(data){
     //data.avance_fisico = 80;
     data.modificado_style = "width:" + ((data.MODIFICADO_1 * 100) / data.AUTORIZADO_1) + "%";
+    data.ministrado_style = "width:" + ((data.MODIFICADO_1 * 100) / data.MINISTRADO_2) + "%";
+    data.comprometido_style = "width:" + ((data.MODIFICADO_1 * 100) / data.COMPROMETIDO_1) + "%";
+    data.devengado_style = "width:" + ((data.MODIFICADO_1 * 100) / data.DEVENGADO_1) + "%";
+    data.ejercido_style = "width:" + ((data.MODIFICADO_1 * 100) / data.EJERCIDO_1) + "%";
+    data.pagado_style = "width:" + ((data.MODIFICADO_1 * 100) / data.PAGADO_1) + "%";
+    data.avance_style = "width:" + ((data.MODIFICADO_1 * 100) / data.AVANCE_1) + "%";
   }
 
   GFSHCPHelpers.initialize(GFSHCPConfig, GFSHCPmap);
