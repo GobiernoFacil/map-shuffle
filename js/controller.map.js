@@ -82,6 +82,12 @@ define(function(require){
     // función que se ejecuta
     //
     initialize : function(settings){
+      // [0] REVISA EL URL POR ALGUNA CONFIGURACIÓN
+      //
+      //
+      this.initialFilters = this.parseHashBangArgs();
+      this.firstTime      = true;
+
       // [1] INICIA LAS PROPIEDADES DEL APP 
       // ----------------------------------------------------------------------
       // * la referencia a classyBrew
@@ -271,6 +277,77 @@ define(function(require){
       this.map.setView(latlng, this.settings.ux.findMeZoom);
     },
 
+    /**
+     * [https://gist.github.com/miohtama/1570295]
+     * Parse hash bang parameters from a URL as key value object.
+     * 
+     * For repeated parameters the last parameter is effective.
+     * 
+     * If = syntax is not used the value is set to null.
+     * 
+     * #x&y=3 -> { x:null, y:3 }
+     *
+     * @param aURL URL to parse or null if window.location is used
+     * 
+     * @return Object of key -> value mappings.
+     */
+    parseHashBangArgs : function(aURL) {
+      aURL = aURL || window.location.href;
+      var vars = {};
+      var hashes = aURL.slice(aURL.indexOf('#') + 1).split('&');
+
+      for(var i = 0; i < hashes.length; i++) {
+        var hash = hashes[i].split('=');
+
+        if(hash.length > 1) {
+           vars[hash[0]] = hash[1];
+        } else {
+          vars[hash[0]] = null;
+        }      
+      }
+      return vars;
+    },
+
+    mixInitialFilters : function(item){
+
+      if(!this.firstTime) return false;
+
+      var filters  = item.config.filters.concat(item.config.extraFilters || []),
+          initial  = this.initialFilters,
+          defaults;
+
+      filters.forEach(function(filter){
+        if(initial[filter.field]){
+          //console.log(this.initialFilters[filter.field]);
+          filter.default = +initial[filter.field] || initial[filter.field];
+        }
+      }, this);
+
+      console.log(filters);
+
+      defaults = filters.filter(function(filter){
+        return filter.hasOwnProperty("default");
+      });
+
+      this.filters = defaults.map(function(filter){
+        return {
+          field : filter.field,
+          value : filter.default
+        }
+      });
+
+      /*
+      this.initialFilters = this.parseHashBangArgs();
+      this.firstTime      = true;
+      */
+
+      //console.log(this.initialFilters, this.firstTime, item.config, this.filters);
+
+      this.firstTime = false;
+
+      return true;
+    },
+
 
 
 
@@ -309,6 +386,9 @@ define(function(require){
     //
     renderLayer : function(item, keepFilters){
 
+      // [0] mezcla los filtros iniciales
+      var isFirstTime = this.mixInitialFilters(item);
+
       // [1] elimina el layer anterior
       //
       this.cleanLayers();
@@ -316,7 +396,7 @@ define(function(require){
       // [2] actualiza las referencia internas
       //
       // * la lista de filtros
-      this.filters = keepFilters ? this.filters : [];
+      this.filters = keepFilters || isFirstTime ? this.filters : [];
       // * el mapa desplegado
       this.currentMap   = item;
       // * el id interno del mapa desplegado
@@ -976,11 +1056,6 @@ define(function(require){
         data = item.data;
       }
 
-      /*
-      if(!this.filters.length){
-        data = item.data;
-      }
-      */
       else{
         this.filters.forEach(function(fil){
           if(fil.value !== SELECTALL){
@@ -1311,7 +1386,8 @@ define(function(require){
            data = _.uniq(_.pluck(item.data, year.field))
                    .map(function(y){return +y})
                    .sort(function(a, b){return a - b}),
-          selector = this.UIyearSelector.querySelector("select");
+          selector = this.UIyearSelector.querySelector("select"),
+          _default = year.default;
 
       selector.innerHTML = "";
       selector.setAttribute("data-field", year.field);
@@ -1327,6 +1403,10 @@ define(function(require){
 
         opt.value     = y;
         opt.innerHTML = y;
+
+        if(_default == y){
+          opt.selected = true;
+        }
 
         selector.appendChild(opt);
       }, this);
@@ -1901,7 +1981,7 @@ define(function(require){
       $(selector).bootstrapTable({
         columns: fields,
         pagination : true,
-        pageSize : 50,
+        pageSize : 10,
         search : true,
         searchOnEnterKey : true,
         data: data,

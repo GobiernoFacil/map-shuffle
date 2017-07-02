@@ -22,13 +22,13 @@
   "data"    : ["key","name","ramo","unidad","state","lat","lng","advance","ciclo","classification"],
   "current" : {},
   "filters" : [
-    {"type" : "state", "field" : "state", "default" : 21},
-    {"type" : "branch", "field" : "ramo", "default" : 1},
+    {"type" : "state", "field" : "state"},
+    {"type" : "branch", "field" : "ramo"},
     {"type" : "unit", "field" : "id_unidad"},
-    {"type" : "year", "field" : "ciclo"}
+    {"type" : "year", "field" : "ciclo", "default" : "2017"}
   ],
   "extraFilters" : [
     {"type" : "extra", "field" : "classification", "title" : "clasificación ciudadana"}
   ],
-"template" : "<%=name%> <div <div class='amount_label'><div class='row'><div class='col-sm-6'><h5>Monto total de inversión</h5>  $<%=monto_total_inversion%><h5>Monto ejercido</h5> $<%=ejercido%></div><div class='col-sm-6'><h5>Avance Físico</h5> <%=advance%>% <div class='bar'><span class='bar inside total' style='width:<%=advance%>%'></span><h5>Año</h5> <%=ciclo%></div></div></div> <br><a href='/opa.html#<%=key%>'  class='btn more info'>Más información</a></div>"
+"template" : "<%=name%> <div class='amount_label'><div class='row'><div class='col-sm-6'><h5>Monto total de inversión</h5>  $<%=monto_total_inversion%><h5>Monto ejercido</h5> $<%=ejercido%></div><div class='col-sm-6'><h5>Avance Físico</h5> <%=advance%>% <div class='bar'><span class='bar inside total' style='width:<%=advance%>%'></span><h5>Año</h5> <%=ciclo%></div></div></div> <br><a href='/opa.html#<%=key%>'  class='btn more info'>Más información</a></div>"
 }
