@@ -468,6 +468,9 @@ define(function(require){
       // [9] Actualiza la guía de color
       //
       this.renderColorGuide();
+
+      // [10] Actualiza el texto para el embed
+      this.updateEmbed();
     },
 
     groupPoints : function(){
@@ -1084,6 +1087,33 @@ define(function(require){
      * F U N C I O N E S   D E   U I   ( P Á N E L E S ) 
      * ------------------------------------------------------------
      */
+
+    updateEmbed : function(){
+      var id      = this.settings.ui.embedForm,
+          path    = this.settings.maps.embedPath,
+          form    = document.getElementById(id),
+          input   = form.querySelector("input"),
+          iframe  = document.createElement("iframe"),
+          filters = this.filters,
+          url; 
+
+      if(filters.length){
+        url = filters.map(function(filter){
+          return filter.field + "=" + filter.value;
+        });
+
+        url = url.join("&");
+      }
+      else{
+        url = "";
+      }
+
+      form.addEventListener("submit", function(e){e.preventDefault()});
+
+      iframe.src = path + "#" + url;
+
+      input.value = iframe.outerHTML;
+    },
 
 
     // LA GUÍA DE COLOR

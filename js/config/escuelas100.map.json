@@ -1,5 +1,5 @@
 {
-  "name"  : "Escuelas al 100",
+  "name" : "Escuelas al 100",
   "type"  : "point",
   "multiple" : false,
   "level" : [],
@@ -11,7 +11,7 @@
   },
   "style" : {
     "fillColor" : "#1cb68d",
-    "color"     : "green",
+    "color"     : "green"
   },
   "location" : {
     "lat" : "LATITUD",
