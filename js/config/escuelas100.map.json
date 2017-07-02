@@ -6,7 +6,7 @@
   "src"   : "/js/maps/escuelas100.csv",
   "file"  : "csv",
   "link"  : {
-    "url"    : "http://localhost:8000/escuelas.html",
+    "url"    : "/escuelas.html",
     "column" : "CLAVECENTROTRABAJO"
   },
   "style" : {
