@@ -1690,7 +1690,8 @@ a.export:visited {
   position: absolute;
   top: 0;
   left: 0px;
-  height: 100%; }
+  height: 100%;
+  overflow-y: scroll; }
   .sidebar section {
     padding: 0; }
   .sidebar .filter_container {
