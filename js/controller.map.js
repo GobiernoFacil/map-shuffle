@@ -121,6 +121,8 @@ define(function(require){
       this.extra        = null;
       // la referencia al geocoder;
       this.geocoder     = null;
+      // los callbacks
+      this.callbacks    = settings.callbacks;
       // referencia al archivo de configuración inicial
       this.settings     = Object.create(CONFIG);
       // referencia a las colecciones de ubicaciones
@@ -215,6 +217,11 @@ define(function(require){
 
       // [8] LOADER 
       this.loaderStop("ya cargó lo básico");
+
+      // [9] HABILITA EL CALLBACK DE INICIO
+      if(this.callbacks && this.callbacks.filterInitialize){
+        this.callbacks.filterInitialize(this);
+      }
     },
 
 
@@ -470,6 +477,12 @@ define(function(require){
 
       // [10] Actualiza el texto para el embed
       this.updateEmbed();
+
+      // [11] Activa el callback de cambio
+      if(this.callbacks && this.callbacks.filterChange){
+        // filters, data, currentData
+        this.callbacks.filterChange(this.filters, this.currentMap, this._currentData);
+      }
     },
 
     groupPoints : function(){

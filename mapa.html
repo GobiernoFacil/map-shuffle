@@ -241,14 +241,18 @@
 
   <script>
     var GFSHCPcallbacks = {
-          filterChange : function(filters, someUselessShit){
+          filterChange : function(filters, data, currentData){
+            console.log(filters, data, currentData);
+          },
 
+          filterInitialize : function(app){
+            console.log(app);
           }
         },
 
         GFSHCPLoaderStart = function(stuff){
           console.log(stuff);
-         document.getElementById("GF-SHCP-loader").style.display = "block";
+          document.getElementById("GF-SHCP-loader").style.display = "block";
         };
 
         GFSHCPLoaderStop = function(stuff){

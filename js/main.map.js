@@ -38,6 +38,7 @@ require(['controller.map'], function(map){
   GFSHCPMapApp = map;
   GFSHCPMapApp.initialize({
     loaderStart : GFSHCPLoaderStart,
-    loaderStop : GFSHCPLoaderStop
+    loaderStop  : GFSHCPLoaderStop,
+    callbacks   : GFSHCPcallbacks
   });
 });
