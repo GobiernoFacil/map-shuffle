@@ -1180,9 +1180,12 @@ define(function(require){
       // ADVANCESEARCH
       var //template = _.template(ADVANCESEARCH),
           elID     = this.settings.ui.searchTable,
-          el       = document.getElementById(elID);
+          el       = document.getElementById(elID),
+          download = this.settings.ui.downloadDataBtn;
 
       el.innerHTML = ADVANCESEARCH;
+
+      console.log("download: ", download);
     },
 
     //
@@ -2014,13 +2017,7 @@ define(function(require){
                            return el; 
                          });
 
-      /*
-      $.extend($.fn.bootstrapTable.columnDefaults, {
-        sortable: true
-      });
-      */
-
-      $(selector).bootstrapTable({
+      this.tableTool = $(selector).bootstrapTable({
         columns: fields,
         pagination : true,
         pageSize : 10,
@@ -2031,10 +2028,14 @@ define(function(require){
         showExport: true,
         pageList : "ALL",
         exportOptions: {
-        fileName: 'custom_file_name',
-        pageList : "ALL"
-    }
+          fileName: 'custom_file_name',
+          pageList : "ALL"
+        }
       });
+
+      // método de uso del plugin
+      // GFSHCPMapApp.tableTool.bootstrapTable("getOptions")
+
 
     },
 

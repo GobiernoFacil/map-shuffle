@@ -97,7 +97,8 @@
     "searchTable"      : "GF-SHCP-table-tool",
     "projectCounter"   : "GF-SHCP-project-counter",
     "colorGuide"       : "GF-SHCP-color-guide",
-    "embedForm"        : "GF-SHCP-embed-form"
+    "embedForm"        : "GF-SHCP-embed-form",
+    "downloadDataBtn"  : "GF-SHCP-get-data"
   },
   "ux" : {
     "findMeZoom" : 14,
