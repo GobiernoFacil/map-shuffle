@@ -173,8 +173,9 @@ define(function(require){
       //this._enableStateFilterChange = this._enableStateFilterChange.bind(this);
 
       // [3] ARREGLA EL GEOJSON DE ESTADOS (esto debe desaparecer)
+      //     v2: OPTIMIZA LOS GEOJSON
       //
-      this._setStatesGeometry();
+      //this._setStatesGeometry();
       
       // [4] INICIA EL MAPA DE LEAFLET
       // ----------------------------------------------------------------------
@@ -318,12 +319,10 @@ define(function(require){
 
       filters.forEach(function(filter){
         if(initial[filter.field]){
-          //console.log(this.initialFilters[filter.field]);
           filter.default = +initial[filter.field] || initial[filter.field];
         }
       }, this);
 
-      console.log(filters);
 
       defaults = filters.filter(function(filter){
         return filter.hasOwnProperty("default");
@@ -2037,8 +2036,47 @@ define(function(require){
     // ---------------------------------------------
     // elimina caracteres raros y nombre nuevo en el geojson de estados
     //
+    // v2 : ahora en lugar de completar los datos, puede acortar el número de decimales
+    //      por estado
     _setStatesGeometry : function(){
+      var optNum = 8;
       ESTADOS.edos.features.forEach(function(estado){
+
+        estado.geometry.coordinates.forEach(function(arr){
+
+          if(arr.length == 1){
+            arr[0].forEach(function(point){
+              var x, y;
+
+              x = String(point[0]).slice(0, -optNum);
+              y = String(point[1]).slice(0, -optNum);
+
+              // console.log(x.length, x, y.length, y);
+              point[0] = x.search(".") != -1 ? (+x || point[0]) : point[0];
+              point[1] = y.search(".") != -1 ? (+y || point[1]) : point[1];
+
+            }, this);
+          }
+          else{
+            /*
+            arr.forEach(function(arr2){
+              if(_.isNumber(arr2[0])) return;
+
+
+              arr2.forEach(function(point){
+                var x, y;
+
+                x = String(point[0]).slice(0, -optNum);
+                y = String(point[1]).slice(0, -optNum);
+
+                point[0] = +x;
+                point[1] = +y;
+              }, this);
+            }, this);
+            */
+          }
+        }, this);
+        /*
         estado.properties.CVE_ENT = +estado.properties.CVE_ENT;
 
         if(estado.properties.CVE_ENT == 31){
@@ -2061,8 +2099,9 @@ define(function(require){
         }
         if(estado.properties.CVE_ENT == 9){
           estado.properties.NOM_ENT = "Ciudad de México";
-        }
+        }*/
       });
+      
 
       this.statesGeojson = ESTADOS;
     },
