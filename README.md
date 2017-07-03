@@ -22,7 +22,7 @@ donde la propiedad "data-main" debe incluir el nombre del archivo de configuraci
 ### descripción
 dentro de la carpeta "js", existe un archivo json llamado: config.map.json; este archivo de configuración sirve para definir:
 * el aspecto inicial del plugin de leaflet,
-* la fuente de dºatos geográficos, 
+* la fuente de datos geográficos, 
 * el diseño para las geometrías (estados, municipios),
 * el diseño para los puntos (cuando se muestre elementos con latitud y longitud)
 * los mapas que se ocuparan, mediante una lista de archivos de configuración,
@@ -101,6 +101,9 @@ Aquí un ejemplo de mapGeometry:
   },
 ```
 
+##### extraMapGeometry
+al igual que mapGeometry, define el diseño por default para los mapas superpuestos, y funciona de la misma manera.
+
 ##### maps
 En el objeto maps, se definen los archivos de configuración de cada mapa (csv, json, tsv) que formará parte de la aplicación.
 
@@ -109,6 +112,7 @@ basePath : la ruta donde están guardados todos los archivos de configuración. 
 maps : es un array con la lista de archivos de configuración
 extras : al igual que maps, es una lista de archivos de configuración, pero de mapas que serán de soporte, y no principales
 current : el mapa que desplegará al iniciar la aplicación. El valor debe ser un entero, y debe ser la posición del archivo de configuración en el array "maps". El conteo inicia en cero; es decir, si se quiere que se despliegue el segundo mapa al inicio, el valor debe ser "1".
+embedPath: Aquí se define el url completo de donde cargarán los mapas en otros sitios, implementados mediante un iframe. Aquí se recomienda tener una segundo dirección, sin diseño, que permita al mapa acoplarse mejor a otro proyecto.
 
 Aquí un ejemplo de maps:
 ```
@@ -116,7 +120,8 @@ Aquí un ejemplo de maps:
     "basePath" : "/js",
     "maps"     : ["ramo23.map.json", "opa.map.json", "tomas.map.json", "gasolina.map.json"],
     "extras"   : ["poblacion.map.json"],
-    "current"  : 3
+    "current"  : 3,
+    "embedPath": "https://gobiernofacil.com/mapa2.html" 
   }
 ```
 
@@ -160,12 +165,42 @@ El archivo de configuración completo debería ser de la siguiente manera:
 }
 ```
 
+##### ui
+Dentro del objeto UI, se definen una serie de clases e identificadores únicos para los elementos de interfaz, para que el sistema pueda reconocerlos (Y no estén definidos dentro del código!); se recomienda no alterar estos identificadores y clases, a menos que alguno colapse con alguna definición del sistema (que se repita un id, o que una clase se utilice para otra cosa en la misma página).
+
+Los identificadores son los siguientes:
+topToolsDiv: el contenedor principal de herramientas.
+bottomToolsDiv: el contenedor secundario de herramientas. 
+mapSelector: el selector de mapas.
+extraMapSelector: el selector de mapas secundario.
+pageSelector: la herramienta de paginación para el mapa 
+filterSelector: el selector de filtros del mapa
+barsTool: la herramienta de comparación
+geolocationBtn: el botón de geolocalización del usuario
+geolocationForm: el formulario de geolocalización
+geolocationField: el input de la búsqueda de geolocalización
+searchTable: la tabla de búsqueda avanzada
+projectCounter: el contador de proyectos
+colorGuide: la guía de color
+embedForm:el input con la información de "embebido"
+downloadDataBtn: el botón para descargar los datos
+  
+##### ux  
+En este objeto se define la configuración de los elementos de interacción. Las propiedades usadas son las siguientes:
+
+findMeZoom: el zoom que debe tener el mapa al geolocalizar al usuario.
+geocoding: el endpoint del api de geolocalización  
+
 ## Configuración particular de un mapa con datos
 Dentro del archivo de config.map.json, se definen distintos archivos json de configuración para cada mapa particular (OPA, Ramo23, etc.); cada uno de estos archivos configura la carga de datos y su método de despliegue.
 
 El archivo de configuración de un mapa particular, tiene las siguientes propiedades:
 
+name : el nombre que aparece en el selector de mapas 
+
 type : puede ser "area" o "point". En el caso de "area", se espera que el archivo con los datos, contenga la clave de estado y, de manera opcional, la clave de municipio del INEGI. en el caso de "point", se espera que tenga la variable de latitud y de longitud (por separado). En la opción de "area", se dibujarán geometrías que delimiten los estados o municipios, agregando la variable numérica seleccionada; para "point", se representará un punto para cada entrada de la lista de datos. Una macbook con un procesador pequeño, puede manejar 15k puntos sin problema, pero más de estos puede alentar la navegación del mapa.
+
+multiple: Propiedad de las gráficas de puntos, que si tiene un valor verdadero, verifica punto por punto si hay otros puntos que desplieguen en el mismo lugar, para agregarlos en un solo template. Es recomendable no hacer esto para colecciones mayores a 5000 elementos, pues puede tardar para hacer todas las revisiones.
 
 level : Este es un array con los niveles posibles de despliegue de la información. Si es "area" el type, este array puede contener "state", para la agregación por estado, y "city", para la agregación por municipio. En el caso de "point", el array estará vacío.
 
@@ -182,6 +217,18 @@ pero esto no:
 ```
 {"persona" : {"nombre" : "arturo c.", "edad" : 35}}
 ```
+
+link : aquí se definen dos propiedades, el url donde se despliega la ficha del elemento, y cuál es la propiedad que debe enviarse después del hash (para que se genere algo como htttps://gobiernofacil.com/laficha.html#fd345632
+
+aquí un ejemplo
+```
+"link"  : {
+    "url"    : "/escuelas.html",
+    "column" : "CLAVECENTROTRABAJO"
+  }
+```
+
+style: este es un objeto con propiedades CSS que modifican la configuración inicial de diseño para el mapa que se está configurando.
 
 location : Este es un objeto con dos propiedades que definen el nombre del id de estado y el id de municipio para cuando se trata de "area", o es un objeto vacío cuando se trata de "point". Para definir la variable con el id de estado, se le asigna a "state", y para la variable de municipio, se le asigna a "city". En el caso de "point", las variables por definir son "lat" para la latitud, y "lng" para la longitud.
 
@@ -260,4 +307,28 @@ y para "point":
   "current" : {},
   "template" : "<p><%=name%>:<%=osm_state%></p>"
 }
+```
+
+filters: aquí se puede definir una lista de filtros disponibles para el mapa. Los filtros son los siguientes: year, state, city, branch, unit.
+
+cada uno se define de la misma manera. Primero se define el tipo, que puede ser cualquiera de los cinco antes mencionados. Después el nombre de la columna donde está definido; por ejemplo, para "year", la columna podría ser: ANIO_EJECUCION. Por último, se define si este filtro estará seleccionado en algún valor por default. 
+
+Esta es la estructura básica:
+
+```
+"filters" : [
+    {"type" : "state", "field" : "CLAVE_ENTIDAD", "default":21},
+    {"type" : "year", "field" : "ANIO_EJECUCION"},
+    {"type" : "branch", "field" : "ramo"},
+    {"type" : "unit", "field" : "id_unidad"},
+    {"type" : "city", "field" : "id_ciudad"}
+  ],
+```
+
+extraFilters : al igual que la lista de filtros, se define una segunda lista de elementos disponibles para filtrar en el mapa, pero seleccionado solamente la columna que se debe filtrar (y agregar en valores únicos). La diferencia, es que hay que especificar el nombre del campo y al tipo de filtro, se le debe poner "extra". Aquí un ejemplo:
+
+```
+"extraFilters" : [
+    {"type" : "extra", "field" : "classification", "title" : "clasificación ciudadana"}
+  ],
 ```
