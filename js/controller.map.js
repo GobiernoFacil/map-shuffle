@@ -58,9 +58,13 @@ define(function(require){
       // [*] la búsqueda avanzada
       ADVANCESEARCH  = require("text!templates/advanced-search.html"),  
       // [*] la guía de color
-      COLORGUIDE     = require("text!templates/color-band.html"),  
+      COLORGUIDE     = require("text!templates/color-band.html"), 
 
-      // [5] define las constantes internas del sistema 
+      // [5] carga los componentes de filtros y búsqueda
+      // ----------------------------------------------------------------------
+      BARSTOOL      = require("bars.maps"), 
+
+      // [6] define las constantes internas del sistema 
       // ----------------------------------------------------------------------
       SELECTALL      = "_____",
       XFILTERCLASS   = "killMePlease";
@@ -130,7 +134,9 @@ define(function(require){
                      estados        : Object.create(ESTADOS),
                      estadosName    : Object.create(ESTADOSNAME),
                      municipios     : Object.create(MUNICIPIOS),
-                     municipiosName : Object.create(MUNICIPIOSNAME)
+                     municipiosName : Object.create(MUNICIPIOSNAME),
+                     ramosName      : Object.create(RAMOSNAME),
+                     unidadesName   : Object.create(UNIDADESNAME)
                    };
       // el formato para números
       this.numberFormat = d3.format(",");
@@ -138,6 +144,9 @@ define(function(require){
       // la función de loader
       this.loaderStart = settings.loaderStart;
       this.loaderStop  = settings.loaderStop;
+
+      // la app de gráficas
+      this.barsTool = this.settings.ux.enableBarsTool ? new BARSTOOL(this) : null;
 
       // [1.1] DEFINE SHORTCUTS PARA LOS ELEMENTOS DE UI
       // ----------------------------------------------------------------------
@@ -483,6 +492,9 @@ define(function(require){
         // filters, data, currentData
         this.callbacks.filterChange(this.filters, this.currentMap, this._currentData);
       }
+
+      // [12] Actualiza la app de comparación
+      if(this.barsTool) this.barsTool.render();
     },
 
     groupPoints : function(){
@@ -1851,7 +1863,9 @@ define(function(require){
      * F U N C I O N E S   D E   B A R R A S   C O M P A R A T I V A S
      * ----------------------------------------------------------------------
      */
+
     enableBarsTool : function(item){
+      /*
       var thisConf    = this.settings.ui.barsTool,
           itemConf    = item.config,
           container   = document.getElementById(thisConf.container),
@@ -1873,6 +1887,7 @@ define(function(require){
       if(itemConf.level.indexOf("state") !== -1){
         this.renderBarsToolStateList();
       }
+      */
     },
 
     addRegionToCompare : function(e){
