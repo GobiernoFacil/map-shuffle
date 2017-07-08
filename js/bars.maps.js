@@ -20,7 +20,7 @@ define(function(require){
 
     var _id        = parent.settings.ui.barsTool.container,
         _container = document.getElementById(_id),
-        //_values    = parent.currentMap.config.values,
+        _values    = null,
         _states    = parent.lists.estadosName,
         _cities    = parent.lists.municipiosName,
         _branches  = parent.lists.ramosName,
@@ -32,16 +32,17 @@ define(function(require){
     var controller = {
 
       render : function(){
-        var values = parent.currentMap.config.values;
+        _values = parent.currentMap.config.values;
 
-        if(values.length){
+        if(_values.length){
           this.show();
-          this.renderOptions(values);
+          this.renderSingleLocation();
+          this.renderMultipleLocation();
+          //this.renderOptions();
           return;
         }
         else{
           this.hide();
-          console.log("no values");
         }
 
 
@@ -58,14 +59,27 @@ define(function(require){
       },
 
       renderOptions : function(){
+        var filtersA = parent.currentMap.config.filters,
+            filtersB = parent.currentMap.config.extraFilters;
 
+        renderValueList();
+
+        if(this._findFilter("state", filtersA)){
+
+        }
       },
+
+      
 
       renderSingleLocation : function(){
 
       },
 
       renderMultipleLocation : function(){
+
+      },
+
+      renderValueList : function(){
 
       },
 
@@ -83,6 +97,12 @@ define(function(require){
 
       renderUnitList : function(){
         
+      },
+
+      _findFilter : function(name, list){
+        return list.filter(function(filter){
+          filter.type == name;
+        }).length;
       }
       
     };

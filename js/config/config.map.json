@@ -86,10 +86,9 @@
       }
     },
     "barsTool" : {
-      "container"     : "GF-SHCP-bars-tool",
-      "stateSelector" : "GF-SHCP-bars-tool-state-selector",
-      "citySelector"  : "GF-SHCP-bars-tool-city-selector",
-      "barsList"      : "GF-SHCP-bars-tool-list"
+      "container"         : "GF-SHCP-bars-tool",
+      "singleLocation"    : "GF-SHCP-bars-app-single-location",
+      "multipleLocations" : "GF-SHCP-bars-app-multiple-locations"
     },
     "geolocationBtn"   : "GF-SHCP-geolocate-user",
     "geolocationForm"  : "GF-SHCP-geolocation-form",
