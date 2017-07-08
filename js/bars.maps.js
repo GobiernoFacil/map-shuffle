@@ -20,11 +20,11 @@ define(function(require){
 
     var _id        = parent.settings.ui.barsTool.container,
         _container = document.getElementById(_id),
-        _values    = parent.currentMap.config.values,
-        _states    = parent.list.estadosName,
-        _cities    = parent.list.municipiosName,
-        _branches  = parent.list.ramosName,
-        _units     = parent.list.unidadesName;
+        //_values    = parent.currentMap.config.values,
+        _states    = parent.lists.estadosName,
+        _cities    = parent.lists.municipiosName,
+        _branches  = parent.lists.ramosName,
+        _units     = parent.lists.unidadesName;
 
   // [3] define el objeto del comparador
   // ----------------------------------------------------------------------
@@ -36,19 +36,18 @@ define(function(require){
 
         if(values.length){
           this.show();
+          this.renderOptions(values);
           return;
         }
         else{
           this.hide();
+          console.log("no values");
         }
-
-        console.log(values);
 
 
       },
 
       show : function(){
-
         _container.style.display = "block";
         _container.innerHTML = TEMPLATE;
       },
@@ -56,6 +55,10 @@ define(function(require){
       hide : function(){
         _container.innerHTML = "";
         _container.style.display = "none";
+      },
+
+      renderOptions : function(){
+
       },
 
       renderSingleLocation : function(){

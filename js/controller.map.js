@@ -468,7 +468,7 @@ define(function(require){
 
       // [6] Activa las barras de comparación
       //
-      this.enableBarsTool(item);
+      //this.enableBarsTool(item);
 
       // [7] Activa la tabla de comparación
       //
@@ -494,7 +494,12 @@ define(function(require){
       }
 
       // [12] Actualiza la app de comparación
-      if(this.barsTool) this.barsTool.render();
+      if(this.barsTool){
+        this.barsTool.render();
+      }
+      else{
+        console.log("no bars tool");
+      }
     },
 
     groupPoints : function(){
