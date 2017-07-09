@@ -58,7 +58,10 @@ define(function(require){
         _SLAddGraphBtn       = parent.settings.ui.barsTool.singleLocationUI.addGraph,
 
 
-        SELECTALL = "ALL";
+        SELECTALL                  = "ALL",
+        SELECTALLSTATESSTRING      = "Todo México",
+        SELECTALLCITIESFIRSTSTRING = "",
+        SELECTALLCITIESSTRING      = "Todo el estado";
 
 
   // [3] define el objeto del comparador
@@ -91,16 +94,6 @@ define(function(require){
         _container.style.display = "none";
       },
 
-      /*
-      _SLStateInputID      = parent.settings.ui.barsTool.singleLocationUI.state,
-        _SLCityInputID       = parent.settings.ui.barsTool.singleLocationUI.city,
-        _SLLocationBtnID     = parent.settings.ui.barsTool.singleLocationUI.addLocation,
-        _SLSelectedFiltersID = parent.settings.ui.barsTool.singleLocationUI.selectedFilters,
-        _SLFilterListID      = parent.settings.ui.barsTool.singleLocationUI.filterList,
-        _SLFilterPrefix      = parent.settings.ui.barsTool.singleLocationUI.filterPrefix,
-        _SLAddGraphBtn       = parent.settings.ui.barsTool.singleLocationUI.addGraph;
-      */
-
       renderSingleLocation : function(){
         var container = document.getElementById(_slID),
             state     = document.getElementById(_SLStateInputID),
@@ -108,10 +101,8 @@ define(function(require){
             filters   = document.getElementById(_SLFilterListID);
 
         this.renderStateList(state);
-        this.renderCityList(city);
+        this.renderCityList(city, state);
         this.renderOptions(filters);
-
-        //console.log(container);
 
         container.addEventListener("submit", function(e){e.preventDefault()});
       },
@@ -132,23 +123,46 @@ define(function(require){
       },
 
       renderStateList : function(state){
-        console.log(_data);
-        console.log(state);
-        console.log(_states);
+        var optAll   = document.createElement("option"),
+            stateCol = parent.currentMap.config.location.state;
 
-        /*
-        32
-name
-:
-"Zacatecas"
-url
-:
-"zacatecas"
-        */
+        console.log(stateCol);
+        if(!stateCol) return;
+
+
+        state.innerHTML = "";
+        state.setAttribute("data-field", stateCol);
+
+        optAll.value     = SELECTALL;
+        optAll.innerHTML = SELECTALLSTATESSTRING;
+        state.appendChild(optAll);
+
+        _states.forEach(function(st){
+          var opt = document.createElement("option");
+
+          opt.value     = st.id;
+          opt.innerHTML = st.name;
+
+          state.appendChild(opt);
+        });
       },
 
-      renderCityList : function(city){
+      renderCityList : function(city, state){
+        var stateVal = state.value,
+            optAll   = document.createElement("option"),
+            stateCol = parent.currentMap.config.location.state,
+            cityCol  = parent.currentMap.config.location.city;
 
+
+        if(!stateCol || !cityCol) return;
+
+        city.innerHTML = "";
+        city.setAttribute("data-field", cityCol);
+
+        optAll.value     = SELECTALL;
+        optAll.innerHTML = +stateVal ? SELECTALLSTRING : SELECTALLCITIESFIRSTSTRING;
+        city.appendChild(optAll);
+        // SELECTALLCITIESFIRSTSTRING
       },
 
       renderBranchList : function(){
