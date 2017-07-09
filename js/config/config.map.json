@@ -88,7 +88,16 @@
     "barsTool" : {
       "container"         : "GF-SHCP-bars-tool",
       "singleLocation"    : "GF-SHCP-bars-app-single-location",
-      "multipleLocations" : "GF-SHCP-bars-app-multiple-locations"
+      "multipleLocations" : "GF-SHCP-bars-app-multiple-locations",
+      "singleLocationUI" : {
+        "state"           : "GF-SHCP-bars-app-single-location-state",
+        "city"            : "GF-SHCP-bars-app-single-location-city",
+        "addLocation"     : "GF-SHCP-bars-app-single-location-select-btn",
+        "selectedFilters" : "GF-SHCP-bars-app-single-location-selected-filters",
+        "filterList"      : "GF-SHCP-bars-app-single-location-filter-list",
+        "filterPrefix"    : "GF-SHCP-bars-app-single-location-filter-prefix-",
+        "addGraph"        : "GF-SHCP-bars-app-single-location-add-bar-btn"   
+      }
     },
     "geolocationBtn"   : "GF-SHCP-geolocate-user",
     "geolocationForm"  : "GF-SHCP-geolocation-form",
