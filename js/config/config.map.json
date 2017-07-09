@@ -97,6 +97,15 @@
         "filterList"      : "GF-SHCP-bars-app-single-location-filter-list",
         "filterPrefix"    : "GF-SHCP-bars-app-single-location-filter-prefix-",
         "addGraph"        : "GF-SHCP-bars-app-single-location-add-bar-btn"   
+      },
+      "filterDivClass"    : "GF-SHCP-bars-app-filter-class",
+      "filterLabels" : {
+        "value" : "Valor",
+        "year"  : "Ciclo",
+        "state" : "Estado",
+        "city"  : "Ciudad",
+        "branch": "Ramo",
+        "unit"  : "Unidad ejectura"
       }
     },
     "geolocationBtn"   : "GF-SHCP-geolocate-user",

@@ -19,23 +19,6 @@ define(function(require){
   //
   var GraphsControllerConstructor = function(parent){
 
-/*
-      "barsTool" : {
-      "container"         : "GF-SHCP-bars-tool",
-      "singleLocation"    : "GF-SHCP-bars-app-single-location",
-      "multipleLocations" : "GF-SHCP-bars-app-multiple-locations",
-      "singleLocationUI" : {
-        "state"           : "GF-SHCP-bars-app-single-location-state",
-        "city"            : "GF-SHCP-bars-app-single-location-city",
-        "addLocation"     : "GF-SHCP-bars-app-single-location-select-btn",
-        "selectedFilters" : "GF-SHCP-bars-app-single-location-selected-filters",
-        "filterList"      : "GF-SHCP-bars-app-single-location-filter-list",
-        "filterPrefix"    : "GF-SHCP-bars-app-single-location-filter-prefix-",
-        "addGraph"        : "GF-SHCP-bars-app-single-location-add-bar-btn"   
-      }
-    },
-      */
-
     var _id         = parent.settings.ui.barsTool.container,
         _slID       = parent.settings.ui.barsTool.singleLocation,
         _mlID       = parent.settings.ui.barsTool.multipleLocations,
@@ -56,6 +39,16 @@ define(function(require){
         _SLFilterListID      = parent.settings.ui.barsTool.singleLocationUI.filterList,
         _SLFilterPrefix      = parent.settings.ui.barsTool.singleLocationUI.filterPrefix,
         _SLAddGraphBtn       = parent.settings.ui.barsTool.singleLocationUI.addGraph,
+        _filterDivClass      = parent.settings.ui.barsTool.filterDivClass,
+
+        _MLFilterPrefix      = "patos",
+
+        _valueLabel  = parent.settings.ui.barsTool.filterLabels.value,
+        _yearLabel   = parent.settings.ui.barsTool.filterLabels.year,
+        _stateLabel  = parent.settings.ui.barsTool.filterLabels.state,
+        _cityLabel   = parent.settings.ui.barsTool.filterLabels.city,
+        _branchLabel = parent.settings.ui.barsTool.filterLabels.branch,
+        _unitLabel   = parent.settings.ui.barsTool.filterLabels.unit,
 
 
         SELECTALL                  = "ALL",
@@ -111,15 +104,44 @@ define(function(require){
 
       },
 
-      renderOptions : function(container){
+      renderOptions : function(container, type){
         var filtersA = parent.currentMap.config.filters,
             filtersB = parent.currentMap.config.extraFilters;
 
-        this.renderValueList(container);
+        this.renderValueList(container, type);
+
+        if(this._findFilter("branch", filtersA)){
+          this.renderBranchList(container, type);
+        }
+
+        if(this._findFilter("unit", filtersA)){
+          this.renderUnitList(container, type);
+        }
+
+        if(this._findFilter("year", filtersA)){
+          this.renderYearList(container, type);
+        }
+
+        if(filtersB.length){
+          this.renderOtherFilters(container, type);
+        }
       },
 
-      renderValueList : function(){
+      renderValueList : function(container, type){
+        var div      = document.createElement("div"),
+            template = _.template(FILTER),
+            firstVal = _values[0],
+            obj      = {
+              id        : (type ? _SLFilterPrefix : _MLFilterPrefix) + firstVal,
+              label     : _valueLabel,
+              dataField : firstVal,
+              options   : _values,
+            },
+            html     = template(obj);
+        div.setAttribute("class", _filterDivClass);
+        div.innerHTML = html;
 
+        container.appendChild(div);
       },
 
       renderStateList : function(state){
@@ -165,13 +187,21 @@ define(function(require){
         // SELECTALLCITIESFIRSTSTRING
       },
 
-      renderBranchList : function(){
+      renderYearList : function(container, type){
 
       },
 
-      renderUnitList : function(){
+      renderBranchList : function(container, type){
+
+      },
+
+      renderUnitList : function(container, type){
         
       },
+
+      renderOtherFilters : function(container, type){
+
+      }
 
       _findFilter : function(name, list){
         return list.filter(function(filter){
