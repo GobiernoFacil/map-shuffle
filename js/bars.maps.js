@@ -29,7 +29,7 @@ define(function(require){
         _data       = null,
         _states     = parent.lists.estadosName.states,
         _cities     = parent.lists.municipiosName,
-        _branches   = parent.lists.ramosName,
+        _branches   = parent.lists.ramosName.branches,
         _units      = parent.lists.unidadesName,
 
         _SLStateInputID      = parent.settings.ui.barsTool.singleLocationUI.state,
@@ -54,7 +54,10 @@ define(function(require){
         SELECTALL                  = "ALL",
         SELECTALLSTATESSTRING      = "Todo México",
         SELECTALLCITIESFIRSTSTRING = "",
-        SELECTALLCITIESSTRING      = "Todo el estado";
+        SELECTALLCITIESSTRING      = "Todo el estado",
+        SELECTALLBRANCHESSTRING    = "Todos los ramos",
+        SELECTALLUNITSSTRING       = "Todos los ejecutores",
+        SELECTALLYEARSSTRING       = "Todos los años";
 
 
   // [3] define el objeto del comparador
@@ -106,40 +109,59 @@ define(function(require){
 
       renderOptions : function(container, type){
         var filtersA = parent.currentMap.config.filters,
-            filtersB = parent.currentMap.config.extraFilters;
+            filtersB = parent.currentMap.config.extraFilters,
+            branch   = this._findFilter("branch", filtersA),
+            unit     = this._findFilter("unit", filtersA),
+            year     = this._findFilter("year", filtersA);
 
         this.renderValueList(container, type);
 
-        if(this._findFilter("branch", filtersA)){
-          this.renderBranchList(container, type);
+        if(branch){
+          this.renderBranchList(branch, container, type);
         }
 
-        if(this._findFilter("unit", filtersA)){
-          this.renderUnitList(container, type);
+        if(unit){
+          this.renderUnitList(unit, container, type);
         }
 
-        if(this._findFilter("year", filtersA)){
-          this.renderYearList(container, type);
+        if(year){
+          this.renderYearList(year, container, type);
         }
 
         if(filtersB.length){
-          this.renderOtherFilters(container, type);
+          filtersB.forEach(function(fil){
+            this.renderOtherFilter(fil, container, type);
+          }, this);
         }
       },
 
       renderValueList : function(container, type){
         var div      = document.createElement("div"),
+            //optAll   = document.createElement("option"),
+            select   = null,
             template = _.template(FILTER),
             firstVal = _values[0],
+            //items    = _values.map(function(val){ return {id : val, name : val} }),
             obj      = {
               id        : (type ? _SLFilterPrefix : _MLFilterPrefix) + firstVal,
               label     : _valueLabel,
               dataField : firstVal,
-              options   : _values,
+              //options   : items,
+              //all       : SELECTALL,
+              //allText   : SELECTALLSTATESSTRING
             },
             html     = template(obj);
+
         div.setAttribute("class", _filterDivClass);
         div.innerHTML = html;
+        select = div.querySelector("select");
+        //optAll.value = SELECTALL;
+        //optAll.innerHTML = 
+
+        _values.forEach(function(val){
+
+        });
+
 
         container.appendChild(div);
       },
@@ -148,7 +170,6 @@ define(function(require){
         var optAll   = document.createElement("option"),
             stateCol = parent.currentMap.config.location.state;
 
-        console.log(stateCol);
         if(!stateCol) return;
 
 
@@ -191,22 +212,81 @@ define(function(require){
 
       },
 
-      renderBranchList : function(container, type){
+      renderBranchList : function(filter, container, type){
+        console.log(filter);
 
+        var branchCol = filter.field,
+            _branch   = document.createElement("div"),
+            branch    = null,
+            template  = _.template(FILTER),
+            obj       = {
+                          id        : (type ? _SLFilterPrefix : _MLFilterPrefix) + branchCol,
+                          label     : "yoooma",//_branchLabel,
+                          dataField : branchCol,
+                          options   : _branches,
+                          all       : SELECTALL,
+                          allText   : SELECTALLBRANCHESSTRING
+                        };
+
+        _branch.innerHTML = template(obj);
+        branch  = _branch.querySelector("select");
+
+        branch.setAttribute("data-field", branchCol);
+        //optAll.value     = SELECTALL;
+        //optAll.innerHTML = SELECTALLBRANCHESSTRING;
+        //branch.appendChild(optAll);
+
+        /*
+        _branches.forEach(function(br){
+          var opt = document.createElement("option");
+
+          opt.value     = br.id;
+          opt.innerHTML = br.name;
+
+          branch.appendChild(opt);
+        });
+        */
+
+        container.appendChild(_branch);
       },
+      /*
+      renderStateList : function(state){
+        var optAll   = document.createElement("option"),
+            stateCol = parent.currentMap.config.location.state;
+
+        if(!stateCol) return;
+
+
+        state.innerHTML = "";
+        state.setAttribute("data-field", stateCol);
+
+        optAll.value     = SELECTALL;
+        optAll.innerHTML = SELECTALLSTATESSTRING;
+        state.appendChild(optAll);
+
+        _states.forEach(function(st){
+          var opt = document.createElement("option");
+
+          opt.value     = st.id;
+          opt.innerHTML = st.name;
+
+          state.appendChild(opt);
+        });
+      },
+      */
 
       renderUnitList : function(container, type){
         
       },
 
-      renderOtherFilters : function(container, type){
+      renderOtherFilter : function(container, type){
 
-      }
+      },
 
       _findFilter : function(name, list){
         return list.filter(function(filter){
-          filter.type == name;
-        }).length;
+          return filter.type == name;
+        })[0];
       }
       
     };
