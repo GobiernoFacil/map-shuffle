@@ -57,7 +57,8 @@ define(function(require){
         SELECTALLCITIESSTRING      = "Todo el estado",
         SELECTALLBRANCHESSTRING    = "Todos los ramos",
         SELECTALLUNITSSTRING       = "Todos los ejecutores",
-        SELECTALLYEARSSTRING       = "Todos los años";
+        SELECTALLYEARSSTRING       = "Todos los años",
+        SELECTALLOTHERSSTRING      = "Todos";
 
 
   // [3] define el objeto del comparador
@@ -204,7 +205,6 @@ define(function(require){
       },
 
       renderYearList : function(filter, container, type){
-        console.log("!!!!!!!!");
         var optAll   = document.createElement("option"),
             yearCol  = filter.field,
             _year    = document.createElement("div"),
@@ -301,26 +301,79 @@ define(function(require){
         container.appendChild(_unit);
       },
 
-      /*
-      var stateVal = state.value,
-            optAll   = document.createElement("option"),
-            stateCol = parent.currentMap.config.location.state,
-            cityCol  = parent.currentMap.config.location.city;
+      renderOtherFilter : function(filter, container, type){
+        var optAll   = document.createElement("option"),
+            otherCol = filter.field,
+            _other   = document.createElement("div"),
+            other    = null,
+            template = _.template(FILTER),
+            label    = parent.settings.ui.barsTool.filterLabels[otherCol] || otherCol,
+            obj      = {
+                         id        : (type ? _SLFilterPrefix : _MLFilterPrefix) + otherCol,
+                         label     : label,
+                         dataField : otherCol
+                       },
+            others   = _.uniq(_data.map(function(d){
+                         return d[otherCol];
+                       })).filter(function(oth){ return oth}).sort();
 
-
-        if(!stateCol || !cityCol) return;
-
-        city.innerHTML = "";
-        city.setAttribute("data-field", cityCol);
 
         optAll.value     = SELECTALL;
-        optAll.innerHTML = +stateVal ? SELECTALLSTRING : SELECTALLCITIESFIRSTSTRING;
-        city.appendChild(optAll);
-      */
+        optAll.innerHTML = SELECTALLOTHERSSTRING;
+        _other.innerHTML  = template(obj);
+        other  = _other.querySelector("select");
 
-      renderOtherFilter : function(container, type){
+        other.setAttribute("data-field", otherCol);
 
+        other.appendChild(optAll);
+
+        others.forEach(function(oth){
+          var opt = document.createElement("option");
+
+          opt.value     = oth;
+          opt.innerHTML = oth;
+
+          other.appendChild(opt);
+        });
+
+        container.appendChild(_other);
       },
+
+      /*
+      var optAll   = document.createElement("option"),
+            yearCol  = filter.field,
+            _year    = document.createElement("div"),
+            year     = null,
+            template = _.template(FILTER),
+            obj      = {
+                         id        : (type ? _SLFilterPrefix : _MLFilterPrefix) + yearCol,
+                         label     : _yearLabel,
+                         dataField : yearCol
+                       },
+            years    = _.uniq(_data.map(function(d){
+                         return d[yearCol];
+                       })).filter(function(yr){ return +yr}).sort();
+
+        optAll.value      = SELECTALL;
+        optAll.innerHTML  = SELECTALLYEARSSTRING;
+        _year.innerHTML = template(obj);
+        year  = _year.querySelector("select");
+
+        year.setAttribute("data-field", yearCol);
+
+        year.appendChild(optAll);
+
+        years.forEach(function(yr){
+          var opt = document.createElement("option");
+
+          opt.value     = yr;
+          opt.innerHTML = yr;
+
+          year.appendChild(opt);
+        });
+
+        container.appendChild(_year);
+      */
 
       _findFilter : function(name, list){
         return list.filter(function(filter){
