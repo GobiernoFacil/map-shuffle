@@ -159,7 +159,10 @@ define(function(require){
         //optAll.innerHTML = 
 
         _values.forEach(function(val){
+          var opt = document.createElement("option");
 
+          opt.innerHTML = opt;
+          selec
         });
 
 
