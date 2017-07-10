@@ -161,8 +161,8 @@ define(function(require){
         _values.forEach(function(val){
           var opt = document.createElement("option");
 
-          opt.innerHTML = opt;
-          selec
+          opt.innerHTML = val;
+          select.appendChild(opt);
         });
 
 
@@ -211,35 +211,65 @@ define(function(require){
         // SELECTALLCITIESFIRSTSTRING
       },
 
-      renderYearList : function(container, type){
+      renderYearList : function(filter, container, type){
+        console.log("!!!!!!!!");
+        var optAll   = document.createElement("option"),
+            yearCol  = filter.field,
+            _year    = document.createElement("div"),
+            year     = null,
+            template = _.template(FILTER),
+            obj      = {
+                         id        : (type ? _SLFilterPrefix : _MLFilterPrefix) + yearCol,
+                         label     : _yearLabel,
+                         dataField : yearCol
+                       },
+            years    = _.uniq(_data.map(function(d){
+                         return d[yearCol];
+                       })).filter(function(yr){ return +yr}).sort();
 
+        optAll.value      = SELECTALL;
+        optAll.innerHTML  = SELECTALLYEARSSTRING;
+        _year.innerHTML = template(obj);
+        year  = _year.querySelector("select");
+
+        year.setAttribute("data-field", yearCol);
+
+        year.appendChild(optAll);
+
+        years.forEach(function(yr){
+          var opt = document.createElement("option");
+
+          opt.value     = yr;
+          opt.innerHTML = yr;
+
+          year.appendChild(opt);
+        });
+
+        container.appendChild(_year);
       },
 
       renderBranchList : function(filter, container, type){
-        console.log(filter);
-
-        var branchCol = filter.field,
+        var optAll   = document.createElement("option"),
+            branchCol = filter.field,
             _branch   = document.createElement("div"),
             branch    = null,
             template  = _.template(FILTER),
             obj       = {
                           id        : (type ? _SLFilterPrefix : _MLFilterPrefix) + branchCol,
-                          label     : "yoooma",//_branchLabel,
-                          dataField : branchCol,
-                          options   : _branches,
-                          all       : SELECTALL,
-                          allText   : SELECTALLBRANCHESSTRING
+                          label     : _branchLabel,
+                          dataField : branchCol
                         };
 
+        optAll.value     = SELECTALL;
+        optAll.innerHTML = SELECTALLBRANCHESSTRING;
         _branch.innerHTML = template(obj);
         branch  = _branch.querySelector("select");
 
         branch.setAttribute("data-field", branchCol);
-        //optAll.value     = SELECTALL;
-        //optAll.innerHTML = SELECTALLBRANCHESSTRING;
-        //branch.appendChild(optAll);
 
-        /*
+        branch.appendChild(optAll);
+
+        
         _branches.forEach(function(br){
           var opt = document.createElement("option");
 
@@ -248,35 +278,10 @@ define(function(require){
 
           branch.appendChild(opt);
         });
-        */
+        
 
         container.appendChild(_branch);
       },
-      /*
-      renderStateList : function(state){
-        var optAll   = document.createElement("option"),
-            stateCol = parent.currentMap.config.location.state;
-
-        if(!stateCol) return;
-
-
-        state.innerHTML = "";
-        state.setAttribute("data-field", stateCol);
-
-        optAll.value     = SELECTALL;
-        optAll.innerHTML = SELECTALLSTATESSTRING;
-        state.appendChild(optAll);
-
-        _states.forEach(function(st){
-          var opt = document.createElement("option");
-
-          opt.value     = st.id;
-          opt.innerHTML = st.name;
-
-          state.appendChild(opt);
-        });
-      },
-      */
 
       renderUnitList : function(container, type){
         
