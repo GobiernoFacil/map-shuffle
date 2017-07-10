@@ -121,7 +121,7 @@ define(function(require){
         }
 
         if(unit){
-          this.renderUnitList(unit, container, type);
+          this.renderUnitList(branch, unit, container, type);
         }
 
         if(year){
@@ -137,26 +137,19 @@ define(function(require){
 
       renderValueList : function(container, type){
         var div      = document.createElement("div"),
-            //optAll   = document.createElement("option"),
             select   = null,
             template = _.template(FILTER),
             firstVal = _values[0],
-            //items    = _values.map(function(val){ return {id : val, name : val} }),
             obj      = {
               id        : (type ? _SLFilterPrefix : _MLFilterPrefix) + firstVal,
               label     : _valueLabel,
-              dataField : firstVal,
-              //options   : items,
-              //all       : SELECTALL,
-              //allText   : SELECTALLSTATESSTRING
+              dataField : firstVal
             },
             html     = template(obj);
 
         div.setAttribute("class", _filterDivClass);
         div.innerHTML = html;
         select = div.querySelector("select");
-        //optAll.value = SELECTALL;
-        //optAll.innerHTML = 
 
         _values.forEach(function(val){
           var opt = document.createElement("option");
@@ -208,7 +201,6 @@ define(function(require){
         optAll.value     = SELECTALL;
         optAll.innerHTML = +stateVal ? SELECTALLSTRING : SELECTALLCITIESFIRSTSTRING;
         city.appendChild(optAll);
-        // SELECTALLCITIESFIRSTSTRING
       },
 
       renderYearList : function(filter, container, type){
@@ -283,9 +275,48 @@ define(function(require){
         container.appendChild(_branch);
       },
 
-      renderUnitList : function(container, type){
-        
+      renderUnitList : function(branch, filter, container, type){
+        var optAll   = document.createElement("option"),
+            unitCol  = filter.field,
+            _unit    = document.createElement("div"),
+            unit     = null,
+            template = _.template(FILTER),
+            obj      = {
+                         id        : (type ? _SLFilterPrefix : _MLFilterPrefix) + unitCol,
+                         label     : _unitLabel,
+                         dataField : unitCol
+                       };
+
+        if(!branch) return;
+
+        optAll.value     = SELECTALL;
+        optAll.innerHTML = SELECTALLUNITSSTRING;
+        _unit.innerHTML = template(obj);
+        unit  = _unit.querySelector("select");
+
+        unit.setAttribute("data-field", unitCol);
+
+        unit.appendChild(optAll);
+
+        container.appendChild(_unit);
       },
+
+      /*
+      var stateVal = state.value,
+            optAll   = document.createElement("option"),
+            stateCol = parent.currentMap.config.location.state,
+            cityCol  = parent.currentMap.config.location.city;
+
+
+        if(!stateCol || !cityCol) return;
+
+        city.innerHTML = "";
+        city.setAttribute("data-field", cityCol);
+
+        optAll.value     = SELECTALL;
+        optAll.innerHTML = +stateVal ? SELECTALLSTRING : SELECTALLCITIESFIRSTSTRING;
+        city.appendChild(optAll);
+      */
 
       renderOtherFilter : function(container, type){
 
