@@ -42,6 +42,7 @@ define(function(require){
         _filterDivClass      = parent.settings.ui.barsTool.filterDivClass,
 
         _MLFilterPrefix      = "patos",
+        _MLSelectedFiltersID = "patos",
 
         _valueLabel  = parent.settings.ui.barsTool.filterLabels.value,
         _yearLabel   = parent.settings.ui.barsTool.filterLabels.year,
@@ -60,8 +61,12 @@ define(function(require){
         SELECTALLYEARSSTRING       = "Todos los años",
         SELECTALLOTHERSSTRING      = "Todos",
 
-        SingleFilters   = null,
-        MultipleFilters = null;
+        SingleFilters       = null,
+        MultipleFilters     = null,
+        singleBars          = null,
+        multipleBars        = null,
+        singleVarSelector   = null,
+        multipleVarSelector = null;
 
 
   // [3] define el objeto del comparador
@@ -104,13 +109,15 @@ define(function(require){
         var container = document.getElementById(_slID),
             state     = document.getElementById(_SLStateInputID),
             city      = document.getElementById(_SLCityInputID),
-            filters   = document.getElementById(_SLFilterListID);
+            filters   = document.getElementById(_SLFilterListID),
+            addBar    = document.getElementById(_SLAddGraphBtn);
 
         this.renderStateList(city, state);
         this.renderCityList(city, state);
         this.renderOptions(filters);
 
         container.addEventListener("submit", function(e){e.preventDefault()});
+        addBar.addEventListener("click", this.renderSingleBar);
       },
 
       renderMultipleLocation : function(){
@@ -170,6 +177,8 @@ define(function(require){
 
 
         container.appendChild(div);
+
+        singleVarSelector = select;
       },
 
       renderStateList : function(city, state, isMultiple){
@@ -364,8 +373,71 @@ define(function(require){
         container.appendChild(_other);
       },
 
-      renderBar : function(){
+      renderSingleBar : function(e){
+        e.preventDefault();
 
+        var data     = _data.slice(),
+            select   = singleVarSelector,
+            state    = document.getElementById(_SLStateInputID).value,
+            city     = document.getElementById(_SLCityInputID).value,
+            stateCol = parent.currentMap.config.location.state,
+            cityCol  = parent.currentMap.config.location.city,
+            filters  = SingleFilters;
+
+
+        // filter by state || city
+        if(city  && city != SELECTALL ){
+          //console.log("filtrar por ciudad");
+          data = data.filter(function(d){
+            return +state == +d[stateCol] && +city == +d[cityCol];
+          });
+        }
+        else if(state != SELECTALL){
+          //console.log("filtra por estado");
+          data = data.filter(function(d){
+            return +state == +d[stateCol];
+          });
+        }
+        else{
+          //console.log("no filtres por ubicación");
+        }
+
+        // make filter groups
+
+        // pass every category of filters
+
+        // calculate value
+
+        // render brar
+      },
+
+      renderCart : function(filter){
+        var container  = document.getElementById(filter.isMultiple ? _MLSelectedFiltersID : _SLSelectedFiltersID),
+            li         = document.createElement("li"),
+            html       = "";
+
+        console.log(filter);
+
+        if(filter.type == "branch"){
+          html = _branches.filter(function(br){ return  +br.id == +filter.value})[0].name;
+        }
+        else if(0){
+
+        }
+
+        else if(0){
+
+        }
+
+        else{
+
+        }
+
+        li.innerHTML = html;
+
+        container.appendChild(li);
+
+        console.log(html);
       },
 
   // [3.2] define las funciones de eventos
@@ -414,7 +486,8 @@ define(function(require){
               id     : _.uniqueId(),
               type   : "branch",
               value  : +branch,
-              column : e.currentTarget.getAttribute("data-field")   
+              column : e.currentTarget.getAttribute("data-field"),
+              isMultiple : false   
             };
 
         
@@ -454,13 +527,22 @@ define(function(require){
       },
 
       _addFilter : function(filter, list, isMultiple){
-        console.log(filter, list, isMultiple, this);
+        var duplicated = null;
 
         // search duplicate
+        duplicated = list.filter(function(fil){
+          return fil.type == filter.type && fil.value == filter.value && fil.extra == filter.extra;
+        }, this)[0];
 
-        // add to list
+        if(duplicated) return;
 
-        // render element
+        list.push(filter);
+
+        this.renderCart(filter);
+      },
+
+      _removeFilter : function(e){
+
       }
 
       
