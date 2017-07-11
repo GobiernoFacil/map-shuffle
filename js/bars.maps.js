@@ -364,6 +364,10 @@ define(function(require){
         container.appendChild(_other);
       },
 
+      renderBar : function(){
+
+      },
+
   // [3.2] define las funciones de eventos
   // ----------------------------------------------------------------------
   //
@@ -404,10 +408,18 @@ define(function(require){
                         return +branch == +un.branch; 
                       }),
             unitObj = parent.currentMap.config.filters.filter(function(fil){
-              return fil.type == "unit";
-            })[0];
+                        return fil.type == "unit";
+                      })[0],
+            filterObj = {
+              id     : _.uniqueId(),
+              type   : "branch",
+              value  : +branch,
+              column : e.currentTarget.getAttribute("data-field")   
+            };
 
         
+        controller._addFilter(filterObj, SingleFilters);
+
         if(!unitObj) return;
 
         unitCol = unitObj.field;
@@ -440,6 +452,16 @@ define(function(require){
           return filter.type == name;
         })[0];
       },
+
+      _addFilter : function(filter, list, isMultiple){
+        console.log(filter, list, isMultiple, this);
+
+        // search duplicate
+
+        // add to list
+
+        // render element
+      }
 
       
     };
