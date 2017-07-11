@@ -28,9 +28,9 @@ define(function(require){
         _values     = null,
         _data       = null,
         _states     = parent.lists.estadosName.states,
-        _cities     = parent.lists.municipiosName,
+        _cities     = parent.lists.municipiosName.cities,
         _branches   = parent.lists.ramosName.branches,
-        _units      = parent.lists.unidadesName,
+        _units      = parent.lists.unidadesName.units,
 
         _SLStateInputID      = parent.settings.ui.barsTool.singleLocationUI.state,
         _SLCityInputID       = parent.settings.ui.barsTool.singleLocationUI.city,
@@ -58,7 +58,10 @@ define(function(require){
         SELECTALLBRANCHESSTRING    = "Todos los ramos",
         SELECTALLUNITSSTRING       = "Todos los ejecutores",
         SELECTALLYEARSSTRING       = "Todos los años",
-        SELECTALLOTHERSSTRING      = "Todos";
+        SELECTALLOTHERSSTRING      = "Todos",
+
+        SingleFilters   = null,
+        MultipleFilters = null;
 
 
   // [3] define el objeto del comparador
@@ -66,9 +69,15 @@ define(function(require){
   //
     var controller = {
 
+  // [3.1] define las funciones de render
+  // ----------------------------------------------------------------------
+  //
       render : function(){
         _values = parent.currentMap.config.values;
         _data   = parent.currentMap.data; 
+
+        SingleFilters   = [];
+        MultipleFilters = [];
 
         if(_values.length){
           this.show();
@@ -97,7 +106,7 @@ define(function(require){
             city      = document.getElementById(_SLCityInputID),
             filters   = document.getElementById(_SLFilterListID);
 
-        this.renderStateList(state);
+        this.renderStateList(city, state);
         this.renderCityList(city, state);
         this.renderOptions(filters);
 
@@ -163,9 +172,10 @@ define(function(require){
         container.appendChild(div);
       },
 
-      renderStateList : function(state){
+      renderStateList : function(city, state, isMultiple){
         var optAll   = document.createElement("option"),
             stateCol = parent.currentMap.config.location.state;
+            //change   = null;
 
         if(!stateCol) return;
 
@@ -185,6 +195,14 @@ define(function(require){
 
           state.appendChild(opt);
         });
+
+        if(isMultiple){
+
+        }
+        else{
+          //change = this.changeSingleState.bind(this, city); 
+          state.addEventListener("change", this.changeSingleState);
+        }
       },
 
       renderCityList : function(city, state){
@@ -211,7 +229,7 @@ define(function(require){
             year     = null,
             template = _.template(FILTER),
             obj      = {
-                         id        : (type ? _SLFilterPrefix : _MLFilterPrefix) + yearCol,
+                         id        : (type ? _MLFilterPrefix : _SLFilterPrefix ) + yearCol,
                          label     : _yearLabel,
                          dataField : yearCol
                        },
@@ -240,14 +258,14 @@ define(function(require){
         container.appendChild(_year);
       },
 
-      renderBranchList : function(filter, container, type){
+      renderBranchList : function(filter, container, isMultiple){
         var optAll   = document.createElement("option"),
             branchCol = filter.field,
             _branch   = document.createElement("div"),
             branch    = null,
             template  = _.template(FILTER),
             obj       = {
-                          id        : (type ? _SLFilterPrefix : _MLFilterPrefix) + branchCol,
+                          id        : (isMultiple ? _MLFilterPrefix : _SLFilterPrefix ) + branchCol,
                           label     : _branchLabel,
                           dataField : branchCol
                         };
@@ -273,6 +291,13 @@ define(function(require){
         
 
         container.appendChild(_branch);
+
+        if(isMultiple){
+
+        }
+        else{
+          branch.addEventListener("change", this.changeSingleBranch);
+        }
       },
 
       renderUnitList : function(branch, filter, container, type){
@@ -282,7 +307,7 @@ define(function(require){
             unit     = null,
             template = _.template(FILTER),
             obj      = {
-                         id        : (type ? _SLFilterPrefix : _MLFilterPrefix) + unitCol,
+                         id        : (type ? _MLFilterPrefix : _SLFilterPrefix ) + unitCol,
                          label     : _unitLabel,
                          dataField : unitCol
                        };
@@ -309,7 +334,7 @@ define(function(require){
             template = _.template(FILTER),
             label    = parent.settings.ui.barsTool.filterLabels[otherCol] || otherCol,
             obj      = {
-                         id        : (type ? _SLFilterPrefix : _MLFilterPrefix) + otherCol,
+                         id        : (type ? _MLFilterPrefix : _SLFilterPrefix ) + otherCol,
                          label     : label,
                          dataField : otherCol
                        },
@@ -339,47 +364,83 @@ define(function(require){
         container.appendChild(_other);
       },
 
-      /*
-      var optAll   = document.createElement("option"),
-            yearCol  = filter.field,
-            _year    = document.createElement("div"),
-            year     = null,
-            template = _.template(FILTER),
-            obj      = {
-                         id        : (type ? _SLFilterPrefix : _MLFilterPrefix) + yearCol,
-                         label     : _yearLabel,
-                         dataField : yearCol
-                       },
-            years    = _.uniq(_data.map(function(d){
-                         return d[yearCol];
-                       })).filter(function(yr){ return +yr}).sort();
+  // [3.2] define las funciones de eventos
+  // ----------------------------------------------------------------------
+  //
+      changeSingleState : function(e){
+        var cityCol = parent.currentMap.config.location.city,
+            state   = e.currentTarget.value,
+            optAll  = document.createElement("option"),
+            city    = document.getElementById(_SLCityInputID),
+            cities  = _cities.filter(function(ct){
+                        return +state == +ct.state; 
+                      });
 
-        optAll.value      = SELECTALL;
-        optAll.innerHTML  = SELECTALLYEARSSTRING;
-        _year.innerHTML = template(obj);
-        year  = _year.querySelector("select");
+        if(!cityCol) return;
 
-        year.setAttribute("data-field", yearCol);
+        optAll.innerHTML = state == SELECTALL ? SELECTALLCITIESFIRSTSTRING : SELECTALLCITIESSTRING;
+        optAll.value     = SELECTALL;
 
-        year.appendChild(optAll);
+        city.innerHTML   = "";
+        city.appendChild(optAll);
 
-        years.forEach(function(yr){
+        cities.forEach(function(ct){
           var opt = document.createElement("option");
 
-          opt.value     = yr;
-          opt.innerHTML = yr;
+          opt.value = ct.city;
+          opt.innerHTML = ct.name;
 
-          year.appendChild(opt);
+          city.appendChild(opt);
         });
+      },
 
-        container.appendChild(_year);
-      */
+      changeSingleBranch : function(e){
+        var unitCol = null,
+            branch  = e.currentTarget.value,
+            optAll  = document.createElement("option"),
+            unitID  = null,
+            unit    = null,
+            units   = _units.filter(function(un){
+                        return +branch == +un.branch; 
+                      }),
+            unitObj = parent.currentMap.config.filters.filter(function(fil){
+              return fil.type == "unit";
+            })[0];
 
+        
+        if(!unitObj) return;
+
+        unitCol = unitObj.field;
+        unitID  = _SLFilterPrefix + unitCol;
+        unit    = document.getElementById(unitID);
+
+
+        
+        optAll.innerHTML = SELECTALLUNITSSTRING;
+        optAll.value     = SELECTALL;
+
+        unit.innerHTML   = "";
+        unit.appendChild(optAll);
+
+        units.forEach(function(un){
+          var opt = document.createElement("option");
+
+          opt.value = un.id;
+          opt.innerHTML = un.name;
+
+          unit.appendChild(opt);
+        });
+      },
+
+  // [3.3] define las funciones de soporte
+  // ----------------------------------------------------------------------
+  //
       _findFilter : function(name, list){
         return list.filter(function(filter){
           return filter.type == name;
         })[0];
-      }
+      },
+
       
     };
 
