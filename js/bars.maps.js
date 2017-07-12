@@ -333,6 +333,8 @@ define(function(require){
         unit.appendChild(optAll);
 
         container.appendChild(_unit);
+
+        unit.addEventListener("change", this.changeSingleUnit);
       },
 
       renderOtherFilter : function(filter, container, type){
@@ -382,7 +384,8 @@ define(function(require){
             city     = document.getElementById(_SLCityInputID).value,
             stateCol = parent.currentMap.config.location.state,
             cityCol  = parent.currentMap.config.location.city,
-            filters  = SingleFilters;
+            filters  = SingleFilters,
+            filterCols = null;
 
 
         // filter by state || city
@@ -403,6 +406,10 @@ define(function(require){
         }
 
         // make filter groups
+        filterCols = _.uniq(_.pluck(filters, "column"));
+
+        console.log(filters, filterCols);
+
 
         // pass every category of filters
 
@@ -419,10 +426,17 @@ define(function(require){
         console.log(filter);
 
         if(filter.type == "branch"){
-          html = _branches.filter(function(br){ return  +br.id == +filter.value})[0].name;
+          html = _branches.filter(function(br){ 
+            return  +br.id == +filter.value
+          })[0].name;
         }
-        else if(0){
+        else if(filter.type == "unit"){
+          console.log(filter);
+          html = _units.filter(function(un){
+            var id  = +un.id || un.id;
 
+            return id == filter.value && +un.branch == filter.extra;
+          })[0].name;
         }
 
         else if(0){
@@ -499,6 +513,8 @@ define(function(require){
         unitID  = _SLFilterPrefix + unitCol;
         unit    = document.getElementById(unitID);
 
+        unit.setAttribute("data-branch", branch);
+
 
         
         optAll.innerHTML = SELECTALLUNITSSTRING;
@@ -515,6 +531,21 @@ define(function(require){
 
           unit.appendChild(opt);
         });
+      },
+
+      changeSingleUnit : function(e){
+        var unit = e.currentTarget.value,
+            branch = e.currentTarget.getAttribute("data-branch"),
+            filterObj = {
+              id     : _.uniqueId(),
+              type   : "unit",
+              value  : +unit || unit,
+              extra  : +branch,
+              column : e.currentTarget.getAttribute("data-field"),
+              isMultiple : false   
+            };
+
+        controller._addFilter(filterObj, SingleFilters);
       },
 
   // [3.3] define las funciones de soporte
