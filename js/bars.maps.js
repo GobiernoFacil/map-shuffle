@@ -375,6 +375,8 @@ define(function(require){
         });
 
         container.appendChild(_other);
+
+        other.addEventListener("change", this.changeSingleFilter);
       },
 
       renderSingleBar : function(e){
@@ -411,21 +413,20 @@ define(function(require){
         filterCols = _.uniq(_.pluck(filters, "column"));
 
         console.log(filters, filterCols);
-
-
         // pass every category of filters
+        filterCols.forEach(function(column){
+          console.log(column);
+        }, this);
 
         // calculate value
 
-        // render brar
+        // render bar
       },
 
       renderCart : function(filter){
         var container  = document.getElementById(filter.isMultiple ? _MLSelectedFiltersID : _SLSelectedFiltersID),
             li         = document.createElement("li"),
             html       = "";
-
-        console.log(filter);
 
         if(filter.type == "branch"){
           html = _branches.filter(function(br){ 
@@ -441,19 +442,17 @@ define(function(require){
           })[0].name;
         }
 
-        else if(0){
-
+        else if(filter.type == "year"){
+          html = filter.value;
         }
 
         else{
-
+          html = filter.value;
         }
 
         li.innerHTML = html;
 
         container.appendChild(li);
-
-        console.log(html);
       },
 
   // [3.2] define las funciones de eventos
@@ -556,6 +555,19 @@ define(function(require){
               id     : _.uniqueId(),
               type   : "year",
               value  : +year,
+              column : e.currentTarget.getAttribute("data-field"),
+              isMultiple : false   
+            };
+
+        controller._addFilter(filterObj, SingleFilters);
+      },
+
+      changeSingleFilter : function(e){
+        var other     = e.currentTarget.value, 
+            filterObj = {
+              id     : _.uniqueId(),
+              type   : "other",
+              value  : other,
               column : e.currentTarget.getAttribute("data-field"),
               isMultiple : false   
             };
