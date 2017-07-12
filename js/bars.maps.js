@@ -412,12 +412,12 @@ define(function(require){
         // make filter groups
         filterCols = _.uniq(_.pluck(filters, "column"));
 
-        console.log(filters, filterCols);
         // pass every category of filters
         filterCols.forEach(function(column){
-          console.log(column);
-        }, this);
+          controller._filterData(data, column, filters);
+        });
 
+        console.log(data);
         // calculate value
 
         // render bar
@@ -434,7 +434,6 @@ define(function(require){
           })[0].name;
         }
         else if(filter.type == "unit"){
-          console.log(filter);
           html = _units.filter(function(un){
             var id  = +un.id || un.id;
 
@@ -515,6 +514,7 @@ define(function(require){
         unit    = document.getElementById(unitID);
 
         unit.setAttribute("data-branch", branch);
+        unit.setAttribute("data-branch-column", e.currentTarget.getAttribute("data-field"));
 
 
         
@@ -538,11 +538,12 @@ define(function(require){
         var unit = e.currentTarget.value,
             branch = e.currentTarget.getAttribute("data-branch"),
             filterObj = {
-              id     : _.uniqueId(),
-              type   : "unit",
-              value  : +unit || unit,
-              extra  : +branch,
-              column : e.currentTarget.getAttribute("data-field"),
+              id         : _.uniqueId(),
+              type       : "unit",
+              value      : +unit || unit,
+              extra      : +branch,
+              extraCol   : e.currentTarget.getAttribute("data-branch-column"),
+              column     : e.currentTarget.getAttribute("data-field"),
               isMultiple : false   
             };
 
@@ -601,7 +602,37 @@ define(function(require){
 
       _removeFilter : function(e){
 
-      }
+      },
+
+      _filterData : function(data, column, _filters){
+        //console.log(data, column, _filters);
+
+        var filters = _filters.filter(function(fil){
+                        return fil.column == column;
+                      }),
+            isString = _.isString(data[0][column]),
+            type     = filters[0].type,
+            compArray = _.pluck(filters, "value"),
+            extraIsString;
+
+        if(isString){
+          compArray = compArray.map(function(comp){
+            return String(comp);
+          });
+        }
+
+        if(type != "unit"){
+          data = data.filter(function(d){
+            //console.log(compArray.indexOf(data[column]), data[column], column);
+            return compArray.indexOf(d[column]) != -1;
+          });
+        }
+        else{
+          //console.log("nope, is unit");
+        }
+
+        //console.log(filters, isString, type, compArray, data);
+      },
 
       
     };
