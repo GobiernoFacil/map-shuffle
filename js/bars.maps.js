@@ -265,6 +265,8 @@ define(function(require){
         });
 
         container.appendChild(_year);
+
+        year.addEventListener("change", this.changeSingleYear);
       },
 
       renderBranchList : function(filter, container, isMultiple){
@@ -541,6 +543,19 @@ define(function(require){
               type   : "unit",
               value  : +unit || unit,
               extra  : +branch,
+              column : e.currentTarget.getAttribute("data-field"),
+              isMultiple : false   
+            };
+
+        controller._addFilter(filterObj, SingleFilters);
+      },
+
+      changeSingleYear : function(e){
+        var year      = e.currentTarget.value, 
+            filterObj = {
+              id     : _.uniqueId(),
+              type   : "year",
+              value  : +year,
               column : e.currentTarget.getAttribute("data-field"),
               isMultiple : false   
             };
