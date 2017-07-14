@@ -121,6 +121,7 @@
     "findMeZoom" : 14,
     "geocoding"  : "https://maps.googleapis.com/maps/api/geocode/json",
     "enableBarsTool" : true,
-    "enableSearchTool" : true
+    "enableSearchTool" : true,
+    "pointNavigationTemplate" : "<a class=\"GF-SHCP-point-prev-btn\" href=\"#\">anterior</a> <a class=\"GF-SHCP-point-next-btn\" href=\"#\">siguiente</a></p>"
   }
 }

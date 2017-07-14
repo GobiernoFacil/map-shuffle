@@ -645,7 +645,8 @@ define(function(require){
           t      = _.template(item.config.template),
           style  = that.settings.mapPoint,
           _style = item.config.style,
-          link   = item.config.link;
+          link   = item.config.link,
+          navt   = this.settings.ux.pointNavigationTemplate;
 
       if(_style){
         for(var prop in _style){
@@ -672,13 +673,23 @@ define(function(require){
           p.on("mouseover", function(e){
 
             var multiple = that.currentMap.config.multiple,
-                content  = null;
+                pointer  = 0,
+                content  = null,
+                items    = [],
+                div      = document.createElement("div");
+
+            div.id = "THE-ONLY-HARDCODED-ID";
 
             if(multiple){
               content = "";
               feature.properties.points.forEach(function(point){
-                content += t(point);
+                //content += t(point);
+                items.push(t(point));
               });
+
+              div.innerHTML = items[0];
+              content = div.innerHTML + (items.length >1 ? navt : "");
+              //console.log(items.length);
             }
             else{
               content = t(feature.properties);
