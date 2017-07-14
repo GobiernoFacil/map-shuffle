@@ -2101,13 +2101,15 @@ section {
   line-height: 35px;
   float: left;
   width: 50%; }
+  .btn.locations_b:hover {
+    background: #999;
+    color: white; }
   .btn.locations_b.current {
     background: #f49d51;
     color: white;
     font-weight: 700; }
-  .btn.locations_b:hover {
-    background: #999;
-    color: white; }
+    .btn.locations_b.current:hover {
+      background: #f49d51; }
 
 .amount_label {
   background: #f2f2f2;
