@@ -642,11 +642,15 @@ define(function(require){
 
       var that   = this,
           points = this._makeGeojson(item),
-          t      = _.template(item.config.template),
-          style  = that.settings.mapPoint,
-          _style = item.config.style,
-          link   = item.config.link,
-          navt   = this.settings.ux.pointNavigationTemplate;
+          t         = _.template(item.config.template),
+          style     = that.settings.mapPoint,
+          _style    = item.config.style,
+          link      = item.config.link,
+          navt      = this.settings.ux.pointNavigationTemplate,
+          prevId    = this.settings.ux.pointNavigationPrevId,
+          nextId    = this.settings.ux.pointNavigationNextId,
+          currentId = this.settings.ux.pointNavigationCurrentId,
+          totalId   = this.settings.ux.pointNavigationTotalId;
 
       if(_style){
         for(var prop in _style){
@@ -672,13 +676,15 @@ define(function(require){
 
           p.on("mouseover", function(e){
 
-            var multiple = that.currentMap.config.multiple,
-                pointer  = 0,
-                content  = null,
-                items    = [],
-                div      = document.createElement("div");
-
-            div.id = "THE-ONLY-HARDCODED-ID";
+            var multiple  = that.currentMap.config.multiple,
+                pointer   = 0,
+                content   = null,
+                items     = [],
+                div       = document.createElement("div"),
+                container = document.createElement("div"),
+                p         = document.createElement("p"),
+                current   = null,
+                total     = null;
 
             if(multiple){
               content = "";
@@ -688,8 +694,48 @@ define(function(require){
               });
 
               div.innerHTML = items[0];
-              content = div.innerHTML + (items.length >1 ? navt : "");
-              //console.log(items.length);
+              container.appendChild(div);
+
+              if(items.length > 1){
+                p.innerHTML = navt;
+                current = p.querySelector("." + currentId);
+                total   = p.querySelector("." + totalId);
+
+                total.innerHTML   = items.length;
+                current.innerHTML = 1;
+                container.appendChild(p);
+
+                p.querySelector("." + prevId).addEventListener("click", function(e){
+                  e.preventDefault();
+                  if(pointer){
+                    pointer--;
+                    div.innerHTML = items[pointer];
+                  }
+                  else{
+                    pointer = items.length - 1;
+                    div.innerHTML = items[pointer];
+                    
+                  }
+
+                  current.innerHTML = pointer + 1;
+                });
+
+                p.querySelector("." + nextId).addEventListener("click", function(e){
+                  e.preventDefault();
+                  if(pointer < items.length - 1){
+                    pointer++;
+                    div.innerHTML = items[pointer];
+                  }
+                  else{
+                    pointer = 0;
+                    div.innerHTML = items[pointer];
+                  }
+
+                  current.innerHTML = pointer + 1;
+                });
+              }
+
+              content = container;
             }
             else{
               content = t(feature.properties);

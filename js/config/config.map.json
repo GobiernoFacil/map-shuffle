@@ -122,6 +122,10 @@
     "geocoding"  : "https://maps.googleapis.com/maps/api/geocode/json",
     "enableBarsTool" : true,
     "enableSearchTool" : true,
-    "pointNavigationTemplate" : "<a class=\"GF-SHCP-point-prev-btn\" href=\"#\">anterior</a> <a class=\"GF-SHCP-point-next-btn\" href=\"#\">siguiente</a></p>"
+    "pointNavigationTemplate" : "<a class=\"GF-SHCP-point-prev-btn\" href=\"#\">anterior</a> <span class=\"GF-SHCP-point-current\"></span>/<span class=\"GF-SHCP-point-total\"></span><a class=\"GF-SHCP-point-next-btn\" href=\"#\">siguiente</a></p>",
+    "pointNavigationPrevId" : "GF-SHCP-point-prev-btn",
+    "pointNavigationNextId" : "GF-SHCP-point-next-btn",
+    "pointNavigationCurrentId" : "GF-SHCP-point-current",
+    "pointNavigationTotalId" : "GF-SHCP-point-total"
   }
 }
