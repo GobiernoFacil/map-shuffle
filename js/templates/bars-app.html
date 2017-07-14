@@ -1,33 +1,51 @@
+
 <!-- SINGLE LOCATION -->
 <form id="GF-SHCP-bars-app-single-location">
-  <!-- location -->
-  <p>
-    <select name="state" id="GF-SHCP-bars-app-single-location-state"></select>
-  </p>
-
-  <p>
-    <select name="city" id="GF-SHCP-bars-app-single-location-city"></select>
-  </p>
-
-  <p>
-    <a href="#" id="GF-SHCP-bars-app-single-location-select-btn">Seleccionar</a>
-  </p>
-
-  <!-- current filters -->
-  <ul id="GF-SHCP-bars-app-single-location-selected-filters" class="cart-list"></ul>
-  <!-- filters  -->
-  <div id="GF-SHCP-bars-app-single-location-filter-list">
-    
-  </div>
-  <p><a href="#" id="GF-SHCP-bars-app-single-location-add-bar-btn">Agregar</a></p>
-
-
+	<!-- location -->
+	<div class="box">
+		<p>Selecciona ubicación a comparar:</p>
+		<div class="row">
+			<div class="col-sm-4">
+				<p> Estado
+				<select name="state" id="GF-SHCP-bars-app-single-location-state"></select>
+  				</p>
+			</div>
+			<div class="col-sm-4">
+				<p>Municipio
+				  <select name="city" id="GF-SHCP-bars-app-single-location-city"></select>
+				</p>
+			</div>
+			<div class="col-sm-4">
+				<p class="right">
+				  <a href="#" id="GF-SHCP-bars-app-single-location-select-btn" class="btn more">Seleccionar</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	
+	<!-- filters  -->
+	<div class="box">
+		<div class="row">
+		<div id="GF-SHCP-bars-app-single-location-filter-list">
+		  
+		</div>
+		</div>
+		<p class="right"><a href="#" id="GF-SHCP-bars-app-single-location-add-bar-btn"  class="btn more">Agregar</a></p>
+		
+	</div>
+	
+	<!-- current filters -->
+	<div class="col-sm-12">
+		<ul id="GF-SHCP-bars-app-single-location-selected-filters" class="cart-list"></ul>
+	</div>
+	
 </form>
 
 
 
 <!-- MULTIPLE LOCATIONS  -->
 <form id="GF-SHCP-bars-app-multiple-locations">
+ <div class="box">
   <!-- filters  -->
   <div>
     
@@ -35,8 +53,10 @@
 
   <!-- current filters -->
   <ul></ul>
-  
+ </div>
+ 
   <!-- location -->
+  <div class="box"
   <p>
     <select name="state"></select>
   </p>
@@ -48,4 +68,5 @@
   <p>
     <input type="submit" name="agregar">
   </p>
+</form>
 </form>
