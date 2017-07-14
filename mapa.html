@@ -6,6 +6,7 @@
   <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
+<div class="map_container">
   <!-- MAIN MAP -->
   <div id="map"> 
 	  <!--paginación, categorías-->
@@ -22,16 +23,13 @@
 	      <ul id="GF-SHCP-cart-list" class="cart-list">
       		<li data-field="year">2017</li>
     	  </ul>
-        
-        <!-- extra layers -->
-        <div id="GF-SHCP-extra-map-list">
-          <p>
-            <label>compara con:</label>
-            <select></select>
-          </p>
-        </div>
-        
       </div>
+      
+       <!-- extra layers -->
+        <div id="GF-SHCP-extra-map-list">
+        	<h3><label>Agregar capa para comparar:</label></h3>
+            <select></select>         
+        </div>
  
       
     </div>
@@ -44,42 +42,197 @@
     </header>
   
   </div>
-  <div class="row">
-  <!-- MAP SELECTOR -->
-  <ul id="GF-SHCP-list"></ul>
-
-  </div>
   
-  <!-- DATA BARS -->
-  <div id="GF-SHCP-bars-tool">
-    <form>
-      <p>
-        <label>estado</label>
-        <select id="GF-SHCP-bars-tool-state-selector"></select>
-      </p>
+</div>
 
-      <p>
-        <label>municipio</label>
-        <select id="GF-SHCP-bars-tool-city-selector"></select>
-      </p>
-    </form>
-    <ul id="GF-SHCP-bars-tool-list">
-      <li>
-        <h4>nombre municipio</h4>
-        <p>
-          <span class="GF-SHCP-bars-tool-list-variable-name">variable</span>
-          <span class="GF-SHCP-bars-tool-list-variable-bar"></span>
-        </p>
-      </li>
-    </ul>
-  </div>
+<section class="compare">
+	<div class="container">
+		<div class="row">  
+			<!-- MAP SELECTOR -->
+			<ul id="GF-SHCP-list"></ul>
 
+			<div class="col-sm-12">
+				<h2 class="map_title">Comparar</h2>
+			</div>
+				<!-- DATA BARS -->
+			<div id="GF-SHCP-bars-tool" class="col-sm-12">
+				<form>
+					<div class="row">
+				    <div class="col-sm-6">
+				    	<p><label>Estado</label>
+						<select id="GF-SHCP-bars-tool-state-selector"></select>
+				  </p>
+				    </div>
+				    <div class="col-sm-6">
+				  <p>
+				    <label>Municipio</label>
+				    <select id="GF-SHCP-bars-tool-city-selector"></select>
+				  </p>
+				    </div>
+				  </div>
+				</form>
+				
+  			</div>
+			<div class="col-sm-12">
+			<ul id="GF-SHCP-bars-tool-list">
+    		  <li>
+    		    <h4>nombre municipio</h4>
+    		    <p>
+    		      <span class="GF-SHCP-bars-tool-list-variable-name">100%</span>
+    		      <span class="GF-SHCP-bars-tool-list-variable-bar"></span>
+    		    </p>
+    		  </li>
+    		</ul>
+		
+			</div>
+		</div>
+	</div>
+</section>
+
+	<div class="container">
 
 
   <!-- DATA TABLE -->
   <div id="GF-SHCP-table-tool">
+    <div id="GF-SHCP-table-tool-action">
+	    <h2 class="map_title">Filtrar</h2>
+      <form class="form">
+	      <div class="row">
+		      <div class="col-sm-3">
+      <p>
+        <label>Estado</label>
+        <select name="id_entidad"></select>
+      </p>
+		      </div>
+		      <div class="col-sm-3">
+      <p>
+        <label>Municipio</label>
+        <select name="id_municipio"></select>
+      </p>
+		      </div>
+		      <div class="col-sm-3">
+      <p>
+        <label>Clave de programas</label>
+        <select name="Fondo"></select>
+      </p>
+		      </div>
+		      <div class="col-sm-3">
+      <p>
+        <label>Buscar</label>
+        <input type="text" name="search" class="inputs">
+      </p>
+		      </div>
+	      </div>
+	      <div class="row">
+		      <div class="col-sm-3 col-sm-offset-6">
+      <p>
+        <a href="#" id="GF-SHCP-table-tool-export-btn" class="export">Exportar</a>
+      </p>
+		      </div>
+		      <div class="col-sm-3">
+      <p>
+        <input type="submit" value="Filtrar">
+      </p>
+		      </div>
+	      </div>
+    </form>
+    </div>
+    
+    <table class="table">
+      <thead>
+        <tr>
+          <th>
+            <a data-name="monto" class="GF-SHCP-table-tool-number-sort" href="#">monto</a>
+          </th>
+          <th>
+            <a data-name="pagado" class="GF-SHCP-table-tool-number-sort" href="#">pagado</a>
+          </th>
+          <th>
+            <a data-name="clave_de_programa" class="GF-SHCP-table-tool-string-sort" href="#">clave_de_programa</a>
+          </th>
+          <th>
+            <a data-name="fondo" class="GF-SHCP-table-tool-string-sort" href="#">fondo</a>
+          </th>
+          <th>
+            <a data-name="entidad" class="GF-SHCP-table-tool-string-sort" href="#">entidad</a>
+          </th>
+          <th>
+            <a data-name="municipio" class="GF-SHCP-table-tool-string-sort" href="#">municipio</a>
+          </th>
+          <th>
+            <a data-name="proyecto" class="GF-SHCP-table-tool-string-sort" href="#">proyecto</a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>5600000</td>
+          <td>0</td>
+          <td>U128</td>
+          <td>PROYECTOS DE DESARROLLO REGIONAL</td>
+          <td>TAMAULIPAS</td>
+          <td>ALTAMIRA</td>
+          <td>INFRAESTRUCTURA VIAL EN EL MUNICIPIO DE ALTAMIRA EN EL ESTADO DE TAMAULIPAS</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+</div>
+<footer>
+    <div class="container">
+      <div class="content">
+        <div class="row">
+          <div class="col-sm-4">
+            <h3>Contacto</h3>
+             <p class="data">Palacio Nacional <br>
+               Plaza de la Constitución s/n<br>
+               Colonia Centro, Delegación Cuauhtémoc<br>
+               México, Ciudad de México</p>
+          </div>
 
+          <div class="col-sm-4">
+            <ul>
+              <li><a class="linksfoot" href="/es/PTP/Glosario">Glosario</a></li>
+              <li><a class="linksfoot" href="/es/PTP/Mapa_de_Sitio">Mapa de sitio</a></li>
+              <li><a class="linksfoot" href="/es/PTP/Estadisticas">Estadísticas del Portal</a></li>
+            </ul>
+            <ul>
+              <!--fb-->
+              <li><a href="http://www.facebook.com/TransparenciaPresupuestaria" class="fb" target="_blank">Facebook</a></li>
+              <!--tw-->
+              <li><a href="//twitter.com/TPresupuestaria" class="tw" target="_blank">Twitter</a></li>                 <!--youtube-->
+              <li> <a href="http://www.youtube.com/channel/UCokAhIwndny0k2ROksI-qqg?sub_confirmation=1" class="youtube" title="Youtube" target="_blank">Youtube</a>
+              </li>
+              <li> <a href="mailto:trans_presupuestaria@hacienda.gob.mx" target="_blank" class="email" title="trans_presupuestaria@hacienda.gob.mx">Email</a></li>
+            </ul>
+          </div>
+
+          <div class="col-sm-4 right">
+            <h3>Última actualización:</h3>
+             <p class="data">Jueves 1 de diciembre de 2016 a las 14:25 hrs.</p>
+             <p class="right"><a href="http://www.hacienda.gob.mx" class="shcp">Secretaría de Hacienda y Crédito Público</a><span class="clearfix"></span></p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="author">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4">
+            <p class="data"><a href="http://www.transparenciapresupuestaria.gob.mx/" class="tp">Transparencia Presupuestaria</a> <a href="#" class="linksfoot">Términos y Condiciones del uso de la información.</a></p>
+          </div>
+          <div class="col-sm-4">
+            <p class="data center">Forjado artesanalmente por <a href="http://www.gobiernofacil.com" class="gobiernofacil" title="Ir a Gobierno Fácil">Gobierno Fácil</a></p>
+          </div>
+          <div class="col-sm-4">
+            <p class="data right"><span class="usaid">USAID</span></p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
   <!-- versión de desarrollo -->
   <script data-main="js/main.map" src="js/libs/require.js"></script>
   <!-- versión de producción: todavía no :P -->
