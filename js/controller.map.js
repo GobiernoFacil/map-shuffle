@@ -1868,8 +1868,39 @@ define(function(require){
     // mapas para comparar
     //
     _stateExtraStyle : function(feature){
-      var css       = Object.create(this.settings.extraMapGeometry);
+      var style     = this.settings.extraMapGeometry,
+          _style    = this.currentExtraMap.config.style,
+          css       = null;
+      
+      if(_style){
+        for(var prop in _style){
+          if(_style.hasOwnProperty(prop)){
+            style[prop] = _style[prop];
+          }
+        }  
+      }
+      css = style;
+         
+      //var css       = Object.create(this.settings.extraMapGeometry);
       css.fillColor = this.extraBrew.getColorInRange(feature.properties.data.value);
+      // this.currentExtraMap
+      /*
+      var style     = this.settings.mapGeometry,
+          _style    = this.currentMap.config.style,
+          css       = null;
+
+      if(_style){
+        for(var prop in _style){
+          if(_style.hasOwnProperty(prop)){
+            style[prop] = _style[prop];
+          }
+        }  
+      }
+      css = style;
+      css.fillColor = this.brew.getColorInRange(feature.properties.data.value);
+
+      return css;
+      */
 
       return css;
     },
@@ -1881,20 +1912,20 @@ define(function(require){
     // las geometrías de municipio
     //
     _cityStyle : function(feature){
-      /*
-      var city    = this.currentData.filter(function(d){
-                      return feature.properties.state == d.state && feature.properties.city == d.city;
-                    })[0];
-      var data    = city.data, 
-          current = this.currentMap.config.current.value,
-          value   = ! city.data.length ? 0 : _.pluck(data, current).reduce(function(a, b){
-                      return Number(a) + Number(b);
-                    }, 0),
-                    */
-      var css     = Object.create(this.settings.mapGeometry);
+      var style     = this.settings.mapGeometry,
+          _style    = this.currentMap.config.style,
+          css       = null;
 
-      //css.fillColor = this.brew.getColorInRange(value);
+      if(_style){
+        for(var prop in _style){
+          if(_style.hasOwnProperty(prop)){
+            style[prop] = _style[prop];
+          }
+        }  
+      }
+      css = style;
       css.fillColor = this.brew.getColorInRange(feature.properties.data.value);
+
       return css;
     },
 

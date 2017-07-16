@@ -16,5 +16,8 @@
     "value"  : "monto",
     "method" : "sum"
   },
+  "style" : {
+    "fillOpacity":0.5
+  },
   "template" : "<p><%=name%> : <%=value%> </p>"
 }
