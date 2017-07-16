@@ -178,6 +178,7 @@ define(function(require){
       this._stateStyle                  = this._stateStyle.bind(this);
       this._stateExtraStyle             = this._stateExtraStyle.bind(this);
       this._cityStyle                   = this._cityStyle.bind(this);
+      this._cityExtraStyle              = this._cityStyle.bind(this);
       this._enableFilterChange          = this._enableFilterChange.bind(this);
       this.renderMapSelectorChange      = this.renderMapSelectorChange.bind(this);
       this.renderExtraMapSelectorChange = this.renderExtraMapSelectorChange.bind(this);
@@ -428,9 +429,9 @@ define(function(require){
       // B) Es un mapa de área por municipio
       else if(item.config.current.level == "city"){
         this.currentData = this._agregateDataByCity(item, this._currentData);
-        this._mapCityGeojson(this.currentData);
+        var xxxxx = this._mapCityGeojson(this.currentData);
         this.brew        = this._colorMixer(item, this.currentData);
-        this.renderCityLayer(item, "cities");
+        this.renderCityLayer(item, "cities", xxxxx, this._cityStyle);
       }
       // C) Es un mapa de puntos definidos por latitud y longitud
       else{
@@ -590,9 +591,9 @@ define(function(require){
       // B) Es un mapa de área por municipio
       else if(item.config.current.level == "city"){
         this.currentExtraData = this._agregateDataByCity(item, item.data);
-        this._mapCityGeojson(this.currentExtraData);
+        var xxxxx = this._mapCityGeojson(this.currentExtraData);
         this.extraBrew        = this._colorMixer(item, this.currentExtraData);
-        this.renderCityLayer(item, "extra");
+        this.renderCityLayer(item, "extra", xxxxx, this._cityExtraStyle);
       }
       /*
       // C) Es un mapa de puntos definidos por latitud y longitud
@@ -656,12 +657,12 @@ define(function(require){
         this.renderStateLayer(item, "states", xxxxx, this._stateStyle);
       }
     */
-    renderCityLayer : function(item, container, geojson){
+    renderCityLayer : function(item, container, geojson, style){
       var that = this,
           t    = _.template(item.config.template);
 
-      this[container] = L.geoJson(MUNICIPIOS.municipios, {
-                      style : this._cityStyle,
+      this[container] = L.geoJson(geojson/*MUNICIPIOS.municipios*/, {
+                      style : style,//this._cityStyle,
                       onEachFeature : function(feature, layer){
                         layer.bindPopup(t(feature.properties.data));
                       }
@@ -1099,13 +1100,17 @@ define(function(require){
     },
 
     _mapCityGeojson : function(data){
-      this.lists.municipios.municipios.features.forEach(function(city){
+      var copy = Object.create(this.lists.municipios.municipios);
+      //this.lists.municipios.municipios
+      copy.features.forEach(function(city){
         var id  = city.properties.city,
             state = city.properties.state,
             d  = _.find(data, {city : id, state : state});
 
         city.properties.data = d;
       });
+
+      return copy;
     },
 
     //
@@ -1932,6 +1937,25 @@ define(function(require){
       }
       css = style;
       css.fillColor = this.brew.getColorInRange(feature.properties.data.value);
+
+      return css;
+    },
+
+    _cityExtraStyle : function(feature){
+      var style     = this.settings.extraMapGeometry,
+          _style    = this.currentExtraMap.config.style,
+          css       = null;
+      
+      if(_style){
+        for(var prop in _style){
+          if(_style.hasOwnProperty(prop)){
+            style[prop] = _style[prop];
+          }
+        }  
+      }
+      css = style;
+         
+      css.fillColor = this.extraBrew.getColorInRange(feature.properties.data.value);
 
       return css;
     },
