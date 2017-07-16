@@ -427,10 +427,10 @@ define(function(require){
       }
       // B) Es un mapa de área por municipio
       else if(item.config.current.level == "city"){
-        this.currentData = this._agregateDataByCity(item);
+        this.currentData = this._agregateDataByCity(item, this._currentData);
         this._mapCityGeojson(this.currentData);
         this.brew        = this._colorMixer(item, this.currentData);
-        this.renderCityLayer(item);
+        this.renderCityLayer(item, "cities");
       }
       // C) Es un mapa de puntos definidos por latitud y longitud
       else{
@@ -586,14 +586,15 @@ define(function(require){
         this.extraBrew = this._colorMixer(item, this.currentExtraData);
         this.renderStateLayer(item, "extra", xxxxx, this._stateExtraStyle);
       }
-      /*
+      
       // B) Es un mapa de área por municipio
       else if(item.config.current.level == "city"){
-        this.currentData = this._agregateDataByCity(item);
-        this._mapCityGeojson(this.currentData);
-        this.brew        = this._colorMixer(item);
-        this.renderCityLayer(item);
+        this.currentExtraData = this._agregateDataByCity(item, item.data);
+        this._mapCityGeojson(this.currentExtraData);
+        this.extraBrew        = this._colorMixer(item, this.currentExtraData);
+        this.renderCityLayer(item, "extra");
       }
+      /*
       // C) Es un mapa de puntos definidos por latitud y longitud
       else{
         this.currentData = null;
@@ -603,6 +604,20 @@ define(function(require){
         }
       }*/
 
+      this.sortLayers();
+
+    },
+
+    sortLayers : function(){
+      var currentLayer = this.points || this.states || this.cities,
+          currentMap   = this.currentMap,
+          currentType  = currentMap.config.type,
+          extraMapType = this.currentExtraMap.config.type;
+
+      if(extraMapType == "area" && currentType == "point"){
+        // layer.bringToFront
+        currentLayer.bringToFront();
+      }
     },
 
     //
@@ -631,11 +646,21 @@ define(function(require){
     // DIBUJA EL LAYER SELECCIONADO PARA CIUDADES
     //
     //
-    renderCityLayer : function(item){
+
+    /*
+    renderStateLayer : function(item, container, geojson, style){
+      if(item.config.current.level == "state"){
+        this.currentData = this._agregateDataByState(item, this._currentData);
+        var xxxxx = this._mapStateGeojson(this.currentData);
+        this.brew = this._colorMixer(item, this.currentData);
+        this.renderStateLayer(item, "states", xxxxx, this._stateStyle);
+      }
+    */
+    renderCityLayer : function(item, container, geojson){
       var that = this,
           t    = _.template(item.config.template);
 
-      this.cities = L.geoJson(MUNICIPIOS.municipios, {
+      this[container] = L.geoJson(MUNICIPIOS.municipios, {
                       style : this._cityStyle,
                       onEachFeature : function(feature, layer){
                         layer.bindPopup(t(feature.properties.data));
@@ -1009,16 +1034,14 @@ define(function(require){
     // REGRESA LA INFORMACIÓN AGREGADA POR MUNICIPIO
     //
     //
-    _agregateDataByCity : function(item){
+    _agregateDataByCity : function(item, currentData){
       var state  = item.config.location.state,
           city   = item.config.location.city,
           method = item.config.current.method || "sum";
           _data  = null;
 
-      this._strToNumber(this._currentData, state);
-      this._strToNumber(this._currentData, city);
-      // this._strToNumber(item.data, state);
-      // this._strToNumber(item.data, city);
+      this._strToNumber(currentData, state);
+      this._strToNumber(currentData, city);
 
       _data = MUNICIPIOSNAME.cities.map(function(ct){
         var search = {},
@@ -1028,7 +1051,7 @@ define(function(require){
         search[state] = ct.state;
         search[city]  = ct.city;
 
-        data = _.where(this._currentData, search);
+        data = _.where(currentData, search);
 
         if(method != "length"){
           value = d3[method](data, function(a){
