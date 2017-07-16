@@ -182,15 +182,7 @@ define(function(require){
       this.renderMapSelectorChange      = this.renderMapSelectorChange.bind(this);
       this.renderExtraMapSelectorChange = this.renderExtraMapSelectorChange.bind(this);
       this.updateUILevelSelectorChange  = this.updateUILevelSelectorChange.bind(this);
-      this.changeStateBarsToolFunction  = this.changeStateBarsToolFunction.bind(this);
-      this.addRegionToCompare           = this.addRegionToCompare.bind(this);
       this.goToUserLocation             = this.goToUserLocation.bind(this);
-      //this._enableStateFilterChange = this._enableStateFilterChange.bind(this);
-
-      // [3] ARREGLA EL GEOJSON DE ESTADOS (esto debe desaparecer)
-      //     v2: OPTIMIZA LOS GEOJSON
-      //
-      //this._setStatesGeometry();
       
       // [4] INICIA EL MAPA DE LEAFLET
       // ----------------------------------------------------------------------
@@ -563,6 +555,16 @@ define(function(require){
     //
     //
     renderExtraLayer : function(item){
+
+      /*
+       SOLUCIÓN :
+
+       layer.bringToFront
+       layer.bringToBack
+
+      */
+
+      
       // [1] elimina el layer anterior
       //
       this.cleanExtraLayer();
@@ -600,6 +602,7 @@ define(function(require){
           this.updatePagination();
         }
       }*/
+
     },
 
     //
@@ -1881,26 +1884,7 @@ define(function(require){
       }
       css = style;
          
-      //var css       = Object.create(this.settings.extraMapGeometry);
       css.fillColor = this.extraBrew.getColorInRange(feature.properties.data.value);
-      // this.currentExtraMap
-      /*
-      var style     = this.settings.mapGeometry,
-          _style    = this.currentMap.config.style,
-          css       = null;
-
-      if(_style){
-        for(var prop in _style){
-          if(_style.hasOwnProperty(prop)){
-            style[prop] = _style[prop];
-          }
-        }  
-      }
-      css = style;
-      css.fillColor = this.brew.getColorInRange(feature.properties.data.value);
-
-      return css;
-      */
 
       return css;
     },
@@ -1964,160 +1948,6 @@ define(function(require){
 
       return brew;
     },
-
-
-
-
-
-    /*
-     * F U N C I O N E S   D E   B A R R A S   C O M P A R A T I V A S
-     * ----------------------------------------------------------------------
-     */
-
-    enableBarsTool : function(item){
-      /*
-      var thisConf    = this.settings.ui.barsTool,
-          itemConf    = item.config,
-          container   = document.getElementById(thisConf.container),
-          stateSelect = document.getElementById(thisConf.stateSelector),
-          citySelect  = document.getElementById(thisConf.citySelector),
-          form        = container.querySelector("form");
-
-      form.removeEventListener("submit", this.addRegionToCompare);
-
-      if(itemConf.type == "point"){
-        container.style.display = "none";
-        return;
-      }
-      else{
-        container.style.display = "block";
-        form.addEventListener("submit", this.addRegionToCompare);
-      }
-
-      if(itemConf.level.indexOf("state") !== -1){
-        this.renderBarsToolStateList();
-      }
-      */
-    },
-
-    addRegionToCompare : function(e){
-      e.preventDefault();
-
-      var state  = document.getElementById(this.settings.ui.barsTool.stateSelector),
-          city   = document.getElementById(this.settings.ui.barsTool.citySelector),
-          list   = document.getElementById(this.settings.ui.barsTool.barsList),
-          __data = this.currentMap.data,
-          _data  = null,
-          data   = null
-          config = this.currentMap.config,
-          states = this.lists.estadosName.states,
-          cities = this.lists.municipiosName.cities,
-          _state = null,
-          _city  = null,
-          total  = []; 
-      
-      if(!state.value || state.value == SELECTALL){
-        return;
-      }
-      else if(state.value && city.value == SELECTALL){
-        _data = __data.filter(function(d){
-          return +state.value == +d[config.location.state];
-        });
-
-        _state = states.filter(function(st){
-          return +state.value == +st.id;
-        })[0];
-
-        config.values.forEach(function(col){
-          var m = {
-            name : col,
-            val  : _data.reduce(function(total, num){
-                     return +num[col] + total;
-                   }, 0)
-          }
-          total.push(m);
-        });
-
-        data = {
-          id : "s" + _state.id,
-          total : total,
-          name : _state.name
-        }
-
-
-        this.compareList.push(data);
-      }
-
-      else{
-      }
-
-    },
-
-    renderBarsToolStateList : function(){
-      var select = document.getElementById(this.settings.ui.barsTool.stateSelector),
-          states = this.lists.estadosName.states,
-          optNone = document.createElement("option");
-
-      optNone.innerHTML = "Selecciona un estado";
-      optNone.value = SELECTALL;
-
-      select.appendChild(optNone);
-
-      states.forEach(function(st){
-        var opt = document.createElement("option");
-
-        opt.value = st.id;
-        opt.innerHTML = st.name;
-
-        select.appendChild(opt);
-      });
-
-      select.removeEventListener("change", this.changeStateBarsToolFunction);
-      select.addEventListener("change", this.changeStateBarsToolFunction);
-    },
-
-    renderBarsToolCityList : function(state){
-      var select  = document.getElementById(this.settings.ui.barsTool.citySelector),
-          optNone = document.createElement("option"),
-          cities  = this.lists.municipiosName.cities.filter(function(city){
-                      return +state == city.state;
-                    });
-
-      select.disabled = false;
-      select.innerHTML = "";
-
-      optNone.innerHTML = "Selecciona un municipio";
-      optNone.value = SELECTALL;
-
-      select.appendChild(optNone);
-
-      cities.forEach(function(ct){
-        var opt = document.createElement("option");
-
-        opt.value     = +ct.city;
-        opt.innerHTML = ct.name;
-
-        select.appendChild(opt);
-      });
-    },
-
-    changeStateBarsToolFunction : function(e){
-      var hasCity = this.currentMap.config.level.indexOf("city") !== -1,
-          stateId = e.target.value,
-          cities  = document.getElementById(this.settings.ui.barsTool.citySelector);
-
-      if(hasCity){
-        this.renderBarsToolCityList(stateId);
-
-      }
-      else{
-        cities.disabled = true;
-      }
-    },
-
-
-
-
 
     /*
      * F U N C I O N E S   D E   T A B L A   D E   B Ú S Q U E D A
