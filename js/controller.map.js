@@ -114,22 +114,26 @@ define(function(require){
       //   los mapas extra son los que se superponen a los principales
       this.extraLayersConfig = [];
       // * la lista de localidades por comparar
-      this.compareList = [];
+      this.compareList  = [];
       // * el mapa de leaflet
       this.map          = null;
       // * la referencia al layer de leaflet de puntos
       this.points       = null;
-      // la referencia al layer de leaflet de estados
+      // * la referencia al layer de leaflet de estados
       this.states       = null;
-      // la referencia al layer de leaflet extra
+      // * la referencia al layer de leaflet extra
       this.extra        = null;
-      // la referencia al geocoder;
+      // * el grupo que contiene puntos y/o geometrías principales
+      this.mapGroupA    = null;
+      // * el grupo que contiene puntos y/o geometrías secundarias
+      this.mapGroupB    = null;
+      // * la referencia al geocoder;
       this.geocoder     = null;
-      // los callbacks
+      // * los callbacks
       this.callbacks    = settings.callbacks;
-      // referencia al archivo de configuración inicial
+      // * referencia al archivo de configuración inicial
       this.settings     = Object.create(CONFIG);
-      // referencia a las colecciones de ubicaciones
+      // * referencia a las colecciones de ubicaciones
       this.lists = {
                      estados        : Object.create(ESTADOS),
                      estadosName    : Object.create(ESTADOSNAME),
@@ -603,10 +607,12 @@ define(function(require){
     //
     //
     renderStateLayer : function(item, container, geojson, style){
+      // [0] genera un referencia a la app
       var that = this,
+      // [1] genera el template del popup
           t    = _.template(item.config.template);
-      // [1] genera el layer de geojson estatal
-      this[container] = L.geoJson(geojson/*ESTADOS.edos*/, {
+      // [2] genera el layer de geojson estatal
+      this[container] = L.geoJson(geojson, {
                     // * asigna el estilo. Internamente, genera la función de color,
                     //   lo demás viene del archivo de configuración principal
                       style : style,
@@ -1837,7 +1843,18 @@ define(function(require){
     // las geometrías de estado
     //
     _stateStyle : function(feature){
-      var css       = Object.create(this.settings.mapGeometry);
+      var style     = this.settings.mapGeometry,
+          _style    = this.currentMap.config.style,
+          css       = null;
+
+      if(_style){
+        for(var prop in _style){
+          if(_style.hasOwnProperty(prop)){
+            style[prop] = _style[prop];
+          }
+        }  
+      }
+      css = style;
       css.fillColor = this.brew.getColorInRange(feature.properties.data.value);
 
       return css;

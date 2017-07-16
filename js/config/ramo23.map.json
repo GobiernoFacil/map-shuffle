@@ -10,7 +10,7 @@
     "city"  : "id_municipio"
   },
   "style" : {
-    "stroke" : "black"
+    "fillOpacity":0.5
   },
   "values"  : ["monto", "Pagado"],
   "data"    : ["clave_de_programa", "fondo", "entidad", "municipio", "proyecto"],
