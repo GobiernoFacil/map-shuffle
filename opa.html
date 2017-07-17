@@ -768,39 +768,34 @@
   <!-- HELPERS -->
   <script src="js/card.helpers.v2.js"></script>
 <script>
+	var divstep0 = document.getElementById("reporte_step0");
+    var divstep1 = document.getElementById("reporte_step1");
+    var divstep2 = document.getElementById("reporte_step2");
 	
 	$("#toggle-view li").on("click", function(e){
 		 e.currentTarget.classList.toggle("active");
 	});
 	
 	$(".btn_type").on("click", function(e){
-		 var divstep0 = document.getElementById("reporte_step0");
-         var divstep1 = document.getElementById("reporte_step1");
-
-            divstep0.classList.toggle("hide");
-            divstep1.classList.toggle("hide");
+        divstep0.classList.toggle("hide");
+        divstep1.classList.toggle("hide");
 	});
 	
 	$('#to_step2').on("click", function(e){
-		 var divstep1 = document.getElementById("reporte_step1");
-                  var divstep2 = document.getElementById("reporte_step2");
-
-              divstep2.classList.toggle("hide");
-              divstep1.classList.toggle("hide");
+        divstep2.classList.toggle("hide");
+        divstep1.classList.toggle("hide");
 	});
 	
 	$(".btn.more.back").on("click", function(e){
-		 var divstep1 = document.getElementById("reporte_step1");
-                  var divstep2 = document.getElementById("reporte_step2");
-
-              divstep2.classList.toggle("hide");
-              divstep1.classList.toggle("hide");
+        divstep2.classList.toggle("hide");
+        divstep1.classList.toggle("hide");
 	});
 
 	
 	
 	//show modal
 	$("#red").on("click", function(){
+		window.scrollTo(0, 0);
 		$("#GF-modal_container").show();
 	});
 	
