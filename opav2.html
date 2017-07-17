@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title><%=nombre%></title>
+  <title>{{ nombre }}</title>
   <meta name="description" v-bind:content="descripcion">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="css/styles.css"/>
@@ -75,24 +75,21 @@
           </div>
           <!--- clave de cartera-->
           <div class="col-sm-6">
-            <h3 class="right">Clave de Cartera: <span id="cveReport"><%=cve_ppi%></span></h3>
+            <h3 class="right">Clave de Cartera: <span id="cveReport">{{cve_ppi}}</span></h3>
           </div>
         </div>
-        <h1 id ="nameReport"><%=nombre%></h1>
+        <h1 id ="nameReport">{{nombre}}</h1>
         <div class="row">
           <div class="col-md-10 col-sm-9">
-            <p><%=descripcion%></p>
+            <p>{{descripcion}}</p>
           </div>
           <div class="col-md-2 col-sm-3">
-	          <h3 class="right">Fase: 
-	          <% if (fase == "vigente") { %>
-			  <span class="active">
-			  <% } 
-			  else { %>
-				   <span class="disabled">
-			 <% }%>
-			  <%=fase%></span></h3>
-			 
+	        <div v-if="fase == 'Vigente'">
+           	 <h3 class="right">Fase: <span class="active">{{fase}}</span></h3>
+	        </div>
+            <div v-else>
+	            <h3 class="right">Fase: <span class="disabled">{{fase}}</span></h3>
+            </div>
           </div>
         </div>
       </div>
@@ -125,12 +122,12 @@
 
 
             </h3>
-            <p class="fichas_ramo"><b class="ramo<%=ramo%>"></b><%=ramo%> - <%=desc_ramo%></p>
+            <p class="fichas_ramo"><b v-bind:class="['ramo' + ramo,]"></b>{{ramo}} - {{desc_ramo}}</p>
           </div>
           <!-- Ejecutor-->
           <div class="col-md-4 col-sm-5">
             <h3 class="title line">Ejecutor del Proyecto</h3>
-            <p id = "ejecutorReport"><%=unidad%> - <%=desc_unidad%></p>
+            <p id = "ejecutorReport">{{unidad}} - {{desc_unidad}}</p>
           </div>
           <!-- Tipo de proyecto-->
           <div class="col-md-4 col-sm-12">
@@ -143,7 +140,7 @@
                 </span>
               </span>
             </h3>
-            <p><%=tipo_ppi%></p>
+            <p>{{ tipo_ppi }}</p>
           </div>
         </div>
 
@@ -166,18 +163,18 @@
 			    <!--localizacion-->
 			   <div class="col-sm-12">
 			     <h3 class="title">Localización</h3>
-			     <p><%=localizacion%></p>
+			     <p>{{localizacion}}</p>
 			   </div>
 
             	<!---entidad-->
           		<div class="col-md-6 col-sm-12">
             	  <h3 class="title">Entidad Federativa</h3>
-            	  <p id="entidadReport"><%=ent_fed%></p>
+            	  <p id="entidadReport">	{{ent_fed}}</p>
             	</div>
             	<!---coordenadas -->
           		<div class="col-md-6 col-sm-12">
             	  <h3 class="title">Coordenadas Geográficas</h3>
-            	  <p>Latitud: <%=latitud_inicial%> <br> Longitud: <%=longitud_inicial%></p>
+            	  <p>Latitud: {{latitud_inicial}} <br> Longitud: {{longitud_inicial}}</p>
             	</div>
             	</div>
             </div>
@@ -196,41 +193,41 @@
             </span>
           </span>
         </h3>
-        <p class="amount big right">$<strong><%=GFormat(monto_total_inversion)%></strong> <span>MXN</span></p>
+        <p class="amount big right">$<strong>{{GFormat(monto_total_inversion)}}</strong> <span>MXN</span></p>
         <div class="bar">
           <span class="bar inside total"></span>
         </div>
 		
 		
-		<div data-hide="<%=aprobado%>">
+		<div v-if="aprobado != null">
        		<!-- pef-->
        		<h3>Presupuesto aprobado en el PEF 2017</h3>
-       		<p class="amount right">$<strong><%=GFormat(aprobado)%></strong> <span>MXN</span></p>
+       		<p class="amount right">$<strong>{{GFormat(aprobado)}}</strong> <span>MXN</span></p>
        		<div class="bar">
-       		  <span class="bar inside pef" style="<%=presupuesto_style%>"></span>
+       		  <span class="bar inside pef" v-bind:style="presupuesto_style"></span>
        		</div>
 		</div>
 		
-		<div data-hide="<%=ejercido%>">
+		<div v-if="ejercido != null">
         	<!-- ejercido-->
         	<h3>Monto ejercido 2017</h3>
-        	<p class="amount right">$<strong><%=GFormat(ejercido)%></strong> <span>MXN</span></p>
+        	<p class="amount right">$<strong>{{GFormat(ejercido)}}</strong> <span>MXN</span></p>
         	<div class="bar">
-        	<span class="bar inside ejercido" style="<%=total_ejercido_style%>"></span>
+        	<span class="bar inside ejercido" v-bind:style="total_ejercido_style"></span>
         	</div>
         </div>
 		
-		<div data-hide="<%=modificado%>">
+		<div v-if="modificado != null">
         	<!-- modificado-->
         	<h3>Presupuesto modificado 2017</h3>
-        	<p class="amount right">$<strong><%=GFormat(modificado)%></strong> <span>MXN</span></p>
+        	<p class="amount right">$<strong>{{GFormat(modificado)}}</strong> <span>MXN</span></p>
         	<div class="bar">
-        	  <span class="bar inside modificado" style="<%=modificado_style%>"></span>
+        	  <span class="bar inside modificado" v-bind:style="modificado_style"></span>
         	</div>
 		</div>
 		
         <!-- reporta obra-->
-        <a id="show-modal" class="btn report trigger">Reporta esta obra</a>
+        <button id="show-modal" @click="showModal = true" class="btn report trigger">Reporta esta obra</button>
 
       </div>
     </div>
@@ -244,7 +241,7 @@
       </div>
       <!--años-->
       <div class="col-sm-3">
-        <p class="amount"><strong><%=anios_he%></strong> años</p>
+        <p class="amount"><strong>{{anios_he}}</strong> años</p>
         <p class="lead">Número estimado de años de operación en el horizonte de evaluación
           <!--tooltip-->
           <span class="tooltip">
@@ -257,7 +254,7 @@
       </div>
       <!--gastos-->
       <div class="col-sm-3">
-        <p class="amount">$<strong><%=GFormat(total_gasto_operacion_he)%></strong></p>
+        <p class="amount">$<strong>{{GFormat(total_gasto_operacion_he)}}</strong></p>
         <p class="lead">Gastos estimados totales de mantenimiento y operación del activo en el horizonte de evaluación
 	      <!--tooltip-->
           <span class="tooltip">
@@ -270,7 +267,7 @@
       </div>
       <!--otros costos-->
       <div class="col-sm-3">
-        <p class="amount">$<%=GFormat(total_gasto_no_consid)%></p>
+        <p class="amount">${{GFormat(total_gasto_no_consid)}}</p>
         <p class="lead">Otros costos y gastos asociados al PPI que no forman parte del gasto de inversión ni de los gastos de operación y mantenimiento
 	      <!--tooltip-->
           <span class="tooltip">
@@ -283,7 +280,7 @@
       </div>
       <!--costo total-->
       <div class="col-sm-3">
-        <p class="amount">$<strong><%=GFormat(costo_total_ppi)%></strong></p>
+        <p class="amount">$<strong>{{GFormat(costo_total_ppi)}}</strong></p>
         <p class="lead">Costo Total del PPI
 	        <!--tooltip-->
           <span class="tooltip">
@@ -315,7 +312,7 @@
             </span>
           </span>
         </h3>
-        <p><%=meta_fisica%></p>
+        <p>{{meta_fisica}}</p>
       </div>
       <!--física-->
       <div class="col-sm-6">
@@ -329,7 +326,7 @@
             </span>
           </span>
         </h3>
-        <p><%=meta_beneficios%></p>
+        <p>{{meta_beneficios}}</p>
       </div>
     </div>
   </section>
@@ -352,17 +349,17 @@
       <!--inicio-->
       <div class="col-sm-4">
         <h3>Fecha de inicio de inversión:</h3>
-        <p><%=fecha_ini_cal_fiscal%></p>
+        <p>{{fecha_ini_cal_fiscal}}</p>
       </div>
       <!--término-->
       <div class="col-sm-4">
         <h3>Fecha de término de inversión:</h3>
-        <p><%=fecha_fin_cal_fiscal%></p>
+        <p>{{fecha_fin_cal_fiscal}}</p>
       </div>
       <!--total-->
       <div class="col-sm-4">
         <h3>Monto total de inversión:</h3>
-        <p>$<%=GFormat(monto_total_inversion)%></p>
+        <p>${{GFormat(monto_total_inversion)}}</p>
       </div>
     </div>
   </section>
@@ -377,51 +374,27 @@
       </div>
       <!--recursos estatales-->
       <div class="col-sm-3">
-	    	<h3>Recursos Estatales</h3>
-			<p class="amount">$<strong>
-			<% if (recursos_estatales) { %>
-			  <%=GFormat(recursos_estatales)%>
-			<% } 
-			else { %>
-				<%=GFormat(0)%>
-			<% }%>
-			</strong></p>
+	      <h3>Recursos Estatales</h3>
+		  <p class="amount" v-if="recursos_estatales">$<strong>{{GFormat(recursos_estatales)}}</strong></p>
+		  <p class="amount" v-else>$<strong>{{GFormat(0)}}</strong></p>
       </div>
       <!--recursos municipales-->
       <div class="col-sm-3">
-	    	<h3>Recursos Municipales</h3>
-			<p class="amount">$<strong>
-			<% if (recursos_municipales) { %>
-			  <%=GFormat(recursos_municipales)%>
-			<% } 
-			else { %>
-				<%=GFormat(0)%>
-			<% }%>
-			</strong></p>
+	      <h3>Recursos Municipales</h3>
+		  <p class="amount" v-if="recursos_municipales">$<strong>{{GFormat(recursos_municipales)}}</strong></p>
+		  <p class="amount" v-else>$<strong>{{GFormat(0)}}</strong></p>
       </div>
 	  <!--privados-->
       <div class="col-sm-3">
 	      <h3>Recursos Privados</h3>
-	      <p class="amount">$<strong>
-			<% if (privados) { %>
-			  <%=GFormat(privados)%>
-			<% } 
-			else { %>
-				<%=GFormat(0)%>
-			<% }%>
-			</strong></p>
+		  <p class="amount" v-if="privados">$<strong>{{GFormat(privados)}}</strong></p>
+		  <p class="amount" v-else>$<strong>{{GFormat(0)}}</strong></p>
       </div>
 	  <!--fideicomiso-->
       <div class="col-sm-3">
 	      <h3>Fideicomiso</h3>
-	      <p class="amount">$<strong>
-			<% if (fideicomiso) { %>
-			  <%=GFormat(fideicomiso)%>
-			<% } 
-			else { %>
-				<%=GFormat(0)%>
-			<% }%>
-			</strong></p>
+		  <p class="amount" v-if="fideicomiso">$<strong>{{GFormat(fideicomiso)}}</strong></p>
+		  <p class="amount" v-else>$<strong>{{GFormat(0)}}</strong></p>
       </div>
     </div>
   </section>
@@ -443,12 +416,12 @@
           </thead>
           <tbody>
             <tr>
-              <td><%=nombre_admin%>              </td>
-              <td><%=ap_paterno_admin%>            </td>
-              <td><%=ap_materno_admin%>               </td>
-              <td><%=cargo_admin%>            </td>
-              <td><%=mail_admin%></td>
-              <td><%=telefono_admin%></td>
+              <td>{{nombre_admin}}              </td>
+              <td>{{ap_paterno_admin}}            </td>
+              <td>{{ap_materno_admin}}               </td>
+              <td>{{cargo_admin}}             </td>
+              <td>{{mail_admin}}</td>
+              <td>{{telefono_admin}}</td>
             </tr>
           </tbody>
         </table>
@@ -467,7 +440,9 @@
   
 </div>
 
-
+<div id="mamadas">
+<button id="show-modal" @click="showModal = true">Show Modal</button>
+</div>
 
   <!-- reportar-->
   <section class="GF-card">
@@ -476,10 +451,13 @@
        <!-- <p class="update right">Información actualizada al primer trimestre de 2016</p>-->
       </div>
       <div class="col-sm-12">
-        <a id="red" class="btn report trigger large"  data-dialog="somedialog">Reporta esta Obra</a>
+        <a id="red" class="btn report large trigger" @click="showModal = true" data-dialog="somedialog">Reporta esta Obra</a>
       </div>
     </div>
-   
+    <!-- modal -->
+	  <modal v-if="showModal" @close="showModal = false">
+    </modal>
+
   </section>
 
 </div>
@@ -545,7 +523,11 @@
 <!-- template for the modal component -->
 <script type="text/x-template" id="modal-template">
   <transition name="modal">
-    
+    <div class="modal-mask">
+      <div class="modal-wrapper">
+        <div class="modal-container">
+
+          <div class="modal-header">
             <slot name="header">
               default header
             </slot>
@@ -573,20 +555,19 @@
   </transition>
 </script>
 
+<!-- app -->
+<div id="app">
+  <button id="show-modal" @click="showModal = true">Show Modal</button>
+  <!-- use the modal component, pass in the prop -->
+  <modal v-if="showModal" @close="showModal = false">
+    <!--
+      you can use custom content here to overwrite
+      default content
+    -->
+    <!-- content-->
+    <h2 slot="header">Reporta esta obra</h2>
 
-
-<div id="GF-modal_container">
-	<div class="modal-mask">
-      <div class="modal-wrapper">
-        <div class="modal-container">
-
-          <div class="modal-header">
-		  <!-- content-->
-		  	<h2 slot="header">Reporta esta obra</h2>
-		  	<button class="modal-default-button action" id="GF-close_btn_modal">X</button>
-          </div>
-           <div class="modal-body">
-		   	<div class="dialog-container" >
+    <div class="dialog-container" slot="body">
 
     <div id="reporte_step0">
       <p slot="header">Realiza tu reporte ciudadano para este proyecto:</p>
@@ -612,38 +593,38 @@
         </div>
     <h3>Preguntas Frecuentes</h3>
     <ul id="toggle-view">
-        <li>
+        <li @click="listfaqs">
           <h4>¿Qué es un reporte ciudadano?</h4>
           <span>+</span>
           <div class="panel">
           Aviso que realiza cualquier interesado, a través de medios electrónicos, sobre posibles observaciones relacionadas con la ubicación, avances físicos y financieros o condiciones físicas de los programas y proyectos de inversión registrados en la Cartera de Inversión y en proceso de ejecución, susceptibles de ser georreferenciados.</div>
         </li>
-        <li>
+        <li @click="listfaqs" class="active">
           <h4>¿Puedo presentar una queja o denuncia sobre algún funcionario público en particular a través de la plataforma?</h4>
           <span>+</span>
           <div class="panel">Para ello, la Secretaría de la Función Pública pone a disposición de los ciudadanos distintos mecanismos que se pueden consultar a través de la página <a href="http://www.funcionpublica.gob.mx/index.php/temas/quejas-y-denuncias.html">http://www.funcionpublica.gob.mx/index.php/temas/quejas-y-denuncias.html</a></div>
         </li>
-        <li>
+        <li @click="listfaqs">
           <h4>¿Qué es la Cartera de Inversión?</h4>
           <span>+</span>
           <div class="panel">La Cartera es un sistema electrónico que contiene la información de todos los programas y proyectos de inversión que las dependencias y entidades de la Administración Pública Federal registraron y que demostraron tener beneficios para la población (rentables socioeconómicamente).</div>
         </li>
-        <li>
+        <li @click="listfaqs">
           <h4>¿Cuál es el procedimiento para registrar un proyecto de inversión?</h4>
           <span>+</span>
           <div class="panel">El proceso comienza con la identificación de necesidades de la población por parte de las dependencias y entidades de la Administración Pública Federal, las cuales analizan, evalúan y formulan proyectos o programas de inversión con el fin de satisfacer dichas necesidades. La solicitud de registro, la cual debe cumplir con la normatividad vigente, la realizan las dependencias y entidades mediante los sistemas informáticos de la Secretaría de Hacienda y Crédito Público (SHCP). Posteriormente, la solicitud es revisada por la Unidad de Inversiones de la SHCP y una vez que el proyecto demuestra que tiene beneficios para la población, se le otorga el registro en la Cartera de Inversión.</div>
         </li>
-        <li>
+        <li @click="listfaqs">
           <h4>¿Por qué no se ha aprobado mi proyecto?</h4>
           <span>+</span>
           <div class="panel">Sólo los programas y proyectos que las dependencias y entidades de la Administración Pública Federal registran en los sistemas informáticos de la SHCP son susceptibles de registro en la Cartera. Para que los proyectos puedan ser aprobados, deben cumplir los requisitos establecidos en la normatividad vigente, por lo que son revisados estrictamente para poder ser autorizados.</div>
         </li>
-        <li>
+        <li @click="listfaqs">
           <h4>¿Por qué mi proyecto no recibió recursos?</h4>
           <span>+</span>
           <div class="panel">Derivado del hecho que los recursos son limitados, la dependencia o entidad determina, de acuerdo con su planeación, qué proyectos son prioritarios para asignarles recursos durante el ejercicio fiscal, además, dichos recursos son aprobados por la Cámara de Diputados, junto con la totalidad del Presupuesto de Egresos de la Federación, en el mes de noviembre de cada año.</div>
         </li>
-        <li>
+        <li @click="listfaqs">
           <h4>¿Cuál es la normatividad vigente para registrar un proyecto de inversión?</h4>
           <span>+</span>
           <div class="panel">Para llevar a cabo el registro de un programa o proyecto de inversión se debe cumplir lo establecido en los Lineamientos para el registro en la cartera de programas y proyectos de inversión, los cuales se encuentran disponibles en la página de la SHCP: <a href="http://www.shcp.gob.mx/LASHCP/MarcoJuridico/ProgramasYProyectosDeInversion/Paginas/lineamientos.aspx">http://www.shcp.gob.mx/LASHCP/MarcoJuridico/ProgramasYProyectosDeInversion/Paginas/lineamientos.aspx</a></div>
@@ -666,7 +647,7 @@
             <textarea id="asuntoReporte"></textarea>
             <label>Narre el motivo de su reporte</label>
             <textarea id="motivoReporte"></textarea>
-            <a id="to_step2" class="btn more">Continuar &gt;</a>
+            <a class="btn more" @click="step2">Continuar &gt;</a>
           </div>
         </div>
       </fieldset>
@@ -750,65 +731,57 @@
       </div>
     </div>
     </div>
-           </div>
-        </div>
-      </div>
-	</div>
+  </modal>
 </div>
 
 
+<!-- libs -->
+<script src="js/libs/d3.v3.min.js"></script>
+<script src="js/libs/jquery-3.1.1.min.js"></script>
+<script src="js/libs/vue.min.js"></script>
+<script src="js/libs/leaflet.js"></script>
 
-  <!-- LIBRERÍAS -->
-  <script src="js/libs/d3.v3.min.js"></script>
-  <script src="js/libs/jquery-3.1.1.min.js"></script>
-  <!--<script src="js/libs/vue.min.js"></script>-->
-  <script src="js/libs/underscore-min.js"></script>
-  <script src="js/libs/leaflet.js"></script>
-
-  <!-- HELPERS -->
-  <script src="js/card.helpers.v2.js"></script>
 <script>
-	var divstep0 = document.getElementById("reporte_step0");
-    var divstep1 = document.getElementById("reporte_step1");
-    var divstep2 = document.getElementById("reporte_step2");
-	
-	$("#toggle-view li").on("click", function(e){
-		 e.currentTarget.classList.toggle("active");
-	});
-	
-	$(".btn_type").on("click", function(e){
-        divstep0.classList.toggle("hide");
-        divstep1.classList.toggle("hide");
-	});
-	
-	$('#to_step2').on("click", function(e){
-        divstep2.classList.toggle("hide");
-        divstep1.classList.toggle("hide");
-	});
-	
-	$(".btn.more.back").on("click", function(e){
-        divstep2.classList.toggle("hide");
-        divstep1.classList.toggle("hide");
-	});
 
-	
-	
-	//show modal
-	$("#red").on("click", function(){
-		window.scrollTo(0, 0);
-		$("#GF-modal_container").show();
-	});
-	
-	
-	/// hide modal	
-	$("#GF-close_btn_modal").on("click", function(){
-		$("#GF-modal_container").hide();
-	});
-	
-	
+// register modal component
+Vue.component('modal', {
+  template: '#modal-template'
+})
+
+// start app
+new Vue({
+  el: '#app',
+  data: {
+    showModal: false
+  },
+  methods: {
+              // lista de faqs en modal
+            listfaqs : function(e) {
+            e.currentTarget.classList.toggle("active");
+              },
+              // modal formulario paso 1
+              step1 : function(e) {
+                var divstep0 = document.getElementById("reporte_step0");
+                var divstep1 = document.getElementById("reporte_step1");
+
+              divstep0.classList.toggle("hide");
+              divstep1.classList.toggle("hide");
+              },
+              // modal formulario paso 2
+              step2 : function(e) {
+                var divstep1 = document.getElementById("reporte_step1");
+                  var divstep2 = document.getElementById("reporte_step2");
+
+              divstep2.classList.toggle("hide");
+              divstep1.classList.toggle("hide");
+              }
+          }
+})
+
 </script>
 
-
+<!-- helpers -->
+<script src="js/card.helpers.js"></script>
 
 <!-- config -->
 <script>
