@@ -119,6 +119,7 @@
   },
   "ux" : {
     "findMeZoom" : 14,
+    "changeStateZoom" : 9,
     "geocoding"  : "https://maps.googleapis.com/maps/api/geocode/json",
     "enableBarsTool" : true,
     "enableSearchTool" : true,

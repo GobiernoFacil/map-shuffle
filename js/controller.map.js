@@ -1715,11 +1715,16 @@ define(function(require){
       var val          = e.currentTarget.value,
           field        = e.currentTarget.getAttribute("data-field"),
           current      = this.filters.filter(function(el){ return el.field == field })[0],
+          _current     = this.currentMap.config.filters.filter(function(el){return el.field == field })[0],
           stateFilter  = this.currentMap.config.filters.filter(function(fil){ return fil.type == "state"})[0],
           cityFilter   = this.currentMap.config.filters.filter(function(fil){ return fil.type == "city"})[0],
           branchFilter = this.currentMap.config.filters.filter(function(fil){ return fil.type == "branch"})[0],
           unitFilter   = this.currentMap.config.filters.filter(function(fil){ return fil.type == "unit"})[0],
-          currentCity  = null;
+          currentCity  = null,
+          stateZoom    = this.settings.ux.changeStateZoom,
+          stateName    = null,
+          cityName     = null;
+
 
       if(
         (stateFilter && stateFilter.field == field) ||
@@ -1727,6 +1732,15 @@ define(function(require){
         (cityFilter && cityFilter.field == field)
       ){
         val = val == SELECTALL ? val : +val;
+      }
+
+      if(_current.type == "state" && val != SELECTALL){
+
+        stateName = this.lists.estadosName.states.filter(function(st){
+          return +st.id == +val;
+        })[0];
+        console.log(stateName, val);
+        this.map.setView(new L.LatLng(stateName.lat, stateName.lng), stateZoom);
       }
 
       if(stateFilter && stateFilter.field == field && cityFilter){
