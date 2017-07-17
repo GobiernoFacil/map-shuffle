@@ -45,6 +45,9 @@ define(function(require){
       // [*] el nombre,ramo y clave de cada unidad ejecutora
       UNIDADESNAME   = require("assets/unidades-nombres"),
 
+      /* COSA PARA BORRAR */
+      MEXMIN = require("assets/mexmin"),
+
       // [4] obtiene los templates de UI
       // ----------------------------------------------------------------------
       // [*] el selector de mapa
