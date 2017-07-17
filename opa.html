@@ -230,7 +230,7 @@
 		</div>
 		
         <!-- reporta obra-->
-        <button id="show-modal" @click="showModal = true" class="btn report trigger">Reporta esta obra</button>
+        <a id="show-modal" class="btn report trigger">Reporta esta obra</a>
 
       </div>
     </div>
@@ -467,9 +467,7 @@
   
 </div>
 
-<div id="mamadas">
-<button id="show-modal" @click="showModal = true">Show Modal</button>
-</div>
+
 
   <!-- reportar-->
   <section class="GF-card">
@@ -478,13 +476,10 @@
        <!-- <p class="update right">Información actualizada al primer trimestre de 2016</p>-->
       </div>
       <div class="col-sm-12">
-        <a id="red" class="btn report large trigger" @click="showModal = true" data-dialog="somedialog">Reporta esta Obra</a>
+        <a id="red" class="btn report trigger large"  data-dialog="somedialog">Reporta esta Obra</a>
       </div>
     </div>
-    <!-- modal -->
-	  <modal v-if="showModal" @close="showModal = false">
-    </modal>
-
+   
   </section>
 
 </div>
@@ -550,11 +545,7 @@
 <!-- template for the modal component -->
 <script type="text/x-template" id="modal-template">
   <transition name="modal">
-    <div class="modal-mask">
-      <div class="modal-wrapper">
-        <div class="modal-container">
-
-          <div class="modal-header">
+    
             <slot name="header">
               default header
             </slot>
@@ -582,19 +573,20 @@
   </transition>
 </script>
 
-<!-- app -->
-<div id="app">
-  <button id="show-modal" @click="showModal = true">Show Modal</button>
-  <!-- use the modal component, pass in the prop -->
-  <modal v-if="showModal" @close="showModal = false">
-    <!--
-      you can use custom content here to overwrite
-      default content
-    -->
-    <!-- content-->
-    <h2 slot="header">Reporta esta obra</h2>
 
-    <div class="dialog-container" slot="body">
+
+<div id="GF-modal_container">
+	<div class="modal-mask">
+      <div class="modal-wrapper">
+        <div class="modal-container">
+
+          <div class="modal-header">
+		  <!-- content-->
+		  	<h2 slot="header">Reporta esta obra</h2>
+		  	<button class="modal-default-button action" id="GF-close_btn_modal">X</button>
+          </div>
+           <div class="modal-body">
+		   	<div class="dialog-container" >
 
     <div id="reporte_step0">
       <p slot="header">Realiza tu reporte ciudadano para este proyecto:</p>
@@ -620,38 +612,38 @@
         </div>
     <h3>Preguntas Frecuentes</h3>
     <ul id="toggle-view">
-        <li @click="listfaqs">
+        <li>
           <h4>¿Qué es un reporte ciudadano?</h4>
           <span>+</span>
           <div class="panel">
           Aviso que realiza cualquier interesado, a través de medios electrónicos, sobre posibles observaciones relacionadas con la ubicación, avances físicos y financieros o condiciones físicas de los programas y proyectos de inversión registrados en la Cartera de Inversión y en proceso de ejecución, susceptibles de ser georreferenciados.</div>
         </li>
-        <li @click="listfaqs" class="active">
+        <li>
           <h4>¿Puedo presentar una queja o denuncia sobre algún funcionario público en particular a través de la plataforma?</h4>
           <span>+</span>
           <div class="panel">Para ello, la Secretaría de la Función Pública pone a disposición de los ciudadanos distintos mecanismos que se pueden consultar a través de la página <a href="http://www.funcionpublica.gob.mx/index.php/temas/quejas-y-denuncias.html">http://www.funcionpublica.gob.mx/index.php/temas/quejas-y-denuncias.html</a></div>
         </li>
-        <li @click="listfaqs">
+        <li>
           <h4>¿Qué es la Cartera de Inversión?</h4>
           <span>+</span>
           <div class="panel">La Cartera es un sistema electrónico que contiene la información de todos los programas y proyectos de inversión que las dependencias y entidades de la Administración Pública Federal registraron y que demostraron tener beneficios para la población (rentables socioeconómicamente).</div>
         </li>
-        <li @click="listfaqs">
+        <li>
           <h4>¿Cuál es el procedimiento para registrar un proyecto de inversión?</h4>
           <span>+</span>
           <div class="panel">El proceso comienza con la identificación de necesidades de la población por parte de las dependencias y entidades de la Administración Pública Federal, las cuales analizan, evalúan y formulan proyectos o programas de inversión con el fin de satisfacer dichas necesidades. La solicitud de registro, la cual debe cumplir con la normatividad vigente, la realizan las dependencias y entidades mediante los sistemas informáticos de la Secretaría de Hacienda y Crédito Público (SHCP). Posteriormente, la solicitud es revisada por la Unidad de Inversiones de la SHCP y una vez que el proyecto demuestra que tiene beneficios para la población, se le otorga el registro en la Cartera de Inversión.</div>
         </li>
-        <li @click="listfaqs">
+        <li>
           <h4>¿Por qué no se ha aprobado mi proyecto?</h4>
           <span>+</span>
           <div class="panel">Sólo los programas y proyectos que las dependencias y entidades de la Administración Pública Federal registran en los sistemas informáticos de la SHCP son susceptibles de registro en la Cartera. Para que los proyectos puedan ser aprobados, deben cumplir los requisitos establecidos en la normatividad vigente, por lo que son revisados estrictamente para poder ser autorizados.</div>
         </li>
-        <li @click="listfaqs">
+        <li>
           <h4>¿Por qué mi proyecto no recibió recursos?</h4>
           <span>+</span>
           <div class="panel">Derivado del hecho que los recursos son limitados, la dependencia o entidad determina, de acuerdo con su planeación, qué proyectos son prioritarios para asignarles recursos durante el ejercicio fiscal, además, dichos recursos son aprobados por la Cámara de Diputados, junto con la totalidad del Presupuesto de Egresos de la Federación, en el mes de noviembre de cada año.</div>
         </li>
-        <li @click="listfaqs">
+        <li>
           <h4>¿Cuál es la normatividad vigente para registrar un proyecto de inversión?</h4>
           <span>+</span>
           <div class="panel">Para llevar a cabo el registro de un programa o proyecto de inversión se debe cumplir lo establecido en los Lineamientos para el registro en la cartera de programas y proyectos de inversión, los cuales se encuentran disponibles en la página de la SHCP: <a href="http://www.shcp.gob.mx/LASHCP/MarcoJuridico/ProgramasYProyectosDeInversion/Paginas/lineamientos.aspx">http://www.shcp.gob.mx/LASHCP/MarcoJuridico/ProgramasYProyectosDeInversion/Paginas/lineamientos.aspx</a></div>
@@ -674,7 +666,7 @@
             <textarea id="asuntoReporte"></textarea>
             <label>Narre el motivo de su reporte</label>
             <textarea id="motivoReporte"></textarea>
-            <a class="btn more" @click="step2">Continuar &gt;</a>
+            <a id="to_step2" class="btn more">Continuar &gt;</a>
           </div>
         </div>
       </fieldset>
@@ -758,54 +750,14 @@
       </div>
     </div>
     </div>
-  </modal>
+           </div>
+        </div>
+      </div>
+	</div>
 </div>
 
 
-<!-- libs -->
-<script src="js/libs/d3.v3.min.js"></script>
-<script src="js/libs/jquery-3.1.1.min.js"></script>
-<script src="js/libs/vue.min.js"></script>
-<script src="js/libs/leaflet.js"></script>
 
-<script>
-
-// register modal component
-Vue.component('modal', {
-  template: '#modal-template'
-})
-
-// start app
-new Vue({
-  el: '#app',
-  data: {
-    showModal: false
-  },
-  methods: {
-              // lista de faqs en modal
-            listfaqs : function(e) {
-            e.currentTarget.classList.toggle("active");
-              },
-              // modal formulario paso 1
-              step1 : function(e) {
-                var divstep0 = document.getElementById("reporte_step0");
-                var divstep1 = document.getElementById("reporte_step1");
-
-              divstep0.classList.toggle("hide");
-              divstep1.classList.toggle("hide");
-              },
-              // modal formulario paso 2
-              step2 : function(e) {
-                var divstep1 = document.getElementById("reporte_step1");
-                  var divstep2 = document.getElementById("reporte_step2");
-
-              divstep2.classList.toggle("hide");
-              divstep1.classList.toggle("hide");
-              }
-          }
-})
-
-</script>
   <!-- LIBRERÍAS -->
   <script src="js/libs/d3.v3.min.js"></script>
   <script src="js/libs/jquery-3.1.1.min.js"></script>
@@ -815,6 +767,52 @@ new Vue({
 
   <!-- HELPERS -->
   <script src="js/card.helpers.v2.js"></script>
+<script>
+	
+	$("#toggle-view li").on("click", function(e){
+		 e.currentTarget.classList.toggle("active");
+	});
+	
+	$(".btn_type").on("click", function(e){
+		 var divstep0 = document.getElementById("reporte_step0");
+         var divstep1 = document.getElementById("reporte_step1");
+
+            divstep0.classList.toggle("hide");
+            divstep1.classList.toggle("hide");
+	});
+	
+	$('#to_step2').on("click", function(e){
+		 var divstep1 = document.getElementById("reporte_step1");
+                  var divstep2 = document.getElementById("reporte_step2");
+
+              divstep2.classList.toggle("hide");
+              divstep1.classList.toggle("hide");
+	});
+	
+	$(".btn.more.back").on("click", function(e){
+		 var divstep1 = document.getElementById("reporte_step1");
+                  var divstep2 = document.getElementById("reporte_step2");
+
+              divstep2.classList.toggle("hide");
+              divstep1.classList.toggle("hide");
+	});
+
+	
+	
+	//show modal
+	$("#red").on("click", function(){
+		$("#GF-modal_container").show();
+	});
+	
+	
+	/// hide modal	
+	$("#GF-close_btn_modal").on("click", function(){
+		$("#GF-modal_container").hide();
+	});
+	
+	
+</script>
+
 
 
 <!-- config -->
