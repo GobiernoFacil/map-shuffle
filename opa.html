@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>{{ nombre }}</title>
+  <title><%=nombre%></title>
   <meta name="description" v-bind:content="descripcion">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="css/styles.css"/>
@@ -75,21 +75,24 @@
           </div>
           <!--- clave de cartera-->
           <div class="col-sm-6">
-            <h3 class="right">Clave de Cartera: <span id="cveReport">{{cve_ppi}}</span></h3>
+            <h3 class="right">Clave de Cartera: <span id="cveReport"><%=cve_ppi%></span></h3>
           </div>
         </div>
-        <h1 id ="nameReport">{{nombre}}</h1>
+        <h1 id ="nameReport"><%=nombre%></h1>
         <div class="row">
           <div class="col-md-10 col-sm-9">
-            <p>{{descripcion}}</p>
+            <p><%=descripcion%></p>
           </div>
           <div class="col-md-2 col-sm-3">
-	        <div v-if="fase == 'Vigente'">
-           	 <h3 class="right">Fase: <span class="active">{{fase}}</span></h3>
-	        </div>
-            <div v-else>
-	            <h3 class="right">Fase: <span class="disabled">{{fase}}</span></h3>
-            </div>
+	          <h3 class="right">Fase: 
+	          <% if (fase == "vigente") { %>
+			  <span class="active">
+			  <% } 
+			  else { %>
+				   <span class="disabled">
+			 <% }%>
+			  <%=fase%></span></h3>
+			 
           </div>
         </div>
       </div>
@@ -122,12 +125,12 @@
 
 
             </h3>
-            <p class="fichas_ramo"><b v-bind:class="['ramo' + ramo,]"></b>{{ramo}} - {{desc_ramo}}</p>
+            <p class="fichas_ramo"><b class="ramo<%=ramo%>"></b><%=ramo%> - <%=desc_ramo%></p>
           </div>
           <!-- Ejecutor-->
           <div class="col-md-4 col-sm-5">
             <h3 class="title line">Ejecutor del Proyecto</h3>
-            <p id = "ejecutorReport">{{unidad}} - {{desc_unidad}}</p>
+            <p id = "ejecutorReport"><%=unidad%> - <%=desc_unidad%></p>
           </div>
           <!-- Tipo de proyecto-->
           <div class="col-md-4 col-sm-12">
@@ -140,7 +143,7 @@
                 </span>
               </span>
             </h3>
-            <p>{{ tipo_ppi }}</p>
+            <p><%=tipo_ppi%></p>
           </div>
         </div>
 
@@ -163,18 +166,18 @@
 			    <!--localizacion-->
 			   <div class="col-sm-12">
 			     <h3 class="title">Localización</h3>
-			     <p>{{localizacion}}</p>
+			     <p><%=localizacion%></p>
 			   </div>
 
             	<!---entidad-->
           		<div class="col-md-6 col-sm-12">
             	  <h3 class="title">Entidad Federativa</h3>
-            	  <p id="entidadReport">	{{ent_fed}}</p>
+            	  <p id="entidadReport"><%=ent_fed%></p>
             	</div>
             	<!---coordenadas -->
           		<div class="col-md-6 col-sm-12">
             	  <h3 class="title">Coordenadas Geográficas</h3>
-            	  <p>Latitud: {{latitud_inicial}} <br> Longitud: {{longitud_inicial}}</p>
+            	  <p>Latitud: <%=latitud_inicial%> <br> Longitud: <%=longitud_inicial%></p>
             	</div>
             	</div>
             </div>
@@ -193,36 +196,36 @@
             </span>
           </span>
         </h3>
-        <p class="amount big right">$<strong>{{GFormat(monto_total_inversion)}}</strong> <span>MXN</span></p>
+        <p class="amount big right">$<strong><%=GFormat(monto_total_inversion)%></strong> <span>MXN</span></p>
         <div class="bar">
           <span class="bar inside total"></span>
         </div>
 		
 		
-		<div v-if="aprobado != null">
+		<div data-hide="<%=aprobado%>">
        		<!-- pef-->
        		<h3>Presupuesto aprobado en el PEF 2017</h3>
-       		<p class="amount right">$<strong>{{GFormat(aprobado)}}</strong> <span>MXN</span></p>
+       		<p class="amount right">$<strong><%=GFormat(aprobado)%></strong> <span>MXN</span></p>
        		<div class="bar">
-       		  <span class="bar inside pef" v-bind:style="presupuesto_style"></span>
+       		  <span class="bar inside pef" style="<%=presupuesto_style%>"></span>
        		</div>
 		</div>
 		
-		<div v-if="ejercido != null">
+		<div data-hide="<%=ejercido%>">
         	<!-- ejercido-->
         	<h3>Monto ejercido 2017</h3>
-        	<p class="amount right">$<strong>{{GFormat(ejercido)}}</strong> <span>MXN</span></p>
+        	<p class="amount right">$<strong><%=GFormat(ejercido)%></strong> <span>MXN</span></p>
         	<div class="bar">
-        	<span class="bar inside ejercido" v-bind:style="total_ejercido_style"></span>
+        	<span class="bar inside ejercido" style="<%=total_ejercido_style%>"></span>
         	</div>
         </div>
 		
-		<div v-if="modificado != null">
+		<div data-hide="<%=modificado%>">
         	<!-- modificado-->
         	<h3>Presupuesto modificado 2017</h3>
-        	<p class="amount right">$<strong>{{GFormat(modificado)}}</strong> <span>MXN</span></p>
+        	<p class="amount right">$<strong><%=GFormat(modificado)%></strong> <span>MXN</span></p>
         	<div class="bar">
-        	  <span class="bar inside modificado" v-bind:style="modificado_style"></span>
+        	  <span class="bar inside modificado" style="<%=modificado_style%>"></span>
         	</div>
 		</div>
 		
@@ -241,7 +244,7 @@
       </div>
       <!--años-->
       <div class="col-sm-3">
-        <p class="amount"><strong>{{anios_he}}</strong> años</p>
+        <p class="amount"><strong><%=anios_he%></strong> años</p>
         <p class="lead">Número estimado de años de operación en el horizonte de evaluación
           <!--tooltip-->
           <span class="tooltip">
@@ -254,7 +257,7 @@
       </div>
       <!--gastos-->
       <div class="col-sm-3">
-        <p class="amount">$<strong>{{GFormat(total_gasto_operacion_he)}}</strong></p>
+        <p class="amount">$<strong><%=GFormat(total_gasto_operacion_he)%></strong></p>
         <p class="lead">Gastos estimados totales de mantenimiento y operación del activo en el horizonte de evaluación
 	      <!--tooltip-->
           <span class="tooltip">
@@ -267,7 +270,7 @@
       </div>
       <!--otros costos-->
       <div class="col-sm-3">
-        <p class="amount">${{GFormat(total_gasto_no_consid)}}</p>
+        <p class="amount">$<%=GFormat(total_gasto_no_consid)%></p>
         <p class="lead">Otros costos y gastos asociados al PPI que no forman parte del gasto de inversión ni de los gastos de operación y mantenimiento
 	      <!--tooltip-->
           <span class="tooltip">
@@ -280,7 +283,7 @@
       </div>
       <!--costo total-->
       <div class="col-sm-3">
-        <p class="amount">$<strong>{{GFormat(costo_total_ppi)}}</strong></p>
+        <p class="amount">$<strong><%=GFormat(costo_total_ppi)%></strong></p>
         <p class="lead">Costo Total del PPI
 	        <!--tooltip-->
           <span class="tooltip">
@@ -312,7 +315,7 @@
             </span>
           </span>
         </h3>
-        <p>{{meta_fisica}}</p>
+        <p><%=meta_fisica%></p>
       </div>
       <!--física-->
       <div class="col-sm-6">
@@ -326,7 +329,7 @@
             </span>
           </span>
         </h3>
-        <p>{{meta_beneficios}}</p>
+        <p><%=meta_beneficios%></p>
       </div>
     </div>
   </section>
@@ -349,17 +352,17 @@
       <!--inicio-->
       <div class="col-sm-4">
         <h3>Fecha de inicio de inversión:</h3>
-        <p>{{fecha_ini_cal_fiscal}}</p>
+        <p><%=fecha_ini_cal_fiscal%></p>
       </div>
       <!--término-->
       <div class="col-sm-4">
         <h3>Fecha de término de inversión:</h3>
-        <p>{{fecha_fin_cal_fiscal}}</p>
+        <p><%=fecha_fin_cal_fiscal%></p>
       </div>
       <!--total-->
       <div class="col-sm-4">
         <h3>Monto total de inversión:</h3>
-        <p>${{GFormat(monto_total_inversion)}}</p>
+        <p>$<%=GFormat(monto_total_inversion)%></p>
       </div>
     </div>
   </section>
@@ -374,27 +377,51 @@
       </div>
       <!--recursos estatales-->
       <div class="col-sm-3">
-	      <h3>Recursos Estatales</h3>
-		  <p class="amount" v-if="recursos_estatales">$<strong>{{GFormat(recursos_estatales)}}</strong></p>
-		  <p class="amount" v-else>$<strong>{{GFormat(0)}}</strong></p>
+	    	<h3>Recursos Estatales</h3>
+			<p class="amount">$<strong>
+			<% if (recursos_estatales) { %>
+			  <%=GFormat(recursos_estatales)%>
+			<% } 
+			else { %>
+				<%=GFormat(0)%>
+			<% }%>
+			</strong></p>
       </div>
       <!--recursos municipales-->
       <div class="col-sm-3">
-	      <h3>Recursos Municipales</h3>
-		  <p class="amount" v-if="recursos_municipales">$<strong>{{GFormat(recursos_municipales)}}</strong></p>
-		  <p class="amount" v-else>$<strong>{{GFormat(0)}}</strong></p>
+	    	<h3>Recursos Municipales</h3>
+			<p class="amount">$<strong>
+			<% if (recursos_municipales) { %>
+			  <%=GFormat(recursos_municipales)%>
+			<% } 
+			else { %>
+				<%=GFormat(0)%>
+			<% }%>
+			</strong></p>
       </div>
 	  <!--privados-->
       <div class="col-sm-3">
 	      <h3>Recursos Privados</h3>
-		  <p class="amount" v-if="privados">$<strong>{{GFormat(privados)}}</strong></p>
-		  <p class="amount" v-else>$<strong>{{GFormat(0)}}</strong></p>
+	      <p class="amount">$<strong>
+			<% if (privados) { %>
+			  <%=GFormat(privados)%>
+			<% } 
+			else { %>
+				<%=GFormat(0)%>
+			<% }%>
+			</strong></p>
       </div>
 	  <!--fideicomiso-->
       <div class="col-sm-3">
 	      <h3>Fideicomiso</h3>
-		  <p class="amount" v-if="fideicomiso">$<strong>{{GFormat(fideicomiso)}}</strong></p>
-		  <p class="amount" v-else>$<strong>{{GFormat(0)}}</strong></p>
+	      <p class="amount">$<strong>
+			<% if (fideicomiso) { %>
+			  <%=GFormat(fideicomiso)%>
+			<% } 
+			else { %>
+				<%=GFormat(0)%>
+			<% }%>
+			</strong></p>
       </div>
     </div>
   </section>
@@ -416,12 +443,12 @@
           </thead>
           <tbody>
             <tr>
-              <td>{{nombre_admin}}              </td>
-              <td>{{ap_paterno_admin}}            </td>
-              <td>{{ap_materno_admin}}               </td>
-              <td>{{cargo_admin}}             </td>
-              <td>{{mail_admin}}</td>
-              <td>{{telefono_admin}}</td>
+              <td><%=nombre_admin%>              </td>
+              <td><%=ap_paterno_admin%>            </td>
+              <td><%=ap_materno_admin%>               </td>
+              <td><%=cargo_admin%>            </td>
+              <td><%=mail_admin%></td>
+              <td><%=telefono_admin%></td>
             </tr>
           </tbody>
         </table>
@@ -779,9 +806,16 @@ new Vue({
 })
 
 </script>
+  <!-- LIBRERÍAS -->
+  <script src="js/libs/d3.v3.min.js"></script>
+  <script src="js/libs/jquery-3.1.1.min.js"></script>
+  <!--<script src="js/libs/vue.min.js"></script>-->
+  <script src="js/libs/underscore-min.js"></script>
+  <script src="js/libs/leaflet.js"></script>
 
-<!-- helpers -->
-<script src="js/card.helpers.js"></script>
+  <!-- HELPERS -->
+  <script src="js/card.helpers.v2.js"></script>
+
 
 <!-- config -->
 <script>
