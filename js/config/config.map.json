@@ -121,7 +121,8 @@
       "prevPage"        : "GF-SHCP-SEARCH-CONTROL-PREV",
       "nextPage"        : "GF-SHCP-SEARCH-CONTROL-NEXT",
       "toolsForm"       : "GF-SHCP-search-tools-form",
-      "paginationForm"  : "GF-SHCP-search-pagination-form"
+      "paginationForm"  : "GF-SHCP-search-pagination-form",
+      "downloadBtn"     : "GF-SHCP-search-app-download"
     },
 
     "geolocationBtn"   : "GF-SHCP-geolocate-user",
