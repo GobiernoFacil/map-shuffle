@@ -40,7 +40,7 @@
     "basePath"  : "/js/config",
     "maps"      : ["escuelas100.map.json", "ramo23.map.json", "opa.map.json", "gasolina.map.json", "tomas.map.json", "entidades.map.json"],
     "extras"    : ["poblacion.map.json"],
-    "current"   : 1,
+    "current"   : 2,
     "embedPath" : "http://localhost:8000/mapa.html" 
   },
   "ui" : {
@@ -86,9 +86,11 @@
       }
     },
     "barsTool" : {
-      "container"         : "GF-SHCP-bars-tool",
-      "singleLocation"    : "GF-SHCP-bars-app-single-location",
-      "multipleLocations" : "GF-SHCP-bars-app-multiple-locations",
+      "container"           : "GF-SHCP-bars-tool",
+      "singleLocation"      : "GF-SHCP-bars-app-single-location",
+      "multipleLocations"   : "GF-SHCP-bars-app-multiple-locations",
+      "singleLocationBtn"   : "GF-SHCP-bars-app-single-location-link",
+      "multipleLocationBtn" : "GF-SHCP-bars-app-multiple-locations-link",
       "singleLocationUI" : {
         "state"           : "GF-SHCP-bars-app-single-location-state",
         "city"            : "GF-SHCP-bars-app-single-location-city",

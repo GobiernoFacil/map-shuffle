@@ -22,6 +22,8 @@ define(function(require){
     var _id         = parent.settings.ui.barsTool.container,
         _slID       = parent.settings.ui.barsTool.singleLocation,
         _mlID       = parent.settings.ui.barsTool.multipleLocations,
+        _slBtnID    = parent.settings.ui.barsTool.singleLocationBtn,
+        _mlBtnID    = parent.settings.ui.barsTool.multipleLocationBtn,
         _container  = document.getElementById(_id),
         _sContainer = null, 
         _mContainer = null,
@@ -88,11 +90,49 @@ define(function(require){
           this.show();
           this.renderSingleLocation();
           this.renderMultipleLocation();
+          this.enableTabs();
           return;
         }
         else{
           this.hide();
         }
+      },
+
+      enableTabs : function(){
+        var singleBtn   = document.getElementById(_slBtnID),
+            multipleBtn = document.getElementById(_mlBtnID),
+            singleDiv   = document.getElementById(_slID),
+            multipleDiv = document.getElementById(_mlID);
+
+
+        // console.log(singleBtn, multipleBtn, singleDiv, multipleDiv);
+        multipleDiv.style.display = "none";
+
+        singleBtn.addEventListener("click", function(e){
+          e.preventDefault();
+          if(this.classList.contains("current")){
+            return;
+          }
+          else{
+            this.classList.add("current");
+            multipleBtn.classList.remove("current");
+            multipleDiv.style.display = "none";
+            singleDiv.style.display   = "block";
+          }
+        });
+
+        multipleBtn.addEventListener("click", function(e){
+          e.preventDefault();
+          if(this.classList.contains("current")){
+            return;
+          }
+          else{
+            this.classList.add("current");
+            singleBtn.classList.remove("current");
+            multipleDiv.style.display = "block";
+            singleDiv.style.display   = "none";
+          }
+        });
       },
 
       show : function(){
@@ -417,7 +457,6 @@ define(function(require){
           controller._filterData(data, column, filters);
         });
 
-        console.log(data);
         // calculate value
 
         // render bar
@@ -452,6 +491,12 @@ define(function(require){
         li.innerHTML = html;
 
         container.appendChild(li);
+
+        li.addEventListener("click", function(e){
+          this.parentNode.removeChild(this);
+          SingleFilters.splice(SingleFilters.indexOf(filter), 1);
+          console.log(SingleFilters);
+        });
       },
 
   // [3.2] define las funciones de eventos
@@ -630,6 +675,8 @@ define(function(require){
         else{
           //console.log("nope, is unit");
         }
+
+        console.log(data, column, _filters);
 
         //console.log(filters, isString, type, compArray, data);
       },

@@ -57,9 +57,7 @@ define(function(require){
       // [*] el selector de filtros
       PAGESELECTOR   = require("text!templates/page-selector-panel.html"),
       // [*] las barras de comparación
-      PAGESELECTOR   = require("text!templates/page-selector-panel.html"),
-      // [*] la búsqueda avanzada
-      ADVANCESEARCH  = require("text!templates/advanced-search.html"),  
+      PAGESELECTOR   = require("text!templates/page-selector-panel.html"),  
       // [*] la guía de color
       COLORGUIDE     = require("text!templates/color-band.html"), 
 
@@ -67,7 +65,11 @@ define(function(require){
       // ----------------------------------------------------------------------
       BARSTOOL      = require("bars.maps"), 
 
-      // [6] define las constantes internas del sistema 
+      // [6] carga los componentes de filtros y búsqueda
+      // ----------------------------------------------------------------------
+      SEARCHTOOL     = require("search.maps"), 
+
+      // [7] define las constantes internas del sistema 
       // ----------------------------------------------------------------------
       SELECTALL      = "_____",
       XFILTERCLASS   = "killMePlease";
@@ -155,6 +157,9 @@ define(function(require){
       // la app de gráficas
       this.barsTool = this.settings.ux.enableBarsTool ? new BARSTOOL(this) : null;
 
+      // la app de búsqueda
+      this.searchTool = this.settings.ux.enableSearchTool ? new SEARCHTOOL : null;
+
       // [1.1] DEFINE SHORTCUTS PARA LOS ELEMENTOS DE UI
       // ----------------------------------------------------------------------
       // * El selector de mapas
@@ -195,7 +200,7 @@ define(function(require){
       // [5] INICIA LOS ELEMENTOS DE UI
       // ----------------------------------------------------------------------
       // * la búsqueda avanzada
-      this.renderAdvancedSearch();
+      //this.renderAdvancedSearch();
 
       // * el selector de mapa
       this.renderMapSelector();
@@ -472,9 +477,11 @@ define(function(require){
 
       // [7] Activa la tabla de comparación
       //
+      /*
       if(!keepFilters){
         this.enableTableTool(item);
       }
+      */
 
       // [8] Actualiza el contador de proyectos
       //
@@ -499,6 +506,13 @@ define(function(require){
       }
       else{
         console.log("no bars tool");
+      }
+
+      if(this.searchTool){
+        this.searchTool.render();
+      }
+      else{
+        console.log("no search tool");
       }
     },
 
@@ -1290,6 +1304,7 @@ define(function(require){
     //
     //
 
+    /*
     renderAdvancedSearch : function(){
       // ADVANCESEARCH
       var //template = _.template(ADVANCESEARCH),
@@ -1301,6 +1316,7 @@ define(function(require){
 
       console.log("download: ", download);
     },
+    */
 
     //
     // EL PANEL DE SELECTOR DE MAPA
