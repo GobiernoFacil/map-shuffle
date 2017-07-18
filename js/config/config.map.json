@@ -110,10 +110,23 @@
         "unit"  : "Unidad ejectura"
       }
     },
+
+    "searchTable" : {
+      "container"       : "GF-SHCP-table-tool",
+      "searchInput"     : "GF-SHCP-search-app-query",
+      "filterContainer" : "GF-SHCP-search-app-filter-list",
+      "cart"            : "GF-SHCP-search-app-filters",
+      "pageInput"       : "GF-SHCP-SEARCH-CONTROL-PAGE",
+      "pageNum"         : "GF-SHCP-SEARCH-LABEL-PAGE-TOTAL",
+      "prevPage"        : "GF-SHCP-SEARCH-CONTROL-PREV",
+      "nextPage"        : "GF-SHCP-SEARCH-CONTROL-NEXT",
+      "toolsForm"       : "GF-SHCP-search-tools-form",
+      "paginationForm"  : "GF-SHCP-search-pagination-form"
+    },
+
     "geolocationBtn"   : "GF-SHCP-geolocate-user",
     "geolocationForm"  : "GF-SHCP-geolocation-form",
     "geolocationField" : "GF-SHCP-geolocation-input",
-    "searchTable"      : "GF-SHCP-table-tool",
     "projectCounter"   : "GF-SHCP-project-counter",
     "colorGuide"       : "GF-SHCP-color-guide",
     "embedForm"        : "GF-SHCP-embed-form",
@@ -129,6 +142,7 @@
     "pointNavigationPrevId" : "GF-SHCP-point-prev-btn",
     "pointNavigationNextId" : "GF-SHCP-point-next-btn",
     "pointNavigationCurrentId" : "GF-SHCP-point-current",
-    "pointNavigationTotalId" : "GF-SHCP-point-total"
+    "pointNavigationTotalId" : "GF-SHCP-point-total",
+    "searchPageSize" : 50
   }
 }

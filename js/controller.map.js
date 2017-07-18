@@ -158,7 +158,7 @@ define(function(require){
       this.barsTool = this.settings.ux.enableBarsTool ? new BARSTOOL(this) : null;
 
       // la app de búsqueda
-      this.searchTool = this.settings.ux.enableSearchTool ? new SEARCHTOOL : null;
+      this.searchTool = this.settings.ux.enableSearchTool ? new SEARCHTOOL(this) : null;
 
       // [1.1] DEFINE SHORTCUTS PARA LOS ELEMENTOS DE UI
       // ----------------------------------------------------------------------
@@ -2033,6 +2033,8 @@ define(function(require){
      * F U N C I O N E S   D E   T A B L A   D E   B Ú S Q U E D A
      * ----------------------------------------------------------------------
      */
+
+     /*
     enableTableTool : function(item){
       var selector     = "#" + this.settings.ui.searchTable,
           columns      = [],
@@ -2073,6 +2075,7 @@ define(function(require){
 
 
     },
+    */
 
 
 
