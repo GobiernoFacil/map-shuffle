@@ -72,7 +72,9 @@ define(function(require){
       // [7] define las constantes internas del sistema 
       // ----------------------------------------------------------------------
       SELECTALL      = "_____",
-      XFILTERCLASS   = "killMePlease";
+      XFILTERCLASS   = "killMePlease",
+      CITYID         = "GFSHCPCityId",
+      UNITID         = "GFSHCPUnitId";
 
 
   /*
@@ -101,8 +103,6 @@ define(function(require){
       // ----------------------------------------------------------------------
       // * la referencia a classyBrew
       this.brew           = null;
-      // * la referencia al layer de leaflet de ciudades
-      this.cities         = null;
       // * la referencia a los datos agregados por municipio o estado
       this.currentData    = null;
       // * la referencia a la información para graficar
@@ -118,20 +118,16 @@ define(function(require){
       // * la lista de mapas extra disponibles (archivos de configuración)
       //   los mapas extra son los que se superponen a los principales
       this.extraLayersConfig = [];
-      // * la lista de localidades por comparar
-      this.compareList  = [];
       // * el mapa de leaflet
       this.map          = null;
       // * la referencia al layer de leaflet de puntos
       this.points       = null;
       // * la referencia al layer de leaflet de estados
       this.states       = null;
+      // * la referencia al layer de leaflet de ciudades
+      this.cities        = null;
       // * la referencia al layer de leaflet extra
       this.extra        = null;
-      // * el grupo que contiene puntos y/o geometrías principales
-      this.mapGroupA    = null;
-      // * el grupo que contiene puntos y/o geometrías secundarias
-      this.mapGroupB    = null;
       // * la referencia al geocoder;
       this.geocoder     = null;
       // * los callbacks
@@ -210,8 +206,6 @@ define(function(require){
 
       // * el selector de filtros
       this.renderFilterSelector();
-
-      // * 
 
       // [6] CARGA LOS ARCHIVOS DE CONFIGURACIÓN Y DESPLIEGA EL MAPA SELECCIONADO
       // ----------------------------------------------------------------------
@@ -945,9 +939,11 @@ define(function(require){
       
       this.loaderStart("voy a cargar un mapa");
       
-      var that = this, 
-          conf = item.config,
-          src  = conf.src;
+      var that    = this, 
+          conf    = item.config,
+          src     = conf.src,
+          hasCity = null,
+          hasUnit = null;
 
       // [1] Si es un api la fuente, actualiza el url
       //
@@ -970,6 +966,11 @@ define(function(require){
           item.data     = data;
           item.response = null;
         }
+
+        // CITYID
+        // UNITID
+        console.log(item);
+
         that.renderLayer(item);
 
         that.loaderStop("ya cargó el mapa");
@@ -1297,27 +1298,6 @@ define(function(require){
       el.appendChild(ul);
     },
 
-
-    // EL BUSCADOR AVANZADO
-    //
-    //
-    //
-    //
-
-    /*
-    renderAdvancedSearch : function(){
-      // ADVANCESEARCH
-      var //template = _.template(ADVANCESEARCH),
-          elID     = this.settings.ui.searchTable,
-          el       = document.getElementById(elID),
-          download = this.settings.ui.downloadDataBtn;
-
-      el.innerHTML = ADVANCESEARCH;
-
-      console.log("download: ", download);
-    },
-    */
-
     //
     // EL PANEL DE SELECTOR DE MAPA
     // ---------------------------------------------
@@ -1339,7 +1319,6 @@ define(function(require){
 
       this.UImapSelector.addEventListener("change", this.renderMapSelectorChange);
 
-        // updateUILevelSelectorChange
       Array.prototype.slice.call(this.UIlevelSelector.querySelectorAll("a")).forEach(function(el){
         el.addEventListener("click", this.updateUILevelSelectorChange);
       }, this);
@@ -2029,54 +2008,6 @@ define(function(require){
       return brew;
     },
 
-    /*
-     * F U N C I O N E S   D E   T A B L A   D E   B Ú S Q U E D A
-     * ----------------------------------------------------------------------
-     */
-
-     /*
-    enableTableTool : function(item){
-      var selector     = "#" + this.settings.ui.searchTable,
-          columns      = [],
-          numFields    = this.currentMap.config.values,
-          stringFields = this.currentMap.config.data,
-          _fields      = _.uniq(numFields.concat(stringFields)),
-          fields       = _fields.map(function(field){
-                           return {field : field, title : field}
-                         }),
-          _data        = this.currentMap.data,
-          data         = _data.map(function(d){
-                           var el = {};
-                           _fields.forEach(function(field){
-                             el[field] = d[field];
-                           });
-
-                           return el; 
-                         });
-
-      this.tableTool = $(selector).bootstrapTable({
-        columns: fields,
-        pagination : true,
-        pageSize : 10,
-        search : true,
-        searchOnEnterKey : true,
-        data: data,
-        sortable : true,
-        showExport: true,
-        pageList : "ALL",
-        exportOptions: {
-          fileName: 'custom_file_name',
-          pageList : "ALL"
-        }
-      });
-
-      // método de uso del plugin
-      // GFSHCPMapApp.tableTool.bootstrapTable("getOptions")
-
-
-    },
-    */
-
 
 
 
@@ -2128,30 +2059,6 @@ define(function(require){
             */
           }
         }, this);
-        /*
-        estado.properties.CVE_ENT = +estado.properties.CVE_ENT;
-
-        if(estado.properties.CVE_ENT == 31){
-          estado.properties.NOM_ENT = "Yucatán";
-        }
-        if(estado.properties.CVE_ENT == 24){
-          estado.properties.NOM_ENT = "San Luis Potosí";
-        }
-        if(estado.properties.CVE_ENT == 22){
-          estado.properties.NOM_ENT = "Querétaro";
-        }
-        if(estado.properties.CVE_ENT == 19){
-          estado.properties.NOM_ENT = "Nuevo León";
-        }
-        if(estado.properties.CVE_ENT == 16){
-          estado.properties.NOM_ENT = "Michoacán";
-        }
-        if(estado.properties.CVE_ENT == 15){
-          estado.properties.NOM_ENT = "México";
-        }
-        if(estado.properties.CVE_ENT == 9){
-          estado.properties.NOM_ENT = "Ciudad de México";
-        }*/
       });
       
 
