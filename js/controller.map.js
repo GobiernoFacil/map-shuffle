@@ -942,9 +942,19 @@ define(function(require){
       var that    = this, 
           conf    = item.config,
           src     = conf.src,
-          hasCity = null,
-          hasUnit = null;
+          hasCity = conf.location.city,
+          hasUnit = null,
+          filters = conf.filters;
 
+      hasUnit = ! filters ? false : filters.filter(function(fil){
+                    return fil.type == "unit";
+                  })[0];
+
+      hasCity = hasCity || filters.filter(function(fil){
+                    return fil.type == "city";
+                })[0];
+
+      //console.log(hasCity, hasUnit);
       // [1] Si es un api la fuente, actualiza el url
       //
       if(conf.api && conf.type == "area"){
@@ -967,9 +977,13 @@ define(function(require){
           item.response = null;
         }
 
-        // CITYID
-        // UNITID
-        console.log(item);
+        if(hasCity){
+          that._addKeyToCities(item.data, conf, hasCity);
+        }
+
+        if(hasUnit){
+          that._addKeyToUnits(item.data, conf, hasUnit);
+         }
 
         that.renderLayer(item);
 
@@ -1005,6 +1019,60 @@ define(function(require){
      * F U N C I O N E S   D E   M A P E O   D E    D A T O S
      * ------------------------------------------------------------
      */
+
+    _addKeyToUnits : function(data, conf, unit){
+      var branch = conf.filters.filter(function(fil){
+                     return fil.type == "branch";
+                   })[0];
+
+      if(!branch) return;
+
+      data.forEach(function(d){
+        d[UNITID] = String(d[branch.field]) + "-" + String(d[unit.field]);
+      });
+
+      unit.field = UNITID;
+    },
+
+    _addKeyToCities : function(data, conf, city){
+      var state = city.length ? conf.location.state : conf.filters.filter(function(fil){
+                    return fil.type == "state";
+                  })[0],
+          stateCol, cityCol;
+
+      if(!state) return;
+
+      stateCol = state.length ? state : state.field;
+      cityCol  = city.length ? city : city.field;
+
+      data.forEach(function(d){
+        var cityLength = String(d[cityCol]).length,
+            cityString;
+
+        if(cityLength == 1){
+          cityString = "00" + String(d[cityCol]);
+        }
+        else if(cityLength == 2){
+          cityString = "0" + String(d[cityCol]);
+        }
+        else{
+          cityString = String(d[cityCol]);
+        }
+        d[CITYID] = Number(String(d[stateCol]) + cityString);
+      });
+
+      if(city.length){
+        conf.location.city = CITYID;
+        conf.filters.forEach(function(fil){
+          if(fil.type == "city"){
+            fil.field = CITYID;
+          }
+        });
+      }
+      else{
+        city.field = CITYID;
+      }
+    },
 
     //
     // REGRESA LA INFORMACIÓN AGREGADA POR ESTADO
