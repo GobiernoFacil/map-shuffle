@@ -28,7 +28,12 @@ define(function(require){
         tbody      = null,
         thead      = null,
         download   = null,
-        page       = 0;
+        nextBtn    = null,
+        prevBtn    = null,
+        pageForm   = null,
+        pageInput  = null,
+        page       = 0,
+        pages      = 0;
 
     var controller = {
       render : function(){
@@ -39,17 +44,24 @@ define(function(require){
         data       = currentMap.data.slice();
         DATA       = currentMap.data.slice();
         container.innerHTML = TEMPLATE;
-        table     = container.querySelector("table");
-        thead     = table.querySelector("thead");
-        tbody     = table.querySelector("tbody");
-        download  = document.getElementById(UI.downloadBtn);
-
-        console.log(UI.downloadBtn);
+        table      = container.querySelector("table");
+        thead      = table.querySelector("thead");
+        tbody      = table.querySelector("tbody");
+        download   = document.getElementById(UI.downloadBtn);
+        pages      = Math.ceil(data.length/pageSize);
+        nextBtn    = document.getElementById(UI.nextPage);
+        prevBtn    = document.getElementById(UI.prevPage);
+        pageForm   = document.getElementById(UI.paginationForm);
+        pageInput  = document.getElementById(UI.pageInput);
 
         this.renderHeaders();
         this.renderItems(page);
         this.renderPagination(page);
         this.enableDowload();
+
+        nextBtn.addEventListener("click", this.nextPage);
+        prevBtn.addEventListener("click", this.prevPage);
+        pageForm.addEventListener("submit", this.selectPage);
       },
 
       renderHeaders : function(){
@@ -65,8 +77,15 @@ define(function(require){
         thead.appendChild(tr);
       },
 
-      renderItems : function(page){
-        var from = page * pageSize,
+      renderItems : function(newPage){
+        newPage = Math.ceil(newPage);
+
+        if(newPage < 0 || newPage >= pages) return;
+
+
+        tbody.innerHTML = "";
+
+        var from = newPage * pageSize,
             to   = from + pageSize;
             list = data.slice(from, to);
 
@@ -82,17 +101,37 @@ define(function(require){
 
           tbody.appendChild(tr);
         });
+
+        pageInput.value = newPage + 1;
+        page = newPage;
       },
 
       renderPagination : function(page){
-        var pages       = Math.ceil(data.length/pageSize),
-            currentPage = document.getElementById(UI.pageInput),
+        var currentPage = document.getElementById(UI.pageInput),
             totalPages  = document.getElementById(UI.pageNum);
 
-        console.log(pages, currentPage, totalPages);
 
-        currentPage.value = page + 1;
         totalPages.innerHTML = pages;
+      },
+
+      nextPage : function(e){
+        e.preventDefault();
+
+        var nextPage = page+1;
+        controller.renderItems(nextPage);
+      },
+
+      prevPage : function(e){
+        e.preventDefault();
+
+        var prevPage = page-1;
+        controller.renderItems(prevPage);
+      },
+
+      selectPage : function(e){
+        e.preventDefault();
+        var newPage = Number(pageInput.value) - 1;
+        controller.renderItems(newPage);
       },
 
       enableDowload : function(){
