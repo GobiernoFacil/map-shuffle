@@ -124,7 +124,7 @@ define(function(require){
       },
 
       renderFilters : function(){
-        var filters = parent.currentMap.config.filters,
+        var filters = parent.currentMap.config.filters.concat(parent.currentMap.config.extraFilters || []),
             stateFilter,
             cityFilter,
             branchFilter,
@@ -136,6 +136,29 @@ define(function(require){
             stateFilter = filterModule.renderStateSelector(filter, filterMenu);
             this.filters.push(stateFilter);
           }
+
+          else if(filter.type == "city"){
+            // renderCitySelector : function(filter, container)
+            cityFilter = filterModule.renderCitySelector(filter, filterMenu);
+            this.filters.push(cityFilter);
+          }
+
+          else if(filter.type == "branch"){
+            // renderCitySelector : function(filter, container)
+            cityFilter = filterModule.renderBranchSelector(filter, filterMenu);
+            this.filters.push(branchFilter);
+          }
+
+          else if(filter.type == "unit"){
+            // renderCitySelector : function(filter, container)
+            unitFilter = filterModule.renderUnitSelector(filter, filterMenu);
+            this.filters.push(unitFilter);
+          }
+          else{
+            this.filters.push( filterModule.renderOtherSelector(filter, filterMenu) );
+          }
+
+
         }, this);
 
       },
