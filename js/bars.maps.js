@@ -11,8 +11,9 @@ define(function(require){
   // [1] obtiene los templates de UI
   // ----------------------------------------------------------------------
   // 
-  var TEMPLATE = require("text!templates/bars-app.html"),
-      FILTER   = require("text!templates/filter-item.html");
+  var TEMPLATE     = require("text!templates/bars-app.html"),
+      FILTER       = require("text!templates/filter-item.html"),
+      FIlterModule = require("filter.module.map"); 
 
   // [2] define el constructor
   // ----------------------------------------------------------------------

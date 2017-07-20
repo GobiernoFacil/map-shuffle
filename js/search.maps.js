@@ -7,15 +7,18 @@
 
 define(function(require){
 
-  var d3         = require("d3"),
-      underscore = require("underscore"),
-      TEMPLATE   = require("text!templates/advanced-search.html"),
-      CONFIG     = require("json!config/config.map.json");
+  var d3           = require("d3"),
+      underscore   = require("underscore"),
+      TEMPLATE     = require("text!templates/advanced-search.html"),
+      CONFIG       = require("json!config/config.map.json"),
+      FIlterModule = require("filter.module.map");
 
   var SearchControllerConstructor = function(parent){
 
     var UI         = CONFIG.ui.searchTable,
         container  = document.getElementById(UI.container),
+        filterMenu = null,
+        filterCart = null,
         pageSize   = CONFIG.ux.searchPageSize,
         format     = d3.format(","),
         currentMap = null,
@@ -33,7 +36,8 @@ define(function(require){
         pageForm   = null,
         pageInput  = null,
         page       = 0,
-        pages      = 0;
+        pages      = 0,
+        filterModule = new FIlterModule(parent);
 
     var controller = {
       render : function(){
@@ -53,7 +57,10 @@ define(function(require){
         prevBtn    = document.getElementById(UI.prevPage);
         pageForm   = document.getElementById(UI.paginationForm);
         pageInput  = document.getElementById(UI.pageInput);
-
+        filterMenu = document.getElementById(UI.filterContainer);
+        filterCart = document.getElementById(UI.cart);
+        
+        this.filters = [];
         this.renderHeaders();
         this.renderItems(page);
         this.renderPagination(page);
@@ -62,6 +69,8 @@ define(function(require){
         nextBtn.addEventListener("click", this.nextPage);
         prevBtn.addEventListener("click", this.prevPage);
         pageForm.addEventListener("submit", this.selectPage);
+
+        this.renderFilters();
       },
 
       renderHeaders : function(){
@@ -112,6 +121,23 @@ define(function(require){
 
 
         totalPages.innerHTML = pages;
+      },
+
+      renderFilters : function(){
+        var filters = parent.currentMap.config.filters,
+            stateFilter,
+            cityFilter,
+            branchFilter,
+            unitFilter;
+
+        filters.forEach(function(filter){
+          var select;
+          if(filter.type == "state"){
+            stateFilter = filterModule.renderStateSelector(filter, filterMenu);
+            this.filters.push(stateFilter);
+          }
+        }, this);
+
       },
 
       nextPage : function(e){
