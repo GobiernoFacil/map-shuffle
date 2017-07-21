@@ -9,6 +9,7 @@ define(function(require){
 
   underscore           = require("underscore"),
   FILTER               = require("text!templates/filter-item.html"),
+  FILTERV2             = require("text!templates/filter-item-v2.html"),
   FILTERCONTAINER      = "div",
   FILTERCONTAINERCLASS = "col-sm-4",
   PREFIX               = "GF-SHCP-FILTER-",
@@ -142,6 +143,46 @@ define(function(require){
         return item;
       },
 
+      renderBranchSelectorV2 : function(filter, container){
+        var optAll    = document.createElement("li"),
+            col       = filter.field,
+            item      = document.createElement(FILTERCONTAINER),
+            template  = _.template(FILTERV2),
+            branches  = parent.lists.ramosName.branches,
+            html, obj, select;
+
+        obj = {
+          id        : PREFIX + _.uniq(),
+          label     : SELECTBRANCHLABEL,
+          dataField : col
+        };
+
+        item.innerHTML = template(obj);
+        select = item.querySelector("ul");
+
+        optAll.value     = SELECTALL;
+        optAll.innerHTML = SELECTALLBRANCHES;
+
+        select.appendChild(optAll);
+        
+        branches.forEach(function(st){
+          var opt = document.createElement("li");
+
+          //opt.value     = st.id;
+          opt.setAttribute("data-value", st.id);
+          opt.innerHTML = st.name;
+
+          select.appendChild(opt);
+        });
+
+        container.appendChild(item);
+
+        // enableFilteringV2 : function(ul, field, value){
+
+        this.enableFilteringV2(container, col, "data-value");
+        return item;
+      },
+
       renderUnitSelector : function(filter, container){
         var optAll   = document.createElement("option"),
             col      = filter.field,
@@ -225,6 +266,13 @@ define(function(require){
 
       updateUnitSelector : function(branch, unit){
 
+      },
+
+      enableFilteringV2 : function(ul, field, value){
+        var _items = ul.querySelectorAll("li"),
+            items  = Array.prototype.slice.apply(_items);
+
+        console.log(items, ul, field, value);
       },
 
       _makeList : function(data, filter){

@@ -145,7 +145,7 @@ define(function(require){
 
           else if(filter.type == "branch"){
             // renderCitySelector : function(filter, container)
-            cityFilter = filterModule.renderBranchSelector(filter, filterMenu);
+            cityFilter = filterModule.renderBranchSelectorV2(filter, filterMenu);
             this.filters.push(branchFilter);
           }
 
