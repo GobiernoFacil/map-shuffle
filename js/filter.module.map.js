@@ -113,6 +113,8 @@ define(function(require){
         container.appendChild(item);
 
         this.citySelect = select;
+        this.enableFiltering(filter, select);
+
         return item;
       },
 
@@ -286,6 +288,13 @@ define(function(require){
           })[0].name;
         }
 
+        else if(filter.type == "city"){
+          html = parent.lists.municipiosName.cities.filter(function(ct){
+            //console.log(ct[parent.CITYID], filter.value, ct, filter);
+            return ct.inegi == +filter.value;
+          })[0].name;
+        }
+
         /*
         else if(filter.type == "year"){
           html = filter.value;
@@ -332,7 +341,7 @@ define(function(require){
           cities.forEach(function(ct){
             var opt = document.createElement("option");
 
-            opt.value     = ct[parent.CITYID];
+            opt.value     = ct.inegi;
             opt.innerHTML = ct.name;
 
             city.appendChild(opt);
@@ -381,8 +390,11 @@ define(function(require){
 
           var value = select.value,
               exist = that.filters.filter(function(fil){
-                return fil.type == filter.type && fil.value == filter.value;
+                console.log(filter, fil);
+                return fil.type == filter.type && fil.value == select.value;
               })[0];
+
+          console.log(exist, that.filters);
 
           if(value == SELECTALL || exist){
             return;
