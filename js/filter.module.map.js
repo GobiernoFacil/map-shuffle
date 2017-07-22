@@ -48,7 +48,7 @@ define(function(require){
             html, obj, select;
 
         obj = {
-          id        : PREFIX + _.uniq(),
+          id        : PREFIX + _.uniqueId(),
           label     : SELECTSTATELABEL,
           dataField : col
         };
@@ -73,6 +73,7 @@ define(function(require){
         container.appendChild(item);
 
         this.enableFiltering(filter, select);
+        this.stateSelect = select;
         return item;
       },
 
@@ -85,7 +86,7 @@ define(function(require){
             html, obj, select;
 
         obj = {
-          id        : PREFIX + _.uniq(),
+          id        : PREFIX + _.uniqueId(),
           label     : SELECTCITYLABEL,
           dataField : col
         };
@@ -111,6 +112,7 @@ define(function(require){
 
         container.appendChild(item);
 
+        this.citySelect = select;
         return item;
       },
 
@@ -123,7 +125,7 @@ define(function(require){
             html, obj, select;
 
         obj = {
-          id        : PREFIX + _.uniq(),
+          id        : PREFIX + _.uniqueId(),
           label     : SELECTBRANCHLABEL,
           dataField : col
         };
@@ -148,6 +150,8 @@ define(function(require){
         container.appendChild(item);
 
         this.enableFiltering(filter, select);
+
+        this.branchSelect = select;
         return item;
       },
 
@@ -160,7 +164,7 @@ define(function(require){
             html, obj, select;
 
         obj = {
-          id        : PREFIX + _.uniq(),
+          id        : PREFIX + _.uniqueId(),
           label     : SELECTBRANCHLABEL,
           dataField : col
         };
@@ -200,7 +204,7 @@ define(function(require){
             html, obj, select;
 
         obj = {
-          id        : PREFIX + _.uniq(),
+          id        : PREFIX + _.uniqueId(),
           label     : SELECTUNITLABEL,
           dataField : col
         };
@@ -212,20 +216,9 @@ define(function(require){
         optAll.innerHTML = SELECTEMPTYUNIT;
 
         select.appendChild(optAll);
-
-        /*
-        cities.forEach(function(st){
-          var opt = document.createElement("option");
-
-          opt.value     = st.inegi;
-          opt.innerHTML = st.name;
-
-          select.appendChild(opt);
-        });
-        */
-
         container.appendChild(item);
 
+        this.unitSelect = select;
         return item;
       },
 
@@ -237,7 +230,7 @@ define(function(require){
             list, html, obj, select;
 
         obj = {
-          id        : PREFIX + _.uniq(),
+          id        : PREFIX + _.uniqueId(),
           label     : filter.title || col,
           dataField : col
         };
@@ -314,11 +307,41 @@ define(function(require){
       },
 
       updateCitySelector : function(state, city){
-        
+        console.log(state, city);
       },
 
       updateUnitSelector : function(branch, unit){
+        var _units   = parent.lists.unidadesName.units,
+            branch   = branch.value,
+            optAll   = document.createElement("option"),
+            //units   = parent.lists.unidadesName.units,
+            html ,units;
 
+        if(branch == SELECTALL){
+          unit.innerHTML   = "";
+          optAll.value     = SELECTALL;
+          optAll.innerHTML = SELECTEMPTYUNIT;
+          unit.appendChild(optAll);
+        }
+        else{
+          unit.innerHTML   = "";
+          optAll.value     = SELECTALL;
+          optAll.innerHTML = SELECTALLUNITS;
+          unit.appendChild(optAll);
+
+          units = _units.filter(function(unit){
+            return unit.branch == branch;
+          });
+
+          units.forEach(function(un){
+            var opt = document.createElement("option");
+
+            opt.value     = un[parent.UNITID];
+            opt.innerHTML = un.name;
+
+            unit.appendChild(opt);
+          });
+        }
       },
 
       enableFiltering : function(filter, select){
@@ -346,6 +369,14 @@ define(function(require){
           }
 
           that.renderCartItem(newFilter);
+
+          if(filter.type == "state" && that.citySelect){
+            that.updateCitySelector(select, that.citySelect);
+          }
+
+          if(filter.type == "branch" && that.unitSelect){
+            that.updateUnitSelector(select, that.unitSelect);
+          }
         });
       },
 
