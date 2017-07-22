@@ -286,12 +286,6 @@ define(function(require){
           })[0].name;
         }
 
-        /*
-        else if(filter.type == "year"){
-          html = filter.value;
-        }
-        */
-
         else{
           html = filter.value;
         }
@@ -307,7 +301,7 @@ define(function(require){
       },
 
       updateCitySelector : function(state, city){
-        console.log(state, city);
+        
       },
 
       updateUnitSelector : function(branch, unit){
