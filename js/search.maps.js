@@ -70,6 +70,8 @@ define(function(require){
         prevBtn.addEventListener("click", this.prevPage);
         pageForm.addEventListener("submit", this.selectPage);
 
+        filterModule.setCart(filterCart);
+
         this.renderFilters();
       },
 
@@ -145,7 +147,7 @@ define(function(require){
 
           else if(filter.type == "branch"){
             // renderCitySelector : function(filter, container)
-            cityFilter = filterModule.renderBranchSelectorV2(filter, filterMenu);
+            cityFilter = filterModule.renderBranchSelector(filter, filterMenu);
             this.filters.push(branchFilter);
           }
 

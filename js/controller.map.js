@@ -101,6 +101,10 @@ define(function(require){
 
       // [1] INICIA LAS PROPIEDADES DEL APP 
       // ----------------------------------------------------------------------
+      // * la columna para el id interno de los municipios
+      this.CITYID = CITYID;
+      // * la columna para el id interno de las unidades ejecutoras
+      this.UNITID = UNITID;
       // * la referencia a classyBrew
       this.brew           = null;
       // * la referencia a los datos agregados por municipio o estado

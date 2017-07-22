@@ -26,9 +26,15 @@ define(function(require){
   SELECTUNITLABEL      = "unidad ejecutora",
   SELECTALLTEXT        = "selecciona un filtro";
 
-  var filterDataConstructor = function(parent){
+  var filterDataConstructor = function(parent, cart){
 
     var filterModule  = {
+      filters      : [],
+      cart         : null,
+      stateSelect  : null,
+      citySelect   : null,
+      branchSelect : null,
+      unitSelect   : null,
       filter : function(data, filters){
 
       },
@@ -66,6 +72,7 @@ define(function(require){
 
         container.appendChild(item);
 
+        this.enableFiltering(filter, select);
         return item;
       },
 
@@ -140,6 +147,7 @@ define(function(require){
 
         container.appendChild(item);
 
+        this.enableFiltering(filter, select);
         return item;
       },
 
@@ -257,7 +265,52 @@ define(function(require){
 
         container.appendChild(item);
 
+        this.enableFiltering(filter, select);
+
         return item;
+      },
+
+      renderCartItem : function(filter){
+         var container = this.cart,
+            li         = document.createElement("li"),
+            html       = "",
+            that       = this;
+
+        if(filter.type == "branch"){
+          html = parent.lists.ramosName.branches.filter(function(br){ 
+            return  +br.id == +filter.value
+          })[0].name;
+        }
+        else if(filter.type == "unit"){
+          html = parent.lists.unidadesName.units.filter(function(un){
+            return un[parent.UNITID] == filter.value;
+          })[0].name;
+        }
+
+        else if(filter.type == "state"){
+          html = parent.lists.estadosName.states.filter(function(br){ 
+            return  +br.id == +filter.value;
+          })[0].name;
+        }
+
+        /*
+        else if(filter.type == "year"){
+          html = filter.value;
+        }
+        */
+
+        else{
+          html = filter.value;
+        }
+
+        li.innerHTML = html;
+
+        container.appendChild(li);
+
+        li.addEventListener("click", function(e){
+          this.parentNode.removeChild(this);
+          that.filters.splice(that.filters.indexOf(filter), 1);
+        });
       },
 
       updateCitySelector : function(state, city){
@@ -268,11 +321,41 @@ define(function(require){
 
       },
 
+      enableFiltering : function(filter, select){
+        var that = this,
+            newFilter;
+        select.addEventListener("change", function(e){
+
+          var value = select.value,
+              exist = that.filters.filter(function(fil){
+                return fil.type == filter.type && fil.value == filter.value;
+              })[0];
+
+          if(value == SELECTALL || exist){
+            return;
+          }
+          else{
+            newFilter = {
+              id    :  _.uniqueId(),
+              value : value,
+              type  : filter.type,
+              field : filter.field
+            };
+
+            that.filters.push(newFilter);
+          }
+
+          that.renderCartItem(newFilter);
+        });
+      },
+
       enableFilteringV2 : function(ul, field, value){
         var _items = ul.querySelectorAll("li"),
             items  = Array.prototype.slice.apply(_items);
+      },
 
-        console.log(items, ul, field, value);
+      setCart : function(cart){
+        this.cart = cart;
       },
 
       _makeList : function(data, filter){
