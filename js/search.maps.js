@@ -36,8 +36,7 @@ define(function(require){
         pageForm   = null,
         pageInput  = null,
         page       = 0,
-        pages      = 0,
-        filterModule = new FIlterModule(parent);
+        pages      = 0;
 
     var controller = {
       render : function(){
@@ -70,7 +69,8 @@ define(function(require){
         prevBtn.addEventListener("click", this.prevPage);
         pageForm.addEventListener("submit", this.selectPage);
 
-        filterModule.setCart(filterCart);
+        this.filterModule = new FIlterModule(parent, filterCart, this.updateData);
+        // this.filterModule.setCart(filterCart);
 
         this.renderFilters();
       },
@@ -86,6 +86,11 @@ define(function(require){
         });
 
         thead.appendChild(tr);
+      },
+
+      updateData : function(_data){
+        data = _data;
+        this.renderItems(0);
       },
 
       renderItems : function(newPage){
@@ -135,29 +140,29 @@ define(function(require){
         filters.forEach(function(filter){
           var select;
           if(filter.type == "state"){
-            stateFilter = filterModule.renderStateSelector(filter, filterMenu);
+            stateFilter = this.filterModule.renderStateSelector(filter, filterMenu);
             this.filters.push(stateFilter);
           }
 
           else if(filter.type == "city"){
             // renderCitySelector : function(filter, container)
-            cityFilter = filterModule.renderCitySelector(filter, filterMenu);
+            cityFilter = this.filterModule.renderCitySelector(filter, filterMenu);
             this.filters.push(cityFilter);
           }
 
           else if(filter.type == "branch"){
             // renderCitySelector : function(filter, container)
-            cityFilter = filterModule.renderBranchSelector(filter, filterMenu);
+            cityFilter = this.filterModule.renderBranchSelector(filter, filterMenu);
             this.filters.push(branchFilter);
           }
 
           else if(filter.type == "unit"){
             // renderCitySelector : function(filter, container)
-            unitFilter = filterModule.renderUnitSelector(filter, filterMenu);
+            unitFilter = this.filterModule.renderUnitSelector(filter, filterMenu);
             this.filters.push(unitFilter);
           }
           else{
-            this.filters.push( filterModule.renderOtherSelector(filter, filterMenu) );
+            this.filters.push( this.filterModule.renderOtherSelector(filter, filterMenu) );
           }
 
 

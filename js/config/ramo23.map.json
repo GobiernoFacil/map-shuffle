@@ -19,7 +19,10 @@
     "value"  : "monto",
     "method" : "length"
   },
-  "filters" : [],
+  "filters" : [
+    {"type" : "state", "field" : "id_entidad"},
+    {"type" : "city", "field" : "id_municipio"}
+  ],
   "extraFilters" : [
     {"type" : "extra", "field" : "Fondo", "title" : "Clave de programas"}
   ],
