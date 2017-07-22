@@ -307,7 +307,37 @@ define(function(require){
       },
 
       updateCitySelector : function(state, city){
-        console.log(state, city);
+        var _cities = parent.lists.municipiosName.cities,
+            state   = state.value,
+            optAll  = document.createElement("option"),
+            //cities   = parent.lists.unidadesName.cities,
+            html ,cities;
+
+        if(state == SELECTALL){
+          city.innerHTML   = "";
+          optAll.value     = SELECTALL;
+          optAll.innerHTML = SELECTEMPTYcitie;
+          city.appendChild(optAll);
+        }
+        else{
+          city.innerHTML   = "";
+          optAll.value     = SELECTALL;
+          optAll.innerHTML = SELECTALLCITIES;
+          city.appendChild(optAll);
+
+          cities = _cities.filter(function(ct){
+            return ct.state == state;
+          });
+
+          cities.forEach(function(ct){
+            var opt = document.createElement("option");
+
+            opt.value     = ct[parent.CITYID];
+            opt.innerHTML = ct.name;
+
+            city.appendChild(opt);
+          });
+        }
       },
 
       updateUnitSelector : function(branch, unit){
