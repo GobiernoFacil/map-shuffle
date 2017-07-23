@@ -45,18 +45,26 @@ define(function(require){
         filterCols.forEach(function(field){
           _data = this._filterData(_data, field, this.filters);
         }, this);
-        console.log(_data);
+        //console.log(_data);
       },
 
       _filterData : function(_data, field, _filters){
+
+        if(!_data.length) return _data;
+
         var filters = _filters.filter(function(fil){
                         return fil.field == field;
                       }),
             isString  = _.isString(_data[0][field]),
             type      = filters[0].type,
             compArray = _.pluck(filters, "value"),
-            extraIsString;
-
+            extraIsString,
+            selectedStates, 
+            
+            _selectedBranches,
+            selectedBranches,
+            _filteredBranches,
+            filteredBranches;
 
         if(isString){
           compArray = compArray.map(function(comp){
@@ -75,7 +83,29 @@ define(function(require){
           });
         }
         else if(type == "unit"){
-          console.log("nope, is unit ");
+          _selectedBranches = _filters.filter(function(fil){
+            return fil.type == "branch";
+          });
+
+          selectedBranches  = _.pluck(_selectedBranches, "value"),
+          _filteredBranches = _.pluck(filters, "parentFilter"),
+          filteredBranches  = _.difference(selectedBranches, _filteredBranches);
+
+          if(_selectedBranches.length && _.isNumber(_data[0][_selectedBranches[0].field]) ){
+            filteredBranches = filteredBranches.map(function(br){ return +br;});
+          }
+
+          _data = _data.filter(function(d){
+            if(_selectedBranches.length){
+              return compArray.indexOf(d[field]) != -1 || filteredBranches.indexOf(d[_selectedBranches[0].field]) != -1;
+            }
+            else{
+              return compArray.indexOf(d[field]) != -1;
+            }
+          });
+          
+
+          console.log(_selectedBranches, selectedBranches, _filteredBranches, filteredBranches);
         }
 
         else if(type == "city"){
