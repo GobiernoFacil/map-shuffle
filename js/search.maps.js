@@ -90,7 +90,7 @@ define(function(require){
 
       updateData : function(_data){
         data = _data;
-        this.renderItems(0);
+        controller.renderItems(0);
       },
 
       renderItems : function(newPage){

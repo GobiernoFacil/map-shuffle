@@ -45,7 +45,11 @@ define(function(require){
         filterCols.forEach(function(field){
           _data = this._filterData(_data, field, this.filters);
         }, this);
-        //console.log(_data);
+        
+
+        console.log(_data);
+
+        callback(_data);
       },
 
       _filterData : function(_data, field, _filters){
@@ -59,7 +63,11 @@ define(function(require){
             type      = filters[0].type,
             compArray = _.pluck(filters, "value"),
             extraIsString,
-            selectedStates, 
+
+            _selectedStates,
+            selectedStates,
+            _filteredStates,
+            filteredStates,
             
             _selectedBranches,
             selectedBranches,
@@ -105,11 +113,29 @@ define(function(require){
           });
           
 
-          console.log(_selectedBranches, selectedBranches, _filteredBranches, filteredBranches);
         }
 
         else if(type == "city"){
-          console.log("nope, is city");
+          _selectedStates = _filters.filter(function(fil){
+            return fil.type == "state";
+          });
+
+          selectedStates  = _.pluck(_selectedStates, "value"),
+          _filteredStates = _.pluck(filters, "parentFilter"),
+          filteredStates  = _.difference(selectedStates, _filteredStates);
+
+          if(_selectedStates.length && _.isNumber(_data[0][_selectedStates[0].field]) ){
+            filteredStates = filteredStates.map(function(st){ return +st;});
+          }
+
+          _data = _data.filter(function(d){
+            if(_selectedStates.length){
+              return compArray.indexOf(d[field]) != -1 || filteredStates.indexOf(d[_selectedStates[0].field]) != -1;
+            }
+            else{
+              return compArray.indexOf(d[field]) != -1;
+            }
+          });
         }
         else{
 
