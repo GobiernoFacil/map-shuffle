@@ -39,73 +39,54 @@ define(function(require){
       filteredData : null,
 
       filter : function(){
-        //console.log(this.filters, parent.currentMap.data, callback);
         var filterCols = _.uniq(_.pluck(this.filters, "field")),
-            _data      = parent.currentMap.data.slice(),
-            dataArray  = [],
-            data;       
+            _data      = parent.currentMap.data.slice();
 
-        /*
         filterCols.forEach(function(field){
-          dataArray.push( this._filterData(_data, field, this.filters) );
+          _data = this._filterData(_data, field, this.filters);
         }, this);
-        */
+        console.log(_data);
       },
 
-      /*
       _filterData : function(_data, field, _filters){
         var filters = _filters.filter(function(fil){
                         return fil.field == field;
                       }),
-            isString  = _.isString(_data[0][column]),
+            isString  = _.isString(_data[0][field]),
             type      = filters[0].type,
             compArray = _.pluck(filters, "value"),
-            data;
-
-        data = _data.filter(function(d){
-            //console.log(compArray.indexOf(data[column]), data[column], column);
-            return compArray.indexOf(d[field]) != -1;
-        });
-
-        return data;
-      },
-      */
-
-
-
-      /*
-      _filterData : function(data, column, _filters){
-        //console.log(data, column, _filters);
-
-        var filters = _filters.filter(function(fil){
-                        return fil.column == column;
-                      }),
-            isString = _.isString(data[0][column]),
-            type     = filters[0].type,
-            compArray = _.pluck(filters, "value"),
             extraIsString;
+
 
         if(isString){
           compArray = compArray.map(function(comp){
             return String(comp);
           });
         }
-
-        if(type != "unit"){
-          data = data.filter(function(d){
-            //console.log(compArray.indexOf(data[column]), data[column], column);
-            return compArray.indexOf(d[column]) != -1;
+        else{
+          compArray = compArray.map(function(comp){
+            return Number(comp);
           });
         }
-        else{
-          //console.log("nope, is unit");
+
+        if(type != "unit" && type != "city"){
+          _data = _data.filter(function(d){
+            return compArray.indexOf(d[field]) != -1;
+          });
+        }
+        else if(type == "unit"){
+          console.log("nope, is unit ");
         }
 
-        console.log(data, column, _filters);
+        else if(type == "city"){
+          console.log("nope, is city");
+        }
+        else{
 
-        //console.log(filters, isString, type, compArray, data);
+        }
+
+        return _data;
       },
-      */
 
       renderStateSelector : function(filter, container){
         var optAll    = document.createElement("option"),
@@ -346,14 +327,11 @@ define(function(require){
             return  +br.id == +filter.value;
           })[0].name;
         }
-
         else if(filter.type == "city"){
           html = parent.lists.municipiosName.cities.filter(function(ct){
-            //console.log(ct[parent.CITYID], filter.value, ct, filter);
             return ct.inegi == +filter.value;
           })[0].name;
         }
-
         else{
           html = filter.value;
         }
@@ -365,6 +343,7 @@ define(function(require){
         li.addEventListener("click", function(e){
           this.parentNode.removeChild(this);
           that.filters.splice(that.filters.indexOf(filter), 1);
+          that.filter();
         });
       },
 
@@ -438,7 +417,8 @@ define(function(require){
 
       enableFiltering : function(filter, select){
         var that = this,
-            newFilter;
+            newFilter,
+            parentFilter;
         select.addEventListener("change", function(e){
 
           var value = select.value,
@@ -450,11 +430,27 @@ define(function(require){
             return;
           }
           else{
+            if(filter.type == "city"){
+              if(String(value).length == 5){
+                parentFilter = value.slice(0,2);
+              }
+              else{
+                parentFilter = value.slice(0,1);
+              }
+            }
+            else if(filter.type == "unit"){
+              parentFilter = value.split("-")[0];
+            }
+            else{
+              parentFilter = null;
+            }
+
             newFilter = {
-              id    :  _.uniqueId(),
-              value : value,
-              type  : filter.type,
-              field : filter.field
+              id           :  _.uniqueId(),
+              value        : value,
+              type         : filter.type,
+              field        : filter.field,
+              parentFilter : parentFilter
             };
 
             that.filters.push(newFilter);
