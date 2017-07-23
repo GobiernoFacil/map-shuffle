@@ -39,11 +39,9 @@ define(function(require){
       filteredData : null,
       
       filter : function(){
-        //console.log(this.filters, parent.currentMap.data, callback);
         var filterCols = _.uniq(_.pluck(this.filters, "field")),
             _data      = parent.currentMap.data.slice();
 
-        //console.log(_data);
 
         filterCols.forEach(function(field){
           _data = this._filterData(_data, field, this.filters);
@@ -61,7 +59,6 @@ define(function(require){
             compArray = _.pluck(filters, "value"),
             extraIsString;
 
-        //console.log(filters, type, compArray, isString, extraIsString);
 
         if(isString){
           compArray = compArray.map(function(comp){
@@ -76,52 +73,22 @@ define(function(require){
 
         if(type != "unit" && type != "city"){
           _data = _data.filter(function(d){
-            //console.log(compArray.indexOf(data[column]), data[column], column);
             return compArray.indexOf(d[field]) != -1;
           });
+        }
+        else if(type == "unit"){
+          console.log("nope, is unit ");
+        }
 
-          console.log(_data.length, _data, compArray);
+        else if(type == "city"){
+          console.log("nope, is city");
         }
         else{
-          console.log("nope, is unit or city");
+
         }
 
         return _data;
       },
-
-      /*
-      _filterData : function(data, column, _filters){
-        //console.log(data, column, _filters);
-
-        var filters = _filters.filter(function(fil){
-                        return fil.column == column;
-                      }),
-            isString = _.isString(data[0][column]),
-            type     = filters[0].type,
-            compArray = _.pluck(filters, "value"),
-            extraIsString;
-
-        if(isString){
-          compArray = compArray.map(function(comp){
-            return String(comp);
-          });
-        }
-
-        if(type != "unit"){
-          data = data.filter(function(d){
-            //console.log(compArray.indexOf(data[column]), data[column], column);
-            return compArray.indexOf(d[column]) != -1;
-          });
-        }
-        else{
-          //console.log("nope, is unit");
-        }
-
-        console.log(data, column, _filters);
-
-        //console.log(filters, isString, type, compArray, data);
-      },
-      */
 
       renderStateSelector : function(filter, container){
         var optAll    = document.createElement("option"),
@@ -364,7 +331,6 @@ define(function(require){
         }
         else if(filter.type == "city"){
           html = parent.lists.municipiosName.cities.filter(function(ct){
-            //console.log(ct[parent.CITYID], filter.value, ct, filter);
             return ct.inegi == +filter.value;
           })[0].name;
         }
