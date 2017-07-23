@@ -37,24 +37,57 @@ define(function(require){
       unitSelect   : null,
       data         : null,
       filteredData : null,
+      
       filter : function(){
         //console.log(this.filters, parent.currentMap.data, callback);
         var filterCols = _.uniq(_.pluck(this.filters, "field")),
             _data      = parent.currentMap.data.slice();
 
-        console.log(data);
+        //console.log(_data);
+
+        filterCols.forEach(function(field){
+          _data = this._filterData(_data, field, this.filters);
+        }, this);
+
+        console.log(_data);
       },
 
-      /*
-      // make filter groups
-        filterCols = _.uniq(_.pluck(filters, "column"));
+      _filterData : function(_data, field, _filters){
+        var filters = _filters.filter(function(fil){
+                        return fil.field == field;
+                      }),
+            isString  = _.isString(_data[0][field]),
+            type      = filters[0].type,
+            compArray = _.pluck(filters, "value"),
+            extraIsString;
 
-        // pass every category of filters
-        filterCols.forEach(function(column){
-          controller._filterData(data, column, filters);
-        });
-      */
+        //console.log(filters, type, compArray, isString, extraIsString);
 
+        if(isString){
+          compArray = compArray.map(function(comp){
+            return String(comp);
+          });
+        }
+        else{
+          compArray = compArray.map(function(comp){
+            return Number(comp);
+          });
+        }
+
+        if(type != "unit" && type != "city"){
+          _data = _data.filter(function(d){
+            //console.log(compArray.indexOf(data[column]), data[column], column);
+            return compArray.indexOf(d[field]) != -1;
+          });
+
+          console.log(_data.length, _data, compArray);
+        }
+        else{
+          console.log("nope, is unit or city");
+        }
+
+        return _data;
+      },
 
       /*
       _filterData : function(data, column, _filters){
@@ -329,17 +362,12 @@ define(function(require){
             return  +br.id == +filter.value;
           })[0].name;
         }
-
-<<<<<<< HEAD
-=======
         else if(filter.type == "city"){
           html = parent.lists.municipiosName.cities.filter(function(ct){
             //console.log(ct[parent.CITYID], filter.value, ct, filter);
             return ct.inegi == +filter.value;
           })[0].name;
         }
-
->>>>>>> 774f7ba4654781cc37468dc5317c87c6ed31a012
         else{
           html = filter.value;
         }
@@ -351,6 +379,7 @@ define(function(require){
         li.addEventListener("click", function(e){
           this.parentNode.removeChild(this);
           that.filters.splice(that.filters.indexOf(filter), 1);
+          that.filter();
         });
       },
 
@@ -424,7 +453,8 @@ define(function(require){
 
       enableFiltering : function(filter, select){
         var that = this,
-            newFilter;
+            newFilter,
+            parentFilter;
         select.addEventListener("change", function(e){
 
           var value = select.value,
@@ -436,11 +466,27 @@ define(function(require){
             return;
           }
           else{
+            if(filter.type == "city"){
+              if(String(value).length == 5){
+                parentFilter = value.slice(0,2);
+              }
+              else{
+                parentFilter = value.slice(0,1);
+              }
+            }
+            else if(filter.type == "unit"){
+              parentFilter = value.split("-")[0];
+            }
+            else{
+              parentFilter = null;
+            }
+
             newFilter = {
-              id    :  _.uniqueId(),
-              value : value,
-              type  : filter.type,
-              field : filter.field
+              id           :  _.uniqueId(),
+              value        : value,
+              type         : filter.type,
+              field        : filter.field,
+              parentFilter : parentFilter
             };
 
             that.filters.push(newFilter);
