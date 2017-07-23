@@ -37,21 +37,40 @@ define(function(require){
       unitSelect   : null,
       data         : null,
       filteredData : null,
+
       filter : function(){
         //console.log(this.filters, parent.currentMap.data, callback);
         var filterCols = _.uniq(_.pluck(this.filters, "field")),
-            _data      = parent.currentMap.data.slice();
+            _data      = parent.currentMap.data.slice(),
+            dataArray  = [],
+            data;       
+
+        /*
+        filterCols.forEach(function(field){
+          dataArray.push( this._filterData(_data, field, this.filters) );
+        }, this);
+        */
       },
 
       /*
-      // make filter groups
-        filterCols = _.uniq(_.pluck(filters, "column"));
+      _filterData : function(_data, field, _filters){
+        var filters = _filters.filter(function(fil){
+                        return fil.field == field;
+                      }),
+            isString  = _.isString(_data[0][column]),
+            type      = filters[0].type,
+            compArray = _.pluck(filters, "value"),
+            data;
 
-        // pass every category of filters
-        filterCols.forEach(function(column){
-          controller._filterData(data, column, filters);
+        data = _data.filter(function(d){
+            //console.log(compArray.indexOf(data[column]), data[column], column);
+            return compArray.indexOf(d[field]) != -1;
         });
+
+        return data;
+      },
       */
+
 
 
       /*
