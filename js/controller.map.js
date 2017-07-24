@@ -111,6 +111,8 @@ define(function(require){
       this.UNITID = UNITID;
       // * la referencia a classyBrew
       this.brew           = null;
+      // * los datos filtrados
+      this.filteredData   = null;
       // * la referencia a los datos agregados por municipio o estado
       this.currentData    = null;
       // * la referencia a la información para graficar
@@ -439,14 +441,14 @@ define(function(require){
       //
       // A) Es un mapa de área por estado
       if(item.config.current.level == "state"){
-        this.currentData = this._agregateDataByState(item, this._currentData);
+        this.currentData = this._agregateDataByState(item, this.filteredData);
         var xxxxx = this._mapStateGeojson(this.currentData);
         this.brew = this._colorMixer(item, this.currentData);
         this.renderStateLayer(item, "states", xxxxx, this._stateStyle);
       }
       // B) Es un mapa de área por municipio
       else if(item.config.current.level == "city"){
-        this.currentData = this._agregateDataByCity(item, this._currentData);
+        this.currentData = this._agregateDataByCity(item, this.filteredData);
         var xxxxx = this._mapCityGeojson(this.currentData);
         this.brew        = this._colorMixer(item, this.currentData);
         this.renderCityLayer(item, "cities", xxxxx, this._cityStyle);
@@ -455,7 +457,7 @@ define(function(require){
       else{
         this.currentData = null;
         // filtra los puntos que no tienen localización
-        this._currentData = ! this.currentMap.config.disable ? this._currentData : this._currentData.filter(function(d){
+        this.filteredData = ! this.currentMap.config.disable ? this.filteredData : this.filteredData.filter(function(d){
           return d[this.currentMap.config.location.lat] != this.currentMap.config.disable[0] && d[this.currentMap.config.location.lng] != this.currentMap.config.disable[1];
         }, this);
 
@@ -473,9 +475,11 @@ define(function(require){
 
       // [4] Actualiza el panel de filtros si es un mapa nuevo
       //
+      /*
       if(!keepFilters){
         this.enableFilters(item);
       }
+      */
 
       // [5] Actualiza las opciones de UI
       //
@@ -495,7 +499,7 @@ define(function(require){
 
       // [8] Actualiza el contador de proyectos
       //
-      this.renderProjectCounter(this._currentData);
+      this.renderProjectCounter(this.filteredData);
 
       // [9] Actualiza la guía de color
       //
@@ -507,7 +511,7 @@ define(function(require){
       // [11] Activa el callback de cambio
       if(this.callbacks && this.callbacks.filterChange){
         // filters, data, currentData
-        this.callbacks.filterChange(this.filters, this.currentMap, this._currentData);
+        this.callbacks.filterChange(this.filters, this.currentMap, this.filteredData);
       }
 
       // [12] Actualiza la app de comparación
@@ -531,7 +535,7 @@ define(function(require){
           colector  = [],
           lat = this.currentMap.config.location.lat,
           lng = this.currentMap.config.location.lng,
-          initialData = this._currentData.slice(0);
+          initialData = this.filteredData.slice(0);
 
       initialData.forEach(function(d){
 
@@ -1007,6 +1011,7 @@ define(function(require){
         that.currentMap   = item;
         // * el id interno del mapa desplegado
         that.currentMapId = item.idex;
+        that.filteredData = item.data.slice();
         that.renderLayer(item);
 
         that.loaderStop("ya cargó el mapa");
@@ -1259,7 +1264,7 @@ define(function(require){
         });
       }
       else{
-        features = this._currentData.map(function(d){
+        features = this.filteredData.map(function(d){
                        var p = {};
                        properties.forEach(function(property){
                         p[property] = d[property];
