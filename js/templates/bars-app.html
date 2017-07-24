@@ -4,90 +4,89 @@
 </div>
 
 <div class="col-sm-12">
-<a id="GF-SHCP-bars-app-single-location-link" href="#" class="btn locations_b current">Una ubicación</a>
-<a id="GF-SHCP-bars-app-multiple-locations-link" href="#" class="btn locations_b">Varias ubicaciones</a>
-<div class="clearfix"></div>
+	<a id="GF-SHCP-bars-app-single-location-link" href="#" class="btn locations_b current">Una ubicación</a>
+	<a id="GF-SHCP-bars-app-multiple-locations-link" href="#" class="btn locations_b">Varias ubicaciones</a>
+	<div class="clearfix"></div>
 
-<div class="compare_s">
-
-<!-- SINGLE LOCATION -->
-<form id="GF-SHCP-bars-app-single-location">
-	<!-- location -->
-	<div class="box">
-		<p>Selecciona ubicación a comparar:</p>
-		<div class="row">
-			<div class="col-sm-4">
-				<p> Estado
-				<select name="state" id="GF-SHCP-bars-app-single-location-state"></select>
-  				</p>
+	<div class="compare_s">
+		<!-- SINGLE LOCATION -->
+		<form id="GF-SHCP-bars-app-single-location">
+			<!-- location -->
+			<div class="box">
+				<p>Selecciona ubicación a comparar:</p>
+				<div class="row">
+					<div class="col-sm-4">
+						<p> Estado
+						<select name="state" id="GF-SHCP-bars-app-single-location-state"></select>
+		  				</p>
+					</div>
+					<div class="col-sm-4">
+						<p>Municipio
+						  <select name="city" id="GF-SHCP-bars-app-single-location-city"></select>
+						</p>
+					</div>
+					<div class="col-sm-4">
+						<p class="right">
+						  <a href="#" id="GF-SHCP-bars-app-single-location-select-btn" class="btn more">Seleccionar</a>
+						</p>
+					</div>
+				</div>
 			</div>
-			<div class="col-sm-4">
-				<p>Municipio
-				  <select name="city" id="GF-SHCP-bars-app-single-location-city"></select>
-				</p>
+			
+			<!-- filters  -->
+			<div class="box">
+				<div class="row">
+				<div id="GF-SHCP-bars-app-single-location-filter-list">
+				  
+				</div>
+				</div>
+				<span><a href="#" id="GF-SHCP-bars-app-single-location-add-bar-btn"  ></a></span>
+				
 			</div>
-			<div class="col-sm-4">
-				<p class="right">
-				  <a href="#" id="GF-SHCP-bars-app-single-location-select-btn" class="btn more">Seleccionar</a>
-				</p>
+			
+			<!-- current filters -->
+			<div class="col-sm-12">
+				<ul id="GF-SHCP-bars-app-single-location-selected-filters" class="cart-list"></ul>
 			</div>
-		</div>
-	</div>
+			
+		</form>
 	
-	<!-- filters  -->
-	<div class="box">
-		<div class="row">
-		<div id="GF-SHCP-bars-app-single-location-filter-list">
-		  
-		</div>
-		</div>
-		<p class="right"><a href="#" id="GF-SHCP-bars-app-single-location-add-bar-btn"  class="btn more">Agregar</a></p>
+		<!-- MULTIPLE LOCATIONS  -->
+		<form id="GF-SHCP-bars-app-multiple-locations">
+		 <div class="box">
+		  <!-- filters  -->
+		  <div>
+		    
+		  </div>
 		
-	</div>
+		  <!-- current filters -->
+		  <ul></ul>
+		 </div>
+		 
+		  <!-- location -->
+		  <div class="box">
+			  <p>Selecciona ubicación a comparar:</p>
+			  <div class="row">
+				  <div class="col-sm-4">
+				  	<p>Estado
+				  	  <select name="state"></select>
+				  	</p>
+				  </div>
+				  <div class="col-sm-4">
+				  	<p>Municipio
+				  	  <select name="city"></select>
+				  	</p>
+				  </div>
+				  <div class="col-sm-4">
+				  	<p>
+				  	  <input type="submit" name="agregar">
+				  	</p>
+				  </div>
+			  </div>
+		</form>
 	
-	<!-- current filters -->
-	<div class="col-sm-12">
-		<ul id="GF-SHCP-bars-app-single-location-selected-filters" class="cart-list"></ul>
+		<div class="clearfix"></div>
+
 	</div>
-	
-</form>
-
-
-
-<!-- MULTIPLE LOCATIONS  -->
-<form id="GF-SHCP-bars-app-multiple-locations">
- <div class="box">
-  <!-- filters  -->
-  <div>
-    
-  </div>
-
-  <!-- current filters -->
-  <ul></ul>
- </div>
- 
-  <!-- location -->
-  <div class="box">
-	  <p>Selecciona ubicación a comparar:</p>
-	  <div class="row">
-		  <div class="col-sm-4">
-		  	<p>Estado
-		  	  <select name="state"></select>
-		  	</p>
-		  </div>
-		  <div class="col-sm-4">
-		  	<p>Municipio
-		  	  <select name="city"></select>
-		  	</p>
-		  </div>
-		  <div class="col-sm-4">
-		  	<p>
-		  	  <input type="submit" name="agregar">
-		  	</p>
-		  </div>
-</form>
-
-<div class="clearfix"></div>
-
-</div>
+	<div class="clearfix"></div>
 </div>
