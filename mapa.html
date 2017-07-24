@@ -195,23 +195,19 @@
   <script>
     var GFSHCPcallbacks = {
           filterChange : function(filters, currentMap, currentData){
-            console.log(filters, currentMap, currentData);
             var header = document.getElementById("GF-SHCP-MAP-NAME");
             header.innerHTML = currentMap.config.name;
           },
 
           filterInitialize : function(app){
-            //console.log(app);
           }
         },
 
         GFSHCPLoaderStart = function(stuff){
-          //console.log(stuff);
           document.getElementById("GF-SHCP-loader").style.display = "block";
         };
 
         GFSHCPLoaderStop = function(stuff){
-          //console.log(stuff);
          document.getElementById("GF-SHCP-loader").style.display = "none";
         };
 
@@ -226,7 +222,7 @@
   <!-- versión de producción: todavía no :P -->
   
   
-  <!--- aca va lo del ul con buscador--->
+  <!-- aca va lo del ul con buscador -->
   <script src="js/libs/jquery-3.1.1.min.js"></script>
   <script>
 	  function myFunction() {

@@ -45,17 +45,17 @@ define(function(require){
       // [*] el nombre,ramo y clave de cada unidad ejecutora
       UNIDADESNAME   = require("assets/unidades-nombres"),
 
-      /* COSA PARA BORRAR */
-      MEXMIN = require("assets/mexmin"),
+      /* COSA PARA BORRAR
+      MEXMIN = require("assets/mexmin"), */
 
       // [4] obtiene los templates de UI
       // ----------------------------------------------------------------------
       // [*] el selector de mapa
       MAPSELECTOR    = require("text!templates/map-selector-panel.html"),
       // [*] el selector de filtros
-      FILTERSELECTOR = require("text!templates/filter-selector-panel.html"),
+      //FILTERSELECTOR = require("text!templates/filter-selector-panel.html"),
       // [*] el selector de filtros
-      PAGESELECTOR   = require("text!templates/page-selector-panel.html"),
+      //PAGESELECTOR   = require("text!templates/page-selector-panel.html"),
       // [*] las barras de comparación
       PAGESELECTOR   = require("text!templates/page-selector-panel.html"),  
       // [*] la guía de color
@@ -76,7 +76,7 @@ define(function(require){
       // [7] define las constantes internas del sistema 
       // ----------------------------------------------------------------------
       SELECTALL      = "_____",
-      XFILTERCLASS   = "killMePlease",
+      //XFILTERCLASS   = "killMePlease",
       CITYID         = "GFSHCPCityId",
       UNITID         = "GFSHCPUnitId";
 
@@ -116,7 +116,7 @@ define(function(require){
       // * la referencia a los datos agregados por municipio o estado
       this.currentData    = null;
       // * la referencia a la información para graficar
-      this._currentData   = null;
+      //this._currentData   = null;
       // * la referencia a los puntos agrupados x ubicación
       this._currentPoints = null;
       // * la referencia al mapa de configuración seleccionado
@@ -172,18 +172,19 @@ define(function(require){
       this.UImapSelector    = null;
       // * El selector del nivel del mapa (estado, municipio)
       this.UIlevelSelector  = null;
+      
       // * El selector de filtros
-      this.UIfilterSelector = null;
+      //this.UIfilterSelector = null;
       // * El selector de año
-      this.UIyearSelector = null;
+      //this.UIyearSelector = null;
       // * El selector de ramo
-      this.UIbranchSelector = null;
+      //this.UIbranchSelector = null;
       // * El selector de estado
-      this.UIstateSelector = null;
+      //this.UIstateSelector = null;
       // * El selector de ciudad
-      this.UIcitySelector = null;
+      //this.UIcitySelector = null;
       // * El selector de ejecutor
-      this.UIunitSelector = null;
+      //this.UIunitSelector = null;
       // * los <select> de los filtros extra
       this.UIextraFiltersSelector = null;
       //
@@ -240,15 +241,13 @@ define(function(require){
       // var geocoder = new google.maps.Geocoder;
 
       // [8] LOADER 
-      this.loaderStop("ya cargó lo básico");
+      this.loaderStop();
 
       // [9] HABILITA EL CALLBACK DE INICIO
       if(this.callbacks && this.callbacks.filterInitialize){
         this.callbacks.filterInitialize(this);
       }
     },
-
-
 
 
 
@@ -403,9 +402,11 @@ define(function(require){
       }
     },
 
+    //
+    // ACTUALIZA EL MAPA CON NUEVOS DATOS DESPUÉS FILTRAR
+    //
+    //
     updateData : function(data){
-
-      //console.log("new data:", data);
       this.filteredData = data;
       this.renderLayer(this.currentMap);
     },
@@ -438,7 +439,6 @@ define(function(require){
       }
       // C) Es un mapa de puntos definidos por latitud y longitud
       else{
-        //console.log("is point");
         this.currentData = null;
         // filtra los puntos que no tienen localización
         this.filteredData = ! this.currentMap.config.disable ? this.filteredData : this.filteredData.filter(function(d){
@@ -1148,19 +1148,10 @@ define(function(require){
       });
 
       return geoJSON;
-      /*
-      this.lists.estados.edos.features.forEach(function(state){
-        var id = state.properties.CVE_ENT,
-            d  = _.find(data, {id : id});
-
-        state.properties.data = d;
-      });
-      */
     },
 
     _mapCityGeojson : function(data){
       var copy = Object.create(this.lists.municipios.municipios);
-      //this.lists.municipios.municipios
       copy.features.forEach(function(city){
         var id  = city.properties.city,
             state = city.properties.state,
@@ -1168,7 +1159,6 @@ define(function(require){
 
         city.properties.data = d;
       });
-
       return copy;
     },
 
@@ -1177,7 +1167,6 @@ define(function(require){
     // -------------------------------------------------------
     //
     _makeGeojson : function(item){
-
       var geojson = {
                       "features" : null,
                       "type" : "FeatureCollection",
@@ -1194,7 +1183,6 @@ define(function(require){
           
 
       if(multiple){
-        //this._currentPoints
         features = this._currentPoints.map(function(d){
           var p    = {};
           p.points = d;
@@ -1232,30 +1220,7 @@ define(function(require){
       return geojson;
     },
 
-    _filterData : function(item){
-      var filter          = {},
-          filterContainer = document.getElementById(this.settings.ui.filterSelector.id),
-          data            = null;
-
-      if(item.config.api || !this.filters.length){
-        data = item.data;
-      }
-
-      else{
-        this.filters.forEach(function(fil){
-          if(fil.value !== SELECTALL){
-            filter[fil.field] = fil.value;
-          }
-        }, this);
-
-        data = _.where(item.data, filter);
-      }
-
-      return data;
-     },
-
      _strToNumber : function(data, field){
-
       data.forEach(function(el){
         el[field] = +el[field];
       });
@@ -1438,7 +1403,7 @@ define(function(require){
     renderProjectCounter : function(data){
       var id    = this.settings.ui.projectCounter,
           el    = document.getElementById(id),
-          total = data.length;
+          total = this.numberFormat(data.length);
 
       el.innerHTML = total ? total : 0;
     },
@@ -1699,15 +1664,12 @@ define(function(require){
     // las geometrías o puntos
     //
     _colorMixer : function(item, theData){
-      
-
       var value = item.config.current.value,
           level = item.config.current.level,
           color = item.config.color || this.settings.mapGeometry.defaultColor || 1,
           data  = null,
           _data = null,
           brew  = null;
-
 
       if(level == "state" || level == "city"){
         data  = theData;
@@ -1717,13 +1679,11 @@ define(function(require){
         return null;
       }
       
-
       brew = new classyBrew();
       brew.setSeries(_data);
       brew.setNumClasses(7);
       brew.setColorCode(brew.getColorCodes()[color]);
       brew.classify('jenks');
-
 
       return brew;
     }
