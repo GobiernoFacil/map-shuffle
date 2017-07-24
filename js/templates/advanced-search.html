@@ -22,25 +22,33 @@
 		</div>
 		  
 		<!-- current filters -->
-		<ul id="GF-SHCP-search-app-filters" class="cart-list"></ul>
-		
+		<div class="col-sm-12">
+			<ul id="GF-SHCP-search-app-filters" class="cart-list"></ul>
+		</div>
+		<div class="clearfix"></div>
 		
 		<div class="box">
-			<table>
-			  <thead></thead>
-			  <tbody></tbody>
-			</table>
-		</div>
-		
+			<div class="bootstrap-table">
+				<table class="table">
+				  <thead></thead>
+				  <tbody></tbody>
+				</table>
+			</div>
+			
+			<div class="divider"></div>
 		
 		<form id="GF-SHCP-search-pagination-form">
-		  <p>
-		    página <input type="number" name="page" id="GF-SHCP-SEARCH-CONTROL-PAGE"> de <span id="GF-SHCP-SEARCH-LABEL-PAGE-TOTAL"></span>
-		  </p>
-		  <p>
-		    <a href="#" id="GF-SHCP-SEARCH-CONTROL-PREV">anterior</a>
-		    <a href="#" id="GF-SHCP-SEARCH-CONTROL-NEXT">siguiente</a>
-		  </p>
+			<div class="box center">
+			<p class="pagination-info">
+			  Página <input type="number" name="page" id="GF-SHCP-SEARCH-CONTROL-PAGE"> de <span id="GF-SHCP-SEARCH-LABEL-PAGE-TOTAL"></span>
+			</p>
+			<ul class="pagination">
+			  <li class="page-number"><a href="#" id="GF-SHCP-SEARCH-CONTROL-PREV" class="btn">&lt; Anterior</a></li>
+			  <li class="page-number"><a href="#" id="GF-SHCP-SEARCH-CONTROL-NEXT" class="btn">Siguiente &gt;</a></li>
+			</ul>
+			</div>
 		</form>
+		</div>
+		
 	</div>
 </div>
