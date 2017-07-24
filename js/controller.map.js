@@ -69,6 +69,10 @@ define(function(require){
       // ----------------------------------------------------------------------
       SEARCHTOOL     = require("search.maps"), 
 
+      // [7] carga el componente de filtrado
+      // ----------------------------------------------------------------------
+      FILTERMODULE   = require("filter.module.map");
+
       // [7] define las constantes internas del sistema 
       // ----------------------------------------------------------------------
       SELECTALL      = "_____",
@@ -180,6 +184,8 @@ define(function(require){
       this.UIunitSelector = null;
       // * los <select> de los filtros extra
       this.UIextraFiltersSelector = null;
+      //
+      this.UIMapCartFilter = document.getElementById(this.settings.ui.filterSelector.cart);
 
       // [2] ARRREGLA EL SCOPE DE ALGUNAS FUNCIONES
       // ----------------------------------------------------------------------
@@ -199,8 +205,6 @@ define(function(require){
 
       // [5] INICIA LOS ELEMENTOS DE UI
       // ----------------------------------------------------------------------
-      // * la búsqueda avanzada
-      //this.renderAdvancedSearch();
 
       // * el selector de mapa
       this.renderMapSelector();
@@ -208,8 +212,16 @@ define(function(require){
       // * el selector de mapas extra
       this.renderExtraMapSelector();
 
-      // * el selector de filtros
-      this.renderFilterSelector();
+
+      //console.log(this, this.UIMapCartFilter, new Function());
+
+      if(this.UIMapCartFilter){
+        // * inicia el engine de filtrado
+        this.filterModule = new FILTERMODULE(this, this.UIMapCartFilter, new Function());
+        // * el selector de filtros
+        this.renderFilterSelector();
+      }
+      
 
       // [6] CARGA LOS ARCHIVOS DE CONFIGURACIÓN Y DESPLIEGA EL MAPA SELECCIONADO
       // ----------------------------------------------------------------------
@@ -354,13 +366,6 @@ define(function(require){
         }
       });
 
-      /*
-      this.initialFilters = this.parseHashBangArgs();
-      this.firstTime      = true;
-      */
-
-      //console.log(this.initialFilters, this.firstTime, item.config, this.filters);
-
       this.firstTime = false;
 
       return true;
@@ -398,6 +403,10 @@ define(function(require){
       }
     },
 
+    updateData : function(data){
+      this.renderLayer(this.currentMap);
+    },
+
     //
     // RENDEREA EL MAPA SELECCIONADO (item)
     //
@@ -405,22 +414,25 @@ define(function(require){
     renderLayer : function(item, keepFilters){
 
       // [0] mezcla los filtros iniciales
-      var isFirstTime = this.mixInitialFilters(item);
+      //var isFirstTime = this.mixInitialFilters(item);
 
-      // [1] elimina el layer anterior
+      // [1] elimina el layer anterior, ya sea puntos, área o mapa extra
       //
-      this.cleanLayers();
+      // this.cleanLayers();
 
       // [2] actualiza las referencia internas
       //
       // * la lista de filtros
-      this.filters = keepFilters || isFirstTime ? this.filters : [];
+      //this.filters = keepFilters || isFirstTime ? this.filters : [];
+      
       // * el mapa desplegado
-      this.currentMap   = item;
+      //this.currentMap   = item;
+      
       // * el id interno del mapa desplegado
-      this.currentMapId = item.idex;
+      //this.currentMapId = item.idex;
+      
       // * la colección de datos seleccionados (los datos sin ser covertidos a geojson)
-      this._currentData = this._filterData(item);
+      //this._currentData = this._filterData(item);
 
 
       // [3] despliega el mapa según el tipo
@@ -989,6 +1001,12 @@ define(function(require){
           that._addKeyToUnits(item.data, conf, hasUnit);
          }
 
+        that.mixInitialFilters(item);
+        that.cleanLayers();
+        // * el mapa desplegado
+        that.currentMap   = item;
+        // * el id interno del mapa desplegado
+        that.currentMapId = item.idex;
         that.renderLayer(item);
 
         that.loaderStop("ya cargó el mapa");
@@ -1476,6 +1494,7 @@ define(function(require){
 
     renderFilterSelector : function(){
       // FILTERSELECTOR
+      /*
       var that = this,
           conf = this.settings.ui.filterSelector,
           div  = document.getElementById(this.settings.ui.topToolsDiv),
@@ -1493,6 +1512,7 @@ define(function(require){
       this.UIextraFiltersSelector = html.querySelector("#" + conf.selectors.extraFiltersId);
 
       div.appendChild(html);
+      */
     },
 
     enableFilters : function(item){

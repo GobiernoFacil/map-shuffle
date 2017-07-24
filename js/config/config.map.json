@@ -72,6 +72,7 @@
       "class" : "",
       "id" : "GF-SHCP-filter-selector",
       "position" : "topleft",
+      "cart" : "GF-SHCP-cart-list",
       "selectors" : {
         "filtersId"       : "GF-SHCP-CONTAINER-FILTERS",
         "extraFiltersId"  : "GF-SHCP-CONTAINER-EXTRA-FILTERS",
