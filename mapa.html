@@ -62,8 +62,7 @@
     <header class="top title_side">
 	    <div class="row">
 		    <div class="col-sm-9">
-				<h1> <!--acá necesito el nombre del mapa-->Obra Pública Abierta: 
-				<!--acá necesito el nombre del estado, municipio o todo méxico--><span>Todo México</span></h1>
+				<h1 id="GF-SHCP-MAP-NAME">Obra Pública Abierta</h1>
 		    </div>
 		    <div class="col-sm-3 right">
 			    <!-- 
@@ -172,8 +171,10 @@
 
   <script>
     var GFSHCPcallbacks = {
-          filterChange : function(filters, data, currentData){
-            //console.log(filters, data, currentData);
+          filterChange : function(filters, currentMap, currentData){
+            console.log(filters, currentMap, currentData);
+            var header = document.getElementById("GF-SHCP-MAP-NAME");
+            header.innerHTML = currentMap.config.name;
           },
 
           filterInitialize : function(app){

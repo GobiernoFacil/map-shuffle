@@ -22,9 +22,9 @@ define(function(require){
       leaflet     = require("leaflet"),
       underscore  = require("underscore"),
       classybrew  = require("classyBrew"),
-      btable      = require("btable"),
-      tableExport = require("tableExport"),
-      bootstrapTableExport = require("bootstrapTableExport"),
+      //btable      = require("btable"),
+      //tableExport = require("tableExport"),
+      //bootstrapTableExport = require("bootstrapTableExport"),
       APIKEY      = "AIzaSyDZXX_dqYAZ9oLxA28sN5ztg3qNBArk80I",
       gMaps       = require("async!https://maps.googleapis.com/maps/api/js?key=AIzaSyDZXX_dqYAZ9oLxA28sN5ztg3qNBArk80I");
 
@@ -195,7 +195,7 @@ define(function(require){
       this._stateExtraStyle             = this._stateExtraStyle.bind(this);
       this._cityStyle                   = this._cityStyle.bind(this);
       this._cityExtraStyle              = this._cityStyle.bind(this);
-      this._enableFilterChange          = this._enableFilterChange.bind(this);
+      //this._enableFilterChange          = this._enableFilterChange.bind(this);
       this.renderMapSelectorChange      = this.renderMapSelectorChange.bind(this);
       this.renderExtraMapSelectorChange = this.renderExtraMapSelectorChange.bind(this);
       this.updateUILevelSelectorChange  = this.updateUILevelSelectorChange.bind(this);
@@ -219,7 +219,7 @@ define(function(require){
         // * inicia el engine de filtrado
         this.filterModule = new FILTERMODULE(this, this.UIMapCartFilter, this.updateData);
         // * el selector de filtros
-        this.renderFilterSelector();
+        //this.renderFilterSelector();
       }
       
 
@@ -405,7 +405,7 @@ define(function(require){
 
     updateData : function(data){
 
-      console.log("new data:", data);
+      //console.log("new data:", data);
       this.filteredData = data;
       this.renderLayer(this.currentMap);
     },
@@ -416,27 +416,9 @@ define(function(require){
     //
     renderLayer : function(item, keepFilters){
 
-      // [0] mezcla los filtros iniciales
-      //var isFirstTime = this.mixInitialFilters(item);
-
       // [1] elimina el layer anterior, ya sea puntos, área o mapa extra
       //
       this.cleanLayers();
-
-      // [2] actualiza las referencia internas
-      //
-      // * la lista de filtros
-      //this.filters = keepFilters || isFirstTime ? this.filters : [];
-      
-      // * el mapa desplegado
-      //this.currentMap   = item;
-      
-      // * el id interno del mapa desplegado
-      //this.currentMapId = item.idex;
-      
-      // * la colección de datos seleccionados (los datos sin ser covertidos a geojson)
-      //this._currentData = this._filterData(item);
-
 
       // [3] despliega el mapa según el tipo
       //
@@ -456,7 +438,7 @@ define(function(require){
       }
       // C) Es un mapa de puntos definidos por latitud y longitud
       else{
-        console.log("is point");
+        //console.log("is point");
         this.currentData = null;
         // filtra los puntos que no tienen localización
         this.filteredData = ! this.currentMap.config.disable ? this.filteredData : this.filteredData.filter(function(d){
@@ -476,30 +458,10 @@ define(function(require){
         }
       }
 
-      // [4] Actualiza el panel de filtros si es un mapa nuevo
-      //
-      /*
-      if(!keepFilters){
-        this.enableFilters(item);
-      }
-      */
-      //this.enableFilters();
-
       // [5] Actualiza las opciones de UI
       //
       this.updateUIOptions(item);
 
-      // [6] Activa las barras de comparación
-      //
-      //this.enableBarsTool(item);
-
-      // [7] Activa la tabla de comparación
-      //
-      /*
-      if(!keepFilters){
-        this.enableTableTool(item);
-      }
-      */
 
       // [8] Actualiza el contador de proyectos
       //
@@ -591,16 +553,6 @@ define(function(require){
     //
     //
     renderExtraLayer : function(item){
-
-      /*
-       SOLUCIÓN :
-
-       layer.bringToFront
-       layer.bringToBack
-
-      */
-
-      
       // [1] elimina el layer anterior
       //
       this.cleanExtraLayer();
@@ -682,16 +634,6 @@ define(function(require){
     // DIBUJA EL LAYER SELECCIONADO PARA CIUDADES
     //
     //
-
-    /*
-    renderStateLayer : function(item, container, geojson, style){
-      if(item.config.current.level == "state"){
-        this.currentData = this._agregateDataByState(item, this._currentData);
-        var xxxxx = this._mapStateGeojson(this.currentData);
-        this.brew = this._colorMixer(item, this.currentData);
-        this.renderStateLayer(item, "states", xxxxx, this._stateStyle);
-      }
-    */
     renderCityLayer : function(item, container, geojson, style){
       var that = this,
           t    = _.template(item.config.template);
@@ -1501,29 +1443,6 @@ define(function(require){
       el.innerHTML = total ? total : 0;
     },
 
-    renderFilterSelector : function(){
-      // FILTERSELECTOR
-      /*
-      var that = this,
-          conf = this.settings.ui.filterSelector,
-          div  = document.getElementById(this.settings.ui.topToolsDiv),
-          html = document.createElement(conf.container);
-
-      html.innerHTML = FILTERSELECTOR;
-      html.id        = conf.id;
-      html.setAttribute("class", conf.class);
-
-      this.UIyearSelector   = html.querySelector("#" + conf.selectors.filtersContainers.yearContainer);
-      this.UIstateSelector  = html.querySelector("#" + conf.selectors.filtersContainers.stateContainer);
-      this.UIcitySelector   = html.querySelector("#" + conf.selectors.filtersContainers.cityContainer);
-      this.UIunitSelector   = html.querySelector("#" + conf.selectors.filtersContainers.unitContainer);
-      this.UIbranchSelector = html.querySelector("#" + conf.selectors.filtersContainers.branchContainer);
-      this.UIextraFiltersSelector = html.querySelector("#" + conf.selectors.extraFiltersId);
-
-      div.appendChild(html);
-      */
-    },
-
     enableFilters : function(){
       var filters = this.currentMap.config.filters.concat(this.currentMap.config.extraFilters || []),
           container = document.getElementById(this.settings.ui.filterSelector),
@@ -1531,6 +1450,8 @@ define(function(require){
           cityFilter,
           branchFilter,
           unitFilter;
+
+      container.innerHTML = "";
 
       filters.forEach(function(filter){
         var select;
@@ -1572,349 +1493,6 @@ define(function(require){
     },
 
 
-    /*
-    enableFilters : function(item){
-      this._disableExtraFilters();
-
-      var that     = this,
-          conf     = this.settings.ui.filterSelector,
-          _filters = conf.selectors.filtersContainers,
-          filters  = item.config.filters,
-          xfilters = item.config.extraFilters,
-          _state   = filters ? filters.filter(function(filter){return filter.type == "state"})[0] : null,
-          _city    = filters ? filters.filter(function(filter){return filter.type == "city"})[0] : null,
-          _branch  = filters ? filters.filter(function(filter){return filter.type == "branch"})[0] : null,
-          _unit    = filters ? filters.filter(function(filter){return filter.type == "unit"})[0] : null,
-          _year    = filters ? filters.filter(function(filter){return filter.type == "year"})[0] :null,
-          _extras  = xfilters || [];
-      // remove filters 
-  
-      if(_year){
-        this._enableYearFilter(item, _year);
-        this.UIyearSelector.style.display = "block";
-      }
-      else{
-        this.UIyearSelector.querySelector("select").removeEventListener("change", this._enableFilterChange);
-        this.UIyearSelector.style.display = "none";
-      }
-
-      if(_state){
-        this._enableStateFilter(item, _state);
-        this.UIstateSelector.style.display = "block";
-      }
-      else{
-        this.UIstateSelector.querySelector("select").removeEventListener("change", this._enableFilterChange);
-        this.UIstateSelector.style.display = "none";
-      }
-
-      // IF CITY
-      if(_city && _state){
-        this._enableCityFilter(item, _state, _city);
-        this.UIcitySelector.style.display = "block";
-      }
-      else{
-        this.UIcitySelector.querySelector("select").removeEventListener("change", this._enableFilterChange);
-        this.UIcitySelector.style.display = "none";
-      }
-
-
-      if(_branch){
-        this._enableBranchFilter(item, _branch);
-        this.UIbranchSelector.style.display = "block";
-      }
-      else{
-        this.UIbranchSelector.querySelector("select").removeEventListener("change", this._enableFilterChange);
-        this.UIbranchSelector.style.display = "none";
-      }
-
-      // IF UNIT
-      if(_unit){
-        this._enableUnitFilter(item, _branch, _unit);
-        this.UIunitSelector.style.display = "block";
-      }
-      else{
-        this.UIunitSelector.querySelector("select").removeEventListener("change", this._enableFilterChange);
-        this.UIunitSelector.style.display = "none";
-      }
-
-      if(_extras){
-        _extras.forEach(function(fil){
-          this._enableExtraFilter(item, fil);
-        }, this);
-      }
-    },
-    */
-
-    _disableExtraFilters : function(){
-      var extras = document.querySelectorAll("." + XFILTERCLASS);
-
-      Array.prototype.slice.call(extras).forEach(function(el){
-        el.parentNode.removeChild(el);
-      });
-    },
-
-    _enableExtraFilter : function(item, filter){
-      var p       = document.createElement("p"),
-          label   = document.createElement("label"),
-          select  = document.createElement("select"),
-          optAll  = document.createElement("option"),
-          pid     = XFILTERCLASS  + _.uniqueId("-pid-"),
-          options = _.uniq(_.pluck(this._currentData, filter.field));
-      
-      p.id = pid;
-      p.classList.add(XFILTERCLASS);
-      label.innerHTML = filter.title;
-      optAll.value     = SELECTALL;
-      optAll.innerHTML = "todos";
-
-      select.setAttribute("name", XFILTERCLASS + pid + "-name");
-
-      select.appendChild(optAll);
-      p.appendChild(label);
-      p.appendChild(select);
-
-      options.forEach(function(opt){
-        var option = document.createElement("option");
-        option.value = opt;
-        option.innerHTML = opt;
-        select.appendChild(option);
-      }, this);
-
-      this.UIextraFiltersSelector.appendChild(p);
-
-      select.setAttribute("data-field", filter.field);
-      select.addEventListener("change", this._enableFilterChange);
-    },
-
-    _enableYearFilter : function(item, year){
-      var _data = item.data,
-           data = _.uniq(_.pluck(item.data, year.field))
-                   .map(function(y){return +y})
-                   .sort(function(a, b){return a - b}),
-          selector = this.UIyearSelector.querySelector("select"),
-          _default = year.default;
-
-      selector.innerHTML = "";
-      selector.setAttribute("data-field", year.field);
-      selector.removeEventListener("change", this._enableFilterChange);
-
-      var optAll = document.createElement("option");
-      optAll.value     = SELECTALL;
-      optAll.innerHTML = "todos";
-      selector.appendChild(optAll);
-
-      data.forEach(function(y){
-        var opt = document.createElement("option");
-
-        opt.value     = y;
-        opt.innerHTML = y;
-
-        if(_default == y){
-          opt.selected = true;
-        }
-
-        selector.appendChild(opt);
-      }, this);
-
-      selector.addEventListener("change", this._enableFilterChange);
-    },
-
-    _enableStateFilter : function(item, state){
-      var /*_data    = _.uniq(_.pluck(item.data, state.field))
-                      .map(function(y){return +y})
-                      .sort(function(a, b){return a - b}),*/
-          data         = Object.create(ESTADOSNAME),
-          selector     = this.UIstateSelector.querySelector("select"),
-          citySelector = this.UIcitySelector.querySelector("select"),
-          optAll       = null,
-          _default     = state.default;
-
-      selector.innerHTML = "";
-      selector.setAttribute("data-field", state.field);
-      selector.removeEventListener("change", this._enableFilterChange);
-
-      optAll           = document.createElement("option");
-      optAll.value     = SELECTALL;
-      optAll.innerHTML = "todos";
-      selector.appendChild(optAll);
-
-      data.states.forEach(function(y){
-        var opt = document.createElement("option");
-
-        opt.value     = y.id;
-        opt.innerHTML = y.name;
-
-        if(_default == y.id){
-          opt.selected = true;
-        }
-
-        selector.appendChild(opt);
-      }, this);
-
-      selector.addEventListener("change", this._enableFilterChange);
-    },
-    // this._enableCityFilter(item, _state, _city);
-    _enableCityFilter : function(item, state, city){
-      var data = Object.create(MUNICIPIOSNAME),
-          selector      = this.UIcitySelector.querySelector("select"),
-          stateSelector = this.UIstateSelector.querySelector("select"),
-          optAll        = null,
-          cities;
-
-      selector.innerHTML = "";
-      selector.setAttribute("data-field", city.field);
-      selector.removeEventListener("change", this._enableFilterChange);
-
-      optAll           = document.createElement("option");
-      optAll.value     = SELECTALL;
-      optAll.innerHTML = "todas";
-      selector.appendChild(optAll);
-
-      if(stateSelector.value != SELECTALL){
-        cities = data.cities.filter(function(city){
-          return city.state == +stateSelector.value;
-        });
-
-        cities.forEach(function(c){
-          var opt = document.createElement("option");
-
-          opt.value     = c.city;
-          opt.innerHTML = c.name;
-
-          selector.appendChild(opt);
-        }, this);
-      }
-
-      selector.addEventListener("change", this._enableFilterChange);
-    },
-
-    _enableBranchFilter : function(item, branch){
-      var /*_data    = _.uniq(_.pluck(item.data, branch.field))
-                      .map(function(y){return +y})
-                      .sort(function(a, b){return a - b}),*/
-          data     = Object.create(RAMOSNAME),
-          selector = this.UIbranchSelector.querySelector("select"),
-          optAll   = null,
-          _default = branch.default;
-
-      selector.innerHTML = "";
-      selector.setAttribute("data-field", branch.field);
-      selector.removeEventListener("change", this._enableFilterChange);
-
-      optAll           = document.createElement("option");
-      optAll.value     = SELECTALL;
-      optAll.innerHTML = "todos";
-      selector.appendChild(optAll);
-
-      data.branches.forEach(function(y){
-        var opt = document.createElement("option");
-
-        opt.value     = y.id;
-        opt.innerHTML = y.name;
-
-        if(_default == y.id){
-          opt.selected = true;
-        }
-
-        selector.appendChild(opt);
-      }, this);
-
-      selector.addEventListener("change", this._enableFilterChange);
-    },
-
-    _enableUnitFilter : function(item, branch, unit){
-      var data           = Object.create(UNIDADESNAME),
-          selector       = this.UIunitSelector.querySelector("select"),
-          branchSelector = this.UIbranchSelector.querySelector("select"),
-          optAll         = null,
-          units;
-
-
-      selector.innerHTML = "";
-      selector.setAttribute("data-field", unit.field);
-      selector.removeEventListener("change", this._enableFilterChange);
-
-      optAll           = document.createElement("option");
-      optAll.value     = SELECTALL;
-      optAll.innerHTML = "todos";
-      selector.appendChild(optAll);
-
-      if(branchSelector.value != SELECTALL){
-        units = data.units.filter(function(unit){
-          return +unit.branch == +branchSelector.value;
-        });
-
-        units.forEach(function(c){
-          var opt = document.createElement("option");
-
-          opt.value     = c.id;
-          opt.innerHTML = c.name;
-
-          selector.appendChild(opt);
-        }, this);
-      }
-
-      selector.addEventListener("change", this._enableFilterChange);
-    },
-
-    _enableFilterChange : function(e){
-      var val          = e.currentTarget.value,
-          field        = e.currentTarget.getAttribute("data-field"),
-          current      = this.filters.filter(function(el){ return el.field == field })[0],
-          _current     = this.currentMap.config.filters.filter(function(el){return el.field == field })[0],
-          stateFilter  = this.currentMap.config.filters.filter(function(fil){ return fil.type == "state"})[0],
-          cityFilter   = this.currentMap.config.filters.filter(function(fil){ return fil.type == "city"})[0],
-          branchFilter = this.currentMap.config.filters.filter(function(fil){ return fil.type == "branch"})[0],
-          unitFilter   = this.currentMap.config.filters.filter(function(fil){ return fil.type == "unit"})[0],
-          currentCity  = null,
-          stateZoom    = this.settings.ux.changeStateZoom,
-          stateName    = null,
-          cityName     = null;
-
-
-      if(
-        (stateFilter && stateFilter.field == field) ||
-        (branchFilter && branchFilter.field == field) ||
-        (cityFilter && cityFilter.field == field)
-      ){
-        val = val == SELECTALL ? val : +val;
-      }
-
-      if(_current.type == "state" && val != SELECTALL){
-
-        stateName = this.lists.estadosName.states.filter(function(st){
-          return +st.id == +val;
-        })[0];
-        this.map.setView(new L.LatLng(stateName.lat, stateName.lng), stateZoom);
-      }
-
-      if(stateFilter && stateFilter.field == field && cityFilter){
-        this._enableCityFilter(null, stateFilter, cityFilter);
-        currentCity = this.filters.filter(function(el){ return el.field == cityFilter.field })[0];
-        this.filters.splice(this.filters.indexOf(currentCity), 1);
-      }
-
-      if(branchFilter && branchFilter.field == field && unitFilter){
-        this._enableUnitFilter(null, branchFilter, unitFilter);
-        currentUnit = this.filters.filter(function(el){ return el.field == unitFilter.field })[0];
-        this.filters.splice(this.filters.indexOf(currentUnit), 1);
-      }
-
-      if(current){
-        this.filters.splice(this.filters.indexOf(current), 1);
-      }
-      else{
-
-      }
-
-      this.filters.push({
-        field : field,
-        value : val
-      });
-
-      this.renderLayer(this.currentMap, true);
-      //this._currentData = this._filterData(this.currentMap);
-    },
 
     updatePagination : function(){
       var map     = this.currentMap,
@@ -1951,10 +1529,6 @@ define(function(require){
       totalEl.innerHTML = total;
     },
     
-
-
-
-
 
     /*
      * L I S T E N E R S   ( P Á N E L E S ) 
@@ -2018,10 +1592,6 @@ define(function(require){
         this.renderLayer(this.currentMap, true);
       }
     },
-
-
-
-
 
 
     /*
@@ -2156,65 +1726,7 @@ define(function(require){
 
 
       return brew;
-    },
-
-
-
-
-
-
-    // XXXXX ESTO DEBE BORRARSE E INTEGRAR EL GEOJSON FINAL XXXXX
-    //
-    // ARREGLA EL GEOJSON DE ESTADOS
-    // ---------------------------------------------
-    // elimina caracteres raros y nombre nuevo en el geojson de estados
-    //
-    // v2 : ahora en lugar de completar los datos, puede acortar el número de decimales
-    //      por estado
-    _setStatesGeometry : function(){
-      var optNum = 8;
-      ESTADOS.edos.features.forEach(function(estado){
-
-        estado.geometry.coordinates.forEach(function(arr){
-
-          if(arr.length == 1){
-            arr[0].forEach(function(point){
-              var x, y;
-
-              x = String(point[0]).slice(0, -optNum);
-              y = String(point[1]).slice(0, -optNum);
-
-              point[0] = x.search(".") != -1 ? (+x || point[0]) : point[0];
-              point[1] = y.search(".") != -1 ? (+y || point[1]) : point[1];
-
-            }, this);
-          }
-          else{
-            /*
-            arr.forEach(function(arr2){
-              if(_.isNumber(arr2[0])) return;
-
-
-              arr2.forEach(function(point){
-                var x, y;
-
-                x = String(point[0]).slice(0, -optNum);
-                y = String(point[1]).slice(0, -optNum);
-
-                point[0] = +x;
-                point[1] = +y;
-              }, this);
-            }, this);
-            */
-          }
-        }, this);
-      });
-      
-
-      this.statesGeojson = ESTADOS;
-    },
-
-
+    }
 
   };
 
