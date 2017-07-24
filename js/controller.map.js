@@ -22,9 +22,6 @@ define(function(require){
       leaflet     = require("leaflet"),
       underscore  = require("underscore"),
       classybrew  = require("classyBrew"),
-      //btable      = require("btable"),
-      //tableExport = require("tableExport"),
-      //bootstrapTableExport = require("bootstrapTableExport"),
       APIKEY      = "AIzaSyDZXX_dqYAZ9oLxA28sN5ztg3qNBArk80I",
       gMaps       = require("async!https://maps.googleapis.com/maps/api/js?key=AIzaSyDZXX_dqYAZ9oLxA28sN5ztg3qNBArk80I");
 
@@ -45,17 +42,10 @@ define(function(require){
       // [*] el nombre,ramo y clave de cada unidad ejecutora
       UNIDADESNAME   = require("assets/unidades-nombres"),
 
-      /* COSA PARA BORRAR
-      MEXMIN = require("assets/mexmin"), */
-
       // [4] obtiene los templates de UI
       // ----------------------------------------------------------------------
       // [*] el selector de mapa
       MAPSELECTOR    = require("text!templates/map-selector-panel.html"),
-      // [*] el selector de filtros
-      //FILTERSELECTOR = require("text!templates/filter-selector-panel.html"),
-      // [*] el selector de filtros
-      //PAGESELECTOR   = require("text!templates/page-selector-panel.html"),
       // [*] las barras de comparación
       PAGESELECTOR   = require("text!templates/page-selector-panel.html"),  
       // [*] la guía de color
@@ -73,10 +63,9 @@ define(function(require){
       // ----------------------------------------------------------------------
       FILTERMODULE   = require("filter.module.map");
 
-      // [7] define las constantes internas del sistema 
+      // [8] define las constantes internas del sistema 
       // ----------------------------------------------------------------------
       SELECTALL      = "_____",
-      //XFILTERCLASS   = "killMePlease",
       CITYID         = "GFSHCPCityId",
       UNITID         = "GFSHCPUnitId";
 
@@ -115,8 +104,6 @@ define(function(require){
       this.filteredData   = null;
       // * la referencia a los datos agregados por municipio o estado
       this.currentData    = null;
-      // * la referencia a la información para graficar
-      //this._currentData   = null;
       // * la referencia a los puntos agrupados x ubicación
       this._currentPoints = null;
       // * la referencia al mapa de configuración seleccionado
@@ -172,19 +159,6 @@ define(function(require){
       this.UImapSelector    = null;
       // * El selector del nivel del mapa (estado, municipio)
       this.UIlevelSelector  = null;
-      
-      // * El selector de filtros
-      //this.UIfilterSelector = null;
-      // * El selector de año
-      //this.UIyearSelector = null;
-      // * El selector de ramo
-      //this.UIbranchSelector = null;
-      // * El selector de estado
-      //this.UIstateSelector = null;
-      // * El selector de ciudad
-      //this.UIcitySelector = null;
-      // * El selector de ejecutor
-      //this.UIunitSelector = null;
       // * los <select> de los filtros extra
       this.UIextraFiltersSelector = null;
       //
@@ -196,7 +170,6 @@ define(function(require){
       this._stateExtraStyle             = this._stateExtraStyle.bind(this);
       this._cityStyle                   = this._cityStyle.bind(this);
       this._cityExtraStyle              = this._cityStyle.bind(this);
-      //this._enableFilterChange          = this._enableFilterChange.bind(this);
       this.renderMapSelectorChange      = this.renderMapSelectorChange.bind(this);
       this.renderExtraMapSelectorChange = this.renderExtraMapSelectorChange.bind(this);
       this.updateUILevelSelectorChange  = this.updateUILevelSelectorChange.bind(this);
@@ -219,8 +192,6 @@ define(function(require){
       if(this.UIMapCartFilter){
         // * inicia el engine de filtrado
         this.filterModule = new FILTERMODULE(this, this.UIMapCartFilter, this.updateData);
-        // * el selector de filtros
-        //this.renderFilterSelector();
       }
       
 
@@ -238,7 +209,6 @@ define(function(require){
 
       // [7.2] HABILITA EL REVERSE GEOCODING
       this.enableReverseGeocofing();
-      // var geocoder = new google.maps.Geocoder;
 
       // [8] LOADER 
       this.loaderStop();
@@ -266,7 +236,6 @@ define(function(require){
           url       = null,
           search    = "",
           that      = this;
-          // APIKEY;
 
       form.addEventListener("submit", function(e){
         e.preventDefault();
@@ -285,7 +254,6 @@ define(function(require){
             that.map.setView(latlng, that.settings.ux.findMeZoom);
           }
         });
-        // encodeURI
       });
 
     },
@@ -352,7 +320,6 @@ define(function(require){
           filter.default = +initial[filter.field] || initial[filter.field];
         }
       }, this);
-
 
       defaults = filters.filter(function(filter){
         return filter.hasOwnProperty("default");
@@ -449,7 +416,6 @@ define(function(require){
         if(this.currentMap.config.multiple){
           this._currentPoints = this.groupPoints();
         }
-
 
         this.renderPointsLayer(item);
         
@@ -885,14 +851,6 @@ define(function(require){
 
           // agrega el mapa al selector de mapas
           that.addExtraMapToExtraMapSelector(item);
-
-          // si es el seleccionado, lo ejectura
-          /*
-          if(+index === +active){
-            that.getLayer(item);
-            that.updateUILevelSelector(item);
-          }
-          */
         });
       }, this);
     },

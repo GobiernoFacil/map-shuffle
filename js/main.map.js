@@ -16,18 +16,8 @@ require.config({
     json       : 'libs/json',
     async      : 'libs/async',
     classyBrew : "libs/classybrew.min",
-    jquery     : "libs/jquery-3.1.1.min",
-    //bootstrap  : "libs/bootstrap.min",
-    //btable     : "libs/bootstrap-table.min",
-    //tableExport: "libs/tableExport.min",
-    //bootstrapTableExport: "libs/bootstrap-table-export"
-  },
-  shim : {
-    //"bootstrap" : { "deps" :['jquery'] },
-    //"tableExport" : { "deps" :['jquery'] },
-    //"btable" : {"deps" : ['bootstrap']},
-    //"bootstrapTableExport" : {"deps" : ["btable"]}
-  },
+    jquery     : "libs/jquery-3.1.1.min"
+  }
 });
 
 var GFSHCPMapApp;
