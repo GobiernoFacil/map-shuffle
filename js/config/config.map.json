@@ -67,25 +67,9 @@
         "prevPageBtn" : "GF-SHCP-CONTROL-PREV"
       }
     },
-    "filterSelector" : {
-      "container" : "div",
-      "class" : "",
-      "id" : "GF-SHCP-filter-selector",
-      "position" : "topleft",
-      "cart" : "GF-SHCP-cart-list",
-      "selectors" : {
-        "filtersId"       : "GF-SHCP-CONTAINER-FILTERS",
-        "extraFiltersId"  : "GF-SHCP-CONTAINER-EXTRA-FILTERS",
-        "filtersContainers" : {
-          "yearContainer"   : "GF-SHCP-CONTROL-YEAR",
-          "stateContainer"  : "GF-SHCP-CONTROL-STATE",
-          "cityContainer"  : "GF-SHCP-CONTROL-CITY",
-          "branchContainer" : "GF-SHCP-CONTROL-BRANCH",
-          "unitContainer" : "GF-SHCP-CONTROL-UNIT"
-        },
-        "extraFiltersContainersPrefix" : "GF-SHCP-CONTROL-EXTRA-"
-      }
-    },
+    "filterSelector" : "GF-SHCP-filter-selector",
+    "mapCart" : "GF-SHCP-cart-list",
+
     "barsTool" : {
       "container"           : "GF-SHCP-bars-tool",
       "singleLocation"      : "GF-SHCP-bars-app-single-location",

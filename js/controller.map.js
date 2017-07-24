@@ -187,7 +187,7 @@ define(function(require){
       // * los <select> de los filtros extra
       this.UIextraFiltersSelector = null;
       //
-      this.UIMapCartFilter = document.getElementById(this.settings.ui.filterSelector.cart);
+      this.UIMapCartFilter = document.getElementById(this.settings.ui.mapCart);
 
       // [2] ARRREGLA EL SCOPE DE ALGUNAS FUNCIONES
       // ----------------------------------------------------------------------
@@ -200,6 +200,7 @@ define(function(require){
       this.renderExtraMapSelectorChange = this.renderExtraMapSelectorChange.bind(this);
       this.updateUILevelSelectorChange  = this.updateUILevelSelectorChange.bind(this);
       this.goToUserLocation             = this.goToUserLocation.bind(this);
+      this.updateData                   = this.updateData.bind(this);
       
       // [4] INICIA EL MAPA DE LEAFLET
       // ----------------------------------------------------------------------
@@ -214,12 +215,9 @@ define(function(require){
       // * el selector de mapas extra
       this.renderExtraMapSelector();
 
-
-      //console.log(this, this.UIMapCartFilter, new Function());
-
       if(this.UIMapCartFilter){
         // * inicia el engine de filtrado
-        this.filterModule = new FILTERMODULE(this, this.UIMapCartFilter, new Function());
+        this.filterModule = new FILTERMODULE(this, this.UIMapCartFilter, this.updateData);
         // * el selector de filtros
         this.renderFilterSelector();
       }
@@ -406,6 +404,9 @@ define(function(require){
     },
 
     updateData : function(data){
+
+      console.log("new data:", data);
+      this.filteredData = data;
       this.renderLayer(this.currentMap);
     },
 
@@ -420,7 +421,7 @@ define(function(require){
 
       // [1] elimina el layer anterior, ya sea puntos, área o mapa extra
       //
-      // this.cleanLayers();
+      this.cleanLayers();
 
       // [2] actualiza las referencia internas
       //
@@ -455,6 +456,7 @@ define(function(require){
       }
       // C) Es un mapa de puntos definidos por latitud y longitud
       else{
+        console.log("is point");
         this.currentData = null;
         // filtra los puntos que no tienen localización
         this.filteredData = ! this.currentMap.config.disable ? this.filteredData : this.filteredData.filter(function(d){
@@ -468,6 +470,7 @@ define(function(require){
 
 
         this.renderPointsLayer(item);
+        
         if(item.config.api){
           this.updatePagination();
         }
@@ -480,6 +483,7 @@ define(function(require){
         this.enableFilters(item);
       }
       */
+      //this.enableFilters();
 
       // [5] Actualiza las opciones de UI
       //
@@ -519,14 +523,14 @@ define(function(require){
         this.barsTool.render();
       }
       else{
-        console.log("no bars tool");
+        
       }
 
       if(this.searchTool){
         this.searchTool.render();
       }
       else{
-        console.log("no search tool");
+        
       }
     },
 
@@ -974,7 +978,6 @@ define(function(require){
                     return fil.type == "city";
                 })[0];
 
-      //console.log(hasCity, hasUnit);
       // [1] Si es un api la fuente, actualiza el url
       //
       if(conf.api && conf.type == "area"){
@@ -1012,6 +1015,7 @@ define(function(require){
         // * el id interno del mapa desplegado
         that.currentMapId = item.idex;
         that.filteredData = item.data.slice();
+        that.enableFilters();
         that.renderLayer(item);
 
         that.loaderStop("ya cargó el mapa");
@@ -1520,6 +1524,55 @@ define(function(require){
       */
     },
 
+    enableFilters : function(){
+      var filters = this.currentMap.config.filters.concat(this.currentMap.config.extraFilters || []),
+          container = document.getElementById(this.settings.ui.filterSelector),
+          stateFilter,
+          cityFilter,
+          branchFilter,
+          unitFilter;
+
+      filters.forEach(function(filter){
+        var select;
+
+        if(filter.type == "state"){
+          stateFilter = this.filterModule.renderStateSelector(filter, container);
+          //this.filters.push(stateFilter);
+        }
+        
+        else if(filter.type == "city"){
+            // renderCitySelector : function(filter, container)
+          cityFilter = this.filterModule.renderCitySelector(filter, container);
+            //this.filters.push(cityFilter);
+        }
+        
+
+        else if(filter.type == "branch"){
+          // renderCitySelector : function(filter, container)
+          cityFilter = this.filterModule.renderBranchSelector(filter, container);
+          //this.filters.push(branchFilter);
+        }
+
+        
+
+        else if(filter.type == "unit"){
+          // renderCitySelector : function(filter, container)
+          unitFilter = this.filterModule.renderUnitSelector(filter, container);
+          //this.filters.push(unitFilter);
+        }
+        
+        else{
+          this.filterModule.renderOtherSelector(filter, container);
+        }
+        
+
+
+      }, this);
+
+    },
+
+
+    /*
     enableFilters : function(item){
       this._disableExtraFilters();
 
@@ -1590,6 +1643,7 @@ define(function(require){
         }, this);
       }
     },
+    */
 
     _disableExtraFilters : function(){
       var extras = document.querySelectorAll("." + XFILTERCLASS);
@@ -1831,7 +1885,6 @@ define(function(require){
         stateName = this.lists.estadosName.states.filter(function(st){
           return +st.id == +val;
         })[0];
-        console.log(stateName, val);
         this.map.setView(new L.LatLng(stateName.lat, stateName.lng), stateZoom);
       }
 
@@ -2131,7 +2184,6 @@ define(function(require){
               x = String(point[0]).slice(0, -optNum);
               y = String(point[1]).slice(0, -optNum);
 
-              // console.log(x.length, x, y.length, y);
               point[0] = x.search(".") != -1 ? (+x || point[0]) : point[0];
               point[1] = y.search(".") != -1 ? (+y || point[1]) : point[1];
 
