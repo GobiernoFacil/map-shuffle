@@ -15,16 +15,16 @@ define(function(require){
   PREFIX               = "GF-SHCP-FILTER-",
   SELECTALL            = "tooooooooodo",
   SELECTALLSTATES      = "Todo México",
-  SELECTSTATELABEL     = "estado",
+  SELECTSTATELABEL     = "Estado",
   SELECTEMPTYCITY      = "",
-  SELECTALLCITIES      = "selecciona un municipio",
-  SELECTCITYLABEL      = "municipio",
+  SELECTALLCITIES      = "Selecciona un municipio",
+  SELECTCITYLABEL      = "Municipio",
   SELECTALLBRANCHES    = "Todos los ramos",
-  SELECTBRANCHLABEL    = "ramo",
+  SELECTBRANCHLABEL    = "Ramo",
   SELECTEMPTYUNIT      = "",
-  SELECTALLUNITS       = "selecciona una unidad ejecutora",
-  SELECTUNITLABEL      = "unidad ejecutora",
-  SELECTALLTEXT        = "selecciona un filtro";
+  SELECTALLUNITS       = "Selecciona una unidad ejecutora",
+  SELECTUNITLABEL      = "Unidad ejecutora",
+  SELECTALLTEXT        = "Selecciona un filtro";
 
   var filterDataConstructor = function(parent, cart, callback){
 
