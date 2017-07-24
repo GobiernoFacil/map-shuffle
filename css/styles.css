@@ -1661,6 +1661,18 @@ h1 {
       .advanced_s form input[type="submit"]:hover,
       .compare_s form input[type="submit"]:hover {
         background: #462b5f; }
+  .advanced_s .btn,
+  .compare_s .btn {
+    background: #7a4ba5;
+    border: 0;
+    color: white;
+    display: block;
+    height: 40px;
+    text-align: center;
+    width: 100%; }
+    .advanced_s .btn:hover,
+    .compare_s .btn:hover {
+      background: #462b5f; }
   .advanced_s .bootstrap-table,
   .compare_s .bootstrap-table {
     font-family: "soberana_sans", Helvetica, Arial, sans-serif; }
