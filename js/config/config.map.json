@@ -122,7 +122,7 @@
     "findMeZoom" : 14,
     "changeStateZoom" : 9,
     "geocoding"  : "https://maps.googleapis.com/maps/api/geocode/json",
-    "enableBarsTool" : 1,
+    "enableBarsTool" : 0,
     "enableSearchTool" : 1,
     "pointNavigationTemplate" : "<a class=\"GF-SHCP-point-prev-btn\" href=\"#\">anterior</a> <span class=\"GF-SHCP-point-current\"></span>/<span class=\"GF-SHCP-point-total\"></span><a class=\"GF-SHCP-point-next-btn\" href=\"#\">siguiente</a></p>",
     "pointNavigationPrevId" : "GF-SHCP-point-prev-btn",

@@ -191,7 +191,7 @@ define(function(require){
 
       if(this.UIMapCartFilter){
         // * inicia el engine de filtrado
-        this.filterModule = new FILTERMODULE(this, this.UIMapCartFilter, this.updateData);
+        this.filterModule = new FILTERMODULE(this, this.UIMapCartFilter, this.updateData, " ");
       }
       
 

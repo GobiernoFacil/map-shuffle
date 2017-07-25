@@ -28,7 +28,7 @@ define(function(require){
   SELECTUNITLABEL      = "Unidad ejecutora",
   SELECTALLTEXT        = "Selecciona un filtro";
 
-  var filterDataConstructor = function(parent, cart, callback){
+  var filterDataConstructor = function(parent, cart, callback, className){
 
     var filterModule  = {
       filters      : [],
@@ -167,7 +167,8 @@ define(function(require){
         obj = {
           id        : PREFIX + _.uniqueId(),
           label     : filter.title || col,
-          dataField : col
+          dataField : col,
+          className : (className || "col-sm-4")
         };
 
         item.innerHTML = template(obj);
@@ -202,7 +203,8 @@ define(function(require){
         obj = {
           id        : PREFIX + _.uniqueId(),
           label     : SELECTSTATELABEL,
-          dataField : col
+          dataField : col,
+          className : (className || "col-sm-4")
         };
 
         item.innerHTML = template(obj);
@@ -240,7 +242,8 @@ define(function(require){
         obj = {
           id        : PREFIX + _.uniqueId(),
           label     : SELECTCITYLABEL,
-          dataField : col
+          dataField : col,
+          className : (className || "col-sm-4")
         };
 
         item.innerHTML = template(obj);
@@ -270,7 +273,8 @@ define(function(require){
         obj = {
           id        : PREFIX + _.uniqueId(),
           label     : SELECTBRANCHLABEL,
-          dataField : col
+          dataField : col,
+          className : (className || "col-sm-4")
         };
 
         item.innerHTML = template(obj);
@@ -309,7 +313,8 @@ define(function(require){
         obj = {
           id        : PREFIX + _.uniqueId(),
           label     : SELECTBRANCHLABEL,
-          dataField : col
+          dataField : col,
+          className : (className || "col-sm-4")
         };
 
         item.innerHTML = template(obj);
@@ -349,7 +354,8 @@ define(function(require){
         obj = {
           id        : PREFIX + _.uniqueId(),
           label     : SELECTUNITLABEL,
-          dataField : col
+          dataField : col,
+          className : (className || "col-sm-4")
         };
 
         item.innerHTML = template(obj);
@@ -372,12 +378,13 @@ define(function(require){
             col       = filter.field,
             item      = document.createElement(FILTERCONTAINER),
             template  = _.template(FILTER),
-            list, html, obj, select;
+            list, html, obj, select, $select;
 
         obj = {
           id        : PREFIX + _.uniqueId(),
           label     : filter.title || col,
-          dataField : col
+          dataField : col,
+          className : (className || "col-sm-4")
         };
 
         item.innerHTML = template(obj);
@@ -403,9 +410,9 @@ define(function(require){
 
         container.appendChild(item);
 
-        // $("#" + obj.id).selectize({items : ["rojo", "negro"]});
+        $select = $("#" + obj.id).selectize({items : ["rojo", "negro"]});
 
-        this.enableFiltering(filter, select);
+        this.enableFilteringV2(filter, $select);
 
         return item;
       },
@@ -528,7 +535,7 @@ define(function(require){
 
           var value = select.value,
               exist = that.filters.filter(function(fil){
-                return fil.type == filter.type && fil.value == select.value;
+                return fil.type == filter.type && fil.value == value;
               })[0];
 
           if(value == SELECTALL || exist){
@@ -575,9 +582,62 @@ define(function(require){
         });
       },
 
-      enableFilteringV2 : function(ul, field, value){
-        var _items = ul.querySelectorAll("li"),
-            items  = Array.prototype.slice.apply(_items);
+      enableFilteringV2 : function(filter, _select){
+
+        var that   = this,
+            select = _select[0].selectize,
+            newFilter,
+            parentFilter;
+        select.on("change", function(e){
+          console.log(select, select.items);
+
+          var value = select.items[0],
+              exist = that.filters.filter(function(fil){
+                return fil.type == filter.type && fil.value == value;
+              })[0];
+
+          if(value == SELECTALL || exist){
+            return;
+          }
+          else{
+            if(filter.type == "city"){
+              if(String(value).length == 5){
+                parentFilter = value.slice(0,2);
+              }
+              else{
+                parentFilter = value.slice(0,1);
+              }
+            }
+            else if(filter.type == "unit"){
+              parentFilter = value.split("-")[0];
+            }
+            else{
+              parentFilter = null;
+            }
+
+            newFilter = {
+              id           :  _.uniqueId(),
+              value        : value,
+              type         : filter.type,
+              field        : filter.field,
+              parentFilter : parentFilter
+            };
+
+            that.filters.push(newFilter);
+          }
+
+          that.renderCartItem(newFilter);
+
+          if(filter.type == "state" && that.citySelect){
+            that.updateCitySelector(select, that.citySelect);
+          }
+
+          if(filter.type == "branch" && that.unitSelect){
+            that.updateUnitSelector(select, that.unitSelect);
+          }
+
+          that.filter();
+        });
       },
 
       _makeList : function(data, filter){
