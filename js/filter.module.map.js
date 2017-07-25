@@ -10,6 +10,7 @@ define(function(require){
   underscore           = require("underscore"),
   FILTER               = require("text!templates/filter-item.html"),
   FILTERV2             = require("text!templates/filter-item-v2.html"),
+  SEARCH               = require("text!templates/search-item.html"),
   FILTERCONTAINER      = "div",
   FILTERCONTAINERCLASS = "col-sm-4",
   PREFIX               = "GF-SHCP-FILTER-",
@@ -37,15 +38,25 @@ define(function(require){
       unitSelect   : null,
       data         : null,
       filteredData : null,
+      searchInput  : null,
 
       filter : function(){
         var filterCols = _.uniq(_.pluck(this.filters, "field")),
-            _data      = parent.currentMap.data.slice();
+            _data      = parent.currentMap.data.slice(),
+            searchField,
+            value;
 
         filterCols.forEach(function(field){
           _data = this._filterData(_data, field, this.filters);
         }, this);
-        
+
+        if(this.searchInput && this.searchInput.value){
+          searchField = this.searchInput.getAttribute("data-field");
+          value = this.searchInput.value;
+          _data = _data.filter(function(d){
+            return d[searchField].search(value) != -1;
+          });
+        }
 
         console.log(_data);
 
@@ -142,6 +153,41 @@ define(function(require){
         }
 
         return _data;
+      },
+
+      renderSearchInput : function(filter, container){
+        var 
+            col       = filter.field,
+            item      = document.createElement(FILTERCONTAINER),
+            template  = _.template(SEARCH),
+            //states    = parent.lists.estadosName.states,
+            html, obj, form, input;
+
+        obj = {
+          id        : PREFIX + _.uniqueId(),
+          label     : filter.title || col,
+          dataField : col
+        };
+
+        item.innerHTML = template(obj);
+        input = item.querySelector("input");
+        form  = item.querySelector("form");
+
+        container.appendChild(item);
+
+        this.searchInput = input;
+
+        this.enableSearch(filter, form, input);
+
+        return item;
+      },
+
+      enableSearch : function(filter, form, input){
+        var that = this;
+        form.addEventListener("submit", function(e){
+          e.preventDefault();
+          that.filter();
+        });
       },
 
       renderStateSelector : function(filter, container){

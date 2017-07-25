@@ -23,6 +23,7 @@
   "data"    : ["key","name","ramo","unidad","state","lat","lng","advance","ciclo","classification"],
   "current" : {},
   "filters" : [
+    {"type" : "search", "field" : "name", "title" : "proyecto"},
     {"type" : "state", "field" : "state"},
     {"type" : "branch", "field" : "ramo"},
     {"type" : "unit", "field" : "id_unidad"},

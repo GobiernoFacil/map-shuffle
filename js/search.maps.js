@@ -11,6 +11,7 @@ define(function(require){
       underscore   = require("underscore"),
       TEMPLATE     = require("text!templates/advanced-search.html"),
       CONFIG       = require("json!config/config.map.json"),
+      SEARCH       = "GF-SHCP-search-app-query",
       FIlterModule = require("filter.module.map");
 
   var SearchControllerConstructor = function(parent){
@@ -135,11 +136,18 @@ define(function(require){
             stateFilter,
             cityFilter,
             branchFilter,
-            unitFilter;
+            unitFilter,
+            searchFilter;
 
         filters.forEach(function(filter){
           var select;
-          if(filter.type == "state"){
+          
+          if(filter.type == "search"){
+            searchFilter = this.filterModule.renderSearchInput(filter, document.getElementById(SEARCH));
+            //this.filters.push(stateFilter);
+          }
+
+          else if(filter.type == "state"){
             stateFilter = this.filterModule.renderStateSelector(filter, filterMenu);
             this.filters.push(stateFilter);
           }

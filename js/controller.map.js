@@ -1372,12 +1372,17 @@ define(function(require){
           stateFilter,
           cityFilter,
           branchFilter,
-          unitFilter;
+          unitFilter,
+          searchFilter;
 
       container.innerHTML = "";
 
       filters.forEach(function(filter){
         var select;
+
+        if(filter.type == "search"){
+          searchFilter = this.filterModule.renderSearchInput(filter, container);
+        }
 
         if(filter.type == "state"){
           stateFilter = this.filterModule.renderStateSelector(filter, container);
