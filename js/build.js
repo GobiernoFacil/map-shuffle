@@ -7,7 +7,9 @@
     underscore : "libs/underscore-min",
     text       : 'libs/text',
     json       : 'libs/json',
-    classyBrew : "libs/classybrew.min"
+    async      : 'libs/async',
+    classyBrew : "libs/classybrew.min",
+    jquery     : "libs/jquery-3.1.1.min"
   },
   include : ['requireLib'],
   name : "main.map",

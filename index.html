@@ -1,0 +1,271 @@
+<!DOCTYPE html><html>
+<head>
+  <title>Mapa versión 2</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="js/libs/leaflet.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+
+</head>
+<body>
+
+<div class="map_container">
+  <!-- MAIN MAP -->
+  <div id="map"> 
+    <!--paginación, categorías-->
+    <div id="GF-SHCP-map" style="width:100%; height:100%; frameborder:0; scrolling:no;"></div>
+    <!--<div id="GF-SHCP-bottom-tools"></div>-->
+    <!-- 
+          Color guide : GF-SHCP-color-guide 
+          Genera un <ul> con los distintos colores para
+          gradientes. El template de cada <li> está
+          en js/templates/color-band.html
+        -->
+        <div id="GF-SHCP-color-guide" style="display: none"></div>
+  </div>
+  
+   <div class="col-sm-3 zero sidebar">
+    <header class="top">
+     <a class="tp">Transparencia Presupuestaria</a>
+    </header>
+    <div class="col-sm-12 filter_container">
+
+
+      <!--
+      TOP CONTAINER : GF-SHCP-top-tools
+      aquí se cargan las herramientas de la parte 
+      superior izquierda en el diseño original. Sin diseño,
+      este div va arriba del mapa
+      -->
+      <div id="GF-SHCP-top-tools">
+        
+      </div>
+      
+      <div id="GF-SHCP-filter-selector"></div>
+      
+       <!-- extra layers -->
+        <div id="GF-SHCP-extra-map-list">
+          <h3><label>Agregar capa para comparar:</label></h3>
+            <select></select>         
+        </div>
+
+        <!-- embed -->
+        <form id="GF-SHCP-embed-form">
+          <h3>Agrega este mapa a tu sitio copiando el siguiente código:</h3>
+      <input type="text" name="embed" class="inputs">
+        </form>
+ 
+      
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="col-sm-9 col-sm-offset-3 zero">
+    <header class="top title_side">
+      <div class="row">
+        <div class="col-sm-9">
+        <h1 id="GF-SHCP-MAP-NAME">Obra Pública Abierta</h1>
+        </div>
+        <div class="col-sm-3 right">
+          <!-- 
+          Project counter : GF-SHCP-project-counter
+          aquí se despliegan el número de proyectos 
+          desplegados en el mapa después de filtrarlos
+          -->
+          <h2>Proyectos:  <span id="GF-SHCP-project-counter">0</span></h2>
+        </div>
+      </div>
+    </header>
+  <div class="filters">
+
+    <!--
+    EL "CARRO DE COMPRAS" DEL MAPA : sin este, los filtros no se inician en el mapa
+    -->
+    <ul id="GF-SHCP-cart-list" class="cart-list"></ul>
+
+
+  </div>
+  
+  </div>
+  
+</div>
+
+
+<div class="container">
+  <div class="row">  
+    
+
+    <!-- DATA BARS -->
+    <div id="GF-SHCP-bars-tool"></div>
+  
+  <div class="clearfix"></div>
+  
+  <!-- el ul con buscador-->  
+  <div class="row">
+    <div class="col-sm-4">
+      <div><a href="#" id="GF-btn-ul" class="init">Seleccionar Opción </a></div>
+      <div id="GF-container-ul">    
+        <input type="text" id="gfInput" onkeyup="myFunction()" placeholder="Search for names..">
+        <ul id="gfUL" class="filter_li">
+          
+           <!-- <li class="init"><a>Seleccionar opción</a> </li>-->
+          <li><a href="#">Adele</a></li>
+          <li><a href="#">Agnes</a></li>
+          <li><a href="#">Billy</a></li>
+          <li><a href="#">Bob</a></li>
+          <li><a href="#">Calvin</a></li>
+          <li><a href="#">Christina</a></li>
+          <li><a href="#">Cindy</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+ 
+  <!--
+    SEARCH TABLE : GF-SHCP-table-tool
+    Esta es la búsqueda avanzada
+  -->
+  <div id="GF-SHCP-table-tool"></div>
+
+      
+    </div><!-- ends row-->
+</div>
+
+<!-- footer -->
+  <footer>
+    <div class="container">
+      <div class="content">
+        <div class="row">
+          <div class="col-sm-4">
+            <h3>Contacto</h3>
+             <p class="data">Palacio Nacional <br>
+               Plaza de la Constitución s/n<br>
+               Colonia Centro, Delegación Cuauhtémoc<br>
+               México, Ciudad de México</p>
+          </div>
+
+          <div class="col-sm-4">
+            <ul>
+              <li><a class="linksfoot" href="/es/PTP/Glosario">Glosario</a></li>
+              <li><a class="linksfoot" href="/es/PTP/Mapa_de_Sitio">Mapa de sitio</a></li>
+              <li><a class="linksfoot" href="/es/PTP/Estadisticas">Estadísticas del Portal</a></li>
+            </ul>
+            <ul>
+              <!-- fb -->
+              <li><a href="http://www.facebook.com/TransparenciaPresupuestaria" class="fb" target="_blank">Facebook</a></li>
+              <!--tw-->
+              <li><a href="//twitter.com/TPresupuestaria" class="tw" target="_blank">Twitter</a></li>                 <!--youtube-->
+              <li> <a href="http://www.youtube.com/channel/UCokAhIwndny0k2ROksI-qqg?sub_confirmation=1" class="youtube" title="Youtube" target="_blank">Youtube</a>
+              </li>
+              <li> <a href="mailto:trans_presupuestaria@hacienda.gob.mx" target="_blank" class="email" title="trans_presupuestaria@hacienda.gob.mx">Email</a></li>
+            </ul>
+          </div>
+
+          <div class="col-sm-4 right">
+            <h3>Última actualización:</h3>
+             <p class="data">Jueves 1 de diciembre de 2016 a las 14:25 hrs.</p>
+             <p class="right"><a href="http://www.hacienda.gob.mx" class="shcp">Secretaría de Hacienda y Crédito Público</a><span class="clearfix"></span></p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="author">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4">
+            <p class="data"><a href="http://www.transparenciapresupuestaria.gob.mx/" class="tp">Transparencia Presupuestaria</a> <a href="#" class="linksfoot">Términos y Condiciones del uso de la información.</a></p>
+          </div>
+          <div class="col-sm-4">
+            <p class="data center">Forjado artesanalmente por <a href="http://www.gobiernofacil.com" class="gobiernofacil" title="Ir a Gobierno Fácil">Gobierno Fácil</a></p>
+          </div>
+          <div class="col-sm-4">
+            <p class="data right"><span class="usaid">USAID</span></p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<div id="GF-SHCP-loader" class="loader">
+  <img src="img/Preloader_3.gif">
+</div>
+
+  <script>
+    var GFSHCPcallbacks = {
+          filterChange : function(filters, currentMap, currentData){
+            var header = document.getElementById("GF-SHCP-MAP-NAME");
+            header.innerHTML = currentMap.config.name;
+          },
+
+          filterInitialize : function(app){
+          }
+        },
+
+        GFSHCPLoaderStart = function(stuff){
+          document.getElementById("GF-SHCP-loader").style.display = "block";
+        };
+
+        GFSHCPLoaderStop = function(stuff){
+         document.getElementById("GF-SHCP-loader").style.display = "none";
+        };
+
+    GFSHCPLoaderStart("está iniciando esta maroma");
+  </script>
+
+
+  <!-- versión de desarrollo -->
+  <!--<script data-main="js/main.map" src="js/libs/require.js"></script>-->
+  <!-- versión de producción -->
+  <script src="/js/main-built.js"></script>
+  <!-- versión de producción: todavía no :P -->
+  
+  
+  <!-- aca va lo del ul con buscador -->
+  <script src="js/libs/jquery-3.1.1.min.js"></script>
+  <script>
+    function myFunction() {
+    // Declare variables
+    var input, filter, ul, li, a, i;
+    input = document.getElementById('gfInput');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("gfUL");
+    li = ul.getElementsByTagName('li');
+
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
+
+  $( document ).ready(function() {
+      $("#GF-btn-ul").on("click", function(e) {
+          e.preventDefault();
+        $("#GF-container-ul").toggle();
+      });
+   
+    
+    $("ul.filter_li").on("click", ".init", function(e) {
+      e.preventDefault();
+     $("#GF-container-ul").toggle();
+    });
+    
+    var allOptions = $("ul").children('li:not(.init)');
+    $("ul").on("click", "li:not(.init)", function(e) {
+       e.preventDefault();
+        allOptions.removeClass('selected');
+        $(this).addClass('selected');
+        $("#GF-btn-ul").html($(this).html());
+        $("#GF-container-ul").toggle();
+    });
+  });
+   </script>
+</body>
+</html>
