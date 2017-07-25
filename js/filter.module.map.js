@@ -11,6 +11,7 @@ define(function(require){
   FILTER               = require("text!templates/filter-item.html"),
   FILTERV2             = require("text!templates/filter-item-v2.html"),
   SEARCH               = require("text!templates/search-item.html"),
+  selectize            = require("selectize"),
   FILTERCONTAINER      = "div",
   FILTERCONTAINERCLASS = "col-sm-4",
   PREFIX               = "GF-SHCP-FILTER-",
@@ -401,6 +402,8 @@ define(function(require){
         
 
         container.appendChild(item);
+
+        // $("#" + obj.id).selectize({items : ["rojo", "negro"]});
 
         this.enableFiltering(filter, select);
 

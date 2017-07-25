@@ -16,7 +16,11 @@ require.config({
     json       : 'libs/json',
     async      : 'libs/async',
     classyBrew : "libs/classybrew.min",
-    jquery     : "libs/jquery-3.1.1.min"
+    jquery     : "libs/jquery-3.1.1.min",
+    selectize  : "libs/selectize.min"
+  },
+  shim : {
+    selectize : ["jquery"]
   }
 });
 
