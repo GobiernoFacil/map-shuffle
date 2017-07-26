@@ -59,7 +59,12 @@ define(function(require){
           });
         }
 
-        callback(_data);
+        callback(_data, this.filters);
+      },
+
+      clearFilters : function(){
+        this.filters = [];
+        this.filter();
       },
 
       _filterData : function(_data, field, _filters){

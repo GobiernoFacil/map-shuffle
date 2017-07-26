@@ -129,6 +129,6 @@
     "pointNavigationNextId" : "GF-SHCP-point-next-btn",
     "pointNavigationCurrentId" : "GF-SHCP-point-current",
     "pointNavigationTotalId" : "GF-SHCP-point-total",
-    "searchPageSize" : 50
+    "searchPageSize" : 10
   }
 }

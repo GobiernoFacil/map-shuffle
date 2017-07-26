@@ -223,50 +223,5 @@
   <!-- versión de producción: todavía no :P -->
   
   
-  <!-- aca va lo del ul con buscador 
-  <script src="js/libs/jquery-3.1.1.min.js"></script>
-  <script>
-    function myFunction() {
-    // Declare variables
-    var input, filter, ul, li, a, i;
-    input = document.getElementById('gfInput');
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("gfUL");
-    li = ul.getElementsByTagName('li');
-
-    // Loop through all list items, and hide those who don't match the search query
-    for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("a")[0];
-        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
-    }
-}
-
-
-  $( document ).ready(function() {
-      $("#GF-btn-ul").on("click", function(e) {
-          e.preventDefault();
-        $("#GF-container-ul").toggle();
-      });
-   
-    
-    $("ul.filter_li").on("click", ".init", function(e) {
-      e.preventDefault();
-     $("#GF-container-ul").toggle();
-    });
-    
-    var allOptions = $("ul").children('li:not(.init)');
-    $("ul").on("click", "li:not(.init)", function(e) {
-       e.preventDefault();
-        allOptions.removeClass('selected');
-        $(this).addClass('selected');
-        $("#GF-btn-ul").html($(this).html());
-        $("#GF-container-ul").toggle();
-    });
-  });
-   </script> -->
 </body>
 </html>
