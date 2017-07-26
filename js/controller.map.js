@@ -102,6 +102,8 @@ define(function(require){
       this.brew           = null;
       // * los datos filtrados
       this.filteredData   = null;
+      // * en el caso de info por api, la página actual
+      this.currentPage    = 1;
       // * la referencia a los datos agregados por municipio o estado
       this.currentData    = null;
       // * la referencia a los puntos agrupados x ubicación
@@ -110,6 +112,9 @@ define(function(require){
       this.currentMap     = null;
       // * la lista de filtros para los datos
       this.filters        = [];
+      // * la lista de buscadores... porque por alguna razón, 
+      //   en lugar de uno, hay que tener varios...
+      this.searchFilters  = [];
       // * la lista de mapas disponibles (archivos de configuración)
       this.layersConfig   = [];
       // * la lista de mapas extra disponibles (archivos de configuración)
@@ -373,8 +378,9 @@ define(function(require){
     // ACTUALIZA EL MAPA CON NUEVOS DATOS DESPUÉS FILTRAR
     //
     //
-    updateData : function(data){
+    updateData : function(data, filters, pagination){
       this.filteredData = data;
+      this.filters = filters;
       this.renderLayer(this.currentMap);
     },
 
@@ -873,7 +879,7 @@ define(function(require){
         return;
       }
 
-      this.loaderStart("voy a cargar un mapa");
+      this.loaderStart();
       
       var that    = this, 
           conf    = item.config,
@@ -895,6 +901,7 @@ define(function(require){
 
       // [1] Si es un api la fuente, actualiza el url
       //
+      
       if(conf.api && conf.type == "area"){
         src = src + "/" + conf.current.level + "/" + conf.current.value
       }
@@ -902,6 +909,10 @@ define(function(require){
       else if(conf.api && conf.type == "point"){
         src = src + "/" + "1";
       }
+
+      this.makeAPIURL(item);
+      
+
 
       // [2] carga el archivo con los datos para graficar
       //
@@ -933,8 +944,46 @@ define(function(require){
         that.enableFilters();
         that.renderLayer(item);
 
-        that.loaderStop("ya cargó el mapa");
+        that.loaderStop();
       });
+    },
+
+    makeAPIURL : function(item){
+      var that    = this, 
+          conf    = item.config,
+          src     = conf.src,
+          filters = this.filters,
+          url,
+          fields;
+
+      url = src + "?";
+
+      if(filters.length){
+        fields = _.uniq(_.pluck(filters, "field"));
+
+        fields.forEach(function(field){
+          var fa     = filters.filter(function(fil){
+                       return fil.field == field;
+                     }),
+              values = _.pluck(fa, "value");
+
+          console.log(fa, values);
+          url = url + field + "=" + values.join("|") + "&";
+        });
+
+      }
+
+      if(this.searchFilters.length){
+        this.searchFilters.forEach(function(sf){
+          if(sf.value){
+            url = url + sf.getAttribute("data-field") + "=" + sf.value + "&";
+          }
+        });
+      }
+
+      url = url + "page=" + this.currentPage;
+
+      console.log(encodeURI(url));
     },
 
     //
@@ -1382,6 +1431,7 @@ define(function(require){
     },
 
     enableFilters : function(){
+      this.enableFilters = [];
       var filters = this.currentMap.config.filters.concat(this.currentMap.config.extraFilters || []),
           container = document.getElementById(this.settings.ui.filterSelector),
           stateFilter,
@@ -1396,7 +1446,8 @@ define(function(require){
         var select;
 
         if(filter.type == "search"){
-          searchFilter = this.filterModule.renderSearchInput(filter, container);
+          // searchFilter = this.filterModule.renderSearchInput(filter, container);
+          this.searchFilters.push(this.filterModule.renderSearchInput(filter, container));
         }
 
         else if(filter.type == "state"){

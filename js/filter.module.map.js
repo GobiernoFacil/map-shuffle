@@ -188,7 +188,7 @@ define(function(require){
 
         this.enableSearch(filter, form, input);
 
-        return item;
+        return input;
       },
 
       enableSearch : function(filter, form, input){
