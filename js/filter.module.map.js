@@ -59,8 +59,6 @@ define(function(require){
           });
         }
 
-        console.log(_data);
-
         callback(_data);
       },
 
@@ -589,7 +587,6 @@ define(function(require){
             newFilter,
             parentFilter;
         select.on("change", function(e){
-          console.log(select, select.items);
 
           var value = select.items[0],
               exist = that.filters.filter(function(fil){

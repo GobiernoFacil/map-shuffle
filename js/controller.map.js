@@ -861,6 +861,19 @@ define(function(require){
     //
     getLayer : function(item){
       
+      if(item.data){
+        this.cleanLayers();
+        // * el mapa desplegado
+        this.currentMap   = item;
+        // * el id interno del mapa desplegado
+        this.currentMapId = item.idex;
+        this.filteredData = item.data.slice();
+        this.enableFilters();
+        this.renderLayer(item);
+
+        return;
+      }
+
       this.loaderStart("voy a cargar un mapa");
       
       var that    = this, 
@@ -1384,7 +1397,7 @@ define(function(require){
           searchFilter = this.filterModule.renderSearchInput(filter, container);
         }
 
-        if(filter.type == "state"){
+        else if(filter.type == "state"){
           stateFilter = this.filterModule.renderStateSelector(filter, container);
           //this.filters.push(stateFilter);
         }
@@ -1469,12 +1482,9 @@ define(function(require){
                     return +l.index == value;
                   })[0];
 
-      if(item.data){
-        this.renderLayer(item);
-      }
-      else{
-        this.getLayer(item);
-      }
+
+      this.getLayer(item);
+
 
       this.updateUILevelSelector(item);
     },
