@@ -70,7 +70,7 @@ define(function(require){
         prevBtn.addEventListener("click", this.prevPage);
         pageForm.addEventListener("submit", this.selectPage);
 
-        this.filterModule = new FIlterModule(parent, filterCart, this.updateData);
+        this.filterModule = new FIlterModule(parent, filterCart, this.updateData, null, pageSize);
         // this.filterModule.setCart(filterCart);
 
         this.renderFilters();
@@ -89,9 +89,14 @@ define(function(require){
         thead.appendChild(tr);
       },
 
-      updateData : function(_data){
+      updateData : function(_data, filters, pagination){
+
+        console.log(_data, filters, pagination);
         data = _data;
+        pages = pagination.pages;
+
         controller.renderItems(0);
+        controller.renderPagination();
       },
 
       renderItems : function(newPage){

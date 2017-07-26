@@ -28,7 +28,7 @@ define(function(require){
   SELECTUNITLABEL      = "Unidad ejecutora",
   SELECTALLTEXT        = "Selecciona un filtro";
 
-  var filterDataConstructor = function(parent, cart, callback, className){
+  var filterDataConstructor = function(parent, cart, callback, className, pageSize){
 
     var filterModule  = {
       filters      : [],
@@ -44,6 +44,8 @@ define(function(require){
       filter : function(){
         var filterCols = _.uniq(_.pluck(this.filters, "field")),
             _data      = parent.currentMap.data.slice(),
+            isApi      = parent.currentMap.config.api,
+            pagination = {},
             searchField,
             value;
 
@@ -59,7 +61,9 @@ define(function(require){
           });
         }
 
-        callback(_data, this.filters);
+        pagination.pages = Math.ceil( _data.length / (pageSize || 1) );
+
+        callback(_data, this.filters, pagination);
       },
 
       clearFilters : function(){
