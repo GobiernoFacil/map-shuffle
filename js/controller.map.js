@@ -65,7 +65,7 @@ define(function(require){
 
       // [8] define las constantes internas del sistema 
       // ----------------------------------------------------------------------
-      SELECTALL      = "_____",
+      SELECTALL      = "ಠ_ಠ",//"_____",
       CITYID         = "GFSHCPCityId",
       UNITID         = "GFSHCPUnitId";
 
@@ -176,11 +176,11 @@ define(function(require){
       this.goToUserLocation             = this.goToUserLocation.bind(this);
       this.updateData                   = this.updateData.bind(this);
       
-      // [4] INICIA EL MAPA DE LEAFLET
+      // [3] INICIA EL MAPA DE LEAFLET
       // ----------------------------------------------------------------------
       this.drawMap();
 
-      // [5] INICIA LOS ELEMENTOS DE UI
+      // [4] INICIA LOS ELEMENTOS DE UI
       // ----------------------------------------------------------------------
 
       // * el selector de mapa
@@ -195,25 +195,25 @@ define(function(require){
       }
       
 
-      // [6] CARGA LOS ARCHIVOS DE CONFIGURACIÓN Y DESPLIEGA EL MAPA SELECCIONADO
+      // [5] CARGA LOS ARCHIVOS DE CONFIGURACIÓN Y DESPLIEGA EL MAPA SELECCIONADO
       // ----------------------------------------------------------------------
       // * la configuración de los mapas principales
       this.loadMapsConfig();
       // * la configuración de los mapas extra (para comparar)
       this.loadExtraMapsConfig();
 
-      // [7] LA GEOLOCALIZACIÓN
+      // [6] LA GEOLOCALIZACIÓN
       // ----------------------------------------------------------------------
-      // [7.1] HABILITA EL GEOLOCALIZADOR Y LA OBTENCIÓN DE LAS COORDENADAS DEL USUARIO
+      // [6.1] HABILITA EL GEOLOCALIZADOR Y LA OBTENCIÓN DE LAS COORDENADAS DEL USUARIO
       this.enableUserLocation();
 
-      // [7.2] HABILITA EL REVERSE GEOCODING
+      // [6.2] HABILITA EL REVERSE GEOCODING
       this.enableReverseGeocofing();
 
-      // [8] LOADER 
+      // [7] LOADER 
       this.loaderStop();
 
-      // [9] HABILITA EL CALLBACK DE INICIO
+      // [8] HABILITA EL CALLBACK DE INICIO
       if(this.callbacks && this.callbacks.filterInitialize){
         this.callbacks.filterInitialize(this);
       }
@@ -723,7 +723,6 @@ define(function(require){
                 .setLatLng(latlng)
                 .setContent(content)
                 .openOn(that.map);
-                
           });
 
           if(link){
@@ -883,10 +882,13 @@ define(function(require){
           hasUnit = null,
           filters = conf.filters;
 
+      // revisa si el mapa tiene unidades ejecutoras, para generar un id único 
+      // para cada una
       hasUnit = ! filters ? false : filters.filter(function(fil){
                     return fil.type == "unit";
                   })[0];
-
+      // revisa si el mapa tiene municipios, para generar un id único 
+      // para cada uno
       hasCity = hasCity || filters.filter(function(fil){
                     return fil.type == "city";
                 })[0];
