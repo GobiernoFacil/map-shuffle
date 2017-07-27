@@ -40,7 +40,7 @@
     "basePath"  : "/js/config",
     "maps"      : ["escuelas100.map.json", "ramo23.map.json", "opa.map.json", "entidades.map.json"],
     "extras"    : ["poblacion.map.json"],
-    "current"   : 2,
+    "current"   : 3,
     "embedPath" : "http://localhost:8000/mapa.html" 
   },
   "ui" : {

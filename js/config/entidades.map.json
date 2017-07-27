@@ -2,7 +2,7 @@
   "name"  : "Entidades federativas",
   "type"  : "point",
   "level" : [],
-  "src"   : "https://mapas.gobiernofacil.com/api/entidades",
+  "src"   : "http://localhost:8001/api/entidadesv2",
   "file"  : "json",
   "api"   : true,
   "link"  : {
@@ -17,6 +17,7 @@
   "data"    : ["FOLIO","NOMBRE_PROYECTO","NUMERO_PROYECTO","ID_ENTIDAD_FEDERATIVA","ENTIDAD","ID_MUNICIPIO","MUNICIPIO","ID_LOCALIDAD","LOCALIDAD","LATITUD","LONGITUD","AMBITO","ID_RECURSO","RECURSO","CLAVE_PROGRAMA_PRESUPUESTARIO","PROGRAMA_PRESUPUESTARIO","ID_RAMO","RAMO","INSTITUCION_EJECUTORA","ID_CLASIFICACION","CLASIFICACION","ID_TIPOPPI","TIPOPPI","BENEFICIARIOS","INICIO","TERMINO","DIRECCION","ID_CONCURRENCIA_DE_RECURSOS","CONCURRENCIA","CICLO_RECURSO","AUTORIZADO_1","MODIFICADO_1","MINISTRADO_2","COMPROMETIDO_1","DEVENGADO_1","EJERCIDO_1","PAGADO_1","AVANCE_FINANCIERO","UNIDADMEDIDA","POBLACION_ANUAL","AVANCE_ESTIMADO_ANUAL","AVANCE_FISICO","ID_ESTATUS_FLUJO_VALIDACION","ESTATUS_FLUJO_VALIDACION","OBSER_FISICO_PER","KA_ESTATUS_3","DESC_ESTATUS_3"],
   "current" : {},
   "filters" : [
+    {"type" : "search", "field" : "NOMBRE_PROYECTO"},
     {"type" : "state", "field" : "ID_ENTIDAD_FEDERATIVA"},
     {"type" : "city", "field" : "ID_MUNICIPIO"},
     {"type" : "branch", "field" : "ID_RAMO"},

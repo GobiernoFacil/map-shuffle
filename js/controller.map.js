@@ -103,7 +103,9 @@ define(function(require){
       // * los datos filtrados
       this.filteredData   = null;
       // * en el caso de info por api, la página actual
-      this.currentPage    = 1;
+      this.currentPage    = 0;
+      // * en el caso de info por api, el total de páginas
+      this.totalPages     = null;
       // * la referencia a los datos agregados por municipio o estado
       this.currentData    = null;
       // * la referencia a los puntos agrupados x ubicación
@@ -425,9 +427,11 @@ define(function(require){
 
         this.renderPointsLayer(item);
         
+        /*
         if(item.config.api){
           this.updatePagination();
         }
+        */
       }
 
       // [5] Actualiza las opciones de UI
@@ -886,7 +890,8 @@ define(function(require){
           src     = conf.src,
           hasCity = conf.location.city,
           hasUnit = null,
-          filters = conf.filters;
+          filters = conf.filters,
+          src2    = this.makeAPIURL(item);
 
       // revisa si el mapa tiene unidades ejecutoras, para generar un id único 
       // para cada una
@@ -910,16 +915,17 @@ define(function(require){
         src = src + "/" + "1";
       }
 
-      this.makeAPIURL(item);
+      //this.makeAPIURL(item);
       
 
 
       // [2] carga el archivo con los datos para graficar
       //
-      d3[conf.file](src, function(error, data){
+      d3[conf.file](src2, function(error, data){
         if(conf.api && conf.type == "point"){
-          item.data     = data.results;
-          item.response = data;
+          item.data       = data.results;
+          item.response   = data;
+          that.totalPages = data.pages;
         }
         else{
           item.data     = data;
@@ -943,12 +949,13 @@ define(function(require){
         that.filteredData = item.data.slice();
         that.enableFilters();
         that.renderLayer(item);
+        if(item.config.api) that.updatePagination();
 
         that.loaderStop();
       });
     },
 
-    makeAPIURL : function(item){
+    makeAPIURL : function(item, page){
       var that    = this, 
           conf    = item.config,
           src     = conf.src,
@@ -967,7 +974,6 @@ define(function(require){
                      }),
               values = _.pluck(fa, "value");
 
-          console.log(fa, values);
           url = url + field + "=" + values.join("|") + "&";
         });
 
@@ -981,9 +987,9 @@ define(function(require){
         });
       }
 
-      url = url + "page=" + this.currentPage;
+      url = url + "page=" + (page || this.currentPage);
 
-      console.log(encodeURI(url));
+      return encodeURI(url);
     },
 
     //
@@ -1431,7 +1437,7 @@ define(function(require){
     },
 
     enableFilters : function(){
-      this.enableFilters = [];
+      this.searchFilters = [];
       var filters = this.currentMap.config.filters.concat(this.currentMap.config.extraFilters || []),
           container = document.getElementById(this.settings.ui.filterSelector),
           stateFilter,
@@ -1489,7 +1495,8 @@ define(function(require){
 
 
     updatePagination : function(){
-      var map     = this.currentMap,
+      var that    = this,
+          map     = this.currentMap,
           res     = map.response,
           conf    = this.settings.ui.pageSelector,
           id      = conf.id,
@@ -1519,8 +1526,79 @@ define(function(require){
       next    = document.getElementById(conf.controls.nextPageBtn);
       prev    = document.getElementById(conf.controls.prevPageBtn);
 
-      pageEl.value = page;
+      pageEl.value = page + 1;
       totalEl.innerHTML = total;
+
+      next.addEventListener("click", function(e){
+        e.preventDefault();
+
+        var page    = Number(that.currentPage) + 1,
+            src2    = that.makeAPIURL(that.currentMap, page),
+            item    = that.currentMap;
+            
+        d3[item.config.file](src2, function(error, data){
+          item.data        = data.results;
+          item.response    = data;
+          that.totalPages  = data.pages;
+          that.currentPage = data.page;
+
+          that.cleanLayers();
+          that.filteredData = item.data.slice();
+          that.renderLayer(item);
+
+          that.currentPage = data.page;
+
+          pageEl.value      = page + 1;
+          totalEl.innerHTML = that.totalPages;
+        });
+
+        console.log("next");
+      });
+
+      prev.addEventListener("click", function(e){
+        e.preventDefault();
+
+        console.log("prev");
+      });
+
+      /*
+     
+      
+
+
+      // [2] carga el archivo con los datos para graficar
+      //
+      d3[conf.file](src2, function(error, data){
+        if(conf.api && conf.type == "point"){
+          item.data     = data.results;
+          item.response = data;
+          that.totalPages = data.pages;
+        }
+        else{
+          item.data     = data;
+          item.response = null;
+        }
+
+        if(hasCity){
+          that._addKeyToCities(item.data, conf, hasCity);
+        }
+
+        if(hasUnit){
+          that._addKeyToUnits(item.data, conf, hasUnit);
+         }
+
+        that.mixInitialFilters(item);
+        that.cleanLayers();
+        // * el mapa desplegado
+        that.currentMap   = item;
+        // * el id interno del mapa desplegado
+        that.currentMapId = item.idex;
+        that.filteredData = item.data.slice();
+        that.enableFilters();
+        that.renderLayer(item);
+
+        that.loaderStop();
+      */
     },
     
 
