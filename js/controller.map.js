@@ -381,9 +381,38 @@ define(function(require){
     //
     //
     updateData : function(data, filters, pagination){
-      this.filteredData = data;
-      this.filters = filters;
-      this.renderLayer(this.currentMap);
+      var that = this;
+
+      if(this.currentMap.config.api){
+        var page    = 0,
+            src2    = that.makeAPIURL(that.currentMap, page),
+            item    = this.currentMap,
+            pageEl  = document.getElementById(this.settings.ui.pageSelector.controls.pageSelect);
+            totalEl = document.getElementById(this.settings.ui.pageSelector.controls.pageDisplay);
+        
+        this.filters = filters;
+
+        d3[item.config.file](src2, function(error, data){
+          item.data        = data.results;
+          item.response    = data;
+          that.totalPages  = data.pages;
+          that.currentPage = data.page;
+
+          that.cleanLayers();
+          that.filteredData = item.data.slice();
+          that.renderLayer(item);
+
+          that.currentPage = data.page;
+
+          pageEl.value      = page + 1;
+          totalEl.innerHTML = that.totalPages;
+        });
+      }
+      else{
+        this.filteredData = data;
+        this.filters = filters;
+        this.renderLayer(this.currentMap);
+      }
     },
 
     //
@@ -987,7 +1016,7 @@ define(function(require){
         });
       }
 
-      url = url + "page=" + (page || this.currentPage);
+      url = url + "page=" + ( (page == 0 || page ? String(page) : null ) || this.currentPage);
 
       return encodeURI(url);
     },
@@ -1431,7 +1460,14 @@ define(function(require){
     renderProjectCounter : function(data){
       var id    = this.settings.ui.projectCounter,
           el    = document.getElementById(id),
-          total = this.numberFormat(data.length);
+          total;
+
+      if(this.currentMap.config.api){
+        total = this.numberFormat(this.currentMap.response.total);
+      }
+      else{
+        total = this.numberFormat(data.length);
+      }
 
       el.innerHTML = total ? total : 0;
     },
@@ -1551,54 +1587,35 @@ define(function(require){
           pageEl.value      = page + 1;
           totalEl.innerHTML = that.totalPages;
         });
-
-        console.log("next");
       });
 
       prev.addEventListener("click", function(e){
         e.preventDefault();
 
-        console.log("prev");
+        var page    = Number(that.currentPage) - 1,
+            src2    = that.makeAPIURL(that.currentMap, page),
+            item    = that.currentMap;
+        
+        if(page < 0) return;
+
+        console.log(page);
+
+        d3[item.config.file](src2, function(error, data){
+          item.data        = data.results;
+          item.response    = data;
+          that.totalPages  = data.pages;
+          that.currentPage = data.page;
+
+          that.cleanLayers();
+          that.filteredData = item.data.slice();
+          that.renderLayer(item);
+
+          that.currentPage = data.page;
+
+          pageEl.value      = page + 1;
+          totalEl.innerHTML = that.totalPages;
+        });
       });
-
-      /*
-     
-      
-
-
-      // [2] carga el archivo con los datos para graficar
-      //
-      d3[conf.file](src2, function(error, data){
-        if(conf.api && conf.type == "point"){
-          item.data     = data.results;
-          item.response = data;
-          that.totalPages = data.pages;
-        }
-        else{
-          item.data     = data;
-          item.response = null;
-        }
-
-        if(hasCity){
-          that._addKeyToCities(item.data, conf, hasCity);
-        }
-
-        if(hasUnit){
-          that._addKeyToUnits(item.data, conf, hasUnit);
-         }
-
-        that.mixInitialFilters(item);
-        that.cleanLayers();
-        // * el mapa desplegado
-        that.currentMap   = item;
-        // * el id interno del mapa desplegado
-        that.currentMapId = item.idex;
-        that.filteredData = item.data.slice();
-        that.enableFilters();
-        that.renderLayer(item);
-
-        that.loaderStop();
-      */
     },
     
 
