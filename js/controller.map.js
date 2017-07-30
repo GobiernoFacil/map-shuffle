@@ -94,10 +94,12 @@ define(function(require){
 
       // [1] INICIA LAS PROPIEDADES DEL APP 
       // ----------------------------------------------------------------------
+      // * referencia al archivo de configuración inicial
+      this.settings = Object.create(CONFIG);
       // * la columna para el id interno de los municipios
-      this.CITYID = CITYID;
+      this.cityID = this.settings.constants.cityId;
       // * la columna para el id interno de las unidades ejecutoras
-      this.UNITID = UNITID;
+      this.unitID = this.settings.constants.unitId;
       // * la referencia a classyBrew
       this.brew           = null;
       // * los datos filtrados
@@ -136,8 +138,6 @@ define(function(require){
       this.geocoder     = null;
       // * los callbacks
       this.callbacks    = settings.callbacks;
-      // * referencia al archivo de configuración inicial
-      this.settings     = Object.create(CONFIG);
       // * referencia a las colecciones de ubicaciones
       this.lists = {
                      estados        : Object.create(ESTADOS),
@@ -1058,10 +1058,10 @@ define(function(require){
       if(!branch) return;
 
       data.forEach(function(d){
-        d[UNITID] = String(d[branch.field]) + "-" + String(d[unit.field]);
-      });
+        d[this.unitID] = String(d[branch.field]) + "-" + String(d[unit.field]);
+      }, this);
 
-      unit.field = UNITID;
+      unit.field = this.unitID;
     },
 
     _addKeyToCities : function(data, conf, city){
@@ -1088,19 +1088,19 @@ define(function(require){
         else{
           cityString = String(d[cityCol]);
         }
-        d[CITYID] = Number(String(d[stateCol]) + cityString);
-      });
+        d[this.cityID] = Number(String(d[stateCol]) + cityString);
+      }, this);
 
       if(city.length){
-        conf.location.city = CITYID;
+        conf.location.city = this.cityID;
         conf.filters.forEach(function(fil){
           if(fil.type == "city"){
-            fil.field = CITYID;
+            fil.field = this.cityID;
           }
         });
       }
       else{
-        city.field = CITYID;
+        city.field = this.cityID;
       }
     },
 
@@ -1597,8 +1597,6 @@ define(function(require){
             item    = that.currentMap;
         
         if(page < 0) return;
-
-        console.log(page);
 
         d3[item.config.file](src2, function(error, data){
           item.data        = data.results;

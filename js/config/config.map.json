@@ -130,5 +130,9 @@
     "pointNavigationCurrentId" : "GF-SHCP-point-current",
     "pointNavigationTotalId" : "GF-SHCP-point-total",
     "searchPageSize" : 10
+  },
+  "constants" : {
+    "cityId" : "GFSHCPCityId",
+    "unitId" : "GFSHCPUnitId"
   }
 }
