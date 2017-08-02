@@ -60,7 +60,8 @@ define(function(require){
         filterMenu = document.getElementById(UI.filterContainer);
         filterCart = document.getElementById(UI.cart);
         
-        this.filters = [];
+        this.filters       = [];
+        this.searchFilters = [];
         this.renderHeaders();
         this.renderItems(page);
         this.renderPagination(page);
@@ -148,7 +149,7 @@ define(function(require){
           var select;
           
           if(filter.type == "search"){
-            searchFilter = this.filterModule.renderSearchInput(filter, document.getElementById(SEARCH));
+            this.searchFilters.push( this.filterModule.renderSearchInput(filter, document.getElementById(SEARCH)) );
             //this.filters.push(stateFilter);
           }
 
@@ -241,7 +242,44 @@ define(function(require){
           window.open(encodedUri);
 
         });
+      },
+
+      makeAPIURL : function(item, page){
+      var that    = this, 
+          conf    = item.config,
+          src     = conf.src,
+          filters = this.filters,
+          url,
+          fields;
+
+      url = src + "?";
+
+      if(filters.length){
+        fields = _.uniq(_.pluck(filters, "field"));
+
+        fields.forEach(function(field){
+          var fa     = filters.filter(function(fil){
+                       return fil.field == field;
+                     }),
+              values = _.pluck(fa, "value");
+
+          url = url + field + "=" + values.join("|") + "&";
+        });
+
       }
+
+      if(this.searchFilters.length){
+        this.searchFilters.forEach(function(sf){
+          if(sf.value){
+            url = url + sf.getAttribute("data-field") + "=" + sf.value + "&";
+          }
+        });
+      }
+
+      url = url + "page=" + ( (page == 0 || page ? String(page) : null ) || this.currentPage);
+
+      return encodeURI(url);
+    },
 
       
     };

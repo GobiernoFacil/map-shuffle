@@ -99,26 +99,7 @@
 	
 	<div class="clearfix"></div>
 	
-	<!-- el ul con buscador-->	
-	<div class="row">
-		<div class="col-sm-4">
-			<div><a href="#" id="GF-btn-ul" class="init">Seleccionar Opción </a></div>
-			<div id="GF-container-ul">		
-				<input type="text" id="gfInput" onkeyup="myFunction()" placeholder="Search for names..">
-				<ul id="gfUL" class="filter_li">
-				  
-				   <!-- <li class="init"><a>Seleccionar opción</a> </li>-->
-				  <li><a href="#">Adele</a></li>
-				  <li><a href="#">Agnes</a></li>
-				  <li><a href="#">Billy</a></li>
-				  <li><a href="#">Bob</a></li>
-				  <li><a href="#">Calvin</a></li>
-				  <li><a href="#">Christina</a></li>
-				  <li><a href="#">Cindy</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
+	
 	
  
   <!--
@@ -221,53 +202,5 @@
   <!-- <script src="/js/main-built.js"></script> -->
   <!-- versión de producción: todavía no :P -->
   
-  
-  <!-- aca va lo del ul con buscador -->
-  <script src="js/libs/jquery-3.1.1.min.js"></script>
-  <script>
-  /*
-	  function myFunction() {
-    // Declare variables
-    var input, filter, ul, li, a, i;
-    input = document.getElementById('gfInput');
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("gfUL");
-    li = ul.getElementsByTagName('li');
-
-    // Loop through all list items, and hide those who don't match the search query
-    for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("a")[0];
-        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
-    }
-}
-
-
-	$( document ).ready(function() {
-	  	$("#GF-btn-ul").on("click", function(e) {
-	  		  e.preventDefault();
-	  		$("#GF-container-ul").toggle();
-	  	});
-	 
-	  
-	  $("ul.filter_li").on("click", ".init", function(e) {
-		  e.preventDefault();
-		 $("#GF-container-ul").toggle();
-		});
-		
-		var allOptions = $("ul").children('li:not(.init)');
-		$("ul").on("click", "li:not(.init)", function(e) {
-			 e.preventDefault();
-		    allOptions.removeClass('selected');
-		    $(this).addClass('selected');
-		    $("#GF-btn-ul").html($(this).html());
-		    $("#GF-container-ul").toggle();
-		});
-	});
-  */
-   </script>
 </body>
 </html>
