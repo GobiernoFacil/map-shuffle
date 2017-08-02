@@ -37,7 +37,8 @@ define(function(require){
         pageForm   = null,
         pageInput  = null,
         page       = 0,
-        pages      = 0;
+        pages      = 0,
+        isAPI      = null;
 
     var controller = {
       render : function(){
@@ -45,6 +46,7 @@ define(function(require){
         config     = currentMap.config;
         numValues  = config.values || [];
         headers    = numValues.concat(config.data || []);
+        isAPI      = config.api;
         data       = currentMap.data.slice();
         DATA       = currentMap.data.slice();
         container.innerHTML = TEMPLATE;
@@ -59,13 +61,17 @@ define(function(require){
         pageInput  = document.getElementById(UI.pageInput);
         filterMenu = document.getElementById(UI.filterContainer);
         filterCart = document.getElementById(UI.cart);
+
         
         this.filters       = [];
+        this._filters      = [];
         this.searchFilters = [];
         this.renderHeaders();
         this.renderItems(page);
         this.renderPagination(page);
         this.enableDowload();
+
+        this.updateData = this.updateData.bind(this);
 
         nextBtn.addEventListener("click", this.nextPage);
         prevBtn.addEventListener("click", this.prevPage);
@@ -92,7 +98,9 @@ define(function(require){
 
       updateData : function(_data, filters, pagination){
 
-        console.log(_data, filters, pagination);
+        this._filters = filters;
+        console.log(isAPI, this.makeAPIURL(parent.currentMap, page));
+
         data = _data;
         pages = pagination.pages;
 
@@ -101,6 +109,7 @@ define(function(require){
       },
 
       renderItems : function(newPage){
+
         newPage = Math.ceil(newPage);
 
         if(newPage < 0 || newPage >= pages) return;
@@ -127,6 +136,8 @@ define(function(require){
 
         pageInput.value = newPage + 1;
         page = newPage;
+
+        console.log(page);
       },
 
       renderPagination : function(page){
@@ -245,12 +256,14 @@ define(function(require){
       },
 
       makeAPIURL : function(item, page){
+ 
       var that    = this, 
           conf    = item.config,
           src     = conf.src,
-          filters = this.filters,
+          filters = this._filters,
           url,
-          fields;
+          fields,
+          _page;
 
       url = src + "?";
 
@@ -275,8 +288,10 @@ define(function(require){
           }
         });
       }
+      _page = ( (page == 0 || page ? String(page) : null ) || this.currentPage);
 
-      url = url + "page=" + ( (page == 0 || page ? String(page) : null ) || this.currentPage);
+      url = url + "page=" + _page +"&";
+      url = url + "pageSize=" + pageSize;
 
       return encodeURI(url);
     },
