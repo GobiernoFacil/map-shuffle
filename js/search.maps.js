@@ -67,11 +67,35 @@ define(function(require){
         this._filters      = [];
         this.searchFilters = [];
         this.renderHeaders();
-        this.renderItems(page);
-        this.renderPagination(page);
-        this.enableDowload();
+
+        if(isAPI){
+          var url  = this.makeAPIURL(parent.currentMap, page),
+              that = this;
+          d3.json(url, function(error, d){
+            data  = d.results;
+            pages = d.pages;
+            controller.renderItems(page);
+            controller.renderPagination(page);
+
+            //this.renderPagination(page);
+            that.enableDowload();
+          });
+        }
+        else{
+          this.renderItems(page);
+          this.renderPagination(page);
+          this.enableDowload();
+        }
+
+        //this.renderItems(page);
+        //this.renderPagination(page);
+        //this.enableDowload();
 
         this.updateData = this.updateData.bind(this);
+        this.nextPage   = this.nextPage.bind(this);
+        this.prevPage   = this.prevPage.bind(this);
+        this.selectPage = this.selectPage.bind(this);
+
 
         nextBtn.addEventListener("click", this.nextPage);
         prevBtn.addEventListener("click", this.prevPage);
@@ -97,15 +121,25 @@ define(function(require){
       },
 
       updateData : function(_data, filters, pagination){
-
+        console.log("change stuff");
         this._filters = filters;
-        console.log(isAPI, this.makeAPIURL(parent.currentMap, page));
+        if(isAPI){
+          var url = this.makeAPIURL(parent.currentMap, page);
+          d3.json(url, function(error, d){
+            data  = d.results;
+            pages = d.pages;
+            page  = 0;
+            controller.renderItems(0);
+            controller.renderPagination();
+          });
+        }
+        else{
+          data = _data;
+          pages = pagination.pages;
 
-        data = _data;
-        pages = pagination.pages;
-
-        controller.renderItems(0);
-        controller.renderPagination();
+          controller.renderItems(0);
+          controller.renderPagination();
+        }
       },
 
       renderItems : function(newPage){
@@ -119,9 +153,10 @@ define(function(require){
 
         var from = newPage * pageSize,
             to   = from + pageSize;
-            list = data.slice(from, to);
+            list = data.slice(from, to),
+            collection = isAPI ? data : list;
 
-        list.forEach(function(item){
+        collection.forEach(function(item){
           var tr = document.createElement("tr");
           headers.forEach(function(key){
             var td = document.createElement("td"),
@@ -136,8 +171,6 @@ define(function(require){
 
         pageInput.value = newPage + 1;
         page = newPage;
-
-        console.log(page);
       },
 
       renderPagination : function(page){
@@ -198,21 +231,63 @@ define(function(require){
       nextPage : function(e){
         e.preventDefault();
 
-        var nextPage = page+1;
-        controller.renderItems(nextPage);
+        if(isAPI){
+          var nextPage = page+1,
+              url = this.makeAPIURL(parent.currentMap, nextPage);
+
+          d3.json(url, function(error, d){
+            data  = d.results;
+            pages = d.pages;
+            controller.renderItems(nextPage);
+            //controller.renderPagination();
+          });
+        }
+        else{
+          var nextPage = page+1;
+          controller.renderItems(nextPage);
+        }
       },
 
       prevPage : function(e){
         e.preventDefault();
 
-        var prevPage = page-1;
-        controller.renderItems(prevPage);
+        if(isAPI){
+          var prevPage = page-1,
+              url = this.makeAPIURL(parent.currentMap, prevPage);
+
+          d3.json(url, function(error, d){
+            data  = d.results;
+            pages = d.pages;
+            controller.renderItems(prevPage);
+            //controller.renderPagination();
+          });
+        }
+        else{
+          var prevPage = page-1;
+          controller.renderItems(prevPage);
+        }
       },
 
       selectPage : function(e){
         e.preventDefault();
-        var newPage = Number(pageInput.value) - 1;
-        controller.renderItems(newPage);
+
+
+        if(isAPI){
+          var newPage = Number(pageInput.value) - 1,
+              url = this.makeAPIURL(parent.currentMap, newPage);
+
+
+          d3.json(url, function(error, d){
+            data  = d.results;
+            pages = d.pages;
+            controller.renderItems(newPage);
+            //controller.renderPagination();
+          });
+        }
+        else{
+          var newPage = Number(pageInput.value) - 1;
+          controller.renderItems(newPage);
+        }
       },
 
       enableDowload : function(){
