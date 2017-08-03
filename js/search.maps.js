@@ -112,12 +112,10 @@ define(function(require){
       renderHeaders : function(){
         var tr = document.createElement("tr");
 
-        //console.log(colNames);
         headers.forEach(function(header){
           var th = document.createElement("th"),
               nm = colNames ? (colNames[header] || header) : header;
 
-          //console.log(colNames[header], header);
 
           th.innerHTML = nm;
           tr.appendChild(th);
@@ -127,7 +125,6 @@ define(function(require){
       },
 
       updateData : function(_data, filters, pagination){
-        console.log("change stuff");
         this._filters = filters;
         if(isAPI){
           var url = this.makeAPIURL(parent.currentMap, page);

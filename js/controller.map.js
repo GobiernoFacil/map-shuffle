@@ -485,7 +485,8 @@ define(function(require){
         this.callbacks.filterChange(this.filters, this.currentMap, this.filteredData);
       }
 
-      // [12] Actualiza la app de comparación
+      // [12] Actualiza el app de comparación
+      /*
       if(this.barsTool){
         this.barsTool.render();
       }
@@ -499,6 +500,7 @@ define(function(require){
       else{
         
       }
+      */
     },
 
     groupPoints : function(){
@@ -979,6 +981,8 @@ define(function(require){
         that.enableFilters();
         that.renderLayer(item);
         if(item.config.api) that.updatePagination();
+        if(that.barsTool) that.barsTool.render();
+        if(that.searchTool) that.searchTool.render();
 
         that.loaderStop();
       });
