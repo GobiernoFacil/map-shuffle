@@ -38,12 +38,14 @@ define(function(require){
         pageInput  = null,
         page       = 0,
         pages      = 0,
-        isAPI      = null;
+        isAPI      = null,
+        colNames   = null;
 
     var controller = {
       render : function(){
         currentMap = parent.currentMap;
         config     = currentMap.config;
+        colNames   = config.columns;
         numValues  = config.values || [];
         headers    = numValues.concat(config.data || []);
         isAPI      = config.api;
@@ -110,10 +112,14 @@ define(function(require){
       renderHeaders : function(){
         var tr = document.createElement("tr");
 
+        //console.log(colNames);
         headers.forEach(function(header){
-          var th = document.createElement("th");
+          var th = document.createElement("th"),
+              nm = colNames ? (colNames[header] || header) : header;
 
-          th.innerHTML = header;
+          //console.log(colNames[header], header);
+
+          th.innerHTML = nm;
           tr.appendChild(th);
         });
 

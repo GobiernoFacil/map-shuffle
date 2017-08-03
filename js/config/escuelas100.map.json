@@ -20,6 +20,10 @@
   "values"  : ["MONTO_ASIGNADO"],
 
   "data"    : ["CLAVECENTROTRABAJO","ANIO_EJECUCION","AVANCE_FINANCIERO","AVANCE_FISICO_PORCENTAJE","NOMBRECT","CLAVE_ENTIDAD","ENTIDAD", "MUNICIPIO","LOCALIDAD","LATITUD","LONGITUD","MATRICULA_PLANTEL","MONTO_ASIGNADO","DOMICILIO","CONTRATISTA"],
+  "columns" : {
+    "CLAVECENTROTRABAJO" : "Clave centro de trabajo",
+    "ANIO_EJECUCION" : "Año de ejecución"
+  }, 
   "current" : {},
   "filters" : [
     {"type" : "state", "field" : "CLAVE_ENTIDAD"},

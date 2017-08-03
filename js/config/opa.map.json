@@ -7,7 +7,7 @@
   "src"   : "/js/maps/opa.json",
   "file"  : "json",
   "link"  : {
-    "url"    : "http://localhost:8001/opa.html",
+    "url"    : "/opa.html",
     "column" : "key"
   },
   "style" : {
