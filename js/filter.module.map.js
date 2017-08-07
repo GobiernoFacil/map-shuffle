@@ -26,6 +26,8 @@ define(function(require){
   SELECTEMPTYUNIT      = "",
   SELECTALLUNITS       = "Selecciona una unidad ejecutora",
   SELECTUNITLABEL      = "Unidad ejecutora",
+  CLEARCLASS           = "GF-SHCP-clear-filters",
+  CLEARTEXT            = "limpiar filtros",
   SELECTALLTEXT        = "Selecciona un filtro";
 
   var filterDataConstructor = function(parent, cart, callback, className, pageSize){
@@ -42,6 +44,7 @@ define(function(require){
       searchInput  : null,
 
       filter : function(){
+
         var filterCols = _.uniq(_.pluck(this.filters, "field")),
             _data      = parent.currentMap.data.slice(),
             isApi      = parent.currentMap.config.api,
@@ -429,6 +432,10 @@ define(function(require){
             li         = document.createElement("li"),
             html       = "",
             that       = this;
+        
+        if(!container.querySelector("." + CLEARCLASS)){
+          this.renderClearFilterBtn(container);
+        }
 
         if(filter.type == "branch"){
           html = parent.lists.ramosName.branches.filter(function(br){ 
@@ -462,6 +469,23 @@ define(function(require){
         li.addEventListener("click", function(e){
           this.parentNode.removeChild(this);
           that.filters.splice(that.filters.indexOf(filter), 1);
+          that.filter();
+        });
+      },
+
+      renderClearFilterBtn : function(container){
+        var li         = document.createElement("li"),
+            html       = "",
+            that       = this;
+
+        li.innerHTML = CLEARTEXT;
+        li.setAttribute("class", CLEARCLASS);
+
+        container.appendChild(li);
+
+        li.addEventListener("click", function(e){
+          that.filters = [];
+          that.cart.innerHTML = "";
           that.filter();
         });
       },
