@@ -152,10 +152,12 @@ define(function(require){
 
         newPage = Math.ceil(newPage);
 
+        tbody.innerHTML = "";
+        
         if(newPage < 0 || newPage >= pages) return;
 
 
-        tbody.innerHTML = "";
+        console.log("!make some");
 
         var from = newPage * pageSize,
             to   = from + pageSize;
