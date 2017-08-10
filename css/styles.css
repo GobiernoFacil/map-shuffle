@@ -2510,7 +2510,9 @@ section {
   section:first-child {
     padding: 80px 0 0; }
 
-.btn.report {
+a:visited.btn.report,
+.btn.report,
+a:link.btn.report {
   background: #7a4ba5;
   border: 2px solid #2c1b3c;
   color: white;
@@ -2521,36 +2523,50 @@ section {
   text-transform: uppercase;
   transition: background 500ms;
   width: 100%; }
-  .btn.report:hover {
+  a:visited.btn.report:hover,
+  .btn.report:hover,
+  a:link.btn.report:hover {
     background: #462b5f;
     color: white;
     text-decoration: none; }
-  .btn.report.large {
+  a:visited.btn.report.large,
+  .btn.report.large,
+  a:link.btn.report.large {
     padding: 20px 0;
     font-size: 17px; }
 
-.btn.more {
+a:visited.btn.more,
+.btn.more,
+a:link.btn.more {
   background: #1cb68d;
   color: white;
   font-size: 14px;
   font-weight: 700;
   padding: 10px 20px;
   transition: background 500ms; }
-  .btn.more.info {
+  a:visited.btn.more.info,
+  .btn.more.info,
+  a:link.btn.more.info {
     background: #f49d51;
     font-size: 10px;
     display: block;
     margin: 0;
     padding: 5px;
     text-align: center; }
-    .btn.more.info:hover {
+    a:visited.btn.more.info:hover,
+    .btn.more.info:hover,
+    a:link.btn.more.info:hover {
       background: #f18221; }
-  .btn.more:hover {
+  a:visited.btn.more:hover,
+  .btn.more:hover,
+  a:link.btn.more:hover {
     background: #158a6b;
     color: white;
     text-decoration: none; }
 
-.btn.locations_b {
+a:visited.btn.locations_b,
+.btn.locations_b,
+a:link.btn.locations_b {
   background: rgba(242, 242, 242, 0.3);
   border-radius: 0;
   color: #ccc;
@@ -2558,14 +2574,20 @@ section {
   line-height: 35px;
   float: left;
   width: 50%; }
-  .btn.locations_b:hover {
+  a:visited.btn.locations_b:hover,
+  .btn.locations_b:hover,
+  a:link.btn.locations_b:hover {
     background: #999;
     color: white; }
-  .btn.locations_b.current {
+  a:visited.btn.locations_b.current,
+  .btn.locations_b.current,
+  a:link.btn.locations_b.current {
     background: #f49d51;
     color: white;
     font-weight: 700; }
-    .btn.locations_b.current:hover {
+    a:visited.btn.locations_b.current:hover,
+    .btn.locations_b.current:hover,
+    a:link.btn.locations_b.current:hover {
       background: #f49d51; }
 
 .amount_label {
