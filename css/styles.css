@@ -1893,6 +1893,13 @@ h1 {
   line-height: 28px;
   text-transform: uppercase; }
 
+#GF-SHCP-FILTER-1 {
+  border: 1px solid #F4F2F2;
+  height: 35px;
+  line-height: 35px;
+  display: block;
+  width: 100%; }
+
 .loader {
   background: rgba(255, 255, 255, 0.7);
   display: none;
