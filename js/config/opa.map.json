@@ -27,7 +27,7 @@
     {"type" : "state", "field" : "state"},
     {"type" : "branch", "field" : "ramo"},
     {"type" : "unit", "field" : "id_unidad"},
-    {"type" : "year", "field" : "ciclo", "default" : "2017", "title" : "Ciclo"}
+    {"type" : "year", "field" : "ciclo", "title" : "Ciclo"}
   ],
   "extraFilters" : [
     {"type" : "extra", "field" : "classification", "title" : "Clasificación ciudadana"}

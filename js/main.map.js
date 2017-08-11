@@ -17,7 +17,8 @@ require.config({
     async      : 'libs/async',
     classyBrew : "libs/classybrew.min",
     jquery     : "libs/jquery-3.1.1.min",
-    selectize  : "libs/selectize.min"
+    selectize  : "libs/selectize.min",
+    Chart      : "libs/chart.min"
   },
   shim : {
     selectize : ["jquery"]

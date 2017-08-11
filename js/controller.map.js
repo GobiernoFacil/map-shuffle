@@ -23,6 +23,7 @@ define(function(require){
       underscore  = require("underscore"),
       classybrew  = require("classyBrew"),
       APIKEY      = "AIzaSyDZXX_dqYAZ9oLxA28sN5ztg3qNBArk80I",
+      Chart       = require("Chart"),
       gMaps       = require("async!https://maps.googleapis.com/maps/api/js?key=AIzaSyDZXX_dqYAZ9oLxA28sN5ztg3qNBArk80I");
 
       // [3] obtiene los conjuntos de datos
@@ -91,6 +92,7 @@ define(function(require){
       //
       this.initialFilters = this.parseHashBangArgs();
       this.firstTime      = true;
+
 
       // [1] INICIA LAS PROPIEDADES DEL APP 
       // ----------------------------------------------------------------------
