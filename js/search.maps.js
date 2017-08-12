@@ -1,7 +1,7 @@
 // MAPA MÚLTIPLE - TRANSPARENCIA PRESUPUESTARIA
 // @package : GFSHCP
 // @location : /js
-// @file     : controller.map.js
+// @file     : search.map.js
 // @author  : Gobierno fácil <howdy@gobiernofacil.com>
 // @url     : http://gobiernofacil.com
 

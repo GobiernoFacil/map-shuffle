@@ -23,8 +23,7 @@ define(function(require){
       underscore  = require("underscore"),
       classybrew  = require("classyBrew"),
       APIKEY      = "AIzaSyDZXX_dqYAZ9oLxA28sN5ztg3qNBArk80I",
-      Chart       = require("Chart"),
-      gMaps       = require("async!https://maps.googleapis.com/maps/api/js?key=AIzaSyDZXX_dqYAZ9oLxA28sN5ztg3qNBArk80I");
+      //gMaps       = require("async!https://maps.googleapis.com/maps/api/js?key=AIzaSyDZXX_dqYAZ9oLxA28sN5ztg3qNBArk80I");
 
       // [3] obtiene los conjuntos de datos
       // ----------------------------------------------------------------------
@@ -54,7 +53,7 @@ define(function(require){
 
       // [5] carga los componentes de filtros y búsqueda
       // ----------------------------------------------------------------------
-      BARSTOOL      = require("bars.maps"), 
+      BARSTOOL      = require("barsv2.maps"), 
 
       // [6] carga los componentes de filtros y búsqueda
       // ----------------------------------------------------------------------
@@ -217,7 +216,7 @@ define(function(require){
       this.enableUserLocation();
 
       // [6.2] HABILITA EL REVERSE GEOCODING
-      this.enableReverseGeocofing();
+      //this.enableReverseGeocofing();
 
       // [7] LOADER 
       this.loaderStop();

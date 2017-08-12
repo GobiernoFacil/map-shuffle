@@ -32,5 +32,24 @@
   "extraFilters" : [
     {"type" : "extra", "field" : "classification", "title" : "Clasificación ciudadana"}
   ],
-"template" : "<%=name%> <div class='amount_label'><div class='row'><div class='col-sm-6'><h5>Monto total de inversión</h5>  $<%=monto_total_inversion%><h5>Monto ejercido</h5> $<%=ejercido%></div><div class='col-sm-6'><h5>Avance Físico</h5> <%=advance%>% <div class='bar'><span class='bar inside total' style='width:<%=advance%>%'></span><h5>Año</h5> <%=ciclo%></div></div></div> <br><a href='/opa.html#<%=key%>'  class='btn more info'>Más información</a></div>"
+  "graphs" : {
+    "graph1" : {
+      "xAxis" : {
+        "field" : "monto_total_inversion",
+        "title" : "monto total invertido"
+      },
+      "yAxis" : {
+        "field" : "ciclo",
+        "title" : "año",
+        "type"  : null
+      },
+      "zAxis" : {
+        "field" : "ramo",
+        "title" : "ramo",
+        "type"  : "branch"
+      },
+      "maxLocations" : 5
+    }
+  },
+  "template" : "<%=name%> <div class='amount_label'><div class='row'><div class='col-sm-6'><h5>Monto total de inversión</h5>  $<%=monto_total_inversion%><h5>Monto ejercido</h5> $<%=ejercido%></div><div class='col-sm-6'><h5>Avance Físico</h5> <%=advance%>% <div class='bar'><span class='bar inside total' style='width:<%=advance%>%'></span><h5>Año</h5> <%=ciclo%></div></div></div> <br><a href='/opa.html#<%=key%>'  class='btn more info'>Más información</a></div>"
 }

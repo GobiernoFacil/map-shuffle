@@ -72,6 +72,12 @@
 
     "barsTool" : {
       "container"           : "GF-SHCP-bars-tool",
+      "graph1"              : "GF-SHCP-GRAPHS-A",
+      "graph2"              : "GF-SHCP-GRAPHS-B",
+      "graph3"              : "GF-SHCP-GRAPHS-C",
+      "graph4"              : "GF-SHCP-GRAPHS-D",
+
+
       "singleLocation"      : "GF-SHCP-bars-app-single-location",
       "multipleLocations"   : "GF-SHCP-bars-app-multiple-locations",
       "singleLocationBtn"   : "GF-SHCP-bars-app-single-location-link",
@@ -122,7 +128,7 @@
     "findMeZoom" : 14,
     "changeStateZoom" : 9,
     "geocoding"  : "https://maps.googleapis.com/maps/api/geocode/json",
-    "enableBarsTool" : 0,
+    "enableBarsTool" : 1,
     "enableSearchTool" : 1,
     "pointNavigationTemplate" : "<a class=\"GF-SHCP-point-prev-btn\" href=\"#\">anterior</a> <span class=\"GF-SHCP-point-current\"></span>/<span class=\"GF-SHCP-point-total\"></span><a class=\"GF-SHCP-point-next-btn\" href=\"#\">siguiente</a></p>",
     "pointNavigationPrevId" : "GF-SHCP-point-prev-btn",
