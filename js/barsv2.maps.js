@@ -25,7 +25,13 @@ define(function(require){
 
 
     var controller = {
+    	data : null,
+    	filters : null,
+    	config : null,
+    	canvas : null,
+    	graph : null,
     	render : function(){
+    		this.updateGraphA = this.updateGraphA.bind(this);
     		container.innerHTML = TEMPLATE;
     		currentMap          = parent.currentMap;
         config              = currentMap.config;
@@ -34,6 +40,8 @@ define(function(require){
         	container.innerHTML = "";
         	return;
         }
+
+        this.config = config.graphs;
 
         if(config.graphs.graph1){
         	this.setupGraphA();
@@ -59,6 +67,8 @@ define(function(require){
     		    graph         = section.querySelector("canvas"),
     		    graphAFilters = new FIlterModule(parent, filterCart, this.updateGraphA),
     		    filters = currentMap.config.filters.concat(currentMap.config.extraFilters || []);
+
+    		this.canvas = graph;
 
     		section.style.display = "block";
     		//console.log(filterCart, filterMenu, graph);
@@ -116,10 +126,62 @@ define(function(require){
     	},
 
     	updateGraphA : function(_data, filters, pagination){
-
+    		//console.log(this, _data, filters, pagination);
+    		this.data    = _data;
+    		this.filters = filters;
     	},
 
     	renderGraphA : function(){
+    		//console.log(this.data, this.filters, this.config);
+    		var _config = this.config.graph1,
+    		    _xAxis   = _config.xAxis,
+    		    _yAxis   = _config.yAxis,
+    		    _zAxis   = _config.zAxis,
+    		    maxLocs = _config.maxLocations,
+    		    locations = this.getLocations(this.filters),
+    		    yAxis     = this.getYaxis(this.filters, _yAxis),
+    		    zAxis     = this.getZaxis(this.filters, _zAxis);
+
+
+    		console.log(locations, yAxis, zAxis);
+
+    	},
+
+    	getLocations : function(filters){
+    		var locs = filters.filter(function(filter){
+    			return filter.type == "state" || filter.type == "city";
+    		});
+
+    		return locs;
+    	},
+
+    	getYaxis : function(filters, yAxis){
+    		
+    		var items = filters.filter(function(filter){
+    			    return filter.field == yAxis.field;
+    		    }, this),
+    		    all   = _.pluck(this.data, yAxis.field);
+
+
+    		 console.log(items);
+
+    		return _.compact(_.uniq(items.length ? _.pluck(items, "value") : all));
+    		
+
+    		//return 12;
+
+
+    	},
+
+    	getZaxis : function(filters, zAxis){
+    		
+    		var items = filters.filter(function(filter){
+    			    return filter.field == zAxis.field;
+    		    }, this);
+
+
+    		return items.length ? _.compact(_.uniq(_.pluck(items, "value"))) : null;
+    		
 
     	}
     };
