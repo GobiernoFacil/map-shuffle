@@ -26,11 +26,13 @@ define(function(require){
 
     var controller = {
     	data : null,
-    	filters : null,
+    	filters : [],
     	config : null,
     	canvas : null,
     	graph : null,
+    	graphA : null,
     	render : function(){
+    		this.data = parent.currentMap.data;
     		this.updateGraphA = this.updateGraphA.bind(this);
     		container.innerHTML = TEMPLATE;
     		currentMap          = parent.currentMap;
@@ -140,10 +142,79 @@ define(function(require){
     		    maxLocs = _config.maxLocations,
     		    locations = this.getLocations(this.filters),
     		    yAxis     = this.getYaxis(this.filters, _yAxis),
-    		    zAxis     = this.getZaxis(this.filters, _zAxis);
+    		    zAxis     = this.getZaxis(this.filters, _zAxis),
+    		    datasetA = null;
 
 
-    		console.log(locations, yAxis, zAxis);
+
+
+    		var datasetA = {
+    			label : "todos los ramos",
+    			backgroundColor : "red",
+    			stack: 'Stack 0',
+    			data : yAxis.map(function(item){
+    				var search = {};
+    				search[_yAxis.field] = item;
+    				return d3.sum(this.data.filter(function(el){return el.ciclo == item}), function(d){return d.ciclo})
+    			}, this)
+    		};
+
+    		var chartData = {
+    			labels   : yAxis,
+    			datasets : [datasetA]
+    		};
+
+    		console.log(chartData);
+
+    		if(this.graphA){
+
+    			this.graphA.destroy();
+
+    			var ctx = this.canvas.getContext("2d");
+
+    			this.graphA = new Chart(ctx, {
+    			type : "bar",
+    			data : chartData,
+    			options : {
+    				title : {
+    					display : true, 
+    					text : "some chet"
+    				},
+    				tooltips : {
+    					mode : "index",
+    					intersect : false
+    				},
+    				responsive : true,
+    				scales : {
+    					xAxes : [{stacked : true}],
+    					yAxes : [{stacked : true}]
+    				}
+    			}
+    		});
+    		}
+    		else{
+    		  var ctx = this.canvas.getContext("2d");
+
+    		  this.graphA = new Chart(ctx, {
+    			type : "bar",
+    			data : chartData,
+    			options : {
+    				title : {
+    					display : true, 
+    					text : "some chet"
+    				},
+    				tooltips : {
+    					mode : "index",
+    					intersect : false
+    				},
+    				responsive : true,
+    				scales : {
+    					xAxes : [{stacked : true}],
+    					yAxes : [{stacked : true}]
+    				}
+    			}
+    		  });
+    	  }
 
     	},
 
@@ -160,14 +231,10 @@ define(function(require){
     		var items = filters.filter(function(filter){
     			    return filter.field == yAxis.field;
     		    }, this),
-    		    all   = _.pluck(this.data, yAxis.field);
+    		    all   = _.pluck(this.data, yAxis.field),
+    		    response = _.compact(_.uniq(items.length ? _.pluck(items, "value") : all));
 
-
-    		 console.log(items);
-
-    		return _.compact(_.uniq(items.length ? _.pluck(items, "value") : all));
-    		
-
+    		return response.sort(); 
     		//return 12;
 
 
