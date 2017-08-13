@@ -25,14 +25,35 @@ define(function(require){
 
 
     var controller = {
-    	data : null,
-    	filters : [],
+    	dataA   : null,
+    	dataB   : null,
+    	dataC   : null,
+    	dataD   : null,
+
     	config : null,
-    	canvas : null,
-    	graph : null,
+
+    	filtersA : [],
+    	filtersB : [],
+    	filtersC : [],
+    	filtersD : [],
+
+    	canvasA : null,
+    	canvasB : null,
+    	canvasC : null,
+    	canvasD : null,
+
+    	graph  : null,
     	graphA : null,
+    	graphB : null,
+    	graphC : null,
+    	graphD : null,
+
     	render : function(){
-    		this.data = parent.currentMap.data;
+    		this.dataA = parent.currentMap.data;
+    		this.dataB = parent.currentMap.data;
+    		this.dataC = parent.currentMap.data;
+    		this.dataD = parent.currentMap.data;
+
     		this.updateGraphA = this.updateGraphA.bind(this);
     		container.innerHTML = TEMPLATE;
     		currentMap          = parent.currentMap;
@@ -70,10 +91,9 @@ define(function(require){
     		    graphAFilters = new FIlterModule(parent, filterCart, this.updateGraphA),
     		    filters = currentMap.config.filters.concat(currentMap.config.extraFilters || []);
 
-    		this.canvas = graph;
+    		this.canvasA = graph;
 
     		section.style.display = "block";
-    		//console.log(filterCart, filterMenu, graph);
 
     		
     		filters.forEach(function(filter){
@@ -128,21 +148,19 @@ define(function(require){
     	},
 
     	updateGraphA : function(_data, filters, pagination){
-    		//console.log(this, _data, filters, pagination);
-    		this.data    = _data;
-    		this.filters = filters;
+    		this.dataA    = _data;
+    		this.filtersA = filters;
     	},
 
     	renderGraphA : function(){
-    		//console.log(this.data, this.filters, this.config);
     		var _config = this.config.graph1,
     		    _xAxis   = _config.xAxis,
     		    _yAxis   = _config.yAxis,
     		    _zAxis   = _config.zAxis,
     		    maxLocs = _config.maxLocations,
-    		    locations = this.getLocations(this.filters),
-    		    yAxis     = this.getYaxis(this.filters, _yAxis),
-    		    zAxis     = this.getZaxis(this.filters, _zAxis),
+    		    locations = this.getLocations(this.filtersA),
+    		    yAxis     = this.getYaxis(this.filtersA, _yAxis),
+    		    zAxis     = this.getZaxis(this.filtersA, _zAxis),
     		    datasetA = null;
 
 
@@ -154,8 +172,10 @@ define(function(require){
     			stack: 'Stack 0',
     			data : yAxis.map(function(item){
     				var search = {};
+
+
     				search[_yAxis.field] = item;
-    				return d3.sum(this.data.filter(function(el){return el.ciclo == item}), function(d){return d.ciclo})
+    				return d3.sum(this.dataA.filter(function(el){return el.ciclo == item}), function(d){return d.ciclo})
     			}, this)
     		};
 
@@ -164,13 +184,11 @@ define(function(require){
     			datasets : [datasetA]
     		};
 
-    		console.log(chartData);
-
     		if(this.graphA){
 
     			this.graphA.destroy();
 
-    			var ctx = this.canvas.getContext("2d");
+    			var ctx = this.canvasA.getContext("2d");
 
     			this.graphA = new Chart(ctx, {
     			type : "bar",
@@ -193,7 +211,7 @@ define(function(require){
     		});
     		}
     		else{
-    		  var ctx = this.canvas.getContext("2d");
+    		  var ctx = this.canvasA.getContext("2d");
 
     		  this.graphA = new Chart(ctx, {
     			type : "bar",
