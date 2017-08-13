@@ -45,9 +45,9 @@
         "type"  : null
       },
       "zAxis" : {
-        "field" : "classification",
-        "title" : "clasificación ciudadana",
-        "type"  : "other"
+        "field" : "ramo",
+        "title" : "ramo",
+        "type"  : "branch"
       },
       "maxLocations" : 5,
       "colors" : ["red", "green", "blue", "yellow", "purple", "pink", "black", "orange", "gray", "maroon"]
