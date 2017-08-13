@@ -159,30 +159,68 @@ define(function(require){
     		    _zAxis   = _config.zAxis,
     		    maxLocs = _config.maxLocations,
     		    locations = this.getLocations(this.filtersA),
-    		    yAxis     = this.getYaxis(this.filtersA, _yAxis),
+    		    yAxis     = this.getYaxis(this.filtersA, _yAxis, this.dataA),
     		    zAxis     = this.getZaxis(this.filtersA, _zAxis),
-    		    datasetA = null;
+    		    datasetA = null,
+    		    defaultLabelA = "todos los ramos";
 
 
 
 
-    		var datasetA = {
-    			label : "todos los ramos",
-    			backgroundColor : "red",
-    			stack: 'Stack 0',
-    			data : yAxis.map(function(item){
-    				var search = {};
+    		console.log(locations, yAxis, zAxis);
+
+            if(zAxis){
+              var dataSets = [];
+              zAxis.forEach(function(zx, i){
+                dataSets.push({
+                  label : _zAxis.type == "branch" ? _.where(parent.lists.ramosName.branches, {id : String(zx)})[0].name : zx,
+                  backgroundColor : _config.colors[i],
+                  stack: 'Stack 0',
+                  data : yAxis.map(function(item){
+                    var search = {};
+                    search[_yAxis.field] = item;
+                    search[_zAxis.field] = zx;
+
+                    console.log(search);
+                    return d3.sum(this.dataA.filter(function(el){
+                        return el[_yAxis.field] == item &&el[_zAxis.field] == zx;
+                    }), function(d){
+                        return +d[_config.xAxis.field]
+                    });
+                  }, this)
+                });
+              }, this); 
+
+              var chartData = {
+                labels   : yAxis,
+                datasets : dataSets
+              };
+            }
+
+            else{
+              var datasetA = {
+                label : defaultLabelA,
+                backgroundColor : "red",
+                stack: 'Stack 0',
+                data : yAxis.map(function(item){
+                    var search = {};
 
 
-    				search[_yAxis.field] = item;
-    				return d3.sum(this.dataA.filter(function(el){return el.ciclo == item}), function(d){return d.ciclo})
-    			}, this)
-    		};
+                    search[_yAxis.field] = item;
+                    return d3.sum(this.dataA.filter(function(el){
+                        return el[_yAxis.field] == item
+                    }), function(d){
+                        return +d[_config.xAxis.field]
+                    })
+                }, this)
+              };
 
-    		var chartData = {
-    			labels   : yAxis,
-    			datasets : [datasetA]
-    		};
+              var chartData = {
+                labels   : yAxis,
+                datasets : [datasetA]
+              };
+            }
+
 
     		if(this.graphA){
 
@@ -244,12 +282,12 @@ define(function(require){
     		return locs;
     	},
 
-    	getYaxis : function(filters, yAxis){
+    	getYaxis : function(filters, yAxis, data){
     		
     		var items = filters.filter(function(filter){
     			    return filter.field == yAxis.field;
     		    }, this),
-    		    all   = _.pluck(this.data, yAxis.field),
+    		    all   = _.pluck(data, yAxis.field),
     		    response = _.compact(_.uniq(items.length ? _.pluck(items, "value") : all));
 
     		return response.sort(); 
