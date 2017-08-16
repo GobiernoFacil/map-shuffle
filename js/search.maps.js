@@ -153,9 +153,6 @@ define(function(require){
         
         if(newPage < 0 || newPage >= pages) return;
 
-
-        console.log("!make some");
-
         var from = newPage * pageSize,
             to   = from + pageSize;
             list = data.slice(from, to),
@@ -208,19 +205,17 @@ define(function(require){
           }
 
           else if(filter.type == "city"){
-            // renderCitySelector : function(filter, container)
+            console.log(filter);
             cityFilter = this.filterModule.renderCitySelector(filter, filterMenu);
             this.filters.push(cityFilter);
           }
 
           else if(filter.type == "branch"){
-            // renderCitySelector : function(filter, container)
             cityFilter = this.filterModule.renderBranchSelector(filter, filterMenu);
             this.filters.push(branchFilter);
           }
 
           else if(filter.type == "unit"){
-            // renderCitySelector : function(filter, container)
             unitFilter = this.filterModule.renderUnitSelector(filter, filterMenu);
             this.filters.push(unitFilter);
           }

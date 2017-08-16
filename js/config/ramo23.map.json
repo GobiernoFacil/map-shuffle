@@ -13,7 +13,7 @@
     "fillOpacity":0.8
   },
   "values"  : ["monto", "Pagado"],
-  "data"    : ["clave_de_programa", "fondo", "entidad", "municipio", "proyecto"],
+  "data"    : ["clave_de_programa", "Fondo", "entidad", "municipio", "proyecto"],
   "current" : {
     "level"  : "state",
     "value"  : "monto",
@@ -26,5 +26,22 @@
   "extraFilters" : [
     {"type" : "extra", "field" : "Fondo", "title" : "Clave de programas"}
   ],
+  "graphs" : {
+    "graph1" : {
+      "title" : "Monto aprobado en 2017",
+      "xAxis" : {
+        "field" : "monto",
+        "title" : "monto total invertido"
+      },
+      "yAxis" : {
+        "field" : "Fondo",
+        "title" : "Fondo",
+        "type"  : null
+      },
+      "zAxis" : null,
+      "maxLocations" : 5,
+      "colors" : ["red", "green", "blue", "yellow", "purple", "pink", "black", "orange", "gray", "maroon"]
+    }
+  },
   "template" : "<%=name%> <div class='amount_label'><h5> Registros: <strong><%=value%></strong></h5></div"
 }

@@ -88,7 +88,7 @@ define(function(require){
     		    filterCart    = section.querySelector("ul"),
     		    filterMenu    = section.querySelector("form"),
     		    graph         = section.querySelector("canvas"),
-    		    graphAFilters = new FIlterModule(parent, filterCart, this.updateGraphA),
+    		    graphAFilters = new FIlterModule(parent, filterCart, this.updateGraphA, null, null, true),
     		    filters = currentMap.config.filters.concat(currentMap.config.extraFilters || []);
 
     		this.canvasA = graph;
@@ -298,6 +298,8 @@ define(function(require){
 
     	getZaxis : function(filters, zAxis){
     		
+            if(!zAxis) return null;
+
     		var items = filters.filter(function(filter){
     			    return filter.field == zAxis.field;
     		    }, this);

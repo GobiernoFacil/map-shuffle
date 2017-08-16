@@ -30,7 +30,7 @@ define(function(require){
   CLEARTEXT            = "limpiar filtros",
   SELECTALLTEXT        = "Selecciona un filtro";
 
-  var filterDataConstructor = function(parent, cart, callback, className, pageSize){
+  var filterDataConstructor = function(parent, cart, callback, className, pageSize, isGraph){
 
     var filterModule  = {
       filters      : [],
@@ -45,6 +45,8 @@ define(function(require){
 
       filter : function(){
 
+        console.log(this.filters);
+
         var filterCols = _.uniq(_.pluck(this.filters, "field")),
             _data      = parent.currentMap.data.slice(),
             isApi      = parent.currentMap.config.api,
@@ -53,6 +55,7 @@ define(function(require){
             value;
 
         filterCols.forEach(function(field){
+          console.log(field);
           _data = this._filterData(_data, field, this.filters);
         }, this);
 
@@ -66,6 +69,8 @@ define(function(require){
 
         pagination.pages = Math.ceil( _data.length / (pageSize || 1) );
 
+        console.log(_data.length);
+
         callback(_data, this.filters, pagination);
       },
 
@@ -75,14 +80,20 @@ define(function(require){
       },
 
       _filterData : function(_data, field, _filters){
-
+        // _data es una copia del set completo de datos del mapa actual
+        // field es el campo de la db que se va a filtrar (string), 
+        // _filters es la lista de filtros de la instancia de este módulo (this.filters)
         if(!_data.length) return _data;
 
+        // se seleccionan los filtros que coinciden con el campo a filtrar
         var filters = _filters.filter(function(fil){
                         return fil.field == field;
                       }),
+        // se revisa qué tipo de dato se va a comparar
             isString  = _.isString(_data[0][field]),
+        // se obtiene el tipo de filtro
             type      = filters[0].type,
+        // se obtienen todos los valores que pasarán el filtro
             compArray = _.pluck(filters, "value"),
             extraIsString,
 
@@ -125,6 +136,9 @@ define(function(require){
             filteredBranches = filteredBranches.map(function(br){ return +br;});
           }
 
+          console.log(compArray);
+
+          
           _data = _data.filter(function(d){
             if(_selectedBranches.length){
               return compArray.indexOf(d[field]) != -1 || filteredBranches.indexOf(d[_selectedBranches[0].field]) != -1;
@@ -150,6 +164,7 @@ define(function(require){
             filteredStates = filteredStates.map(function(st){ return +st;});
           }
 
+          console.log(field, filteredStates, _selectedStates);
           _data = _data.filter(function(d){
             if(_selectedStates.length){
               return compArray.indexOf(d[field]) != -1 || filteredStates.indexOf(d[_selectedStates[0].field]) != -1;
@@ -242,6 +257,7 @@ define(function(require){
       },
 
       renderCitySelector : function(filter, container){
+        console.log("el filter más arriba", filter);
         var optAll   = document.createElement("option"),
             col      = filter.field,
             item     = document.createElement(FILTERCONTAINER),
@@ -588,6 +604,7 @@ define(function(require){
               parentFilter = null;
             }
 
+            console.log("el filtro: " , filter);
             newFilter = {
               id           :  _.uniqueId(),
               value        : value,
