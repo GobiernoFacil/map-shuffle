@@ -610,9 +610,12 @@ define(function(require){
               value        : value,
               type         : filter.type,
               field        : filter.field,
-              parentFilter : parentFilter
+              parentFilter : parentFilter,
+              label        : value
             };
 
+            that.findLabel(newFilter);
+            
             that.filters.push(newFilter);
           }
 
@@ -667,8 +670,11 @@ define(function(require){
               value        : value,
               type         : filter.type,
               field        : filter.field,
-              parentFilter : parentFilter
+              parentFilter : parentFilter,
+              label        : value
             };
+
+            that.findLabel(newFilter);
 
             that.filters.push(newFilter);
           }
@@ -685,6 +691,33 @@ define(function(require){
 
           that.filter();
         });
+      },
+
+      findLabel : function(filter){
+        if(filter.type == "branch"){
+          filter.label = parent.lists.ramosName.branches.filter(function(br){ 
+            return  +br.id == +filter.value
+          })[0].name;
+        }
+        else if(filter.type == "unit"){
+          filter.label = parent.lists.unidadesName.units.filter(function(un){
+            return un.key == filter.value;
+          })[0].name;
+        }
+
+        else if(filter.type == "state"){
+          filter.label = parent.lists.estadosName.states.filter(function(br){ 
+            return  +br.id == +filter.value;
+          })[0].name;
+        }
+        else if(filter.type == "city"){
+          filter.label = parent.lists.municipiosName.cities.filter(function(ct){
+            return ct.inegi == +filter.value;
+          })[0].name;
+        }
+        else{
+          filter.label = filter.value;
+        }
       },
 
       _makeList : function(data, filter){

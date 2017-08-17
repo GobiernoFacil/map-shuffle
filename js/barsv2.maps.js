@@ -7,7 +7,7 @@
 
 define(function(require){
   Chart        = require("Chart"),
-	d3           = require("d3"),
+  d3           = require("d3"),
   underscore   = require("underscore"),
   FIlterModule = require("filter.module.map"),
   TEMPLATE     = require("text!templates/bars-app.html"),
@@ -169,7 +169,33 @@ define(function(require){
 
     		console.log(locations, yAxis, zAxis);
 
-            if(zAxis){
+        if(zAxis && locations){
+          console.log(":D");
+        }
+        else if(locations){
+          var dataSets = [];
+          locations.forEach(function(loc, i){
+            dataSets.push({
+              label : loc.label,
+              backgroundColor : "red",
+              stack : 'Stack ' + i,
+              data : yAxis.map(function(item){
+                return d3.sum(this.dataA.filter(function(el){
+                        return el[_yAxis.field] == item &&el[loc.field] == loc.value;
+                    }), function(d){
+                        return +d[_config.xAxis.field]
+                    });
+              }, this)
+            });
+          }, this);
+
+          var chartData = {
+                labels   : yAxis,
+                datasets : dataSets
+              };
+        }
+
+        else if(zAxis){
               var dataSets = [];
               zAxis.forEach(function(zx, i){
                 dataSets.push({
@@ -195,9 +221,9 @@ define(function(require){
                 labels   : yAxis,
                 datasets : dataSets
               };
-            }
+        }
 
-            else{
+        else{
               var datasetA = {
                 label : defaultLabelA,
                 backgroundColor : "red",
@@ -219,7 +245,7 @@ define(function(require){
                 labels   : yAxis,
                 datasets : [datasetA]
               };
-            }
+        }
 
 
     		if(this.graphA){
