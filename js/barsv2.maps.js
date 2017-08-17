@@ -150,6 +150,8 @@ define(function(require){
     	updateGraphA : function(_data, filters, pagination){
     		this.dataA    = _data;
     		this.filtersA = filters;
+
+        this.renderGraphA();
     	},
 
     	renderGraphA : function(){
@@ -164,11 +166,6 @@ define(function(require){
     		    datasetA = null,
     		    defaultLabelA = "todos los ramos";
 
-
-
-
-    		console.log(locations, yAxis, zAxis);
-
         if(zAxis && locations){
           console.log(":D");
         }
@@ -177,7 +174,7 @@ define(function(require){
           locations.forEach(function(loc, i){
             dataSets.push({
               label : loc.label,
-              backgroundColor : "red",
+              backgroundColor : _config.colors[i],
               stack : 'Stack ' + i,
               data : yAxis.map(function(item){
                 return d3.sum(this.dataA.filter(function(el){
@@ -203,11 +200,6 @@ define(function(require){
                   backgroundColor : _config.colors[i],
                   stack: 'Stack 0',
                   data : yAxis.map(function(item){
-                    var search = {};
-                    search[_yAxis.field] = item;
-                    search[_zAxis.field] = zx;
-
-                    console.log(search);
                     return d3.sum(this.dataA.filter(function(el){
                         return el[_yAxis.field] == item &&el[_zAxis.field] == zx;
                     }), function(d){
@@ -260,7 +252,7 @@ define(function(require){
     			options : {
     				title : {
     					display : true, 
-    					text : "some chet"
+    					text : parent.currentMap.config.name
     				},
     				tooltips : {
     					mode : "index",
@@ -269,21 +261,28 @@ define(function(require){
     				responsive : true,
     				scales : {
     					xAxes : [{stacked : true}],
-    					yAxes : [{stacked : true}]
+    					yAxes : [{
+                stacked : true,
+                ticks: {
+                // Include a dollar sign in the ticks
+                  callback: function(value, index, values) {
+                    return '$' + value.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                  }
+                }
+              }]
     				}
     			}
     		});
     		}
     		else{
     		  var ctx = this.canvasA.getContext("2d");
-
     		  this.graphA = new Chart(ctx, {
     			type : "bar",
     			data : chartData,
     			options : {
     				title : {
     					display : true, 
-    					text : "some chet"
+    					text : parent.currentMap.config.name
     				},
     				tooltips : {
     					mode : "index",
@@ -291,8 +290,18 @@ define(function(require){
     				},
     				responsive : true,
     				scales : {
-    					xAxes : [{stacked : true}],
-    					yAxes : [{stacked : true}]
+    					xAxes : [{
+                stacked : true
+              }],
+    					yAxes : [{
+                stacked : true,
+                ticks: {
+                // Include a dollar sign in the ticks
+                  callback: function(value, index, values) {
+                    return '$' + value.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                  }
+                }
+              }]
     				}
     			}
     		  });
