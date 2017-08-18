@@ -10,7 +10,8 @@
     async      : 'libs/async',
     classyBrew : "libs/classybrew.min",
     jquery     : "libs/jquery-3.1.1.min",
-    selectize  : "libs/selectize.min"
+    selectize  : "libs/selectize.min",
+    Chart      : "libs/chart.min"
   },
   include : ['requireLib'],
   name : "main.map",
