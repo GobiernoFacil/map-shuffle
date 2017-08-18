@@ -36,13 +36,13 @@
     "graph1" : {
       "title" : "Monto total invertido por año",
       "xAxis" : {
-        "field" : "monto_total_inversion",
-        "title" : "monto total invertido"
-      },
-      "yAxis" : {
         "field" : "ciclo",
         "title" : "año",
         "type"  : null
+      },
+      "yAxis" : {
+        "field" : "monto_total_inversion",
+        "title" : "monto total invertido"
       },
       "zAxis" : {
         "field" : "ramo",

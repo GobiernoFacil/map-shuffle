@@ -155,19 +155,52 @@ define(function(require){
     	},
 
     	renderGraphA : function(){
-    		var _config = this.config.graph1,
+    		var that = this,
+                _config = this.config.graph1,
     		    _xAxis   = _config.xAxis,
     		    _yAxis   = _config.yAxis,
     		    _zAxis   = _config.zAxis,
     		    maxLocs = _config.maxLocations,
     		    locations = this.getLocations(this.filtersA),
-    		    yAxis     = this.getYaxis(this.filtersA, _yAxis, this.dataA),
+    		    xAxis     = this.getXaxis(this.filtersA, _xAxis, this.dataA),
     		    zAxis     = this.getZaxis(this.filtersA, _zAxis),
     		    datasetA = null,
     		    defaultLabelA = "todos los ramos";
 
         if(zAxis && locations){
-          console.log(":D");
+            console.log("zAxis & locations", zAxis, locations);
+          var dataSets = [];
+          locations.forEach(function(loc, i){
+            var stack = 'Stack ' + i;
+
+            /*
+
+
+            */
+            zAxis.forEach(function(zx, j){
+                dataSets.push({
+                  label : _zAxis.type == "branch" ? _.where(parent.lists.ramosName.branches, {id : String(zx)})[0].name : zx,
+                  backgroundColor : _config.colors[i],
+                  stack: stack,
+                  data : xAxis.map(function(item){
+                    return d3.sum(that.dataA.filter(function(el){
+                        return el[_xAxis.field] == item && el[_zAxis.field] == zx && el[loc.field] == loc.value;
+                    }), function(d){
+                        return +d[_config.yAxis.field]
+                    });
+                  }, this)
+                });
+            }, this); 
+            /*
+
+
+            */
+          });
+
+          var chartData = {
+                labels   : xAxis,
+                datasets : dataSets
+              };
         }
         else if(locations){
           var dataSets = [];
@@ -176,41 +209,44 @@ define(function(require){
               label : loc.label,
               backgroundColor : _config.colors[i],
               stack : 'Stack ' + i,
-              data : yAxis.map(function(item){
+              data : xAxis.map(function(item){
                 return d3.sum(this.dataA.filter(function(el){
-                        return el[_yAxis.field] == item &&el[loc.field] == loc.value;
+                        return el[_xAxis.field] == item &&el[loc.field] == loc.value;
                     }), function(d){
-                        return +d[_config.xAxis.field]
+                        return +d[_config.yAxis.field]
                     });
               }, this)
             });
           }, this);
 
           var chartData = {
-                labels   : yAxis,
+                labels   : xAxis,
                 datasets : dataSets
               };
         }
 
         else if(zAxis){
+            console.log("zAxis", zAxis);
               var dataSets = [];
+
+
               zAxis.forEach(function(zx, i){
                 dataSets.push({
                   label : _zAxis.type == "branch" ? _.where(parent.lists.ramosName.branches, {id : String(zx)})[0].name : zx,
                   backgroundColor : _config.colors[i],
                   stack: 'Stack 0',
-                  data : yAxis.map(function(item){
+                  data : xAxis.map(function(item){
                     return d3.sum(this.dataA.filter(function(el){
-                        return el[_yAxis.field] == item &&el[_zAxis.field] == zx;
+                        return el[_xAxis.field] == item &&el[_zAxis.field] == zx;
                     }), function(d){
-                        return +d[_config.xAxis.field]
+                        return +d[_config.yAxis.field]
                     });
                   }, this)
                 });
               }, this); 
 
               var chartData = {
-                labels   : yAxis,
+                labels   : xAxis,
                 datasets : dataSets
               };
         }
@@ -228,16 +264,18 @@ define(function(require){
                     return d3.sum(this.dataA.filter(function(el){
                         return el[_yAxis.field] == item
                     }), function(d){
-                        return +d[_config.xAxis.field]
+                        return +d[_config.yAxis.field]
                     })
                 }, this)
               };
 
               var chartData = {
-                labels   : yAxis,
+                labels   : xAxis,
                 datasets : [datasetA]
               };
         }
+
+        console.log(chartData);
 
 
     		if(this.graphA){
@@ -314,15 +352,15 @@ define(function(require){
     			return filter.type == "state" || filter.type == "city";
     		});
 
-    		return locs;
+    		return locs.length ? locs : null;
     	},
 
-    	getYaxis : function(filters, yAxis, data){
+    	getXaxis : function(filters, xAxis, data){
     		
     		var items = filters.filter(function(filter){
-    			    return filter.field == yAxis.field;
+    			    return filter.field == xAxis.field;
     		    }, this),
-    		    all   = _.pluck(data, yAxis.field),
+    		    all   = _.pluck(data, xAxis.field),
     		    response = _.compact(_.uniq(items.length ? _.pluck(items, "value") : all));
 
     		return response.sort(); 
