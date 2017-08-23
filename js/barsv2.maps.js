@@ -55,7 +55,9 @@ define(function(require){
     		this.dataD = parent.currentMap.data;
 
     		this.updateGraphA = this.updateGraphA.bind(this);
-    		container.innerHTML = TEMPLATE;
+        this.updateGraphB = this.updateGraphB.bind(this);
+    		
+        container.innerHTML = TEMPLATE;
     		currentMap          = parent.currentMap;
         config              = currentMap.config;
 
@@ -137,7 +139,55 @@ define(function(require){
     	},
 
     	setupGraphB : function(){
+        var section       = document.getElementById(UI.graph2),
+            filterCart    = section.querySelector("ul"),
+            filterMenu    = section.querySelector("form"),
+            graph         = section.querySelector("canvas"),
+            graphBFilters = new FIlterModule(parent, filterCart, this.updateGraphB, null, null, true),
+            filters       = currentMap.config.filters.concat(currentMap.config.extraFilters || []);
 
+        this.canvasB = graph;
+
+        section.style.display = "block";
+
+        
+        filters.forEach(function(filter){
+          //var select;
+          
+          if(filter.type == "search"){
+            //this.searchFilters.push( graphAFilters.renderSearchInput(filter, document.getElementById(SEARCH)) );
+            //this.filters.push(stateFilter);
+          }
+
+          else if(filter.type == "state"){
+            graphBFilters.renderStateSelector(filter, filterMenu);
+            //this.filters.push(stateFilter);
+          }
+
+          else if(filter.type == "city"){
+            // renderCitySelector : function(filter, container)
+            graphBFilters.renderCitySelector(filter, filterMenu);
+            //this.filters.push(cityFilter);
+          }
+
+          else if(filter.type == "branch"){
+            // renderCitySelector : function(filter, container)
+            graphBFilters.renderBranchSelector(filter, filterMenu);
+            //this.filters.push(branchFilter);
+          }
+
+          else if(filter.type == "unit"){
+            // renderCitySelector : function(filter, container)
+            graphBFilters.renderUnitSelector(filter, filterMenu);
+            //this.filters.push(unitFilter);
+          }
+          else{
+            graphBFilters.renderOtherSelector(filter, filterMenu)
+            //this.filters.push( graphAFilters.renderOtherSelector(filter, filterMenu) );
+          }
+
+
+        }, this);
     	},
     	setupGraphC : function(){
 
@@ -154,9 +204,74 @@ define(function(require){
         this.renderGraphA();
     	},
 
+      updateGraphB : function(_data, filters, pagination){
+        this.dataB    = _data;
+        this.filtersB = filters;
+
+        this.renderGraphB();
+      },
+
+      renderGraphB : function(){
+
+        var that       = this,
+            _config    = this.config.graph2,
+            _area      = _config.area,
+
+            maxLocs    = _config.maxLocations,
+            locations  = this.getLocations(this.filtersB),
+            areas      = this.getXaxis(this.filtersB, _area, this.dataB),
+            datasetB   = null,
+            defaultLabelB = "todos los ramos",
+            labels     = _.pluck(locations, "label"),
+            dataSets   = [],
+            stateField = parent.currentMap.config.location.state,
+            cityField  = parent.settings.constants.cityId,
+            options    = { };
+
+
+
+        if(labels.length < 3){
+          return;
+        }
+        else{
+          areas.forEach(function(area, index){
+            var values = [];
+
+            locations.forEach(function(loc){
+              var fld = loc.type == "state" ? stateField : cityField;
+
+              
+              values.push(d3.sum( this.dataB.filter(function(d){
+                  return d[_area.field] == area && d[fld] == loc.value;
+                }), function(d){
+                return d[_config.value];
+              }));
+
+            }, this);
+
+            dataSets.push({
+              backgroundColor : Chart.helpers.color(_config.colors[index]).alpha(0.5).rgbString(),
+              borderColor : _config.colors[index],
+              data :values,
+              label : this.findLabel(area, _area)
+            });
+          }, this);
+
+          if(this.graphB){
+            this.graphB.destroy();
+          }
+
+          this.graphB = new Chart(this.canvasB, {
+            type: 'radar',
+            data: {labels : labels, datasets : dataSets},
+            options: options
+          });
+        }
+      },
+
     	renderGraphA : function(){
     		var that = this,
-                _config = this.config.graph1,
+            _config = this.config.graph1,
     		    _xAxis   = _config.xAxis,
     		    _yAxis   = _config.yAxis,
     		    _zAxis   = _config.zAxis,
@@ -168,7 +283,6 @@ define(function(require){
     		    defaultLabelA = "todos los ramos";
 
         if(zAxis && locations){
-            console.log("zAxis & locations", zAxis, locations);
           var dataSets = [];
           locations.forEach(function(loc, i){
             var stack = 'Stack ' + i;
@@ -226,7 +340,6 @@ define(function(require){
         }
 
         else if(zAxis){
-            console.log("zAxis", zAxis);
               var dataSets = [];
 
 
@@ -274,8 +387,6 @@ define(function(require){
                 datasets : [datasetA]
               };
         }
-
-        console.log(chartData);
 
 
     		if(this.graphA){
@@ -363,10 +474,7 @@ define(function(require){
     		    all   = _.pluck(data, xAxis.field),
     		    response = _.compact(_.uniq(items.length ? _.pluck(items, "value") : all));
 
-    		return response.sort(); 
-    		//return 12;
-
-
+    		return response.sort();
     	},
 
     	getZaxis : function(filters, zAxis){
@@ -381,7 +489,18 @@ define(function(require){
     		return items.length ? _.compact(_.uniq(_.pluck(items, "value"))) : null;
     		
 
-    	}
+    	},
+
+      findLabel : function(value, conf){
+        console.log(value, conf.field, conf.type, conf);
+
+        if(conf.type == "branch"){
+          return parent.lists.ramosName.branches.filter(function(el){ return el.id == value})[0].name;
+        }
+        else{
+          return value;
+        }
+      }
     };
 
     return controller;
