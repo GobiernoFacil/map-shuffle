@@ -41,6 +41,17 @@
       "zAxis" : null,
       "maxLocations" : 5,
       "colors" : ["red", "green", "blue", "yellow", "purple", "pink", "black", "orange", "gray", "maroon"]
+    },
+    "graph2" : {
+      "title" : "Monto total",
+      "value" : "monto",
+      "area" : {
+        "field" : "Fondo",
+        "title" : "Fondo",
+        "type"  : null
+      },
+      "maxLocations" : 5,
+      "colors" : ["red", "green", "blue", "yellow", "purple", "pink", "black", "orange", "gray", "maroon", "aquamarine", "chartreuse", "cyan", "darkorange", "deeppink", "gold"]
     }
   },
   "template" : "<%=name%> <div class='amount_label'><h5> Registros: <strong><%=value%></strong></h5></div"
