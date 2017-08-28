@@ -56,6 +56,7 @@ define(function(require){
 
     		this.updateGraphA = this.updateGraphA.bind(this);
         this.updateGraphB = this.updateGraphB.bind(this);
+        this.updateGraphD = this.updateGraphD.bind(this);
     		
         container.innerHTML = TEMPLATE;
     		currentMap          = parent.currentMap;
@@ -194,7 +195,55 @@ define(function(require){
     	},
 
     	setupGraphD : function(){
-    		
+        var section       = document.getElementById(UI.graph4),
+            filterCart    = section.querySelector("ul"),
+            filterMenu    = section.querySelector("form"),
+            graph         = section.querySelector("canvas"),
+            graphDFilters = new FIlterModule(parent, filterCart, this.updateGraphD, null, null, true),
+            filters       = currentMap.config.filters.concat(currentMap.config.extraFilters || []);
+
+        this.canvasD = graph;
+
+        section.style.display = "block";
+
+        
+        filters.forEach(function(filter){
+          //var select;
+          
+          if(filter.type == "search"){
+            //this.searchFilters.push( graphAFilters.renderSearchInput(filter, document.getElementById(SEARCH)) );
+            //this.filters.push(stateFilter);
+          }
+
+          else if(filter.type == "state"){
+            graphDFilters.renderStateSelector(filter, filterMenu);
+            //this.filters.push(stateFilter);
+          }
+
+          else if(filter.type == "city"){
+            // renderCitySelector : function(filter, container)
+            graphDFilters.renderCitySelector(filter, filterMenu);
+            //this.filters.push(cityFilter);
+          }
+
+          else if(filter.type == "branch"){
+            // renderCitySelector : function(filter, container)
+            graphDFilters.renderBranchSelector(filter, filterMenu);
+            //this.filters.push(branchFilter);
+          }
+
+          else if(filter.type == "unit"){
+            // renderCitySelector : function(filter, container)
+            graphDFilters.renderUnitSelector(filter, filterMenu);
+            //this.filters.push(unitFilter);
+          }
+          else{
+            graphDFilters.renderOtherSelector(filter, filterMenu)
+            //this.filters.push( graphAFilters.renderOtherSelector(filter, filterMenu) );
+          }
+
+
+        }, this);
     	},
 
     	updateGraphA : function(_data, filters, pagination){
@@ -209,6 +258,15 @@ define(function(require){
         this.filtersB = filters;
 
         this.renderGraphB();
+      },
+
+      updateGraphD : function(_data, filters, pagination, latestFilter){
+        this.dataD    = _data;
+        this.filtersD = filters;
+        //this.locatioD = 
+
+        console.log(_data, filters, pagination, latestFilter);
+        this.renderGraphD();
       },
 
       renderGraphB : function(){
@@ -267,6 +325,75 @@ define(function(require){
             options: options
           });
         }
+      },
+
+      renderGraphD : function(){
+
+        var that       = this,
+            _config    = this.config.graph4,
+            _area      = _config.area,
+            _points    = _config.points,
+
+            //maxLocs    = _config.maxLocations,
+            location  = this.currentLocationD,
+
+
+
+            areas      = this.getXaxis(this.filtersD, _area, this.dataD),
+            points     = this.getXaxis(this.filtersD, _points, this.dataD),
+
+
+
+
+            datasetD   = null,
+            defaultLabelD = "todos los ramos",
+            labels     = points.map(function(val){
+              return this.findLabel(val, _points);
+            }, this),
+            dataSets   = [],
+            stateField = parent.currentMap.config.location.state,
+            cityField  = parent.settings.constants.cityId,
+            options    = { };
+
+        /*
+        if(labels.length < 3){
+          return;
+        }
+        else{
+          areas.forEach(function(area, index){
+            var values = [];
+
+            locations.forEach(function(loc){
+              var fld = loc.type == "state" ? stateField : cityField;
+
+              
+              values.push(d3.sum( this.dataB.filter(function(d){
+                  return d[_area.field] == area && d[fld] == loc.value;
+                }), function(d){
+                return d[_config.value];
+              }));
+
+            }, this);
+
+            dataSets.push({
+              backgroundColor : Chart.helpers.color(_config.colors[index]).alpha(0.5).rgbString(),
+              borderColor : _config.colors[index],
+              data :values,
+              label : this.findLabel(area, _area)
+            });
+          }, this);
+
+          if(this.graphB){
+            this.graphB.destroy();
+          }
+
+          this.graphB = new Chart(this.canvasB, {
+            type: 'radar',
+            data: {labels : labels, datasets : dataSets},
+            options: options
+          });
+        }
+        */
       },
 
     	renderGraphA : function(){
@@ -492,7 +619,6 @@ define(function(require){
     	},
 
       findLabel : function(value, conf){
-        console.log(value, conf.field, conf.type, conf);
 
         if(conf.type == "branch"){
           return parent.lists.ramosName.branches.filter(function(el){ return el.id == value})[0].name;

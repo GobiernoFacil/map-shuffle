@@ -42,10 +42,9 @@ define(function(require){
       data         : null,
       filteredData : null,
       searchInput  : null,
+      latestFilter : null,
 
       filter : function(){
-
-        console.log(this.filters);
 
         var filterCols = _.uniq(_.pluck(this.filters, "field")),
             _data      = parent.currentMap.data.slice(),
@@ -55,7 +54,6 @@ define(function(require){
             value;
 
         filterCols.forEach(function(field){
-          console.log(field);
           _data = this._filterData(_data, field, this.filters);
         }, this);
 
@@ -69,9 +67,7 @@ define(function(require){
 
         pagination.pages = Math.ceil( _data.length / (pageSize || 1) );
 
-        console.log(_data.length);
-
-        callback(_data, this.filters, pagination);
+        callback(_data, this.filters, pagination, this.latestFilter);
       },
 
       clearFilters : function(){
@@ -136,8 +132,6 @@ define(function(require){
             filteredBranches = filteredBranches.map(function(br){ return +br;});
           }
 
-          console.log(compArray);
-
           
           _data = _data.filter(function(d){
             if(_selectedBranches.length){
@@ -164,7 +158,6 @@ define(function(require){
             filteredStates = filteredStates.map(function(st){ return +st;});
           }
 
-          console.log(field, filteredStates, _selectedStates);
           _data = _data.filter(function(d){
             if(_selectedStates.length){
               return compArray.indexOf(d[field]) != -1 || filteredStates.indexOf(d[_selectedStates[0].field]) != -1;
@@ -257,7 +250,6 @@ define(function(require){
       },
 
       renderCitySelector : function(filter, container){
-        console.log("el filter más arriba", filter);
         var optAll   = document.createElement("option"),
             col      = filter.field,
             item     = document.createElement(FILTERCONTAINER),
@@ -604,7 +596,6 @@ define(function(require){
               parentFilter = null;
             }
 
-            console.log("el filtro: " , filter);
             newFilter = {
               id           :  _.uniqueId(),
               value        : value,
@@ -617,6 +608,8 @@ define(function(require){
             that.findLabel(newFilter);
             
             that.filters.push(newFilter);
+
+            that.latestFilter = newFilter;
           }
 
           that.renderCartItem(newFilter);
@@ -677,6 +670,8 @@ define(function(require){
             that.findLabel(newFilter);
 
             that.filters.push(newFilter);
+
+            that.latestFilter = newFilter;
           }
 
           that.renderCartItem(newFilter);

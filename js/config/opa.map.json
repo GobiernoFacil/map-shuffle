@@ -62,6 +62,23 @@
       },
       "maxLocations" : 5,
       "colors" : ["red", "green", "blue", "yellow", "purple", "pink", "black", "orange", "gray", "maroon", "aquamarine", "chartreuse", "cyan", "darkorange", "deeppink", "gold"]
+    },
+
+    "graph4" : {
+      "title" : "Monto total por año",
+      "value" : "monto_total_inversion",
+      "area" : {
+        "field" : "ramo",
+        "title" : "ramo",
+        "type"  : "branch"
+      },
+      "points" : {
+        "field" : "ciclo",
+        "title" : "año",
+        "type"  : null
+      },
+      "maxLocations" : 5,
+      "colors" : ["red", "green", "blue", "yellow", "purple", "pink", "black", "orange", "gray", "maroon", "aquamarine", "chartreuse", "cyan", "darkorange", "deeppink", "gold"]
     }
 
 
