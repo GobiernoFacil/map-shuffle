@@ -199,8 +199,9 @@ define(function(require){
             filterCart    = section.querySelector("ul"),
             filterMenu    = section.querySelector("form"),
             graph         = section.querySelector("canvas"),
-            graphDFilters = new FIlterModule(parent, filterCart, this.updateGraphD, null, null, true),
             filters       = currentMap.config.filters.concat(currentMap.config.extraFilters || []);
+
+        graphDFilters = new FIlterModule(parent, filterCart, this.updateGraphD, null, null, true);
 
         this.canvasD = graph;
 
@@ -263,8 +264,10 @@ define(function(require){
       updateGraphD : function(_data, filters, pagination, latestFilter){
         this.dataD    = _data;
         this.filtersD = filters;
-        //this.locatioD = 
-
+  
+        if(latestFilter && (latestFilter.type == "state" || latestFilter.type == "city") ){
+          graphDFilters._setUniq(["state", "city"], latestFilter);
+        }
         console.log(_data, filters, pagination, latestFilter);
         this.renderGraphD();
       },
@@ -327,33 +330,91 @@ define(function(require){
         }
       },
 
+      //
+      // DIBUJA LA CUARTA GRÁFICA (radar una ubicación)
+      //
+      //
       renderGraphD : function(){
-
+        // [1] obtiene algunas referencias
+        //
         var that       = this,
+            // la configuración de la gráfica
             _config    = this.config.graph4,
+            // el campo que define el área
             _area      = _config.area,
+            // el campo que define los puntos
             _points    = _config.points,
-
             //maxLocs    = _config.maxLocations,
+            // la ubicación a desplegar
             location  = this.currentLocationD,
-
-
-
+            // el array con los valores de las áreas
             areas      = this.getXaxis(this.filtersD, _area, this.dataD),
+            // el array con los valores de los puntos
             points     = this.getXaxis(this.filtersD, _points, this.dataD),
-
-
-
-
+            // los datos para graficar
             datasetD   = null,
+            // el título de la gráfica
             defaultLabelD = "todos los ramos",
+            // las etiquetas para las aristas (points)
             labels     = points.map(function(val){
               return this.findLabel(val, _points);
             }, this),
+            // los datos para cada geometría en el radar
             dataSets   = [],
+            // la columna de estado
             stateField = parent.currentMap.config.location.state,
+            // la columna de municipio
             cityField  = parent.settings.constants.cityId,
+            // las opciones de la gráfica
             options    = { };
+
+        // [2] se mapean los datos para graficar
+        //
+        areas.forEach(function(area, index){
+          // [2.1] se inicia el array de los valores numéricos
+          //       para cada área
+          var values = [];
+
+          // [2.2] cada punto define un valor del área
+
+          console.log(points);
+          points.forEach(function(point){
+            // [2.2.1] cada valor resulta de sumar los valores que 
+            //         tienen la misma clave de área y la misma clave del punto.
+            //         el valor que suman es el que corresponde al valor definido
+            //         en la configuración de la gráfica (value)
+            values.push(d3.sum( this.dataD.filter(function(d){
+                  return d[_area.field] == area && d[_points.field] == point;
+                }), function(d){
+                return d[_config.value];
+              }));
+
+            }, this);
+
+            dataSets.push({
+              backgroundColor : Chart.helpers.color(_config.colors[index]).alpha(0.5).rgbString(),
+              borderColor : _config.colors[index],
+              data :values,
+              label : this.findLabel(area, _area)
+            });
+        }, this);
+
+
+        console.log(dataSets);
+
+        // [3] si la gráfica existe, la resetea
+        //
+        if(this.graphD){
+          this.graphD.destroy();
+        }
+
+        // [4] dibuja la gráfica
+        //
+        this.graphD = new Chart(this.canvasD, {
+            type: 'radar',
+            data: {labels : labels, datasets : dataSets},
+            options: options
+        });
 
         /*
         if(labels.length < 3){

@@ -472,6 +472,10 @@ define(function(require){
 
         li.innerHTML = html;
 
+        li.setAttribute("data-type", filter.type);
+
+        //console.log(filter);
+
         container.appendChild(li);
 
         li.addEventListener("click", function(e){
@@ -717,6 +721,37 @@ define(function(require){
 
       _makeList : function(data, filter){
         return _.compact(_.uniq(_.pluck(data, filter.field))).sort();
+      },
+
+      _setUniq : function(types, filter){
+
+        this.latestFilter = null;
+        this._removeFilters(types);
+        this.renderCartItem(filter);
+        this.filters.push(filter);
+        this.filter();
+        //this.filter();
+
+      },
+
+      _removeFilters : function(types){
+        
+        types.forEach(function(type){
+        
+          var liItems = this.cart.querySelectorAll("[data-type=" + type +"]");
+          for(var i = 0; i < liItems.length; i++){
+            liItems[i].parentNode.removeChild(liItems[i]);
+          }
+
+          var filters = this.filters.filter(function(fil){
+            return fil.type == type;
+          }, this);
+
+
+          this.filters = _.difference(this.filters, filters);
+
+        }, this);
+        
       },
     };
 
