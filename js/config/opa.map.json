@@ -64,6 +64,26 @@
       "colors" : ["red", "green", "blue", "yellow", "purple", "pink", "black", "orange", "gray", "maroon", "aquamarine", "chartreuse", "cyan", "darkorange", "deeppink", "gold"]
     },
 
+    "graph3" : {
+      "title" : "Monto total invertido por año",
+      "xAxis" : {
+        "field" : "ciclo",
+        "title" : "año",
+        "type"  : null
+      },
+      "yAxis" : {
+        "field" : "monto_total_inversion",
+        "title" : "monto total invertido"
+      },
+      "zAxis" : {
+        "field" : "ramo",
+        "title" : "ramo",
+        "type"  : "branch"
+      },
+      "maxLocations" : 5,
+      "colors" : ["red", "green", "blue", "yellow", "purple", "pink", "black", "orange", "gray", "maroon"]
+    },
+
     "graph4" : {
       "title" : "Monto total por año",
       "value" : "monto_total_inversion",

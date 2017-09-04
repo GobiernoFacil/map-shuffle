@@ -56,6 +56,7 @@ define(function(require){
 
     		this.updateGraphA = this.updateGraphA.bind(this);
         this.updateGraphB = this.updateGraphB.bind(this);
+        this.updateGraphC = this.updateGraphC.bind(this);
         this.updateGraphD = this.updateGraphD.bind(this);
     		
         container.innerHTML = TEMPLATE;
@@ -191,7 +192,56 @@ define(function(require){
         }, this);
     	},
     	setupGraphC : function(){
+        console.log("yai");
+        var section       = document.getElementById(UI.graph3),
+            filterCart    = section.querySelector("ul"),
+            filterMenu    = section.querySelector("form"),
+            graph         = section.querySelector("canvas"),
+            graphCFilters = new FIlterModule(parent, filterCart, this.updateGraphC, null, null, true),
+            filters = currentMap.config.filters.concat(currentMap.config.extraFilters || []);
 
+        this.canvasC = graph;
+
+        section.style.display = "block";
+
+        
+        filters.forEach(function(filter){
+          //var select;
+          
+          if(filter.type == "search"){
+            //this.searchFilters.push( graphAFilters.renderSearchInput(filter, document.getElementById(SEARCH)) );
+            //this.filters.push(stateFilter);
+          }
+
+          else if(filter.type == "state"){
+            graphCFilters.renderStateSelector(filter, filterMenu);
+            //this.filters.push(stateFilter);
+          }
+
+          else if(filter.type == "city"){
+            // renderCitySelector : function(filter, container)
+            graphCFilters.renderCitySelector(filter, filterMenu);
+            //this.filters.push(cityFilter);
+          }
+
+          else if(filter.type == "branch"){
+            // renderCitySelector : function(filter, container)
+            graphCFilters.renderBranchSelector(filter, filterMenu);
+            //this.filters.push(branchFilter);
+          }
+
+          else if(filter.type == "unit"){
+            // renderCitySelector : function(filter, container)
+            graphCFilters.renderUnitSelector(filter, filterMenu);
+            //this.filters.push(unitFilter);
+          }
+          else{
+            graphCFilters.renderOtherSelector(filter, filterMenu);
+            //this.filters.push( graphAFilters.renderOtherSelector(filter, filterMenu) );
+          }
+
+
+        }, this);
     	},
 
     	setupGraphD : function(){
@@ -261,6 +311,14 @@ define(function(require){
         this.renderGraphB();
       },
 
+      updateGraphC : function(_data, filters, pagination){
+        this.dataC    = _data;
+        this.filtersC = filters;
+
+        this.renderGraphC();
+      },
+
+
       updateGraphD : function(_data, filters, pagination, latestFilter){
         this.dataD    = _data;
         this.filtersD = filters;
@@ -270,6 +328,10 @@ define(function(require){
         }
         console.log(_data, filters, pagination, latestFilter);
         this.renderGraphD();
+      },
+
+      renderGraphC : function(){
+        console.log("render!!!!");
       },
 
       renderGraphB : function(){
