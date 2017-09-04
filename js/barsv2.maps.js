@@ -352,7 +352,7 @@ define(function(require){
 
         zAxis.forEach(function(zx, i){
             dataSets.push({
-              label : zx,
+              label : this.findLabel(zx, _zAxis),//zx,
               backgroundColor : _config.colors[i],
               stack : 'Stack ' + i,
               data : xAxis.map(function(item){
