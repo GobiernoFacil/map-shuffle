@@ -192,13 +192,14 @@ define(function(require){
         }, this);
     	},
     	setupGraphC : function(){
-        console.log("yai");
         var section       = document.getElementById(UI.graph3),
             filterCart    = section.querySelector("ul"),
             filterMenu    = section.querySelector("form"),
             graph         = section.querySelector("canvas"),
-            graphCFilters = new FIlterModule(parent, filterCart, this.updateGraphC, null, null, true),
+            //graphCFilters = new FIlterModule(parent, filterCart, this.updateGraphC, null, null, true),
             filters = currentMap.config.filters.concat(currentMap.config.extraFilters || []);
+
+        graphCFilters = new FIlterModule(parent, filterCart, this.updateGraphC, null, null, true);
 
         this.canvasC = graph;
 
@@ -311,9 +312,13 @@ define(function(require){
         this.renderGraphB();
       },
 
-      updateGraphC : function(_data, filters, pagination){
+      updateGraphC : function(_data, filters, pagination, latestFilter){
         this.dataC    = _data;
         this.filtersC = filters;
+
+        if(latestFilter && (latestFilter.type == "state" || latestFilter.type == "city") ){
+          graphCFilters._setUniq(["state", "city"], latestFilter);
+        }
 
         this.renderGraphC();
       },
@@ -326,12 +331,115 @@ define(function(require){
         if(latestFilter && (latestFilter.type == "state" || latestFilter.type == "city") ){
           graphDFilters._setUniq(["state", "city"], latestFilter);
         }
-        console.log(_data, filters, pagination, latestFilter);
         this.renderGraphD();
       },
 
       renderGraphC : function(){
-        console.log("render!!!!");
+        var that          = this,
+            _config       = this.config.graph3,
+            _xAxis        = _config.xAxis,
+            _yAxis        = _config.yAxis,
+            _zAxis        = _config.zAxis,
+            maxLocs       = _config.maxLocations,
+            location      = this.currentLocationC,
+            xAxis         = this.getXaxis(this.filtersC, _xAxis, this.dataC),
+            zAxis         = this.getZaxis(this.filtersC, _zAxis),
+            datasetC      = null,
+            defaultLabelC = "todos los ramos",
+            dataSets      = [];
+
+    
+
+        zAxis.forEach(function(zx, i){
+            dataSets.push({
+              label : zx,
+              backgroundColor : _config.colors[i],
+              stack : 'Stack ' + i,
+              data : xAxis.map(function(item){
+                return d3.sum(this.dataA.filter(function(el){
+                        return el[_xAxis.field] == item && el[_zAxis.field] == zx;
+                    }), function(d){
+                        return +d[_config.yAxis.field]
+                    });
+              }, this)
+            });
+        }, this);
+
+        var chartData = {
+          labels   : xAxis,
+          datasets : dataSets
+        };
+
+
+
+        if(this.graphC){
+
+          this.graphC.destroy();
+
+          var ctx = this.canvasC.getContext("2d");
+
+          this.graphC = new Chart(ctx, {
+          type : "bar",
+          data : chartData,
+          options : {
+            title : {
+              display : true, 
+              text : parent.currentMap.config.name
+            },
+            tooltips : {
+              mode : "index",
+              intersect : false
+            },
+            responsive : true,
+            scales : {
+              xAxes : [{stacked : true}],
+              yAxes : [{
+                stacked : true,
+                ticks: {
+                // Include a dollar sign in the ticks
+                  callback: function(value, index, values) {
+                    return '$' + value.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                  }
+                }
+              }]
+            }
+          }
+        });
+        }
+        else{
+          var ctx = this.canvasC.getContext("2d");
+          this.graphC = new Chart(ctx, {
+          type : "bar",
+          data : chartData,
+          options : {
+            title : {
+              display : true, 
+              text : parent.currentMap.config.name
+            },
+            tooltips : {
+              mode : "index",
+              intersect : false
+            },
+            responsive : true,
+            scales : {
+              xAxes : [{
+                stacked : true
+              }],
+              yAxes : [{
+                stacked : true,
+                ticks: {
+                // Include a dollar sign in the ticks
+                  callback: function(value, index, values) {
+                    return '$' + value.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                  }
+                }
+              }]
+            }
+          }
+          });
+        }
+        
+
       },
 
       renderGraphB : function(){
@@ -438,8 +546,6 @@ define(function(require){
           var values = [];
 
           // [2.2] cada punto define un valor del área
-
-          console.log(points);
           points.forEach(function(point){
             // [2.2.1] cada valor resulta de sumar los valores que 
             //         tienen la misma clave de área y la misma clave del punto.
@@ -461,9 +567,6 @@ define(function(require){
             });
         }, this);
 
-
-        console.log(dataSets);
-
         // [3] si la gráfica existe, la resetea
         //
         if(this.graphD){
@@ -477,46 +580,6 @@ define(function(require){
             data: {labels : labels, datasets : dataSets},
             options: options
         });
-
-        /*
-        if(labels.length < 3){
-          return;
-        }
-        else{
-          areas.forEach(function(area, index){
-            var values = [];
-
-            locations.forEach(function(loc){
-              var fld = loc.type == "state" ? stateField : cityField;
-
-              
-              values.push(d3.sum( this.dataB.filter(function(d){
-                  return d[_area.field] == area && d[fld] == loc.value;
-                }), function(d){
-                return d[_config.value];
-              }));
-
-            }, this);
-
-            dataSets.push({
-              backgroundColor : Chart.helpers.color(_config.colors[index]).alpha(0.5).rgbString(),
-              borderColor : _config.colors[index],
-              data :values,
-              label : this.findLabel(area, _area)
-            });
-          }, this);
-
-          if(this.graphB){
-            this.graphB.destroy();
-          }
-
-          this.graphB = new Chart(this.canvasB, {
-            type: 'radar',
-            data: {labels : labels, datasets : dataSets},
-            options: options
-          });
-        }
-        */
       },
 
     	renderGraphA : function(){
