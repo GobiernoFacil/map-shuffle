@@ -56,6 +56,7 @@ define(function(require){
 
     		this.updateGraphA = this.updateGraphA.bind(this);
         this.updateGraphB = this.updateGraphB.bind(this);
+        this.updateGraphC = this.updateGraphC.bind(this);
         this.updateGraphD = this.updateGraphD.bind(this);
     		
         container.innerHTML = TEMPLATE;
@@ -191,7 +192,57 @@ define(function(require){
         }, this);
     	},
     	setupGraphC : function(){
+        var section       = document.getElementById(UI.graph3),
+            filterCart    = section.querySelector("ul"),
+            filterMenu    = section.querySelector("form"),
+            graph         = section.querySelector("canvas"),
+            //graphCFilters = new FIlterModule(parent, filterCart, this.updateGraphC, null, null, true),
+            filters = currentMap.config.filters.concat(currentMap.config.extraFilters || []);
 
+        graphCFilters = new FIlterModule(parent, filterCart, this.updateGraphC, null, null, true);
+
+        this.canvasC = graph;
+
+        section.style.display = "block";
+
+        
+        filters.forEach(function(filter){
+          //var select;
+          
+          if(filter.type == "search"){
+            //this.searchFilters.push( graphAFilters.renderSearchInput(filter, document.getElementById(SEARCH)) );
+            //this.filters.push(stateFilter);
+          }
+
+          else if(filter.type == "state"){
+            graphCFilters.renderStateSelector(filter, filterMenu);
+            //this.filters.push(stateFilter);
+          }
+
+          else if(filter.type == "city"){
+            // renderCitySelector : function(filter, container)
+            graphCFilters.renderCitySelector(filter, filterMenu);
+            //this.filters.push(cityFilter);
+          }
+
+          else if(filter.type == "branch"){
+            // renderCitySelector : function(filter, container)
+            graphCFilters.renderBranchSelector(filter, filterMenu);
+            //this.filters.push(branchFilter);
+          }
+
+          else if(filter.type == "unit"){
+            // renderCitySelector : function(filter, container)
+            graphCFilters.renderUnitSelector(filter, filterMenu);
+            //this.filters.push(unitFilter);
+          }
+          else{
+            graphCFilters.renderOtherSelector(filter, filterMenu);
+            //this.filters.push( graphAFilters.renderOtherSelector(filter, filterMenu) );
+          }
+
+
+        }, this);
     	},
 
     	setupGraphD : function(){
@@ -199,8 +250,9 @@ define(function(require){
             filterCart    = section.querySelector("ul"),
             filterMenu    = section.querySelector("form"),
             graph         = section.querySelector("canvas"),
-            graphDFilters = new FIlterModule(parent, filterCart, this.updateGraphD, null, null, true),
             filters       = currentMap.config.filters.concat(currentMap.config.extraFilters || []);
+
+        graphDFilters = new FIlterModule(parent, filterCart, this.updateGraphD, null, null, true);
 
         this.canvasD = graph;
 
@@ -260,13 +312,134 @@ define(function(require){
         this.renderGraphB();
       },
 
+      updateGraphC : function(_data, filters, pagination, latestFilter){
+        this.dataC    = _data;
+        this.filtersC = filters;
+
+        if(latestFilter && (latestFilter.type == "state" || latestFilter.type == "city") ){
+          graphCFilters._setUniq(["state", "city"], latestFilter);
+        }
+
+        this.renderGraphC();
+      },
+
+
       updateGraphD : function(_data, filters, pagination, latestFilter){
         this.dataD    = _data;
         this.filtersD = filters;
-        //this.locatioD = 
-
-        console.log(_data, filters, pagination, latestFilter);
+  
+        if(latestFilter && (latestFilter.type == "state" || latestFilter.type == "city") ){
+          graphDFilters._setUniq(["state", "city"], latestFilter);
+        }
         this.renderGraphD();
+      },
+
+      renderGraphC : function(){
+        var that          = this,
+            _config       = this.config.graph3,
+            _xAxis        = _config.xAxis,
+            _yAxis        = _config.yAxis,
+            _zAxis        = _config.zAxis,
+            maxLocs       = _config.maxLocations,
+            location      = this.currentLocationC,
+            xAxis         = this.getXaxis(this.filtersC, _xAxis, this.dataC),
+            zAxis         = this.getZaxis(this.filtersC, _zAxis),
+            datasetC      = null,
+            defaultLabelC = "todos los ramos",
+            dataSets      = [];
+
+    
+
+        zAxis.forEach(function(zx, i){
+            dataSets.push({
+              label : this.findLabel(zx, _zAxis),//zx,
+              backgroundColor : _config.colors[i],
+              stack : 'Stack ' + i,
+              data : xAxis.map(function(item){
+                return d3.sum(this.dataA.filter(function(el){
+                        return el[_xAxis.field] == item && el[_zAxis.field] == zx;
+                    }), function(d){
+                        return +d[_config.yAxis.field]
+                    });
+              }, this)
+            });
+        }, this);
+
+        var chartData = {
+          labels   : xAxis,
+          datasets : dataSets
+        };
+
+
+
+        if(this.graphC){
+
+          this.graphC.destroy();
+
+          var ctx = this.canvasC.getContext("2d");
+
+          this.graphC = new Chart(ctx, {
+          type : "bar",
+          data : chartData,
+          options : {
+            title : {
+              display : true, 
+              text : parent.currentMap.config.name
+            },
+            tooltips : {
+              mode : "index",
+              intersect : false
+            },
+            responsive : true,
+            scales : {
+              xAxes : [{stacked : true}],
+              yAxes : [{
+                stacked : true,
+                ticks: {
+                // Include a dollar sign in the ticks
+                  callback: function(value, index, values) {
+                    return '$' + value.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                  }
+                }
+              }]
+            }
+          }
+        });
+        }
+        else{
+          var ctx = this.canvasC.getContext("2d");
+          this.graphC = new Chart(ctx, {
+          type : "bar",
+          data : chartData,
+          options : {
+            title : {
+              display : true, 
+              text : parent.currentMap.config.name
+            },
+            tooltips : {
+              mode : "index",
+              intersect : false
+            },
+            responsive : true,
+            scales : {
+              xAxes : [{
+                stacked : true
+              }],
+              yAxes : [{
+                stacked : true,
+                ticks: {
+                // Include a dollar sign in the ticks
+                  callback: function(value, index, values) {
+                    return '$' + value.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                  }
+                }
+              }]
+            }
+          }
+          });
+        }
+        
+
       },
 
       renderGraphB : function(){
@@ -327,48 +500,59 @@ define(function(require){
         }
       },
 
+      //
+      // DIBUJA LA CUARTA GRÁFICA (radar una ubicación)
+      //
+      //
       renderGraphD : function(){
-
+        // [1] obtiene algunas referencias
+        //
         var that       = this,
+            // la configuración de la gráfica
             _config    = this.config.graph4,
+            // el campo que define el área
             _area      = _config.area,
+            // el campo que define los puntos
             _points    = _config.points,
-
             //maxLocs    = _config.maxLocations,
+            // la ubicación a desplegar
             location  = this.currentLocationD,
-
-
-
+            // el array con los valores de las áreas
             areas      = this.getXaxis(this.filtersD, _area, this.dataD),
+            // el array con los valores de los puntos
             points     = this.getXaxis(this.filtersD, _points, this.dataD),
-
-
-
-
+            // los datos para graficar
             datasetD   = null,
+            // el título de la gráfica
             defaultLabelD = "todos los ramos",
+            // las etiquetas para las aristas (points)
             labels     = points.map(function(val){
               return this.findLabel(val, _points);
             }, this),
+            // los datos para cada geometría en el radar
             dataSets   = [],
+            // la columna de estado
             stateField = parent.currentMap.config.location.state,
+            // la columna de municipio
             cityField  = parent.settings.constants.cityId,
+            // las opciones de la gráfica
             options    = { };
 
-        /*
-        if(labels.length < 3){
-          return;
-        }
-        else{
-          areas.forEach(function(area, index){
-            var values = [];
+        // [2] se mapean los datos para graficar
+        //
+        areas.forEach(function(area, index){
+          // [2.1] se inicia el array de los valores numéricos
+          //       para cada área
+          var values = [];
 
-            locations.forEach(function(loc){
-              var fld = loc.type == "state" ? stateField : cityField;
-
-              
-              values.push(d3.sum( this.dataB.filter(function(d){
-                  return d[_area.field] == area && d[fld] == loc.value;
+          // [2.2] cada punto define un valor del área
+          points.forEach(function(point){
+            // [2.2.1] cada valor resulta de sumar los valores que 
+            //         tienen la misma clave de área y la misma clave del punto.
+            //         el valor que suman es el que corresponde al valor definido
+            //         en la configuración de la gráfica (value)
+            values.push(d3.sum( this.dataD.filter(function(d){
+                  return d[_area.field] == area && d[_points.field] == point;
                 }), function(d){
                 return d[_config.value];
               }));
@@ -381,19 +565,21 @@ define(function(require){
               data :values,
               label : this.findLabel(area, _area)
             });
-          }, this);
+        }, this);
 
-          if(this.graphB){
-            this.graphB.destroy();
-          }
+        // [3] si la gráfica existe, la resetea
+        //
+        if(this.graphD){
+          this.graphD.destroy();
+        }
 
-          this.graphB = new Chart(this.canvasB, {
+        // [4] dibuja la gráfica
+        //
+        this.graphD = new Chart(this.canvasD, {
             type: 'radar',
             data: {labels : labels, datasets : dataSets},
             options: options
-          });
-        }
-        */
+        });
       },
 
     	renderGraphA : function(){

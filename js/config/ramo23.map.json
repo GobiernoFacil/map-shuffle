@@ -17,7 +17,8 @@
   "current" : {
     "level"  : "city",
     "value"  : "monto",
-    "method" : "length"
+    "method" : "length",
+    "unit"   : "proyectos"
   },
   "filters" : [
     {"type" : "state", "field" : "id_entidad"},
