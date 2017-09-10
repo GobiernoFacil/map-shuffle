@@ -100,9 +100,11 @@ define(function(require){
       // * referencia al archivo de configuración inicial
       this.settings = Object.create(CONFIG);
       // * la columna para el id interno de los municipios
-      this.cityID = this.settings.constants.cityId;
+      this.cityID   = this.settings.constants.cityId;
       // * la columna para el id interno de las unidades ejecutoras
-      this.unitID = this.settings.constants.unitId;
+      this.unitID   = this.settings.constants.unitId;
+      // * la columna para el url de cada item
+      this.itemUrl  = this.settings.constants.itemUrl;
       // * la referencia a classyBrew
       this.brew           = null;
       // * los datos filtrados
@@ -942,6 +944,7 @@ define(function(require){
           src     = conf.src,
           hasCity = conf.location.city,
           hasUnit = null,
+          hasUrl  = conf.link,
           filters = conf.filters,
           src2    = this.makeAPIURL(item);
 
@@ -990,7 +993,11 @@ define(function(require){
 
         if(hasUnit){
           that._addKeyToUnits(item.data, conf, hasUnit);
-         }
+        }
+
+        if(hasUrl){
+          that._addUrlToItems(item.data, conf);
+        }
 
         that.mixInitialFilters(item);
         that.cleanLayers();
@@ -1074,6 +1081,12 @@ define(function(require){
      * F U N C I O N E S   D E   M A P E O   D E    D A T O S
      * ------------------------------------------------------------
      */
+
+    _addUrlToItems : function(data, conf){
+      data.forEach(function(d){
+        d[this.itemUrl] = conf.link.url + "#" + d[conf.link.column];
+      }, this);
+    },
 
     _addKeyToUnits : function(data, conf, unit){
       var branch = conf.filters.filter(function(fil){

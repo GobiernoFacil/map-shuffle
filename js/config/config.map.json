@@ -40,7 +40,7 @@
     "basePath"  : "/js/config",
     "maps"      : ["escuelas100.map.json", "ramo23.map.json", "opa.map.json", "entidades.map.json"],
     "extras"    : ["poblacion.map.json"],
-    "current"   : 1,
+    "current"   : 2,
     "embedPath" : "http://localhost:8000/mapa.html" 
   },
   "ui" : {
@@ -138,7 +138,8 @@
     "searchPageSize" : 10
   },
   "constants" : {
-    "cityId" : "GFSHCPCityId",
-    "unitId" : "GFSHCPUnitId"
+    "cityId"  : "GFSHCPCityId",
+    "unitId"  : "GFSHCPUnitId",
+    "itemUrl" : "GFSHCPurl"
   }
 }
