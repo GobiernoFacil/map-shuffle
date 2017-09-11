@@ -222,7 +222,8 @@ define(function(require){
           id        : PREFIX + _.uniqueId(),
           label     : SELECTSTATELABEL,
           dataField : col,
-          className : (className || "col-sm-4")
+          className : (className || "col-sm-4"),
+          tooltip   : "happy"
         };
 
         item.innerHTML = template(obj);
@@ -261,7 +262,8 @@ define(function(require){
           id        : PREFIX + _.uniqueId(),
           label     : SELECTCITYLABEL,
           dataField : col,
-          className : (className || "col-sm-4")
+          className : (className || "col-sm-4"),
+          tooltip   : "happy"
         };
 
         item.innerHTML = template(obj);
@@ -292,7 +294,8 @@ define(function(require){
           id        : PREFIX + _.uniqueId(),
           label     : SELECTBRANCHLABEL,
           dataField : col,
-          className : (className || "col-sm-4")
+          className : (className || "col-sm-4"),
+          tooltip   : "happy"
         };
 
         item.innerHTML = template(obj);
@@ -332,7 +335,8 @@ define(function(require){
           id        : PREFIX + _.uniqueId(),
           label     : SELECTBRANCHLABEL,
           dataField : col,
-          className : (className || "col-sm-4")
+          className : (className || "col-sm-4"),
+          tooltip   : "happy"
         };
 
         item.innerHTML = template(obj);
@@ -373,7 +377,8 @@ define(function(require){
           id        : PREFIX + _.uniqueId(),
           label     : SELECTUNITLABEL,
           dataField : col,
-          className : (className || "col-sm-4")
+          className : (className || "col-sm-4"),
+          tooltip   : "happy"
         };
 
         item.innerHTML = template(obj);
@@ -402,7 +407,8 @@ define(function(require){
           id        : PREFIX + _.uniqueId(),
           label     : filter.title || col,
           dataField : col,
-          className : (className || "col-sm-4")
+          className : (className || "col-sm-4"),
+          tooltip   : "happy"
         };
 
         item.innerHTML = template(obj);
