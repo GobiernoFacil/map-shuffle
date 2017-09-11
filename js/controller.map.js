@@ -1521,6 +1521,8 @@ define(function(require){
 
       container.innerHTML = "";
 
+      this.filterModule.renderClearFilterBtn2(container);
+      
       filters.forEach(function(filter){
         var select;
 
@@ -1559,8 +1561,6 @@ define(function(require){
           this.filterModule.renderOtherSelector(filter, container);
         }
         
-
-
       }, this);
 
     },

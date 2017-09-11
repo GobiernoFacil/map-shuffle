@@ -11,6 +11,7 @@ define(function(require){
   FILTER               = require("text!templates/filter-item.html"),
   FILTERV2             = require("text!templates/filter-item-v2.html"),
   SEARCH               = require("text!templates/search-item.html"),
+  CLEARFILTERSBTN      = require("text!templates/clear-filter-item.html"),
   selectize            = require("selectize"),
   FILTERCONTAINER      = "div",
   FILTERCONTAINERCLASS = "col-sm-4",
@@ -507,6 +508,26 @@ define(function(require){
           that.filter();
         });
       },
+
+      renderClearFilterBtn2 : function(container){
+        var div    = document.createElement("div"),
+            that   = this,
+            anchor;
+
+        div.innerHTML = CLEARFILTERSBTN;
+        div.setAttribute("class", CLEARCLASS);
+        anchor = div.querySelector("a");
+        container.appendChild(div);
+
+        anchor.addEventListener("click", function(e){
+          e.preventDefault();
+          that.filters = [];
+          that.cart.innerHTML = "";
+          that.filter();
+        });
+      },
+
+      // CLEARFILTERSBTN
 
       updateCitySelector : function(state, city){
         var _cities = parent.lists.municipiosName.cities,
