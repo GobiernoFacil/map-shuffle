@@ -21,6 +21,7 @@ define(function(require){
         container  = document.getElementById(UI.container),
         filterMenu = null,
         filterCart = null,
+        projectNum = null,
         pageSize   = CONFIG.ux.searchPageSize,
         format     = d3.format(","),
         currentMap = null,
@@ -40,8 +41,10 @@ define(function(require){
         page       = 0,
         pages      = 0,
         isAPI      = null,
+        apiRes     = null,
         colNames   = null,
-        URLColName = parent.itemUrl;
+        URLColName = parent.itemUrl,
+        totalItems = 0;
 
     var controller = {
       render : function(){
@@ -65,6 +68,7 @@ define(function(require){
         pageInput  = document.getElementById(UI.pageInput);
         filterMenu = document.getElementById(UI.filterContainer);
         filterCart = document.getElementById(UI.cart);
+        projectNum = document.getElementById(UI.totalItems);
 
         
         this.filters       = [];
@@ -83,6 +87,7 @@ define(function(require){
           d3.json(url, function(error, d){
             data  = d.results;
             pages = d.pages;
+            apiRes = d;
             controller.renderItems(page);
             controller.renderPagination(page);
             that.enableDowload();
@@ -132,6 +137,7 @@ define(function(require){
             data  = d.results;
             pages = d.pages;
             page  = 0;
+            apiRes = d;
             controller.renderItems(0);
             controller.renderPagination();
           });
@@ -146,6 +152,8 @@ define(function(require){
       },
 
       renderItems : function(newPage){
+
+        this.renderItemsNum();
 
         newPage = Math.ceil(newPage);
 
@@ -184,6 +192,19 @@ define(function(require){
 
 
         totalPages.innerHTML = pages;
+      },
+
+      renderItemsNum : function(){
+        var itemsNum;
+        if(isAPI){
+          itemsNum = apiRes.total;
+        }
+        else{
+          itemsNum = data.length;
+        }
+
+        projectNum.innerHTML = format(itemsNum);
+        //console.log(projectNum, data, itemsNum);
       },
 
       renderFilters : function(){

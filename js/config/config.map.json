@@ -113,7 +113,8 @@
       "nextPage"        : "GF-SHCP-SEARCH-CONTROL-NEXT",
       "toolsForm"       : "GF-SHCP-search-tools-form",
       "paginationForm"  : "GF-SHCP-search-pagination-form",
-      "downloadBtn"     : "GF-SHCP-search-app-download"
+      "downloadBtn"     : "GF-SHCP-search-app-download",
+      "totalItems"      : "GF-SHCP-search-app-total-items"
     },
 
     "geolocationBtn"   : "GF-SHCP-geolocate-user",
