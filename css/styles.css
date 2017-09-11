@@ -1874,10 +1874,9 @@ h1 {
   #GF-SHCP-color-guide li {
     color: #777;
     list-style: none;
-    display: inline-block;
+    display: block;
     font-size: 9px;
-    margin-left: 5px;
-    text-align: right; }
+    margin-left: 5px; }
     #GF-SHCP-color-guide li i {
       display: block !important;
       height: 10px !important;
