@@ -1087,6 +1087,9 @@ h2 .tooltip:hover .tooltip-item {
 .selectize-dropdown .optgroup:first-child {
   border-top: 0 none; }
 
+.selectize-input {
+  padding: 0; }
+
 .wrapper,
 .wrap {
   width: 90%;
@@ -1894,21 +1897,6 @@ h1 {
   line-height: 28px;
   text-transform: uppercase; }
 
-.GF-tab_graphs_app {
-  margin: 0 auto;
-  text-align: center; }
-  .GF-tab_graphs_app li {
-    display: inline-block;
-    width: 24%;
-    text-align: center; }
-    .GF-tab_graphs_app li a {
-      background: #f2f2f2;
-      padding: 10px 0;
-      display: block; }
-      .GF-tab_graphs_app li a:hover {
-        background: #999;
-        color: white; }
-
 .cart-list li.GF-SHCP-clear-filters {
   background: #f49d51;
   color: white; }
@@ -2062,6 +2050,22 @@ h1 {
     .title_map b.compare_i {
       background: #f49d51 url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTkuMiAyNC4yIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxOS4yIDI0LjI7IiB4bWw6c3BhY2U9InByZXNlcnZlIj48c3R5bGUgdHlwZT0idGV4dC9jc3MiPi5zdDB7ZmlsbDojRkZGRkZGO308L3N0eWxlPjxnPjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNi4zLDYuNkwxMiwyLjJjLTAuMi0wLjItMC41LTAuMi0wLjcsMGMtMC4yLDAuMi0wLjIsMC41LDAsMC43bDMuNSwzLjVIMy4zYzAsMCwwLDAsMCwwSDIuOHY0LjdjMCwwLjMsMC4yLDAuNSwwLjUsMC41YzAuMywwLDAuNS0wLjIsMC41LTAuNVY3LjRoMTFsLTMuNSwzLjVjLTAuMiwwLjItMC4yLDAuNSwwLDAuN2MwLjIsMC4yLDAuNSwwLjIsMC43LDBsNC4zLTQuM0MxNi41LDcuMSwxNi41LDYuOCwxNi4zLDYuNnoiLz48cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTYsMTIuOGMtMC4zLDAtMC41LDAuMi0wLjUsMC41djMuOGgtMTFMOCwxMy42YzAuMi0wLjIsMC4yLTAuNSwwLTAuN2MtMC4yLTAuMi0wLjUtMC4yLTAuNywwTDMsMTcuM2MtMC4yLDAuMi0wLjIsMC41LDAsMC43bDQuMyw0LjNjMC4yLDAuMiwwLjUsMC4yLDAuNywwYzAuMi0wLjIsMC4yLTAuNSwwLTAuN2wtMy41LTMuNUgxNmMwLDAsMCwwLDAsMGgwLjV2LTQuN0MxNi41LDEzLjEsMTYuMywxMi44LDE2LDEyLjh6Ii8+PC9nPjwvc3ZnPg==") no-repeat 50%;
       background-size: auto 28px; }
+
+.GF-tab_graphs_app {
+  margin: 0 auto;
+  text-align: center; }
+  .GF-tab_graphs_app li {
+    display: inline-block;
+    width: 24.7%;
+    text-align: center; }
+    .GF-tab_graphs_app li a {
+      background: #f49d51;
+      color: white;
+      padding: 10px 0;
+      display: block; }
+      .GF-tab_graphs_app li a:hover {
+        background: #f7b881;
+        color: white; }
 
 .advanced_s,
 .compare_s {
