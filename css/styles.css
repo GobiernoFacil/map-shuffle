@@ -304,11 +304,12 @@ select {
   font-size: 13px;
   line-height: 35px;
   width: 100%;
-  transition: background 500ms; }
-  select:focus {
-    background: #1cb68d;
-    border-color: #F4F2F2 !important;
-    color: white; }
+  transition: background 500ms;
+  /*&:focus { 
+		background: $green_bgd;
+		border-color: #F4F2F2 !important;
+		color: white;
+	} se oculta porque da error en chrome de windows */ }
 
 input.inputs {
   background: white;
@@ -1874,150 +1875,15 @@ h1 {
   #GF-SHCP-color-guide li {
     color: #777;
     list-style: none;
-    display: block;
+    display: inline-block;
     font-size: 9px;
-    margin-left: 5px; }
+    margin-left: 5px;
+    text-align: right; }
     #GF-SHCP-color-guide li i {
       display: block !important;
       height: 10px !important;
       margin: 0;
       width: 60px !important; }
-
-/**
- * Tooltip Styles
- */
-
-/* Add this attribute to the element that needs a tooltip */
-[data-tooltip] {
-  position: relative;
-  z-index: 2;
-  cursor: pointer;
-}
-
-/* Hide the tooltip content by default */
-[data-tooltip]:before,
-[data-tooltip]:after {
-  visibility: hidden;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-  filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=0);
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* Position tooltip above the element */
-[data-tooltip]:before {
-  position: absolute;
-  bottom: 150%;
-  left: 50%;
-  margin-bottom: 5px;
-  margin-left: -80px;
-  padding: 7px;
-  width: 160px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  background-color: #000;
-  background-color: hsla(0, 0%, 20%, 0.9);
-  color: #fff;
-  content: attr(data-tooltip);
-  text-align: center;
-  font-size: 14px;
-  line-height: 1.2;
-}
-
-/* Triangle hack to make tooltip look like a speech bubble */
-[data-tooltip]:after {
-  position: absolute;
-  bottom: 150%;
-  left: 50%;
-  margin-left: -5px;
-  width: 0;
-  border-top: 5px solid #000;
-  border-top: 5px solid hsla(0, 0%, 20%, 0.9);
-  border-right: 5px solid transparent;
-  border-left: 5px solid transparent;
-  content: " ";
-  font-size: 0;
-  line-height: 0;
-}
-
-/* Show tooltip content on hover */
-[data-tooltip]:hover:before,
-[data-tooltip]:hover:after {
-  visibility: visible;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-  filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=100);
-  opacity: 1;
-}
-
-.cart-list li.GF-SHCP-clear-filters {
-	background: red;
-	color: white;
-}
-
-.cart-list li.GF-SHCP-clear-filters:hover {
-		color: white !important;
-	}
-
-.sidebar .filter_container 
-.GF-SHCP-clear-filters p a  {
-	background: #f2f2f2;
-	color: #888;
-	position: relative;
-	padding: 10px;
-}
-.sidebar .filter_container 
-.GF-SHCP-clear-filters p a:hover  {
-	background: #ccc;
-	color: #333;
-}
-
-.sidebar .filter_container 
-.GF-SHCP-clear-filters p a:after {
-	content: "X";
-	background: red;
-	color: white;
-	font-weight: 700;
-	padding: 10px;
-	position: absolute;
-	right: 0;
-	top:0;
-}
-.sidebar .filter_container 
-.GF-SHCP-clear-filters p a:hover:after {
-	background: #9A2C0C;
-}
-
-#GF-SHCP-search-app-total-items {
-	font: 700 28px "Soberana", Helvetica, sans-serif;
-	padding: 15px 0 15px 15px;
-}
-
-#GF-SHCP-search-app-total-items + span {
-	font: 500 17px "Soberana", Helvetica, sans-serif;
-	padding: 15px 0 15px;
-
-}
-
-.GF-tab_graphs_app {
-	margin: 0 auto;
-	text-align: center;
-}
-.GF-tab_graphs_app li {
-	display: inline-block;
-	width: 24%;
-	text-align: center;
-}
-.GF-tab_graphs_app li a{ 
-	background: #f2f2f2;
-	padding: 10px 0;
-	display: block;
-}
-.GF-tab_graphs_app li a:hover{ 
-	background: #999;
-	color: white;
-}
-
 
 #GF-SHCP-geolocate-user {
   background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIxLjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkNhcGFfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiCgkgdmlld0JveD0iMCAwIDY0IDY0IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA2NCA2NDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLnN0MHtmaWxsOiNGRkZGRkY7fQo8L3N0eWxlPgo8Zz4KCTxnPgoJCTxnIGlkPSJjaXJjbGVfMTJfIj4KCQkJPGc+CgkJCQk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNjEuNSwzNC41SDU5Yy0xLjIsMTMtMTEuNSwyMy4zLTI0LjUsMjQuNXYyLjZjMCwxLjQtMS4xLDIuNS0yLjUsMi41Yy0xLjQsMC0yLjUtMS4xLTIuNS0yLjVWNTkKCQkJCQlDMTYuNiw1Ny44LDYuMiw0Ny40LDUsMzQuNUgyLjVDMS4xLDM0LjUsMCwzMy40LDAsMzJjMC0xLjQsMS4xLTIuNSwyLjUtMi41SDVDNi4yLDE2LjUsMTYuNiw2LjIsMjkuNiw1YzAsMCwwLTAuMSwwLTAuMVYyLjUKCQkJCQlDMjkuNSwxLjEsMzAuNiwwLDMyLDBjMS40LDAsMi41LDEuMSwyLjUsMi41djIuNWMwLDAsMCwwLjEsMCwwLjFjMTMsMS4yLDIzLjMsMTEuNSwyNC41LDI0LjVoMi42YzEuNCwwLDIuNSwxLjEsMi41LDIuNQoJCQkJCUM2NCwzMy40LDYyLjksMzQuNSw2MS41LDM0LjV6IE0zMiw5LjhDMTkuOCw5LjgsOS44LDE5LjgsOS44LDMyUzE5LjgsNTQuMiwzMiw1NC4yUzU0LjIsNDQuMiw1NC4yLDMyUzQ0LjIsOS44LDMyLDkuOHoKCQkJCQkgTTMyLDQ2LjhjLTguMiwwLTE0LjgtNi42LTE0LjgtMTQuOGMwLTguMiw2LjYtMTQuOCwxNC44LTE0LjhjOC4yLDAsMTQuOCw2LjYsMTQuOCwxNC44QzQ2LjgsNDAuMiw0MC4yLDQ2LjgsMzIsNDYuOHogTTMyLDIyLjIKCQkJCQljLTUuNCwwLTkuOCw0LjQtOS44LDkuOHM0LjQsOS44LDkuOCw5LjhzOS44LTQuNCw5LjgtOS44UzM3LjQsMjIuMiwzMiwyMi4yeiIvPgoJCQk8L2c+CgkJPC9nPgoJPC9nPgo8L2c+CjxjaXJjbGUgY2xhc3M9InN0MCIgY3g9IjMxIiBjeT0iMzIuNyIgcj0iMTEuMyIvPgo8L3N2Zz4K");
