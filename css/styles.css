@@ -1894,6 +1894,46 @@ h1 {
   line-height: 28px;
   text-transform: uppercase; }
 
+.GF-tab_graphs_app {
+  margin: 0 auto;
+  text-align: center; }
+  .GF-tab_graphs_app li {
+    display: inline-block;
+    width: 24%;
+    text-align: center; }
+    .GF-tab_graphs_app li a {
+      background: #f2f2f2;
+      padding: 10px 0;
+      display: block; }
+      .GF-tab_graphs_app li a:hover {
+        background: #999;
+        color: white; }
+
+.cart-list li.GF-SHCP-clear-filters {
+  background: #f49d51;
+  color: white; }
+  .cart-list li.GF-SHCP-clear-filters:hover {
+    color: white !important; }
+
+.sidebar .filter_container
+.GF-SHCP-clear-filters p a {
+  background: #462b5f url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iNTEycHgiIGhlaWdodD0iNTEycHgiIHZpZXdCb3g9IjAgMCA1NjEgNTYxIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1NjEgNTYxOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PGc+PGcgaWQ9Imxvb3AiPjxwYXRoIGQ9Ik0yODAuNSw3Ni41VjBsLTEwMiwxMDJsMTAyLDEwMnYtNzYuNWM4NC4xNSwwLDE1Myw2OC44NSwxNTMsMTUzYzAsMjUuNS03LjY1LDUxLTE3Ljg1LDcxLjRsMzguMjUsMzguMjUgICAgQzQ3MS43NSwzNTcsNDg0LjUsMzIxLjMsNDg0LjUsMjgwLjVDNDg0LjUsMTY4LjMsMzkyLjcsNzYuNSwyODAuNSw3Ni41eiBNMjgwLjUsNDMzLjVjLTg0LjE1LDAtMTUzLTY4Ljg1LTE1My0xNTMgICAgYzAtMjUuNSw3LjY1LTUxLDE3Ljg1LTcxLjRsLTM4LjI1LTM4LjI1Qzg5LjI1LDIwNCw3Ni41LDIzOS43LDc2LjUsMjgwLjVjMCwxMTIuMiw5MS44LDIwNCwyMDQsMjA0VjU2MWwxMDItMTAybC0xMDItMTAyVjQzMy41eiIgZmlsbD0iI0ZGRkZGRiIvPjwvZz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PC9zdmc+") no-repeat 97% 50%;
+  background-size: 20px;
+  color: white;
+  position: relative;
+  padding: 10px; }
+  .sidebar .filter_container
+.GF-SHCP-clear-filters p a:hover {
+    background-color: #603b82; }
+
+#GF-SHCP-search-app-total-items {
+  font: 700 28px "Soberana", Helvetica, sans-serif;
+  padding: 15px 0 15px 15px; }
+
+#GF-SHCP-search-app-total-items + span {
+  font: 500 17px "Soberana", Helvetica, sans-serif;
+  padding: 15px 0 15px; }
+
 #GF-SHCP-FILTER-1 {
   border: 1px solid #F4F2F2;
   height: 35px;
