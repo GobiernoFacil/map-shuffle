@@ -15,7 +15,7 @@
   "values"  : ["monto", "Pagado"],
   "data"    : ["clave_de_programa", "Fondo", "entidad", "municipio", "proyecto"],
   "current" : {
-    "level"  : "state",
+    "level"  : "city",
     "value"  : "monto",
     "method" : "length",
     "unit"   : "proyectos"

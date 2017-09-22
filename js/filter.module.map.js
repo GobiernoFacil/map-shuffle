@@ -11,7 +11,9 @@ define(function(require){
   FILTER               = require("text!templates/filter-item.html"),
   FILTERV2             = require("text!templates/filter-item-v2.html"),
   SEARCH               = require("text!templates/search-item.html"),
-  CLEAR                = require("text!templates/clear-filters-item.html"),
+
+  CLEARFILTERSBTN      = require("text!templates/clear-filter-item.html"),
+
   selectize            = require("selectize"),
   FILTERCONTAINER      = "div",
   FILTERCONTAINERCLASS = "col-sm-4",
@@ -224,7 +226,8 @@ define(function(require){
           id        : PREFIX + _.uniqueId(),
           label     : SELECTSTATELABEL,
           dataField : col,
-          className : (className || "col-sm-4")
+          className : (className || "col-sm-4"),
+          tooltip   : "happy"
         };
 
         item.innerHTML = template(obj);
@@ -263,7 +266,8 @@ define(function(require){
           id        : PREFIX + _.uniqueId(),
           label     : SELECTCITYLABEL,
           dataField : col,
-          className : (className || "col-sm-4")
+          className : (className || "col-sm-4"),
+          tooltip   : "happy"
         };
 
         item.innerHTML = template(obj);
@@ -294,7 +298,8 @@ define(function(require){
           id        : PREFIX + _.uniqueId(),
           label     : SELECTBRANCHLABEL,
           dataField : col,
-          className : (className || "col-sm-4")
+          className : (className || "col-sm-4"),
+          tooltip   : "happy"
         };
 
         item.innerHTML = template(obj);
@@ -334,7 +339,8 @@ define(function(require){
           id        : PREFIX + _.uniqueId(),
           label     : SELECTBRANCHLABEL,
           dataField : col,
-          className : (className || "col-sm-4")
+          className : (className || "col-sm-4"),
+          tooltip   : "happy"
         };
 
         item.innerHTML = template(obj);
@@ -375,7 +381,8 @@ define(function(require){
           id        : PREFIX + _.uniqueId(),
           label     : SELECTUNITLABEL,
           dataField : col,
-          className : (className || "col-sm-4")
+          className : (className || "col-sm-4"),
+          tooltip   : "happy"
         };
 
         item.innerHTML = template(obj);
@@ -404,7 +411,8 @@ define(function(require){
           id        : PREFIX + _.uniqueId(),
           label     : filter.title || col,
           dataField : col,
-          className : (className || "col-sm-4")
+          className : (className || "col-sm-4"),
+          tooltip   : "happy"
         };
 
         item.innerHTML = template(obj);
@@ -504,26 +512,24 @@ define(function(require){
         });
       },
 
-      renderClearFilterExtra : function(container){
-        var div  = document.createElement("div"),
-            html = "",
-            that = this;
+      renderClearFilterBtn2 : function(container){
+        var div    = document.createElement("div"),
+            that   = this,
+            anchor;
 
-        div.innerHTML = CLEAR;
+        div.innerHTML = CLEARFILTERSBTN;
+        div.setAttribute("class", CLEARCLASS);
+        anchor = div.querySelector("a");
+        container.appendChild(div);
 
-        console.log(div);
+        anchor.addEventListener("click", function(e){
+          e.preventDefault();
+          that.filters = [];
+          that.cart.innerHTML = "";
+          that.filter();
+        });
       },
 
-
-      /*
-      <div class="<%=className%>">
-<form>
-  <p>
-    <a href="#" class="<%=classNameAnchor%>"><%=text%></a>
-  </p>
-</form>
-</div>
-      */
 
       updateCitySelector : function(state, city){
         var _cities = parent.lists.municipiosName.cities,

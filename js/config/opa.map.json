@@ -1,5 +1,5 @@
 {
-  "name"  : "Obra pública abierta",
+  "name"  : "Obra Pública Abierta",
   "type"  : "point",
   "multiple" : true,
   "disable" : [0,0],
@@ -19,18 +19,16 @@
     "lng" : "lng",
     "state" : "state"
   },
-  "values"  : ["monto_total_inversion", "ejercido"],
-  "data"    : ["key","name","ramo","unidad","state","lat","lng","advance","ciclo","classification"],
-  "current" : {},
+  "values"     : ["monto_total_inversion", "ejercido"],
+  "data"       : ["monto_total_inversion", "ejercido", "key","name","ramo","unidad","state","lat","lng","advance","ciclo","classification"],
+  "dataSearch" : ["monto_total_inversion", "ejercido", "key","name","ramo","unidad","state","advance","ciclo","classification"],
+  "current"    : {},
   "filters" : [
     {"type" : "search", "field" : "name", "title" : "Proyecto"},
     {"type" : "state", "field" : "state"},
     {"type" : "branch", "field" : "ramo"},
     {"type" : "unit", "field" : "id_unidad"},
     {"type" : "year", "field" : "ciclo", "title" : "Ciclo"}
-  ],
-  "extraFilters" : [
-    {"type" : "extra", "field" : "classification", "title" : "Clasificación ciudadana"}
   ],
   "graphs" : {
     "graph1" : {
@@ -50,7 +48,7 @@
         "type"  : "branch"
       },
       "maxLocations" : 5,
-      "colors" : ["red", "green", "blue", "yellow", "purple", "pink", "black", "orange", "gray", "maroon"]
+      "colors" : ["#bcce00", "#ee7336", "#25ae85", "#5aa099", "#462b5f", "#f49d51", "#008789", "#b3a493", "#1c9059", "#dc1918", "#b8c9d2","#75bf8d"]
     },
     "graph2" : {
       "title" : "Monto total por ramo",
@@ -61,7 +59,7 @@
         "type"  : "branch"
       },
       "maxLocations" : 5,
-      "colors" : ["red", "green", "blue", "yellow", "purple", "pink", "black", "orange", "gray", "maroon", "aquamarine", "chartreuse", "cyan", "darkorange", "deeppink", "gold"]
+      "colors" : ["#bcce00", "#ee7336", "#25ae85", "#5aa099", "#462b5f", "#f49d51", "#008789", "#b3a493", "#1c9059", "#dc1918", "#b8c9d2","#75bf8d"]
     },
 
     "graph3" : {
@@ -81,7 +79,7 @@
         "type"  : "branch"
       },
       "maxLocations" : 5,
-      "colors" : ["red", "green", "blue", "yellow", "purple", "pink", "black", "orange", "gray", "maroon"]
+      "colors" : ["#bcce00", "#ee7336", "#25ae85", "#5aa099", "#462b5f", "#f49d51", "#008789", "#b3a493", "#1c9059", "#dc1918", "#b8c9d2","#75bf8d"]
     },
 
     "graph4" : {
@@ -98,7 +96,7 @@
         "type"  : null
       },
       "maxLocations" : 5,
-      "colors" : ["red", "green", "blue", "yellow", "purple", "pink", "black", "orange", "gray", "maroon", "aquamarine", "chartreuse", "cyan", "darkorange", "deeppink", "gold"]
+      "colors" : ["#bcce00", "#ee7336", "#25ae85", "#5aa099", "#462b5f", "#f49d51", "#008789", "#b3a493", "#1c9059", "#dc1918", "#b8c9d2","#75bf8d"]
     }
 
 

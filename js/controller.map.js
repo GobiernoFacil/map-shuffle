@@ -95,12 +95,16 @@ define(function(require){
 
       // [1] INICIA LAS PROPIEDADES DEL APP 
       // ----------------------------------------------------------------------
+      //
+      //
       // * referencia al archivo de configuración inicial
       this.settings = Object.create(CONFIG);
       // * la columna para el id interno de los municipios
-      this.cityID = this.settings.constants.cityId;
+      this.cityID   = this.settings.constants.cityId;
       // * la columna para el id interno de las unidades ejecutoras
-      this.unitID = this.settings.constants.unitId;
+      this.unitID   = this.settings.constants.unitId;
+      // * la columna para el url de cada item
+      this.itemUrl  = this.settings.constants.itemUrl;
       // * la referencia a classyBrew
       this.brew           = null;
       // * los datos filtrados
@@ -163,17 +167,21 @@ define(function(require){
 
       // [1.1] DEFINE SHORTCUTS PARA LOS ELEMENTOS DE UI
       // ----------------------------------------------------------------------
+      //
+      //
       // * El selector de mapas
-      this.UImapSelector    = null;
+      this.UImapSelector          = null;
       // * El selector del nivel del mapa (estado, municipio)
-      this.UIlevelSelector  = null;
+      this.UIlevelSelector        = null;
       // * los <select> de los filtros extra
       this.UIextraFiltersSelector = null;
       //
-      this.UIMapCartFilter = document.getElementById(this.settings.ui.mapCart);
+      this.UIMapCartFilter        = document.getElementById(this.settings.ui.mapCart);
 
       // [2] ARRREGLA EL SCOPE DE ALGUNAS FUNCIONES
       // ----------------------------------------------------------------------
+      //
+      //
       this._stateStyle                  = this._stateStyle.bind(this);
       this._stateExtraStyle             = this._stateExtraStyle.bind(this);
       this._cityStyle                   = this._cityStyle.bind(this);
@@ -186,17 +194,26 @@ define(function(require){
       
       // [3] INICIA EL MAPA DE LEAFLET
       // ----------------------------------------------------------------------
+      //
+      //
       this.drawMap();
 
       // [4] INICIA LOS ELEMENTOS DE UI
       // ----------------------------------------------------------------------
-
+      //
+      //
       // * el selector de mapa
       this.renderMapSelector();
 
       // * el selector de mapas extra
       this.renderExtraMapSelector();
 
+      /*!!!!!!
+      !! 
+      !! esta función debe de revisarse de manera distinta, en lugar de buscar
+      !! un elemento html, en la configuración debería tener una entrada 
+      !!
+      !!!!!!*/
       if(this.UIMapCartFilter){
         // * inicia el engine de filtrado
         this.filterModule = new FILTERMODULE(this, this.UIMapCartFilter, this.updateData, " ");
@@ -421,7 +438,7 @@ define(function(require){
     //
     //
     renderLayer : function(item, keepFilters){
-
+      var geojson;
       // [1] elimina el layer anterior, ya sea puntos, área o mapa extra
       //
       this.cleanLayers();
@@ -431,16 +448,16 @@ define(function(require){
       // A) Es un mapa de área por estado
       if(item.config.current.level == "state"){
         this.currentData = this._agregateDataByState(item, this.filteredData);
-        var xxxxx = this._mapStateGeojson(this.currentData);
+        geojson = this._mapStateGeojson(this.currentData);
         this.brew = this._colorMixer(item, this.currentData);
-        this.renderStateLayer(item, "states", xxxxx, this._stateStyle);
+        this.renderStateLayer(item, "states", geojson, this._stateStyle);
       }
       // B) Es un mapa de área por municipio
       else if(item.config.current.level == "city"){
         this.currentData = this._agregateDataByCity(item, this.filteredData);
-        var xxxxx = this._mapCityGeojson(this.currentData);
+        geojson = this._mapCityGeojson(this.currentData);
         this.brew        = this._colorMixer(item, this.currentData);
-        this.renderCityLayer(item, "cities", xxxxx, this._cityStyle);
+        this.renderCityLayer(item, "cities", geojson, this._cityStyle);
       }
       // C) Es un mapa de puntos definidos por latitud y longitud
       else{
@@ -903,13 +920,18 @@ define(function(require){
     getLayer : function(item){
       
       if(item.data){
+        // * elimina todos los layers del mapa
         this.cleanLayers();
-        // * el mapa desplegado
+        // * asigna a currentMap la configuración del mapa seleccionado
         this.currentMap   = item;
-        // * el id interno del mapa desplegado
+        // * asigna a currentMapId el id interno del mapa desplegado
+        //   (pero creo que ni se ocupa :P)
         this.currentMapId = item.idex;
+        // * asigna a filteredData una copia de todos los datos
         this.filteredData = item.data.slice();
+        // * habilita los filtros del mapa que tiene la configuración
         this.enableFilters();
+        // * renderea el mapa
         this.renderLayer(item);
 
         return;
@@ -922,6 +944,7 @@ define(function(require){
           src     = conf.src,
           hasCity = conf.location.city,
           hasUnit = null,
+          hasUrl  = conf.link,
           filters = conf.filters,
           src2    = this.makeAPIURL(item);
 
@@ -970,7 +993,11 @@ define(function(require){
 
         if(hasUnit){
           that._addKeyToUnits(item.data, conf, hasUnit);
-         }
+        }
+
+        if(hasUrl){
+          that._addUrlToItems(item.data, conf);
+        }
 
         that.mixInitialFilters(item);
         that.cleanLayers();
@@ -1054,6 +1081,12 @@ define(function(require){
      * F U N C I O N E S   D E   M A P E O   D E    D A T O S
      * ------------------------------------------------------------
      */
+
+    _addUrlToItems : function(data, conf){
+      data.forEach(function(d){
+        d[this.itemUrl] = conf.link.url + "#" + d[conf.link.column];
+      }, this);
+    },
 
     _addKeyToUnits : function(data, conf, unit){
       var branch = conf.filters.filter(function(fil){
@@ -1165,13 +1198,12 @@ define(function(require){
       this._strToNumber(currentData, state);
       this._strToNumber(currentData, city);
 
-      _data = MUNICIPIOSNAME.cities.map(function(ct){
+      _data = this.lists.municipiosName.cities.map(function(ct){
         var search = {},
             data   = null,
             value  = null;
         
-        search[state] = ct.state;
-        search[city]  = ct.city;
+        search[this.cityID] = +ct.clave_inegi;
 
         data = _.where(currentData, search);
 
@@ -1489,6 +1521,8 @@ define(function(require){
 
       container.innerHTML = "";
 
+      this.filterModule.renderClearFilterBtn2(container);
+      
       filters.forEach(function(filter){
         var select;
 
@@ -1527,8 +1561,6 @@ define(function(require){
           this.filterModule.renderOtherSelector(filter, container);
         }
         
-
-
       }, this);
 
       this.filterModule.renderClearFilterExtra(container);

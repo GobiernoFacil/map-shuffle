@@ -12,7 +12,8 @@ define(function(require){
       TEMPLATE     = require("text!templates/advanced-search.html"),
       CONFIG       = require("json!config/config.map.json"),
       SEARCH       = "GF-SHCP-search-app-query",
-      FIlterModule = require("filter.module.map");
+      FIlterModule = require("filter.module.map"),
+      LINKText     = "ver";
 
   var SearchControllerConstructor = function(parent){
 
@@ -20,6 +21,7 @@ define(function(require){
         container  = document.getElementById(UI.container),
         filterMenu = null,
         filterCart = null,
+        projectNum = null,
         pageSize   = CONFIG.ux.searchPageSize,
         format     = d3.format(","),
         currentMap = null,
@@ -39,7 +41,10 @@ define(function(require){
         page       = 0,
         pages      = 0,
         isAPI      = null,
-        colNames   = null;
+        apiRes     = null,
+        colNames   = null,
+        URLColName = parent.itemUrl,
+        totalItems = 0;
 
     var controller = {
       render : function(){
@@ -47,7 +52,7 @@ define(function(require){
         config     = currentMap.config;
         colNames   = config.columns;
         numValues  = config.values || [];
-        headers    = numValues.concat(config.data || []);
+        headers    = config.dataSearch || config.data || [];
         isAPI      = config.api;
         data       = currentMap.data.slice();
         DATA       = currentMap.data.slice();
@@ -63,11 +68,17 @@ define(function(require){
         pageInput  = document.getElementById(UI.pageInput);
         filterMenu = document.getElementById(UI.filterContainer);
         filterCart = document.getElementById(UI.cart);
+        projectNum = document.getElementById(UI.totalItems);
 
         
         this.filters       = [];
         this._filters      = [];
         this.searchFilters = [];
+
+        if(config.link){
+          headers.unshift(URLColName);
+        }
+
         this.renderHeaders();
 
         if(isAPI){
@@ -76,10 +87,9 @@ define(function(require){
           d3.json(url, function(error, d){
             data  = d.results;
             pages = d.pages;
+            apiRes = d;
             controller.renderItems(page);
             controller.renderPagination(page);
-
-            //this.renderPagination(page);
             that.enableDowload();
           });
         }
@@ -88,10 +98,6 @@ define(function(require){
           this.renderPagination(page);
           this.enableDowload();
         }
-
-        //this.renderItems(page);
-        //this.renderPagination(page);
-        //this.enableDowload();
 
         this.updateData = this.updateData.bind(this);
         this.nextPage   = this.nextPage.bind(this);
@@ -104,7 +110,6 @@ define(function(require){
         pageForm.addEventListener("submit", this.selectPage);
 
         this.filterModule = new FIlterModule(parent, filterCart, this.updateData, null, pageSize);
-        // this.filterModule.setCart(filterCart);
 
         this.renderFilters();
       },
@@ -132,6 +137,7 @@ define(function(require){
             data  = d.results;
             pages = d.pages;
             page  = 0;
+            apiRes = d;
             controller.renderItems(0);
             controller.renderPagination();
           });
@@ -147,6 +153,8 @@ define(function(require){
 
       renderItems : function(newPage){
 
+        this.renderItemsNum();
+
         newPage = Math.ceil(newPage);
 
         tbody.innerHTML = "";
@@ -161,9 +169,12 @@ define(function(require){
         collection.forEach(function(item){
           var tr = document.createElement("tr");
           headers.forEach(function(key){
-            var td = document.createElement("td"),
+            var td  = document.createElement("td"),
                 val = numValues.indexOf(key) != -1 ? format(item[key]) : item[key];
 
+            if(key == URLColName){
+              val = "<a target='_blank' href='" + item[URLColName] + "'>" + LINKText +"</a>";
+            }
             td.innerHTML = val;
             tr.appendChild(td);
           });
@@ -181,6 +192,19 @@ define(function(require){
 
 
         totalPages.innerHTML = pages;
+      },
+
+      renderItemsNum : function(){
+        var itemsNum;
+        if(isAPI){
+          itemsNum = apiRes.total;
+        }
+        else{
+          itemsNum = data.length;
+        }
+
+        projectNum.innerHTML = format(itemsNum);
+        //console.log(projectNum, data, itemsNum);
       },
 
       renderFilters : function(){

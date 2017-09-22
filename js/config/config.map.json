@@ -38,7 +38,7 @@
   },
   "maps" : {
     "basePath"  : "/js/config",
-    "maps"      : ["escuelas100.map.json", "ramo23.map.json", "opa.map.json", "entidades.map.json"],
+    "maps"      : ["escuelas100.map.json", "ramo23.map.json", "opa.map.json"],
     "extras"    : ["poblacion.map.json"],
     "current"   : 2,
     "embedPath" : "http://localhost:8000/mapa.html" 
@@ -113,7 +113,8 @@
       "nextPage"        : "GF-SHCP-SEARCH-CONTROL-NEXT",
       "toolsForm"       : "GF-SHCP-search-tools-form",
       "paginationForm"  : "GF-SHCP-search-pagination-form",
-      "downloadBtn"     : "GF-SHCP-search-app-download"
+      "downloadBtn"     : "GF-SHCP-search-app-download",
+      "totalItems"      : "GF-SHCP-search-app-total-items"
     },
 
     "geolocationBtn"   : "GF-SHCP-geolocate-user",
@@ -138,7 +139,8 @@
     "searchPageSize" : 10
   },
   "constants" : {
-    "cityId" : "GFSHCPCityId",
-    "unitId" : "GFSHCPUnitId"
+    "cityId"  : "GFSHCPCityId",
+    "unitId"  : "GFSHCPUnitId",
+    "itemUrl" : "GFSHCPurl"
   }
 }
