@@ -11,6 +11,7 @@ define(function(require){
   FILTER               = require("text!templates/filter-item.html"),
   FILTERV2             = require("text!templates/filter-item-v2.html"),
   SEARCH               = require("text!templates/search-item.html"),
+  CLEAR                = require("text!templates/clear-filters-item.html"),
   selectize            = require("selectize"),
   FILTERCONTAINER      = "div",
   FILTERCONTAINERCLASS = "col-sm-4",
@@ -59,9 +60,10 @@ define(function(require){
 
         if(this.searchInput && this.searchInput.value){
           searchField = this.searchInput.getAttribute("data-field");
-          value = this.searchInput.value;
+          value = this.searchInput.value.toLowerCase();
           _data = _data.filter(function(d){
-            return d[searchField].search(value) != -1;
+            var str = d[searchField].toLowerCase();
+            return str.search(value) != -1;
           });
         }
 
@@ -501,6 +503,27 @@ define(function(require){
           that.filter();
         });
       },
+
+      renderClearFilterExtra : function(container){
+        var div  = document.createElement("div"),
+            html = "",
+            that = this;
+
+        div.innerHTML = CLEAR;
+
+        console.log(div);
+      },
+
+
+      /*
+      <div class="<%=className%>">
+<form>
+  <p>
+    <a href="#" class="<%=classNameAnchor%>"><%=text%></a>
+  </p>
+</form>
+</div>
+      */
 
       updateCitySelector : function(state, city){
         var _cities = parent.lists.municipiosName.cities,

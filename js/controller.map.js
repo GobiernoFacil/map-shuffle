@@ -1531,6 +1531,8 @@ define(function(require){
 
       }, this);
 
+      this.filterModule.renderClearFilterExtra(container);
+
     },
 
 
