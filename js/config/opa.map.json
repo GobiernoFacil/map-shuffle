@@ -23,6 +23,10 @@
   "data"       : ["monto_total_inversion", "ejercido", "key","name","ramo","unidad","state","lat","lng","advance","ciclo","classification"],
   "dataSearch" : ["monto_total_inversion", "ejercido", "key","name","ramo","unidad","state","advance","ciclo","classification"],
   "current"    : {},
+  "columns" : {
+    "GFSHCPurl" : "ficha",
+    "monto_total_inversion" : "monto total"
+  },
   "filters" : [
     {"type" : "search", "field" : "name", "title" : "Proyecto"},
     {"type" : "state", "field" : "state"},

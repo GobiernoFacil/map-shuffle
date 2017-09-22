@@ -933,6 +933,9 @@ define(function(require){
         this.enableFilters();
         // * renderea el mapa
         this.renderLayer(item);
+        
+        if(this.barsTool) this.barsTool.render();
+        if(this.searchTool) this.searchTool.render();
 
         return;
       }
@@ -1563,7 +1566,7 @@ define(function(require){
         
       }, this);
 
-      this.filterModule.renderClearFilterExtra(container);
+      this.filterModule.renderClearFilterBtn2(container);
 
     },
 
