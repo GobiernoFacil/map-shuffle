@@ -1,5 +1,5 @@
 {
-  "name"  : "Obra pública abierta",
+  "name"  : "Obra Pública Abierta",
   "type"  : "point",
   "multiple" : true,
   "disable" : [0,0],
@@ -29,9 +29,6 @@
     {"type" : "branch", "field" : "ramo"},
     {"type" : "unit", "field" : "id_unidad"},
     {"type" : "year", "field" : "ciclo", "title" : "Ciclo"}
-  ],
-  "extraFilters" : [
-    {"type" : "extra", "field" : "classification", "title" : "Clasificación ciudadana"}
   ],
   "graphs" : {
     "graph1" : {
