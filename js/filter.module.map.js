@@ -45,6 +45,7 @@ define(function(require){
       data         : null,
       filteredData : null,
       searchInput  : null,
+      searchInputs : [],
       latestFilter : null,
 
       filter : function(){
@@ -74,10 +75,16 @@ define(function(require){
         callback(_data, this.filters, pagination, this.latestFilter);
       },
 
+      /*
       clearFilters : function(){
+        var searchInputs = document.querySelectorAll("." + parent.settings.ux.searchInputClass);
+
+        console.log(searchInputs);
+
         this.filters = [];
         this.filter();
       },
+      */
 
       _filterData : function(_data, field, _filters){
         // _data es una copia del set completo de datos del mapa actual
@@ -200,6 +207,8 @@ define(function(require){
         container.appendChild(item);
 
         this.searchInput = input;
+
+        this.searchInputs.push(input);
 
         this.enableSearch(filter, form, input);
 
@@ -508,6 +517,7 @@ define(function(require){
         li.addEventListener("click", function(e){
           that.filters = [];
           that.cart.innerHTML = "";
+          that.searchInputs.forEach(function(sr){sr.value = "";});
           that.filter();
         });
       },
@@ -526,6 +536,7 @@ define(function(require){
           e.preventDefault();
           that.filters = [];
           that.cart.innerHTML = "";
+          that.searchInputs.forEach(function(sr){sr.value = "";});
           that.filter();
         });
       },
@@ -611,6 +622,7 @@ define(function(require){
               })[0];
 
           if(value == SELECTALL || exist){
+            select.value = SELECTALL;
             return;
           }
           else{
@@ -656,6 +668,8 @@ define(function(require){
           }
 
           that.filter();
+
+          select.value = SELECTALL;
         });
       },
 

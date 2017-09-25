@@ -120,8 +120,7 @@ define(function(require){
         headers.forEach(function(header){
           var th = document.createElement("th"),
               nm = colNames ? (colNames[header] || header) : header;
-              console.log(colNames, header, colNames[header]);
-
+              
           th.innerHTML = nm;
           tr.appendChild(th);
         });

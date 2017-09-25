@@ -136,7 +136,8 @@
     "pointNavigationNextId" : "GF-SHCP-point-next-btn",
     "pointNavigationCurrentId" : "GF-SHCP-point-current",
     "pointNavigationTotalId" : "GF-SHCP-point-total",
-    "searchPageSize" : 10
+    "searchPageSize" : 10,
+    "searchInputClass" : "GF-SHCP-search-input"
   },
   "constants" : {
     "cityId"  : "GFSHCPCityId",
