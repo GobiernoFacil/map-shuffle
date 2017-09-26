@@ -332,6 +332,7 @@ define(function(require){
       return vars;
     },
 
+    /*
     mixInitialFilters : function(item){
 
       if(!this.firstTime) return false;
@@ -361,6 +362,7 @@ define(function(require){
 
       return true;
     },
+    */
 
 
 
@@ -932,7 +934,9 @@ define(function(require){
         // * habilita los filtros del mapa que tiene la configuración
         this.enableFilters();
         // * renderea el mapa
-        this.renderLayer(item);
+        //this.renderLayer(item);
+        this.filterModule._enableDefaultFilters();
+        this.filterModule.filter();
         
         if(this.barsTool) this.barsTool.render();
         if(this.searchTool) this.searchTool.render();
@@ -1002,7 +1006,7 @@ define(function(require){
           that._addUrlToItems(item.data, conf);
         }
 
-        that.mixInitialFilters(item);
+        //that.mixInitialFilters(item);
         that.cleanLayers();
         // * el mapa desplegado
         that.currentMap   = item;
@@ -1010,7 +1014,9 @@ define(function(require){
         that.currentMapId = item.idex;
         that.filteredData = item.data.slice();
         that.enableFilters();
-        that.renderLayer(item);
+        //that.renderLayer(item);
+        that.filterModule._enableDefaultFilters();
+        that.filterModule.filter();
         if(item.config.api) that.updatePagination();
         if(that.barsTool) that.barsTool.render();
         if(that.searchTool) that.searchTool.render();

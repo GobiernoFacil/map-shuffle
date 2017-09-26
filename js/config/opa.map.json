@@ -34,6 +34,9 @@
     {"type" : "unit", "field" : "id_unidad"},
     {"type" : "year", "field" : "ciclo", "title" : "Ciclo"}
   ],
+  "defaultFilters" : [
+    {"type" : "state", "value" : 21, "parentFilter" : null}
+  ],
   "graphs" : {
     "graph1" : {
       "title" : "Monto total invertido por año",

@@ -796,6 +796,31 @@ define(function(require){
         }, this);
         
       },
+
+      _enableDefaultFilters : function(){
+        
+        var _defaultFilters = parent.currentMap.config.defaultFilters;
+
+        _defaultFilters.forEach(function(d){
+          this.findLabel(d);
+          /*
+           id           :  _.uniqueId(),
+              value        : value,
+              type         : filter.type,
+              field        : filter.field,
+              parentFilter : parentFilter,
+              label        : value
+          */
+          d.id = _.uniqueId();
+          d.field = parent.currentMap.config.filters.filter(function(fi){
+            return fi.type == d.type;
+          })[0].field || null;
+          console.log(d);
+          console.log(parent.currentMap.config.filters);
+        }, this);
+
+
+      }
     };
 
     return filterModule;
