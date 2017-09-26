@@ -920,7 +920,8 @@ define(function(require){
     //
     //
     getLayer : function(item){
-      
+      this.filterModule._clearFilters();
+
       if(item.data){
         // * elimina todos los layers del mapa
         this.cleanLayers();

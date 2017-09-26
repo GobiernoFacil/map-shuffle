@@ -801,6 +801,8 @@ define(function(require){
         
         var _defaultFilters = parent.currentMap.config.defaultFilters;
 
+        if(!_defaultFilters) return;
+
         _defaultFilters.forEach(function(d){
           this.findLabel(d);
           d.id    = _.uniqueId();
@@ -814,6 +816,11 @@ define(function(require){
         }, this);
 
 
+      },
+      _clearFilters : function(){
+        this.filters = [];
+        this.cart.innerHTML = "";
+        this.searchInputs.forEach(function(sr){sr.value = "";});
       }
     };
 
