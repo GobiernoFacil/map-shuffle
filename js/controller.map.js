@@ -729,7 +729,18 @@ define(function(require){
               content = "";
               feature.properties.points.forEach(function(point){
                 //content += t(point);
-                items.push(t(point));
+                var _point = Object.create(point);
+
+                for(var property in _point){
+                  if(point.hasOwnProperty(property)){
+                    if(that.currentMap.config.values.indexOf(property) != -1){
+                      _point[property] = that.numberFormat(_point[property]);
+                    }
+                  }
+                }
+
+
+                items.push(t(_point));
               });
 
               div.innerHTML = items[0];
