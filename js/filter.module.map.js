@@ -62,14 +62,17 @@ define(function(require){
           _data = this._filterData(_data, field, this.filters);
         }, this);
 
-        if(this.searchInput && this.searchInput.value){
-          searchField = this.searchInput.getAttribute("data-field");
-          value = this.searchInput.value.toLowerCase();
-          _data = _data.filter(function(d){
-            var str = d[searchField].toLowerCase();
-            return str.search(value) != -1;
-          });
-        }
+
+        this.searchInputs.forEach(function(sr){
+          if(sr.value){
+            searchField = sr.getAttribute("data-field");
+            value       = sr.value.toLowerCase();
+            _data       = _data.filter(function(d){
+              var str = d[searchField].toLowerCase();
+              return str.search(value) != -1;
+            });
+          }
+        }, this);
 
         pagination.pages = Math.ceil( _data.length / (pageSize || 1) );
 

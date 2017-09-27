@@ -29,6 +29,7 @@
   },
   "filters" : [
     {"type" : "search", "field" : "name", "title" : "Proyecto"},
+    {"type" : "search", "field" : "key", "title" : "Clave"},
     {"type" : "state", "field" : "state"},
     {"type" : "branch", "field" : "ramo"},
     {"type" : "unit", "field" : "id_unidad"},
