@@ -229,7 +229,7 @@ define(function(require){
           label     : SELECTSTATELABEL,
           dataField : col,
           className : (className || "col-sm-4"),
-          tooltip   : "happy"
+          tooltip   : "Selecciona un estado"
         };
 
         item.innerHTML = template(obj);
@@ -271,7 +271,7 @@ define(function(require){
           label     : SELECTCITYLABEL,
           dataField : col,
           className : (className || "col-sm-4"),
-          tooltip   : "happy"
+          tooltip   : "Selecciona un estado y después un municipio"
         };
 
         item.innerHTML = template(obj);
@@ -303,7 +303,7 @@ define(function(require){
           label     : SELECTBRANCHLABEL,
           dataField : col,
           className : (className || "col-sm-4"),
-          tooltip   : "happy"
+          tooltip   : "Selecciona un ramo"
         };
 
         item.innerHTML = template(obj);
@@ -344,7 +344,7 @@ define(function(require){
           label     : SELECTBRANCHLABEL,
           dataField : col,
           className : (className || "col-sm-4"),
-          tooltip   : "happy"
+          tooltip   : "selecciona un ramo"
         };
 
         item.innerHTML = template(obj);
@@ -388,7 +388,7 @@ define(function(require){
           label     : SELECTUNITLABEL,
           dataField : col,
           className : (className || "col-sm-4"),
-          tooltip   : "happy"
+          tooltip   : "selecciona un ramo y después una unidad ejecutora"
         };
 
         item.innerHTML = template(obj);
@@ -418,7 +418,7 @@ define(function(require){
           label     : filter.title || col,
           dataField : col,
           className : (className || "col-sm-4"),
-          tooltip   : "happy"
+          tooltip   : "selecciona una opción"
         };
 
         item.innerHTML = template(obj);
