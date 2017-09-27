@@ -57,6 +57,7 @@ define(function(require){
             searchField,
             value;
 
+
         filterCols.forEach(function(field){
           _data = this._filterData(_data, field, this.filters);
         }, this);
@@ -74,17 +75,6 @@ define(function(require){
 
         callback(_data, this.filters, pagination, this.latestFilter);
       },
-
-      /*
-      clearFilters : function(){
-        var searchInputs = document.querySelectorAll("." + parent.settings.ux.searchInputClass);
-
-        console.log(searchInputs);
-
-        this.filters = [];
-        this.filter();
-      },
-      */
 
       _filterData : function(_data, field, _filters){
         // _data es una copia del set completo de datos del mapa actual
@@ -271,6 +261,8 @@ define(function(require){
             //cities   = parent.lists.municipiosName.cities,
             html, obj, select;
 
+        filter.field = parent.cityID;
+
         obj = {
           id        : PREFIX + _.uniqueId(),
           label     : SELECTCITYLABEL,
@@ -386,6 +378,8 @@ define(function(require){
             //units   = parent.lists.unidadesName.units,
             html, obj, select;
 
+        filter.field = parent.unitID;
+
         obj = {
           id        : PREFIX + _.uniqueId(),
           label     : SELECTUNITLABEL,
@@ -492,8 +486,6 @@ define(function(require){
         li.innerHTML = html;
 
         li.setAttribute("data-type", filter.type);
-
-        //console.log(filter);
 
         container.appendChild(li);
 
@@ -640,6 +632,7 @@ define(function(require){
             else{
               parentFilter = null;
             }
+
 
             newFilter = {
               id           :  _.uniqueId(),
