@@ -1171,7 +1171,8 @@ define(function(require){
 
       var state  = item.config.location.state,
           _data  = null,
-          method = item.config.current.method || "sum";
+          method = item.config.current.method || "sum",
+          values = item.config.values || [];
 
       this._strToNumber(currentData, state);
       //this._strToNumber(item.data, state);
@@ -1179,7 +1180,8 @@ define(function(require){
       _data = this.lists.estadosName.states.map(function(st){
         var search = {},
             data   = null,
-            value  = null;
+            value  = null,
+            obj;
         
         search[state] = st.id;
         data          = _.where(currentData, search);
@@ -1193,13 +1195,23 @@ define(function(require){
           value = data.length;
         }
 
-        return {
+        obj = {
           id    : st.id,
           name  : st.name,
           url   : st.url,
           data  : data,
           value : value
+        };
+
+        if(values.length){
+          values.forEach(function(val){
+            obj[val] = d3.sum(data, function(a){
+              return +a[val];
+            });
+          }, this);
         }
+
+        return obj;
 
       }, this);
 
