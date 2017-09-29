@@ -32,7 +32,7 @@
 	"ESTATUS_OPERACION" : "Estatus"	
   },
   "filters" : [
-    {"type" : "search", "field" : "DESC_INFRAESTRUCTURA", "title" : "Nombre"},
+    {"type" : "search", "field" : "DESC_INFRAESTRUCTURA", "title" : "Nombre de la Unidad Médica"},
     {"type" : "state", "field" : "ID_ENTIDAD_FEDERATIVA"}
   ],
    "extraFilters" : [
