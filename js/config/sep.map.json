@@ -1,0 +1,46 @@
+{
+	"name": "Infraestructura SEP",
+	"type": "area",
+	"level": ["state", "city"],
+	"src": "/js/maps/mapa_sep.csv",
+	"file": "csv",
+	"color": 12,
+	"location": {
+		"state": "ID_ENTIDAD_FEDERATIVA"
+	},
+	"style": {
+		"fillOpacity": 0.8
+	},
+	"values": ["ID_INFRAESTRUCTURA"],
+	"data": ["DESC_INFRAESTRUCTRUA", "DIRECCION_ESCUELA", "NIVEL", "SOSTENIMIENTO", "ID_ENTIDAD_FEDERATIVA", "ENTIDAD_FEDERATIVA", "ID_MUNICIPIO", "MUNICIPIO"],
+	"dataSearch": ["ID_INFRAESTRUCTURA", "DESC_INFRAESTRUCTRUA", "DIRECCION_ESCUELA", "NIVEL", "SOSTENIMIENTO", "ID_ENTIDAD_FEDERATIVA", "ENTIDAD_FEDERATIVA", "ID_MUNICIPIO", "MUNICIPIO"],
+	"current": {
+		"level": "state",
+		"value": "",
+		"method": "length"
+	},
+	"columns": {
+		"ID_INFRAESTRUCTURA": "Clave de la Escuela",
+		"DESC_INFRAESTRUCTURA": "Nombre",
+		"DIRECCION_ESCUELA": "Dirección",
+		"SOSTENIMIENTO": "Sostenimiento",
+		"ENTIDAD_FEDERATIVA": "Entidad Federativa",
+		"MUNICIPIO": "Municipio"
+	},
+	"filters": [{
+		"type": "state",
+		"field": "ID_ENTIDAD_FEDERATIVA"
+	}],
+	"extraFilters": [{
+			"type": "extra",
+			"field": "NIVEL",
+			"title": "Nivel"
+		},
+		{
+			"type": "extra",
+			"field": "SOSTENIMIENTO",
+			"title": "Sostenimiento"
+		}
+	],
+	"template": "<%=name%> <div class='amount_label'><h5> Cantidad: <strong><%=value%></strong></h5></div"
+}
