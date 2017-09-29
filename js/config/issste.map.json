@@ -38,5 +38,45 @@
    "extraFilters" : [
     {"type" : "extra", "field" : "TIPO_DANIO", "title" : "Tipo de Daño"}
   ],
-  "template" : "<%=DESC_INFRAESTRUCTURA%> <div class='amount_label'><div class='row'><div class='col-sm-6'><h5>Número de camas</h5>  $<%=NUM_CAMAS%><h5>Número de camas en operación</h5> $<%=NUM_CAMAS_OPERACION%></div><div class='col-sm-6'><h5>Tipo de Daño</h5> <%=TIPO_DANIO%>% <h5>Daño</h5> <%=DETALLE_DANIO%></div></div></div>"
+  "template" : {
+  "name"  : "Infraestructura ISSSTE",
+  "type"  : "point",
+  "multiple" : true,
+  "disable" : [0,0],
+  "level" : [],
+  "src"   : "/js/maps/mapa_issste.csv",
+  "file"  : "csv"
+  ,
+  "style" : {
+    "fillColor" : "#f49d51",
+    "color"     : "#ea750f"
+  },
+  "location" : {
+    "lat" : "LATITUD",
+    "lng" : "LONGITUD",
+    "state" : "ID_ENTIDAD_FEDERATIVA"
+  },
+  "values"     : [],
+  "data"       : ["FECHA_EVENTO", "TIPO_EVENTO", "ID_INFRAESTRUCTURA", "TIPO_INFRAESTRUCTURA", "DESC_INFRAESTRUCTURA", "ID_ENTIDAD_FEDERATIVA", "ENTIDAD_FEDERATIVA", "ID_MUNICIPIO", "MUNICIPIO", "LATITUD", "LONGITUD", "TIPO_DANIO", "DETALLE_DANIO", "ESTATUS_OPERACION", "ESTATUS_INFORMACION", "NUM_CAMAS", "NUM_CAMAS_OPERACION"],
+  "dataSearch" : ["FECHA_EVENTO", "TIPO_EVENTO", "TIPO_INFRAESTRUCTURA", "DESC_INFRAESTRUCTURA", "ENTIDAD_FEDERATIVA", "MUNICIPIO", "TIPO_DANIO", "DETALLE_DANIO", "ESTATUS_OPERACION"],
+  "current"    : {},
+  "columns" : {
+    "FECHA_EVENTO" : "Fecha del Evento",
+	"TIPO_EVENTO" : "Tipo de Evento",
+	"TIPO_INFRAESTRUCTURA" : "Tipo de Unidad Médica",
+	"DESC_INFRAESTRUCTURA" : "Nombre de la Unidad Médica", 
+	"ENTIDAD_FEDERATIVA" : "Entidad Federativa",
+	"MUNICIPIO" : "Municipio",
+	"TIPO_DANIO" : "Tipo de Daño",
+	"DETALLE_DANIO" : "Detalle del daño",
+	"ESTATUS_OPERACION" : "Estatus"	
+  },
+  "filters" : [
+    {"type" : "search", "field" : "DESC_INFRAESTRUCTURA", "title" : "Nombre de la Unidad Médica"},
+    {"type" : "state", "field" : "ID_ENTIDAD_FEDERATIVA"}
+  ],
+   "extraFilters" : [
+    {"type" : "extra", "field" : "TIPO_DANIO", "title" : "Tipo de Daño"}
+  ],
+  "template" : "<%=DESC_INFRAESTRUCTURA%> <div class='amount_label'><div class='row'><div class='col-sm-6'><h5>Camas</h5>  <%=NUM_CAMAS%><h5>Estatus</h5><%=ESTATUS_OPERACION%></div><div class='col-sm-6'><h5>Camas en operación</h5> <%=NUM_CAMAS_OPERACION%><h5>Tipo de Daño</h5> <%=TIPO_DANIO%> </div><div class="col-sm-12"><h5>Daño</h5> <%=DETALLE_DANIO%></div></div></div>"
 }
