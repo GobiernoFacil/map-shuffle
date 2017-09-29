@@ -1881,5 +1881,7 @@ define(function(require){
 
   };
 
+  var xxxx_xxxx;
   return GFSHCPMap;
+
 });
