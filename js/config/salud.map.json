@@ -1,0 +1,42 @@
+{
+  "name"  : "Infraestructura Salud",
+  "type"  : "point",
+  "multiple" : true,
+  "disable" : [0,0],
+  "level" : [],
+  "src"   : "/js/maps/mapa_salud.csv",
+  "file"  : "csv"
+  ,
+  "style" : {
+    "fillColor" : "#f49d51",
+    "color"     : "#ea750f"
+  },
+  "location" : {
+    "lat" : "LATITUD",
+    "lng" : "LONGITUD",
+    "state" : "ID_ENTIDAD_FEDERATIVA"
+  },
+  "values"     : [],
+  "data"       : ["FECHA_EVENTO", "TIPO_EVENTO", "ID_INFRAESTRUCTURA", "TIPO_INFRAESTRUCTURA", "DESC_INFRAESTRUCTURA", "ID_ENTIDAD_FEDERATIVA", "ENTIDAD_FEDERATIVA", "ID_MUNICIPIO", "MUNICIPIO", "LATITUD", "LONGITUD", "CAMAS_AREA_HOSPITALIZACION", "CAMAS_FUERA_AREA_HOSPITALIZACION", "NUM_CAMAS_OPERACION", "INFRAESTRUCTURA_VALORADA", "TIPO_DANIO", "DETALLE_DANIO", " NIVEL_GOBIERNO_VALORACION", "INSTANCIA_GOBIERNO_VALORACION", "ESTATUS_OPERACION"],
+  "dataSearch" : ["ID_INFRAESTRUCTURA", "TIPO_INFRAESTRUCTURA", "DESC_INFRAESTRUCTURA", "ENTIDAD_FEDERATIVA", "MUNICIPIO", "TIPO_DANIO", "DETALLE_DANIO", "ESTATUS_OPERACION"],
+  "current"    : {},
+  "columns" : {
+	"ID_INFRAESTRUCTURA" : "Clave de la Unidad Médica",
+	"TIPO_INFRAESTRUCTURA" : "Tipo de Unidad Médica",
+	"DESC_INFRAESTRUCTURA" : "Nombre de la Unidad Médica", 
+	"ENTIDAD_FEDERATIVA" : "Entidad Federativa",
+	"MUNICIPIO" : "Municipio",
+	"TIPO_DANIO" : "Tipo de Daño",
+	"DETALLE_DANIO" : "Detalle del daño",
+	"ESTATUS_OPERACION" : "Estatus"	
+  },
+  "filters" : [
+    {"type" : "search", "field" : "DESC_INFRAESTRUCTURA", "title" : "Nombre de la Unidad Médica"},
+    {"type" : "state", "field" : "ID_ENTIDAD_FEDERATIVA"},
+	{"type" : "city", "field" : "ID_MUNICIPIO"}
+  ],
+   "extraFilters" : [
+    {"type" : "extra", "field" : "ESTATUS_OPERACION", "title" : "Estatus"}
+  ],
+  "template" : "<%=DESC_INFRAESTRUCTURA%> <div class='amount_label'><div class='row'><div class='col-sm-6'><h5>Camas dentro unidad</h5>  <%=CAMAS_AREA_HOSPITALIZACION%><h5>Estatus</h5><%=ESTATUS_OPERACION%></div><div class='col-sm-6'><h5>Camas fuera de la Unidad</h5> <%=CAMAS_FUERA_AREA_HOSPITALIZACION%><h5>Tipo de Daño</h5> <%=TIPO_DANIO%> </div><div class='col-sm-12'><h5>Daño</h5> <%=DETALLE_DANIO%></div></div></div>"
+}
