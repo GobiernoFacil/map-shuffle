@@ -86,6 +86,7 @@ define(function(require){
     // función que se ejecuta
     //
     initialize : function(settings){
+      this.uselessStuff = null;
       // [0] REVISA EL URL POR ALGUNA CONFIGURACIÓN
       //
       //
@@ -1881,7 +1882,6 @@ define(function(require){
 
   };
 
-  var xxxx_xxxx;
   return GFSHCPMap;
 
 });
