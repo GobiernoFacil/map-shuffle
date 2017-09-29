@@ -1,9 +1,9 @@
 {
   "map" : {
     "div"         : "GF-SHCP-map",
-    "lat"         : 22.442167,
-    "lng"         : -100.110350,
-    "zoom"        : 5,
+    "lat"         : 19.0412967,
+    "lng"         : -98.20619959999999,
+    "zoom"        : 7,
     "tileServer"  : "http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png'",
     "tileServerConfig" : {
       "maxZoom"     : 18,
