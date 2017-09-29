@@ -38,7 +38,7 @@
   },
   "maps" : {
     "basePath"  : "/js/config",
-    "maps"      : ["issste.map.json"],
+    "maps"      : ["issste.map.json", "desastre.map.json"],
     "current"   : 0,
     "embedPath" : "https://mapas3.gobiernofacil.com/mapa.html" 
   },
