@@ -21,6 +21,16 @@
     "method" : "length",
     "unit"   : "Viviendas"
   },
+   "columns" : {
+  "FECHA_EVENTO" : "FECHA DEL EVENTO",
+  "TIPO_EVENTO" : "TIPO DE EVENTO",
+  "ID_INFRAESTRUCTURA" : "CLAVE DE LA VIVIENDA",
+  "ENTIDAD_FEDERATIVA" : "ENTIDAD FEDERATIVA",
+  "TIPO_DANIO" : "TIPO DE DAÑO",
+  "DETALLE_DANIO" : "DETALLE DEL DAÑO",
+  "ESTATUS_OPERACION" : "ESTATUS",
+  "MONTO_API" : "MONTO"
+  },
   "filters" : [
     {"type" : "state", "field" : "ID_ENTIDAD_FEDERATIVA"},
 	{"type" : "city", "field" : "ID_MUNICIPIO"}
