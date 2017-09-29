@@ -1,0 +1,124 @@
+FECHA_EVENTO,TIPO_EVENTO,ID_INFRAESTRUCTURA,TIPO_INFRAESTRUCTURA,DESC_INFRAESTRUCTURA,ID_ENTIDAD_FEDERATIVA,ENTIDAD_FEDERATIVA,ID_MUNICIPIO,MUNICIPIO,LATITUD,LONGITUD,TIPO_DANIO,DETALLE_DANIO,ESTATUS_OPERACION,ESTATUS_INFORMACION,NUM_CAMAS,NUM_CAMAS_OPERACION
+2017-09-19,Sismo,Hospital Regional /Alta Especialidad,Hospital Regional /Alta Especialidad,"""Centenario De La Revolución Mexicana""",17,Morelos,8,Emiliano Zapata,18.847643,-99.197596,Menor,Daños En Acabados,Operando,Preeliminar,139,100
+2017-09-19,Sismo,Clínica Hospital,Clínica Hospital,"""Dr. Rafael Barba Ocampo""",17,Morelos,6,Cuautla De Ocampo,18.813615,-98.947484,Menor,"Daños Menores En Muros (Fisuras)
+Caída De Falso Plafón",Operando,Preeliminar,39,39
+2017-09-19,Sismo,Clínica Medicina Familiar,Clínica Medicina Familiar,Yecapixtla,17,Morelos,30,Yecapixtla,18.88235,-98.864647,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Clínica Medicina Familiar,Clínica Medicina Familiar,Cuernavaca ,17,Morelos,7,Cuernavaca ,18.928831,-99.240535,Menor,Daños En Acabados  ,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Clínica Médica Familiar con Especialidades,Clínica Médica Familiar con Especialidades,Jojutla De Juárez,17,Morelos,12,Jojutla De Juárez,18.611469,-99.177038,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil 132,17,Morelos,6,Cuautla De Ocampo,18.815547,-98.947501,Menor,Daño En Acabados,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Oficinas Delegacionales,Oficinas Delegacionales,Cuernavaca ,17,Morelos,7,Cuernavaca ,18.928831,-99.240535,Grave,Daños Estructurales (Edificio Arrendado),Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Centro Cultural La Catra,Centro Cultural La Catra,Cuernavaca ,17,Morelos,7,Cuernavaca ,18.928831,-99.240535,Grave,Daños Estructurales (Edificio En Comodato),Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Hospital General,Hospital General,"Tlaxcala, Tlax.",27,Tlaxcala,33,Tlaxcala,19.29778,-98.23991,Menor,Daños En Acabados,Operando,Preeliminar,73,73
+2017-09-19,Sismo,Hospital Regional /Alta Especialidad,Hospital Regional /Alta Especialidad,Puebla,21,Puebla,114,Puebla,19.020707,-98.198629,Menor,Daños En Acabados,Operando,Preeliminar,152,135
+2017-09-07,Sismo,Clínica Medicina Familiar,Clínica Medicina Familiar,Atlixco,21,Puebla,19,Atlixco,18.920422,-98.437476,Medio,Daño En El Unico Acceso Por Socavon,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Unidad de Medicina Familiar,Unidad de Medicina Familiar,Chiautla De Tapia,21,Puebla,47,Chiautla De Tapia,18.301068,-98.605601,Medio,Daños En Acabados,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 67,21,Puebla,114,Puebla,19.035932,-98.199139,Grave,Daños Estructurales,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 184,21,Puebla,156,Tehuacan,18.47117,-97.397732,Medio,Daño Estructural Aparente,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Hospital General,Hospital General,"Dra. Columba Rivera Osorio, Pachuca",13,Hidalgo,48,Pachuca,20.07319,-98.776385,Menor,Daños En Acabados,Operando,Preeliminar,69,69
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 75,13,Hidalgo,48,Estancia De Bienestar Y Desarrollo Infantil No. 75,20.116541,-98.754301,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Hospital Regional /Alta Especialidad,Hospital Regional /Alta Especialidad,"""Presidente Benito Juárez"", Oax.",20,Oaxaca,67,Oaxaca ,17.084054,-96.72278,Menor,Daños En Acabados,Operando,Preeliminar,119,119
+2017-09-19,Sismo,Clínica Médica Familiar,Clínica Médica Familiar,Salina Cruz,20,Oaxaca,79,Salina Cruz,16.178746,-95.199058,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Unidad de Medicina Familiar,Unidad de Medicina Familiar,Cd. Ixtepec,20,Oaxaca,14,Cd. Ixtepec,16.547105,-95.086941,Grave,Daños Estructurales,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Unidad de Medicina Familiar,Unidad de Medicina Familiar,Juchitán De Zaragoza,20,Oaxaca,43,Juchitán De Zaragoza,16.441851,-95.0099,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Clínica Hospital,Clínica Hospital,Tehuantepec,20,Oaxaca,515,Tehuantepec,16.292499,-95.22962,Medio,Daños En Acabados,Evacuado,Preeliminar,53,0
+2017-09-19,Sismo,Unidad de Medicina Familiar,Unidad de Medicina Familiar,Matías Romero,20,Oaxaca,57,Matías Romero,16.884436,-95.039047,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Unidad de Medicina Familiar,Unidad de Medicina Familiar,San Pedro Tapanatepec,20,Oaxaca,327,San Pedro Tapanatepec,16.369861,-94.193827,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Unidad de Medicina Familiar,Unidad de Medicina Familiar,San Francisco Ixhuatán,20,Oaxaca,143,San Francisco Ixhuatán,16.362326,-94.484686,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Clínica Hospital,Clínica Hospital,Tuxtepec,20,Oaxaca,184,Tuxtepec,18.081988,-96.151936,Medio,Daños En Acabados,Operando,Preeliminar,10,10
+2017-09-19,Sismo,Clínica Hospital,Clínica Hospital,Huajuapan De León,20,Oaxaca,39,Huajuapan De León,17.801314,-97.779942,Medio,Daños En Acabados,Evacuado,Preeliminar,30,0
+2017-09-19,Sismo,Clínica Médica Familiar con Especialidades,Clínica Médica Familiar con Especialidades,Oaxaca ,20,Oaxaca,67,Oaxaca ,17.27742,-97.671988,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Unidad de Medicina Familiar,Unidad de Medicina Familiar,Miahuatlán De Porfirio Díaz,20,Oaxaca,59,Miahuatlán De Porfirio Díaz,16.327706,-96.594099,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 93,20,Oaxaca,43,Tuxtepec,17.816177,-97.776777,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Clínica Hospital,Clínica Hospital,Iguala De La Independencia,12,Guerrero,35,Iguala ,18.340937,-99.527619,Menor,Daños En Acabados,Operando,Preeliminar,57,57
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 106,12,Guerrero,29,Iguala ,17.535219,-99.49303,Grave,Daños Estructurales,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 9,12,Guerrero,1,Acapulco De Juárez,16.872539,-99.888496,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Hospital Regional /Alta Especialidad,Hospital Regional /Alta Especialidad,Bicentenario De La Independencia,15,México,109,Tultitlan,19.628813,-99.16345,Menor,Daños En Acabados,Operando,Preeliminar,196,196
+2017-09-19,Sismo,Unidad de Medicina Familiar,Unidad de Medicina Familiar,Amecameca De Juárez,15,México,9,Amecameca De Juárez,19.125541,-98.77122,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Unidad de Medicina Familiar,Unidad de Medicina Familiar,Tenancingo De Degollado,15,México,88,Tenancingo De Degollado,18.955779,-99.592513,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Oficinas Delegacionales,Oficinas Delegacionales,Toluca,15,México,106,Toluca,19.292357,-99.62332,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Hospital Regional /Alta Especialidad,Hospital Regional /Alta Especialidad,"""Primero De Octubre""",9,Ciudad de México,5,Gustavo A. Madero,19.48709,-99.133484,Menor,Daños En Acabados,Operando,Preeliminar,290,267
+2017-09-19,Sismo,Clínica de Especialidades,Clínica de Especialidades,Indianilla,9,Ciudad de México,15,Cuauhtemoc,19.42181,-99.1492,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 3,9,Ciudad de México,15,Cuauhtemoc,19.416719,-99.148571,Grave,Daños Estructurales,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 11,9,Ciudad de México,15,Cuauhtemoc,19.436534,-99.156305,Medio,Inmueble Habitable. Riesgo En Colindancia,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No 12,9,Ciudad de México,15,Cuauhtemoc,19.451564,-99.143187,Menor,Inmueble Habitable. Zona Con Trabajos De Emergencia,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 48,9,Ciudad de México,15,Cuauhtemoc,19.440297,-99.147137,Menor,Inmueble Habitable. Zona Con Trabajos De Emergencia,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 50,9,Ciudad de México,15,Cuauhtemoc,19.416709,-99.148285,Medio,Daño Estructural En El Comedor,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 56,9,Ciudad de México,15,Cuauhtemoc,19.453905,-99.161086,Menor,Inmueble Habitable. Zona Con Trabajos De Emergencia,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 95,9,Ciudad de México,15,Cuauhtemoc,19.440246,-99.145976,Menor,Daños En Acabados,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 151,9,Ciudad de México,15,Cuauhtemoc,19.420759,-99.134368,Menor,Inmueble Habitable. Riesgo En Colindancia,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 25,9,Ciudad de México,5,Gustavo A. Madero,19.493493,-99.159676,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 54,9,Ciudad de México,5,Gustavo A. Madero,19.466421,-99.129686,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Clínica Medicina Familiar,Clínica Medicina Familiar,Iztapalapa I,9,Ciudad de México,7,Iztapalapa,19.356331,-99.106993,Medio,Daños En Acabados,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Hospital General,Hospital General,"""Gral. José Maria Morelos Y Pavón""",9,Ciudad de México,7,Iztapalapa,19.364833,-98.996075,Menor,Daños En Acabados,Operando,Preeliminar,120,120
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 101,9,Ciudad de México,7,Iztapalapa,19.366749,-99.060409,Menor,Inmueble Habitable. Zona Con Trabajos De Emergencia,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 141,9,Ciudad de México,58,Nezahualcoyotl,19.401779,-99.036507,Menor,Daños En Acabados,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 152,9,Ciudad de México,17,Venustiano Carranza,19.412222,-99.115017,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 43,9,Ciudad de México,17,Venustiano Carranza,19.424128,-99.119238,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 45,9,Ciudad de México,17,Venustiano Carranza,19.411615,-99.122928,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 6,9,Ciudad de México,6,Iztacalco,19.400003,-99.1311738,Menor,Daños En Acabados,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 7,9,Ciudad de México,17,Venustiano Carranza,19.44582,-99.11349,Menor,Daños En Acabados,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 83,9,Ciudad de México,7,Iztapalapa,19.38746,-99.04734,Menor,Inmueble Habitable. Zona Con Trabajos De Emergencia,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Clínica Medicina Familiar,Clínica Medicina Familiar,Cuitláhuac,9,Ciudad de México,2,Azcapotzalco,19.471732,-99.165876,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Clínica Medicina Familiar,Clínica Medicina Familiar,Legaria,9,Ciudad de México,16,Miguel Hidalgo,19.451256,-99.202148,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Clínica Medicina Familiar,Clínica Medicina Familiar,Revolución,9,Ciudad de México,14,Benito Juárez,19.389456,-99.186255,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 41,9,Ciudad de México,16,Miguel Hidalgo,19.448069,-99.166992,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 46,9,Ciudad de México,16,Miguel Hidalgo,19.442636,-99.174277,Medio,Inmueble Habitable. Riesgo En Colindancia,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 55,9,Ciudad de México,16,Miguel Hidalgo,19.40899,-99.185325,Menor,Sin Certificado De Habitabilidad. Propuesta De Reubicación,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Centro Médico Nacional (Hospital),Centro Médico Nacional,"""20 De Noviembre""",9,Ciudad de México,14,Benito Juárez,19.372572,-99.171219,Sin daños,Sin Daños En El Hospital. ,Operando,Preeliminar,370,354
+2017-09-19,Sismo,Centro Médico Nacional (Edificio de Consulta Externa),Centro Médico Nacional,"""20 De Noviembre""",9,Ciudad de México,14,Benito Juárez,19.372572,-99.171219,Medio,Requiere Peritaje Estructural,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Hospital Regional /Alta Especialidad,Hospital Regional /Alta Especialidad,"""Lic. Adolfo López Mateos""",9,Ciudad de México,10,Alvaro Obregón,19.358374,-99.172436,Medio,Daños En Acabados,Operando,Preeliminar,252,252
+2017-09-19,Sismo,Clínica Médica Familiar,Clínica Médica Familiar,Narvarte,9,Ciudad de México,14,Benito Juárez,19.38406,-99.149723,Medio,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Clínica Médica Familiar,Clínica Médica Familiar,Del Valle,9,Ciudad de México,14,Benito Juárez,19.398474,-99.168969,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Clínica de Especialidades,Clínica de Especialidades,Churubusco,9,Ciudad de México,3,Coyoacán,19.345592,-99.144975,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Clínica Médica Familiar,Clínica Médica Familiar,"""Dr. Ignacio Chávez""",9,Ciudad de México,3,Coyoacán,19.315605,-99.114586,Medio,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Clínica Médica Familiar,Clínica Médica Familiar,División Del Norte,9,Ciudad de México,3,Coyoacán,19.31975,-99.13881,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Clínica Médica Familiar,Clínica Médica Familiar,Coyoacán,9,Ciudad de México,3,Coyoacán,19.349615,-99.158288,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Clínica Médica Familiar,Clínica Médica Familiar,Xochimilco,9,Ciudad de México,13,Xochimilco,19.256742,-99.108307,Medio,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Clínica Médica Familiar,Clínica Médica Familiar,Milpa Alta,9,Ciudad de México,9,Milpa Alta,19.193676,-99.016732,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Hospital General,Hospital General,"""Dr. Darío Fernández Fierro""",9,Ciudad de México,14,Benito Juárez,19.363705,-99.188609,Medio,Daños En Acabados,Operando,Preeliminar,175,150
+2017-09-19,Sismo,Clínica Médica Familiar,Clínica Médica Familiar,Fuentes Brotantes,9,Ciudad de México,12,Tlalpan,19.280673,-99.185694,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Velatorio,Velatorio,San Fernando,9,Ciudad de México,12,Tlalpan,19.295526,-99.178471,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 107,9,Ciudad de México,12,Tlalpan,19.288259,-99.180363,Menor,Daños En Acabados,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 117,9,Ciudad de México,14,Benito Juárez,19.40197,-99.14945,Menor,Daños En Acabados,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 118,9,Ciudad de México,14,Benito Juárez,19.40197,-99.14945,Menor,Daños En Acabados,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 14,9,Ciudad de México,12,Tlalpan,19.295304,-99.17884,Menor,Inmueble Habitable. Zona Con Trabajos De Emergencia,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 153,9,Ciudad de México,3,San Pablo Tepetlapa,19.319334,-99.13887,Menor,Daños En Acabados,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 154,9,Ciudad de México,13,Xochimilco,19.277786,-99.127829,Menor,Daños En Acabados,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 157,9,Ciudad de México,14,Benito Juárez,19.400099,-99.163974,Menor,Daños En Acabados,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 24,9,Ciudad de México,12,Tlalpan,19.292687,-99.154073,Menor,Daños En Acabados,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 44,9,Ciudad de México,14,Benito Juárez,19.378727,-99.189536,Menor,Daños En Acabados,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 47,9,Ciudad de México,14,Benito Juárez,19.37217,-99.154487,Menor,Daños En Acabados,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 96,9,Ciudad de México,14,Benito Juárez,19.393252,-99.14868,Grave,Daños Estructurales,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 97,9,Ciudad de México,14,Benito Juárez,19.398267,-99.145746,Menor,Daños En Acabados,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No. 98,9,Ciudad de México,3,Coyoacán,19.312001,-99.117522,Menor,Daños En Acabados,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Unidad de Crédito,Unidad de Crédito,Unidad De Credito 3 San Antonio Abad,9,Ciudad de México,15,Iztapalapa,19.417028,-99.134123,Grave,Edificio Colapsado,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Oficinas Administrativas,Oficinas Administrativas,La Fragua 16 Y 18,9,Ciudad de México,15,Cuauhtemoc,19.434085,-99.153437,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Oficinas Administrativas,Oficinas Administrativas,Buenavista,9,Ciudad de México,15,Cuauhtemoc,19.444494,-99.152054,Medio,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Oficinas Administrativas,Oficinas Administrativas,San Fernando (Torre Médica),9,Ciudad de México,12,Tlalpan,19.295507,-99.178879,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Oficinas Administrativas,Oficinas Administrativas,La Fragua 4,9,Ciudad de México,15,Cuauhtemoc,19.435083,-99.15316,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Oficinas Administrativas,Oficinas Administrativas,Finanzas Río Rhín,9,Ciudad de México,15,Cuauhtemoc,19.43355,-99.16629,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Oficinas Administrativas,Oficinas Administrativas,Fovissste Miguel Noreña 28,9,Ciudad de México,14,Benito Juárez,19.363193,-99.186789,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,EBDI,EBDI,Estancia De Bienestar Y Desarrollo Infantil No 15,9,Ciudad de México,5,Gustavo A. Madero,19.487575,-99.133295,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Centro Recreativo ISSSTEHuixtla,Centro Recreativo ISSSTEHuixtla,Tehuixtla,17,Morelos,101,Tehuixtla,18.547127,-99.270065,Grave,Daños Estructurales,Evacuado,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Clínica Hospital,Clínica Hospital,Xalapa,30,Veracruz,89,Xalapa,19.545089,-96.93779,Menor,Daños En Acabados,Operando,Preeliminar,84,84
+2017-09-19,Sismo,Clínica Medicina Familiar,Clínica Medicina Familiar,Córdoba ,30,Veracruz,40,Córdoba ,18.889505,-96.925378,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Clínica Hospital,Clínica Hospital,Tuxpan,30,Veracruz,57,Tuxpan,20.952676,-97.417186,Menor,Daños En Acabados,Operando,Preeliminar,31,31
+2017-09-19,Sismo,Unidad de Medicina Familiar,Unidad de Medicina Familiar,Tantoyuca,30,Veracruz,78,Tantoyuca,21.353044,-98.215598,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Unidad de Medicina Familiar,Unidad de Medicina Familiar,Naranjos,30,Veracruz,77,Naranjos,21.34562,-97.695868,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Unidad de Medicina Familiar,Unidad de Medicina Familiar,Pánuco,30,Veracruz,96,Pánuco,22.048304,-98.187167,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Clínica Hospital,Clínica Hospital,Poza Rica De Hidalgo,30,Veracruz,19,Poza Rica De Hidalgo,20.506752,-97.460322,Menor,Daños En Acabados,Operando,Preeliminar,40,40
+2017-09-19,Sismo,Clínica Hospital,Clínica Hospital,Coatzacoalcos,30,Veracruz,101,Coatzacoalcos,18.145485,-94.48475,Grave,Daños Estructurales,Evacuado,Preeliminar,13,0
+2017-09-19,Sismo,Clínica Medicina Familiar,Clínica Medicina Familiar,San Andrés Tuxtla,30,Veracruz,9,San Andrés Tuxtla,18.450428,-95.22034,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Clínica Medicina Familiar,Clínica Medicina Familiar,Martínez De La Torre,30,Veracruz,97,Martínez De La Torre,20.060907,-97.062674,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Unidad de Medicina Familiar,Unidad de Medicina Familiar,Misantla,30,Veracruz,109,Misantla,19.924345,-96.857554,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Hospital General,Hospital General,"""Dr. Belisario Dominguez"", Tuxtla Gutiérrez.",7,Chiapas,101,Tuxtla Gutiérrez ,16.750596,-93.129471,Grave,Daños Estructurales,Evacuado,Preeliminar,83,0
+2017-09-19,Sismo,Clínica Hospital,Clínica Hospital,"""Dr. Roberto Nettel F."", Tapachula",7,Chiapas,89,Tapachula,14.899557,-92.249379,Menor,Daños En Acabados,Operando,Preeliminar,36,36
+2017-09-19,Sismo,Unidad de Medicina Familiar,Unidad de Medicina Familiar,Huixtla,7,Chiapas,40,Huixtla,15.13329,-92.461041,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Unidad de Medicina Familiar,Unidad de Medicina Familiar,Motozintla De Mendoza ,7,Chiapas,57,Motozintla De Mendoza ,15.367977,-92.24657,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Clínica Hospital,Clínica Hospital,San Cristóbal De Las Casas,7,Chiapas,78,San Cristóbal De Las Casas,16.725531,-92.646744,Menor,Daños En Acabados,Operando,Preeliminar,13,13
+2017-09-19,Sismo,Unidad de Medicina Familiar,Unidad de Medicina Familiar,Salto De Agua,7,Chiapas,77,Salto De Agua,17.554316,-92.339887,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Clínica de Atención Familiar,Clínica de Atención Familiar,Tila,7,Chiapas,96,Tila,17.300041,-92.426176,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Clínica Hospital,Clínica Hospital,Comitán De Domínguez,7,Chiapas,19,Comitán De Domínguez,16.231049,-92.136277,Menor,Daños En Acabados,Operando,Preeliminar,16,16
+2017-09-19,Sismo,Clínica Medicina Familiar,Clínica Medicina Familiar,Tuxtla Gutiérrez ,7,Chiapas,101,Tuxtla Gutiérrez ,16.749763,-93.130306,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Unidad de Medicina Familiar,Unidad de Medicina Familiar,Arriaga,7,Chiapas,9,Arriaga,16.24129,-93.887677,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
+2017-09-19,Sismo,Unidad de Medicina Familiar,Unidad de Medicina Familiar,Tonalá ,7,Chiapas,97,Tonalá ,16.081391,-93.766019,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
