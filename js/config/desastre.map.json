@@ -1,0 +1,36 @@
+{
+  "name"  : "FONDEN Desastres",
+  "type"  : "area",
+  "level" : ["state"],
+  "src"   : "/js/maps/fonden_desastre.csv",
+  "file"  : "csv",
+  "color" : 12,
+  "location" : {
+    "state" : "ID_ENTIDAD_FEDERATIVA"
+  },
+  "style" : {
+    "fillOpacity":0.8
+  },
+  "values"  : ["MONTO_API"],
+  "data"    : ["FECHA_EVENTO", "TIPO_EVENTO", "ID_ENTIDAD_FEDERATIVA", "ENTIDAD_FEDERATIVA", "SECTOR"],
+  "dataSearch" : ["FECHA_EVENTO", "TIPO_EVENTO", "ENTIDAD_FEDERATIVA", "SECTOR", "MONTO_API"],
+  "current" : {
+    "level"  : "state",
+    "value"  : "MONTO_API",
+    "method" : "sum",
+    "unit"   : "Pesos mexicanos"
+  },
+  "columns" : {
+  "FECHA_EVENTO" : "FECHA DEL EVENTO",
+  "TIPO_EVENTO" : "TIPO DE EVENTO",
+  "ENTIDAD_FEDERATIVA" : "ENTIDAD FEDERATIVA",
+  "MONTO_API" : "MONTO"
+  },
+  "filters" : [
+    {"type" : "state", "field" : "ID_ENTIDAD_FEDERATIVA"}
+  ],
+  "extraFilters" : [
+    {"type" : "extra", "field" : "SECTOR", "title" : "Sector"}
+  ],
+  "template" : "<%=name%> <div class='amount_label'><h5> Registros: <strong><%=value%></strong></h5></div"
+}
