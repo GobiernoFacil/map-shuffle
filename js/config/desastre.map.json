@@ -1,7 +1,7 @@
 {
   "name"  : "FONDEN Desastres",
   "type"  : "area",
-  "level" : ["state"],
+  "level" : "state",
   "src"   : "/js/maps/fonden_desastre.csv",
   "file"  : "csv",
   "color" : 12,
@@ -11,7 +11,7 @@
   "style" : {
     "fillOpacity":0.8
   },
-  "values"  : ["MONTO_API"],
+  "values"  : "MONTO_API",
   "data"    : ["FECHA_EVENTO", "TIPO_EVENTO", "ID_ENTIDAD_FEDERATIVA", "ENTIDAD_FEDERATIVA", "SECTOR"],
   "dataSearch" : ["FECHA_EVENTO", "TIPO_EVENTO", "ENTIDAD_FEDERATIVA", "SECTOR", "MONTO_API"],
   "current" : {
