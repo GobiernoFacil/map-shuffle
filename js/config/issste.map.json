@@ -78,5 +78,5 @@
    "extraFilters" : [
     {"type" : "extra", "field" : "TIPO_DANIO", "title" : "Tipo de Daño"}
   ],
-  "template" : "<%=DESC_INFRAESTRUCTURA%> <div class='amount_label'><div class='row'><div class='col-sm-6'><h5>Camas</h5>  <%=NUM_CAMAS%><h5>Estatus</h5><%=ESTATUS_OPERACION%></div><div class='col-sm-6'><h5>Camas en operación</h5> <%=NUM_CAMAS_OPERACION%><h5>Tipo de Daño</h5> <%=TIPO_DANIO%> </div><div class="col-sm-12"><h5>Daño</h5> <%=DETALLE_DANIO%></div></div></div>"
+  "template" : "<%=DESC_INFRAESTRUCTURA%> <div class='amount_label'><div class='row'><div class='col-sm-6'><h5>Camas</h5>  <%=NUM_CAMAS%><h5>Estatus</h5><%=ESTATUS_OPERACION%></div><div class='col-sm-6'><h5>Camas en operación</h5> <%=NUM_CAMAS_OPERACION%><h5>Tipo de Daño</h5> <%=TIPO_DANIO%> </div><div class='col-sm-12'><h5>Daño</h5> <%=DETALLE_DANIO%></div></div></div>"
 }
