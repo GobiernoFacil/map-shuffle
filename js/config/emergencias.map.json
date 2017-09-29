@@ -1,0 +1,37 @@
+{
+  "name"  : "FONDEN Emergencias",
+  "type"  : "area",
+  "level" : ["state"],
+  "src"   : "/js/maps/mapa_emergencias.csv",
+  "file"  : "csv",
+  "color" : 12,
+  "location" : {
+    "state" : "ID_ENTIDAD_FEDERATIVA"
+  },
+  "style" : {
+    "fillOpacity":0.8
+  },
+  "values"  : ["CANTIDAD"],
+  "data"    : ["FECHA_EVENTO", "TIPO_EVENTO", "ID_ENTIDAD_FEDERATIVA", "UNIDAD_MEDIDA", "TIPO_BIEN"],
+  "dataSearch" : ["FECHA_EVENTO", "TIPO_EVENTO", "ID_ENTIDAD_FEDERATIVA","CANTIDAD", "UNIDAD_MEDIDA", "TIPO_BIEN"],
+  "current" : {
+    "level"  : "state",
+    "value"  : "MONTO_API",
+    "method" : "sum"
+  },
+  "columns" : {
+  "FECHA_EVENTO" : "FECHA DEL EVENTO",
+  "TIPO_EVENTO" : "TIPO DE EVENTO",
+  "ENTIDAD_FEDERATIVA" : "ENTIDAD FEDERATIVA",
+  "UNIDAD_MEDIDA" : "UNIDAD DE MEDIDA",
+  "TIPO_BIEN" : "TIPO DE BIEN"
+  },
+  "filters" : [
+    {"type" : "state", "field" : "ID_ENTIDAD_FEDERATIVA"}
+  ],
+  "extraFilters" : [
+    {"type" : "extra", "field" : "UNIDAD_MEDIDA", "title" : "Unidad de Medida"},
+	{"type" : "extra", "field" : "TIPO_BIEN", "title" : "Tipo de Bien"}
+  ],
+  "template" : "<%=name%> <div class='amount_label'><h5> Cantidad: <strong><%=value%></strong></h5></div"
+}
