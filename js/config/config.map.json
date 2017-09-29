@@ -38,10 +38,9 @@
   },
   "maps" : {
     "basePath"  : "/js/config",
-    "maps"      : ["escuelas100.map.json", "ramo23.map.json", "opa.map.json"],
-    "extras"    : ["poblacion.map.json"],
-    "current"   : 2,
-    "embedPath" : "http://localhost:8000/mapa.html" 
+    "maps"      : ["issste.map.json"],
+    "current"   : 0,
+    "embedPath" : "https://mapas3.gobiernofacil.com/mapa.html" 
   },
   "ui" : {
     "topToolsDiv"    : "GF-SHCP-top-tools",
