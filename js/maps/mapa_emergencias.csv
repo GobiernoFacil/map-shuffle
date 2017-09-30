@@ -1,100 +1,100 @@
 FECHA_EVENTO,TIPO_EVENTO,ID_ENTIDAD_FEDERATIVA,ENTIDAD_FEDERATIVA,NUMERO_BOLETIN,FECHA_BOLETIN,CANTIDAD,UNIDAD_MEDIDA,TIPO_BIEN
-2017-09-07,Sismo,7,Chiapas,276/17,42986,"108,442",Unitario,Despensa
-2017-09-07,Sismo,20,Oaxaca,277/17,42986,"167,000",Unitario,Despensa
-2017-09-19,Sismo,9,Ciudad de México,311/17,42997,"24,362",Unitario,Despensa
-2017-09-19,Sismo,17,Morelos,312/17,42997,"12,147",Unitario,Despensa
-2017-09-19,Sismo,21,Puebla,313/17,42997,"9,153",Unitario,Despensa
-2017-09-19,Sismo,12,Guerrero,314/17,42997,"6,225",Unitario,Despensa
-2017-09-07,Sismo,7,Chiapas,276/17,42986,"122,584",Unitario,Colchoneta
-2017-09-07,Sismo,20,Oaxaca,277/17,42986,"88,845",Unitario,Colchoneta
-2017-09-19,Sismo,9,Ciudad de México,311/17,42997,"31,500",Unitario,Colchoneta
-2017-09-19,Sismo,17,Morelos,312/17,42997,"15,800",Unitario,Colchoneta
-2017-09-19,Sismo,21,Puebla,313/17,42997,"15,000",Unitario,Colchoneta
-2017-09-19,Sismo,12,Guerrero,314/17,42997,"8,303",Unitario,Colchoneta
-2017-09-07,Sismo,7,Chiapas,276/17,42986,"122,584",Unitario,Cobertor
-2017-09-07,Sismo,20,Oaxaca,277/17,42986,"58,845",Unitario,Cobertor
-2017-09-19,Sismo,9,Ciudad de México,311/17,42997,"31,500",Unitario,Cobertor
-2017-09-19,Sismo,17,Morelos,312/17,42997,"15,000",Unitario,Cobertor
-2017-09-19,Sismo,21,Puebla,313/17,42997,"15,000",Unitario,Cobertor
-2017-09-19,Sismo,12,Guerrero,314/17,42997,"8,303",Unitario,Cobertor
-2017-09-07,Sismo,7,Chiapas,276/17,42986,"150,000",Unitario,Lámina Tipo B
-2017-09-19,Sismo,9,Ciudad de México,311/17,42997,"5,000",Unitario,Lámina Tipo B
-2017-09-19,Sismo,17,Morelos,312/17,42997,"40,000",Unitario,Lámina Tipo B
-2017-09-19,Sismo,21,Puebla,313/17,42997,"20,000",Unitario,Lámina Tipo B
-2017-09-19,Sismo,12,Guerrero,314/17,42997,"26,984",Unitario,Lámina Tipo B
-2017-09-07,Sismo,7,Chiapas,276/17,42986,"400,000",Litro,Agua
-2017-09-07,Sismo,20,Oaxaca,277/17,42986,"120,000",Litro,Agua
-2017-09-19,Sismo,9,Ciudad de México,311/17,42997,"207,000",Litro,Agua
-2017-09-19,Sismo,17,Morelos,312/17,42997,"101,000",Litro,Agua
-2017-09-19,Sismo,21,Puebla,313/17,42997,"100,000",Litro,Agua
-2017-09-19,Sismo,12,Guerrero,314/17,42997,"192,848",Litro,Agua
-2017-09-07,Sismo,7,Chiapas,276/17,42986,"30,646",Unitario,Kit de limpieza
-2017-09-07,Sismo,20,Oaxaca,277/17,42986,"14,000",Unitario,Kit de limpieza
-2017-09-19,Sismo,9,Ciudad de México,311/17,42997,"23,987",Unitario,Kit de limpieza
-2017-09-19,Sismo,17,Morelos,312/17,42997,"8,647",Unitario,Kit de limpieza
-2017-09-19,Sismo,21,Puebla,313/17,42997,"9,153",Unitario,Kit de limpieza
-2017-09-19,Sismo,12,Guerrero,314/17,42997,"2,075",Unitario,Kit de limpieza
-2017-09-07,Sismo,7,Chiapas,276/17,42986,"77,796",Unitario,Kit de aseo personal
-2017-09-07,Sismo,20,Oaxaca,277/17,42986,"14,000",Unitario,Kit de aseo personal
-2017-09-19,Sismo,9,Ciudad de México,311/17,42997,"23,987",Unitario,Kit de aseo personal
-2017-09-19,Sismo,17,Morelos,312/17,42997,"8,647",Unitario,Kit de aseo personal
-2017-09-19,Sismo,21,Puebla,313/17,42997,"9,153",Unitario,Kit de aseo personal
-2017-09-19,Sismo,12,Guerrero,314/17,42997,"4,150",Unitario,Kit de aseo personal
-2017-09-07,Sismo,7,Chiapas,276/17,42986,"20,000",Unitario,Impermeables
-2017-09-07,Sismo,20,Oaxaca,277/17,42986,"57,325",Unitario,Impermeables
-2017-09-07,Sismo,7,Chiapas,276/17,42986,"20,000",Unitario,Botas
-2017-09-07,Sismo,20,Oaxaca,277/17,42986,"6,000",Unitario,Rollos de hule
-2017-09-19,Sismo,9,Ciudad de México,311/17,42997,"10,000",Unitario,Guantes
-2017-09-19,Sismo,17,Morelos,312/17,42997,"5,000",Unitario,Guantes
-2017-09-19,Sismo,21,Puebla,313/17,42997,"5,000",Unitario,Guantes
-2017-09-07,Sismo,20,Oaxaca,277/17,42986,"20,000",Unitario,Toallas sanitarias
-2017-09-07,Sismo,21,Oaxaca,277/18,42987,"10,000",Unitario,Pañal 1
-2017-09-07,Sismo,22,Oaxaca,277/19,42988,"10,000",Unitario,Pañal 2
-2017-09-07,Sismo,23,Oaxaca,277/20,42989,"10,000",Unitario,Pañal 3
-2017-09-07,Sismo,7,Chiapas,276/17,42986,"18,907",Unitario,Pañal 4
-2017-09-07,Sismo,20,Oaxaca,277/17,42986,"10,000",Unitario,Pañal 4
-2017-09-07,Sismo,7,Chiapas,276/17,42986,"18,907",Unitario,Pañal 5
-2017-09-07,Sismo,20,Oaxaca,277/17,42986,"10,000",Unitario,Pañal 5
-2017-09-07,Sismo,7,Chiapas,276/17,42986,"5,000",Unitario,Pañal de adulto
-2017-09-19,Sismo,9,Ciudad de México,311/17,42997,"5,000",Unitario,Linternas
-2017-09-19,Sismo,17,Morelos,312/17,42997,"2,232",Unitario,Linternas
-2017-09-19,Sismo,21,Puebla,313/17,42997,"2,500",Unitario,Linternas
-2017-09-07,Sismo,7,Chiapas,276/17,42986,"2,187",Unitario,Palas
-2017-09-19,Sismo,9,Ciudad de México,311/17,42997,"5,000",Unitario,Palas
-2017-09-19,Sismo,17,Morelos,312/17,42997,"1,959",Unitario,Palas
-2017-09-19,Sismo,21,Puebla,313/17,42997,"2,500",Unitario,Palas
-2017-09-07,Sismo,7,Chiapas,276/17,42986,"2,187",Unitario,Marros
-2017-09-19,Sismo,9,Ciudad de México,311/17,42997,"5,000",Unitario,Marros
-2017-09-19,Sismo,17,Morelos,312/17,42997,514,Unitario,Marros
-2017-09-19,Sismo,21,Puebla,313/17,42997,"2,500",Unitario,Marros
-2017-09-19,Sismo,9,Ciudad de México,311/17,42997,"5,000",Unitario,Barretas
-2017-09-19,Sismo,17,Morelos,312/17,42997,"2,500",Unitario,Barretas
-2017-09-19,Sismo,21,Puebla,313/17,42997,"2,500",Unitario,Barretas
-2017-09-07,Sismo,7,Chiapas,276/17,42986,"2,187",Unitario,Carretillas
-2017-09-19,Sismo,9,Ciudad de México,311/17,42997,"5,000",Unitario,Carretillas
-2017-09-19,Sismo,17,Morelos,312/17,42997,"1,491",Unitario,Carretillas
-2017-09-19,Sismo,21,Puebla,313/17,42997,"2,500",Unitario,Carretillas
-2017-09-19,Sismo,9,Ciudad de México,311/17,42997,"5,000",Unitario,Cascos
-2017-09-19,Sismo,17,Morelos,312/17,42997,"2,418",Unitario,Cascos
-2017-09-19,Sismo,21,Puebla,313/17,42997,"2,500",Unitario,Cascos
-2017-09-07,Sismo,7,Chiapas,276/17,42986,"2,187",Unitario,Zapapico
-2017-09-19,Sismo,9,Ciudad de México,311/17,42997,"5,000",Unitario,Zapapico
-2017-09-19,Sismo,17,Morelos,312/17,42997,"2,500",Unitario,Zapapico
-2017-09-19,Sismo,21,Puebla,313/17,42997,"2,500",Unitario,Zapapico
-2017-09-19,Sismo,9,Ciudad de México,311/17,42997,"10,000",Unitario,Mascarillas
-2017-09-19,Sismo,17,Morelos,312/17,42997,"5,000",Unitario,Mascarillas
-2017-09-19,Sismo,21,Puebla,313/17,42997,"5,000",Unitario,Mascarillas
-2017-09-19,Sismo,9,Ciudad de México,311/17,42997,"15,000",Par,Guantes de neopreno (22)
-2017-09-19,Sismo,17,Morelos,312/17,42997,"5,000",Par,Guantes de neopreno (22)
-2017-09-19,Sismo,21,Puebla,313/17,42997,"5,000",Par,Guantes de neopreno (22)
-2017-09-19,Sismo,9,Ciudad de México,311/17,42997,"15,000",Par,Guantes de neopreno (40)
-2017-09-19,Sismo,17,Morelos,312/17,42997,"5,000",Par,Guantes de neopreno (40)
-2017-09-19,Sismo,21,Puebla,313/17,42997,"5,000",Par,Guantes de neopreno (40)
-2017-09-07,Sismo,20,Oaxaca,277/17,42986,20,Unitario,Potabilizadora de agua
-2017-09-07,Sismo,20,Oaxaca,277/17,42986,314,Unitario,Arrendamiento de letrinas
-2017-09-07,Sismo,20,Oaxaca,277/17,42986,169,Unitario,Arrendamiento de regaderas
-2017-09-07,Sismo,7,Chiapas,276/17,42986,No aplica,Una autorización,Medicamentos
-2017-09-07,Sismo,20,Oaxaca,277/17,42986,No aplica,Una autorización,Medicamentos
-2017-09-19,Sismo,17,Morelos,312/17,42997,No aplica,Una autorización,Medicamentos
-2017-09-19,Sismo,21,Puebla,313/17,42997,No aplica,Una autorización,Medicamentos
-2017-09-19,Sismo,12,Guerrero,314/17,42997,No aplica,Una autorización,Medicamentos
+2017-09-07,Sismo,7,Chiapas,276/17,2017-09-08,108442.00,Unitario,Despensa
+2017-09-07,Sismo,20,Oaxaca,277/17,2017-09-08,167000.00,Unitario,Despensa
+2017-09-19,Sismo,9,Ciudad de México,311/17,2017-09-19,24362.00,Unitario,Despensa
+2017-09-19,Sismo,17,Morelos,312/17,2017-09-19,12147.00,Unitario,Despensa
+2017-09-19,Sismo,21,Puebla,313/17,2017-09-19,9153.00,Unitario,Despensa
+2017-09-19,Sismo,12,Guerrero,314/17,2017-09-19,6225.00,Unitario,Despensa
+2017-09-07,Sismo,7,Chiapas,276/17,2017-09-08,122584.00,Unitario,Colchoneta
+2017-09-07,Sismo,20,Oaxaca,277/17,2017-09-08,88845.00,Unitario,Colchoneta
+2017-09-19,Sismo,9,Ciudad de México,311/17,2017-09-19,31500.00,Unitario,Colchoneta
+2017-09-19,Sismo,17,Morelos,312/17,2017-09-19,15800.00,Unitario,Colchoneta
+2017-09-19,Sismo,21,Puebla,313/17,2017-09-19,15000.00,Unitario,Colchoneta
+2017-09-19,Sismo,12,Guerrero,314/17,2017-09-19,8303.00,Unitario,Colchoneta
+2017-09-07,Sismo,7,Chiapas,276/17,2017-09-08,122584.00,Unitario,Cobertor
+2017-09-07,Sismo,20,Oaxaca,277/17,2017-09-08,58845.00,Unitario,Cobertor
+2017-09-19,Sismo,9,Ciudad de México,311/17,2017-09-19,31500.00,Unitario,Cobertor
+2017-09-19,Sismo,17,Morelos,312/17,2017-09-19,15000.00,Unitario,Cobertor
+2017-09-19,Sismo,21,Puebla,313/17,2017-09-19,15000.00,Unitario,Cobertor
+2017-09-19,Sismo,12,Guerrero,314/17,2017-09-19,8303.00,Unitario,Cobertor
+2017-09-07,Sismo,7,Chiapas,276/17,2017-09-08,150000.00,Unitario,Lámina Tipo B
+2017-09-19,Sismo,9,Ciudad de México,311/17,2017-09-19,5000.00,Unitario,Lámina Tipo B
+2017-09-19,Sismo,17,Morelos,312/17,2017-09-19,40000.00,Unitario,Lámina Tipo B
+2017-09-19,Sismo,21,Puebla,313/17,2017-09-19,20000.00,Unitario,Lámina Tipo B
+2017-09-19,Sismo,12,Guerrero,314/17,2017-09-19,26984.00,Unitario,Lámina Tipo B
+2017-09-07,Sismo,7,Chiapas,276/17,2017-09-08,400000.00,Litro,Agua
+2017-09-07,Sismo,20,Oaxaca,277/17,2017-09-08,120000.00,Litro,Agua
+2017-09-19,Sismo,9,Ciudad de México,311/17,2017-09-19,207000.00,Litro,Agua
+2017-09-19,Sismo,17,Morelos,312/17,2017-09-19,101000.00,Litro,Agua
+2017-09-19,Sismo,21,Puebla,313/17,2017-09-19,100000.00,Litro,Agua
+2017-09-19,Sismo,12,Guerrero,314/17,2017-09-19,192848.00,Litro,Agua
+2017-09-07,Sismo,7,Chiapas,276/17,2017-09-08,30646.00,Unitario,Kit de limpieza
+2017-09-07,Sismo,20,Oaxaca,277/17,2017-09-08,14000.00,Unitario,Kit de limpieza
+2017-09-19,Sismo,9,Ciudad de México,311/17,2017-09-19,23987.00,Unitario,Kit de limpieza
+2017-09-19,Sismo,17,Morelos,312/17,2017-09-19,8647.00,Unitario,Kit de limpieza
+2017-09-19,Sismo,21,Puebla,313/17,2017-09-19,9153.00,Unitario,Kit de limpieza
+2017-09-19,Sismo,12,Guerrero,314/17,2017-09-19,2075.00,Unitario,Kit de limpieza
+2017-09-07,Sismo,7,Chiapas,276/17,2017-09-08,77796.00,Unitario,Kit de aseo personal
+2017-09-07,Sismo,20,Oaxaca,277/17,2017-09-08,14000.00,Unitario,Kit de aseo personal
+2017-09-19,Sismo,9,Ciudad de México,311/17,2017-09-19,23987.00,Unitario,Kit de aseo personal
+2017-09-19,Sismo,17,Morelos,312/17,2017-09-19,8647.00,Unitario,Kit de aseo personal
+2017-09-19,Sismo,21,Puebla,313/17,2017-09-19,9153.00,Unitario,Kit de aseo personal
+2017-09-19,Sismo,12,Guerrero,314/17,2017-09-19,4150.00,Unitario,Kit de aseo personal
+2017-09-07,Sismo,7,Chiapas,276/17,2017-09-08,20000.00,Unitario,Impermeables
+2017-09-07,Sismo,20,Oaxaca,277/17,2017-09-08,57325.00,Unitario,Impermeables
+2017-09-07,Sismo,7,Chiapas,276/17,2017-09-08,20000.00,Unitario,Botas
+2017-09-07,Sismo,20,Oaxaca,277/17,2017-09-08,6000.00,Unitario,Rollos de hule
+2017-09-19,Sismo,9,Ciudad de México,311/17,2017-09-19,10000.00,Unitario,Guantes
+2017-09-19,Sismo,17,Morelos,312/17,2017-09-19,5000.00,Unitario,Guantes
+2017-09-19,Sismo,21,Puebla,313/17,2017-09-19,5000.00,Unitario,Guantes
+2017-09-07,Sismo,20,Oaxaca,277/17,2017-09-08,20000.00,Unitario,Toallas sanitarias
+2017-09-07,Sismo,21,Oaxaca,277/18,2017-09-09,10000.00,Unitario,Pañal 1
+2017-09-07,Sismo,22,Oaxaca,277/19,2017-09-10,10000.00,Unitario,Pañal 2
+2017-09-07,Sismo,23,Oaxaca,277/20,2017-09-11,10000.00,Unitario,Pañal 3
+2017-09-07,Sismo,7,Chiapas,276/17,2017-09-08,18907.00,Unitario,Pañal 4
+2017-09-07,Sismo,20,Oaxaca,277/17,2017-09-08,10000.00,Unitario,Pañal 4
+2017-09-07,Sismo,7,Chiapas,276/17,2017-09-08,18907.00,Unitario,Pañal 5
+2017-09-07,Sismo,20,Oaxaca,277/17,2017-09-08,10000.00,Unitario,Pañal 5
+2017-09-07,Sismo,7,Chiapas,276/17,2017-09-08,5000.00,Unitario,Pañal de adulto
+2017-09-19,Sismo,9,Ciudad de México,311/17,2017-09-19,5000.00,Unitario,Linternas
+2017-09-19,Sismo,17,Morelos,312/17,2017-09-19,2232.00,Unitario,Linternas
+2017-09-19,Sismo,21,Puebla,313/17,2017-09-19,2500.00,Unitario,Linternas
+2017-09-07,Sismo,7,Chiapas,276/17,2017-09-08,2187.00,Unitario,Palas
+2017-09-19,Sismo,9,Ciudad de México,311/17,2017-09-19,5000.00,Unitario,Palas
+2017-09-19,Sismo,17,Morelos,312/17,2017-09-19,1959.00,Unitario,Palas
+2017-09-19,Sismo,21,Puebla,313/17,2017-09-19,2500.00,Unitario,Palas
+2017-09-07,Sismo,7,Chiapas,276/17,2017-09-08,2187.00,Unitario,Marros
+2017-09-19,Sismo,9,Ciudad de México,311/17,2017-09-19,5000.00,Unitario,Marros
+2017-09-19,Sismo,17,Morelos,312/17,2017-09-19,514.00,Unitario,Marros
+2017-09-19,Sismo,21,Puebla,313/17,2017-09-19,2500.00,Unitario,Marros
+2017-09-19,Sismo,9,Ciudad de México,311/17,2017-09-19,5000.00,Unitario,Barretas
+2017-09-19,Sismo,17,Morelos,312/17,2017-09-19,2500.00,Unitario,Barretas
+2017-09-19,Sismo,21,Puebla,313/17,2017-09-19,2500.00,Unitario,Barretas
+2017-09-07,Sismo,7,Chiapas,276/17,2017-09-08,2187.00,Unitario,Carretillas
+2017-09-19,Sismo,9,Ciudad de México,311/17,2017-09-19,5000.00,Unitario,Carretillas
+2017-09-19,Sismo,17,Morelos,312/17,2017-09-19,1491.00,Unitario,Carretillas
+2017-09-19,Sismo,21,Puebla,313/17,2017-09-19,2500.00,Unitario,Carretillas
+2017-09-19,Sismo,9,Ciudad de México,311/17,2017-09-19,5000.00,Unitario,Cascos
+2017-09-19,Sismo,17,Morelos,312/17,2017-09-19,2418.00,Unitario,Cascos
+2017-09-19,Sismo,21,Puebla,313/17,2017-09-19,2500.00,Unitario,Cascos
+2017-09-07,Sismo,7,Chiapas,276/17,2017-09-08,2187.00,Unitario,Zapapico
+2017-09-19,Sismo,9,Ciudad de México,311/17,2017-09-19,5000.00,Unitario,Zapapico
+2017-09-19,Sismo,17,Morelos,312/17,2017-09-19,2500.00,Unitario,Zapapico
+2017-09-19,Sismo,21,Puebla,313/17,2017-09-19,2500.00,Unitario,Zapapico
+2017-09-19,Sismo,9,Ciudad de México,311/17,2017-09-19,10000.00,Unitario,Mascarillas
+2017-09-19,Sismo,17,Morelos,312/17,2017-09-19,5000.00,Unitario,Mascarillas
+2017-09-19,Sismo,21,Puebla,313/17,2017-09-19,5000.00,Unitario,Mascarillas
+2017-09-19,Sismo,9,Ciudad de México,311/17,2017-09-19,15000.00,Par,Guantes de neopreno (22)
+2017-09-19,Sismo,17,Morelos,312/17,2017-09-19,5000.00,Par,Guantes de neopreno (22)
+2017-09-19,Sismo,21,Puebla,313/17,2017-09-19,5000.00,Par,Guantes de neopreno (22)
+2017-09-19,Sismo,9,Ciudad de México,311/17,2017-09-19,15000.00,Par,Guantes de neopreno (40)
+2017-09-19,Sismo,17,Morelos,312/17,2017-09-19,5000.00,Par,Guantes de neopreno (40)
+2017-09-19,Sismo,21,Puebla,313/17,2017-09-19,5000.00,Par,Guantes de neopreno (40)
+2017-09-07,Sismo,20,Oaxaca,277/17,2017-09-08,20.00,Unitario,Potabilizadora de agua
+2017-09-07,Sismo,20,Oaxaca,277/17,2017-09-08,314.00,Unitario,Arrendamiento de letrinas
+2017-09-07,Sismo,20,Oaxaca,277/17,2017-09-08,169.00,Unitario,Arrendamiento de regaderas
+2017-09-07,Sismo,7,Chiapas,276/17,2017-09-08,No aplica,Una autorización,Medicamentos
+2017-09-07,Sismo,20,Oaxaca,277/17,2017-09-08,No aplica,Una autorización,Medicamentos
+2017-09-19,Sismo,17,Morelos,312/17,2017-09-19,No aplica,Una autorización,Medicamentos
+2017-09-19,Sismo,21,Puebla,313/17,2017-09-19,No aplica,Una autorización,Medicamentos
+2017-09-19,Sismo,12,Guerrero,314/17,2017-09-19,No aplica,Una autorización,Medicamentos
