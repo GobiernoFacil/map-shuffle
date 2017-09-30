@@ -11,12 +11,11 @@
 	"style": {
 		"fillOpacity": 0.8
 	},
-	"values": ["ID_INFRAESTRUCTURA"],
+	"values": [],
 	"data": ["DESC_INFRAESTRUCTURA", "DIRECCION_ESCUELA", "NIVEL", "SOSTENIMIENTO", "ID_ENTIDAD_FEDERATIVA", "ENTIDAD_FEDERATIVA", "ID_MUNICIPIO", "MUNICIPIO"],
 	"dataSearch": ["ID_INFRAESTRUCTURA", "DESC_INFRAESTRUCTURA", "DIRECCION_ESCUELA", "NIVEL", "SOSTENIMIENTO", "ID_ENTIDAD_FEDERATIVA", "ENTIDAD_FEDERATIVA", "ID_MUNICIPIO", "MUNICIPIO"],
 	"current": {
 		"level": "state",
-		"value": "ID_INFRAESTRUCTURA",
 		"method": "length"
 	},
 	"columns": {
