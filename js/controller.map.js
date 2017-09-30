@@ -381,9 +381,12 @@ define(function(require){
     drawMap : function(){
       // [1] inicia el mapa de leaflet con los settings de config.map.json
       //
-      this.map = L.map(this.settings.map.div)
+      this.map = L.map(this.settings.map.div, {zoomControl : false})
                   .setView([this.settings.map.lat, this.settings.map.lng], this.settings.map.zoom);
 
+      L.control.zoom({
+        position:'bottomright'
+      }).addTo(this.map);
       // [2] agrega el layer de tiles
       //
       L.tileLayer(this.settings.map.tileServer, this.settings.map.tileServerConfig).addTo(this.map);
@@ -902,6 +905,8 @@ define(function(require){
 
       // carga el json de cada mapa, y si es el mapa seleccionado, 
       // genera unlayer con la información
+      if(!this.settings.maps.extras) return;
+
       this.settings.maps.extras.forEach(function(url, index){
         
         // crea una referencia para la ruta del archivo de configuración,
