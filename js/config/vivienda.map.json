@@ -39,5 +39,5 @@
     {"type" : "extra", "field" : "TIPO_DANIO", "title" : "Tipo de Daño"},
 	{"type" : "extra", "field" : "ESTATUS_OPERACION", "title" : "Estatus"}
   ],
-  "template" : "<%=name%> <div class='amount_label'><h5> Registros: <strong><%=value%></strong></h5></div"
+  "template" : "<%=name%> <div class='amount_label'><h5> Viviendas: <strong><%=value%></strong></h5></div"
 }
