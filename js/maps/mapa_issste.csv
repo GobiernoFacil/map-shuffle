@@ -1,7 +1,6 @@
 FECHA_EVENTO,TIPO_EVENTO,ID_INFRAESTRUCTURA,TIPO_INFRAESTRUCTURA,DESC_INFRAESTRUCTURA,ID_ENTIDAD_FEDERATIVA,ENTIDAD_FEDERATIVA,ID_MUNICIPIO,MUNICIPIO,LATITUD,LONGITUD,TIPO_DANIO,DETALLE_DANIO,ESTATUS_OPERACION,ESTATUS_INFORMACION,NUM_CAMAS,NUM_CAMAS_OPERACION
 2017-09-19,Sismo,Hospital Regional /Alta Especialidad,Hospital Regional /Alta Especialidad,"""Centenario De La Revolución Mexicana""",17,Morelos,8,Emiliano Zapata,18.847643,-99.197596,Menor,Daños En Acabados,Operando,Preeliminar,139,100
-2017-09-19,Sismo,Clínica Hospital,Clínica Hospital,"""Dr. Rafael Barba Ocampo""",17,Morelos,6,Cuautla De Ocampo,18.813615,-98.947484,Menor,"Daños Menores En Muros (Fisuras)
-Caída De Falso Plafón",Operando,Preeliminar,39,39
+2017-09-19,Sismo,Clínica Hospital,Clínica Hospital,"""Dr. Rafael Barba Ocampo""",17,Morelos,6,Cuautla De Ocampo,18.813615,-98.947484,Menor,Daños Menores En Muros (Fisuras)Caída De Falso Plafón,Operando,Preeliminar,39,39
 2017-09-19,Sismo,Clínica Medicina Familiar,Clínica Medicina Familiar,Yecapixtla,17,Morelos,30,Yecapixtla,18.88235,-98.864647,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
 2017-09-19,Sismo,Clínica Medicina Familiar,Clínica Medicina Familiar,Cuernavaca ,17,Morelos,7,Cuernavaca ,18.928831,-99.240535,Menor,Daños En Acabados  ,Operando,Preeliminar,N/A,N/A
 2017-09-19,Sismo,Clínica Médica Familiar con Especialidades,Clínica Médica Familiar con Especialidades,Jojutla De Juárez,17,Morelos,12,Jojutla De Juárez,18.611469,-99.177038,Menor,Daños En Acabados,Operando,Preeliminar,N/A,N/A
