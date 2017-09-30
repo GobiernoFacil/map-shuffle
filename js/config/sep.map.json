@@ -1,7 +1,7 @@
 {
 	"name": "Escuelas Abiertas al 29/09/2017",
 	"type": "area",
-	"level": ["state", "city"],
+	"level": ["state"],
 	"src": "/js/maps/mapa_sep.csv",
 	"file": "csv",
 	"color": 12,
