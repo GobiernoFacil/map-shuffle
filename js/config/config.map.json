@@ -3,7 +3,7 @@
     "div"         : "GF-SHCP-map",
     "lat"         : 19.0412967,
     "lng"         : -98.20619959999999,
-    "zoom"        : 10,
+    "zoom"        : 6,
     "tileServer"  : "http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png'",
     "tileServerConfig" : {
       "maxZoom"     : 18,
@@ -38,9 +38,8 @@
   },
   "maps" : {
     "basePath"  : "/js/config",
-    "maps"      : ["issste.map.json", "desastre.map.json", "emergencias.map.json", "vivienda.map.json","salud.map.json", "imss.map.json"],
-    "current"   : 0,
-    "embedPath" : "https://mapas3.gobiernofacil.com/mapa.html" 
+    "maps"      : ["issste.map.json", "desastre.map.json", "emergencias.map.json", "vivienda.map.json","salud.map.json", "imss.map.json", "sep.map.json"],
+    "current"   : 0
   },
   "ui" : {
     "topToolsDiv"    : "GF-SHCP-top-tools",
