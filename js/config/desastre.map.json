@@ -32,5 +32,5 @@
   "extraFilters" : [
     {"type" : "extra", "field" : "SECTOR", "title" : "Sector"}
   ],
-  "template" : "<%=name%> <div class='amount_label'><h5> Registros: <strong><%=value%></strong></h5></div"
+  "template" : "<%=name%> <div class='amount_label'><h5> Monto: <strong>$<%=value%></strong></h5></div"
 }
