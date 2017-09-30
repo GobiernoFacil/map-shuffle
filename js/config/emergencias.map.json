@@ -16,7 +16,7 @@
   "dataSearch" : ["FECHA_EVENTO", "TIPO_EVENTO", "ID_ENTIDAD_FEDERATIVA","CANTIDAD", "UNIDAD_MEDIDA", "TIPO_BIEN"],
   "current" : {
     "level"  : "state",
-    "value"  : "MONTO_API",
+    "value"  : "CANTIDAD",
     "method" : "sum"
   },
   "columns" : {
