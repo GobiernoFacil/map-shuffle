@@ -1,5 +1,5 @@
 {
-  "name"  : "FONDEN Desastres",
+  "name"  : "FONDEN Apoyos Parciales Inmediatos",
   "type"  : "area",
   "level" : ["state"],
   "src"   : "/js/maps/fonden_desastre.csv",
