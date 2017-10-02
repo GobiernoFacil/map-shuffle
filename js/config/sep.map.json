@@ -1,12 +1,13 @@
 {
 	"name": "Escuelas Abiertas al 02/10/2017",
 	"type": "area",
-	"level": ["state"],
+	"level": ["state", "city"],
 	"src": "/js/maps/mapa_sep.csv",
 	"file": "csv",
 	"color": 12,
 	"location": {
-		"state": "ID_ENTIDAD_FEDERATIVA"
+		"state": "ID_ENTIDAD_FEDERATIVA",
+		"city": "ID_MUNICIPIO"
 	},
 	"style": {
 		"fillOpacity": 0.8
