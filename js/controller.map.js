@@ -410,6 +410,8 @@ define(function(require){
             pageEl  = document.getElementById(this.settings.ui.pageSelector.controls.pageSelect);
             totalEl = document.getElementById(this.settings.ui.pageSelector.controls.pageDisplay);
         
+        console.log(this.settings.ui.pageSelector.controls, this.settings.ui.pageSelector.controls.pageSelect, pageEl);
+
         this.filters = filters;
 
         d3[item.config.file](src2, function(error, data){
@@ -651,7 +653,17 @@ define(function(require){
                       style : style,
                     // * agrega el popup a cada estado
                       onEachFeature : function(feature, layer){
-                        layer.bindPopup(t(feature.properties.data));
+                       // _estado2_
+                        var _d = Object.create(feature.properties.data);
+                        for(var key in _d){
+                          if(_d.hasOwnProperty(key)){
+                            _d[key] = that.currentMap.config.values.indexOf(key) != -1 ? that.numberFormat(_d[key]) : _d[key];
+                          }
+                        }
+
+                        _d.value = that.numberFormat(_d.value);
+
+                        layer.bindPopup(t(_d));
                       }
                     // * agrega el layer de estados al mapa
                     }).addTo(this.map);
@@ -668,7 +680,16 @@ define(function(require){
       this[container] = L.geoJson(geojson/*MUNICIPIOS.municipios*/, {
                       style : style,//this._cityStyle,
                       onEachFeature : function(feature, layer){
-                        layer.bindPopup(t(feature.properties.data));
+                        var _d = Object.create(feature.properties.data);
+                        for(var key in _d){
+                          if(_d.hasOwnProperty(key)){
+                            _d[key] = that.currentMap.config.values.indexOf(key) != -1 ? that.numberFormat(_d[key]) : _d[key];
+                          }
+                        }
+
+                        _d.value = that.numberFormat(_d.value);
+
+                        layer.bindPopup(t(_d));
                       }
                     }).addTo(this.map);
     },
@@ -1194,6 +1215,9 @@ define(function(require){
         else{
           value = data.length;
         }
+        /*
+        _estado_
+        */
 
         obj = {
           id    : st.id,
@@ -1225,8 +1249,9 @@ define(function(require){
     _agregateDataByCity : function(item, currentData){
       var state  = item.config.location.state,
           city   = item.config.location.city,
-          method = item.config.current.method || "sum";
-          _data  = null;
+          method = item.config.current.method || "sum",
+          _data  = null,
+          values = item.config.values || [];
 
       this._strToNumber(currentData, state);
       this._strToNumber(currentData, city);
@@ -1234,7 +1259,8 @@ define(function(require){
       _data = this.lists.municipiosName.cities.map(function(ct){
         var search = {},
             data   = null,
-            value  = null;
+            value  = null,
+            obj;
         
         search[this.cityID] = +ct.clave_inegi;
 
@@ -1249,7 +1275,7 @@ define(function(require){
           value = data.length;
         }
 
-        return {
+        obj =  {
           id    : ct.inegi,
           state : ct.state,
           city  : ct.city,
@@ -1257,7 +1283,19 @@ define(function(require){
           //url  : ct.url,
           data  : data,
           value : value
+        };
+
+        if(values.length){
+          values.forEach(function(val){
+            obj[val] = d3.sum(data, function(a){
+              return +a[val];
+            });
+          }, this);
         }
+
+        return obj;
+
+
       }, this);
 
       return _data;

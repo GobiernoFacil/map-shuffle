@@ -3,7 +3,7 @@
     "div"         : "GF-SHCP-map",
     "lat"         : 22.442167,
     "lng"         : -100.110350,
-    "zoom"        : 5,
+    "zoom"        : 6,
     "tileServer"  : "http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png'",
     "tileServerConfig" : {
       "maxZoom"     : 18,
@@ -38,9 +38,9 @@
   },
   "maps" : {
     "basePath"  : "/js/config",
-    "maps"      : ["escuelas100.map.json", "ramo23.map.json", "opa.map.json"],
+    "maps"      : ["escuelas100.map.json", "ramo23.map.json", "opa.map.json", "entidades.map.json"],
     "extras"    : ["poblacion.map.json"],
-    "current"   : 2,
+    "current"   : 1,
     "embedPath" : "http://localhost:8000/mapa.html" 
   },
   "ui" : {
