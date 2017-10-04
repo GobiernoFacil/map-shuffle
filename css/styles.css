@@ -1920,11 +1920,11 @@ h1 {
     background-color: #603b82; }
 
 #GF-SHCP-search-app-total-items {
-  font: 700 28px "Soberana", Helvetica, sans-serif;
+  font: 700 28px "soberana_sans", Helvetica, Arial, sans-serif, Helvetica, sans-serif;
   padding: 15px 0 15px 15px; }
 
 #GF-SHCP-search-app-total-items + span {
-  font: 500 17px "Soberana", Helvetica, sans-serif;
+  font: 500 17px "soberana_sans", Helvetica, Arial, sans-serif, Helvetica, sans-serif;
   padding: 15px 0 15px; }
 
 #GF-SHCP-FILTER-1 {
