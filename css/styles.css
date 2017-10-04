@@ -81,7 +81,7 @@ time, mark, audio, video {
 
 h1, h2, h3, h4, h5, .cta, blockquote.feature,
 #access, #insidenav, #pagination, .bloglist .more, blockquote {
-  font-family: "Soberana", Helvetica, sans-serif;
+  font-family: "soberana_sans", Helvetica, sans-serif;
   font-weight: 500; }
 
 strong {
@@ -138,7 +138,7 @@ h6 {
 /* = TEXT */
 p, ul, ol, dl, table, form {
   /* 13px */
-  font-family: "Soberana", Helvetica, sans-serif;
+  font-family: "soberana_sans", Helvetica, sans-serif;
   font-size: 16px;
   margin: 0 0 1.5em 0; }
 
@@ -147,7 +147,7 @@ a,
 a:link {
   color: #302d2e;
   background-color: transparent;
-  font-family: "Soberana", Helvetica, sans-serif;
+  font-family: "soberana_sans", Helvetica, sans-serif;
   text-decoration: none; }
 
 .alt a, .alt a:link {
