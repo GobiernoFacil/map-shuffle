@@ -12,7 +12,7 @@
     "fillOpacity":0.8
   },
   "values"  : ["MONTO_API"],
-  "data"    : ["FECHA_EVENTO", "TIPO_EVENTO", "ID_ENTIDAD_FEDERATIVA", "ENTIDAD_FEDERATIVA", "SECTOR"],
+  "data"    : ["FECHA_EVENTO", "TIPO_EVENTO", "ID_ENTIDAD_FEDERATIVA", "ENTIDAD_FEDERATIVA", "SECTOR", "ESTATUS_INFORMACION"],
   "dataSearch" : ["FECHA_EVENTO", "TIPO_EVENTO", "ENTIDAD_FEDERATIVA", "SECTOR", "MONTO_API"],
   "current" : {
     "level"  : "state",
