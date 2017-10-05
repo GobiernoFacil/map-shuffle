@@ -1,72 +1,28 @@
-FECHA_EVENTO,TIPO_EVENTO,ID_ENTIDAD_FEDERATIVA,ENTIDAD_FEDERATIVA,SECTOR,MONTO_API,ESTATUS_INFORMACION
-2017-09-07,Sismo,20,Oaxaca,Carretero Estatal,"273,529,129.00",Preliminar
-2017-09-07,Sismo,20,Oaxaca,Carretero Federal,"15,996,340.00",Preliminar
-2017-09-07,Sismo,20,Oaxaca,Educativo Estatal,"4,450,186.00",Preliminar
-2017-09-07,Sismo,20,Oaxaca,Educativo Federal,"287,662,864.00",Preliminar
-2017-09-07,Sismo,20,Oaxaca,Vivienda Estatal,"1,667,168,081.00",Preliminar
-2017-09-07,Sismo,20,Oaxaca,"Monumentos Arqueológicos, Artísticos e Históricos Federal","35,085,491.19",Preliminar
-2017-09-07,Sismo,20,Oaxaca,Hidráulico Estatal,"31,222,886.00",Preliminar
-2017-09-07,Sismo,20,Oaxaca,Hidráulico Federal,"34,420,000.00",Preliminar
-2017-09-07,Sismo,20,Oaxaca,Naval Federal,"10,898,307.00",Preliminar
-2017-09-07,Sismo,20,Oaxaca,Cultura Estatal,"10,000,000.00",Preliminar
-2017-09-07,Sismo,20,Oaxaca,Salud Estatal,"3,900,000.00",Preliminar
-2017-09-07,Sismo,7,Chiapas,Carretero Estatal,"136,850,000.00",Preliminar
-2017-09-07,Sismo,7,Chiapas,Carretero Federal,"10,428,264.21",Preliminar
-2017-09-07,Sismo,7,Chiapas,Carretero Rural Federal,"26,600,000.00",Preliminar
-2017-09-07,Sismo,7,Chiapas,Educativo Estatal,"21,667,682.00",Preliminar
-2017-09-07,Sismo,7,Chiapas,Educativo Federal,"11,317,015.00",Preliminar
-2017-09-07,Sismo,7,Chiapas,Vivienda Estatal,"1,327,566,803.00",Preliminar
-2017-09-07,Sismo,7,Chiapas,Vial Urbano Estatal,"1,385,605.00",Preliminar
-2017-09-07,Sismo,7,Chiapas,"Monumentos Arqueológicos, Artísticos e Históricos Federal","13,605,829.19",Preliminar
-2017-09-07,Sismo,7,Chiapas,Hidráulico Estatal,"55,524,333.00",Preliminar
-2017-09-07,Sismo,7,Chiapas,Hidráulico Federal,"65,905,330.38",Preliminar
-2017-09-07,Sismo,7,Chiapas,Naval Federal,"6,286,469.00",Preliminar
-2017-09-07,Sismo,7,Chiapas,Cultura Estatal,"655,865.67",Preliminar
-2017-09-07,Sismo,30,Veracruz,Educativo Federal,"14,329,958.00",Preliminar
-2017-09-07,Sismo,30,Veracruz,Educativo Estatal,"6,773,000.00",Preliminar
-2017-09-07,Sismo,20,Oaxaca,Carretero Estatal,"5,580,000.00",Preliminar
-2017-09-07,Sismo,20,Oaxaca,Hidráulico Estatal,"1,068,000.00",Preliminar
-2017-09-19,Sismo,9,Ciudad de México,Naval Federal,"15,021,000.00",Preliminar
-2017-09-19,Sismo,9,Ciudad de México,Cultura Estatal,"23,641,973.32",Preliminar
-2017-09-19,Sismo,9,Ciudad de México,Educativo Federal,"372,266,825.00",Preliminar
-2017-09-19,Sismo,9,Ciudad de México,Hidráulico Estatal,"139,557,079.00",Preliminar
-2017-09-19,Sismo,9,Ciudad de México,Deportivo Estatal,"45,990,750.00",Preliminar
-2017-09-19,Sismo,9,Ciudad de México,Monumentos Históricos Federal,"20,526,333.10",Preliminar
-2017-09-19,Sismo,9,Ciudad de México,Hidráulico Federal,"52,158,420.00",Preliminar
-2017-09-19,Sismo,15,Estado de México,Educativo Estatal,"136,142,000.00",Preliminar
-2017-09-19,Sismo,15,Estado de México,Educativo Federal,"173,279,130.00",Preliminar
-2017-09-19,Sismo,15,Estado de México,Monumentos Históricos Federal,"18,270,000.00",Preliminar
-2017-09-19,Sismo,15,Estado de México,Carretero Estatal,"11,289,925.00",Preliminar
-2017-09-19,Sismo,15,Estado de México,Vial Urbano Estatal,"2,200,000.00",Preliminar
-2017-09-19,Sismo,15,Estado de México,Hidráulico Estatal,"8,195,772.00",Preliminar
-2017-09-19,Sismo,15,Estado de México,Cultura Estatal,"720,000.00",Preliminar
-2017-09-19,Sismo,15,Estado de México,Vivienda Estatal,"34,454,784.00",Preliminar
-2017-09-19,Sismo,12,Guerrero,Educativo Estatal,"21,486,993.00",Preliminar
-2017-09-19,Sismo,12,Guerrero,Educativo Federal,"202,500,787.00",Preliminar
-2017-09-19,Sismo,12,Guerrero,Vial Urbano Estatal,"41,992,830.00",Preliminar
-2017-09-19,Sismo,12,Guerrero,Carretero Estatal,"46,038,754.00",Preliminar
-2017-09-19,Sismo,17,Morelos,Educativo Federal,"207,890,315.00",Preliminar
-2017-09-19,Sismo,17,Morelos,Carretero Federal,"4,600,750.00",Preliminar
-2017-09-19,Sismo,17,Morelos,Hidráulico Federal,"15,757,749.22",Preliminar
-2017-09-19,Sismo,17,Morelos,Vivienda Estatal,"247,975,984.36",Preliminar
-2017-09-19,Sismo,17,Morelos,Hidráulico Estatal,"15,959,980.20",Preliminar
-2017-09-19,Sismo,17,Morelos,Cultura Federal,"16,440,900.00",Preliminar
-2017-09-19,Sismo,17,Morelos,Educativo Estatal,"11,691,250.00",Preliminar
-2017-09-19,Sismo,17,Morelos,Carretero Estatal,"73,500,000.00",Preliminar
-2017-09-19,Sismo,17,Morelos,Deportivo Estatal,"2,498,100.00",Preliminar
-2017-09-19,Sismo,17,Morelos,Monumentos Históricos Federal,"92,224,760.85",Preliminar
-2017-09-19,Sismo,20,Oaxaca,Carretero Estatal,"34,275,000.00",Preliminar
-2017-09-19,Sismo,20,Oaxaca,Educativo Federal,"26,919,476.00",Preliminar
-2017-09-19,Sismo,20,Oaxaca,Carretero Federal,"7,603,091.00",Preliminar
-2017-09-19,Sismo,20,Oaxaca,Salud Estatal,"300,000.00",Preliminar
-2017-09-19,Sismo,21,Puebla,Educativo Federal,"237,433,082.00",Preliminar
-2017-09-19,Sismo,21,Puebla,Carretero Federal,"10,200,000.00",Preliminar
-2017-09-19,Sismo,21,Puebla,Hidráulico Federal,"24,516,967.75",Preliminar
-2017-09-19,Sismo,21,Puebla,Monumentos Históricos Federal,"32,288,398.81",Preliminar
-2017-09-19,Sismo,21,Puebla,Hidráulico Estatal,"1,308,017.92",Preliminar
-2017-09-19,Sismo,21,Puebla,Educativo Estatal,"132,084,745.00",Preliminar
-2017-09-19,Sismo,21,Puebla,Vivienda Estatal,"115,794,000.00",Preliminar
-2017-09-19,Sismo,21,Puebla,Cultura Estatal,"16,410,927.00",Preliminar
-2017-09-19,Sismo,29,Tlaxcala,Monumentos Históricos Federal,"12,957,482.90",Preliminar
-2017-09-19,Sismo,29,Tlaxcala,Educativo Federal,"33,617,032.00",Preliminar
-2017-09-19,Sismo,29,Tlaxcala,Educativo Estatal,"24,531,142.00",Preliminar
+FECHA_EVENTO,TIPO_EVENTO,ID_ENTIDAD_FEDERATIVA,ENTIDAD_FEDERATIVA,SECTOR,MONTO_API
+07/09/2017,Sismo,20,Oaxaca,Carretero Estatal,273529129
+07/09/2017,Sismo,20,Oaxaca,Carretero Federal,15996340
+07/09/2017,Sismo,20,Oaxaca,Educativo Estatal,4450186
+07/09/2017,Sismo,20,Oaxaca,Educativo Federal,287662864
+07/09/2017,Sismo,20,Oaxaca,Vivienda Estatal,1667168081
+07/09/2017,Sismo,20,Oaxaca,"Monumentos Arqueológicos, Artísticos e Históricos Federal",35085491.19
+07/09/2017,Sismo,20,Oaxaca,Hidráulico Estatal,31222886
+07/09/2017,Sismo,20,Oaxaca,Hidráulico Federal,34420000
+07/09/2017,Sismo,20,Oaxaca,Naval Federal,10898307
+07/09/2017,Sismo,20,Oaxaca,Cultura Estatal,10000000
+07/09/2017,Sismo,20,Oaxaca,Salud Estatal,3900000
+07/09/2017,Sismo,7,Chiapas,Carretero Estatal,136850000
+07/09/2017,Sismo,7,Chiapas,Carretero Federal,10428264.21
+07/09/2017,Sismo,7,Chiapas,Carretero Rural Federal,26600000
+07/09/2017,Sismo,7,Chiapas,Educativo Estatal,21667682
+07/09/2017,Sismo,7,Chiapas,Educativo Federal,11317015
+07/09/2017,Sismo,7,Chiapas,Vivienda Estatal,1327566803
+07/09/2017,Sismo,7,Chiapas,Vial Urbano Estatal,1385605
+07/09/2017,Sismo,7,Chiapas,"Monumentos Arqueológicos, Artísticos e Históricos Federal",13605829.19
+07/09/2017,Sismo,7,Chiapas,Hidráulico Estatal,55524333
+07/09/2017,Sismo,7,Chiapas,Hidráulico Federal,65905330.38
+07/09/2017,Sismo,7,Chiapas,Naval Federal,6286469
+07/09/2017,Sismo,7,Chiapas,Cultura Estatal,655865.67
+07/09/2017,Sismo,30,Veracruz,Educativo Federal,14329958
+07/09/2017,Sismo,30,Veracruz,Educativo Estatal,6773000
+07/09/2017,Sismo,20,Oaxaca,Carretero Estatal,5580000
+07/09/2017,Sismo,20,Oaxaca,Hidráulico Estatal,1068000
