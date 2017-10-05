@@ -1,72 +1,72 @@
 FECHA_EVENTO,TIPO_EVENTO,ID_ENTIDAD_FEDERATIVA,ENTIDAD_FEDERATIVA,SECTOR,MONTO_API,ESTATUS_INFORMACION
-42985,Sismo,20,Oaxaca,Carretero Estatal,273529129.00,Preliminar
-42985,Sismo,20,Oaxaca,Carretero Federal,15996340.00,Preliminar
-42985,Sismo,20,Oaxaca,Educativo Estatal,4450186.00,Preliminar
-42985,Sismo,20,Oaxaca,Educativo Federal,287662864.00,Preliminar
-42985,Sismo,20,Oaxaca,Vivienda Estatal,1667168081.00,Preliminar
-42985,Sismo,20,Oaxaca,"Monumentos Arqueológicos, Artísticos e Históricos Federal",35085491.19,Preliminar
-42985,Sismo,20,Oaxaca,Hidráulico Estatal,31222886.00,Preliminar
-42985,Sismo,20,Oaxaca,Hidráulico Federal,34420000.00,Preliminar
-42985,Sismo,20,Oaxaca,Naval Federal,10898307.00,Preliminar
-42985,Sismo,20,Oaxaca,Cultura Estatal,10000000.00,Preliminar
-42985,Sismo,20,Oaxaca,Salud Estatal,3900000.00,Preliminar
-42985,Sismo,7,Chiapas,Carretero Estatal,136850000.00,Preliminar
-42985,Sismo,7,Chiapas,Carretero Federal,10428264.21,Preliminar
-42985,Sismo,7,Chiapas,Carretero Rural Federal,26600000.00,Preliminar
-42985,Sismo,7,Chiapas,Educativo Estatal,21667682.00,Preliminar
-42985,Sismo,7,Chiapas,Educativo Federal,11317015.00,Preliminar
-42985,Sismo,7,Chiapas,Vivienda Estatal,1327566803.00,Preliminar
-42985,Sismo,7,Chiapas,Vial Urbano Estatal,1385605.00,Preliminar
-42985,Sismo,7,Chiapas,"Monumentos Arqueológicos, Artísticos e Históricos Federal",13605829.19,Preliminar
-42985,Sismo,7,Chiapas,Hidráulico Estatal,55524333.00,Preliminar
-42985,Sismo,7,Chiapas,Hidráulico Federal,65905330.38,Preliminar
-42985,Sismo,7,Chiapas,Naval Federal,6286469.00,Preliminar
-42985,Sismo,7,Chiapas,Cultura Estatal,655865.67,Preliminar
-42985,Sismo,30,Veracruz,Educativo Federal,14329958.00,Preliminar
-42985,Sismo,30,Veracruz,Educativo Estatal,6773000.00,Preliminar
-42985,Sismo,20,Oaxaca,Carretero Estatal,5580000.00,Preliminar
-42985,Sismo,20,Oaxaca,Hidráulico Estatal,1068000.00,Preliminar
-42997,Sismo,9,Ciudad de México,Naval Federal,15021000.00,Preliminar
-42997,Sismo,9,Ciudad de México,Cultura Estatal,23641973.32,Preliminar
-42997,Sismo,9,Ciudad de México,Educativo Federal,372266825.00,Preliminar
-42997,Sismo,9,Ciudad de México,Hidráulico Estatal,139557079.00,Preliminar
-42997,Sismo,9,Ciudad de México,Deportivo Estatal,45990750.00,Preliminar
-42997,Sismo,9,Ciudad de México,Monumentos Históricos Federal,20526333.10,Preliminar
-42997,Sismo,9,Ciudad de México,Hidráulico Federal,52158420.00,Preliminar
-42997,Sismo,15,Estado de México,Educativo Estatal,136142000.00,Preliminar
-42997,Sismo,15,Estado de México,Educativo Federal,173279130.00,Preliminar
-42997,Sismo,15,Estado de México,Monumentos Históricos Federal,18270000.00,Preliminar
-42997,Sismo,15,Estado de México,Carretero Estatal,11289925.00,Preliminar
-42997,Sismo,15,Estado de México,Vial Urbano Estatal,2200000.00,Preliminar
-42997,Sismo,15,Estado de México,Hidráulico Estatal,8195772.00,Preliminar
-42997,Sismo,15,Estado de México,Cultura Estatal,720000.00,Preliminar
-42997,Sismo,15,Estado de México,Vivienda Estatal,34454784.00,Preliminar
-42997,Sismo,12,Guerrero,Educativo Estatal,21486993.00,Preliminar
-42997,Sismo,12,Guerrero,Educativo Federal,202500787.00,Preliminar
-42997,Sismo,12,Guerrero,Vial Urbano Estatal,41992830.00,Preliminar
-42997,Sismo,12,Guerrero,Carretero Estatal,46038754.00,Preliminar
-42997,Sismo,17,Morelos,Educativo Federal,207890315.00,Preliminar
-42997,Sismo,17,Morelos,Carretero Federal,4600750.00,Preliminar
-42997,Sismo,17,Morelos,Hidráulico Federal,15757749.22,Preliminar
-42997,Sismo,17,Morelos,Vivienda Estatal,247975984.36,Preliminar
-42997,Sismo,17,Morelos,Hidráulico Estatal,15959980.20,Preliminar
-42997,Sismo,17,Morelos,Cultura Federal,16440900.00,Preliminar
-42997,Sismo,17,Morelos,Educativo Estatal,11691250.00,Preliminar
-42997,Sismo,17,Morelos,Carretero Estatal,73500000.00,Preliminar
-42997,Sismo,17,Morelos,Deportivo Estatal,2498100.00,Preliminar
-42997,Sismo,17,Morelos,Monumentos Históricos Federal,92224760.85,Preliminar
-42997,Sismo,20,Oaxaca,Carretero Estatal,34275000.00,Preliminar
-42997,Sismo,20,Oaxaca,Educativo Federal,26919476.00,Preliminar
-42997,Sismo,20,Oaxaca,Carretero Federal,7603091.00,Preliminar
-42997,Sismo,20,Oaxaca,Salud Estatal,300000.00,Preliminar
-42997,Sismo,21,Puebla,Educativo Federal,237433082.00,Preliminar
-42997,Sismo,21,Puebla,Carretero Federal,10200000.00,Preliminar
-42997,Sismo,21,Puebla,Hidráulico Federal,24516967.75,Preliminar
-42997,Sismo,21,Puebla,Monumentos Históricos Federal,32288398.81,Preliminar
-42997,Sismo,21,Puebla,Hidráulico Estatal,1308017.92,Preliminar
-42997,Sismo,21,Puebla,Educativo Estatal,132084745.00,Preliminar
-42997,Sismo,21,Puebla,Vivienda Estatal,115794000.00,Preliminar
-42997,Sismo,21,Puebla,Cultura Estatal,16410927.00,Preliminar
-42997,Sismo,29,Tlaxcala,Monumentos Históricos Federal,12957482.90,Preliminar
-42997,Sismo,29,Tlaxcala,Educativo Federal,33617032.00,Preliminar
-42997,Sismo,29,Tlaxcala,Educativo Estatal,24531142.00,Preliminar
+2017-09-07,Sismo,20,Oaxaca,Carretero Estatal,273529129,Preliminar
+2017-09-07,Sismo,20,Oaxaca,Carretero Federal,15996340,Preliminar
+2017-09-07,Sismo,20,Oaxaca,Educativo Estatal,4450186,Preliminar
+2017-09-07,Sismo,20,Oaxaca,Educativo Federal,287662864,Preliminar
+2017-09-07,Sismo,20,Oaxaca,Vivienda Estatal,1667168081,Preliminar
+2017-09-07,Sismo,20,Oaxaca,"Monumentos Arqueológicos, Artísticos e Históricos Federal",35085491.19,Preliminar
+2017-09-07,Sismo,20,Oaxaca,Hidráulico Estatal,31222886,Preliminar
+2017-09-07,Sismo,20,Oaxaca,Hidráulico Federal,34420000,Preliminar
+2017-09-07,Sismo,20,Oaxaca,Naval Federal,10898307,Preliminar
+2017-09-07,Sismo,20,Oaxaca,Cultura Estatal,10000000,Preliminar
+2017-09-07,Sismo,20,Oaxaca,Salud Estatal,3900000,Preliminar
+2017-09-07,Sismo,7,Chiapas,Carretero Estatal,136850000,Preliminar
+2017-09-07,Sismo,7,Chiapas,Carretero Federal,10428264.21,Preliminar
+2017-09-07,Sismo,7,Chiapas,Carretero Rural Federal,26600000,Preliminar
+2017-09-07,Sismo,7,Chiapas,Educativo Estatal,21667682,Preliminar
+2017-09-07,Sismo,7,Chiapas,Educativo Federal,11317015,Preliminar
+2017-09-07,Sismo,7,Chiapas,Vivienda Estatal,1327566803,Preliminar
+2017-09-07,Sismo,7,Chiapas,Vial Urbano Estatal,1385605,Preliminar
+2017-09-07,Sismo,7,Chiapas,"Monumentos Arqueológicos, Artísticos e Históricos Federal",13605829.19,Preliminar
+2017-09-07,Sismo,7,Chiapas,Hidráulico Estatal,55524333,Preliminar
+2017-09-07,Sismo,7,Chiapas,Hidráulico Federal,65905330.38,Preliminar
+2017-09-07,Sismo,7,Chiapas,Naval Federal,6286469,Preliminar
+2017-09-07,Sismo,7,Chiapas,Cultura Estatal,655865.67,Preliminar
+2017-09-07,Sismo,30,Veracruz,Educativo Federal,14329958,Preliminar
+2017-09-07,Sismo,30,Veracruz,Educativo Estatal,6773000,Preliminar
+2017-09-07,Sismo,20,Oaxaca,Carretero Estatal,5580000,Preliminar
+2017-09-07,Sismo,20,Oaxaca,Hidráulico Estatal,1068000,Preliminar
+2017-09-19,Sismo,9,Ciudad de México,Naval Federal,15021000,Preliminar
+2017-09-19,Sismo,9,Ciudad de México,Cultura Estatal,23641973.32,Preliminar
+2017-09-19,Sismo,9,Ciudad de México,Educativo Federal,372266825,Preliminar
+2017-09-19,Sismo,9,Ciudad de México,Hidráulico Estatal,139557079,Preliminar
+2017-09-19,Sismo,9,Ciudad de México,Deportivo Estatal,45990750,Preliminar
+2017-09-19,Sismo,9,Ciudad de México,Monumentos Históricos Federal,20526333.1,Preliminar
+2017-09-19,Sismo,9,Ciudad de México,Hidráulico Federal,52158420,Preliminar
+2017-09-19,Sismo,15,Estado de México,Educativo Estatal,136142000,Preliminar
+2017-09-19,Sismo,15,Estado de México,Educativo Federal,173279130,Preliminar
+2017-09-19,Sismo,15,Estado de México,Monumentos Históricos Federal,18270000,Preliminar
+2017-09-19,Sismo,15,Estado de México,Carretero Estatal,11289925,Preliminar
+2017-09-19,Sismo,15,Estado de México,Vial Urbano Estatal,2200000,Preliminar
+2017-09-19,Sismo,15,Estado de México,Hidráulico Estatal,8195772,Preliminar
+2017-09-19,Sismo,15,Estado de México,Cultura Estatal,720000,Preliminar
+2017-09-19,Sismo,15,Estado de México,Vivienda Estatal,34454784,Preliminar
+2017-09-19,Sismo,12,Guerrero,Educativo Estatal,21486993,Preliminar
+2017-09-19,Sismo,12,Guerrero,Educativo Federal,202500787,Preliminar
+2017-09-19,Sismo,12,Guerrero,Vial Urbano Estatal,41992830,Preliminar
+2017-09-19,Sismo,12,Guerrero,Carretero Estatal,46038754,Preliminar
+2017-09-19,Sismo,17,Morelos,Educativo Federal,207890315,Preliminar
+2017-09-19,Sismo,17,Morelos,Carretero Federal,4600750,Preliminar
+2017-09-19,Sismo,17,Morelos,Hidráulico Federal,15757749.22,Preliminar
+2017-09-19,Sismo,17,Morelos,Vivienda Estatal,247975984.4,Preliminar
+2017-09-19,Sismo,17,Morelos,Hidráulico Estatal,15959980.2,Preliminar
+2017-09-19,Sismo,17,Morelos,Cultura Federal,16440900,Preliminar
+2017-09-19,Sismo,17,Morelos,Educativo Estatal,11691250,Preliminar
+2017-09-19,Sismo,17,Morelos,Carretero Estatal,73500000,Preliminar
+2017-09-19,Sismo,17,Morelos,Deportivo Estatal,2498100,Preliminar
+2017-09-19,Sismo,17,Morelos,Monumentos Históricos Federal,92224760.85,Preliminar
+2017-09-19,Sismo,20,Oaxaca,Carretero Estatal,34275000,Preliminar
+2017-09-19,Sismo,20,Oaxaca,Educativo Federal,26919476,Preliminar
+2017-09-19,Sismo,20,Oaxaca,Carretero Federal,7603091,Preliminar
+2017-09-19,Sismo,20,Oaxaca,Salud Estatal,300000,Preliminar
+2017-09-19,Sismo,21,Puebla,Educativo Federal,237433082,Preliminar
+2017-09-19,Sismo,21,Puebla,Carretero Federal,10200000,Preliminar
+2017-09-19,Sismo,21,Puebla,Hidráulico Federal,24516967.75,Preliminar
+2017-09-19,Sismo,21,Puebla,Monumentos Históricos Federal,32288398.81,Preliminar
+2017-09-19,Sismo,21,Puebla,Hidráulico Estatal,1308017.92,Preliminar
+2017-09-19,Sismo,21,Puebla,Educativo Estatal,132084745,Preliminar
+2017-09-19,Sismo,21,Puebla,Vivienda Estatal,115794000,Preliminar
+2017-09-19,Sismo,21,Puebla,Cultura Estatal,16410927,Preliminar
+2017-09-19,Sismo,29,Tlaxcala,Monumentos Históricos Federal,12957482.9,Preliminar
+2017-09-19,Sismo,29,Tlaxcala,Educativo Federal,33617032,Preliminar
+2017-09-19,Sismo,29,Tlaxcala,Educativo Estatal,24531142,Preliminar
