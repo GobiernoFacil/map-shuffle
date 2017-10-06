@@ -185,7 +185,7 @@ define(function(require){
       this._stateStyle                  = this._stateStyle.bind(this);
       this._stateExtraStyle             = this._stateExtraStyle.bind(this);
       this._cityStyle                   = this._cityStyle.bind(this);
-      this._cityExtraStyle              = this._cityStyle.bind(this);
+      this._cityExtraStyle              = this._cityExtraStyle.bind(this);
       this.renderMapSelectorChange      = this.renderMapSelectorChange.bind(this);
       this.renderExtraMapSelectorChange = this.renderExtraMapSelectorChange.bind(this);
       this.updateUILevelSelectorChange  = this.updateUILevelSelectorChange.bind(this);
@@ -332,38 +332,6 @@ define(function(require){
       return vars;
     },
 
-    /*
-    mixInitialFilters : function(item){
-
-      if(!this.firstTime) return false;
-
-      var filters  = item.config.filters.concat(item.config.extraFilters || []),
-          initial  = this.initialFilters,
-          defaults;
-
-      filters.forEach(function(filter){
-        if(initial[filter.field]){
-          filter.default = +initial[filter.field] || initial[filter.field];
-        }
-      }, this);
-
-      defaults = filters.filter(function(filter){
-        return filter.hasOwnProperty("default");
-      });
-
-      this.filters = defaults.map(function(filter){
-        return {
-          field : filter.field,
-          value : filter.default
-        }
-      });
-
-      this.firstTime = false;
-
-      return true;
-    },
-    */
-
 
 
 
@@ -410,7 +378,6 @@ define(function(require){
             pageEl  = document.getElementById(this.settings.ui.pageSelector.controls.pageSelect);
             totalEl = document.getElementById(this.settings.ui.pageSelector.controls.pageDisplay);
         
-        console.log(this.settings.ui.pageSelector.controls, this.settings.ui.pageSelector.controls.pageSelect, pageEl);
 
         this.filters = filters;
 
@@ -591,7 +558,7 @@ define(function(require){
       // * el mapa desplegado
       this.currentExtraMap   = item;
       // * el id interno del mapa desplegado
-      this.currentExtraMapId = item.idex;
+      this.currentExtraMapId = item.index;
 
       // [3] despliega el mapa según el tipo
       //
@@ -606,6 +573,8 @@ define(function(require){
       
       // B) Es un mapa de área por municipio
       else if(item.config.current.level == "city"){
+ 
+        this._addKeyToCities(item.data, item.config, item.config.location.city);
         this.currentExtraData = this._agregateDataByCity(item, item.data);
         var xxxxx = this._mapCityGeojson(this.currentExtraData);
         this.extraBrew        = this._colorMixer(item, this.currentExtraData);
@@ -677,8 +646,9 @@ define(function(require){
       var that = this,
           t    = _.template(item.config.template);
 
-      this[container] = L.geoJson(geojson/*MUNICIPIOS.municipios*/, {
-                      style : style,//this._cityStyle,
+          
+      this[container] = L.geoJson(geojson, {
+                      style : style,
                       onEachFeature : function(feature, layer){
                         var _d = Object.create(feature.properties.data);
                         for(var key in _d){
@@ -1173,11 +1143,15 @@ define(function(require){
 
       if(city.length){
         conf.location.city = this.cityID;
-        conf.filters.forEach(function(fil){
-          if(fil.type == "city"){
-            fil.field = this.cityID;
-          }
-        });
+        
+        if(conf.filters){
+          conf.filters.forEach(function(fil){
+            if(fil.type == "city"){
+              fil.field = this.cityID;
+            }
+          });
+        }
+
       }
       else{
         city.field = this.cityID;
@@ -1893,6 +1867,7 @@ define(function(require){
     // las geometrías o puntos
     //
     _colorMixer : function(item, theData){
+
       var value = item.config.current.value,
           level = item.config.current.level,
           color = item.config.color || this.settings.mapGeometry.defaultColor || 1,
@@ -1907,7 +1882,8 @@ define(function(require){
       else{
         return null;
       }
-      
+
+
       brew = new classyBrew();
       brew.setSeries(_data);
       brew.setNumClasses(7);

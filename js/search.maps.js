@@ -203,7 +203,6 @@ define(function(require){
         }
 
         projectNum.innerHTML = format(itemsNum);
-        //console.log(projectNum, data, itemsNum);
       },
 
       renderFilters : function(){
@@ -228,7 +227,6 @@ define(function(require){
           }
 
           else if(filter.type == "city"){
-            console.log(filter);
             cityFilter = this.filterModule.renderCitySelector(filter, filterMenu);
             this.filters.push(cityFilter);
           }
