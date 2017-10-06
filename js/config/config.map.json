@@ -22,16 +22,16 @@
   },
   "mapGeometry" : {
     "weight"       : 0.4,
-    "opacity"      : 0.1,
-    "color"        : "red",
+    "opacity"      : 0.8,
+    "color"        : "black",
     "dashArray"    : "",
     "fillOpacity"  : 1,
     "defaultColor" : 12 
   },
   "extraMapGeometry" : {
     "weight"       : 0.4,
-    "opacity"      : 0.1,
-    "color"        : "red",
+    "opacity"      : 0.8,
+    "color"        : "black",
     "dashArray"    : "",
     "fillOpacity"  : 1,
     "defaultColor" : 5 

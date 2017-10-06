@@ -81,7 +81,7 @@ time, mark, audio, video {
 
 h1, h2, h3, h4, h5, .cta, blockquote.feature,
 #access, #insidenav, #pagination, .bloglist .more, blockquote {
-  font-family: "Soberana", Helvetica, sans-serif;
+  font-family: "soberana_sans", Helvetica, sans-serif;
   font-weight: 500; }
 
 strong {
@@ -138,7 +138,7 @@ h6 {
 /* = TEXT */
 p, ul, ol, dl, table, form {
   /* 13px */
-  font-family: "Soberana", Helvetica, sans-serif;
+  font-family: "soberana_sans", Helvetica, sans-serif;
   font-size: 16px;
   margin: 0 0 1.5em 0; }
 
@@ -147,7 +147,7 @@ a,
 a:link {
   color: #302d2e;
   background-color: transparent;
-  font-family: "Soberana", Helvetica, sans-serif;
+  font-family: "soberana_sans", Helvetica, sans-serif;
   text-decoration: none; }
 
 .alt a, .alt a:link {
@@ -728,6 +728,11 @@ h2 .tooltip:hover .tooltip-item {
   visibility: visible !important;
   -webkit-box-shadow: inset 0 0 12px 4px #ffffff;
   box-shadow: inset 0 0 12px 4px #ffffff; }
+
+.selectize-input {
+  height: 35px; }
+  .selectize-input .item {
+    padding: 10px; }
 
 .selectize-control.plugin-drag_drop .ui-sortable-placeholder::after {
   content: '!';
@@ -1915,11 +1920,11 @@ h1 {
     background-color: #603b82; }
 
 #GF-SHCP-search-app-total-items {
-  font: 700 28px "Soberana", Helvetica, sans-serif;
+  font: 700 28px "soberana_sans", Helvetica, Arial, sans-serif, Helvetica, sans-serif;
   padding: 15px 0 15px 15px; }
 
 #GF-SHCP-search-app-total-items + span {
-  font: 500 17px "Soberana", Helvetica, sans-serif;
+  font: 500 17px "soberana_sans", Helvetica, Arial, sans-serif, Helvetica, sans-serif;
   padding: 15px 0 15px; }
 
 #GF-SHCP-FILTER-1 {
