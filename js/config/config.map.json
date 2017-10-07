@@ -39,7 +39,7 @@
   "maps" : {
     "basePath"  : "/js/config",
     "maps"      : ["escuelas100.map.json", "ramo23.map.json", "opa.map.json", "entidades.map.json"],
-    "extras"    : ["poblacion.map.json"],
+    "extras"    : ["poblacion.map.json", "areas_afectadas_desastre.json"],
     "current"   : 1,
     "embedPath" : "http://localhost:8000/mapa.html" 
   },

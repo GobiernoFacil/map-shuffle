@@ -1,0 +1,700 @@
+FECHA_EVENTO,ID_ENTIDAD_FEDERATIVA,ENTIDAD_FEDERATIVA,ID_MUNICIPIO,MUNICIPIO,DECLARATORIA_DESASTRE,MAGNITUD_SISMO
+07/09/2017,7,Chiapas,1,Acacoyagua,Sí,8.2
+07/09/2017,7,Chiapas,2,Acala,Sí,8.2
+07/09/2017,7,Chiapas,3,Acapetahua,Sí,8.2
+07/09/2017,7,Chiapas,4,Altamirano,Sí,8.2
+07/09/2017,7,Chiapas,5,Amatán,Sí,8.2
+07/09/2017,7,Chiapas,6,Amatenango de la Frontera,Sí,8.2
+07/09/2017,7,Chiapas,7,Amatenango del Valle,Sí,8.2
+07/09/2017,7,Chiapas,8,Angel Albino Corzo,Sí,8.2
+07/09/2017,7,Chiapas,9,Arriaga,Sí,8.2
+07/09/2017,7,Chiapas,10,Bejucal de Ocampo,Sí,8.2
+07/09/2017,7,Chiapas,11,Bella Vista,Sí,8.2
+07/09/2017,7,Chiapas,12,Berriozábal,Sí,8.2
+07/09/2017,7,Chiapas,13,Bochil,Sí,8.2
+07/09/2017,7,Chiapas,14,El Bosque,Sí,8.2
+07/09/2017,7,Chiapas,15,Cacahoatán,Sí,8.2
+07/09/2017,7,Chiapas,17,Cintalapa,Sí,8.2
+07/09/2017,7,Chiapas,18,Coapilla,Sí,8.2
+07/09/2017,7,Chiapas,19,Comitán de Domínguez,Sí,8.2
+07/09/2017,7,Chiapas,20,La Concordia,Sí,8.2
+07/09/2017,7,Chiapas,21,Copainalá,Sí,8.2
+07/09/2017,7,Chiapas,22,Chalchihuitán,Sí,8.2
+07/09/2017,7,Chiapas,23,Chamula,Sí,8.2
+07/09/2017,7,Chiapas,24,Chanal,Sí,8.2
+07/09/2017,7,Chiapas,26,Chenalhó,Sí,8.2
+07/09/2017,7,Chiapas,27,Chiapa de Corzo,Sí,8.2
+07/09/2017,7,Chiapas,28,Chiapilla,Sí,8.2
+07/09/2017,7,Chiapas,29,Chicoasén,Sí,8.2
+07/09/2017,7,Chiapas,30,Chicomuselo,Sí,8.2
+07/09/2017,7,Chiapas,32,Escuintla,Sí,8.2
+07/09/2017,7,Chiapas,33,Francisco León,Sí,8.2
+07/09/2017,7,Chiapas,34,Frontera Comalapa,Sí,8.2
+07/09/2017,7,Chiapas,35,Frontera Hidalgo,Sí,8.2
+07/09/2017,7,Chiapas,36,La Grandeza,Sí,8.2
+07/09/2017,7,Chiapas,37,Huehuetán,Sí,8.2
+07/09/2017,7,Chiapas,38,Huixtán,Sí,8.2
+07/09/2017,7,Chiapas,40,Huixtla,Sí,8.2
+07/09/2017,7,Chiapas,41,La Independencia,Sí,8.2
+07/09/2017,7,Chiapas,44,Ixtapa,Sí,8.2
+07/09/2017,7,Chiapas,46,Jiquipilas,Sí,8.2
+07/09/2017,7,Chiapas,47,Jitotol,Sí,8.2
+07/09/2017,7,Chiapas,49,Larráinzar,Sí,8.2
+07/09/2017,7,Chiapas,51,Mapastepec,Sí,8.2
+07/09/2017,7,Chiapas,52,Las Margaritas,Sí,8.2
+07/09/2017,7,Chiapas,53,Mazapa de Madero,Sí,8.2
+07/09/2017,7,Chiapas,54,Mazatán,Sí,8.2
+07/09/2017,7,Chiapas,55,Metapa,Sí,8.2
+07/09/2017,7,Chiapas,56,Mitontic,Sí,8.2
+07/09/2017,7,Chiapas,57,Motozintla,Sí,8.2
+07/09/2017,7,Chiapas,58,Nicolás Ruíz,Sí,8.2
+07/09/2017,7,Chiapas,59,Ocosingo,Sí,8.2
+07/09/2017,7,Chiapas,60,Ocotepec,Sí,8.2
+07/09/2017,7,Chiapas,61,Ocozocoautla de Espinosa,Sí,8.2
+07/09/2017,7,Chiapas,63,Osumacinta,Sí,8.2
+07/09/2017,7,Chiapas,64,Oxchuc,Sí,8.2
+07/09/2017,7,Chiapas,66,Pantelhó,Sí,8.2
+07/09/2017,7,Chiapas,67,Pantepec,Sí,8.2
+07/09/2017,7,Chiapas,69,Pijijiapan,Sí,8.2
+07/09/2017,7,Chiapas,70,El Porvenir,Sí,8.2
+07/09/2017,7,Chiapas,71,Villa Comaltitlán,Sí,8.2
+07/09/2017,7,Chiapas,72,Pueblo Nuevo Solistahuacán,Sí,8.2
+07/09/2017,7,Chiapas,73,Rayón,Sí,8.2
+07/09/2017,7,Chiapas,75,Las Rosas,Sí,8.2
+07/09/2017,7,Chiapas,78,San Cristóbal de las Casas,Sí,8.2
+07/09/2017,7,Chiapas,79,San Fernando,Sí,8.2
+07/09/2017,7,Chiapas,80,Siltepec,Sí,8.2
+07/09/2017,7,Chiapas,81,Simojovel,Sí,8.2
+07/09/2017,7,Chiapas,83,Socoltenango,Sí,8.2
+07/09/2017,7,Chiapas,84,Solosuchiapa,Sí,8.2
+07/09/2017,7,Chiapas,85,Soyaló,Sí,8.2
+07/09/2017,7,Chiapas,86,Suchiapa,Sí,8.2
+07/09/2017,7,Chiapas,87,Suchiate,Sí,8.2
+07/09/2017,7,Chiapas,89,Tapachula,Sí,8.2
+07/09/2017,7,Chiapas,90,Tapalapa,Sí,8.2
+07/09/2017,7,Chiapas,92,Tecpatán,Sí,8.2
+07/09/2017,7,Chiapas,93,Tenejapa,Sí,8.2
+07/09/2017,7,Chiapas,94,Teopisca,Sí,8.2
+07/09/2017,7,Chiapas,97,Tonalá,Sí,8.2
+07/09/2017,7,Chiapas,98,Totolapa,Sí,8.2
+07/09/2017,7,Chiapas,99,La Trinitaria,Sí,8.2
+07/09/2017,7,Chiapas,101,Tuxtla Gutiérrez,Sí,8.2
+07/09/2017,7,Chiapas,102,Tuxtla Chico,Sí,8.2
+07/09/2017,7,Chiapas,103,Tuzantán,Sí,8.2
+07/09/2017,7,Chiapas,104,Tzimol,Sí,8.2
+07/09/2017,7,Chiapas,105,Unión Juárez,Sí,8.2
+07/09/2017,7,Chiapas,106,Venustiano Carranza,Sí,8.2
+07/09/2017,7,Chiapas,107,Villa Corzo,Sí,8.2
+07/09/2017,7,Chiapas,108,Villaflores,Sí,8.2
+07/09/2017,7,Chiapas,110,San Lucas,Sí,8.2
+07/09/2017,7,Chiapas,111,Zinacantán,Sí,8.2
+07/09/2017,7,Chiapas,112,San Juan Cancuc,Sí,8.2
+07/09/2017,7,Chiapas,113,Aldama,Sí,8.2
+07/09/2017,7,Chiapas,117,Montecristo de Guerrero,Sí,8.2
+07/09/2017,7,Chiapas,118,San Andrés Duraznal,Sí,8.2
+07/09/2017,7,Chiapas,119,Santiago el Pinar,Sí,8.2
+19/09/2017,7,Chiapas,121,Emiliano Zapata,Sí,7.1
+07/09/2017,7,Chiapas,122,El Parral,Sí,8.2
+19/09/2017,7,Chiapas,123,Mezcalapa,Sí,7.1
+19/09/2017,9,CIudad de México,2,Azcapotzalco,Sí,7.1
+19/09/2017,9,CIudad de México,3,Coyoacán,Sí,7.1
+19/09/2017,9,CIudad de México,4,Cuajimalpa de Morelos,Sí,7.1
+19/09/2017,9,CIudad de México,5,Gustavo A. Madero,Sí,7.1
+19/09/2017,9,CIudad de México,6,Iztacalco,Sí,7.1
+19/09/2017,9,CIudad de México,7,Iztapalapa,Sí,7.1
+19/09/2017,9,CIudad de México,8,La Magdalena Contreras,Sí,7.1
+19/09/2017,9,CIudad de México,9,Milpa Alta,Sí,7.1
+19/09/2017,9,CIudad de México,10,Álvaro Obregón,Sí,7.1
+19/09/2017,9,CIudad de México,11,Tláhuac,Sí,7.1
+19/09/2017,9,CIudad de México,12,Tlalpan,Sí,7.1
+19/09/2017,9,CIudad de México,13,Xochimilco,Sí,7.1
+19/09/2017,9,CIudad de México,14,Benito Juárez,Sí,7.1
+19/09/2017,9,CIudad de México,15,Cuauhtémoc,Sí,7.1
+19/09/2017,9,CIudad de México,16,Miguel Hidalgo,Sí,7.1
+19/09/2017,9,CIudad de México,17,Venustiano Carranza,Sí,7.1
+19/09/2017,12,Guerrero,2,Ahuacuotzingo,Sí,7.1
+19/09/2017,12,Guerrero,4,Alcozauca de Guerrero,Sí,7.1
+19/09/2017,12,Guerrero,5,Alpoyeca,Sí,7.1
+19/09/2017,12,Guerrero,8,Atenango del Río,Sí,7.1
+19/09/2017,12,Guerrero,15,Buenavista de Cuéllar,Sí,7.1
+19/09/2017,12,Guerrero,19,Copalillo,Sí,7.1
+19/09/2017,12,Guerrero,24,Cualác,Sí,7.1
+19/09/2017,12,Guerrero,33,Huamuxtitlán,Sí,7.1
+19/09/2017,12,Guerrero,34,Huitzuco de los Figueroa,Sí,7.1
+19/09/2017,12,Guerrero,35,Iguala de la Independencia,Sí,7.1
+19/09/2017,12,Guerrero,42,Mártir de Cuilapan,Sí,7.1
+19/09/2017,12,Guerrero,45,Olinalá,Sí,7.1
+19/09/2017,12,Guerrero,49,Pilcaya,Sí,7.1
+19/09/2017,12,Guerrero,55,Taxco de Alarcón,Sí,7.1
+19/09/2017,12,Guerrero,59,Tepecoacuilco de Trujano,Sí,7.1
+19/09/2017,12,Guerrero,60,Tetipac,Sí,7.1
+19/09/2017,12,Guerrero,65,Tlalixtaquilla de Maldonado,Sí,7.1
+19/09/2017,12,Guerrero,66,Tlapa de Comonfort,Sí,7.1
+19/09/2017,12,Guerrero,70,Xochihuehuetlán,Sí,7.1
+19/09/2017,15,México,9,Amecameca,Sí,7.1
+19/09/2017,15,México,15,Atlautla,Sí,7.1
+19/09/2017,15,México,34,Ecatzingo,Sí,7.1
+19/09/2017,15,México,49,Joquicingo,Sí,7.1
+19/09/2017,15,México,52,Malinalco,Sí,7.1
+19/09/2017,15,México,58,Nezahualcóyotl,Sí,7.1
+19/09/2017,15,México,63,Ocuilan,Sí,7.1
+19/09/2017,15,México,88,Tenancingo,Sí,7.1
+19/09/2017,15,México,94,Tepetlixpa,Sí,7.1
+19/09/2017,15,México,101,Tianguistenco,Sí,7.1
+19/09/2017,15,México,113,Villa Guerrero,Sí,7.1
+19/09/2017,15,México,119,Zumpahuacán,Sí,7.1
+19/09/2017,17,Morelos,1,Amacuzac,Sí,7.1
+19/09/2017,17,Morelos,2,Atlatlahucan,Sí,7.1
+19/09/2017,17,Morelos,3,Axochiapan,Sí,7.1
+19/09/2017,17,Morelos,4,Ayala,Sí,7.1
+19/09/2017,17,Morelos,5,Coatlán del Río,Sí,7.1
+19/09/2017,17,Morelos,6,Cuautla,Sí,7.1
+19/09/2017,17,Morelos,7,Cuernavaca,Sí,7.1
+19/09/2017,17,Morelos,8,Emiliano Zapata,Sí,7.1
+19/09/2017,17,Morelos,9,Huitzilac,Sí,7.1
+19/09/2017,17,Morelos,10,Jantetelco,Sí,7.1
+19/09/2017,17,Morelos,11,Jiutepec,Sí,7.1
+19/09/2017,17,Morelos,12,Jojutla,Sí,7.1
+19/09/2017,17,Morelos,13,Jonacatepec,Sí,7.1
+19/09/2017,17,Morelos,14,Mazatepec,Sí,7.1
+19/09/2017,17,Morelos,15,Miacatlán,Sí,7.1
+19/09/2017,17,Morelos,16,Ocuituco,Sí,7.1
+19/09/2017,17,Morelos,17,Puente de Ixtla,Sí,7.1
+19/09/2017,17,Morelos,18,Temixco,Sí,7.1
+19/09/2017,17,Morelos,19,Tepalcingo,Sí,7.1
+19/09/2017,17,Morelos,20,Tepoztlán,Sí,7.1
+19/09/2017,17,Morelos,21,Tetecala,Sí,7.1
+19/09/2017,17,Morelos,22,Tetela del Volcán,Sí,7.1
+19/09/2017,17,Morelos,23,Tlalnepantla,Sí,7.1
+19/09/2017,17,Morelos,24,Tlaltizapán,Sí,7.1
+19/09/2017,17,Morelos,25,Tlaquiltenango,Sí,7.1
+19/09/2017,17,Morelos,26,Tlayacapan,Sí,7.1
+19/09/2017,17,Morelos,27,Totolapan,Sí,7.1
+19/09/2017,17,Morelos,28,Xochitepec,Sí,7.1
+19/09/2017,17,Morelos,29,Yautepec,Sí,7.1
+19/09/2017,17,Morelos,30,Yecapixtla,Sí,7.1
+19/09/2017,17,Morelos,31,Zacatepec,Sí,7.1
+19/09/2017,17,Morelos,32,Zacualpan,Sí,7.1
+19/09/2017,17,Morelos,33,Temoac,Sí,7.1
+19/09/2017,20,Oaxaca,3,Asunción Cacalotepec,Sí,7.1
+19/09/2017,20,Oaxaca,4,Asunción Cuyotepeji,Sí,7.1
+07/09/2017,20,Oaxaca,5,Asunción Ixtaltepec,Sí,8.2
+19/09/2017,20,Oaxaca,7,Asunción Ocotlán,Sí,7.1
+19/09/2017,20,Oaxaca,8,Asunción Tlacolulita,Sí,7.1
+07/09/2017,20,Oaxaca,10,El Barrio de la Soledad,Sí,8.2
+19/09/2017,20,Oaxaca,11,Calihualá,Sí,7.1
+19/09/2017,20,Oaxaca,12,Candelaria Loxicha,Sí,7.1
+19/09/2017,20,Oaxaca,13,Ciénega de Zimatlán,Sí,7.1
+07/09/2017,20,Oaxaca,14,Ciudad Ixtepec,Sí,8.2
+19/09/2017,20,Oaxaca,15,Coatecas Altas,Sí,7.1
+19/09/2017,20,Oaxaca,17,La Compañía,Sí,7.1
+19/09/2017,20,Oaxaca,22,Cosoltepec,Sí,7.1
+19/09/2017,20,Oaxaca,23,Cuilápam de Guerrero,Sí,7.1
+07/09/2017,20,Oaxaca,25,Chahuites,Sí,8.2
+19/09/2017,20,Oaxaca,28,Heroica Ciudad de Ejutla de Crespo,Sí,7.1
+07/09/2017,20,Oaxaca,30,El Espinal,Sí,8.2
+19/09/2017,20,Oaxaca,31,Tamazulapam del Espíritu Santo,Sí,7.1
+19/09/2017,20,Oaxaca,32,Fresnillo de Trujano,Sí,7.1
+19/09/2017,20,Oaxaca,33,Guadalupe Etla,Sí,7.1
+19/09/2017,20,Oaxaca,34,Guadalupe de Ramírez,Sí,7.1
+19/09/2017,20,Oaxaca,35,Guelatao de Juárez,Sí,7.1
+07/09/2017,20,Oaxaca,36,Guevea de Humboldt,Sí,8.2
+19/09/2017,20,Oaxaca,38,Villa Hidalgo,Sí,7.1
+19/09/2017,20,Oaxaca,39,Heroica Ciudad de Huajuapan de León,Sí,7.1
+19/09/2017,20,Oaxaca,42,Ixtlán de Juárez,Sí,7.1
+07/09/2017,20,Oaxaca,43,Heroica Ciudad de Juchitán de Zaragoza,Sí,8.2
+19/09/2017,20,Oaxaca,47,Santa Magdalena Jicotlán,Sí,7.1
+19/09/2017,20,Oaxaca,48,Magdalena Mixtepec,Sí,7.1
+19/09/2017,20,Oaxaca,49,Magdalena Ocotlán,Sí,7.1
+19/09/2017,20,Oaxaca,51,Magdalena Teitipac,Sí,7.1
+07/09/2017,20,Oaxaca,52,Magdalena Tequisistlán,Sí,8.2
+07/09/2017,20,Oaxaca,53,Magdalena Tlacotepec,Sí,8.2
+19/09/2017,20,Oaxaca,55,Mariscala de Juárez,Sí,7.1
+07/09/2017,20,Oaxaca,57,Matías Romero Avendaño,Sí,8.2
+19/09/2017,20,Oaxaca,59,Miahuatlán de Porfirio Díaz,Sí,7.1
+19/09/2017,20,Oaxaca,60,Mixistlán de la Reforma,Sí,7.1
+19/09/2017,20,Oaxaca,61,Monjas,Sí,7.1
+19/09/2017,20,Oaxaca,62,Natividad,Sí,7.1
+19/09/2017,20,Oaxaca,64,Nejapa de Madero,Sí,7.1
+19/09/2017,20,Oaxaca,65,Ixpantepec Nieves,Sí,7.1
+07/09/2017,20,Oaxaca,66,Santiago Niltepec,Sí,8.2
+19/09/2017,20,Oaxaca,67,Oaxaca de Juárez,Sí,7.1
+19/09/2017,20,Oaxaca,68,Ocotlán de Morelos,Sí,7.1
+19/09/2017,20,Oaxaca,69,La Pe,Sí,7.1
+19/09/2017,20,Oaxaca,71,Pluma Hidalgo,Sí,7.1
+19/09/2017,20,Oaxaca,72,San José del Progreso,Sí,7.1
+19/09/2017,20,Oaxaca,74,Santa Catarina Quioquitani,Sí,7.1
+07/09/2017,20,Oaxaca,75,Reforma de Pineda,Sí,8.2
+19/09/2017,20,Oaxaca,78,Rojas de Cuauhtémoc,Sí,7.1
+07/09/2017,20,Oaxaca,79,Salina Cruz,Sí,8.2
+19/09/2017,20,Oaxaca,80,San Agustín Amatengo,Sí,7.1
+19/09/2017,20,Oaxaca,81,San Agustín Atenango,Sí,7.1
+19/09/2017,20,Oaxaca,83,San Agustín de las Juntas,Sí,7.1
+19/09/2017,20,Oaxaca,84,San Agustín Etla,Sí,7.1
+19/09/2017,20,Oaxaca,85,San Agustín Loxicha,Sí,7.1
+19/09/2017,20,Oaxaca,87,San Agustín Yatareni,Sí,7.1
+19/09/2017,20,Oaxaca,89,San Andrés Dinicuiti,Sí,7.1
+19/09/2017,20,Oaxaca,91,San Andrés Huayápam,Sí,7.1
+19/09/2017,20,Oaxaca,92,San Andrés Ixtlahuaca,Sí,7.1
+19/09/2017,20,Oaxaca,93,San Andrés Lagunas,Sí,7.1
+19/09/2017,20,Oaxaca,95,San Andrés Paxtlán,Sí,7.1
+19/09/2017,20,Oaxaca,97,San Andrés Solaga,Sí,7.1
+19/09/2017,20,Oaxaca,99,San Andrés Tepetlapa,Sí,7.1
+19/09/2017,20,Oaxaca,100,San Andrés Yaá,Sí,7.1
+19/09/2017,20,Oaxaca,101,San Andrés Zabache,Sí,7.1
+19/09/2017,20,Oaxaca,103,San Antonino Castillo Velasco,Sí,7.1
+19/09/2017,20,Oaxaca,104,San Antonino el Alto,Sí,7.1
+19/09/2017,20,Oaxaca,105,San Antonino Monte Verde,Sí,7.1
+19/09/2017,20,Oaxaca,106,San Antonio Acutla,Sí,7.1
+19/09/2017,20,Oaxaca,107,San Antonio de la Cal,Sí,7.1
+19/09/2017,20,Oaxaca,112,San Baltazar Chichicápam,Sí,7.1
+19/09/2017,20,Oaxaca,113,San Baltazar Loxicha,Sí,7.1
+19/09/2017,20,Oaxaca,114,San Baltazar Yatzachi el Bajo,Sí,7.1
+19/09/2017,20,Oaxaca,115,San Bartolo Coyotepec,Sí,7.1
+19/09/2017,20,Oaxaca,117,San Bartolomé Loxicha,Sí,7.1
+19/09/2017,20,Oaxaca,118,San Bartolomé Quialana,Sí,7.1
+19/09/2017,20,Oaxaca,120,San Bartolomé Zoogocho,Sí,7.1
+19/09/2017,20,Oaxaca,122,San Bartolo Yautepec,Sí,7.1
+19/09/2017,20,Oaxaca,123,San Bernardo Mixtepec,Sí,7.1
+07/09/2017,20,Oaxaca,124,San Blas Atempa,Sí,8.2
+19/09/2017,20,Oaxaca,125,San Carlos Yautepec,Sí,7.1
+19/09/2017,20,Oaxaca,126,San Cristóbal Amatlán,Sí,7.1
+19/09/2017,20,Oaxaca,128,San Cristóbal Lachirioag,Sí,7.1
+19/09/2017,20,Oaxaca,129,San Cristóbal Suchixtlahuaca,Sí,7.1
+07/09/2017,20,Oaxaca,130,San Dionisio del Mar,Sí,8.2
+19/09/2017,20,Oaxaca,131,San Dionisio Ocotepec,Sí,7.1
+19/09/2017,20,Oaxaca,132,San Dionisio Ocotlán,Sí,7.1
+19/09/2017,20,Oaxaca,135,San Felipe Tejalápam,Sí,7.1
+19/09/2017,20,Oaxaca,138,San Francisco Cajonos,Sí,7.1
+07/09/2017,20,Oaxaca,141,San Francisco del Mar,Sí,8.2
+07/09/2017,20,Oaxaca,143,San Francisco Ixhuatán,Sí,8.2
+19/09/2017,20,Oaxaca,145,San Francisco Lachigoló,Sí,7.1
+19/09/2017,20,Oaxaca,146,San Francisco Logueche,Sí,7.1
+19/09/2017,20,Oaxaca,148,San Francisco Ozolotepec,Sí,7.1
+19/09/2017,20,Oaxaca,149,San Francisco Sola,Sí,7.1
+19/09/2017,20,Oaxaca,151,San Francisco Teopan,Sí,7.1
+19/09/2017,20,Oaxaca,152,San Francisco Tlapancingo,Sí,7.1
+19/09/2017,20,Oaxaca,153,San Gabriel Mixtepec,Sí,7.1
+19/09/2017,20,Oaxaca,154,San Ildefonso Amatlán,Sí,7.1
+19/09/2017,20,Oaxaca,155,San Ildefonso Sola,Sí,7.1
+19/09/2017,20,Oaxaca,156,San Ildefonso Villa Alta,Sí,7.1
+19/09/2017,20,Oaxaca,157,San Jacinto Amilpas,Sí,7.1
+19/09/2017,20,Oaxaca,159,San Jerónimo Coatlán,Sí,7.1
+19/09/2017,20,Oaxaca,160,San Jerónimo Silacayoapilla,Sí,7.1
+19/09/2017,20,Oaxaca,162,San Jerónimo Taviche,Sí,7.1
+19/09/2017,20,Oaxaca,164,San Jorge Nuchita,Sí,7.1
+19/09/2017,20,Oaxaca,165,San José Ayuquila,Sí,7.1
+19/09/2017,20,Oaxaca,167,San José del Peñasco,Sí,7.1
+19/09/2017,20,Oaxaca,170,San José Lachiguiri,Sí,7.1
+19/09/2017,20,Oaxaca,174,Ánimas Trujano,Sí,7.1
+19/09/2017,20,Oaxaca,181,San Juan Bautista Suchitepec,Sí,7.1
+19/09/2017,20,Oaxaca,183,San Juan Bautista Tlachichilco,Sí,7.1
+19/09/2017,20,Oaxaca,184,San Juan Bautista Tuxtepec,Sí,7.1
+19/09/2017,20,Oaxaca,185,San Juan Cacahuatepec,Sí,7.1
+19/09/2017,20,Oaxaca,186,San Juan Cieneguilla,Sí,7.1
+19/09/2017,20,Oaxaca,189,San Juan Comaltepec,Sí,7.1
+19/09/2017,20,Oaxaca,190,San Juan Cotzocón,Sí,7.1
+19/09/2017,20,Oaxaca,191,San Juan Chicomezúchil,Sí,7.1
+19/09/2017,20,Oaxaca,192,San Juan Chilateca,Sí,7.1
+19/09/2017,20,Oaxaca,194,San Juan del Río,Sí,7.1
+19/09/2017,20,Oaxaca,197,San Juan Guelavía,Sí,7.1
+07/09/2017,20,Oaxaca,198,San Juan Guichicovi,Sí,8.2
+19/09/2017,20,Oaxaca,199,San Juan Ihualtepec,Sí,7.1
+19/09/2017,20,Oaxaca,200,San Juan Juquila Mixes,Sí,7.1
+19/09/2017,20,Oaxaca,201,San Juan Juquila Vijanos,Sí,7.1
+19/09/2017,20,Oaxaca,202,San Juan Lachao,Sí,7.1
+19/09/2017,20,Oaxaca,203,San Juan Lachigalla,Sí,7.1
+19/09/2017,20,Oaxaca,204,San Juan Lajarcia,Sí,7.1
+19/09/2017,20,Oaxaca,205,San Juan Lalana,Sí,7.1
+19/09/2017,20,Oaxaca,207,San Juan Mazatlán,Sí,7.1
+19/09/2017,20,Oaxaca,208,San Juan Mixtepec - Distrito 08 -,Sí,7.1
+19/09/2017,20,Oaxaca,209,San Juan Mixtepec - Distrito 26 -,Sí,7.1
+19/09/2017,20,Oaxaca,210,San Juan Ñumí,Sí,7.1
+19/09/2017,20,Oaxaca,211,San Juan Ozolotepec,Sí,7.1
+19/09/2017,20,Oaxaca,212,San Juan Petlapa,Sí,7.1
+19/09/2017,20,Oaxaca,213,San Juan Quiahije,Sí,7.1
+19/09/2017,20,Oaxaca,216,San Juan Tabaá,Sí,7.1
+19/09/2017,20,Oaxaca,219,San Juan Teitipac,Sí,7.1
+19/09/2017,20,Oaxaca,222,San Juan Yaeé,Sí,7.1
+19/09/2017,20,Oaxaca,223,San Juan Yatzona,Sí,7.1
+19/09/2017,20,Oaxaca,226,San Lorenzo Albarradas,Sí,7.1
+19/09/2017,20,Oaxaca,227,San Lorenzo Cacaotepec,Sí,7.1
+19/09/2017,20,Oaxaca,229,San Lorenzo Texmelucan,Sí,7.1
+19/09/2017,20,Oaxaca,230,San Lorenzo Victoria,Sí,7.1
+19/09/2017,20,Oaxaca,231,San Lucas Camotlán,Sí,7.1
+19/09/2017,20,Oaxaca,233,San Lucas Quiaviní,Sí,7.1
+19/09/2017,20,Oaxaca,235,San Luis Amatlán,Sí,7.1
+19/09/2017,20,Oaxaca,236,San Marcial Ozolotepec,Sí,7.1
+19/09/2017,20,Oaxaca,237,San Marcos Arteaga,Sí,7.1
+19/09/2017,20,Oaxaca,238,San Martín de los Cansecos,Sí,7.1
+19/09/2017,20,Oaxaca,241,San Martín Lachilá,Sí,7.1
+19/09/2017,20,Oaxaca,242,San Martín Peras,Sí,7.1
+19/09/2017,20,Oaxaca,243,San Martín Tilcajete,Sí,7.1
+19/09/2017,20,Oaxaca,245,San Martín Zacatepec,Sí,7.1
+19/09/2017,20,Oaxaca,246,San Mateo Cajonos,Sí,7.1
+19/09/2017,20,Oaxaca,247,Capulálpam de Méndez,Sí,7.1
+07/09/2017,20,Oaxaca,248,San Mateo del Mar,Sí,8.2
+19/09/2017,20,Oaxaca,251,San Mateo Nejápam,Sí,7.1
+19/09/2017,20,Oaxaca,253,San Mateo Piñas,Sí,7.1
+19/09/2017,20,Oaxaca,254,San Mateo Río Hondo,Sí,7.1
+19/09/2017,20,Oaxaca,256,San Mateo Tlapiltepec,Sí,7.1
+19/09/2017,20,Oaxaca,257,San Melchor Betaza,Sí,7.1
+19/09/2017,20,Oaxaca,259,San Miguel Ahuehuetitlán,Sí,7.1
+19/09/2017,20,Oaxaca,261,San Miguel Amatitlán,Sí,7.1
+19/09/2017,20,Oaxaca,262,San Miguel Amatlán,Sí,7.1
+19/09/2017,20,Oaxaca,263,San Miguel Coatlán,Sí,7.1
+07/09/2017,20,Oaxaca,265,San Miguel Chimalapa,Sí,8.2
+19/09/2017,20,Oaxaca,266,San Miguel del Puerto,Sí,7.1
+19/09/2017,20,Oaxaca,267,San Miguel del Río,Sí,7.1
+19/09/2017,20,Oaxaca,268,San Miguel Ejutla,Sí,7.1
+19/09/2017,20,Oaxaca,271,San Miguel Mixtepec,Sí,7.1
+19/09/2017,20,Oaxaca,272,San Miguel Panixtlahuaca,Sí,7.1
+19/09/2017,20,Oaxaca,273,San Miguel Peras,Sí,7.1
+19/09/2017,20,Oaxaca,274,San Miguel Piedras,Sí,7.1
+19/09/2017,20,Oaxaca,275,San Miguel Quetzaltepec,Sí,7.1
+19/09/2017,20,Oaxaca,277,Villa Sola de Vega,Sí,7.1
+19/09/2017,20,Oaxaca,279,San Miguel Suchixtepec,Sí,7.1
+19/09/2017,20,Oaxaca,280,Villa Talea de Castro,Sí,7.1
+07/09/2017,20,Oaxaca,282,San Miguel Tenango,Sí,8.2
+19/09/2017,20,Oaxaca,284,San Miguel Tilquiápam,Sí,7.1
+19/09/2017,20,Oaxaca,286,San Miguel Tlacotepec,Sí,7.1
+19/09/2017,20,Oaxaca,287,San Miguel Tulancingo,Sí,7.1
+19/09/2017,20,Oaxaca,288,San Miguel Yotao,Sí,7.1
+19/09/2017,20,Oaxaca,289,San Nicolás,Sí,7.1
+19/09/2017,20,Oaxaca,290,San Nicolás Hidalgo,Sí,7.1
+19/09/2017,20,Oaxaca,291,San Pablo Coatlán,Sí,7.1
+19/09/2017,20,Oaxaca,292,San Pablo Cuatro Venados,Sí,7.1
+19/09/2017,20,Oaxaca,293,San Pablo Etla,Sí,7.1
+19/09/2017,20,Oaxaca,295,San Pablo Huixtepec,Sí,7.1
+19/09/2017,20,Oaxaca,298,San Pablo Villa de Mitla,Sí,7.1
+19/09/2017,20,Oaxaca,299,San Pablo Yaganiza,Sí,7.1
+19/09/2017,20,Oaxaca,301,San Pedro Apóstol,Sí,7.1
+19/09/2017,20,Oaxaca,303,San Pedro Cajonos,Sí,7.1
+07/09/2017,20,Oaxaca,305,San Pedro Comitancillo,Sí,8.2
+19/09/2017,20,Oaxaca,306,San Pedro el Alto,Sí,7.1
+07/09/2017,20,Oaxaca,307,San Pedro Huamelula,Sí,8.2
+07/09/2017,20,Oaxaca,308,San Pedro Huilotepec,Sí,8.2
+19/09/2017,20,Oaxaca,310,San Pedro Ixtlahuaca,Sí,7.1
+19/09/2017,20,Oaxaca,314,San Pedro Juchatengo,Sí,7.1
+19/09/2017,20,Oaxaca,315,San Pedro Mártir,Sí,7.1
+19/09/2017,20,Oaxaca,316,San Pedro Mártir Quiechapa,Sí,7.1
+19/09/2017,20,Oaxaca,317,San Pedro Mártir Yucuxaco,Sí,7.1
+19/09/2017,20,Oaxaca,318,San Pedro Mixtepec - Distrito 22 -,Sí,7.1
+19/09/2017,20,Oaxaca,319,San Pedro Mixtepec - Distrito 26 -,Sí,7.1
+19/09/2017,20,Oaxaca,321,San Pedro Nopala,Sí,7.1
+19/09/2017,20,Oaxaca,323,San Pedro Ocotepec,Sí,7.1
+19/09/2017,20,Oaxaca,324,San Pedro Pochutla,Sí,7.1
+19/09/2017,20,Oaxaca,325,San Pedro Quiatoni,Sí,7.1
+07/09/2017,20,Oaxaca,327,San Pedro Tapanatepec,Sí,8.2
+19/09/2017,20,Oaxaca,328,San Pedro Taviche,Sí,7.1
+19/09/2017,20,Oaxaca,333,San Pedro Totolápam,Sí,7.1
+19/09/2017,20,Oaxaca,335,San Pedro Yaneri,Sí,7.1
+19/09/2017,20,Oaxaca,337,San Pedro y San Pablo Ayutla,Sí,7.1
+19/09/2017,20,Oaxaca,339,San Pedro y San Pablo Teposcolula,Sí,7.1
+19/09/2017,20,Oaxaca,340,San Pedro y San Pablo Tequixtepec,Sí,7.1
+19/09/2017,20,Oaxaca,341,San Pedro Yucunama,Sí,7.1
+19/09/2017,20,Oaxaca,342,San Raymundo Jalpan,Sí,7.1
+19/09/2017,20,Oaxaca,343,San Sebastián Abasolo,Sí,7.1
+19/09/2017,20,Oaxaca,344,San Sebastián Coatlán,Sí,7.1
+19/09/2017,20,Oaxaca,346,San Sebastián Nicananduta,Sí,7.1
+19/09/2017,20,Oaxaca,347,San Sebastián Río Hondo,Sí,7.1
+19/09/2017,20,Oaxaca,348,San Sebastián Tecomaxtlahuaca,Sí,7.1
+19/09/2017,20,Oaxaca,349,San Sebastián Teitipac,Sí,7.1
+19/09/2017,20,Oaxaca,350,San Sebastián Tutla,Sí,7.1
+19/09/2017,20,Oaxaca,351,San Simón Almolongas,Sí,7.1
+19/09/2017,20,Oaxaca,352,San Simón Zahuatlán,Sí,7.1
+19/09/2017,20,Oaxaca,353,Santa Ana,Sí,7.1
+19/09/2017,20,Oaxaca,356,Santa Ana del Valle,Sí,7.1
+19/09/2017,20,Oaxaca,357,Santa Ana Tavela,Sí,7.1
+19/09/2017,20,Oaxaca,358,Santa Ana Tlapacoyan,Sí,7.1
+19/09/2017,20,Oaxaca,360,Santa Ana Zegache,Sí,7.1
+19/09/2017,20,Oaxaca,361,Santa Catalina Quierí,Sí,7.1
+19/09/2017,20,Oaxaca,362,Santa Catarina Cuixtla,Sí,7.1
+19/09/2017,20,Oaxaca,363,Santa Catarina Ixtepeji,Sí,7.1
+19/09/2017,20,Oaxaca,364,Santa Catarina Juquila,Sí,7.1
+19/09/2017,20,Oaxaca,365,Santa Catarina Lachatao,Sí,7.1
+19/09/2017,20,Oaxaca,366,Santa Catarina Loxicha,Sí,7.1
+19/09/2017,20,Oaxaca,368,Santa Catarina Minas,Sí,7.1
+19/09/2017,20,Oaxaca,369,Santa Catarina Quiané,Sí,7.1
+19/09/2017,20,Oaxaca,373,Santa Catarina Zapoquila,Sí,7.1
+19/09/2017,20,Oaxaca,375,Santa Cruz Amilpas,Sí,7.1
+19/09/2017,20,Oaxaca,376,Santa Cruz de Bravo,Sí,7.1
+19/09/2017,20,Oaxaca,378,Santa Cruz Mixtepec,Sí,7.1
+19/09/2017,20,Oaxaca,380,Santa Cruz Papalutla,Sí,7.1
+19/09/2017,20,Oaxaca,381,Santa Cruz Tacache de Mina,Sí,7.1
+19/09/2017,20,Oaxaca,384,Santa Cruz Xitla,Sí,7.1
+19/09/2017,20,Oaxaca,385,Santa Cruz Xoxocotlán,Sí,7.1
+19/09/2017,20,Oaxaca,387,Santa Gertrudis,Sí,7.1
+19/09/2017,20,Oaxaca,388,Santa Inés del Monte,Sí,7.1
+19/09/2017,20,Oaxaca,389,Santa Inés Yatzeche,Sí,7.1
+19/09/2017,20,Oaxaca,390,Santa Lucía del Camino,Sí,7.1
+19/09/2017,20,Oaxaca,391,Santa Lucía Miahuatlán,Sí,7.1
+19/09/2017,20,Oaxaca,393,Santa Lucía Ocotlán,Sí,7.1
+19/09/2017,20,Oaxaca,394,Santa María Alotepec,Sí,7.1
+19/09/2017,20,Oaxaca,398,Ayoquezco de Aldama,Sí,7.1
+19/09/2017,20,Oaxaca,399,Santa María Atzompa,Sí,7.1
+19/09/2017,20,Oaxaca,400,Santa María Camotlán,Sí,7.1
+19/09/2017,20,Oaxaca,401,Santa María Colotepec,Sí,7.1
+19/09/2017,20,Oaxaca,403,Santa María Coyotepec,Sí,7.1
+19/09/2017,20,Oaxaca,405,Villa de Chilapa de Díaz,Sí,7.1
+07/09/2017,20,Oaxaca,407,Santa María Chimalapa,Sí,8.2
+19/09/2017,20,Oaxaca,409,Santa María del Tule,Sí,7.1
+19/09/2017,20,Oaxaca,410,Santa María Ecatepec,Sí,7.1
+19/09/2017,20,Oaxaca,411,Santa María Guelacé,Sí,7.1
+07/09/2017,20,Oaxaca,412,Santa María Guienagati,Sí,8.2
+19/09/2017,20,Oaxaca,413,Santa María Huatulco,Sí,7.1
+07/09/2017,20,Oaxaca,418,Santa María Jalapa del Marqués,Sí,8.2
+19/09/2017,20,Oaxaca,419,Santa María Jaltianguis,Sí,7.1
+19/09/2017,20,Oaxaca,420,Santa María Lachixío,Sí,7.1
+07/09/2017,20,Oaxaca,421,Santa María Mixtequilla,Sí,8.2
+19/09/2017,20,Oaxaca,424,Santa María Ozolotepec,Sí,7.1
+07/09/2017,20,Oaxaca,427,Santa María Petapa,Sí,8.2
+19/09/2017,20,Oaxaca,428,Santa María Quiegolani,Sí,7.1
+19/09/2017,20,Oaxaca,429,Santa María Sola,Sí,7.1
+19/09/2017,20,Oaxaca,432,Santa María Temaxcalapa,Sí,7.1
+19/09/2017,20,Oaxaca,433,Santa María Temaxcaltepec,Sí,7.1
+19/09/2017,20,Oaxaca,435,Santa María Tepantlali,Sí,7.1
+19/09/2017,20,Oaxaca,436,Santa María Texcatitlán,Sí,7.1
+19/09/2017,20,Oaxaca,437,Santa María Tlahuitoltepec,Sí,7.1
+19/09/2017,20,Oaxaca,439,Santa María Tonameca,Sí,7.1
+07/09/2017,20,Oaxaca,440,Santa María Totolapilla,Sí,8.2
+07/09/2017,20,Oaxaca,441,Santa María Xadani,Sí,8.2
+19/09/2017,20,Oaxaca,442,Santa María Yalina,Sí,7.1
+19/09/2017,20,Oaxaca,443,Santa María Yavesía,Sí,7.1
+19/09/2017,20,Oaxaca,449,Santa María Zoquitlán,Sí,7.1
+19/09/2017,20,Oaxaca,452,Santiago Apóstol,Sí,7.1
+07/09/2017,20,Oaxaca,453,Santiago Astata,Sí,8.2
+19/09/2017,20,Oaxaca,454,Santiago Atitlán,Sí,7.1
+19/09/2017,20,Oaxaca,455,Santiago Ayuquililla,Sí,7.1
+19/09/2017,20,Oaxaca,456,Santiago Cacaloxtepec,Sí,7.1
+19/09/2017,20,Oaxaca,457,Santiago Camotlán,Sí,7.1
+19/09/2017,20,Oaxaca,459,Santiago Chazumba,Sí,7.1
+19/09/2017,20,Oaxaca,460,Santiago Choapam,Sí,7.1
+19/09/2017,20,Oaxaca,461,Santiago del Río,Sí,7.1
+19/09/2017,20,Oaxaca,462,Santiago Huajolotitlán,Sí,7.1
+19/09/2017,20,Oaxaca,464,Santiago Ihuitlán Plumas,Sí,7.1
+19/09/2017,20,Oaxaca,465,Santiago Ixcuintepec,Sí,7.1
+19/09/2017,20,Oaxaca,467,Santiago Jamiltepec,Sí,7.1
+19/09/2017,20,Oaxaca,468,Santiago Jocotepec,Sí,7.1
+07/09/2017,20,Oaxaca,470,Santiago Lachiguiri,Sí,8.2
+19/09/2017,20,Oaxaca,471,Santiago Lalopa,Sí,7.1
+07/09/2017,20,Oaxaca,472,Santiago Laollaga,Sí,8.2
+19/09/2017,20,Oaxaca,473,Santiago Laxopa,Sí,7.1
+19/09/2017,20,Oaxaca,475,Santiago Matatlán,Sí,7.1
+19/09/2017,20,Oaxaca,476,Santiago Miltepec,Sí,7.1
+19/09/2017,20,Oaxaca,477,Santiago Minas,Sí,7.1
+19/09/2017,20,Oaxaca,484,Santiago Tamazola,Sí,7.1
+07/09/2017,20,Oaxaca,486,Villa Tejúpam de la Unión,Sí,8.2
+19/09/2017,20,Oaxaca,488,Santiago Tepetlapa,Sí,7.1
+19/09/2017,20,Oaxaca,495,Santiago Xanica,Sí,7.1
+19/09/2017,20,Oaxaca,496,Santiago Xiacuí,Sí,7.1
+19/09/2017,20,Oaxaca,497,Santiago Yaitepec,Sí,7.1
+19/09/2017,20,Oaxaca,498,Santiago Yaveo,Sí,7.1
+19/09/2017,20,Oaxaca,501,Santiago Yucuyachi,Sí,7.1
+19/09/2017,20,Oaxaca,502,Santiago Zacatepec,Sí,7.1
+19/09/2017,20,Oaxaca,503,Santiago Zoochila,Sí,7.1
+19/09/2017,20,Oaxaca,504,Nuevo Zoquiapam,Sí,7.1
+07/09/2017,20,Oaxaca,505,Santo Domingo Ingenio,Sí,8.2
+19/09/2017,20,Oaxaca,506,Santo Domingo Albarradas,Sí,7.1
+07/09/2017,20,Oaxaca,508,Santo Domingo Chihuitán,Sí,8.2
+19/09/2017,20,Oaxaca,509,Santo Domingo de Morelos,Sí,7.1
+19/09/2017,20,Oaxaca,512,Santo Domingo Ozolotepec,Sí,7.1
+07/09/2017,20,Oaxaca,513,Santo Domingo Petapa,Sí,8.2
+19/09/2017,20,Oaxaca,514,Santo Domingo Roayaga,Sí,7.1
+07/09/2017,20,Oaxaca,515,Santo Domingo Tehuantepec,Sí,8.2
+19/09/2017,20,Oaxaca,516,Santo Domingo Teojomulco,Sí,7.1
+19/09/2017,20,Oaxaca,517,Santo Domingo Tepuxtepec,Sí,7.1
+19/09/2017,20,Oaxaca,519,Santo Domingo Tomaltepec,Sí,7.1
+19/09/2017,20,Oaxaca,520,Santo Domingo Tonalá,Sí,7.1
+19/09/2017,20,Oaxaca,522,Santo Domingo Xagacía,Sí,7.1
+19/09/2017,20,Oaxaca,524,Santo Domingo Yodohino,Sí,7.1
+07/09/2017,20,Oaxaca,525,Santo Domingo Zanatepec,Sí,8.2
+19/09/2017,20,Oaxaca,526,Santos Reyes Nopala,Sí,7.1
+19/09/2017,20,Oaxaca,528,Santos Reyes Tepejillo,Sí,7.1
+19/09/2017,20,Oaxaca,529,Santos Reyes Yucuná,Sí,7.1
+19/09/2017,20,Oaxaca,530,Santo Tomás Jalieza,Sí,7.1
+19/09/2017,20,Oaxaca,533,Santo Tomás Tamazulapan,Sí,7.1
+19/09/2017,20,Oaxaca,534,San Vicente Coatlán,Sí,7.1
+19/09/2017,20,Oaxaca,535,San Vicente Lachixío,Sí,7.1
+19/09/2017,20,Oaxaca,537,Silacayoápam,Sí,7.1
+19/09/2017,20,Oaxaca,538,Sitio de Xitlapehua,Sí,7.1
+19/09/2017,20,Oaxaca,539,Soledad Etla,Sí,7.1
+19/09/2017,20,Oaxaca,540,Villa de Tamazulápam del Progreso,Sí,7.1
+19/09/2017,20,Oaxaca,541,Tanetze de Zaragoza,Sí,7.1
+19/09/2017,20,Oaxaca,542,Taniche,Sí,7.1
+19/09/2017,20,Oaxaca,544,Teococuilco de Marcos Pérez,Sí,7.1
+19/09/2017,20,Oaxaca,546,Teotitlán del Valle,Sí,7.1
+19/09/2017,20,Oaxaca,547,Teotongo,Sí,7.1
+19/09/2017,20,Oaxaca,549,Tezoatlán de Segura y Luna,Sí,7.1
+19/09/2017,20,Oaxaca,550,San Jerónimo Tlacochahuaya,Sí,7.1
+19/09/2017,20,Oaxaca,551,Tlacolula de Matamoros,Sí,7.1
+19/09/2017,20,Oaxaca,552,Tlacotepec Plumas,Sí,7.1
+19/09/2017,20,Oaxaca,553,Tlalixtac de Cabrera,Sí,7.1
+19/09/2017,20,Oaxaca,554,Totontepec Villa de Morelos,Sí,7.1
+19/09/2017,20,Oaxaca,555,Trinidad Zaachila,Sí,7.1
+07/09/2017,20,Oaxaca,557,Unión Hidalgo,Sí,8.2
+19/09/2017,20,Oaxaca,560,Villa Díaz Ordaz,Sí,7.1
+19/09/2017,20,Oaxaca,561,Yaxe,Sí,7.1
+19/09/2017,20,Oaxaca,563,Yogana,Sí,7.1
+19/09/2017,20,Oaxaca,565,Villa de Zaachila,Sí,7.1
+07/09/2017,20,Oaxaca,567,Zapotitlán Lagunas,Sí,8.2
+07/09/2017,20,Oaxaca,568,Zapotitlán Palmas,Sí,8.2
+19/09/2017,20,Oaxaca,570,Zimatlán de Álvarez,Sí,7.1
+19/09/2017,21,Puebla,1,Acajete,Sí,7.1
+19/09/2017,21,Puebla,3,Acatlán,Sí,7.1
+19/09/2017,21,Puebla,5,Acteopan,Sí,7.1
+19/09/2017,21,Puebla,7,Ahuatlán,Sí,7.1
+19/09/2017,21,Puebla,9,Ahuehuetitla,Sí,7.1
+19/09/2017,21,Puebla,11,Albino Zertuche,Sí,7.1
+19/09/2017,21,Puebla,15,Amozoc,Sí,7.1
+19/09/2017,21,Puebla,18,Atexcal,Sí,7.1
+19/09/2017,21,Puebla,19,Atlixco,Sí,7.1
+19/09/2017,21,Puebla,20,Atoyatempan,Sí,7.1
+19/09/2017,21,Puebla,21,Atzala,Sí,7.1
+19/09/2017,21,Puebla,22,Atzitzihuacán,Sí,7.1
+19/09/2017,21,Puebla,24,Axutla,Sí,7.1
+19/09/2017,21,Puebla,26,Calpan,Sí,7.1
+19/09/2017,21,Puebla,27,Caltepec,Sí,7.1
+19/09/2017,21,Puebla,31,Coatzingo,Sí,7.1
+19/09/2017,21,Puebla,32,Cohetzala,Sí,7.1
+19/09/2017,21,Puebla,33,Cohuecan,Sí,7.1
+19/09/2017,21,Puebla,34,Coronango,Sí,7.1
+19/09/2017,21,Puebla,37,Coyotepec,Sí,7.1
+19/09/2017,21,Puebla,38,Cuapiaxtla de Madero,Sí,7.1
+19/09/2017,21,Puebla,40,Cuautinchán,Sí,7.1
+19/09/2017,21,Puebla,41,Cuautlancingo,Sí,7.1
+19/09/2017,21,Puebla,42,Cuayuca de Andrade,Sí,7.1
+19/09/2017,21,Puebla,47,Chiautla,Sí,7.1
+19/09/2017,21,Puebla,48,Chiautzingo,Sí,7.1
+19/09/2017,21,Puebla,51,Chietla,Sí,7.1
+19/09/2017,21,Puebla,52,Chigmecatitlán,Sí,7.1
+19/09/2017,21,Puebla,55,Chila,Sí,7.1
+19/09/2017,21,Puebla,56,Chila de la Sal,Sí,7.1
+19/09/2017,21,Puebla,59,Chinantla,Sí,7.1
+19/09/2017,21,Puebla,60,Domingo Arenas,Sí,7.1
+19/09/2017,21,Puebla,62,Epatlán,Sí,7.1
+19/09/2017,21,Puebla,66,Guadalupe,Sí,7.1
+19/09/2017,21,Puebla,69,Huaquechula,Sí,7.1
+19/09/2017,21,Puebla,70,Huatlatlauca,Sí,7.1
+19/09/2017,21,Puebla,73,Huehuetlán el Chico,Sí,7.1
+19/09/2017,21,Puebla,74,Huejotzingo,Sí,7.1
+19/09/2017,21,Puebla,79,Huitziltepec,Sí,7.1
+19/09/2017,21,Puebla,81,Ixcamilpa de Guerrero,Sí,7.1
+19/09/2017,21,Puebla,82,Ixcaquixtla,Sí,7.1
+19/09/2017,21,Puebla,85,Izúcar de Matamoros,Sí,7.1
+19/09/2017,21,Puebla,87,Jolalpan,Sí,7.1
+19/09/2017,21,Puebla,90,Juan C. Bonilla,Sí,7.1
+19/09/2017,21,Puebla,92,Juan N. Méndez,Sí,7.1
+19/09/2017,21,Puebla,95,La Magdalena Tlatlauquitepec,Sí,7.1
+19/09/2017,21,Puebla,97,Mixtla,Sí,7.1
+19/09/2017,21,Puebla,98,Molcaxac,Sí,7.1
+19/09/2017,21,Puebla,102,Nealtican,Sí,7.1
+19/09/2017,21,Puebla,106,Ocoyucan,Sí,7.1
+19/09/2017,21,Puebla,112,Petlalcingo,Sí,7.1
+19/09/2017,21,Puebla,113,Piaxtla,Sí,7.1
+19/09/2017,21,Puebla,114,Puebla,Sí,7.1
+19/09/2017,21,Puebla,118,Los Reyes de Juárez,Sí,7.1
+19/09/2017,21,Puebla,119,San Andrés Cholula,Sí,7.1
+19/09/2017,21,Puebla,121,San Diego la Mesa Tochimiltzingo,Sí,7.1
+19/09/2017,21,Puebla,122,San Felipe Teotlalcingo,Sí,7.1
+19/09/2017,21,Puebla,125,San Gregorio Atzompa,Sí,7.1
+19/09/2017,21,Puebla,126,San Jerónimo Tecuanipan,Sí,7.1
+19/09/2017,21,Puebla,127,San Jerónimo Xayacatlán,Sí,7.1
+19/09/2017,21,Puebla,131,San Juan Atzompa,Sí,7.1
+19/09/2017,21,Puebla,132,San Martín Texmelucan,Sí,7.1
+19/09/2017,21,Puebla,133,San Martín Totoltepec,Sí,7.1
+19/09/2017,21,Puebla,134,San Matías Tlalancaleca,Sí,7.1
+19/09/2017,21,Puebla,135,San Miguel Ixitlán,Sí,7.1
+19/09/2017,21,Puebla,136,San Miguel Xoxtla,Sí,7.1
+19/09/2017,21,Puebla,138,San Nicolás de los Ranchos,Sí,7.1
+19/09/2017,21,Puebla,139,San Pablo Anicano,Sí,7.1
+19/09/2017,21,Puebla,140,San Pedro Cholula,Sí,7.1
+19/09/2017,21,Puebla,141,San Pedro Yeloixtlahuaca,Sí,7.1
+19/09/2017,21,Puebla,143,San Salvador el Verde,Sí,7.1
+19/09/2017,21,Puebla,144,San Salvador Huixcolotla,Sí,7.1
+19/09/2017,21,Puebla,146,Santa Catarina Tlaltempan,Sí,7.1
+19/09/2017,21,Puebla,147,Santa Inés Ahuatempan,Sí,7.1
+19/09/2017,21,Puebla,148,Santa Isabel Cholula,Sí,7.1
+19/09/2017,21,Puebla,150,Huehuetlán el Grande,Sí,7.1
+19/09/2017,21,Puebla,151,Santo Tomás Hueyotlipan,Sí,7.1
+19/09/2017,21,Puebla,153,Tecali de Herrera,Sí,7.1
+19/09/2017,21,Puebla,154,Tecamachalco,Sí,7.1
+19/09/2017,21,Puebla,155,Tecomatlán,Sí,7.1
+19/09/2017,21,Puebla,156,Tehuacán,Sí,7.1
+19/09/2017,21,Puebla,157,Tehuitzingo,Sí,7.1
+19/09/2017,21,Puebla,159,Teopantlán,Sí,7.1
+19/09/2017,21,Puebla,160,Teotlalco,Sí,7.1
+19/09/2017,21,Puebla,161,Tepanco de López,Sí,7.1
+19/09/2017,21,Puebla,163,Tepatlaxco de Hidalgo,Sí,7.1
+19/09/2017,21,Puebla,164,Tepeaca,Sí,7.1
+19/09/2017,21,Puebla,165,Tepemaxalco,Sí,7.1
+19/09/2017,21,Puebla,166,Tepeojuma,Sí,7.1
+19/09/2017,21,Puebla,168,Tepexco,Sí,7.1
+19/09/2017,21,Puebla,169,Tepexi de Rodríguez,Sí,7.1
+19/09/2017,21,Puebla,171,Tepeyahualco de Cuauhtémoc,Sí,7.1
+19/09/2017,21,Puebla,175,Tianguismanalco,Sí,7.1
+19/09/2017,21,Puebla,176,Tilapa,Sí,7.1
+19/09/2017,21,Puebla,177,Tlacotepec de Benito Juárez,Sí,7.1
+19/09/2017,21,Puebla,180,Tlahuapan,Sí,7.1
+19/09/2017,21,Puebla,181,Tlaltenango,Sí,7.1
+19/09/2017,21,Puebla,182,Tlanepantla,Sí,7.1
+19/09/2017,21,Puebla,185,Tlapanalá,Sí,7.1
+19/09/2017,21,Puebla,188,Tochimilco,Sí,7.1
+19/09/2017,21,Puebla,189,Tochtepec,Sí,7.1
+19/09/2017,21,Puebla,190,Totoltepec de Guerrero,Sí,7.1
+19/09/2017,21,Puebla,191,Tulcingo,Sí,7.1
+19/09/2017,21,Puebla,193,Tzicatlacoyan,Sí,7.1
+19/09/2017,21,Puebla,196,Xayacatlán de Bravo,Sí,7.1
+19/09/2017,21,Puebla,198,Xicotlán,Sí,7.1
+19/09/2017,21,Puebla,201,Xochiltepec,Sí,7.1
+19/09/2017,21,Puebla,203,Xochitlán Todos Santos,Sí,7.1
+19/09/2017,21,Puebla,205,Yehualtepec,Sí,7.1
+19/09/2017,21,Puebla,206,Zacapala,Sí,7.1
+19/09/2017,21,Puebla,209,Zapotitlán,Sí,7.1
+19/09/2017,21,Puebla,211,Zaragoza,Sí,7.1
+19/09/2017,29,Tlaxcala,1,Amaxac de Guerrero,Sí,7.1
+19/09/2017,29,Tlaxcala,2,Apetatitlán de Antonio Carvajal,Sí,7.1
+19/09/2017,29,Tlaxcala,5,Apizaco,Sí,7.1
+19/09/2017,29,Tlaxcala,9,Cuaxomulco,Sí,7.1
+19/09/2017,29,Tlaxcala,10,Chiautempan,Sí,7.1
+19/09/2017,29,Tlaxcala,14,Hueyotlipan,Sí,7.1
+19/09/2017,29,Tlaxcala,15,Ixtacuixtla de Mariano Matamoros,Sí,7.1
+19/09/2017,29,Tlaxcala,17,Mazatecochco de José María Morelos,Sí,7.1
+19/09/2017,29,Tlaxcala,18,Contla de Juan Cuamatzi,Sí,7.1
+19/09/2017,29,Tlaxcala,19,Tepetitla de Lardizábal,Sí,7.1
+19/09/2017,29,Tlaxcala,22,Acuamanala de Miguel Hidalgo,Sí,7.1
+19/09/2017,29,Tlaxcala,23,Natívitas,Sí,7.1
+19/09/2017,29,Tlaxcala,24,Panotla,Sí,7.1
+19/09/2017,29,Tlaxcala,25,San Pablo del Monte,Sí,7.1
+19/09/2017,29,Tlaxcala,26,Santa Cruz Tlaxcala,Sí,7.1
+19/09/2017,29,Tlaxcala,27,Tenancingo,Sí,7.1
+19/09/2017,29,Tlaxcala,28,Teolocholco,Sí,7.1
+19/09/2017,29,Tlaxcala,29,Tepeyanco,Sí,7.1
+19/09/2017,29,Tlaxcala,32,Tetlatlahuca,Sí,7.1
+19/09/2017,29,Tlaxcala,33,Tlaxcala,Sí,7.1
+19/09/2017,29,Tlaxcala,36,Totolac,Sí,7.1
+19/09/2017,29,Tlaxcala,38,Tzompantepec,Sí,7.1
+19/09/2017,29,Tlaxcala,40,Xaltocan,Sí,7.1
+19/09/2017,29,Tlaxcala,41,Papalotla de Xicohténcatl,Sí,7.1
+19/09/2017,29,Tlaxcala,42,Xicohtzinco,Sí,7.1
+19/09/2017,29,Tlaxcala,43,Yauhquemehcan,Sí,7.1
+19/09/2017,29,Tlaxcala,44,Zacatelco,Sí,7.1
+19/09/2017,29,Tlaxcala,48,La Magdalena Tlaltelulco,Sí,7.1
+19/09/2017,29,Tlaxcala,49,San Damián Texóloc,Sí,7.1
+19/09/2017,29,Tlaxcala,50,San Francisco Tetlanohcan,Sí,7.1
+19/09/2017,29,Tlaxcala,51,San Jerónimo Zacualpan,Sí,7.1
+19/09/2017,29,Tlaxcala,52,San José Teacalco,Sí,7.1
+19/09/2017,29,Tlaxcala,53,San Juan Huactzinco,Sí,7.1
+19/09/2017,29,Tlaxcala,54,San Lorenzo Axocomanitla,Sí,7.1
+19/09/2017,29,Tlaxcala,55,San Lucas Tecopilco,Sí,7.1
+19/09/2017,29,Tlaxcala,56,Santa Ana Nopalucan,Sí,7.1
+19/09/2017,29,Tlaxcala,57,Santa Apolonia Teacalco,Sí,7.1
+19/09/2017,29,Tlaxcala,58,Santa Catarina Ayometla,Sí,7.1
+19/09/2017,29,Tlaxcala,59,Santa Cruz Quilehtla,Sí,7.1
+19/09/2017,29,Tlaxcala,60,Santa Isabel Xiloxoxtla,Sí,7.1
+19/09/2017,30,Veracruz de Ignacio de la Llave,39,Coatzacoalcos,Sí,7.1
+19/09/2017,30,Veracruz de Ignacio de la Llave,48,Cosoleacaque,Sí,7.1
+19/09/2017,30,Veracruz de Ignacio de la Llave,70,Hidalgotitlán,Sí,7.1
+19/09/2017,30,Veracruz de Ignacio de la Llave,89,Jáltipan,Sí,7.1
+19/09/2017,30,Veracruz de Ignacio de la Llave,108,Minatitlán,Sí,7.1
+19/09/2017,30,Veracruz de Ignacio de la Llave,172,Texistepec,Sí,7.1

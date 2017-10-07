@@ -1,0 +1,23 @@
+{
+  "name"  : "Declaratoria de Desastre",
+  "type"  : "area",
+  "level" : ["city"],
+  "src"   : "/js/maps/declaratoria_desastre.csv",
+  "file"  : "csv",
+  "color" : 12,
+  "location" : {
+    "state" : "ID_ENTIDAD_FEDERATIVA",
+    "city"  : "ID_MUNICIPIO"
+  },
+  "values"  : ["MAGNITUD_SISMO"],
+  "data"    : ["ID_ENTIDAD_FEDERATIVA", "ENTIDAD_FEDERATIVA", "ID_MUNICIPIO", "MUNICIPIO", "DECLARATORIA_DESASTRE", "FECHA_EVENTO"],
+  "current" : {
+    "level"  : "city",
+    "value"  : "MAGNITUD_SISMO",
+    "method" : "sum"
+  },
+  "style" : {
+    "fillOpacity":0.5
+  },
+  "template" : "<%=name%> <div class='amount_label'><h5> Magnitud del Sismo: <strong><%=value%> : <%=MAGNITUD_SISMO%></strong></h5></div"
+}
