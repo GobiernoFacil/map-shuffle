@@ -311,7 +311,8 @@ select {
 		color: white;
 	} se oculta porque da error en chrome de windows */ }
 
-input.inputs {
+input.inputs,
+input[type="text"] {
   background: white;
   border: 1px solid #F4F2F2;
   border-radius: 0;
