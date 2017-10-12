@@ -375,7 +375,7 @@ define(function(require){
         var page    = 0,
             src2    = that.makeAPIURL(that.currentMap, page),
             item    = this.currentMap,
-            pageEl  = document.getElementById(this.settings.ui.pageSelector.controls.pageSelect);
+            pageEl  = document.getElementById(this.settings.ui.pageSelector.controls.pageSelect),
             totalEl = document.getElementById(this.settings.ui.pageSelector.controls.pageDisplay);
         
 
@@ -393,8 +393,8 @@ define(function(require){
 
           that.currentPage = data.page;
 
-          pageEl.value      = page + 1;
-          totalEl.innerHTML = that.totalPages;
+          if(pageEl) pageEl.value = page + 1;
+          if(totalEl) totalEl.innerHTML = that.totalPages;
         });
       }
       else{
@@ -1047,7 +1047,9 @@ define(function(require){
                      }),
               values = _.pluck(fa, "value");
 
-          url = url + field + "=" + values.join("|") + "&";
+          url = url + field + "=" + values.map(function(vl){
+            return "'" + vl + "'";
+          }).join("|") + "&";
         });
 
       }
