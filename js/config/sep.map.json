@@ -1,0 +1,46 @@
+{
+	"name": "Escuelas Abiertas al 12/10/2017",
+	"type": "area",
+	"level": ["state", "city"],
+	"src": "/js/maps/mapa_sep.csv",
+	"file": "csv",
+	"color": 12,
+	"location": {
+		"state": "ID_ENTIDAD_FEDERATIVA",
+		"city": "ID_MUNICIPIO"
+	},
+	"style": {
+		"fillOpacity": 0.8
+	},
+	"values": [],
+	"data": ["DESC_INFRAESTRUCTURA", "DIRECCION_ESCUELA", "NIVEL", "SOSTENIMIENTO", "ID_ENTIDAD_FEDERATIVA", "ENTIDAD_FEDERATIVA", "ID_MUNICIPIO", "MUNICIPIO"],
+	"dataSearch": ["ID_INFRAESTRUCTURA", "DESC_INFRAESTRUCTURA", "DIRECCION_ESCUELA", "NIVEL", "SOSTENIMIENTO", "ENTIDAD_FEDERATIVA", "MUNICIPIO"],
+	"current": {
+		"level": "state",
+		"method": "length"
+	},
+	"columns": {
+		"ID_INFRAESTRUCTURA": "Clave de la Escuela",
+		"DESC_INFRAESTRUCTURA": "Nombre",
+		"DIRECCION_ESCUELA": "Dirección",
+		"SOSTENIMIENTO": "Sostenimiento",
+		"ENTIDAD_FEDERATIVA": "Entidad Federativa",
+		"MUNICIPIO": "Municipio"
+	},
+	"filters": [{
+		"type": "state",
+		"field": "ID_ENTIDAD_FEDERATIVA"
+	}],
+	"extraFilters": [{
+			"type": "extra",
+			"field": "NIVEL",
+			"title": "Nivel"
+		},
+		{
+			"type": "extra",
+			"field": "SOSTENIMIENTO",
+			"title": "Sostenimiento"
+		}
+	],
+	"template": "<%=name%> <div class='amount_label'><h5> Escuelas: <strong><%=value%></strong></h5></div"
+}
