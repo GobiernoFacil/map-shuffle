@@ -37,6 +37,7 @@ define(function(require){
 
     var filterModule  = {
       filters      : [],
+      selectizeFil : [],
       cart         : cart,
       stateSelect  : null,
       citySelect   : null,
@@ -446,6 +447,8 @@ define(function(require){
 
         $select = $("#" + obj.id).selectize({items : ["rojo", "negro"]});
 
+        this.selectizeFil.push($select);
+
         this.enableFilteringV2(filter, $select);
 
         return item;
@@ -513,6 +516,11 @@ define(function(require){
           that.filters = [];
           that.cart.innerHTML = "";
           that.searchInputs.forEach(function(sr){sr.value = "";});
+
+          that.selectizeFil.forEach(function(sf){
+            sf[0].selectize.setValue(SELECTALL);
+          });
+          
           that.filter();
         });
       },
@@ -532,6 +540,11 @@ define(function(require){
           that.filters = [];
           that.cart.innerHTML = "";
           that.searchInputs.forEach(function(sr){sr.value = "";});
+
+          that.selectizeFil.forEach(function(sf){
+            sf[0].selectize.setValue(SELECTALL);
+          });
+
           that.filter();
         });
       },
@@ -817,6 +830,7 @@ define(function(require){
         this.filters = [];
         this.cart.innerHTML = "";
         this.searchInputs.forEach(function(sr){sr.value = "";});
+        this.selectizeFil = [];
       }
     };
 
