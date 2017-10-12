@@ -38,6 +38,7 @@ define(function(require){
     var filterModule  = {
       filters      : [],
       selectizeFil : [],
+      normalFil    : [],
       cart         : cart,
       stateSelect  : null,
       citySelect   : null,
@@ -255,6 +256,18 @@ define(function(require){
         this.enableFiltering(filter, select);
         this.stateSelect = select;
         return item;
+      },
+
+      resetDependentSelector : function(select){
+        var options = select.querySelectorAll("option");
+
+        for(var i=0; i< options.length; i++){
+          if(options[i].value != SELECTALL){
+            //console.log(options[i].value);
+            options[i].parentNode.removeChild(options[i]);
+          }
+        }
+
       },
 
       renderCitySelector : function(filter, container){
@@ -520,6 +533,18 @@ define(function(require){
           that.selectizeFil.forEach(function(sf){
             sf[0].selectize.setValue(SELECTALL);
           });
+
+          that.normalFil.forEach(function(nf){
+            nf.value = SELECTALL;
+          });
+
+          if(that.citySelect){
+            that.resetDependentSelector(that.citySelect);
+          }
+
+          if(that.unitSelect){
+            that.resetDependentSelector(that.unitSelect);
+          }
           
           that.filter();
         });
@@ -543,6 +568,10 @@ define(function(require){
 
           that.selectizeFil.forEach(function(sf){
             sf[0].selectize.setValue(SELECTALL);
+          });
+
+          that.normalFil.forEach(function(nf){
+            nf.value = SELECTALL;
           });
 
           that.filter();
@@ -622,6 +651,9 @@ define(function(require){
         var that = this,
             newFilter,
             parentFilter;
+
+        this.normalFil.push(select);
+
         select.addEventListener("change", function(e){
 
           var value = select.value,
@@ -678,7 +710,7 @@ define(function(require){
 
           that.filter();
 
-          select.value = SELECTALL;
+          // select.value = SELECTALL;
         });
       },
 
@@ -827,10 +859,16 @@ define(function(require){
 
       },
       _clearFilters : function(){
-        this.filters = [];
+        this.filters        = [];
         this.cart.innerHTML = "";
-        this.searchInputs.forEach(function(sr){sr.value = "";});
-        this.selectizeFil = [];
+        this.selectizeFil   = [];
+        this.normalFil      = [];
+        this.citySelect     = null;
+        this.unitSelect     = null;
+
+        this.searchInputs.forEach(function(sr){
+          sr.value = "";
+        });
       }
     };
 
