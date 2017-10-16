@@ -36,7 +36,8 @@
     {"type" : "year", "field" : "ciclo", "title" : "Ciclo"}
   ],
   "defaultFilters" : [
-    {"type" : "state", "value" : 21, "parentFilter" : null}
+    {"type" : "state", "value" : 19, "parentFilter" : null},
+    {"type" : "year", "value" : 2017, "parentFilter" : null}
   ],
   "graphs" : {
     "graph1" : {
