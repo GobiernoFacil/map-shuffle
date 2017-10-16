@@ -11,7 +11,8 @@ define(function(require){
   underscore   = require("underscore"),
   FIlterModule = require("filter.module.map"),
   TEMPLATE     = require("text!templates/bars-app.html"),
-  CONFIG       = require("json!config/config.map.json");
+  CONFIG       = require("json!config/config.map.json"),
+  defaultLabelA = "todos los ramos, todo México";
 
   var GraphsControllerConstructor = function(parent){
   	var UI         = CONFIG.ui.barsTool,
@@ -20,7 +21,7 @@ define(function(require){
         config     = null,
         graphAFilters,
         graphBFilters,
-        graphCFilters = 1,
+        graphCFilters,
         graphDFilters;
 
 
@@ -177,16 +178,19 @@ define(function(require){
             xAxis         = this.getXaxis(this.filtersA, _xAxis, this.dataA),
             zAxis         = this.getZaxis(this.filtersA, _zAxis),
             datasetA      = null,
-            defaultLabelA = "todos los ramos";
+            counter,
+            dataSets = [],
+            chartData;
 
         if(zAxis && locations){
-          var dataSets = [];
+          console.log("zAxis && locations");
+          counter = 0;
           locations.forEach(function(loc, i){
             var stack = 'Stack ' + i;
             zAxis.forEach(function(zx, j){
                 dataSets.push({
-                  label : _zAxis.type == "branch" ? _.where(parent.lists.ramosName.branches, {id : String(zx)})[0].name : zx,
-                  backgroundColor : _config.colors[i],
+                  label :  (loc.label + " : ") + (_zAxis.type == "branch" ? _.where(parent.lists.ramosName.branches, {id : String(zx)})[0].name : zx),
+                  backgroundColor : _config.colors[counter],
                   stack: stack,
                   data : xAxis.map(function(item){
                     return d3.sum(that.dataA.filter(function(el){
@@ -196,17 +200,20 @@ define(function(require){
                     });
                   }, this)
                 });
+              counter++;
             }, this); 
 
           });
 
-          var chartData = {
-                labels   : xAxis,
-                datasets : dataSets
-              };
+          chartData = {
+            labels   : xAxis,
+            datasets : dataSets
+          };
+
+          console.log(counter);
         }
         else if(locations){
-          var dataSets = [];
+          console.log("locations");
           locations.forEach(function(loc, i){
             dataSets.push({
               label : loc.label,
@@ -216,22 +223,20 @@ define(function(require){
                 return d3.sum(this.dataA.filter(function(el){
                         return el[_xAxis.field] == item &&el[loc.field] == loc.value;
                     }), function(d){
-                        return +d[_config.yAxis.field]
+                        return +d[_config.yAxis.field];
                     });
               }, this)
             });
           }, this);
 
-          var chartData = {
-                labels   : xAxis,
-                datasets : dataSets
-              };
+          chartData = {
+            labels   : xAxis,
+            datasets : dataSets
+          };
         }
 
         else if(zAxis){
-              var dataSets = [];
-
-
+          console.log("zaxis");
               zAxis.forEach(function(zx, i){
                 dataSets.push({
                   label : _zAxis.type == "branch" ? _.where(parent.lists.ramosName.branches, {id : String(zx)})[0].name : zx,
@@ -247,43 +252,43 @@ define(function(require){
                 });
               }, this); 
 
-              var chartData = {
-                labels   : xAxis,
-                datasets : dataSets
-              };
+          chartData = {
+            labels   : xAxis,
+            datasets : dataSets
+          };
         }
 
         else{
+          console.log("other", xAxis);
               var datasetA = {
                 label : defaultLabelA,
-                backgroundColor : "red",
+                backgroundColor : _config.colors[0],
                 stack: 'Stack 0',
-                data : yAxis.map(function(item){
+                data : xAxis.map(function(item){
                     var search = {};
 
 
-                    search[_yAxis.field] = item;
+                    search[_xAxis.field] = item;
+
+                    console.log(search);
                     return d3.sum(this.dataA.filter(function(el){
-                        return el[_yAxis.field] == item
+                        return el[_xAxis.field] == item
                     }), function(d){
                         return +d[_config.yAxis.field]
                     })
                 }, this)
               };
 
-              var chartData = {
-                labels   : xAxis,
-                datasets : [datasetA]
-              };
+          chartData = {
+            labels   : xAxis,
+            datasets : [datasetA]
+          };
         }
 
 
-        if(this.graphA){
-
-          this.graphA.destroy();
+        if(this.graphA){ this.graphA.destroy(); }
 
           var ctx = this.canvasA.getContext("2d");
-
           this.graphA = new Chart(ctx, {
           type : "bar",
           data : chartData,
@@ -310,40 +315,7 @@ define(function(require){
               }]
             }
           }
-        });
-        }
-        else{
-          var ctx = this.canvasA.getContext("2d");
-          this.graphA = new Chart(ctx, {
-          type : "bar",
-          data : chartData,
-          options : {
-            title : {
-              display : true, 
-              text : parent.currentMap.config.name
-            },
-            tooltips : {
-              mode : "index",
-              intersect : false
-            },
-            responsive : true,
-            scales : {
-              xAxes : [{
-                stacked : true
-              }],
-              yAxes : [{
-                stacked : true,
-                ticks: {
-                // Include a dollar sign in the ticks
-                  callback: function(value, index, values) {
-                    return '$' + value.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-                  }
-                }
-              }]
-            }
-          }
           });
-        }
 
       },
 
