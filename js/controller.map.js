@@ -944,6 +944,7 @@ define(function(require){
         if(this.barsTool) this.barsTool.render();
         if(this.searchTool) this.searchTool.render();
 
+        if(!conf.api) this.filterModule.reduceFilters();
         return;
       }
 
@@ -1024,6 +1025,7 @@ define(function(require){
         if(that.barsTool) that.barsTool.render();
         if(that.searchTool) that.searchTool.render();
 
+        if(!conf.api) that.filterModule.reduceFilters();
         that.loaderStop();
       });
     },

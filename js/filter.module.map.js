@@ -49,6 +49,38 @@ define(function(require){
       searchInput  : null,
       searchInputs : [],
       latestFilter : null,
+      stateList    : [],
+      cityList     : [],
+      branchList   : [],
+      unitList     : [],
+
+      reduceFilters : function(){
+        console.log(parent.currentMap.data, parent.currentMap.config);
+        var conf  = parent.currentMap.config.filters,
+            _data = parent.currentMap.data,
+            state,
+            city,
+            branch, unit;
+        
+        if(!conf){
+          this.stateList  = [];
+          this.cityList   = [];
+          this.branchList = [];
+          this.unitList   = [];
+          return;
+        }
+
+        state  = _.find(conf, {type : "state"});
+        city   = _.find(conf, {type : "city"});
+        branch = _.find(conf, {type : "branch"});
+        unit   = _.find(conf, {type : "unit"});
+
+        this.stateList  = state ? _.uniq(_.pluck(_data, state.field)) : [];
+        this.cityList   = city ? _.uniq(_.pluck(_data, parent.cityID)) : [];
+        this.branchList = branch ? _.uniq(_.pluck(_data, branch.field)) : [];
+        this.unitList   = unit ? _.uniq(_.pluck(_data, parent.unitID)) : [];
+
+      },
 
       filter : function(){
 
@@ -859,6 +891,9 @@ define(function(require){
 
       },
       _clearFilters : function(){
+
+        console.log(parent.currentMap);
+
         this.filters        = [];
         this.cart.innerHTML = "";
         this.selectizeFil   = [];
