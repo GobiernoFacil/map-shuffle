@@ -17,7 +17,7 @@
   "current" : {
     "level"  : "city",
     "value"  : "monto",
-    "method" : "length",
+    "method" : "sum",
     "unit"   : "proyectos"
   },
   "filters" : [
@@ -55,5 +55,5 @@
       "colors" : ["red", "green", "blue", "yellow", "purple", "pink", "black", "orange", "gray", "maroon", "aquamarine", "chartreuse", "cyan", "darkorange", "deeppink", "gold"]
     }
   },
-  "template" : "<%=name%> <div class='amount_label'><h5> Registros: <strong><%=value%></strong></h5></div><div class='amount_label'><h5> Monto: <strong><%=monto%></strong></h5></div>"
+  "template" : "<%=name%> <div class='amount_label'><h5> Aprobado: <strong>$<%=value%></strong></h5></div><div class='amount_label'><h5> Pagado: <strong>$<%=monto%></strong></h5></div>"
 }
