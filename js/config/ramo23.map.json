@@ -27,9 +27,6 @@
   "extraFilters" : [
     {"type" : "extra", "field" : "Fondo", "title" : "Clave de programas"}
   ],
-  "defaultFilters" : [
-    {"type" : "extra", "field": "Fondo", "value" : "FONDO DE CAPITALIDAD", "parentFilter" : null}
-  ],
   "graphs" : {
     "graph1" : {
       "title" : "Monto aprobado en 2017",
