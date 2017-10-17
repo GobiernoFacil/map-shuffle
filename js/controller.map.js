@@ -923,6 +923,7 @@ define(function(require){
     //
     getLayer : function(item){
       this.filterModule._clearFilters();
+      this.map.closePopup();
 
       if(item.data){
         // * elimina todos los layers del mapa
