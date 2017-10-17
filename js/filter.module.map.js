@@ -55,7 +55,6 @@ define(function(require){
       unitList     : [],
 
       reduceFilters : function(){
-        console.log(parent.currentMap.data, parent.currentMap.config);
         var conf  = parent.currentMap.config.filters,
             _data = parent.currentMap.data,
             state,
@@ -295,7 +294,6 @@ define(function(require){
 
         for(var i=0; i< options.length; i++){
           if(options[i].value != SELECTALL){
-            //console.log(options[i].value);
             options[i].parentNode.removeChild(options[i]);
           }
         }
@@ -892,7 +890,6 @@ define(function(require){
       },
       _clearFilters : function(){
 
-        console.log(parent.currentMap);
 
         this.filters        = [];
         this.cart.innerHTML = "";

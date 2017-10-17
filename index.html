@@ -185,9 +185,16 @@
           filterChange : function(filters, currentMap, currentData){
             var header = document.getElementById("GF-SHCP-MAP-NAME");
             header.innerHTML = currentMap.config.name;
+
           },
 
           filterInitialize : function(app){
+          },
+
+          searchInitialize : function(searchModule, currentMap){
+            var header = document.getElementById("GFSHCP-SOME-MAP-TITLE");
+            header.innerHTML = currentMap.config.name;
+
           }
         },
 

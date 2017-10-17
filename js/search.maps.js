@@ -112,6 +112,10 @@ define(function(require){
         this.filterModule = new FIlterModule(parent, filterCart, this.updateData, null, pageSize);
 
         this.renderFilters();
+
+        if(parent.callbacks && parent.callbacks.searchInitialize){
+          parent.callbacks.searchInitialize(this, currentMap);
+        }
       },
 
       renderHeaders : function(){
