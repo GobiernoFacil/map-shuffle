@@ -945,7 +945,8 @@ define(function(require){
         if(this.barsTool) this.barsTool.render();
         if(this.searchTool) this.searchTool.render();
 
-        if(!conf.api) this.filterModule.reduceFilters();
+
+        if(!item.config.api) this.filterModule.reduceFilters();
         return;
       }
 
