@@ -1,29 +1,6 @@
 define({
   "states": [
-    {
-      "id": 1,
-      "name": "Aguascalientes",
-      "url": "aguascalientes",
-      "clave_inegi": "01000",
-      "lat": 22.034027099609,
-      "lng": -102.36222457886
-    },
-    {
-      "id": 2,
-      "name": "Baja California",
-      "url": "baja-california",
-      "clave_inegi": "02000",
-      "lat": 30.35791683197,
-      "lng": -115.53708267212
-    },
-    {
-      "id": 3,
-      "name": "Baja California Sur",
-      "url": "baja-california-sur",
-      "clave_inegi": "03000",
-      "lat": 25.435832977295,
-      "lng": -112.29750061035
-    },
+    
     {
       "id": 4,
       "name": "Campeche",

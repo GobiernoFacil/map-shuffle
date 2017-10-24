@@ -98,28 +98,70 @@ define(function(require){
     	},
 
       _enableToggleButtons : function(config){
-        var btn1 = parent.settings.ui.barsTool.graph1Btn,
-            btn2 = parent.settings.ui.barsTool.graph2Btn,
-            btn3 = parent.settings.ui.barsTool.graph3Btn,
-            btn4 = parent.settings.ui.barsTool.graph4Btn;
+        var _btn1 = parent.settings.ui.barsTool.graph1Btn,
+            _btn2 = parent.settings.ui.barsTool.graph2Btn,
+            _btn3 = parent.settings.ui.barsTool.graph3Btn,
+            _btn4 = parent.settings.ui.barsTool.graph4Btn,
+            btn1  = document.getElementById(_btn1),
+            btn2  = document.getElementById(_btn2),
+            btn3  = document.getElementById(_btn3),
+            btn4  = document.getElementById(_btn4),
+            graph1 = document.getElementById(UI.graph1),
+            graph2 = document.getElementById(UI.graph2),
+            graph3 = document.getElementById(UI.graph3),
+            graph4 = document.getElementById(UI.graph4);
 
         if(config.graphs.graph1){
-          // graphs
-          if(this.graphB){
-            console.log(this.graphB);
-          }
-          else{
-            console.log(this.graphB);
-          }
+          if(graph2) graph2.style.display = "none";
+          if(graph3) graph3.style.display = "none";
+          if(graph4) graph4.style.display = "none";
         }
         else if(config.graphs.graph2){
-
+          if(graph3) graph3.style.display = "none";
+          if(graph4) graph4.style.display = "none";
         }
         else if(config.graphs.graph3){
-          
+          if(graph4) graph4.style.display = "none";
         }
-        else{
-          
+
+        if(btn1 && graph1){
+          btn1.addEventListener("click", function(e){
+            e.preventDefault();
+            graph1.style.display = "block";
+            if(graph2) graph2.style.display = "none";
+            if(graph3) graph3.style.display = "none";
+            if(graph4) graph4.style.display = "none";
+          });
+        }
+
+        if(btn2 && graph2){
+          btn2.addEventListener("click", function(e){
+            e.preventDefault();
+            graph2.style.display = "block";
+            if(graph1) graph1.style.display = "none";
+            if(graph3) graph3.style.display = "none";
+            if(graph4) graph4.style.display = "none";
+          });
+        }
+
+        if(btn3 && graph3){
+          btn3.addEventListener("click", function(e){
+            e.preventDefault();
+            graph3.style.display = "block";
+            if(graph2) graph2.style.display = "none";
+            if(graph1) graph1.style.display = "none";
+            if(graph4) graph4.style.display = "none";
+          });
+        }
+
+        if(btn4 && graph4){
+          btn4.addEventListener("click", function(e){
+            e.preventDefault();
+            graph4.style.display = "block";
+            if(graph2) graph2.style.display = "none";
+            if(graph3) graph3.style.display = "none";
+            if(graph1) graph1.style.display = "none";
+          });
         }
       },
 

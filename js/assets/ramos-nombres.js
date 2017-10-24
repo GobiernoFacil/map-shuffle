@@ -16,14 +16,8 @@ branches : [
     "id": "4",
     "name": "Gobernación"
   },
-  {
-    "id": "5",
-    "name": "Relaciones Exteriores"
-  },
-  {
-    "id": "6",
-    "name": "Hacienda y Crédito Público"
-  },
+
+
   {
     "id": "7",
     "name": "Defensa Nacional"
