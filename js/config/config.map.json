@@ -76,8 +76,10 @@
       "graph2"              : "GF-SHCP-GRAPHS-B",
       "graph3"              : "GF-SHCP-GRAPHS-C",
       "graph4"              : "GF-SHCP-GRAPHS-D",
-
-
+      "graph1Btn"           : "GF-SHCP-GRAPHS-A-btn",
+      "graph2Btn"           : "GF-SHCP-GRAPHS-B-btn",
+      "graph3Btn"           : "GF-SHCP-GRAPHS-C-btn",
+      "graph4Btn"           : "GF-SHCP-GRAPHS-D-btn",
       "singleLocation"      : "GF-SHCP-bars-app-single-location",
       "multipleLocations"   : "GF-SHCP-bars-app-multiple-locations",
       "singleLocationBtn"   : "GF-SHCP-bars-app-single-location-link",

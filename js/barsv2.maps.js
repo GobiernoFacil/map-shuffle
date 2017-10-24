@@ -91,7 +91,37 @@ define(function(require){
         	//this.setupGraphD();
           graphDFilters = this._setupGraph(UI.graph4, this.updateGraphD, "canvasD");
         }
+
+        this._enableToggleButtons(config);
+
+
     	},
+
+      _enableToggleButtons : function(config){
+        var btn1 = parent.settings.ui.barsTool.graph1Btn,
+            btn2 = parent.settings.ui.barsTool.graph2Btn,
+            btn3 = parent.settings.ui.barsTool.graph3Btn,
+            btn4 = parent.settings.ui.barsTool.graph4Btn;
+
+        if(config.graphs.graph1){
+          // graphs
+          if(this.graphB){
+            console.log(this.graphB);
+          }
+          else{
+            console.log(this.graphB);
+          }
+        }
+        else if(config.graphs.graph2){
+
+        }
+        else if(config.graphs.graph3){
+          
+        }
+        else{
+          
+        }
+      },
 
       _setupGraph : function(graphId, updateFunction, container){
         var section       = document.getElementById(graphId),
