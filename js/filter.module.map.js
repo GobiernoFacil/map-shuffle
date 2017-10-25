@@ -535,13 +535,29 @@ define(function(require){
         li.innerHTML = html;
 
         li.setAttribute("data-type", filter.type);
+        li.setAttribute("data-value", filter.value);
 
         container.appendChild(li);
 
         li.addEventListener("click", function(e){
+          var el = this;
           this.parentNode.removeChild(this);
           that.filters.splice(that.filters.indexOf(filter), 1);
           that.filter();
+
+          that.normalFil.forEach(function(fil){
+            //console.log(fil, el);
+            if(fil.value == el.getAttribute("data-value") && fil.getAttribute("data-field") == el.getAttribute("data-type")){
+              fil.value = SELECTALL;
+            }
+          });
+
+          that.selectizeFil.forEach(function(fil){
+            // console.log(fil[0].selectize.getValue());
+            if(fil[0].selectize.getValue() == el.getAttribute("data-value") /*&& fil[0].getAttribute("data-field") == el.getAttribute("data-type")*/){
+              fil[0].selectize.setValue(SELECTALL);
+            }
+          });
         });
       },
 
