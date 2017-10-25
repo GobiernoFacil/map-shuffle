@@ -23,7 +23,7 @@ define(function(require){
       underscore  = require("underscore"),
       classybrew  = require("classyBrew"),
       APIKEY      = "AIzaSyDZXX_dqYAZ9oLxA28sN5ztg3qNBArk80I",
-      gMaps       = require("async!https://maps.googleapis.com/maps/api/js?key=AIzaSyDZXX_dqYAZ9oLxA28sN5ztg3qNBArk80I");
+      //gMaps       = require("async!https://maps.googleapis.com/maps/api/js?key=AIzaSyDZXX_dqYAZ9oLxA28sN5ztg3qNBArk80I");
 
       // [3] obtiene los conjuntos de datos
       // ----------------------------------------------------------------------
@@ -233,7 +233,7 @@ define(function(require){
       this.enableUserLocation();
 
       // [6.2] HABILITA EL REVERSE GEOCODING
-      this.enableReverseGeocofing();
+      //this.enableReverseGeocofing();
 
       // [7] LOADER 
       this.loaderStop();
@@ -814,9 +814,11 @@ define(function(require){
         this.map.removeLayer(this.cities);
       }
 
+      /*
       if(this.extra){
         this.cleanExtraLayer();
       }
+      */
     },
 
     //
@@ -826,6 +828,9 @@ define(function(require){
     cleanExtraLayer : function(){
       if(this.extra){
         this.map.removeLayer(this.extra);
+        var div      = document.getElementById(this.settings.ui.extraMapSelector),
+            select   = div.querySelector("select");
+        select.value = SELECTALL;
       }
       else{
       }
@@ -921,6 +926,7 @@ define(function(require){
     //
     //
     getLayer : function(item){
+      this.cleanExtraLayer();
       this.filterModule._clearFilters();
       this.map.closePopup();
 
