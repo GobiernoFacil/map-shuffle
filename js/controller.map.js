@@ -612,6 +612,7 @@ define(function(require){
     //
     renderStateLayer : function(item, container, geojson, style){
       // [0] genera un referencia a la app
+      //console.log(geojson);
       var that = this,
       // [1] genera el template del popup
           t    = _.template(item.config.template);
@@ -625,9 +626,7 @@ define(function(require){
                        // _estado2_
                         var _d = Object.create(feature.properties.data);
                         for(var key in _d){
-                          if(_d.hasOwnProperty(key)){
-                            _d[key] = that.currentMap.config.values.indexOf(key) != -1 ? that.numberFormat(_d[key]) : _d[key];
-                          }
+                          _d[key] = that.currentMap.config.values.indexOf(key) != -1 ? that.numberFormat(_d[key]) : _d[key];
                         }
 
                         _d.value = that.numberFormat(_d.value);
@@ -1289,6 +1288,7 @@ define(function(require){
         var id = state.properties.CVE_ENT,
             d  = _.find(data, {id : id});
 
+        console.log(d);
         state.properties.data = d;
       });
 
@@ -1792,6 +1792,7 @@ define(function(require){
         }  
       }
       css = style;
+      console.log(feature);
       css.fillColor = this.brew.getColorInRange(feature.properties.data.value);
 
       return css;

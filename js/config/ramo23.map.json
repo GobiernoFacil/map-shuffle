@@ -15,9 +15,9 @@
   "values"  : ["monto", "Pagado"],
   "data"    : ["clave_de_programa", "Fondo", "entidad", "municipio", "proyecto"],
   "current" : {
-    "level"  : "city",
+    "level"  : "state",
     "value"  : "monto",
-    "method" : "sum",
+    "method" : "length",
     "unit"   : "proyectos"
   },
   "filters" : [
@@ -55,5 +55,5 @@
       "colors" : ["red", "green", "blue", "yellow", "purple", "pink", "black", "orange", "gray", "maroon", "aquamarine", "chartreuse", "cyan", "darkorange", "deeppink", "gold"]
     }
   },
-  "template" : "<%=name%> <div class='amount_label'><h5> Aprobado: <strong>$<%=value%></strong></h5></div><div class='amount_label'><h5> Pagado: <strong>$<%=monto%></strong></h5></div>"
+  "template" : "<%=name%> <div class='amount_label'><h5> Proyectos: <strong><%=value%></strong></h5></div><div class='amount_label'><h5> Pagado: <strong>$<%=Pagado%></strong></h5></div><div class='amount_label'><h5> Aprobado: <strong>$<%=monto%></strong></h5></div>"
 }
