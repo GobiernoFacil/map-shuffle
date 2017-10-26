@@ -124,6 +124,7 @@
     "geolocationField" : "GF-SHCP-geolocation-input",
     "projectCounter"   : "GF-SHCP-project-counter",
     "colorGuide"       : "GF-SHCP-color-guide",
+    "colorGuideX"       : "GF-SHCP-color-guide-x",
     "embedForm"        : "GF-SHCP-embed-form",
     "downloadDataBtn"  : "GF-SHCP-get-data"
   },

@@ -191,6 +191,7 @@ define(function(require){
       this.updateUILevelSelectorChange  = this.updateUILevelSelectorChange.bind(this);
       this.goToUserLocation             = this.goToUserLocation.bind(this);
       this.updateData                   = this.updateData.bind(this);
+      //this.renderColorGuideX            = this.renderColorGuideX.bind(this);
       
       // [3] INICIA EL MAPA DE LEAFLET
       // ----------------------------------------------------------------------
@@ -549,6 +550,7 @@ define(function(require){
     //
     //
     renderExtraLayer : function(item){
+      //this.renderColorGuideX();
       // [1] elimina el layer anterior
       //
       this.cleanExtraLayer(true);
@@ -583,6 +585,8 @@ define(function(require){
         this.extraBrew        = this._colorMixer(item, this.currentExtraData);
         this.renderCityLayer(item, "extra", xxxxx, this._cityExtraStyle);
       }
+
+      this.renderColorGuideX();
       /*
       // C) Es un mapa de puntos definidos por latitud y longitud
       else{
@@ -835,6 +839,7 @@ define(function(require){
           var div      = document.getElementById(this.settings.ui.extraMapSelector),
               select   = div.querySelector("select");
           select.value = SELECTALL;
+          this.renderColorGuideX("clear");
         }
       }
       else{
@@ -1459,6 +1464,42 @@ define(function(require){
       el.appendChild(ul);
     },
 
+    renderColorGuideX : function(clear){
+      var id   = this.settings.ui.colorGuideX,
+          el   = document.getElementById(id),
+          ul   = document.createElement("ul"),
+          li   = _.template(COLORGUIDE),
+          grades = this.extraBrew ? this.extraBrew.getBreaks() : null,
+          colors = this.extraBrew ? this.extraBrew.getColors() : null;
+
+
+      if(clear){
+        el.innerHTML     = "";
+        el.style.display = "none";
+        return;
+      }
+
+      el.innerHTML     = "";
+      el.style.display = "block";
+
+      colors.forEach(function(color, i){
+        var from = this.numberFormat(grades[i]),
+            to   = this.numberFormat(grades[i+1])
+            data = {
+              from  : from,
+              to    : to,
+              color : color
+            },
+            _li = document.createElement("li");
+        
+        _li.innerHTML = li(data);
+
+        ul.appendChild(_li);
+      }, this);
+
+      el.appendChild(ul);
+    },
+
     //
     // EL PANEL DE SELECTOR DE MAPA
     // ---------------------------------------------
@@ -1744,6 +1785,7 @@ define(function(require){
 
       if(!value && value != 0){
         this.cleanExtraLayer();
+        //this.renderColorGuideX("clear");
         return;
       }
 
