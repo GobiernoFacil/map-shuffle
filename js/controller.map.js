@@ -23,7 +23,7 @@ define(function(require){
       underscore  = require("underscore"),
       classybrew  = require("classyBrew"),
       APIKEY      = "AIzaSyDZXX_dqYAZ9oLxA28sN5ztg3qNBArk80I",
-      //gMaps       = require("async!https://maps.googleapis.com/maps/api/js?key=AIzaSyDZXX_dqYAZ9oLxA28sN5ztg3qNBArk80I");
+      gMaps       = require("async!https://maps.googleapis.com/maps/api/js?key=AIzaSyDZXX_dqYAZ9oLxA28sN5ztg3qNBArk80I");
 
       // [3] obtiene los conjuntos de datos
       // ----------------------------------------------------------------------
@@ -233,7 +233,7 @@ define(function(require){
       this.enableUserLocation();
 
       // [6.2] HABILITA EL REVERSE GEOCODING
-      //this.enableReverseGeocofing();
+      this.enableReverseGeocofing();
 
       // [7] LOADER 
       this.loaderStop();
@@ -551,7 +551,7 @@ define(function(require){
     renderExtraLayer : function(item){
       // [1] elimina el layer anterior
       //
-      this.cleanExtraLayer();
+      this.cleanExtraLayer(true);
 
       // [2] actualiza las referencia internas
       //
@@ -559,6 +559,7 @@ define(function(require){
       this.currentExtraMap   = item;
       // * el id interno del mapa desplegado
       this.currentExtraMapId = item.index;
+
 
       // [3] despliega el mapa según el tipo
       //
@@ -573,8 +574,10 @@ define(function(require){
       
       // B) Es un mapa de área por municipio
       else if(item.config.current.level == "city"){
- 
-        this._addKeyToCities(item.data, item.config, item.config.location.city);
+        if(!item.data[0][this.cityID]){
+          this._addKeyToCities(item.data, item.config, item.config.location.city);
+        }
+
         this.currentExtraData = this._agregateDataByCity(item, item.data);
         var xxxxx = this._mapCityGeojson(this.currentExtraData);
         this.extraBrew        = this._colorMixer(item, this.currentExtraData);
@@ -612,7 +615,6 @@ define(function(require){
     //
     renderStateLayer : function(item, container, geojson, style){
       // [0] genera un referencia a la app
-      //console.log(geojson);
       var that = this,
       // [1] genera el template del popup
           t    = _.template(item.config.template);
@@ -825,12 +827,15 @@ define(function(require){
     // ELIMINA EL LAYER EXTRA DEL MAPA
     //
     //
-    cleanExtraLayer : function(){
+    cleanExtraLayer : function(softReset){
       if(this.extra){
         this.map.removeLayer(this.extra);
-        var div      = document.getElementById(this.settings.ui.extraMapSelector),
-            select   = div.querySelector("select");
-        select.value = SELECTALL;
+
+        if(!softReset){
+          var div      = document.getElementById(this.settings.ui.extraMapSelector),
+              select   = div.querySelector("select");
+          select.value = SELECTALL;
+        }
       }
       else{
       }
@@ -1294,7 +1299,6 @@ define(function(require){
         var id = state.properties.CVE_ENT,
             d  = _.find(data, {id : id});
 
-        console.log(d);
         state.properties.data = d;
       });
 
@@ -1798,7 +1802,6 @@ define(function(require){
         }  
       }
       css = style;
-      console.log(feature);
       css.fillColor = this.brew.getColorInRange(feature.properties.data.value);
 
       return css;
