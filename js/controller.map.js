@@ -1941,10 +1941,11 @@ define(function(require){
         return null;
       }
 
+      //console.log(this.settings.mapGeometry.defaultLevels, item.config.colorLevels);
 
       brew = new classyBrew();
       brew.setSeries(_data);
-      brew.setNumClasses(7);
+      brew.setNumClasses(item.config.colorLevels ? item.config.colorLevels : this.settings.mapGeometry.defaultLevels);
       brew.setColorCode(brew.getColorCodes()[color]);
       brew.classify('jenks');
 

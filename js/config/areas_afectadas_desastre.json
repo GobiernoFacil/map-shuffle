@@ -1,6 +1,7 @@
 {
   "name"  : "Declaratoria de Desastre",
   "type"  : "area",
+  "colorLevels" : 3,
   "level" : ["city"],
   "src"   : "/js/maps/declaratoria_desastre.csv",
   "file"  : "csv",
