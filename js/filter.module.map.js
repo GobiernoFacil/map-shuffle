@@ -21,12 +21,12 @@ define(function(require){
   SELECTALL            = "tooooooooodo",
   SELECTALLSTATES      = "Todo México",
   SELECTSTATELABEL     = "Estado",
-  SELECTEMPTYCITY      = "",
+  SELECTEMPTYCITY      = "Debes seleccionar un estado primero",
   SELECTALLCITIES      = "Selecciona un municipio",
   SELECTCITYLABEL      = "Municipio",
   SELECTALLBRANCHES    = "Todos los ramos",
   SELECTBRANCHLABEL    = "Ramo",
-  SELECTEMPTYUNIT      = "",
+  SELECTEMPTYUNIT      = "Debes seleccionar un ramo primero",
   SELECTALLUNITS       = "Selecciona una unidad ejecutora",
   SELECTUNITLABEL      = "Unidad ejecutora",
   CLEARCLASS           = "GF-SHCP-clear-filters",
@@ -289,12 +289,23 @@ define(function(require){
         return item;
       },
 
-      resetDependentSelector : function(select){
+      resetDependentSelector : function(select, type){
         var options = select.querySelectorAll("option");
 
         for(var i=0; i< options.length; i++){
           if(options[i].value != SELECTALL){
             options[i].parentNode.removeChild(options[i]);
+          }
+          else{
+            if(type == "city"){
+              options[i].innerHTML = SELECTEMPTYCITY;
+            }
+            else if(type == "unit"){
+              options[i].innerHTML = SELECTEMPTYUNIT;
+            }
+            else{
+              return;
+            }
           }
         }
 
@@ -585,11 +596,11 @@ define(function(require){
           });
 
           if(that.citySelect){
-            that.resetDependentSelector(that.citySelect);
+            that.resetDependentSelector(that.citySelect, "city");
           }
 
           if(that.unitSelect){
-            that.resetDependentSelector(that.unitSelect);
+            that.resetDependentSelector(that.unitSelect, "unit");
           }
           
           that.filter();
