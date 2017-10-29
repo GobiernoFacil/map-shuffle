@@ -143,6 +143,17 @@ define(function(require){
             apiRes = d;
             controller.renderItems(0);
             controller.renderPagination();
+
+            //console.log(download, data, "api");
+
+            if(data.length){
+              download.disabled = false;
+              download.innerHTML = "Descargar";
+            }
+            else{
+              download.disabled = true;
+              download.innerHTML = "Sin resultados";
+            }
           });
         }
         else{
@@ -151,6 +162,17 @@ define(function(require){
 
           controller.renderItems(0);
           controller.renderPagination();
+
+          //console.log(download, data, "normal");
+
+          if(data.length){
+              download.disabled = false;
+              download.innerHTML = "Descargar";
+            }
+            else{
+              download.disabled = true;
+              download.innerHTML = "Sin resultados";
+            }
         }
       },
 
