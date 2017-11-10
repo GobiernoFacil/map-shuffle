@@ -42,8 +42,8 @@
     "graph1" : {
       "title" : "Monto total invertido por año",
       "xAxis" : {
-        "field" : "ciclo",
-        "title" : "año",
+        "field" : "ramo",
+        "title" : "Ramo",
         "type"  : null
       },
       "yAxis" : {
@@ -51,8 +51,8 @@
         "title" : "monto total invertido"
       },
       "zAxis" : {
-        "field" : "ramo",
-        "title" : "ramo",
+        "field" : "ciclo",
+        "title" : "Ciclo",
         "type"  : "branch"
       },
       "maxLocations" : 5,
