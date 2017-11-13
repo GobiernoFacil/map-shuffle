@@ -4,8 +4,8 @@
   "multiple" : true,
   "disable" : [0,0],
   "level" : [],
-  "src"   : "/js/maps/opa.json",
-  "file"  : "json",
+  "src"   : "/js/maps/opa.csv",
+  "file"  : "csv",
   "link"  : {
     "url"    : "/opa.html",
     "column" : "key"
@@ -19,51 +19,55 @@
     "lng" : "lng",
     "state" : "state"
   },
-  "values"     : ["monto_total_inversion", "ejercido"],
-  "data"       : ["monto_total_inversion", "ejercido", "key","name","ramo","unidad","state","lat","lng","advance","ciclo","classification"],
-  "dataSearch" : ["monto_total_inversion", "ejercido", "key","name","ramo","unidad","state","advance","ciclo","classification"],
+  "values"     : ["MONTO_PPEF","APROBADO","MODIFICADO","EJERCIDO","AVANCE_FISICO","MONTO_TOTAL_INVERSION","TOTAL_GASTO_OPERACION_HE","TOTAL_GASTO_NO_CONSID","COSTO_TOTAL_PPI","CALENDARIO_FISCAL_DEL_CICLO","RECURSOS_ESTATALES","RECURSOS_MUNICIPALES","PRIVADOS","FIDEICOMISO"],
+  "data"       : ["CVE_PPI","NOMBRE","ID_RAMO","DESC_RAMO","ID_UR","DESC_UR","TIPO_PPI","DESC_PPI","LOCALIZACION","ID_ENTIDAD_FEDERATIVA","ENTIDAD_FEDERATIVA","LATITUD_INICIAL","LONGITUD_INICIAL","FECHA_INI_CAL_FISCAL","FECHA_FIN_CAL_FISCAL","FECHA_INI_FF","FECHA_FIN_FF","ANIOS_HE","NOMBRE_ADMIN","AP_MATERNO_ADMIN","AP_PATERNO_ADMIN","CARGO_ADMIN","MAIL_ADMIN","TELEFONO_ADMIN","META_FISICA","META_BENEFICIOS","ID_PPI","MONTO_PPEF","APROBADO","MODIFICADO","EJERCIDO","AVANCE_FISICO","GRUPO_FUNCIONAL","FUNCION","MONTO_TOTAL_INVERSION","TOTAL_GASTO_OPERACION_HE","TOTAL_GASTO_NO_CONSID","COSTO_TOTAL_PPI","ANIO","CALENDARIO_FISCAL_DEL_CICLO","RECURSOS_ESTATALES","RECURSOS_MUNICIPALES","PRIVADOS","FIDEICOMISO","CICLO","FASE"],
+  "dataSearch" : ["CVE_PPI","NOMBRE","ID_RAMO","ENTIDAD_FEDERATIVA","TIPO_PPI","CICLO","FASE"],
   "current"    : {},
   "columns" : {
     "GFSHCPurl" : "ficha",
-    "monto_total_inversion" : "monto total"
+    "CVE_PPI" : "CLAVE DE CARTERA",
+	"ID_RAMO" : "RAMO",
+	"TIPO_PPI": "TIPO"
   },
   "filters" : [
-    {"type" : "search", "field" : "name", "title" : "Proyecto"},
-    {"type" : "search", "field" : "key", "title" : "Clave"},
-    {"type" : "state", "field" : "state"},
-    {"type" : "branch", "field" : "ramo"},
-    {"type" : "unit", "field" : "id_unidad"},
-    {"type" : "year", "field" : "ciclo", "title" : "Ciclo"}
+    {"type" : "search", "field" : "NOMBRE", "title" : "Nombre del Proyecto"},
+    {"type" : "search", "field" : "CVE_PPI", "title" : "Clave"},
+    {"type" : "state", "field" : "ID_ENTIDAD_FEDERATIVA"},
+    {"type" : "branch", "field" : "ID_RAMO"},
+    {"type" : "unit", "field" : "ID_UR"},
+    {"type" : "year", "field" : "CICLO", "title" : "Ciclo"},
+	{"type" : "app", "field" : "ES_APP", "title" : "APP"},
+	{"type" : "type", "field" : "TIPO_PPI", "title" : "TIPO"}
   ],
   "defaultFilters" : [
     {"type" : "year", "value" : 2017, "parentFilter" : null}
   ],
   "graphs" : {
     "graph1" : {
-      "title" : "Monto total invertido por año",
+      "title" : "Monto total de inversión",
       "xAxis" : {
         "field" : "ramo",
         "title" : "Ramo",
         "type"  : null
       },
       "yAxis" : {
-        "field" : "monto_total_inversion",
-        "title" : "monto total invertido"
+        "field" : "MONTO_TOTAL_INVERSION",
+        "title" : "Monto Total de Inversión"
       },
       "zAxis" : {
-        "field" : "ciclo",
-        "title" : "Ciclo",
+        "field" : "TIPO_PPI",
+        "title" : "Tipo de Proyecto",
         "type"  : "branch"
       },
       "maxLocations" : 5,
       "colors" : ["#bcce00", "#ee7336", "#25ae85", "#5aa099", "#462b5f", "#f49d51", "#008789", "#b3a493", "#1c9059", "#dc1918", "#b8c9d2","#75bf8d"]
     },
     "graph2" : {
-      "title" : "Monto total por ramo",
-      "value" : "monto_total_inversion",
+      "title" : "Monto total por Tipo",
+      "value" : "MONTO_TOTAL_INVERSION",
       "area" : {
-        "field" : "ramo",
-        "title" : "ramo",
+        "field" : "TIPO_PPI",
+        "title" : "Tipo de Proyecto",
         "type"  : "branch"
       },
       "maxLocations" : 5,
@@ -71,19 +75,19 @@
     },
 
     "graph3" : {
-      "title" : "Monto total invertido por año",
+      "title" : "Monto Ejercido por Ramo",
       "xAxis" : {
-        "field" : "ciclo",
-        "title" : "año",
+        "field" : "ID_RAMO",
+        "title" : "Ramo",
         "type"  : null
       },
       "yAxis" : {
-        "field" : "monto_total_inversion",
-        "title" : "monto total invertido"
+        "field" : "MONTO_EJERCIDO",
+        "title" : "Monto Ejercido Total"
       },
       "zAxis" : {
-        "field" : "ramo",
-        "title" : "ramo",
+        "field" : "TIPO_PPI",
+        "title" : "TIPO",
         "type"  : "branch"
       },
       "maxLocations" : 5,
@@ -94,13 +98,13 @@
       "title" : "Monto total por año",
       "value" : "monto_total_inversion",
       "area" : {
-        "field" : "ramo",
-        "title" : "ramo",
+        "field" : "ID_ENTIDAD_FEDERATIVA",
+        "title" : "Entidad Federativa",
         "type"  : "branch"
       },
       "points" : {
-        "field" : "ciclo",
-        "title" : "año",
+        "field" : "TIPO_PPI",
+        "title" : "TIPO",
         "type"  : null
       },
       "maxLocations" : 5,
@@ -109,5 +113,5 @@
 
 
   },
-  "template" : "<%=name%> <div class='amount_label'><div class='row'><div class='col-sm-6'><h5>Monto total de inversión</h5>  $<%=monto_total_inversion%><h5>Monto ejercido</h5> $<%=ejercido%></div><div class='col-sm-6'><h5>Avance Físico</h5> <%=advance%>% <div class='bar'><span class='bar inside total' style='width:<%=advance%>%'></span><h5>Año</h5> <%=ciclo%></div></div></div> <br><a href='/opa.html#<%=key%>'  class='btn more info'>Más información</a></div>"
+  "template" : "<%=name%> <div class='amount_label'><div class='row'><div class='col-sm-6'><h5>Monto total de inversión</h5>  $<%=MONTO_TOTAL_INVERSION%><h5>Monto ejercido</h5> $<%=MONTO_EJERCIDO%></div><div class='col-sm-6'><h5>Avance Físico</h5> <%=AVANCE_FISICO%>% <div class='bar'><span class='bar inside total' style='width:<%=AVANCE_FISICO%>%'></span><h5>Año</h5> <%=CICLO%></div></div></div> <br><a href='/opa.html#<%=key%>'  class='btn more info'>Más información</a></div>"
 }
