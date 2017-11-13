@@ -82,7 +82,7 @@
         "type"  : null
       },
       "yAxis" : {
-        "field" : "MONTO_EJERCIDO",
+        "field" : "EJERCIDO",
         "title" : "Monto Ejercido Total"
       },
       "zAxis" : {
@@ -113,5 +113,5 @@
 
 
   },
-  "template" : "<%=name%> <div class='amount_label'><div class='row'><div class='col-sm-6'><h5>Monto total de inversión</h5>  $<%=MONTO_TOTAL_INVERSION%><h5>Monto ejercido</h5> $<%=MONTO_EJERCIDO%></div><div class='col-sm-6'><h5>Avance Físico</h5> <%=AVANCE_FISICO%>% <div class='bar'><span class='bar inside total' style='width:<%=AVANCE_FISICO%>%'></span><h5>Año</h5> <%=CICLO%></div></div></div> <br><a href='/opa.html#<%=key%>'  class='btn more info'>Más información</a></div>"
+  "template" : "<%=name%> <div class='amount_label'><div class='row'><div class='col-sm-6'><h5>Monto total de inversión</h5>  $<%=MONTO_TOTAL_INVERSION%><h5>Monto ejercido</h5> $<%=EJERCIDO%></div><div class='col-sm-6'><h5>Avance Físico</h5> <%=AVANCE_FISICO%>% <div class='bar'><span class='bar inside total' style='width:<%=AVANCE_FISICO%>%'></span><h5>Año</h5> <%=CICLO%></div></div></div> <br><a href='/opa.html#<%=key%>'  class='btn more info'>Más información</a></div>"
 }
