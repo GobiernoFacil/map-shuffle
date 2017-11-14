@@ -56,7 +56,7 @@
       "title" : "Monto total",
       "value" : "MONTO_APROBADO",
       "area" : {
-        "field" : "DEC_PP",
+        "field" : "DESC_PP",
         "title" : "Fondo",
         "type"  : null
       },
