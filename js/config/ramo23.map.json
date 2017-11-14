@@ -2,53 +2,61 @@
   "name"  : "Ramo 23",
   "type"  : "area",
   "level" : ["state", "city"],
-  "src"   : "/js/maps/ramo23-2017.csv",
+  "src"   : "/js/maps/ramo23_comp.csv",
   "file"  : "csv",
   "color" : 12,
   "colorLevels" : 5,
   "location" : {
-    "state" : "id_entidad",
-    "city"  : "id_municipio"
+    "state" : "ID_ENTIDAD_FEDERATIVA",
+    "city"  : "ID_MUNICIPIO"
   },
   "style" : {
     "fillOpacity":0.8
   },
-  "values"  : ["monto", "Pagado"],
-  "data"    : ["clave_de_programa", "Fondo", "entidad", "municipio", "proyecto"],
+  "values"  : ["MONTO_APROBADO", "MONTO_PAGADO"],
+  "data"    : ["CICLO", "MODALIDAD_PP", "DESC_PP", "ID_ENTIDAD_FEDERATIVA", "ENTIDAD_FEDERATIVA","ID_MUNICIPIO","MUNICIPIO","DESC_PPI","MONTO_APROBADO","MONTO_PAGADO"],
   "current" : {
     "level"  : "state",
-    "value"  : "monto",
+    "value"  : "MONTO_APROBADO",
     "method" : "length",
     "unit"   : "proyectos"
   },
   "filters" : [
-    {"type" : "state", "field" : "id_entidad"},
-    {"type" : "city", "field" : "id_municipio"}
+    {"type" : "state", "field" : "ID_ENTIDAD_FEDERATIVA"},
+    {"type" : "city", "field" : "ID_MUNICIPIO"},
+    {"type" : "year", "field" : "CICLO"}
   ],
   "extraFilters" : [
-    {"type" : "extra", "field" : "Fondo", "title" : "Clave de programas"}
+    {"type" : "extra", "field" : "DESC_PP", "title" : "Fondo"}
+  ],
+   "defaultFilters" : [
+    {"type" : "year", "value" : 2017, "parentFilter" : null}
   ],
   "graphs" : {
     "graph1" : {
-      "title" : "Monto aprobado en 2017",
+      "title" : "Monto Aprobado",
       "xAxis" : {
-        "field" : "monto",
-        "title" : "monto total invertido"
+        "field" : "CICLO",
+        "title" : "Ciclo"
       },
       "yAxis" : {
-        "field" : "Fondo",
-        "title" : "Fondo",
+        "field" : "MONTO_APROBADO",
+        "title" : "Monto Aprobado",
         "type"  : null
       },
-      "zAxis" : null,
+      "zAxis" : {
+        "field" : "DESC_PP",
+        "title" : "Fondo",
+        "type"  : "branch"
+      },
       "maxLocations" : 5,
       "colors" : ["red", "green", "blue", "yellow", "purple", "pink", "black", "orange", "gray", "maroon"]
     },
     "graph2" : {
       "title" : "Monto total",
-      "value" : "monto",
+      "value" : "MONTO_APROBADO",
       "area" : {
-        "field" : "Fondo",
+        "field" : "DEC_PP",
         "title" : "Fondo",
         "type"  : null
       },
@@ -56,5 +64,40 @@
       "colors" : ["red", "green", "blue", "yellow", "purple", "pink", "black", "orange", "gray", "maroon", "aquamarine", "chartreuse", "cyan", "darkorange", "deeppink", "gold"]
     }
   },
-  "template" : "<%=name%> <div class='amount_label'><h5> Proyectos: <strong><%=value%></strong></h5></div><div class='amount_label'><h5> Pagado: <strong>$<%=Pagado%></strong></h5></div><div class='amount_label'><h5> Aprobado: <strong>$<%=monto%></strong></h5></div>"
+   "graph3" : {
+      "title" : "Monto Pagado por Fondo",
+      "xAxis" : {
+        "field" : "CICLO",
+        "title" : "Ciclo",
+        "type"  : null
+      },
+      "yAxis" : {
+        "field" : "MONTO_PAGADO",
+        "title" : "Monto Pagado"
+      },
+      "zAxis" : {
+        "field" : "DESC_PP",
+        "title" : "Fondo",
+        "type"  : "branch"
+      },
+      "maxLocations" : 5,
+      "colors" : ["#bcce00", "#ee7336", "#25ae85", "#5aa099", "#462b5f", "#f49d51", "#008789", "#b3a493", "#1c9059", "#dc1918", "#b8c9d2","#75bf8d"]
+    },
+ "graph4" : {
+      "title" : "Monto Aprobado por Año",
+      "value" : "MONTO_APROBADO",
+      "area" : {
+        "field" : "DESC_PP",
+        "title" : "Fondo",
+        "type"  : "branch"
+      },
+      "points" : {
+        "field" : "CICLO",
+        "title" : "Ciclo",
+        "type"  : null
+      },
+      "maxLocations" : 5,
+      "colors" : ["#bcce00", "#ee7336", "#25ae85", "#5aa099", "#462b5f", "#f49d51", "#008789", "#b3a493", "#1c9059", "#dc1918", "#b8c9d2","#75bf8d"]
+    },
+  "template" : "<%=name%> <div class='amount_label'><h5> Proyectos: <strong><%=value%></strong></h5></div><div class='amount_label'><h5> Pagado: <strong>$<%=MONTO_PAGADO%></strong></h5></div><div class='amount_label'><h5> Aprobado: <strong>$<%=MONTO_APROBADO%></strong></h5></div>"
 }
