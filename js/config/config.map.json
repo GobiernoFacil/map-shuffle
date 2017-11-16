@@ -1,114 +1,151 @@
 {
-  "name"  : "Obra Pública Abierta",
-  "type"  : "point",
-  "multiple" : true,
-  "disable" : [0,0],
-  "level" : [],
-  "src"   : "/js/maps/opa.json",
-  "file"  : "json",
-  "link"  : {
-    "url"    : "/opa.html",
-    "column" : "key"
-  },
-  "style" : {
-    "fillColor" : "#f49d51",
-    "color"     : "#ea750f"
-  },
-  "location" : {
-    "lat" : "lat",
-    "lng" : "lng",
-    "state" : "state"
-  },
-  "values"     : ["monto_total_inversion", "ejercido"],
-  "data"       : ["monto_total_inversion", "ejercido", "key","name","ramo","unidad","state","lat","lng","advance","ciclo","classification"],
-  "dataSearch" : ["monto_total_inversion", "ejercido", "key","name","ramo","unidad","state","advance","ciclo","classification"],
-  "current"    : {},
-  "columns" : {
-    "GFSHCPurl" : "ficha",
-    "monto_total_inversion" : "monto total"
-  },
-  "filters" : [
-    {"type" : "search", "field" : "name", "title" : "Proyecto"},
-    {"type" : "search", "field" : "key", "title" : "Clave"},
-    {"type" : "state", "field" : "state"},
-    {"type" : "branch", "field" : "ramo"},
-    {"type" : "unit", "field" : "id_unidad"},
-    {"type" : "year", "field" : "ciclo", "title" : "Ciclo"}
-  ],
-  "defaultFilters" : [
-    {"type" : "state", "value" : 19, "parentFilter" : null},
-    {"type" : "year", "value" : 2017, "parentFilter" : null}
-  ],
-  "graphs" : {
-    "graph1" : {
-      "title" : "Monto total invertido por año",
-      "xAxis" : {
-        "field" : "ciclo",
-        "title" : "año",
-        "type"  : null
-      },
-      "yAxis" : {
-        "field" : "monto_total_inversion",
-        "title" : "monto total invertido"
-      },
-      "zAxis" : {
-        "field" : "ramo",
-        "title" : "ramo",
-        "type"  : "branch"
-      },
-      "maxLocations" : 5,
-      "colors" : ["#bcce00", "#ee7336", "#25ae85", "#5aa099", "#462b5f", "#f49d51", "#008789", "#b3a493", "#1c9059", "#dc1918", "#b8c9d2","#75bf8d"]
+  "map" : {
+    "div"         : "GF-SHCP-map",
+    "lat"         : 22.442167,
+    "lng"         : -100.110350,
+    "zoom"        : 6,
+    "tileServer"  : "http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png'",
+    "tileServerConfig" : {
+      "maxZoom"     : 18,
+      "attribution" : "&copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>"
     },
-    "graph2" : {
-      "title" : "Monto total por ramo",
-      "value" : "monto_total_inversion",
-      "area" : {
-        "field" : "ramo",
-        "title" : "ramo",
-        "type"  : "branch"
-      },
-      "maxLocations" : 5,
-      "colors" : ["#bcce00", "#ee7336", "#25ae85", "#5aa099", "#462b5f", "#f49d51", "#008789", "#b3a493", "#1c9059", "#dc1918", "#b8c9d2","#75bf8d"]
-    },
-
-    "graph3" : {
-      "title" : "Monto total invertido por año",
-      "xAxis" : {
-        "field" : "ciclo",
-        "title" : "año",
-        "type"  : null
-      },
-      "yAxis" : {
-        "field" : "monto_total_inversion",
-        "title" : "monto total invertido"
-      },
-      "zAxis" : {
-        "field" : "ramo",
-        "title" : "ramo",
-        "type"  : "branch"
-      },
-      "maxLocations" : 5,
-      "colors" : ["#bcce00", "#ee7336", "#25ae85", "#5aa099", "#462b5f", "#f49d51", "#008789", "#b3a493", "#1c9059", "#dc1918", "#b8c9d2","#75bf8d"]
-    },
-
-    "graph4" : {
-      "title" : "Monto total por año",
-      "value" : "monto_total_inversion",
-      "area" : {
-        "field" : "ramo",
-        "title" : "ramo",
-        "type"  : "branch"
-      },
-      "points" : {
-        "field" : "ciclo",
-        "title" : "año",
-        "type"  : null
-      },
-      "maxLocations" : 5,
-      "colors" : ["#bcce00", "#ee7336", "#25ae85", "#5aa099", "#462b5f", "#f49d51", "#008789", "#b3a493", "#1c9059", "#dc1918", "#b8c9d2","#75bf8d"]
-    }
-
-
+    "attributions" : ["SHCP"]
   },
-  "template" : "<%=name%> <div class='amount_label'><div class='row'><div class='col-sm-6'><h5>Monto total de inversión</h5>  $<%=monto_total_inversion%><h5>Monto ejercido</h5> $<%=ejercido%></div><div class='col-sm-6'><h5>Avance Físico</h5> <%=advance%>% <div class='bar'><span class='bar inside total' style='width:<%=advance%>%'></span><h5>Año</h5> <%=ciclo%></div></div></div> <br><a href='/opa.html#<%=key%>'  class='btn more info'>Más información</a></div>"
+  "mapPoint" : {
+    "radius"      : 6,
+    "radius2"     : 9,
+    "fillColor"   : "rgb(244, 157, 81)",
+    "color"       : "rgb(214, 103, 6)",
+    "weight"      : 1,
+    "opacity"     : 0.3,
+    "fillOpacity" : 0.9
+  },
+  "mapGeometry" : {
+    "weight"       : 0.4,
+    "opacity"      : 0.8,
+    "color"        : "red",
+    "dashArray"    : "",
+    "fillOpacity"  : 1,
+    "defaultColor" : 12,
+    "defaultLevels": 7 
+  },
+  "extraMapGeometry" : {
+    "weight"       : 0.4,
+    "opacity"      : 0.8,
+    "color"        : "red",
+    "dashArray"    : "",
+    "fillOpacity"  : 1,
+    "defaultColor" : 5 
+  },
+  "maps" : {
+    "basePath"  : "/js/config",
+    "maps"      : ["bansefi2.map.json", "escuelas100.map.json", "ramo23.map.json", "opa.map.json", "entidades.map.json"],
+    "extras"    : ["poblacion.map.json", "areas_afectadas_desastre.json"],
+    "current"   : 0,
+    "embedPath" : "http://localhost:8000/mapa.html" 
+  },
+  "ui" : {
+    "topToolsDiv"    : "GF-SHCP-top-tools",
+    "bottomToolsDiv" : "GF-SHCP-bottom-tools", 
+    "mapSelector" : {
+      "container" : "div",
+      "class"     : "",
+      "id"        : "GF-SHCP-map-selector",
+      "position"  : "topright",
+      "levelId"   : "GF-SHCP-view-selector-section",
+      "geolocationId" : "GF-SHCP-view-geolocation-section"
+    },
+    "extraMapSelector" : "GF-SHCP-extra-map-list",
+    "pageSelector" : {
+      "container" : "div",
+      "class"     : "",
+      "id"        : "GF-SHCP-page-selector",
+      "position"  : "topright",
+      "controls"  : {
+        "pageSelect" : "GF-SHCP-CONTROL-PAGE",
+        "pageDisplay" : "GF-SHCP-LABEL-PAGE-TOTAL",
+        "nextPageBtn" : "GF-SHCP-CONTROL-NEXT",
+        "prevPageBtn" : "GF-SHCP-CONTROL-PREV"
+      }
+    },
+    "filterSelector" : "GF-SHCP-filter-selector",
+    "mapCart" : "GF-SHCP-cart-list",
+
+    "barsTool" : {
+      "container"           : "GF-SHCP-bars-tool",
+      "graph1"              : "GF-SHCP-GRAPHS-A",
+      "graph2"              : "GF-SHCP-GRAPHS-B",
+      "graph3"              : "GF-SHCP-GRAPHS-C",
+      "graph4"              : "GF-SHCP-GRAPHS-D",
+      "graph1Btn"           : "GF-SHCP-GRAPHS-A-btn",
+      "graph2Btn"           : "GF-SHCP-GRAPHS-B-btn",
+      "graph3Btn"           : "GF-SHCP-GRAPHS-C-btn",
+      "graph4Btn"           : "GF-SHCP-GRAPHS-D-btn",
+      "singleLocation"      : "GF-SHCP-bars-app-single-location",
+      "multipleLocations"   : "GF-SHCP-bars-app-multiple-locations",
+      "singleLocationBtn"   : "GF-SHCP-bars-app-single-location-link",
+      "multipleLocationBtn" : "GF-SHCP-bars-app-multiple-locations-link",
+      "singleLocationUI" : {
+        "state"           : "GF-SHCP-bars-app-single-location-state",
+        "city"            : "GF-SHCP-bars-app-single-location-city",
+        "addLocation"     : "GF-SHCP-bars-app-single-location-select-btn",
+        "selectedFilters" : "GF-SHCP-bars-app-single-location-selected-filters",
+        "filterList"      : "GF-SHCP-bars-app-single-location-filter-list",
+        "filterPrefix"    : "GF-SHCP-bars-app-single-location-filter-prefix-",
+        "addGraph"        : "GF-SHCP-bars-app-single-location-add-bar-btn"   
+      },
+      "filterDivClass"    : "GF-SHCP-bars-app-filter-class",
+      "filterLabels" : {
+        "value" : "Valor",
+        "year"  : "Ciclo",
+        "state" : "Estado",
+        "city"  : "Ciudad",
+        "branch": "Ramo",
+        "unit"  : "Unidad ejectura"
+      }
+    },
+
+    "searchTable" : {
+      "container"       : "GF-SHCP-table-tool",
+      "searchInput"     : "GF-SHCP-search-app-query",
+      "filterContainer" : "GF-SHCP-search-app-filter-list",
+      "cart"            : "GF-SHCP-search-app-filters",
+      "pageInput"       : "GF-SHCP-SEARCH-CONTROL-PAGE",
+      "pageNum"         : "GF-SHCP-SEARCH-LABEL-PAGE-TOTAL",
+      "prevPage"        : "GF-SHCP-SEARCH-CONTROL-PREV",
+      "nextPage"        : "GF-SHCP-SEARCH-CONTROL-NEXT",
+      "toolsForm"       : "GF-SHCP-search-tools-form",
+      "paginationForm"  : "GF-SHCP-search-pagination-form",
+      "downloadBtn"     : "GF-SHCP-search-app-download",
+      "totalItems"      : "GF-SHCP-search-app-total-items"
+    },
+
+    "geolocationBtn"   : "GF-SHCP-geolocate-user",
+    "geolocationForm"  : "GF-SHCP-geolocation-form",
+    "geolocationField" : "GF-SHCP-geolocation-input",
+    "projectCounter"   : "GF-SHCP-project-counter",
+    "colorGuide"       : "GF-SHCP-color-guide",
+    "colorGuideX"       : "GF-SHCP-color-guide-x",
+    "embedForm"        : "GF-SHCP-embed-form",
+    "downloadDataBtn"  : "GF-SHCP-get-data"
+  },
+  "ux" : {
+    "findMeZoom" : 14,
+    "changeStateZoom" : 9,
+    "geocoding"  : "https://maps.googleapis.com/maps/api/geocode/json",
+    "enableBarsTool" : 1,
+    "enableSearchTool" : 1,
+    "pointNavigationTemplate" : "<a class=\"GF-SHCP-point-prev-btn\" href=\"#\">anterior</a> <span class=\"GF-SHCP-point-current\"></span>/<span class=\"GF-SHCP-point-total\"></span><a class=\"GF-SHCP-point-next-btn\" href=\"#\">siguiente</a></p>",
+    "pointNavigationPrevId" : "GF-SHCP-point-prev-btn",
+    "pointNavigationNextId" : "GF-SHCP-point-next-btn",
+    "pointNavigationCurrentId" : "GF-SHCP-point-current",
+    "pointNavigationTotalId" : "GF-SHCP-point-total",
+    "searchPageSize" : 10,
+    "searchInputClass" : "GF-SHCP-search-input"
+  },
+  "constants" : {
+    "cityId"  : "GFSHCPCityId",
+    "unitId"  : "GFSHCPUnitId",
+    "itemUrl" : "GFSHCPurl"
+  }
 }
