@@ -1,0 +1,35 @@
+{
+  "name": "Tarjetas entregadas de Apoyo a Viviendas",
+  "type": "area",
+  "level": ["state", "city"],
+  "src": "/js/maps/mapa_bansefi.csv",
+  "file": "csv",
+  "color": 12,
+  "location": {
+    "state": "ID_ENTIDAD_FEDERATIVA",
+    "city": "ID_MUNICIPIO"
+  },
+  "style": {
+    "fillOpacity": 0.8
+  },
+  "values": ["MONTO_PAGADO_OCT", "MONTO_PAGADO_NOV"],
+  "data": ["ID", "TIPO_DANIO", "ID_ENTIDAD_FEDERATIVA", "ENTIDAD_FEDERATIVA", "ID_MUNICIPIO", "MUNICIPIO", "ID_LOCALIDAD", "LOCALIDAD", "MONTO_PAGADO_OCT", "FECHA_PAGADO_OCT", "MONTO_PAGADO_NOV", "FECHA_PAGADO_NOV"],
+  "dataSearch": ["ID", "ENTIDAD_FEDERATIVA", "MUNICIPIO", "TIPO_DANIO"],
+  "current": {
+    "level": "state",
+    "method": "length",
+    "value" : "MONTO_PAGADO_OCT",
+    "unit" : "items"
+  },
+  "columns": {
+    "ID": "Clave del Beneficiario",
+    "ENTIDAD_FEDERATIVA": "Entidad Federativa",
+    "MUNICIPIO": "Municipio"
+  },
+  "filters": [{
+    "type": "state",
+    "field": "ID_ENTIDAD_FEDERATIVA"
+  }],
+  "extraFilters": [],
+  "template": "<%=name%> <div class='amount_label'><h5> Apoyos Entregados: <strong><%=value%></strong></h5></div class='amount_label'><h5> Monto Entregado Octubre: <strong>$<%=MONTO_PAGADO_OCT%></strong></h5></div><div class='amount_label'><h5> Monto Entregado Noviembre: <strong>$<%=MONTO_PAGADO_NOV%></strong></h5></div>"
+}
