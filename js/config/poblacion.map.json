@@ -1,24 +1,23 @@
 {
-  "name"  : "Población en México",
+  "name"  : "Porcentaje de la Deuda contra PIB Estatal",
   "type"  : "area",
   "colorLevels" : 4,
-  "level" : ["state", "city"],
-  "src"   : "/js/maps/ramo23-2017.csv",
+  "level" : ["state"],
+  "src"   : "/js/maps/porcentaje_deuda_pibe.csv",
   "file"  : "csv",
   "color" : 18,
   "location" : {
-    "state" : "id_entidad",
-    "city"  : "id_municipio"
+    "state" : "ID_ENTIDAD_FEDERATIVA"
   },
-  "values"  : ["monto", "pagado"],
-  "data"    : ["clave_de_programa", "fondo", "entidad", "municipio", "proyecto"],
+  "values"  : ["PIBE"],
+  "data"    : ["ID_ENTIDAD_FEDERATIVA", "ENTIDAD_FEDERATIVA"],
   "current" : {
-    "level"  : "city",
-    "value"  : "monto",
+    "level"  : "state",
+    "value"  : "PIBE",
     "method" : "sum"
   },
   "style" : {
     "fillOpacity":0.5
   },
-  "template" : "<p><%=name%> : <%=value%> </p>"
+  "template" : "<%=name%> <div class='amount_label'><h5> Deuda con respecto al PIB Estatal: <strong>%<%=value%></strong></h5></div>"
 }
