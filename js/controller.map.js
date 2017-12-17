@@ -697,7 +697,7 @@ define(function(require){
 
       this.points = L.geoJson(points, {
         pointToLayer : function(feature, latlng){
-          var p     = L.circleMarker(latlng, that.settings.mapPoint),
+          var p     = L.circleMarker(latlng, style),//that.settings.mapPoint),
               props = feature.properties;
 
           //that.currentMap.config.values

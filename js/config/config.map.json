@@ -39,8 +39,8 @@
   },
   "maps" : {
     "basePath"  : "/js/config",
-    "maps"      : ["bansefi2.map.json", "escuelas100.map.json", "ramo23.map.json", "opa.map.json", "entidades.map.json"],
-    "extras"    : ["poblacion.map.json", "areas_afectadas_desastre.json"],
+    "maps"      : ["ramo23.map.json", "opa.map.json", "entidades.map.json"],
+    "extras"    : ["areas_afectadas_desastre.json"],
     "current"   : 0,
     "embedPath" : "http://localhost:8000/mapa.html" 
   },

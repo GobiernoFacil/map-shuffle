@@ -11,7 +11,7 @@
     "column" : "key"
   },
   "style" : {
-    "fillColor" : "#f49d51",
+    "fillColor" : "#f40000",
     "color"     : "#ea750f"
   },
   "location" : {
@@ -36,7 +36,10 @@
     {"type" : "year", "field" : "ciclo", "title" : "Ciclo"}
   ],
   "defaultFilters" : [
-    {"type" : "year", "value" : 2017, "parentFilter" : null}
+    {"type" : "year", "value" : 2017, "parentFilter" : null},
+    {"type" : "state", "value" : 21, "parentFilter" : null},
+    {"type" : "branch", "value" : 11, "parentFilter" : null},
+    {"type" : "unit", "value" : "11-114", "parentFilter" : null}
   ],
   "graphs" : {
     "graph1" : {

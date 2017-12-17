@@ -4,7 +4,8 @@
   "level": ["state", "city"],
   "src": "/js/maps/mapa_bansefi.csv",
   "file": "csv",
-  "color": 12,
+  "color": 3,
+  "colorLevels" : 3,
   "location": {
     "state": "ID_ENTIDAD_FEDERATIVA",
     "city": "ID_MUNICIPIO"
