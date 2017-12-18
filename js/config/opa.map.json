@@ -1,7 +1,7 @@
 {
   "name"  : "Obra Pública Abierta",
   "type"  : "point",
-  "multiple" : true,
+  "multiple" : 1,
   "disable" : [0,0],
   "level" : [],
   "src"   : "/js/maps/opa.json",
@@ -11,7 +11,7 @@
     "column" : "key"
   },
   "style" : {
-    "fillColor" : "#f40000",
+    "fillColor" : "#f49d51",
     "color"     : "#ea750f"
   },
   "location" : {

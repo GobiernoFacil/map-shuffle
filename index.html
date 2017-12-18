@@ -192,8 +192,10 @@
           },
 
           searchInitialize : function(searchModule, currentMap){
-            var header = document.getElementById("GFSHCP-SOME-MAP-TITLE");
+            var header  = document.getElementById("GFSHCP-SOME-MAP-TITLE"),
+                header2 = document.getElementById("GFSHCP-SOME-MAP-TITLE-2");
             header.innerHTML = currentMap.config.name;
+            header2.innerHTML = currentMap.config.name;
 
           }
         },

@@ -41,7 +41,7 @@
     "basePath"  : "/js/config",
     "maps"      : ["ramo23.map.json", "opa.map.json", "entidades.map.json"],
     "extras"    : ["areas_afectadas_desastre.json"],
-    "current"   : 3,
+    "current"   : 0,
     "embedPath" : "http://localhost:8000/mapa.html" 
   },
   "ui" : {

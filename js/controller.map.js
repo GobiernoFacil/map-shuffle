@@ -795,7 +795,8 @@ define(function(require){
 
           if(link){
             p.on("click", function(e){
-              window.open(link.url + "#" + feature.properties[link.column]);
+              var pointUrl = feature.properties[link.column] ? link.url + "#" + feature.properties[link.column] : feature.properties.points[0][that.itemUrl];
+              window.open(pointUrl, '_blank');
             });
           }
           return p;
