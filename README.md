@@ -6,16 +6,41 @@
 https://github.com/GobiernoFacil/map-shuffle
 ```
 
-2. Dentro de los documentos del repositorio, hay un archivo de prueba llamado mapa.html; en este se puede ver que se requieren dos archivos para que el sistema funcione:
-* el css de Leaflet, que se encuentra por default en: /js/libs/leaflet.css (aunque puede moverse a cualquier directorio, siempre y cuando este se especifique al cargar el archivo)
-* el plugin requirejs, que debe incluir la liga al archivo de configuración de la aplicación, de la siguiente manera:
+2. Dentro de los documentos del repositorio, hay un archivo de prueba llamado index.html; en este se puede ver que se requieren cuatro hojas de estilo: la de leaflet, la de bootstrap, la de un plugin para dropdowns (selectize) y la del diseño actual.
+```
+<link rel="stylesheet" type="text/css" href="js/libs/leaflet.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/selectize.css">
+<link rel="stylesheet" type="text/css" href="css/styles.css">
+```
+
+En cuanto al JS, hay dos archivos que permiten ejecutar la aplicación. Para el modo de desarrollo requiere el archivo "require.js", en el que también es necesario especificar la propiedad _data-main_, que es donde está la configuración de require.js. La propiedad _data-main_ debe incluir el nombre del archivo de configuración sin la extensión "js".
 ```
 <script data-main="js/main.map" src="js/libs/require.js"></script>
 ```
 
-donde la propiedad "data-main" debe incluir el nombre del archivo de configuración sin la extensión "js".
+Para el caso de producción, el archivo necesario es main-built.js, que se genera mediante node. Al final de esta guía viene el proceso para generar este archivo.
+```
+<script src="/js/main-built.js"></script>
+```
 
-3. Por último, es necesario agregar un div con un id único; este servirá para cargar el mapa. El CSS para este mapa no influye en el funcionamiento del mismo, aunque sí puede afectar la usabilidad (en caso de ser muy pequeño, por ejemplo).
+Una vez que los archivos están en el servidor, solo es neceario configurar dos rutas:
+* En config.map.json la propiedad maps.basePath, donde se especifica la ruta absuluta para los archivos de configuración de los mapas
+```
+"maps" : {
+    "basePath"  : "/js/config",
+    "maps"      : ["ramo23.map.json", "opa.map.json", "entidades.map.json"],
+    "extras"    : ["areas_afectadas_desastre.json"],
+    "current"   : 0,
+    "embedPath" : "http://localhost:8000/mapa.html" 
+}
+```
+* En cada archivo de configuración de mapa es necesario poner la ruta absuluta donde ese encuentra la DB con la información a desplegar
+```
+"src"   : "/js/maps/opa.json"
+```
+
+Para más información, hay que consultar la guía de configuración del mapa general y particular.
 
 
 ## Configuración general del mapa
