@@ -357,3 +357,109 @@ extraFilters : al igual que la lista de filtros, se define una segunda lista de 
     {"type" : "extra", "field" : "classification", "title" : "clasificación ciudadana"}
   ],
 ```
+
+# Optimización del código
+Para generar el build que agrupa todas las librerías necesarias y el archivo de coonfiguración principal, es necesaria la herramienta de requirejs (r.js) y Node. La guía de instalación/descarga de la herramienta require se encuentra [aquí](http://requirejs.org/docs/optimization.html)
+
+Ya con la herramienta disponible, es necesario ejecutar mediante node la aplicación de require(r.js), con el flag -o y la ruta del archivo que contiene la configuración del build. Este archivo se encuentra dentro de la carpeta JS y se llama _build.js_.
+
+Aquí un ejemplo:
+```
+ node /usr/local/bin/r.js -o build.js
+```
+
+# Configuración de los templates
+Dentro de la configuración de cada mapa, es posible definir un objeto llamado _link_. En este se definen dos propiedades, _url_ y _column_. 
+```
+"link"  : {
+    "url"    : "/opa.html",
+    "column" : "key"
+  },
+```
+
+La primera define el url absoluto que despliega el template de la base de datos actual. La segunda define la columna que se utiliza para buscar el identificador del registro que se quiere desplegar. con estas dos, se genera un url que consta del template más el signo _#_ y el valor de la columna seleccionada; algo similar a esto:
+```
+/opa.html#133891A0004
+```
+
+A estos links se puede acceder mediante los puntos de un mapa o los registros de la búsqueda avanzada. 
+
+## Creación de un archivo de template.
+Un archivo de template es un html que contiene ciertas librerías de JS y CSS para funcionar de manera correcta. 
+
+Para crear un template lo primero que se necesita es incluir al inicio los siguientes archivos css:
+* css/styles.css
+* css/leaflet.css
+
+Al final del HTML es necesario incluir las siguientes librerías de JS:
+* js/libs/d3.v3.min.js
+* js/libs/jquery-3.1.1.min.js
+* js/libs/underscore-min.js
+* js/libs/leaflet.js
+* js/card.helpers.v2.js
+
+Una vez que se tienen estas librerías, es posible construir el template.
+
+Los diversos elementos que componen el template son los siguientes:
+
+## Endpoint
+Todo template depende de un api que se define dentro del template, y un valor que recibe de la aplicación de mapas (la propiedad _column_ del objeto _link_). Con esto se forma una petición __GET__ que une el endpoint con el valor recibido. Aquí un ejemplo para un valor "133891A0004":
+```
+https://mapas.gobiernofacil.com/api/consulta/opa/133891A0004
+```
+
+El desarrollo del api para cada template sale del scope del proyecto, pero el mismo espera recibir un objeto con dos propiedades: total y resultados. El primero es el número de registros que responden al identificador enviado, y el segundo un array con los registros (cada registro un objeto json). 
+```
+{total: 15, resultados : [...]}
+```
+
+El endpoint se define dentro de una variable llamada _GFSHCPConfig_, en la propiedad _endpoint_. Más adelante se detalla cada elemento de esta variable de configuración.
+
+## mensaje de error
+Un elemento de bloque que informe que no es posible desplegar la información seleccionada. Este debe tener un id único y su propiedad de _display_ igual a _none_.
+```
+<!-- MENSAJE DE ERROR -->
+  <div id="GF-error-message" style="display: none">
+    La información no está disponible
+  </div>
+```
+
+## el template
+El template principal está diseñado para soportar múltiples registros; este elemento de template es una etiqueta de bloque que define qué datos se despliegan, y su método de despliegue: gráficas, mapas, html. Esta etiqueta debe tener un identificador único y su propiedad de _display_ igual a _none_. Para desplegar  cada dato, se utiliza _underscore_. Para una guía de cómo utilizar esta librería, hay que revisar [este link](http://underscorejs.org/#template).
+
+Aquí un ejemplo de un template sin diseño y con elemento de contenido
+
+```
+<div id="GF-entidades-template" style="display: none;">
+  <section>
+    <h2>Template básico de entidades federativas</h2>
+
+    <div class="GF-SHCP-map" 
+         data-lat="LATITUD"
+         data-lng="LONGITUD"
+         style="width:400px; height:350px; frameborder:0; scrolling:no;"></div>
+         
+    <p><%=FOLIO%></p>
+    <p><%=NOMBRE_PROYECTO%></p>
+    <p><%=NUMERO_PROYECTO%></p>
+    <p><%=ID_ENTIDAD_FEDERATIVA%></p>
+    <p><%=ENTIDAD%></p>
+    <p><%=ID_MUNICIPIO%></p>
+    <p><%=MUNICIPIO%></p>
+    <p><%=ID_LOCALIDAD%></p>
+    <p><%=LOCALIDAD%></p>
+    <p><%=LATITUD%></p>
+    <p><%=LONGITUD%></p>
+    <p><%=AMBITO%></p>
+    <p><%=ID_RECURSO%></p>
+
+    <div class="GF-SHCP-circle"
+         data-width="160"
+         data-height="130"
+         data-color-a="rgb(190,205,81)"
+         data-color-b="rgb(210,210,210)"
+         data-column="AVANCE_FISICO"></div>
+
+  </section>
+  </div>
+```
