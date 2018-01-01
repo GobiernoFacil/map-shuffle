@@ -115,52 +115,99 @@ define(function(require){
           if(graph2) graph2.style.display = "none";
           if(graph3) graph3.style.display = "none";
           if(graph4) graph4.style.display = "none";
+          btn1.classList.add("current");
         }
         else if(config.graphs.graph2){
           if(graph3) graph3.style.display = "none";
           if(graph4) graph4.style.display = "none";
+          btn2.classList.add("current");
         }
         else if(config.graphs.graph3){
           if(graph4) graph4.style.display = "none";
+          btn3.classList.add("current");
         }
 
         if(btn1 && graph1){
+          btn1.querySelector("a").innerHTML = config.graphs.graph1.title || "gráfica sin título";
           btn1.addEventListener("click", function(e){
             e.preventDefault();
             graph1.style.display = "block";
-            if(graph2) graph2.style.display = "none";
-            if(graph3) graph3.style.display = "none";
-            if(graph4) graph4.style.display = "none";
+            if(! btn1.classList.contains("current") ) btn1.classList.add("current");
+            if(graph2){
+              graph2.style.display = "none";
+              if(btn2.classList.contains("current") ) btn2.classList.remove("current");
+            }
+            if(graph3){
+              graph3.style.display = "none";
+              if(btn3.classList.contains("current") ) btn3.classList.remove("current");
+            }
+            if(graph4){
+              graph4.style.display = "none";
+              if(btn4.classList.contains("current") ) btn4.classList.remove("current");
+            }
           });
         }
 
         if(btn2 && graph2){
+          btn2.querySelector("a").innerHTML = config.graphs.graph2.title || "gráfica sin título";
           btn2.addEventListener("click", function(e){
             e.preventDefault();
             graph2.style.display = "block";
-            if(graph1) graph1.style.display = "none";
-            if(graph3) graph3.style.display = "none";
-            if(graph4) graph4.style.display = "none";
+            if(! btn2.classList.contains("current") ) btn2.classList.add("current");
+            if(graph1){
+              graph1.style.display = "none";
+              if(btn1.classList.contains("current") ) btn1.classList.remove("current");
+            }
+            if(graph3){
+              graph3.style.display = "none";
+              if(btn3.classList.contains("current") ) btn3.classList.remove("current");
+            }
+            if(graph4){
+              graph4.style.display = "none";
+              if(btn4.classList.contains("current") ) btn4.classList.remove("current");
+            }
           });
         }
 
         if(btn3 && graph3){
+          btn3.querySelector("a").innerHTML = config.graphs.graph3.title || "gráfica sin título";
           btn3.addEventListener("click", function(e){
             e.preventDefault();
             graph3.style.display = "block";
-            if(graph2) graph2.style.display = "none";
-            if(graph1) graph1.style.display = "none";
-            if(graph4) graph4.style.display = "none";
+            if(! btn3.classList.contains("current") ) btn3.classList.add("current");
+            if(graph2){
+              graph2.style.display = "none";
+              if(btn2.classList.contains("current") ) btn2.classList.remove("current");
+            }
+            if(graph1){
+              graph1.style.display = "none";
+              if(btn1.classList.contains("current") ) btn1.classList.remove("current");
+            }
+            if(graph4){
+              graph4.style.display = "none";
+              if(btn4.classList.contains("current") ) btn4.classList.remove("current");
+            }
           });
         }
 
         if(btn4 && graph4){
+          btn4.querySelector("a").innerHTML = config.graphs.graph4.title || "gráfica sin título";
           btn4.addEventListener("click", function(e){
             e.preventDefault();
             graph4.style.display = "block";
-            if(graph2) graph2.style.display = "none";
-            if(graph3) graph3.style.display = "none";
-            if(graph1) graph1.style.display = "none";
+            if(! btn4.classList.contains("current") ) btn4.classList.add("current");
+            if(graph2){
+              graph2.style.display = "none";
+              if(btn2.classList.contains("current") ) btn2.classList.remove("current");
+            }
+            if(graph3){
+              graph3.style.display = "none";
+              if(btn3.classList.contains("current") ) btn3.classList.remove("current");
+            }
+            if(graph1){
+              graph1.style.display = "none";
+              if(btn1.classList.contains("current") ) btn1.classList.remove("current");
+            }
           });
         }
       },

@@ -62,9 +62,8 @@
       },
       "maxLocations" : 5,
       "colors" : ["red", "green", "blue", "yellow", "purple", "pink", "black", "orange", "gray", "maroon", "aquamarine", "chartreuse", "cyan", "darkorange", "deeppink", "gold"]
-    }
-  },
-   "graph3" : {
+    },
+    "graph3" : {
       "title" : "Monto Pagado por Fondo",
       "xAxis" : {
         "field" : "CICLO",
@@ -98,6 +97,7 @@
       },
       "maxLocations" : 5,
       "colors" : ["#bcce00", "#ee7336", "#25ae85", "#5aa099", "#462b5f", "#f49d51", "#008789", "#b3a493", "#1c9059", "#dc1918", "#b8c9d2","#75bf8d"]
-    },
+    }
+  },
   "template" : "<%=name%> <div class='amount_label'><h5> Proyectos: <strong><%=value%></strong></h5></div><div class='amount_label'><h5> Pagado: <strong>$<%=MONTO_PAGADO%></strong></h5></div><div class='amount_label'><h5> Aprobado: <strong>$<%=MONTO_APROBADO%></strong></h5></div>"
 }
