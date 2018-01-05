@@ -373,14 +373,14 @@ define(function(require){
       var that = this;
 
       if(this.currentMap.config.api){
+        this.filters = filters;
+        
         var page    = 0,
             src2    = that.makeAPIURL(that.currentMap, page),
             item    = this.currentMap,
             pageEl  = document.getElementById(this.settings.ui.pageSelector.controls.pageSelect),
             totalEl = document.getElementById(this.settings.ui.pageSelector.controls.pageDisplay);
         
-
-        this.filters = filters;
 
         d3[item.config.file](src2, function(error, data){
           item.data        = data.results;
@@ -1055,6 +1055,8 @@ define(function(require){
           filters = this.filters,
           url,
           fields;
+
+      console.log(filters);
 
       url = src + "?";
 

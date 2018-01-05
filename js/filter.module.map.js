@@ -109,6 +109,7 @@ define(function(require){
 
         pagination.pages = Math.ceil( _data.length / (pageSize || 1) );
 
+
         callback(_data, this.filters, pagination, this.latestFilter);
       },
 
@@ -557,14 +558,12 @@ define(function(require){
           that.filter();
 
           that.normalFil.forEach(function(fil){
-            //console.log(fil, el);
             if(fil.value == el.getAttribute("data-value") && fil.getAttribute("data-field") == el.getAttribute("data-type")){
               fil.value = SELECTALL;
             }
           });
 
           that.selectizeFil.forEach(function(fil){
-            // console.log(fil[0].selectize.getValue());
             if(fil[0].selectize.getValue() == el.getAttribute("data-value") /*&& fil[0].getAttribute("data-field") == el.getAttribute("data-type")*/){
               fil[0].selectize.setValue(SELECTALL);
             }
@@ -604,6 +603,7 @@ define(function(require){
           }
           
           that.filter();
+
         });
       },
 
@@ -632,6 +632,7 @@ define(function(require){
           });
 
           that.filter();
+          
         });
       },
 

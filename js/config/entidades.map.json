@@ -3,7 +3,7 @@
   "type"  : "point",
   "multiple" : true,
   "level" : [],
-  "src"   : "https://mapas.gobiernofacil.com/api/entidadesv2",
+  "src"   : "http://localhost:8000/api/entidadesv2",
   "file"  : "json",
   "api"   : true,
   "link"  : {
