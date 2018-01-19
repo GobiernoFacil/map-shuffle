@@ -8,34 +8,34 @@
 * js/config/config.map.json
 
 ## métodos
-* void render(): asigna valores iniciales, corrige el scope de las funciones de update, y despliega el estado inicial del módulo de gráficas. 
+* void render() 
 
-* void _enableToggleButtons(config): habilita los botones de selección de gráfica.
+* void _enableToggleButtons(config)
 
-* object _setupGraph(graphId, updateFunction, container): habilita un gráfica, asignando los elementos de HTMl que la controlan y sus filtros.
+* object _setupGraph(graphId, updateFunction, container)
 
-* void _renderGraphFilters(filters, filterModule, filterMenu): despliega el menú de filtros de cada gráfica.
+* void _renderGraphFilters(filters, filterModule, filterMenu)
 
-* void updateGraphA(_data, filters, pagination): actualiza la primera gráfica.
+* void updateGraphA(_data, filters, pagination)
 
-* void updateGraphB(_data, filters, pagination): actualiza la segunda gráfica.
+* void updateGraphB(_data, filters, pagination)
 
-* void updateGraphC(_data, filters, pagination, latestFilter): actualiza la tercera gráfica.
+* void updateGraphC(_data, filters, pagination, latestFilter)
 
-* void updateGraphD(_data, filters, pagination, latestFilter): actualiza la cuarta gráfica.
+* void updateGraphD(_data, filters, pagination, latestFilter)
 
-* void renderGraphA(): configura el plugin _chart_ para la primera gráfica.
+* void renderGraphA()
 
-* void renderGraphB(): configura el plugin _chart_ para la segunda gráfica.
+* void renderGraphB()
 
-* void renderGraphC(): configura el plugin _chart_ para la tercera gráfica.
+* void renderGraphC()
 
-* void renderGraphD(): configura el plugin _chart_ para la cuarta gráfica.
+* void renderGraphD()
 
-* array getLocations(filters): selecciona los filtros de ubicación de la lista de filtros.
+* array getLocations(filters)
 
-* array getXaxis(filters, xAxis, data): determina la lista de valores para el eje X.
+* array getXaxis(filters, xAxis, data)
 
-* array getZaxis(filters, zAxis): determina la lista de valores para el eje Z.
+* array getZaxis(filters, zAxis)
 
-* string findLabel(value, conf): busca el nombre del elemento seleccionado.
+* string findLabel(value, conf)
