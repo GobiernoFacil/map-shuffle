@@ -19,100 +19,100 @@
 * js/filter.module.map
 
 ## funciones (clases)
-* void initialize(settings): asigna los valores de default, define shortcuts para elementos de UI, arregla el scope de funciones que se llaman fuera del nivel del objeto, llama a las funciones que despliegan el estado inicial del mapa.
+* void initialize(settings)
 
-* void enableReverseGeocofing(): habilita el campo de geocoding utilizando el api de google maps.
+* void enableReverseGeocofing()
 
-* void enableUserLocation(): habilita el uso de HTML5 para geolocalizar al usuario.
+* void enableUserLocation()
 
-* void goToUserLocation(position): mueve el centro del mapa a la ubicación del usuario si aceptó ser ubicado.
+* void goToUserLocation(position)
 
-* array parseHashBangArgs(aURL): Convierte la información después del hash en el url a un array. El código fue tomado de [aquí](https://gist.github.com/miohtama/1570295)
+* array parseHashBangArgs(aURL)
 
-* void drawMap(): inicia el mapa de leaflet.
+* void drawMap()
 
-* void updateData(data, filters, pagination): actualiza el mapa con nuevos datos después de filtrar la información.
+* void updateData(data, filters, pagination)
 
-* void renderLayer(item, keepFilters): despliega el mapa seleccionado.
+* void renderLayer(item, keepFilters)
 
-* array groupPoints(): genera un arreglo con los puntos que comparten una misma ubicación, definida por latitud y longitud.
+* array groupPoints()
 
-* void updateUIOptions(item): actualiza el menú de opciones del mapa dependiendo del tipo de información que se despliega.
+* void updateUIOptions(item)
 
-* void renderExtraLayer(item): despliega el mapa extra.
+* void renderExtraLayer(item)
 
-* void sortLayers(): organiza el mapa principal y el mapa extra para que no pierdan su posición original.
+* void sortLayers()
 
-* void renderStateLayer(item, container, geojson, style): despliega un mapa de área con información estatal.
+* void renderStateLayer(item, container, geojson, style)
 
-* void renderCityLayer(item, container, geojson, style): despliega un mapa de área con información municipal.
+* void renderCityLayer(item, container, geojson, style)
 
-* void renderPointsLayer(item): despliega un mapa de puntos.
+* void renderPointsLayer(item)
 
-* void cleanLayers(): elimina todas las capas de información de leaflet (los mapas).
+* void cleanLayers()
 
-* void cleanExtraLayer(softReset): elimina el mapa (layer) extra de leaflet.
+* void cleanExtraLayer(softReset)
 
-* void loadMapsConfig(): carga el archivo de configuración.
+* void loadMapsConfig()
 
-* void loadExtraMapsConfig(): carga la configuración del mapa extra.
+* void loadExtraMapsConfig()
 
-* void getLayer(item): obtiene la información del mapa seleccionado, limpia la interfaz de mapas, y llama la función de despliegue de mapa cuando la información está disponible.
+* void getLayer(item)
 
-* string makeAPIURL(item, page): genera el url de la llamada al api, agregando los valores para filtrar.
+* string makeAPIURL(item, page)
 
-* void getExtraLayer(item): obtiene la información del mapa extra.
+* void getExtraLayer(item)
 
-* void _addUrlToItems(data, conf): genera el url a la ficha para cada elemento desplegado en el mapa (aplica para mapas de puntos).
+* void _addUrlToItems(data, conf)
 
-* void _addKeyToUnits(data, conf, unit): genera un id único para cada unidad ejecutora.
+* void _addKeyToUnits(data, conf, unit)
 
-* void _addKeyToCities(data, conf, city): genera un id único para cada municipio (su clave INEGI)
+* void _addKeyToCities(data, conf, city)
 
-* array _agregateDataByState(item, currentData): agrega la información en un array por estado.
+* array _agregateDataByState(item, currentData)
 
-* array _agregateDataByCity(item, currentData): agrega la información en un array por municipio.
+* array _agregateDataByCity(item, currentData)
 
-* JSON _mapStateGeojson(data): convierte un array de datos de estado en un objeto geoJSON válido.
+* JSON _mapStateGeojson(data)
 
-* JSON _mapCityGeojson(data): convierte un array de datos de municipio en un objeto geoJSON válido.
+* JSON _mapCityGeojson(data)
 
-* JSON _makeGeojson(item): genera un objeto de geoJSON.
+* JSON _makeGeojson(item)
 
-* updateEmbed: genera el url para el iframe (compartir el mapa)
+* void updateEmbed()
 
-* renderColorGuide: genera la escala de color para el mapa principal.
+* void renderColorGuide()
 
-* renderColorGuideX: genera la escala de color para el mapa para comparar.
+* void renderColorGuideX(clear)
 
-* renderMapSelector: genera el UI para el selector de mapas.
+* void renderMapSelector()
 
-* renderExtraMapSelector: genera el UI para el selector de mapas extra.
+* void renderExtraMapSelector()
 
-* addMapToMapSelector: agrega una opción al selector de mapas principal.
+* void addMapToMapSelector(item, active)
 
-* addExtraMapToExtraMapSelector: agrega una opción al selector de mapas extra.
+* void addExtraMapToExtraMapSelector(item)
 
-* updateUILevelSelector: configura el menú de nivel para mapas de área (estado o municipio).
+* void updateUILevelSelector(item)
 
-* renderProjectCounter: despliega el número de proyectos seleccionados.
+* void renderProjectCounter(data)
 
-* enableFilters: activa el UI para los filtros del mapa principal.
+* void enableFilters()
 
-* updatePagination: activa el UI para la paginación de resultados cuando se trata de un API la fuente de datos.
+* void updatePagination()
 
-* renderMapSelectorChange: la función que se activa al cambiar de mapa en el selector de mapas. Llama a las funciones que despliega el nuevo mapa.
+* void renderMapSelectorChange(e)
 
-* renderExtraMapSelectorChange: la función que se activa al cambiar de mapa en el selector de mapas extra. Llama a las funciones de despliegue de mapas extra.
+* void renderExtraMapSelectorChange(e)
 
-* updateUILevelSelectorChange: la función que llama el selector de nivel. Hace el cambio entre el agregado de estado y municipio.
+* void updateUILevelSelectorChange(e)
 
-* _stateStyle: la función de estilo para el agregado de estados. Regresa un objeto con propiedades CSS.
+* Object _stateStyle(feature)
 
-* _stateExtraStyle: la función de estilo para el agregado de estados en mapas extra. Regresa un objeto con propiedades CSS.
+* Object _stateExtraStyle(feature)
 
-* _citytyle: la función de estilo para el agregado de municipios. Regresa un objeto con propiedades CSS.
+* Object _citytyle(feature)
 
-* _stateExtraStyle: la función de estilo para el agregado de municipios en mapas extra. Regresa un objeto con propiedades CSS.
+* Object _stateExtraStyle(feature)
 
-* _colorMixer: regresa una función que asigna el color para las geometrías o puntos, utilizando _classyBrew_.
+* Object _colorMixer(item, theData)

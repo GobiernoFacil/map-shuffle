@@ -5,12 +5,12 @@
 * leaflet
 
 ## métodos
-* void initialize(config, map): hace la llamada al api de datos para obtener la información de la ficha.
+* void initialize(config, map)
 
-* void render(data, container, template): utiliza el template para desplegar cada item de la respuesta.
+* void render(data, container, template)
 
-* void hideEmptyValues(container): oculta los elementos de HTML que no contienen información en la ficha.
+* void hideEmptyValues(container)
 
-* void makeMap(container, d): genera un mapa con leaflet utilizando los datos del template.
+* void makeMap(container, d)
 
-* void renderCircle(el, data, className): genera una gráfica de pie.
+* void renderCircle(el, data, className)
