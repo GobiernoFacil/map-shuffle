@@ -814,7 +814,6 @@
 <script>
   var GFormat          = d3.format(","),
       GFAPIBaseURL     = "https://mapas.gobiernofacil.com/api/consulta/opa",
-      //GFAPIBaseURL     = "http://localhost:8000/api/consulta/opa",
       GFErrorBlockID    = "GF-error-message",
       GFContentBlockID  = "GF-card-list-container",
       GFTemplateBlockID = "GF-opa-template",
@@ -870,7 +869,7 @@
   
   var appKey  = '5825343BB68F29D2A881B2E8D205B98846C95558';
 
-  // var estadosList = get_stateList();
+  var estadosList = [];
   $(document).ready(function(){
     $('#reportForm').on('keyup keypress', function(e) {
       var keyCode = e.keyCode || e.which;
@@ -897,7 +896,7 @@
    $(document).on("click", ".rpt-advance", function () {
      event.preventDefault();
      anonimo  = $("#anonymous").val();
-     estados = estadosList.responseJSON.estado;
+     estados = estadosList; //estadosList.responseJSON.estado;
 
 
      //informacion de proyecto
@@ -908,7 +907,7 @@
          nombre    = $("#nameReport").text(),
          motivo    = $("#motivoReporte").val(),
          asunto    = $("#asuntoReporte").val(),
-         estadoId = "",
+         estadoID = "",
          paisId="2";
          testado = RemoveAccents(entidad.toLowerCase());
          for (var i = 0; i < estados.length; i++) {
