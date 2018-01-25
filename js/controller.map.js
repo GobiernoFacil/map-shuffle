@@ -444,7 +444,7 @@ define(function(require){
           this._currentPoints = this.groupPoints();
         }
 
-        this.renderPointsLayer(item);
+        this.renderPointsLayer(item, this.filteredData);
         
         /*
         if(item.config.api){
@@ -572,6 +572,9 @@ define(function(require){
         var xxxxx = this._mapStateGeojson(this.currentExtraData);
         this.extraBrew = this._colorMixer(item, this.currentExtraData);
         this.renderStateLayer(item, "extra", xxxxx, this._stateExtraStyle);
+
+
+        this.renderColorGuideX();
       }
       
       // B) Es un mapa de área por municipio
@@ -584,18 +587,26 @@ define(function(require){
         var xxxxx = this._mapCityGeojson(this.currentExtraData);
         this.extraBrew        = this._colorMixer(item, this.currentExtraData);
         this.renderCityLayer(item, "extra", xxxxx, this._cityExtraStyle);
+
+        this.renderColorGuideX();
       }
 
-      this.renderColorGuideX();
-      /*
       // C) Es un mapa de puntos definidos por latitud y longitud
       else{
-        this.currentData = null;
-        this.renderPointsLayer(item);
-        if(item.config.api){
-          this.updatePagination();
-        }
-      }*/
+        this.currentExtraData = null;
+        this.extraFilteredData = this.currentExtraMap.data;
+        
+        // filtra los puntos que no tienen localización
+        this.extraFilteredData = ! this.currentExtraMap.config.disable ? this.extraFilteredData : this.extraFilteredData.filter(function(d){
+          return d[this.currentExtraMap.config.location.lat] != this.currentExtraMap.config.disable[0] && d[this.currentExtraMap.config.location.lng] != this.currentExtraMap.config.disable[1];
+        }, this);
+
+        console.log(this.extraFilteredData);
+
+        // this.renderPointsLayer(item);
+        
+
+      }
 
       this.sortLayers();
 
@@ -673,10 +684,10 @@ define(function(require){
     // DIBUJA EL LAYER SELECCIONADO PARA PUNTOS
     //
     //
-    renderPointsLayer : function(item){
+    renderPointsLayer : function(item, filteredData){
 
       var that   = this,
-          points = this._makeGeojson(item),
+          points = this._makeGeojson(item, filteredData),
           t         = _.template(item.config.template),
           style     = that.settings.mapPoint,
           _style    = item.config.style,
@@ -1329,7 +1340,7 @@ define(function(require){
     // TOMA UN ARRAY DE PUNTOS Y LO CONVIERTE A GEOJSON
     // -------------------------------------------------------
     //
-    _makeGeojson : function(item){
+    _makeGeojson : function(item, DATA){
       var geojson = {
                       "features" : null,
                       "type" : "FeatureCollection",
@@ -1361,7 +1372,7 @@ define(function(require){
         });
       }
       else{
-        features = this.filteredData.map(function(d){
+        features = DATA.map(function(d){
                        var p = {};
                        properties.forEach(function(property){
                         p[property] = d[property];

@@ -1,0 +1,33 @@
+{
+  "name"  : "Obra Pública Abierta",
+  "type"  : "point",
+  "multiple" : 1,
+  "disable" : [0,0],
+  "level" : [],
+  "src"   : "/js/maps/opa.json",
+  "file"  : "json",
+  "link"  : {
+    "url"    : "/opa.html",
+    "column" : "key"
+  },
+  "style" : {
+    "fillColor" : "#f49d51",
+    "color"     : "#ea750f"
+  },
+  "location" : {
+    "lat" : "lat",
+    "lng" : "lng",
+    "state" : "state"
+  },
+  "values"     : ["monto_total_inversion", "ejercido"],
+  "data"       : ["monto_total_inversion", "ejercido", "key","name","ramo","unidad","state","lat","lng","advance","ciclo","classification"],
+  "current"    : {},
+  "columns" : {
+    "GFSHCPurl" : "ficha",
+    "monto_total_inversion" : "monto total"
+  },
+  "filters" : [],
+  "defaultFilters" : [],
+  "graphs" : {},
+  "template" : "<%=name%> <div class='amount_label'><div class='row'><div class='col-sm-6'><h5>Monto total de inversión</h5>  $<%=monto_total_inversion%><h5>Monto ejercido</h5> $<%=ejercido%></div><div class='col-sm-6'><h5>Avance Físico</h5> <%=advance%>% <div class='bar'><span class='bar inside total' style='width:<%=advance%>%'></span><h5>Año</h5> <%=ciclo%></div></div></div> <br><a href='/opa.html#<%=key%>'  class='btn more info'>Más información</a></div>"
+}

@@ -1,0 +1,30 @@
+{
+  "name"  : "Contribución social minería",
+  "type"  : "point",
+  "multiple" : 0,
+  "disable" : [0,0],
+  "level" : [],
+  "src"   : "/js/maps/contribucion_social_mineria.csv",
+  "file"  : "csv",
+  "style" : {
+    "fillColor" : "black",
+    "color"     : "white"
+  },
+  "location" : {
+    "lat" : "LATITUD",
+    "lng" : "LONGITUD",
+    "state" : "ID_ENTIDAD_FEDERATIVA",
+    "city" : "ID_MUNICIPIO"
+  },
+  "values"     : ["AUTORIZADO", "MODIFICADO", "MINISTRADO", "COMPROMETIDO", "DEVENGADO", "EJERCIDO", "PAGADO"],
+  "data"       : ["SECTOR", "ID_PASO_EITI", "CICLO", "PERIODO", "TIPO_PROYECTO", "ID_PROYECTO", "NOMBRE_PROYECTO", "ID_ENTIDAD_FEDERATIVA", "ENTIDAD", "ID_MUNICIPIO", "MUNICIPIO", "ID_LOCALIDAD", "LOCALIDAD", "LATITUD", "LONGITUD", "DIRECCION", "ID_RECURSO", "RECURSO", "INSTITUCION_EJECUTORA", "ID_CLASIFICACION", "CLASIFICACION", "BENEFICIARIOS", "POBLACION_ANUAL", "DESC_ESTATUS", "DETALLE_ESTATUS", "INICIO", "TERMINO", "ID_RAMO", "DESC_RAMO", "CLAVE_PROGRAMA_PRESUPUESTARIO", "PROGRAMA_PRESUPUESTARIO", "ID_CONCURRENCIA_DE_RECURSOS", "CONCURRENCIA", "AUTORIZADO", "MODIFICADO", "MINISTRADO", "COMPROMETIDO", "DEVENGADO", "EJERCIDO", "PAGADO", "AVANCE_FINANCIERO", "AVANCE_ESTIMADO_ANUAL", "AVANCE_FISICO", "UNIDAD_MEDIDA", "FECHA_PUBLICACION", "FECHA_MODIFICACION", "FUENTE_INFORMACION", "CONTACTO_INFORMACION"],
+  "current"    : {},
+  "filters" : [
+    {"type" : "search", "field" : "NOMBRE_PROYECTO", "title" : "Proyecto"},
+    {"type" : "search", "field" : "ID_PROYECTO", "title" : "Clave"},
+    {"type" : "state", "field" : "ID_ENTIDAD_FEDERATIVA"},
+    {"type" : "city", "field" : "ID_MUNICIPIO"}
+  ],
+  "defaultFilters" : [],
+  "template" : "<%=NOMBRE_PROYECTO%> <div class='amount_label'><div class='row'><div class='col-sm-6'><h5>Monto total autorizado</h5>  $<%=AUTORIZADO%></div>"
+}
