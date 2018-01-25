@@ -1,0 +1,34 @@
+{
+  "name"  : "Egresos minería",
+  "type"  : "area",
+  "level" : ["state"],
+  "src"   : "/js/maps/egresos_mineria.csv",
+  "file"  : "csv",
+  "color" : 12,
+  "colorLevels" : 5,
+  "location" : {
+    "state" : "ID_ENTIDAD_FEDERATIVA"
+  },
+  "style" : {
+    "fillOpacity":0.8
+  },
+  "values"  : ["MONTO_APROBADO", "MONTO_MODIFICADO", "MONTO_DEVENGADO", "MONTO_PAGADO", "MONTO_EJERCIDO"],
+  "data"    : ["SECTOR", "ID_PASO_EITI", "CICLO", "PERIODO", "ID_RAMO", "DESC_RAMO", "ID_UR", "DESC_UR", "ID_MODALIDAD", "DESC_MODALIDAD", "ID_PP", "DESC_PP", "ID_PARTIDA_ESPECIFICA", "DESC_PARTIDA_ESPECIFICA", "ID_ENTIDAD_FEDERATIVA", "ENTIDAD_FEDERATIVA", "MONTO_APROBADO", "MONTO_MODIFICADO", "MONTO_DEVENGADO", "MONTO_PAGADO", "MONTO_EJERCIDO", "FECHA_PUBLICACION", "FECHA_MODIFICACION", "FUENTE_INFORMACION", "CONTACTO_INFORMACION"],
+  "current" : {
+    "level"  : "state",
+    "value"  : "MONTO_APROBADO",
+    "method" : "length",
+    "unit"   : "proyectos"
+  },
+  "filters" : [
+    {"type" : "state", "field" : "ID_ENTIDAD_FEDERATIVA"},
+    {"type" : "branch", "field" : "ID_RAMO"},
+    {"type" : "year", "field" : "CICLO"}
+  ],
+  "extraFilters" : [
+    {"type" : "extra", "field" : "DESC_MODALIDAD", "title" : "Modalidad"}
+  ],
+   "defaultFilters" : [],
+  "graphs" : null,
+  "template" : "<%=name%> <div class='amount_label'><h5> Proyectos: <strong><%=value%></strong></h5></div><div class='amount_label'><h5> Pagado: <strong>$<%=MONTO_PAGADO%></strong></h5></div><div class='amount_label'><h5> Aprobado: <strong>$<%=MONTO_APROBADO%></strong></h5></div>"
+}

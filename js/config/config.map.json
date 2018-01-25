@@ -39,8 +39,8 @@
   },
   "maps" : {
     "basePath"  : "/js/config",
-    "maps"      : ["ramo23.map.json", "opa.map.json", "entidades.map.json"],
-    "extras"    : ["areas_afectadas_desastre.json"],
+    "maps"      : ["contribucion_social_minera.map.json"],
+    "extras"    : ["egresos_mineria.map.json"],
     "current"   : 0,
     "embedPath" : "http://localhost:8000/mapa.html" 
   },

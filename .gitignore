@@ -2,3 +2,5 @@ bower_components
 .DS_Store
 css/src_sass
 css/fonts
+js/maps/contribucion_social_mineria.csv
+js/maps/egresos_mineria.csv
