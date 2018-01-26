@@ -1,25 +1,45 @@
 # Documento de pruebas
 
 1.1 despliegue del mapa sin bases de datos
+
 1.2 despliegue de un mapa de área
+
 1.3 cambio de estado de un mapa de área
+
 1.4 despliegue de un mapa de puntos
+
 1.5 despliegue de un mapa extra
+
 1.6 despliegue de gráfica 1
+
 1.7 despliegue de gráfica 2
+
 1.8 despliegue de gráfica 3
+
 1.9 despliegue de gráfica 4
+
 1.10 despliegue de buscador avanzado
+
 1.11 descarga de datos en CSV
+
 1.12 despliegue de filtros de estado
+
 1.13 despliegue de filtros de ramo
+
 1.14 despliegue de filtros personalizados
+
 1.15 despliegue de filtros iniciales
+
 1.16 carga de información vía api en el mapa
+
 1.17 carga de información vía api en el buscador avanzado
+
 1.18 activación de ficha en el mapa
+
 1.19 despliegue de columnas en la ficha
+
 1.20 despliegue de mapa en la ficha
+
 
 ## 1.1 despliegue del mapa sin bases de datos
 código: MMDDAV2-CP-001
