@@ -2081,6 +2081,8 @@ h1 {
       .GF-tab_graphs_app li a:hover {
         background: #f7b881;
         color: white; }
+    .GF-tab_graphs_app li.current a {
+      background: #777; }
 
 .advanced_s,
 .compare_s {
