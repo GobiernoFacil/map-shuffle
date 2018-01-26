@@ -2175,6 +2175,11 @@ h1 {
   .compare_s .fixed-table-loading {
     color: #777;
     font-size: 13px; }
+  .advanced_s .t_bar_app,
+  .compare_s .t_bar_app {
+    padding-top: 20px;
+    font-size: 17px;
+    font-weight: 700; }
 
 .content_white {
   color: white; }
