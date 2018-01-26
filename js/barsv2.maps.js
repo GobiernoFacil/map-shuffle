@@ -302,7 +302,6 @@ define(function(require){
             chartData;
 
         if(zAxis && locations){
-          console.log("zAxis && locations");
           counter = 0;
           locations.forEach(function(loc, i){
             var stack = 'Stack ' + i;
@@ -329,10 +328,8 @@ define(function(require){
             datasets : dataSets
           };
 
-          console.log(counter);
         }
         else if(locations){
-          console.log("locations");
           locations.forEach(function(loc, i){
             dataSets.push({
               label : loc.label,
@@ -355,7 +352,6 @@ define(function(require){
         }
 
         else if(zAxis){
-          console.log("zaxis");
               zAxis.forEach(function(zx, i){
                 dataSets.push({
                   label : _zAxis.type == "branch" ? _.where(parent.lists.ramosName.branches, {id : String(zx)})[0].name : zx,
@@ -378,7 +374,6 @@ define(function(require){
         }
 
         else{
-          console.log("other", xAxis);
               var datasetA = {
                 label : defaultLabelA,
                 backgroundColor : _config.colors[0],
@@ -389,7 +384,6 @@ define(function(require){
 
                     search[_xAxis.field] = item;
 
-                    console.log(search);
                     return d3.sum(this.dataA.filter(function(el){
                         return el[_xAxis.field] == item
                     }), function(d){
@@ -453,6 +447,8 @@ define(function(require){
             dataSets      = [];
 
 
+        console.log(_zAxis, zAxis);
+
         zAxis.forEach(function(zx, i){
             dataSets.push({
               label : this.findLabel(zx, _zAxis),//zx,
@@ -472,8 +468,6 @@ define(function(require){
           labels   : xAxis,
           datasets : dataSets
         };
-
-
 
         if(this.graphC){
 
@@ -510,6 +504,8 @@ define(function(require){
         });
         }
         else{
+          console.log("somethign wrong");
+
           var ctx = this.canvasC.getContext("2d");
           this.graphC = new Chart(ctx, {
           type : "bar",
@@ -560,11 +556,22 @@ define(function(require){
             dataSets   = [],
             stateField = parent.currentMap.config.location.state,
             cityField  = parent.settings.constants.cityId,
-            options    = { };
+            options    = { 
+              scale : {
+                ticks: {
+                // Include a dollar sign in the ticks
+                  callback: function(value, index, values) {
+                    return '$' + value.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                  }
+                }
+              }
+            };
 
 
 
         if(labels.length < 3){
+          //console.log("labels < 3");
+          if(this.graphB) this.graphB.destroy();
           return;
         }
         else{
@@ -591,15 +598,18 @@ define(function(require){
             });
           }, this);
 
+
           if(this.graphB){
             this.graphB.destroy();
           }
+
 
           this.graphB = new Chart(this.canvasB, {
             type: 'radar',
             data: {labels : labels, datasets : dataSets},
             options: options
           });
+
         }
       },
 
@@ -639,7 +649,16 @@ define(function(require){
             // la columna de municipio
             cityField  = parent.settings.constants.cityId,
             // las opciones de la gráfica
-            options    = { };
+            options    = { 
+              scale : {
+                ticks: {
+                // Include a dollar sign in the ticks
+                  callback: function(value, index, values) {
+                    return '$' + value.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+                  }
+                }
+              }
+            };
 
         // [2] se mapean los datos para graficar
         //
@@ -716,7 +735,7 @@ define(function(require){
     			    return filter.field == zAxis.field;
     		    }, this);
 
-    		return items.length ? _.compact(_.uniq(_.pluck(items, "value"))) : null;
+    		return items.length ? _.compact(_.uniq(_.pluck(items, "value"))) : [];
     		
 
     	},

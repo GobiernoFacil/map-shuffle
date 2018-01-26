@@ -668,9 +668,9 @@ define(function(require){
                       onEachFeature : function(feature, layer){
                         var _d = Object.create(feature.properties.data);
                         for(var key in _d){
-                          if(_d.hasOwnProperty(key)){
+                          //if(_d.hasOwnProperty(key)){
                             _d[key] = that.currentMap.config.values.indexOf(key) != -1 ? that.numberFormat(_d[key]) : _d[key];
-                          }
+                          //}
                         }
 
                         _d.value = that.numberFormat(_d.value);
