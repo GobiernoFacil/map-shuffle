@@ -601,9 +601,8 @@ define(function(require){
           return d[this.currentExtraMap.config.location.lat] != this.currentExtraMap.config.disable[0] && d[this.currentExtraMap.config.location.lng] != this.currentExtraMap.config.disable[1];
         }, this);
 
-        console.log(this.extraFilteredData);
 
-        // this.renderPointsLayer(item);
+        this.renderPointsLayer(item, this.extraFilteredData, true);
         
 
       }
@@ -617,6 +616,7 @@ define(function(require){
           currentMap   = this.currentMap,
           currentType  = currentMap.config.type,
           extraMapType = this.currentExtraMap.config.type;
+
 
       if(extraMapType == "area" && currentType == "point"){
         // layer.bringToFront
@@ -684,10 +684,10 @@ define(function(require){
     // DIBUJA EL LAYER SELECCIONADO PARA PUNTOS
     //
     //
-    renderPointsLayer : function(item, filteredData){
+    renderPointsLayer : function(item, filteredData, isExtra){
 
       var that   = this,
-          points = this._makeGeojson(item, filteredData),
+          points = this._makeGeojson(item, filteredData, isExtra),
           t         = _.template(item.config.template),
           style     = that.settings.mapPoint,
           _style    = item.config.style,
@@ -696,7 +696,8 @@ define(function(require){
           prevId    = this.settings.ux.pointNavigationPrevId,
           nextId    = this.settings.ux.pointNavigationNextId,
           currentId = this.settings.ux.pointNavigationCurrentId,
-          totalId   = this.settings.ux.pointNavigationTotalId;
+          totalId   = this.settings.ux.pointNavigationTotalId,
+          LAYER;
 
       if(_style){
         for(var prop in _style){
@@ -706,7 +707,7 @@ define(function(require){
         }
       }
 
-      this.points = L.geoJson(points, {
+      LAYER = L.geoJson(points, {
         pointToLayer : function(feature, latlng){
           var p     = L.circleMarker(latlng, style),//that.settings.mapPoint),
               props = feature.properties;
@@ -813,6 +814,15 @@ define(function(require){
           return p;
         }
       }).addTo(this.map);
+
+
+      if(isExtra){
+        this.extra = LAYER;
+      }
+      else{
+        this.points = LAYER;
+      }
+
     },
 
     //
@@ -1066,8 +1076,6 @@ define(function(require){
           filters = this.filters,
           url,
           fields;
-
-      console.log(filters);
 
       url = src + "?";
 
@@ -1340,7 +1348,7 @@ define(function(require){
     // TOMA UN ARRAY DE PUNTOS Y LO CONVIERTE A GEOJSON
     // -------------------------------------------------------
     //
-    _makeGeojson : function(item, DATA){
+    _makeGeojson : function(item, DATA, isExtra){
       var geojson = {
                       "features" : null,
                       "type" : "FeatureCollection",
@@ -1356,7 +1364,7 @@ define(function(require){
           features   = null;
           
 
-      if(multiple){
+      if(multiple && !isExtra){
         features = this._currentPoints.map(function(d){
           var p    = {};
           p.points = d;
@@ -1955,7 +1963,6 @@ define(function(require){
         return null;
       }
 
-      //console.log(this.settings.mapGeometry.defaultLevels, item.config.colorLevels);
 
       brew = new classyBrew();
       brew.setSeries(_data);
