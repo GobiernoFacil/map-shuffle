@@ -2772,7 +2772,7 @@ a:link.btn.locations_b {
 /* Show tooltip content on hover */
 [data-tooltip]:hover:before,
 [data-tooltip]:hover:after {
-  visibility: visible;
+  visibility: hidden;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
   filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
   opacity: 1; }
