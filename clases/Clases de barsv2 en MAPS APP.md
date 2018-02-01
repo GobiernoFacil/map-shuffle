@@ -7,7 +7,7 @@
 * js/filter.module.map
 * js/config/config.map.json
 
-## funciones (clases)
+## funciones (métodos)
 * render: asigna valores iniciales, corrige el scope de las funciones de update, y despliega el estado inicial del módulo de gráficas. 
 * _enableToggleButtons: habilita los botones de selección de gráfica.
 * _setupGraph: habilita un gráfica, asignando los elementos de HTMl que la controlan y sus filtros.
