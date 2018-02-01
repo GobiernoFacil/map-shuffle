@@ -47,7 +47,7 @@
       "zAxis" : {
         "field" : "DESC_PP",
         "title" : "Fondo",
-        "type"  : "branch"
+        "type"  : null
       },
       "maxLocations" : 5,
       "colors" : ["red", "green", "blue", "yellow", "purple", "pink", "black", "orange", "gray", "maroon"]
