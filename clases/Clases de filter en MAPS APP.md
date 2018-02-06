@@ -4,7 +4,7 @@
 * underscore
 * selectize
 
-## funciones (clases)
+## funciones (métodos)
 * reduceFilters: genera una lista inicial de filtros seleccionados, basándose en el archivo de configuración.
 * filter: filtra la información en base a los filtros seleccionados, y hace la llamada a la función de render correspondiente (puede ser llamada desde el mapa, desde las gráficas o desde el buscador avanzado).
 * _filterData: filtra la información dependiendo su tipo (string, number, state, city, branch, unit).
