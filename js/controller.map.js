@@ -1160,8 +1160,8 @@ define(function(require){
 
     _addUrlToItems : function(data, conf){
       data.forEach(function(d){
-        d[this.itemUrl] = conf.link.url + "#" + d[conf.link.column];
-      }, this);
+        d[GFSHCPMap.itemUrl] = conf.link.url + "#" + d[conf.link.column];
+      }, GFSHCPMap);
     },
 
     _addKeyToUnits : function(data, conf, unit){
@@ -1172,10 +1172,10 @@ define(function(require){
       if(!branch) return;
 
       data.forEach(function(d){
-        d[this.unitID] = String(d[branch.field]) + "-" + String(d[unit.field]);
-      }, this);
+        d[GFSHCPMap.unitID] = String(d[branch.field]) + "-" + String(d[unit.field]);
+      }, GFSHCPMap);
 
-      unit.field = this.unitID;
+      unit.field = GFSHCPMap.unitID;
     },
 
     _addKeyToCities : function(data, conf, city){
@@ -1202,23 +1202,23 @@ define(function(require){
         else{
           cityString = String(d[cityCol]);
         }
-        d[this.cityID] = Number(String(d[stateCol]) + cityString);
-      }, this);
+        d[GFSHCPMap.cityID] = Number(String(d[stateCol]) + cityString);
+      }, GFSHCPMap);
 
       if(city.length){
-        conf.location.city = this.cityID;
+        conf.location.city = GFSHCPMap.cityID;
         
         if(conf.filters){
           conf.filters.forEach(function(fil){
             if(fil.type == "city"){
-              fil.field = this.cityID;
+              fil.field = GFSHCPMap.cityID;
             }
           });
         }
 
       }
       else{
-        city.field = this.cityID;
+        city.field = GFSHCPMap.cityID;
       }
     },
 
