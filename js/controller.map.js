@@ -378,8 +378,11 @@ define(function(require){
         var page    = 0,
             src2    = that.makeAPIURL(that.currentMap, page),
             item    = this.currentMap,
+            conf    = item.config,
             pageEl  = document.getElementById(this.settings.ui.pageSelector.controls.pageSelect),
-            totalEl = document.getElementById(this.settings.ui.pageSelector.controls.pageDisplay);
+            totalEl = document.getElementById(this.settings.ui.pageSelector.controls.pageDisplay),
+            hasCity = conf.location.city,
+            hasUrl  = conf.link;
         
 
         d3[item.config.file](src2, function(error, data){
@@ -389,6 +392,23 @@ define(function(require){
           that.currentPage = data.page;
 
           that.cleanLayers();
+
+
+          if(hasCity){
+            that._addKeyToCities(item.data, conf, hasCity);
+          }
+
+          /*
+          if(hasUnit){
+            that._addKeyToUnits(item.data, conf, hasUnit);
+          }
+          */
+
+          if(hasUrl){
+            that._addUrlToItems(item.data, conf);
+          }
+
+
           that.filteredData = item.data.slice();
           that.renderLayer(item);
 
@@ -1056,6 +1076,7 @@ define(function(require){
         // * el id interno del mapa desplegado
         that.currentMapId = item.idex;
         that.filteredData = item.data.slice();
+
         that.enableFilters();
         //that.renderLayer(item);
         that.filterModule._enableDefaultFilters();
