@@ -207,7 +207,9 @@ define(function(require){
       this.renderMapSelector();
 
       // * el selector de mapas extra
-      this.renderExtraMapSelector();
+      //this.renderExtraMapSelector();
+      console.log("mej");
+
 
       /*!!!!!!
       !! 
@@ -226,7 +228,7 @@ define(function(require){
       // * la configuración de los mapas principales
       this.loadMapsConfig();
       // * la configuración de los mapas extra (para comparar)
-      this.loadExtraMapsConfig();
+      //this.loadExtraMapsConfig();
 
       // [6] LA GEOLOCALIZACIÓN
       // ----------------------------------------------------------------------
