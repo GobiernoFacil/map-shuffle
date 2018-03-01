@@ -112,19 +112,42 @@ Aquí un ejemplo de mapPoint:
 
 ##### mapGeometry
 el elemento mapGeometry es una colección de propiedades CSS para una geometría SVG. Cualquier propiedad puede ser definida aquí, y se aplicarán todas las que sean válidas. Si no son definidas correctamente las propiedades CSS, las geometrías no se desplegarán.
-
+ 
 No hay propiedades obligatorias, aunque sin una definición válida de CSS, no se desplegarán los estados/municipios
 
 Aquí un ejemplo de mapGeometry:
 ```
 "mapGeometry" : {
-    "weight"      : 0.4,
-    "opacity"     : 0.1,
-    "color"       : "black",
-    "dashArray"   : "",
-    "fillOpacity" : 1
+    "weight"       : 0.4,
+    "opacity"      : 0.1,
+    "color"        : "black",
+    "dashArray"    : "",
+    "fillOpacity"  : 1,
+    "defaultColor" : 12,
+    "defaultLevels": 7
   },
 ```
+
+Como parte de esta definición del objeto, hay dos propiedades especiales que no forman parte del estándar CSS. Estás son _defaultColor_ y _defaultLevels_.
+
+##### defaultColor
+Esta propiedad indica el código de color que se quiere ocupar en las barras de color para los mapas de área. Acepta valores del cero al 34, e identifican a las siguientes opciones:
+```
+/*
+["OrRd", "PuBu", "BuPu", "Oranges", 
+"BuGn", "YlOrBr", "YlGn", "Reds", 
+"RdPu", "Greens", "YlGnBu", "Purples", 
+"GnBu", "Greys", "YlOrRd", "PuRd", "Blues", 
+"PuBuGn", "Spectral", "RdYlGn", "RdBu", 
+"PiYG", "PRGn", "RdYlBu", "BrBG", 
+"RdGy", "PuOr", "Set2", "Accent", 
+"Set1", "Set3", "Dark2", "Paired", 
+"Pastel2", "Pastel1"];
+*/
+```
+
+##### defaultLevels
+Esta propiedad define el número de bandas en las que estará dividida la escala de color de los mapas de área. Esta propiedad acepta enteros, del dos al nueve. 
 
 ##### extraMapGeometry
 al igual que mapGeometry, define el diseño por default para los mapas superpuestos, y funciona de la misma manera.
