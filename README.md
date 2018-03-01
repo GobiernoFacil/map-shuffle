@@ -381,6 +381,21 @@ extraFilters : al igual que la lista de filtros, se define una segunda lista de 
   ],
 ```
 
+dataSearch : Este es un array donde se definen las columnas que se desplegarán en la búsqueda avanzada. Por ejemplo:
+
+```
+  "dataSearch" : ["monto_total_inversion", "ejercido", "key","name","ramo","unidad","state","advance","ciclo","classification"]
+```
+
+columns: Este es un array que sirve para reemplazar los nombre de cada columna de la db por otro nombre más comprensible, por ejemplo, cambiar "ESTADOS_NOMBRE" por "estado". Esta sustitución se hará en los nombres de las columnas del buscador avanzado. Aquí un ejemplo:
+
+```
+ "columns" : {
+    "GFSHCPurl" : "ficha",
+    "monto_total_inversion" : "monto total"
+  },
+```
+
 # Optimización del código
 Para generar el build que agrupa todas las librerías necesarias y el archivo de coonfiguración principal, es necesaria la herramienta de requirejs (r.js) y Node. La guía de instalación/descarga de la herramienta require se encuentra [aquí](http://requirejs.org/docs/optimization.html)
 
