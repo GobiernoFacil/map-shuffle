@@ -134,17 +134,19 @@ define(function(require){
 
       updateData : function(_data, filters, pagination){
         this._filters = filters;
+
         if(isAPI){
-          var url = this.makeAPIURL(parent.currentMap, page);
+          var url     = this.makeAPIURL(parent.currentMap, page);
+          
           d3.json(url, function(error, d){
             data  = d.results;
+
             pages = d.pages;
             page  = 0;
             apiRes = d;
             controller.renderItems(0);
             controller.renderPagination();
 
-            //console.log(download, data, "api");
 
             if(data.length){
               download.disabled = false;
@@ -163,7 +165,6 @@ define(function(require){
           controller.renderItems(0);
           controller.renderPagination();
 
-          //console.log(download, data, "normal");
 
           if(data.length){
               download.disabled = false;
@@ -177,6 +178,27 @@ define(function(require){
       },
 
       renderItems : function(newPage){
+
+        if(isAPI){
+          var item    = parent.currentMap,
+              hasCity = item.config.location.city,
+              hasUrl  = item.config.link;
+          
+
+          if(hasCity){
+            parent._addKeyToCities(data, item.config, hasCity);
+          }
+
+          /*
+            if(hasUnit){
+              parent._addKeyToUnits(item.data, item.config, hasUnit);
+            }
+          */
+
+          if(hasUrl){
+             parent._addUrlToItems(data, item.config);
+          }
+        }
 
         this.renderItemsNum();
 
@@ -196,6 +218,7 @@ define(function(require){
           headers.forEach(function(key){
             var td  = document.createElement("td"),
                 val = numValues.indexOf(key) != -1 ? format(item[key]) : item[key];
+
 
             if(key == URLColName){
               val = "<a target='_blank' href='" + item[URLColName] + "'>" + LINKText +"</a>";

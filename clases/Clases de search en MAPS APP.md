@@ -6,7 +6,7 @@
 * js/config/config.map.json
 * js/filter.module.map
 
-## funciones (clases)
+## funciones (métodos)
 * render: asigna valores iniciales, obtiene referencias al HTML,  despliega la tabla de búsqueda, crea los listeners (elementos de interacción).
 * renderHeaders: despliega los headers de la tabla.
 * updateData: actualiza la información de la tabla.

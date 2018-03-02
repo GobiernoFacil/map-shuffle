@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title><%=nombre%></title>
   <meta name="description" v-bind:content="descripcion">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
   <link rel="stylesheet" type="text/css" href="css/styles.css"/>
   <link rel="stylesheet" type="text/css" href="css/leaflet.css">
   <script src="js/modernizr.custom.js"></script>
@@ -97,7 +97,8 @@
         </div>
       </div>
       <!--avance fisico-->
-      <div id="arc_side" class="col-md-2 col-sm-3 side">
+      <div id="arc_side" class="col-md-2 col-sm-3">
+	      <div class="side">
         <h3>Avance Físico Total</h3>
         <div class="GF-SHCP-circle"
          data-width="160"
@@ -105,6 +106,7 @@
          data-color-a="rgb(190,205,81)"
          data-color-b="rgb(210,210,210)"
          data-column="avance_fisico"></div>
+	      </div>
       </div>
     </div>
 
@@ -185,7 +187,8 @@
           </div>
         </div>
       </div>
-      <div class="col-md-3 col-sm-4 side">
+      <div class="col-md-3 col-sm-4">
+	      <div class="side">
         <!-- monto total-->
         <h3>
           <!--tooltip-->
@@ -232,6 +235,7 @@
         <!-- reporta obra-->
         <a id="show-modal" class="btn report trigger">Reporta esta obra</a>
 
+      </div>
       </div>
     </div>
   </section>
@@ -814,7 +818,6 @@
 <script>
   var GFormat          = d3.format(","),
       GFAPIBaseURL     = "https://mapas.gobiernofacil.com/api/consulta/opa",
-      //GFAPIBaseURL     = "http://localhost:8000/api/consulta/opa",
       GFErrorBlockID    = "GF-error-message",
       GFContentBlockID  = "GF-card-list-container",
       GFTemplateBlockID = "GF-opa-template",
@@ -870,7 +873,7 @@
   
   var appKey  = '5825343BB68F29D2A881B2E8D205B98846C95558';
 
-  // var estadosList = get_stateList();
+  var estadosList = [];
   $(document).ready(function(){
     $('#reportForm').on('keyup keypress', function(e) {
       var keyCode = e.keyCode || e.which;
@@ -897,7 +900,7 @@
    $(document).on("click", ".rpt-advance", function () {
      event.preventDefault();
      anonimo  = $("#anonymous").val();
-     estados = estadosList.responseJSON.estado;
+     estados = estadosList; //estadosList.responseJSON.estado;
 
 
      //informacion de proyecto
@@ -908,7 +911,7 @@
          nombre    = $("#nameReport").text(),
          motivo    = $("#motivoReporte").val(),
          asunto    = $("#asuntoReporte").val(),
-         estadoId = "",
+         estadoID = "",
          paisId="2";
          testado = RemoveAccents(entidad.toLowerCase());
          for (var i = 0; i < estados.length; i++) {

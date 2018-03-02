@@ -5,7 +5,7 @@
   "src"   : "/js/maps/ramo23_comp.csv",
   "file"  : "csv",
   "color" : 12,
-  "colorLevels" : 5,
+  "colorLevels" : 9,
   "location" : {
     "state" : "ID_ENTIDAD_FEDERATIVA",
     "city"  : "ID_MUNICIPIO"
@@ -47,7 +47,7 @@
       "zAxis" : {
         "field" : "DESC_PP",
         "title" : "Fondo",
-        "type"  : "branch"
+        "type"  : null
       },
       "maxLocations" : 5,
       "colors" : ["red", "green", "blue", "yellow", "purple", "pink", "black", "orange", "gray", "maroon"]

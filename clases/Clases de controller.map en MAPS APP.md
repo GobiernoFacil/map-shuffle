@@ -18,7 +18,7 @@
 * js/search.maps
 * js/filter.module.map
 
-## funciones (clases)
+## funciones (métodos)
 * initialize: asigna los valores de default, define shortcuts para elementos de UI, arregla el scope de funciones que se llaman fuera del nivel del objeto, llama a las funciones que despliegan el estado inicial del mapa.
 * enableReverseGeocofing: habilita el campo de geocoding utilizando el api de google maps.
 * enableUserLocation: habilita el uso de HTML5 para geolocalizar al usuario.

@@ -1871,7 +1871,8 @@ h1 {
 #GF-modal_container {
   display: none; }
 
-#GF-SHCP-color-guide {
+#GF-SHCP-color-guide,
+#GF-SHCP-color-guide-x {
   background: white;
   display: block;
   padding: 10px;
@@ -1879,20 +1880,27 @@ h1 {
   bottom: 20px;
   z-index: 9999;
   right: 0; }
-  #GF-SHCP-color-guide ul {
+  #GF-SHCP-color-guide ul,
+  #GF-SHCP-color-guide-x ul {
     margin: 0; }
-  #GF-SHCP-color-guide li {
+  #GF-SHCP-color-guide li,
+  #GF-SHCP-color-guide-x li {
     color: #777;
     list-style: none;
     display: block;
     font-size: 9px;
     margin-left: 5px;
     text-align: right; }
-    #GF-SHCP-color-guide li i {
+    #GF-SHCP-color-guide li i,
+    #GF-SHCP-color-guide-x li i {
       display: block !important;
       height: 10px !important;
       margin: 0;
       width: 60px !important; }
+
+#GF-SHCP-color-guide-x {
+  top: 148px;
+  bottom: inherit; }
 
 #GF-SHCP-geolocate-user {
   background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIxLjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkNhcGFfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiCgkgdmlld0JveD0iMCAwIDY0IDY0IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA2NCA2NDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLnN0MHtmaWxsOiNGRkZGRkY7fQo8L3N0eWxlPgo8Zz4KCTxnPgoJCTxnIGlkPSJjaXJjbGVfMTJfIj4KCQkJPGc+CgkJCQk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNjEuNSwzNC41SDU5Yy0xLjIsMTMtMTEuNSwyMy4zLTI0LjUsMjQuNXYyLjZjMCwxLjQtMS4xLDIuNS0yLjUsMi41Yy0xLjQsMC0yLjUtMS4xLTIuNS0yLjVWNTkKCQkJCQlDMTYuNiw1Ny44LDYuMiw0Ny40LDUsMzQuNUgyLjVDMS4xLDM0LjUsMCwzMy40LDAsMzJjMC0xLjQsMS4xLTIuNSwyLjUtMi41SDVDNi4yLDE2LjUsMTYuNiw2LjIsMjkuNiw1YzAsMCwwLTAuMSwwLTAuMVYyLjUKCQkJCQlDMjkuNSwxLjEsMzAuNiwwLDMyLDBjMS40LDAsMi41LDEuMSwyLjUsMi41djIuNWMwLDAsMCwwLjEsMCwwLjFjMTMsMS4yLDIzLjMsMTEuNSwyNC41LDI0LjVoMi42YzEuNCwwLDIuNSwxLjEsMi41LDIuNQoJCQkJCUM2NCwzMy40LDYyLjksMzQuNSw2MS41LDM0LjV6IE0zMiw5LjhDMTkuOCw5LjgsOS44LDE5LjgsOS44LDMyUzE5LjgsNTQuMiwzMiw1NC4yUzU0LjIsNDQuMiw1NC4yLDMyUzQ0LjIsOS44LDMyLDkuOHoKCQkJCQkgTTMyLDQ2LjhjLTguMiwwLTE0LjgtNi42LTE0LjgtMTQuOGMwLTguMiw2LjYtMTQuOCwxNC44LTE0LjhjOC4yLDAsMTQuOCw2LjYsMTQuOCwxNC44QzQ2LjgsNDAuMiw0MC4yLDQ2LjgsMzIsNDYuOHogTTMyLDIyLjIKCQkJCQljLTUuNCwwLTkuOCw0LjQtOS44LDkuOHM0LjQsOS44LDkuOCw5LjhzOS44LTQuNCw5LjgtOS44UzM3LjQsMjIuMiwzMiwyMi4yeiIvPgoJCQk8L2c+CgkJPC9nPgoJPC9nPgo8L2c+CjxjaXJjbGUgY2xhc3M9InN0MCIgY3g9IjMxIiBjeT0iMzIuNyIgcj0iMTEuMyIvPgo8L3N2Zz4K");
@@ -2081,6 +2089,8 @@ h1 {
       .GF-tab_graphs_app li a:hover {
         background: #f7b881;
         color: white; }
+    .GF-tab_graphs_app li.current a {
+      background: #777; }
 
 .advanced_s,
 .compare_s {
@@ -2165,6 +2175,11 @@ h1 {
   .compare_s .fixed-table-loading {
     color: #777;
     font-size: 13px; }
+  .advanced_s .t_bar_app,
+  .compare_s .t_bar_app {
+    padding-top: 20px;
+    font-size: 17px;
+    font-weight: 700; }
 
 .content_white {
   color: white; }
@@ -2762,7 +2777,7 @@ a:link.btn.locations_b {
 /* Show tooltip content on hover */
 [data-tooltip]:hover:before,
 [data-tooltip]:hover:after {
-  visibility: visible;
+  visibility: hidden;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
   filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
   opacity: 1; }
@@ -2885,10 +2900,6 @@ a.email {
   .record table.table {
     display: block;
     overflow: scroll; }
-  .side {
-    margin-right: 15px;
-    margin-left: 15px;
-    margin-top: 10px; }
   footer p.data {
     text-align: center; }
   footer .shcp {
@@ -2931,14 +2942,46 @@ a.email {
       height: 25px;
       margin: 5px 0; }
   .module_box input {
-    width: 87.4%; } }
+    width: 87.4%; }
+  .record {
+    overflow-x: hidden; }
+    .record h1 {
+      font-size: 23px;
+      line-height: 1.2; }
+    .record h3 {
+      margin-bottom: 5px;
+      text-align: center; }
+    .record svg {
+      display: block;
+      margin: 0 auto; }
+    .record .amount {
+      font-size: 18px; }
+      .record .amount.big {
+        font-size: 18px; }
+    .record .bar {
+      margin-bottom: 20px; }
+    .record table.table {
+      display: block;
+      overflow: scroll; }
+  footer p.data {
+    text-align: center; }
+  footer .shcp {
+    float: none;
+    margin: 0 auto; }
+  .GF-card {
+    text-align: center; }
+  .usaid {
+    float: none;
+    text-align: center; } }
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
-  .record h1 {
-    font-size: 30px;
-    line-height: 1.2; }
-  .record .amount.big {
-    font-size: 23px; }
+  .record {
+    overflow-x: hidden; }
+    .record h1 {
+      font-size: 30px;
+      line-height: 1.2; }
+    .record .amount.big {
+      font-size: 23px; }
   .module_box input {
     width: 86.4%; } }
 

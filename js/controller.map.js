@@ -378,8 +378,11 @@ define(function(require){
         var page    = 0,
             src2    = that.makeAPIURL(that.currentMap, page),
             item    = this.currentMap,
+            conf    = item.config,
             pageEl  = document.getElementById(this.settings.ui.pageSelector.controls.pageSelect),
-            totalEl = document.getElementById(this.settings.ui.pageSelector.controls.pageDisplay);
+            totalEl = document.getElementById(this.settings.ui.pageSelector.controls.pageDisplay),
+            hasCity = conf.location.city,
+            hasUrl  = conf.link;
         
 
         d3[item.config.file](src2, function(error, data){
@@ -389,6 +392,23 @@ define(function(require){
           that.currentPage = data.page;
 
           that.cleanLayers();
+
+
+          if(hasCity){
+            that._addKeyToCities(item.data, conf, hasCity);
+          }
+
+          /*
+          if(hasUnit){
+            that._addKeyToUnits(item.data, conf, hasUnit);
+          }
+          */
+
+          if(hasUrl){
+            that._addUrlToItems(item.data, conf);
+          }
+
+
           that.filteredData = item.data.slice();
           that.renderLayer(item);
 
@@ -444,7 +464,7 @@ define(function(require){
           this._currentPoints = this.groupPoints();
         }
 
-        this.renderPointsLayer(item);
+        this.renderPointsLayer(item, this.filteredData);
         
         /*
         if(item.config.api){
@@ -572,6 +592,9 @@ define(function(require){
         var xxxxx = this._mapStateGeojson(this.currentExtraData);
         this.extraBrew = this._colorMixer(item, this.currentExtraData);
         this.renderStateLayer(item, "extra", xxxxx, this._stateExtraStyle);
+
+
+        this.renderColorGuideX();
       }
       
       // B) Es un mapa de área por municipio
@@ -584,18 +607,25 @@ define(function(require){
         var xxxxx = this._mapCityGeojson(this.currentExtraData);
         this.extraBrew        = this._colorMixer(item, this.currentExtraData);
         this.renderCityLayer(item, "extra", xxxxx, this._cityExtraStyle);
+
+        this.renderColorGuideX();
       }
 
-      this.renderColorGuideX();
-      /*
       // C) Es un mapa de puntos definidos por latitud y longitud
       else{
-        this.currentData = null;
-        this.renderPointsLayer(item);
-        if(item.config.api){
-          this.updatePagination();
-        }
-      }*/
+        this.currentExtraData = null;
+        this.extraFilteredData = this.currentExtraMap.data;
+        
+        // filtra los puntos que no tienen localización
+        this.extraFilteredData = ! this.currentExtraMap.config.disable ? this.extraFilteredData : this.extraFilteredData.filter(function(d){
+          return d[this.currentExtraMap.config.location.lat] != this.currentExtraMap.config.disable[0] && d[this.currentExtraMap.config.location.lng] != this.currentExtraMap.config.disable[1];
+        }, this);
+
+
+        this.renderPointsLayer(item, this.extraFilteredData, true);
+        
+
+      }
 
       this.sortLayers();
 
@@ -606,6 +636,7 @@ define(function(require){
           currentMap   = this.currentMap,
           currentType  = currentMap.config.type,
           extraMapType = this.currentExtraMap.config.type;
+
 
       if(extraMapType == "area" && currentType == "point"){
         // layer.bringToFront
@@ -657,9 +688,9 @@ define(function(require){
                       onEachFeature : function(feature, layer){
                         var _d = Object.create(feature.properties.data);
                         for(var key in _d){
-                          if(_d.hasOwnProperty(key)){
+                          //if(_d.hasOwnProperty(key)){
                             _d[key] = that.currentMap.config.values.indexOf(key) != -1 ? that.numberFormat(_d[key]) : _d[key];
-                          }
+                          //}
                         }
 
                         _d.value = that.numberFormat(_d.value);
@@ -673,10 +704,10 @@ define(function(require){
     // DIBUJA EL LAYER SELECCIONADO PARA PUNTOS
     //
     //
-    renderPointsLayer : function(item){
+    renderPointsLayer : function(item, filteredData, isExtra){
 
       var that   = this,
-          points = this._makeGeojson(item),
+          points = this._makeGeojson(item, filteredData, isExtra),
           t         = _.template(item.config.template),
           style     = that.settings.mapPoint,
           _style    = item.config.style,
@@ -685,7 +716,8 @@ define(function(require){
           prevId    = this.settings.ux.pointNavigationPrevId,
           nextId    = this.settings.ux.pointNavigationNextId,
           currentId = this.settings.ux.pointNavigationCurrentId,
-          totalId   = this.settings.ux.pointNavigationTotalId;
+          totalId   = this.settings.ux.pointNavigationTotalId,
+          LAYER;
 
       if(_style){
         for(var prop in _style){
@@ -695,7 +727,7 @@ define(function(require){
         }
       }
 
-      this.points = L.geoJson(points, {
+      LAYER = L.geoJson(points, {
         pointToLayer : function(feature, latlng){
           var p     = L.circleMarker(latlng, style),//that.settings.mapPoint),
               props = feature.properties;
@@ -802,6 +834,15 @@ define(function(require){
           return p;
         }
       }).addTo(this.map);
+
+
+      if(isExtra){
+        this.extra = LAYER;
+      }
+      else{
+        this.points = LAYER;
+      }
+
     },
 
     //
@@ -1035,6 +1076,7 @@ define(function(require){
         // * el id interno del mapa desplegado
         that.currentMapId = item.idex;
         that.filteredData = item.data.slice();
+
         that.enableFilters();
         //that.renderLayer(item);
         that.filterModule._enableDefaultFilters();
@@ -1055,8 +1097,6 @@ define(function(require){
           filters = this.filters,
           url,
           fields;
-
-      console.log(filters);
 
       url = src + "?";
 
@@ -1120,8 +1160,8 @@ define(function(require){
 
     _addUrlToItems : function(data, conf){
       data.forEach(function(d){
-        d[this.itemUrl] = conf.link.url + "#" + d[conf.link.column];
-      }, this);
+        d[GFSHCPMap.itemUrl] = conf.link.url + "#" + d[conf.link.column];
+      }, GFSHCPMap);
     },
 
     _addKeyToUnits : function(data, conf, unit){
@@ -1132,10 +1172,10 @@ define(function(require){
       if(!branch) return;
 
       data.forEach(function(d){
-        d[this.unitID] = String(d[branch.field]) + "-" + String(d[unit.field]);
-      }, this);
+        d[GFSHCPMap.unitID] = String(d[branch.field]) + "-" + String(d[unit.field]);
+      }, GFSHCPMap);
 
-      unit.field = this.unitID;
+      unit.field = GFSHCPMap.unitID;
     },
 
     _addKeyToCities : function(data, conf, city){
@@ -1162,23 +1202,23 @@ define(function(require){
         else{
           cityString = String(d[cityCol]);
         }
-        d[this.cityID] = Number(String(d[stateCol]) + cityString);
-      }, this);
+        d[GFSHCPMap.cityID] = Number(String(d[stateCol]) + cityString);
+      }, GFSHCPMap);
 
       if(city.length){
-        conf.location.city = this.cityID;
+        conf.location.city = GFSHCPMap.cityID;
         
         if(conf.filters){
           conf.filters.forEach(function(fil){
             if(fil.type == "city"){
-              fil.field = this.cityID;
+              fil.field = GFSHCPMap.cityID;
             }
           });
         }
 
       }
       else{
-        city.field = this.cityID;
+        city.field = GFSHCPMap.cityID;
       }
     },
 
@@ -1329,7 +1369,7 @@ define(function(require){
     // TOMA UN ARRAY DE PUNTOS Y LO CONVIERTE A GEOJSON
     // -------------------------------------------------------
     //
-    _makeGeojson : function(item){
+    _makeGeojson : function(item, DATA, isExtra){
       var geojson = {
                       "features" : null,
                       "type" : "FeatureCollection",
@@ -1345,7 +1385,7 @@ define(function(require){
           features   = null;
           
 
-      if(multiple){
+      if(multiple && !isExtra){
         features = this._currentPoints.map(function(d){
           var p    = {};
           p.points = d;
@@ -1361,7 +1401,7 @@ define(function(require){
         });
       }
       else{
-        features = this.filteredData.map(function(d){
+        features = DATA.map(function(d){
                        var p = {};
                        properties.forEach(function(property){
                         p[property] = d[property];
@@ -1944,7 +1984,6 @@ define(function(require){
         return null;
       }
 
-      //console.log(this.settings.mapGeometry.defaultLevels, item.config.colorLevels);
 
       brew = new classyBrew();
       brew.setSeries(_data);
