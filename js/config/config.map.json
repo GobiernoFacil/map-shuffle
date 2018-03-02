@@ -1,9 +1,9 @@
 {
   "map" : {
     "div"         : "GF-SHCP-map",
-    "lat"         : 22.442167,
-    "lng"         : -100.110350,
-    "zoom"        : 6,
+    "lat"         : 19.4303341116379,
+    "lng"         : -98.4038543701172,
+    "zoom"        : 10,
     "tileServer"  : "http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png'",
     "tileServerConfig" : {
       "maxZoom"     : 18,
@@ -39,7 +39,7 @@
   },
   "maps" : {
     "basePath"  : "/js/config",
-    "maps"      : ["ramo23.map.json", "opa.map.json", "entidades.map.json"],
+    "maps"      : ["gobernador_tlaxcala.map.json", "ramo23.map.json", "opa.map.json", "entidades.map.json"],
     "extras"    : ["areas_afectadas_desastre.json", "opa-extra.map.json"],
     "current"   : 0,
     "embedPath" : "http://localhost:8000/mapa.html" 
