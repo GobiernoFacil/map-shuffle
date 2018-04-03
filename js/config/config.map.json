@@ -39,9 +39,9 @@
   },
   "maps" : {
     "basePath"  : "/js/config",
-    "maps"      : ["gobernador_tlaxcala.map.json", "ramo23.map.json", "opa.map.json", "entidades.map.json"],
+    "maps"      : ["gobernador_tlaxcala.map.json", "ramo23.map.json", "opa_sin_graficas.map.json", "entidades.map.json"],
     "extras"    : ["areas_afectadas_desastre.json", "opa-extra.map.json"],
-    "current"   : 0,
+    "current"   : 2,
     "embedPath" : "http://localhost:8000/mapa.html" 
   },
   "ui" : {
