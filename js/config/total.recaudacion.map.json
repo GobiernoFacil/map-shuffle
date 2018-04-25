@@ -1,0 +1,105 @@
+{
+  "name"  : "Total de Recaudación Local",
+  "type"  : "area",
+  "level" : ["state"],
+  "src"   : "/js/maps/mapa_total_recaudacion.csv",
+  "file"  : "csv",
+  "color" : 11,
+  "location" : {
+    "state" : "ID_ENTIDAD_FEDERATIVA"
+  },
+  "style" : {
+    "fillOpacity":0.8
+  },
+  "values"  : ["MONTO_IMPUESTOS", "MONTO_DERECHOS", "MONTO_PREDIAL", "MONTO_AGUA", "TOTAL_RECAUDACION_LOCAL"],
+  "data"    : ["CICLO", "ID_ENTIDAD_FEDERATIVA", "ENTIDAD_FEDERATIVA", "MONTO_IMPUESTOS", "MONTO_DERECHOS", "MONTO_PREDIAL", "MONTO_AGUA", "TOTAL_RECAUDACION_LOCAL"],
+  "dataSearch" : ["CICLO", "ENTIDAD_FEDERATIVA", "MONTO_IMPUESTOS", "MONTO_DERECHOS", "MONTO_PREDIAL", "MONTO_AGUA", "TOTAL_RECAUDACION_LOCAL"],
+  "current" : {
+    "level"  : "state",
+    "value"  : "TOTAL_RECAUDACION_LOCAL",
+    "method" : "sum"
+  },
+    "columns" : {
+    "ENTIDAD_FEDERATIVA" : "Entidad Federativa",
+    "MONTO_IMPUESTOS" : "Pago de Impuestos",
+    "MONTO_DERECHOS" : "Pago de Derechos",
+    "MONTO_AGUA" : "Pago de Derechos de Agua",
+    "MONTO_PREDIAL" : "Pago de Impuesto Predial",
+    "TOTAL_RECAUDACION_LOCAL" : "Total de Recaudación Local"
+  },
+  "filters" : [
+    {"type" : "state", "field" : "ID_ENTIDAD_FEDERATIVA"},
+    {"type" : "year", "field" : "CICLO"}
+  ],
+  "defaultFilters" : [
+    {"type" : "year", "value" : 2016, "parentFilter" : null}
+  ],
+  "graphs" : {
+    "graph1" : {
+      "title" : "Total de Recaudación Local",
+      "xAxis" : {
+        "field" : "CICLO",
+        "title" : "Ciclo",
+        "type" : null
+      },
+      "yAxis" : {
+        "field" : "TOTAL_RECAUDACION_LOCAL",
+        "title" : "Total de Recaudación Local"
+      },
+      "zAxis" : {
+        "field" : "ENTIDAD_FEDERATIVA",
+        "title" : "Entidad Federativa",
+        "type"  : null
+      },
+      "maxLocations" : 5,
+      "colors" : ["red", "green", "blue", "yellow", "purple", "pink", "black", "orange", "gray", "maroon"]
+    },
+    "graph2" : {
+      "title" : "Total de Recaudación Local",
+      "value" : "TOTAL_RECAUDACION_LOCAL",
+      "area" : {
+        "field" : "ENTIDAD_FEDERATIVA",
+        "title" : "Entidad Federativa",
+        "type"  : null
+      },
+      "maxLocations" : 5,
+      "colors" : ["red", "green", "blue", "yellow", "purple", "pink", "black", "orange", "gray", "maroon", "aquamarine", "chartreuse", "cyan", "darkorange", "deeppink", "gold"]
+    },
+    "graph3" : {
+      "title" : "Total de Recaudación Local por Entidad Federativa",
+      "xAxis" : {
+        "field" : "CICLO",
+        "title" : "Ciclo",
+        "type"  : null
+      },
+      "yAxis" : {
+        "field" : "TOTAL_RECAUDACION_LOCAL",
+        "title" : "Total de Recaudación Local"
+      },
+      "zAxis" : {
+        "field" : "ENTIDAD_FEDERATIVA",
+        "title" : "Entidad Federativa",
+        "type"  : null
+      },
+      "maxLocations" : 5,
+      "colors" : ["#bcce00", "#ee7336", "#25ae85", "#5aa099", "#462b5f", "#f49d51", "#008789", "#b3a493", "#1c9059", "#dc1918", "#b8c9d2","#75bf8d"]
+    },
+ "graph4" : {
+      "title" : "Monto Aprobado por Año",
+      "value" : "TOTAL_RECAUDACION_LOCAL",
+      "area" : {
+        "field" : "ENTIDAD_FEDERATIVA",
+        "title" : "Entidad Federativa",
+        "type"  : null
+      },
+      "points" : {
+        "field" : "CICLO",
+        "title" : "Ciclo",
+        "type"  : null
+      },
+      "maxLocations" : 5,
+      "colors" : ["#bcce00", "#ee7336", "#25ae85", "#5aa099", "#462b5f", "#f49d51", "#008789", "#b3a493", "#1c9059", "#dc1918", "#b8c9d2","#75bf8d"]
+    }
+  },
+  "template" : "<%=name%> <div class='amount_label'><h5> Total de Recaudación Local: <strong>$<%=value%></strong></h5></div><div class='amount_label'><h5> Impuestos: <strong>$<%=MONTO_IMPUESTOS%></strong></h5></div><div class='amount_label'><h5> Derechos: <strong>$<%=MONTO_DERECHOS%></strong></h5></div><div class='amount_label'><h5> Predial: <strong>$<%=MONTO_PREDIAL%></strong></h5></div><div class='amount_label'><h5> Agua: <strong>$<%=MONTO_AGUA%></strong></h5></div>"
+}

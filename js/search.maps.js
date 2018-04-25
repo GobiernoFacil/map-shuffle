@@ -48,6 +48,7 @@ define(function(require){
 
     var controller = {
       render : function(){
+        console.log("yoo");
         currentMap = parent.currentMap;
         config     = currentMap.config;
         colNames   = config.columns;

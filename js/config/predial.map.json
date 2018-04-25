@@ -1,0 +1,39 @@
+{
+  "name"  : "Impuesto Predial",
+  "type"  : "area",
+  "level" : ["state", "city"],
+  "src"   : "/js/maps/mapa_imp_predial.csv",
+  "file"  : "csv",
+  "color" : 4,
+  "location" : {
+    "state" : "ID_ENTIDAD_FEDERATIVA",
+	"city" : "ID_MUNICIPIO"
+  },
+  "style" : {
+    "fillOpacity":0.8
+  },
+  "values"  : ["NUM_CUENTAS_PAGADAS", "MONTO_PREDIAL"],
+  "data"    : ["CICLO", "ID_ENTIDAD_FEDERATIVA", "ENTIDAD_FEDERATIVA", "ID_MUNICIPIO", "MUNICIPIO", "NUM_CUENTAS_PAGADAS", "MONTO_PREDIAL"],
+  "dataSearch" : ["CICLO", "ENTIDAD_FEDERATIVA", "MUNICIPIO", "MONTO_PREDIAL"],
+  "current" : {
+    "level"  : "state",
+    "value"  : "MONTO_PREDIAL",
+    "method" : "sum",
+    "unit"   : "pesos mexicanos"
+  },
+    "columns" : {
+    "ENTIDAD_FEDERATIVA" : "Entidad Federativa",
+	"MUNICIPIO" : "Municipio",
+    "NUM_CUENTAS_PAGADAS" : "Número de Cuentas Pagadas",
+	"MONTO_PREDIAL" : "Total de ingresos"
+  },
+  "filters" : [
+    {"type" : "state", "field" : "ID_ENTIDAD_FEDERATIVA"},
+	{"type" : "city", "field" : "ID_MUNICIPIO"},
+    {"type" : "year", "field" : "CICLO"}
+  ],
+  "defaultFilters" : [
+    {"type" : "year", "value" : 2016, "parentFilter" : null}
+  ],
+  "template" : "<%=name%> <div class='amount_label'><h5> Total de impuesto predial: <strong>$<%=value%></strong></h5></div><div class='amount_label'><h5> Cuentas pagadas: <strong><%=NUM_CUENTAS_PAGADAS%></strong></h5></div>"
+}

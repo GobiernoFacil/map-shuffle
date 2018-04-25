@@ -39,9 +39,9 @@
   },
   "maps" : {
     "basePath"  : "/js/config",
-    "maps"      : ["ramo23.map.json", "opa.map.json", "entidades.map.json"],
+    "maps"      : ["ramo23.map.json", "opa.map.json", "entidades.map.json", "total.recaudacion.map.json", "predial.map.json"],
     "extras"    : ["areas_afectadas_desastre.json", "opa-extra.map.json"],
-    "current"   : 0,
+    "current"   : 3,
     "embedPath" : "http://localhost:8000/mapa.html" 
   },
   "ui" : {
