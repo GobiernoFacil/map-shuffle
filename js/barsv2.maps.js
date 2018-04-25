@@ -71,6 +71,8 @@ define(function(require){
 
         this.config = config.graphs;
 
+        console.log(this.config);
+
         if(config.graphs.graph1){
         	//this.setupGraphA();
           graphAFilters = this._setupGraph(UI.graph1, this.updateGraphA, "canvasA");
@@ -127,7 +129,8 @@ define(function(require){
           btn3.classList.add("current");
         }
 
-        if(btn1 && graph1){
+        if(btn1 && graph1 && this.config.graph1){
+          btn1.style.display = "inline-block";
           btn1.querySelector("a").innerHTML = config.graphs.graph1.title || "gráfica sin título";
           btn1.addEventListener("click", function(e){
             e.preventDefault();
@@ -148,7 +151,8 @@ define(function(require){
           });
         }
 
-        if(btn2 && graph2){
+        if(btn2 && graph2 && this.config.graph2){
+          btn2.style.display = "inline-block";
           btn2.querySelector("a").innerHTML = config.graphs.graph2.title || "gráfica sin título";
           btn2.addEventListener("click", function(e){
             e.preventDefault();
@@ -169,7 +173,8 @@ define(function(require){
           });
         }
 
-        if(btn3 && graph3){
+        if(btn3 && graph3 && this.config.graph3){
+          btn3.style.display = "inline-block";
           btn3.querySelector("a").innerHTML = config.graphs.graph3.title || "gráfica sin título";
           btn3.addEventListener("click", function(e){
             e.preventDefault();
@@ -190,7 +195,8 @@ define(function(require){
           });
         }
 
-        if(btn4 && graph4){
+        if(btn4 && graph4 && this.config.graph4){
+          btn4.style.display = "inline-block";
           btn4.querySelector("a").innerHTML = config.graphs.graph4.title || "gráfica sin título";
           btn4.addEventListener("click", function(e){
             e.preventDefault();

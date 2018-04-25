@@ -41,6 +41,8 @@ define(function(require){
       RAMOSNAME      = require("assets/ramos-nombres"),
       // [*] el nombre,ramo y clave de cada unidad ejecutora
       UNIDADESNAME   = require("assets/unidades-nombres"),
+      // [*] conversión de ine a inegi
+      INECONVERSION = require("assets/ine_to_inegi")
 
       // [4] obtiene los templates de UI
       // ----------------------------------------------------------------------
@@ -86,6 +88,8 @@ define(function(require){
     // función que se ejecuta
     //
     initialize : function(settings){
+      
+
       // [0] REVISA EL URL POR ALGUNA CONFIGURACIÓN
       //
       //
@@ -1057,6 +1061,10 @@ define(function(require){
           item.response = null;
         }
 
+        if(hasCity && conf.ine){
+          that._convertINEtoINEGI(item.data, conf);
+        }
+
         if(hasCity){
           that._addKeyToCities(item.data, conf, hasCity);
         }
@@ -1176,6 +1184,19 @@ define(function(require){
       }, GFSHCPMap);
 
       unit.field = GFSHCPMap.unitID;
+    },
+
+    _convertINEtoINEGI: function(data, conf){
+      data.forEach(function(d){
+        var loc = INECONVERSION.ine.filter(function(dd){
+          return d[conf.location.city] == +dd.ineCity && d[conf.location.state]  == +dd.ineSstate;
+        })[0];
+
+        //console.log(d, INECONVERSION.ine, loc);
+
+        d[conf.location.city]  = loc.inegiCity || d[conf.location.city];
+        d[conf.location.state] = loc.inegiState || d[conf.location.state];
+      });
     },
 
     _addKeyToCities : function(data, conf, city){
