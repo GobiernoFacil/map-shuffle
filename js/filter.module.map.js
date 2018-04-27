@@ -154,8 +154,14 @@ define(function(require){
 
         if(type != "unit" && type != "city"){
           _data = _data.filter(function(d){
-            //return compArray.indexOf(d[field]) != -1;
-            return compArray.filter(function(comp){ return comp == d[field]}).length;
+            return compArray.filter(function(comp){
+              if(isString){
+                return String(comp) == String(d[field])
+              }
+              else{
+                return Number(comp) == Number(d[field])
+              }
+            }).length;
           });
         }
         else if(type == "unit"){
